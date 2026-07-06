@@ -79,7 +79,7 @@ samples/    Input and expected sample files
 specs/      LHM and syntax binding specifications
 src/        Main conversion programs
 tests/      Regression tests and test artifacts
-tools/      Utility scripts for LHM, bindings, definitions, and taxonomy support
+tools/      Utility scripts for LHM, bindings, definitions, and taxonomy support, including the local taxonomy generator
 ```
 
 ## Development policy
@@ -91,7 +91,7 @@ When changing code:
 3. Keep the LHM, binding CSV, converter code, and tests consistent.
 4. Update documentation when behavior changes.
 5. Keep generated artifacts separate from source definitions unless explicitly requested.
-6. Report assumptions clearly when a required external dependency is not available.
+6. Report assumptions clearly when a required external dependency is not available. The taxonomy generator used by tests is local at `tools/taxonomy/xBRLGL_TaxonomyGenerator.py`; do not depend on an external `XBRL-GL-2026` checkout for normal operation.
 
 ## Test commands
 

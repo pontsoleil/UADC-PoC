@@ -8,7 +8,7 @@ Run commands from the `UADC_PoC` directory:
 cd UADC_PoC
 ```
 
-All paths below are relative to this directory unless they begin with `../`.
+All paths below are relative to this directory. The taxonomy generator is included in `tools/taxonomy/`, so no external `XBRL-GL-2026` checkout is required.
 
 Set the Python command for the local Windows environment:
 
@@ -45,7 +45,7 @@ out/taxonomy/
 To run the taxonomy generator directly:
 
 ```powershell
-& $python ..\XBRL-GL-2026\xBRLGL_TaxonomyGenerator.py `
+& $python .\tools\taxonomy\xBRLGL_TaxonomyGenerator.py `
   .\specs\lhm\EN16931_CIUS_Invoice_LHM.csv `
   -b .\out\taxonomy `
   -p en16931 `

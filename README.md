@@ -36,6 +36,8 @@ OpenPeppol BIS CIUS
 - `tests/` - regression checks.
 - `out/` - generated local output, ignored by Git.
 
+The taxonomy generator is included at `tools/taxonomy/xBRLGL_TaxonomyGenerator.py`; no external `XBRL-GL-2026` checkout is required for normal tests.
+
 ## Current Scope
 
 1. Define and audit the Invoice LHM from EN 16931-1.

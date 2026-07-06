@@ -4,7 +4,7 @@
 
 This document specifies the taxonomy generation program used by the UADC Proof of Concept.
 
-All paths in this document are relative to the `UADC_PoC` working directory after the repository is pushed or cloned, except paths beginning with `../`, which refer to sibling directories of `UADC_PoC`.
+All paths in this document are relative to the repository root after the repository is pushed or cloned. The taxonomy generator is included in this repository; it no longer depends on an external `XBRL-GL-2026` checkout.
 
 ## 2. Scope
 
@@ -17,7 +17,7 @@ specs/lhm/EN16931_CIUS_Invoice_LHM.csv
 Taxonomy generator:
 
 ```text
-../XBRL-GL-2026/xBRLGL_TaxonomyGenerator.py
+tools/taxonomy/xBRLGL_TaxonomyGenerator.py
 ```
 
 Output directory:
@@ -33,7 +33,7 @@ The output directory is generated local output and is not intended to be pushed 
 Program:
 
 ```text
-../XBRL-GL-2026/xBRLGL_TaxonomyGenerator.py
+tools/taxonomy/xBRLGL_TaxonomyGenerator.py
 ```
 
 Responsibilities:

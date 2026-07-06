@@ -13,13 +13,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = ROOT.parent
 PYTHON = Path(sys.executable)
 
 
 def main() -> int:
     out_dir = ROOT / "out" / "taxonomy"
-    script = REPO / "XBRL-GL-2026" / "xBRLGL_TaxonomyGenerator.py"
+    script = ROOT / "tools" / "taxonomy" / "xBRLGL_TaxonomyGenerator.py"
     lhm = ROOT / "specs" / "lhm" / "EN16931_CIUS_Invoice_LHM.csv"
     cmd = [
         str(PYTHON),
