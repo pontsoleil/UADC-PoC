@@ -50,15 +50,15 @@ def main() -> int:
     gl_gen_xsd = TAXONOMY / "gen" / f"gl-gen-{VERSION}.xsd"
     plt_all_xsd = TAXONOMY / "plt" / f"plt-all-{VERSION}.xsd"
 
-    for path in (oim_xsd, def_linkbase, module_xsd, content_xsd, gl_gen_xsd):
+    for path in (oim_xsd, def_linkbase, module_xsd, gl_gen_xsd):
         assert_exists(path)
     assert not plt_all_xsd.exists(), f"Tuple entry point must not exist: {plt_all_xsd}"
+    assert not content_xsd.exists(), f"Content schema must not exist: {content_xsd}"
 
     roots = {
         oim_xsd: parse(oim_xsd),
         def_linkbase: parse(def_linkbase),
         module_xsd: parse(module_xsd),
-        content_xsd: parse(content_xsd),
         gl_gen_xsd: parse(gl_gen_xsd),
     }
     for path, root in roots.items():
@@ -72,15 +72,8 @@ def main() -> int:
     assert "xbrli:tuple" not in oim_groups
     assert not any(element.tag.endswith("complexType") for element in roots[oim_xsd])
 
-    content_elements = [element for element in roots[content_xsd] if element.tag.endswith("element")]
-    assert content_elements
-    assert not any(element.tag.endswith("complexType") for element in roots[content_xsd])
-    assert all(element.attrib.get("substitutionGroup") == "xbrli:item" for element in content_elements)
-
     module_imports = local_schema_locations(roots[module_xsd])
-    content_imports = local_schema_locations(roots[content_xsd])
     assert f"../gen/gl-gen-{VERSION}.xsd" in module_imports
-    assert f"../gen/gl-gen-{VERSION}.xsd" in content_imports
 
     item_elements = [
         element for element in oim_elements

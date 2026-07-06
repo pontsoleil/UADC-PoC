@@ -11,10 +11,10 @@ without supporting the current checkpoint.
 
 1. Generate the `plt-oim-<version>.xsd` xBRL-CSV taxonomy schema.
 2. Generate hypercube, dimension, and primary item concepts in `plt-oim`.
-3. Generate `en16931-content-<version>.xsd` as item declarations only.
+3. Do not generate `en16931-content-<version>.xsd`; item declarations remain in the module schema and xBRL-CSV primary items remain in `plt-oim`.
 4. Do not generate `plt-all-<version>.xsd`.
 5. Do not define XBRL 2.1 tuple `complexType` structures for this PoC.
-6. Reference `gl-gen` from generated schemas as `../gen/gl-gen-<version>.xsd`.
+6. Reference `gl-gen` from generated module schemas as `../gen/gl-gen-<version>.xsd`.
 
 ## Consequences
 

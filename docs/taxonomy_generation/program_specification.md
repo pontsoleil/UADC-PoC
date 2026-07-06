@@ -41,7 +41,6 @@ Responsibilities:
 - read the UADC LHM CSV layout through `csv.DictReader`;
 - normalize UADC LHM records into the internal XBRL-GL generator layout;
 - generate module taxonomy schema files;
-- generate module content schema files containing item declarations only;
 - generate an xBRL-CSV dimensional taxonomy schema;
 - generate label, presentation, definition linkbase, JSON metadata, and CSV skeleton files.
 
@@ -98,7 +97,6 @@ out/taxonomy/en16931/en16931-2026-07-05-presentation.xml
 out/taxonomy/en16931/lang/en16931-2026-07-05-label.xml
 out/taxonomy/en16931/lang/en16931-2026-07-05-label-ja.xml
 out/taxonomy/gen/gl-gen-2026-07-05.xsd
-out/taxonomy/plt/en16931-content-2026-07-05.xsd
 out/taxonomy/plt/plt-def-2026-07-05.xml
 out/taxonomy/plt/plt-oim-2026-07-05.xsd
 ```
@@ -123,28 +121,12 @@ Responsibilities:
 - assign `xbrli:periodType="instant"` to `substitutionGroup="xbrli:item"` elements.
 - import the GL generic type schema from `../gen/gl-gen-<version>.xsd` when a GL generic type is used.
 
-### 5.2 Module content schema
+### 5.2 Omitted tuple/content schemas
 
-File pattern:
+No XBRL 2.1 tuple taxonomy entry point or tuple/content schema is generated for this Structured CSV PoC. In particular, these files are not defined:
 
-```text
-out/taxonomy/plt/<module>-content-<version>.xsd
-```
-
-For this PoC:
-
-```text
-out/taxonomy/plt/en16931-content-2026-07-05.xsd
-```
-
-Responsibilities:
-
-- declare item concepts only;
-- do not define `complexType`;
-- do not define `xbrli:tuple` concepts;
-- import the GL generic type schema from `../gen/gl-gen-<version>.xsd` when a GL generic type is used.
-
-No XBRL 2.1 tuple taxonomy entry point is generated for this Structured CSV PoC. In particular, `out/taxonomy/plt/plt-all-<version>.xsd` is not defined.
+- `out/taxonomy/plt/plt-all-<version>.xsd`
+- `out/taxonomy/plt/<module>-content-<version>.xsd`
 
 ### 5.3 GL generic type schema
 
@@ -158,7 +140,7 @@ Responsibilities:
 
 - provide reusable GL item types such as `gen:amountItemType` and `gen:emailAddressItemType`;
 - use the same version namespace as the generated taxonomy;
-- be referenced from module and content schemas as `../gen/gl-gen-<version>.xsd`.
+- be referenced from module schemas as `../gen/gl-gen-<version>.xsd`.
 
 ### 5.4 xBRL-CSV taxonomy schema
 
@@ -207,8 +189,8 @@ The taxonomy regression checks verify that:
 - `plt-oim` contains no `complexType`;
 - `plt-oim` does not import `en16931-content`;
 - `plt-all` is not generated;
-- `en16931-content` contains item declarations only and no `complexType`;
-- module and content schemas import `../gen/gl-gen-<version>.xsd`;
+- `en16931-content` is not generated;
+- module schemas import `../gen/gl-gen-<version>.xsd`;
 - `xbrli:item` elements generated in `plt-oim` have `xbrli:periodType="instant"`.
 
 ## 7. Dependencies

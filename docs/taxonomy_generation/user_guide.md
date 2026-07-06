@@ -76,7 +76,6 @@ out/taxonomy/en16931/en16931-2026-07-05-presentation.xml
 out/taxonomy/en16931/lang/en16931-2026-07-05-label.xml
 out/taxonomy/en16931/lang/en16931-2026-07-05-label-ja.xml
 out/taxonomy/gen/gl-gen-2026-07-05.xsd
-out/taxonomy/plt/en16931-content-2026-07-05.xsd
 out/taxonomy/plt/plt-def-2026-07-05.xml
 out/taxonomy/plt/plt-oim-2026-07-05.xsd
 ```
@@ -85,7 +84,6 @@ Meaning:
 
 - `en16931/en16931-2026-07-05.xsd`: module item concepts.
 - `gen/gl-gen-2026-07-05.xsd`: GL generic item type schema referenced as `../gen/gl-gen-<version>.xsd`.
-- `plt/en16931-content-2026-07-05.xsd`: item declarations only; no `complexType` and no tuple definitions.
 - `plt/plt-oim-2026-07-05.xsd`: xBRL-CSV taxonomy schema with hypercubes, dimensions, and primary items.
 - `plt/plt-def-2026-07-05.xml`: xBRL-CSV dimensional definition linkbase.
 
@@ -119,18 +117,18 @@ Select-String -Path .\out\taxonomy\plt\plt-oim-2026-07-05.xsd `
   -Pattern 'xbrldt:hypercubeItem','xbrldt:dimensionItem','substitutionGroup="xbrli:item"'
 ```
 
-Check that the module and content schemas import the GL generic schema:
+Check that the module schema imports the GL generic schema:
 
 ```powershell
-Select-String -Path .\out\taxonomy\en16931\en16931-2026-07-05.xsd, `
-                    .\out\taxonomy\plt\en16931-content-2026-07-05.xsd `
+Select-String -Path .\out\taxonomy\en16931\en16931-2026-07-05.xsd `
   -Pattern '../gen/gl-gen-2026-07-05.xsd'
 ```
 
-Check that `plt-all` is not generated:
+Check that `plt-all` and `en16931-content` are not generated:
 
 ```powershell
 Test-Path .\out\taxonomy\plt\plt-all-2026-07-05.xsd
+Test-Path .\out\taxonomy\plt\en16931-content-2026-07-05.xsd
 ```
 
 Expected result: `False`.

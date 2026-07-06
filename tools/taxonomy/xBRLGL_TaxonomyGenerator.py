@@ -899,76 +899,14 @@ class xBRLGL_TaxonomyGenerator:
             self.trace_print(f"-- {xsd_file}")
 
         """
-        Module content schema file for xBRL-CSV.
-        This PoC does not generate XBRL 2.1 tuple content. The content schema
-        contains item declarations only and no complexType definitions.
+        xBRL-CSV only output.
+        Do not generate XBRL 2.1 tuple/content schemas in plt.
         """
-        for module, data in element_dict.items():
-            directory = file_path(f"{xbrl_base}/plt")
-            modules = set()
-            for record in data:
-                element = record["element"]
-                _module = element[:element.index(":")]
-                modules.add(_module)
-
-            html = [
-                '<?xml version="1.0" encoding="UTF-8"?>\n',
-                "<!-- (c) XBRL International.  See http://www.xbrl.org/legal -->\n",
-                f'<schema targetNamespace="http://www.xbrl.org/int/gl/{module}/{self.version}" elementFormDefault="qualified" attributeFormDefault="unqualified"\n',
-                '  xmlns="http://www.w3.org/2001/XMLSchema"\n',
-                '  xmlns:xlink="http://www.w3.org/1999/xlink"\n',
-                '  xmlns:xbrli="http://www.xbrl.org/2003/instance"\n',
-                f'  xmlns:gen="http://www.xbrl.org/int/gl/gen/{self.version}"\n',
-            ]
-
-            for _module in modules:
-                if _module != module:
-                    html.append(
-                        f'  xmlns:{_module}="http://www.xbrl.org/int/gl/{_module}/{self.version}"\n'
-                    )
-            html.append(
-                f'  xmlns:{module}="http://www.xbrl.org/int/gl/{module}/{self.version}">\n'
-            )
-            html.append(
-                '  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>\n'
-            )
-            html.append(
-                f'  <import namespace="http://www.xbrl.org/int/gl/gen/{self.version}" schemaLocation="{self.gl_gen_schema_location(directory)}"/>\n'
-            )
-            for _module in modules:
-                if _module != module:
-                    html.append(
-                        f'  <import namespace="http://www.xbrl.org/int/gl/{_module}/{self.version}" schemaLocation="{_module}-content-{self.version}.xsd"/>\n'
-                    )
-            html.append("  <!-- item element -->\n")
-            for record in data:
-                element = record["element"]
-                if "A" != record["type"]:
-                    continue
-                element_type = record['element_type']
-                element_module = element[:element.index(":")]
-                if element_module != module:
-                    continue
-                element_name = element[1 + element.index(":"):]
-                element_type = self.concept_item_type(record)
-                html.append(
-                    f'  <element name="{element_name}" id="{element_module}_{element_name}" type="{element_type}" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>\n'
-                )
-
-            html.append("</schema>")
-
-            """
-            Write module content schema file
-            """
-            if not os.path.isdir(directory):
-                os.makedirs(directory, exist_ok=True)
-                self.trace_print(f"Created moduke schema directory: {directory}")
-            xsd_file = file_path(
-                f"{xbrl_base}/plt/{module}-content-{self.version}.xsd"
-            )
-            with open(xsd_file, "w", encoding=self.encoding, newline="") as f:
-                f.writelines(html)
-            self.trace_print(f"-- {xsd_file}")
+        for module in element_dict.keys():
+            content_file = file_path(f"{xbrl_base}/plt/{module}-content-{self.version}.xsd")
+            if os.path.exists(content_file):
+                os.remove(content_file)
+                self.trace_print(f"Removed content schema file {content_file}")
 
         plt_all_file = file_path(f"{xbrl_base}/plt/plt-all-{self.version}.xsd")
         if os.path.exists(plt_all_file):

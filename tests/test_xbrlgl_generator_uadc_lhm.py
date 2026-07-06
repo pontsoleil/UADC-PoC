@@ -43,9 +43,10 @@ def main() -> int:
     definition = out_dir / "plt" / "plt-def-2026-07-05.xml"
     module_xsd = out_dir / "en16931" / "en16931-2026-07-05.xsd"
     gl_gen_xsd = out_dir / "gen" / "gl-gen-2026-07-05.xsd"
-    for path in (oim_xsd, content_xsd, definition, module_xsd, gl_gen_xsd):
+    for path in (oim_xsd, definition, module_xsd, gl_gen_xsd):
         assert path.exists(), f"Missing generated file: {path}"
     assert not plt_all_xsd.exists(), f"Tuple entry point must not be generated: {plt_all_xsd}"
+    assert not content_xsd.exists(), f"Content schema must not be generated: {content_xsd}"
 
     root = ET.parse(oim_xsd).getroot()
     elements = [element for element in root if element.tag.endswith("element")]
@@ -70,18 +71,6 @@ def main() -> int:
     imports = [element.attrib.get("schemaLocation", "") for element in root if element.tag.endswith("import")]
     assert f"en16931-content-2026-07-05.xsd" not in imports
     assert "../en16931/en16931-2026-07-05.xsd" not in imports
-
-    content_root = ET.parse(content_xsd).getroot()
-    content_elements = [element for element in content_root if element.tag.endswith("element")]
-    content_imports = [element.attrib.get("schemaLocation", "") for element in content_root if element.tag.endswith("import")]
-    assert content_elements
-    assert not any(element.tag.endswith("complexType") for element in content_root)
-    assert "xbrli:tuple" not in {element.attrib.get("substitutionGroup", "") for element in content_elements}
-    assert all(
-        element.attrib.get("substitutionGroup") == "xbrli:item"
-        for element in content_elements
-    )
-    assert "../gen/gl-gen-2026-07-05.xsd" in content_imports
 
     module_root = ET.parse(module_xsd).getroot()
     module_imports = [element.attrib.get("schemaLocation", "") for element in module_root if element.tag.endswith("import")]

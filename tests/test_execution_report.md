@@ -249,8 +249,8 @@ Taxonomy:
 
 - `plt-oim-2026-07-05.xsd` is the xBRL-CSV taxonomy schema.
 - `plt-all-2026-07-05.xsd` is not generated.
-- `en16931-content-2026-07-05.xsd` contains item declarations only and no `complexType`.
-- Module and content schemas reference `../gen/gl-gen-2026-07-05.xsd`.
+- `en16931-content-2026-07-05.xsd` is not generated.
+- Module schemas reference `../gen/gl-gen-2026-07-05.xsd`.
 - Non-repeating BGs such as Seller and Buyer are not emitted as `d_*` dimension concepts.
 - Local taxonomy structure validation passed with `tests/validate_taxonomy.py`.
 - Arelle validation passed for `out/taxonomy/plt/plt-oim-2026-07-05.xsd`.
