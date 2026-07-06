@@ -1,0 +1,902 @@
+{
+  "documentInfo": {
+    "documentType": "https://xbrl.org/2021/xbrl-csv",
+    "namespaces": {
+      "en16931": "http://www.xbrl.org/int/gl/en16931/2026-07-05",
+      "plt": "http://www.xbrl.org/int/gl/plt/2026-07-05",
+      "iso4217": "http://www.xbrl.org/2003/iso4217",
+      "scheme": "http://www.example.com",
+      "xbrl": "https://xbrl.org/2021"
+    },
+    "taxonomy": [
+      "../../../../out/taxonomy/plt/plt-oim-2026-07-05.xsd",
+      "../../../../out/taxonomy/en16931/en16931-2026-07-05.xsd"
+    ]
+  },
+  "tables": {
+    "structured": {
+      "template": "structured",
+      "url": "../structured_csv/sales-order-example.csv"
+    }
+  },
+  "tableTemplates": {
+    "structured": {
+      "dimensions": {
+        "period": "2026-07-06T00:00:00",
+        "entity": "scheme:UADC-PoC",
+        "plt:d_en16931_Invoice": "$dInvoice",
+        "plt:d_en16931_InvoiceInvoiceNote": "$dInvoiceInvoiceNote",
+        "plt:d_en16931_InvoicePrecedingInvoiceReference": "$dInvoicePrecedingInvoiceReference",
+        "plt:d_en16931_PaymentInstructions": "$dPaymentInstructions",
+        "plt:d_en16931_CreditTransfer": "$dCreditTransfer",
+        "plt:d_en16931_DocumentLevelAllowances": "$dDocumentLevelAllowances",
+        "plt:d_en16931_DocumentLevelCharges": "$dDocumentLevelCharges",
+        "plt:d_en16931_VatBreakdown": "$dVatBreakdown",
+        "plt:d_en16931_AdditionalSupportingDocuments": "$dAdditionalSupportingDocuments",
+        "plt:d_en16931_InvoiceLine": "$dInvoiceLine",
+        "plt:d_en16931_InvoiceLineAllowances": "$dInvoiceLineAllowances",
+        "plt:d_en16931_InvoiceLineCharges": "$dInvoiceLineCharges",
+        "plt:d_en16931_ItemAttributes": "$dItemAttributes"
+      },
+      "columns": {
+        "dInvoice": {},
+        "dInvoiceInvoiceNote": {},
+        "dInvoicePrecedingInvoiceReference": {},
+        "dPaymentInstructions": {},
+        "dCreditTransfer": {},
+        "dDocumentLevelAllowances": {},
+        "dDocumentLevelCharges": {},
+        "dVatBreakdown": {},
+        "dAdditionalSupportingDocuments": {},
+        "dInvoiceLine": {},
+        "dInvoiceLineAllowances": {},
+        "dInvoiceLineCharges": {},
+        "dItemAttributes": {},
+        "InvoiceNumber": {
+          "dimensions": {
+            "concept": "en16931:InvoiceNumber"
+          }
+        },
+        "InvoiceIssueDate": {
+          "dimensions": {
+            "concept": "en16931:InvoiceIssueDate"
+          }
+        },
+        "InvoiceTypeCode": {
+          "dimensions": {
+            "concept": "en16931:InvoiceTypeCode"
+          }
+        },
+        "DocumentCurrencyCode": {
+          "dimensions": {
+            "concept": "en16931:DocumentCurrencyCode"
+          }
+        },
+        "TaxAccountingCurrencyCode": {
+          "dimensions": {
+            "concept": "en16931:TaxAccountingCurrencyCode"
+          }
+        },
+        "ValueAddedTaxPointDate": {
+          "dimensions": {
+            "concept": "en16931:ValueAddedTaxPointDate"
+          }
+        },
+        "ValueAddedTaxPointDateCode": {
+          "dimensions": {
+            "concept": "en16931:ValueAddedTaxPointDateCode"
+          }
+        },
+        "PaymentDueDate": {
+          "dimensions": {
+            "concept": "en16931:PaymentDueDate"
+          }
+        },
+        "BuyerReference": {
+          "dimensions": {
+            "concept": "en16931:BuyerReference"
+          }
+        },
+        "ProjectReference": {
+          "dimensions": {
+            "concept": "en16931:ProjectReference"
+          }
+        },
+        "ContractReference": {
+          "dimensions": {
+            "concept": "en16931:ContractReference"
+          }
+        },
+        "PurchaseOrderReference": {
+          "dimensions": {
+            "concept": "en16931:PurchaseOrderReference"
+          }
+        },
+        "SalesOrderReference": {
+          "dimensions": {
+            "concept": "en16931:SalesOrderReference"
+          }
+        },
+        "ReceivingAdviceReference": {
+          "dimensions": {
+            "concept": "en16931:ReceivingAdviceReference"
+          }
+        },
+        "DespatchAdviceReference": {
+          "dimensions": {
+            "concept": "en16931:DespatchAdviceReference"
+          }
+        },
+        "TenderOrLotReference": {
+          "dimensions": {
+            "concept": "en16931:TenderOrLotReference"
+          }
+        },
+        "InvoicedObjectIdentifier": {
+          "dimensions": {
+            "concept": "en16931:InvoicedObjectIdentifier"
+          }
+        },
+        "BuyerAccountingReference": {
+          "dimensions": {
+            "concept": "en16931:BuyerAccountingReference"
+          }
+        },
+        "PaymentTerms": {
+          "dimensions": {
+            "concept": "en16931:PaymentTerms"
+          }
+        },
+        "InvoiceNoteSubjectCode": {
+          "dimensions": {
+            "concept": "en16931:InvoiceNoteSubjectCode"
+          }
+        },
+        "InvoiceNoteInvoiceNote": {
+          "dimensions": {
+            "concept": "en16931:InvoiceNoteInvoiceNote"
+          }
+        },
+        "BusinessProcessType": {
+          "dimensions": {
+            "concept": "en16931:BusinessProcessType"
+          }
+        },
+        "SpecificationIdentifier": {
+          "dimensions": {
+            "concept": "en16931:SpecificationIdentifier"
+          }
+        },
+        "PrecedingInvoiceReferencePrecedingInvoiceReference": {
+          "dimensions": {
+            "concept": "en16931:PrecedingInvoiceReferencePrecedingInvoiceReference"
+          }
+        },
+        "PrecedingInvoiceIssueDate": {
+          "dimensions": {
+            "concept": "en16931:PrecedingInvoiceIssueDate"
+          }
+        },
+        "SellerName": {
+          "dimensions": {
+            "concept": "en16931:SellerName"
+          }
+        },
+        "SellerTradingName": {
+          "dimensions": {
+            "concept": "en16931:SellerTradingName"
+          }
+        },
+        "SellerIdentifier": {
+          "dimensions": {
+            "concept": "en16931:SellerIdentifier"
+          }
+        },
+        "SellerLegalRegistrationIdentifier": {
+          "dimensions": {
+            "concept": "en16931:SellerLegalRegistrationIdentifier"
+          }
+        },
+        "SellerVatIdentifier": {
+          "dimensions": {
+            "concept": "en16931:SellerVatIdentifier"
+          }
+        },
+        "SellerTaxRegistrationIdentifier": {
+          "dimensions": {
+            "concept": "en16931:SellerTaxRegistrationIdentifier"
+          }
+        },
+        "SellerAdditionalLegalInformation": {
+          "dimensions": {
+            "concept": "en16931:SellerAdditionalLegalInformation"
+          }
+        },
+        "SellerElectronicAddress": {
+          "dimensions": {
+            "concept": "en16931:SellerElectronicAddress"
+          }
+        },
+        "SellerAddressLine1": {
+          "dimensions": {
+            "concept": "en16931:SellerAddressLine1"
+          }
+        },
+        "SellerAddressLine2": {
+          "dimensions": {
+            "concept": "en16931:SellerAddressLine2"
+          }
+        },
+        "SellerAddressLine3": {
+          "dimensions": {
+            "concept": "en16931:SellerAddressLine3"
+          }
+        },
+        "SellerCity": {
+          "dimensions": {
+            "concept": "en16931:SellerCity"
+          }
+        },
+        "SellerPostCode": {
+          "dimensions": {
+            "concept": "en16931:SellerPostCode"
+          }
+        },
+        "SellerCountrySubdivision": {
+          "dimensions": {
+            "concept": "en16931:SellerCountrySubdivision"
+          }
+        },
+        "SellerCountryCode": {
+          "dimensions": {
+            "concept": "en16931:SellerCountryCode"
+          }
+        },
+        "SellerContactPoint": {
+          "dimensions": {
+            "concept": "en16931:SellerContactPoint"
+          }
+        },
+        "SellerContactTelephoneNumber": {
+          "dimensions": {
+            "concept": "en16931:SellerContactTelephoneNumber"
+          }
+        },
+        "SellerContactEmailAddress": {
+          "dimensions": {
+            "concept": "en16931:SellerContactEmailAddress"
+          }
+        },
+        "BuyerName": {
+          "dimensions": {
+            "concept": "en16931:BuyerName"
+          }
+        },
+        "BuyerTradingName": {
+          "dimensions": {
+            "concept": "en16931:BuyerTradingName"
+          }
+        },
+        "BuyerIdentifier": {
+          "dimensions": {
+            "concept": "en16931:BuyerIdentifier"
+          }
+        },
+        "BuyerLegalRegistrationIdentifier": {
+          "dimensions": {
+            "concept": "en16931:BuyerLegalRegistrationIdentifier"
+          }
+        },
+        "BuyerVatIdentifier": {
+          "dimensions": {
+            "concept": "en16931:BuyerVatIdentifier"
+          }
+        },
+        "BuyerElectronicAddress": {
+          "dimensions": {
+            "concept": "en16931:BuyerElectronicAddress"
+          }
+        },
+        "BuyerAddressLine1": {
+          "dimensions": {
+            "concept": "en16931:BuyerAddressLine1"
+          }
+        },
+        "BuyerAddressLine2": {
+          "dimensions": {
+            "concept": "en16931:BuyerAddressLine2"
+          }
+        },
+        "BuyerAddressLine3": {
+          "dimensions": {
+            "concept": "en16931:BuyerAddressLine3"
+          }
+        },
+        "BuyerCity": {
+          "dimensions": {
+            "concept": "en16931:BuyerCity"
+          }
+        },
+        "BuyerPostCode": {
+          "dimensions": {
+            "concept": "en16931:BuyerPostCode"
+          }
+        },
+        "BuyerCountrySubdivision": {
+          "dimensions": {
+            "concept": "en16931:BuyerCountrySubdivision"
+          }
+        },
+        "BuyerCountryCode": {
+          "dimensions": {
+            "concept": "en16931:BuyerCountryCode"
+          }
+        },
+        "BuyerContactPoint": {
+          "dimensions": {
+            "concept": "en16931:BuyerContactPoint"
+          }
+        },
+        "BuyerContactTelephoneNumber": {
+          "dimensions": {
+            "concept": "en16931:BuyerContactTelephoneNumber"
+          }
+        },
+        "BuyerContactEmailAddress": {
+          "dimensions": {
+            "concept": "en16931:BuyerContactEmailAddress"
+          }
+        },
+        "PayeeName": {
+          "dimensions": {
+            "concept": "en16931:PayeeName"
+          }
+        },
+        "PayeeIdentifier": {
+          "dimensions": {
+            "concept": "en16931:PayeeIdentifier"
+          }
+        },
+        "PayeeLegalRegistrationIdentifier": {
+          "dimensions": {
+            "concept": "en16931:PayeeLegalRegistrationIdentifier"
+          }
+        },
+        "SellerTaxRepresentativeName": {
+          "dimensions": {
+            "concept": "en16931:SellerTaxRepresentativeName"
+          }
+        },
+        "SellerTaxRepresentativeVatIdentifier": {
+          "dimensions": {
+            "concept": "en16931:SellerTaxRepresentativeVatIdentifier"
+          }
+        },
+        "TaxRepresentativeAddressLine1": {
+          "dimensions": {
+            "concept": "en16931:TaxRepresentativeAddressLine1"
+          }
+        },
+        "TaxRepresentativeAddressLine2": {
+          "dimensions": {
+            "concept": "en16931:TaxRepresentativeAddressLine2"
+          }
+        },
+        "TaxRepresentativeAddressLine3": {
+          "dimensions": {
+            "concept": "en16931:TaxRepresentativeAddressLine3"
+          }
+        },
+        "TaxRepresentativeCity": {
+          "dimensions": {
+            "concept": "en16931:TaxRepresentativeCity"
+          }
+        },
+        "TaxRepresentativePostCode": {
+          "dimensions": {
+            "concept": "en16931:TaxRepresentativePostCode"
+          }
+        },
+        "TaxRepresentativeCountrySubdivision": {
+          "dimensions": {
+            "concept": "en16931:TaxRepresentativeCountrySubdivision"
+          }
+        },
+        "TaxRepresentativeCountryCode": {
+          "dimensions": {
+            "concept": "en16931:TaxRepresentativeCountryCode"
+          }
+        },
+        "DeliverToPartyName": {
+          "dimensions": {
+            "concept": "en16931:DeliverToPartyName"
+          }
+        },
+        "DeliverToLocationIdentifier": {
+          "dimensions": {
+            "concept": "en16931:DeliverToLocationIdentifier"
+          }
+        },
+        "ActualDeliveryDate": {
+          "dimensions": {
+            "concept": "en16931:ActualDeliveryDate"
+          }
+        },
+        "InvoicingPeriodStartDate": {
+          "dimensions": {
+            "concept": "en16931:InvoicingPeriodStartDate"
+          }
+        },
+        "InvoicingPeriodEndDate": {
+          "dimensions": {
+            "concept": "en16931:InvoicingPeriodEndDate"
+          }
+        },
+        "DeliverToAddressLine1": {
+          "dimensions": {
+            "concept": "en16931:DeliverToAddressLine1"
+          }
+        },
+        "DeliverToAddressLine2": {
+          "dimensions": {
+            "concept": "en16931:DeliverToAddressLine2"
+          }
+        },
+        "DeliverToAddressLine3": {
+          "dimensions": {
+            "concept": "en16931:DeliverToAddressLine3"
+          }
+        },
+        "DeliverToCity": {
+          "dimensions": {
+            "concept": "en16931:DeliverToCity"
+          }
+        },
+        "DeliverToPostCode": {
+          "dimensions": {
+            "concept": "en16931:DeliverToPostCode"
+          }
+        },
+        "DeliverToCountrySubdivision": {
+          "dimensions": {
+            "concept": "en16931:DeliverToCountrySubdivision"
+          }
+        },
+        "DeliverToCountryCode": {
+          "dimensions": {
+            "concept": "en16931:DeliverToCountryCode"
+          }
+        },
+        "PaymentMeansTypeCode": {
+          "dimensions": {
+            "concept": "en16931:PaymentMeansTypeCode"
+          }
+        },
+        "PaymentMeansText": {
+          "dimensions": {
+            "concept": "en16931:PaymentMeansText"
+          }
+        },
+        "PaymentRemittanceInformation": {
+          "dimensions": {
+            "concept": "en16931:PaymentRemittanceInformation"
+          }
+        },
+        "PaymentAccountIdentifier": {
+          "dimensions": {
+            "concept": "en16931:PaymentAccountIdentifier"
+          }
+        },
+        "PaymentAccountName": {
+          "dimensions": {
+            "concept": "en16931:PaymentAccountName"
+          }
+        },
+        "PaymentServiceProviderIdentifier": {
+          "dimensions": {
+            "concept": "en16931:PaymentServiceProviderIdentifier"
+          }
+        },
+        "PaymentCardPrimaryAccountNumber": {
+          "dimensions": {
+            "concept": "en16931:PaymentCardPrimaryAccountNumber"
+          }
+        },
+        "PaymentCardHolderName": {
+          "dimensions": {
+            "concept": "en16931:PaymentCardHolderName"
+          }
+        },
+        "MandateReferenceIdentifier": {
+          "dimensions": {
+            "concept": "en16931:MandateReferenceIdentifier"
+          }
+        },
+        "BankAssignedCreditorIdentifier": {
+          "dimensions": {
+            "concept": "en16931:BankAssignedCreditorIdentifier"
+          }
+        },
+        "DebitedAccountIdentifier": {
+          "dimensions": {
+            "concept": "en16931:DebitedAccountIdentifier"
+          }
+        },
+        "DocumentLevelAllowanceAmount": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelAllowanceAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "DocumentLevelAllowanceBaseAmount": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelAllowanceBaseAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "DocumentLevelAllowancePercentage": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelAllowancePercentage"
+          }
+        },
+        "DocumentLevelAllowanceVatCategoryCode": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelAllowanceVatCategoryCode"
+          }
+        },
+        "DocumentLevelAllowanceVatRate": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelAllowanceVatRate"
+          }
+        },
+        "DocumentLevelAllowanceReason": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelAllowanceReason"
+          }
+        },
+        "DocumentLevelAllowanceReasonCode": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelAllowanceReasonCode"
+          }
+        },
+        "DocumentLevelChargeAmount": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelChargeAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "DocumentLevelChargeBaseAmount": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelChargeBaseAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "DocumentLevelChargePercentage": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelChargePercentage"
+          }
+        },
+        "DocumentLevelChargeVatCategoryCode": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelChargeVatCategoryCode"
+          }
+        },
+        "DocumentLevelChargeVatRate": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelChargeVatRate"
+          }
+        },
+        "DocumentLevelChargeReason": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelChargeReason"
+          }
+        },
+        "DocumentLevelChargeReasonCode": {
+          "dimensions": {
+            "concept": "en16931:DocumentLevelChargeReasonCode"
+          }
+        },
+        "SumOfInvoiceLineNetAmount": {
+          "dimensions": {
+            "concept": "en16931:SumOfInvoiceLineNetAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "SumOfAllowancesOnDocumentLevel": {
+          "dimensions": {
+            "concept": "en16931:SumOfAllowancesOnDocumentLevel",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "SumOfChargesOnDocumentLevel": {
+          "dimensions": {
+            "concept": "en16931:SumOfChargesOnDocumentLevel",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "InvoiceTotalAmountWithoutVat": {
+          "dimensions": {
+            "concept": "en16931:InvoiceTotalAmountWithoutVat",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "InvoiceTotalVatAmount": {
+          "dimensions": {
+            "concept": "en16931:InvoiceTotalVatAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "InvoiceTotalVatAmountInAccountingCurrency": {
+          "dimensions": {
+            "concept": "en16931:InvoiceTotalVatAmountInAccountingCurrency",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "InvoiceTotalAmountWithVat": {
+          "dimensions": {
+            "concept": "en16931:InvoiceTotalAmountWithVat",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "PaidAmount": {
+          "dimensions": {
+            "concept": "en16931:PaidAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "RoundingAmount": {
+          "dimensions": {
+            "concept": "en16931:RoundingAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "AmountDueForPayment": {
+          "dimensions": {
+            "concept": "en16931:AmountDueForPayment",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "VatCategoryTaxableAmount": {
+          "dimensions": {
+            "concept": "en16931:VatCategoryTaxableAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "VatCategoryTaxAmount": {
+          "dimensions": {
+            "concept": "en16931:VatCategoryTaxAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "VatCategoryCode": {
+          "dimensions": {
+            "concept": "en16931:VatCategoryCode"
+          }
+        },
+        "VatCategoryRate": {
+          "dimensions": {
+            "concept": "en16931:VatCategoryRate"
+          }
+        },
+        "VatExemptionReasonText": {
+          "dimensions": {
+            "concept": "en16931:VatExemptionReasonText"
+          }
+        },
+        "VatExemptionReasonCode": {
+          "dimensions": {
+            "concept": "en16931:VatExemptionReasonCode"
+          }
+        },
+        "SupportingDocumentReference": {
+          "dimensions": {
+            "concept": "en16931:SupportingDocumentReference"
+          }
+        },
+        "SupportingDocumentDescription": {
+          "dimensions": {
+            "concept": "en16931:SupportingDocumentDescription"
+          }
+        },
+        "ExternalDocumentLocation": {
+          "dimensions": {
+            "concept": "en16931:ExternalDocumentLocation"
+          }
+        },
+        "AttachedDocument": {
+          "dimensions": {
+            "concept": "en16931:AttachedDocument"
+          }
+        },
+        "InvoiceLineIdentifier": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineIdentifier"
+          }
+        },
+        "InvoiceLineNote": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineNote"
+          }
+        },
+        "InvoiceLineObjectIdentifier": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineObjectIdentifier"
+          }
+        },
+        "InvoicedQuantity": {
+          "dimensions": {
+            "concept": "en16931:InvoicedQuantity"
+          }
+        },
+        "InvoicedQuantityUnitCode": {
+          "dimensions": {
+            "concept": "en16931:InvoicedQuantityUnitCode"
+          }
+        },
+        "InvoiceLineNetAmount": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineNetAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "ReferencedPurchaseOrderLineReference": {
+          "dimensions": {
+            "concept": "en16931:ReferencedPurchaseOrderLineReference"
+          }
+        },
+        "InvoiceLineBuyerAccountingReference": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineBuyerAccountingReference"
+          }
+        },
+        "InvoiceLinePeriodStartDate": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLinePeriodStartDate"
+          }
+        },
+        "InvoiceLinePeriodEndDate": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLinePeriodEndDate"
+          }
+        },
+        "InvoiceLineAllowanceAmount": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineAllowanceAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "InvoiceLineAllowanceBaseAmount": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineAllowanceBaseAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "InvoiceLineAllowancePercentage": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineAllowancePercentage"
+          }
+        },
+        "InvoiceLineAllowanceReason": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineAllowanceReason"
+          }
+        },
+        "InvoiceLineAllowanceReasonCode": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineAllowanceReasonCode"
+          }
+        },
+        "InvoiceLineChargeAmount": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineChargeAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "InvoiceLineChargeBaseAmount": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineChargeBaseAmount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "InvoiceLineChargePercentage": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineChargePercentage"
+          }
+        },
+        "InvoiceLineChargeReason": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineChargeReason"
+          }
+        },
+        "InvoiceLineChargeReasonCode": {
+          "dimensions": {
+            "concept": "en16931:InvoiceLineChargeReasonCode"
+          }
+        },
+        "ItemNetPrice": {
+          "dimensions": {
+            "concept": "en16931:ItemNetPrice",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "ItemPriceDiscount": {
+          "dimensions": {
+            "concept": "en16931:ItemPriceDiscount",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "ItemGrossPrice": {
+          "dimensions": {
+            "concept": "en16931:ItemGrossPrice",
+            "unit": "iso4217:JPY"
+          }
+        },
+        "ItemPriceBaseQuantity": {
+          "dimensions": {
+            "concept": "en16931:ItemPriceBaseQuantity"
+          }
+        },
+        "ItemPriceBaseQuantityUnitCode": {
+          "dimensions": {
+            "concept": "en16931:ItemPriceBaseQuantityUnitCode"
+          }
+        },
+        "InvoicedItemVatCategoryCode": {
+          "dimensions": {
+            "concept": "en16931:InvoicedItemVatCategoryCode"
+          }
+        },
+        "InvoicedItemVatRate": {
+          "dimensions": {
+            "concept": "en16931:InvoicedItemVatRate"
+          }
+        },
+        "ItemName": {
+          "dimensions": {
+            "concept": "en16931:ItemName"
+          }
+        },
+        "ItemDescription": {
+          "dimensions": {
+            "concept": "en16931:ItemDescription"
+          }
+        },
+        "ItemSellerIdentifier": {
+          "dimensions": {
+            "concept": "en16931:ItemSellerIdentifier"
+          }
+        },
+        "ItemBuyerIdentifier": {
+          "dimensions": {
+            "concept": "en16931:ItemBuyerIdentifier"
+          }
+        },
+        "ItemStandardIdentifier": {
+          "dimensions": {
+            "concept": "en16931:ItemStandardIdentifier"
+          }
+        },
+        "ItemClassificationIdentifier": {
+          "dimensions": {
+            "concept": "en16931:ItemClassificationIdentifier"
+          }
+        },
+        "ItemCountryOfOrigin": {
+          "dimensions": {
+            "concept": "en16931:ItemCountryOfOrigin"
+          }
+        },
+        "ItemAttributeName": {
+          "dimensions": {
+            "concept": "en16931:ItemAttributeName"
+          }
+        },
+        "ItemAttributeValue": {
+          "dimensions": {
+            "concept": "en16931:ItemAttributeValue"
+          }
+        }
+      }
+    }
+  }
+}
