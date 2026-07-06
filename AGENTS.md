@@ -2,7 +2,13 @@
 
 ## Project
 
-This repository is the UADA / UADC Proof of Concept workspace.
+This repository is the UADC-PoC workspace.
+
+GitHub repository:
+
+```text
+https://github.com/pontsoleil/UADC-PoC
+```
 
 The purpose of this repository is to develop and maintain a proof of concept for:
 
@@ -14,14 +20,20 @@ The purpose of this repository is to develop and maintain a proof of concept for
 - taxonomy generation
 - round-trip XML reconstruction tests
 
-This repository replaces the previous UADA repository contents with the UADC PoC workspace.
+This project was previously developed under the UADA repository and has now been renamed to UADC-PoC.
 
 ## Working directory
 
-Use this directory as the main working repository:
+Use this directory as the main local working repository:
 
 ```text
 C:\Users\nobuy\GitHub\UADC_GIT
+```
+
+The Git remote must point to:
+
+```text
+https://github.com/pontsoleil/UADC-PoC.git
 ```
 
 Do not use the old development directory as the GitHub synchronization target:
@@ -38,11 +50,12 @@ The old directory may contain unrelated local history, large files, and legacy w
 - Do not commit Python cache files.
 - Do not commit virtual environment directories.
 - Do not commit files larger than 90 MB.
-- Do not commit private keys, credentials, certificates, passwords, or local machine configuration.
+- Do not commit private keys, credentials, certificates, passwords, local certificates, or local machine configuration.
 - Do not reintroduce old UADA legacy folders unless explicitly requested.
-- Keep source files, tests, and specifications in the current UADC PoC structure.
+- Keep source files, tests, and specifications in the current UADC-PoC structure.
+- Preserve UTF-8 text files and LF line endings according to `.gitattributes`.
 
-## Ignore these paths
+## Normally ignored paths
 
 The following paths should normally remain untracked:
 
@@ -77,7 +90,8 @@ When changing code:
 2. Prefer small, focused changes.
 3. Keep the LHM, binding CSV, converter code, and tests consistent.
 4. Update documentation when behavior changes.
-5. Preserve UTF-8 text files and LF line endings according to `.gitattributes`.
+5. Keep generated artifacts separate from source definitions unless explicitly requested.
+6. Report assumptions clearly when a required external dependency is not available.
 
 ## Test commands
 
