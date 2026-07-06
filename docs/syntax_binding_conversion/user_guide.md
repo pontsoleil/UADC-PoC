@@ -273,15 +273,15 @@ Check that the binding CSV contains `semantic_path` and `xpath` values.
 
 If `--drop-empty-columns` is used, columns with no generated values are removed. Run without this option when a stable full header is required.
 
-### Metadata JSON has empty taxonomy references
+### Metadata JSON cannot locate the taxonomy
 
-Run the taxonomy generator first:
+The converter must write a non-empty `documentInfo.taxonomy` array. Generate the taxonomy first:
 
 ```powershell
 & $python .\tests\test_xbrlgl_generator_uadc_lhm.py
 ```
 
-Or pass `--taxonomy-base` with the directory containing `plt/plt-oim-*.xsd` and `en16931/en16931-*.xsd`.
+Or pass `--taxonomy-base` with the directory containing `plt/plt-oim-*.xsd`. If this schema is missing, metadata generation fails instead of writing an empty taxonomy list.
 
 ### Repeating rows are missing
 

@@ -142,7 +142,10 @@ out/hierarchical/en16931_lhm_hierarchical.csv.metadata.json
 
 The metadata is an xBRL-CSV metadata document that Arelle can load with the
 `loadFromOIM` plugin. It links the structured CSV table to the generated
-xBRL-CSV taxonomy entry points and maps CSV columns to taxonomy concepts.
+xBRL-CSV taxonomy entry points and maps CSV columns to taxonomy concepts. The
+report `documentInfo.taxonomy` property must not be empty; missing `plt-oim` is
+treated as a conversion error. The JSON metadata names the xBRL-CSV OIM taxonomy
+entry point `out/taxonomy/plt/plt-oim-<version>.xsd`.
 
 ## 5. Reverse Output
 

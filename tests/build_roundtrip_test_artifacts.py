@@ -36,6 +36,15 @@ DATASETS = [
 ]
 
 
+def ensure_taxonomy() -> None:
+    taxonomy_base = ROOT / "out" / "taxonomy"
+    oim_schema = taxonomy_base / "plt" / "plt-oim-2026-07-05.xsd"
+    module_schema = taxonomy_base / "en16931" / "en16931-2026-07-05.xsd"
+    if oim_schema.exists() and module_schema.exists():
+        return
+    subprocess.run([str(PYTHON), str(ROOT / "tests" / "test_xbrlgl_generator_uadc_lhm.py")], check=True)
+
+
 def is_invoice_xml(xml_file: Path) -> bool:
     root = ET.parse(xml_file).getroot()
     local_name = root.tag.rsplit("}", 1)[-1] if root.tag.startswith("{") else root.tag
@@ -100,6 +109,7 @@ def build_dataset(dataset_name: str, source_files: list[Path]) -> int:
 
 
 def main() -> int:
+    ensure_taxonomy()
     total = 0
     for dataset_name, source_files in DATASETS:
         count = build_dataset(dataset_name, source_files)

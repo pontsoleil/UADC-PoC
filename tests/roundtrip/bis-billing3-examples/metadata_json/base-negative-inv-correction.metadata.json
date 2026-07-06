@@ -9,8 +9,7 @@
       "xbrl": "https://xbrl.org/2021"
     },
     "taxonomy": [
-      "../../../../out/taxonomy/plt/plt-oim-2026-07-05.xsd",
-      "../../../../out/taxonomy/en16931/en16931-2026-07-05.xsd"
+      "../../../../out/taxonomy/plt/plt-oim-2026-07-05.xsd"
     ]
   },
   "tables": {

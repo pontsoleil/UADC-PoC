@@ -817,11 +817,15 @@ def latest_file(directory: Path, pattern: str) -> Optional[Path]:
 
 def taxonomy_entrypoints(taxonomy_base: Optional[Path], metadata_file: Path) -> Dict[str, str]:
     if not taxonomy_base:
-        return {}
+        raise ValueError("--taxonomy-base is required when writing xBRL-CSV metadata.")
+    xbrl_csv_schema = latest_file(taxonomy_base / "plt", "plt-oim-*.xsd")
+    module_schema = latest_file(taxonomy_base / "en16931", "en16931-*.xsd")
+    if not xbrl_csv_schema:
+        raise ValueError(f"Missing xBRL-CSV taxonomy schema under {taxonomy_base / 'plt'}.")
     return {
-        "xbrlCsvSchema": relative_metadata_path(latest_file(taxonomy_base / "plt", "plt-oim-*.xsd"), metadata_file),
+        "xbrlCsvSchema": relative_metadata_path(xbrl_csv_schema, metadata_file),
         "definitionLinkbase": relative_metadata_path(latest_file(taxonomy_base / "plt", "plt-def-*.xml"), metadata_file),
-        "moduleSchema": relative_metadata_path(latest_file(taxonomy_base / "en16931", "en16931-*.xsd"), metadata_file),
+        "moduleSchema": relative_metadata_path(module_schema, metadata_file),
     }
 
 
@@ -913,7 +917,6 @@ def write_csv_metadata(
             template_columns[field] = xbrl_csv_column_definition(column)
     taxonomy_files = [
         entrypoints.get("xbrlCsvSchema", ""),
-        entrypoints.get("moduleSchema", ""),
     ]
     metadata = {
         "documentInfo": {

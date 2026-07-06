@@ -59,8 +59,7 @@ def check_case(source_xml: Path, structured_csv: Path, metadata_json: Path, roun
     assert "metadataType" not in metadata
     document_taxonomy = metadata["documentInfo"]["taxonomy"]
     assert document_taxonomy, metadata_json
-    assert any(entry.endswith("plt-oim-2026-07-05.xsd") for entry in document_taxonomy)
-    assert any(entry.endswith("en16931-2026-07-05.xsd") for entry in document_taxonomy)
+    assert document_taxonomy == ["../../../../out/taxonomy/plt/plt-oim-2026-07-05.xsd"], metadata_json
     assert all("plt-all" not in entry and "content" not in entry for entry in document_taxonomy)
     assert metadata["tables"]["structured"]["url"].endswith(structured_csv.name)
     template = metadata["tableTemplates"]["structured"]
