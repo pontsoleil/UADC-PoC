@@ -222,7 +222,7 @@ Metadata JSON:
 
 - One metadata JSON file is generated for each structured CSV.
 - The metadata is xBRL-CSV metadata, not a UADC-specific mapping format.
-- `documentInfo.taxonomy` references generated `plt-oim` and `en16931` taxonomy schemas.
+- `documentInfo.taxonomy` references generated `plt-oim` as the xBRL-CSV taxonomy entry point.
 - `tables.structured.url` references the generated structured CSV.
 - `tableTemplates.structured.dimensions["plt:d_en16931_Invoice"]` maps to `$dInvoice`.
 - `tableTemplates.structured.columns.InvoiceNumber.dimensions.concept` maps to `en16931:InvoiceNumber`.

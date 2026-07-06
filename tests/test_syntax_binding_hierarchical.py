@@ -13,61 +13,73 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REPO = ROOT.parents[0]
 PYTHON = Path(sys.executable)
 
 
+def ensure_taxonomy() -> None:
+    taxonomy_base = ROOT / "out" / "taxonomy"
+    oim_schema = taxonomy_base / "plt" / "plt-oim-2026-07-05.xsd"
+    module_schema = taxonomy_base / "en16931" / "en16931-2026-07-05.xsd"
+    if oim_schema.exists() and module_schema.exists():
+        return
+    subprocess.run([str(PYTHON), str(ROOT / "tests" / "test_xbrlgl_generator_uadc_lhm.py")], check=True)
+
+
 def main() -> int:
+    ensure_taxonomy()
     out_dir = ROOT / "out" / "hierarchical"
-    out_csv = out_dir / "package_invoice_hierarchical.csv"
-    package = REPO / "syntax_binding_revised_package"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_csv = out_dir / "openpeppol_minimal_hierarchical.csv"
+    binding = ROOT / "specs" / "bindings" / "syntax" / "EN16931_UBL_Invoice_Syntax_Binding.csv"
+    lhm = ROOT / "specs" / "lhm" / "EN16931_CIUS_Invoice_LHM.csv"
     cmd = [
         str(PYTHON),
         str(ROOT / "src" / "syntax_binding_hierarchical.py"),
-        str(package / "invoice.xml"),
+        str(ROOT / "samples" / "input" / "openpeppol_ubl_invoice_minimal.xml"),
         "-b",
-        str(package / "bindings.csv"),
-        "--template-csv",
-        str(package / "invoice.csv"),
+        str(binding),
+        "--lhm-csv",
+        str(lhm),
         "-o",
         str(out_csv),
     ]
     subprocess.run(cmd, check=True)
 
-    with (package / "invoice.csv").open(newline="", encoding="utf-8-sig") as f:
-        expected_header = next(csv.reader(f))
     with out_csv.open(newline="", encoding="utf-8-sig") as f:
-        rows = list(csv.DictReader(f))
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames or []
+        rows = list(reader)
 
     assert rows, "No hierarchical rows were written."
-    assert rows[0].keys() == dict.fromkeys(expected_header).keys(), "Output header should follow template CSV."
-    assert rows[0]["dInvoice"] == "1"
-    assert rows[0]["invoiceNumber"] == "INV-26-861"
-    assert rows[0]["issueDate"] == "2026-06-20"
-    assert rows[0]["currencyCode"] == "JPY"
-    assert rows[0]["totalTaxAmount"] == "1472"
+    dimension_fields = [name for name in fieldnames if name.startswith("d") and name[1:2].isupper()]
+    assert fieldnames[: len(dimension_fields)] == dimension_fields, "BG dimension columns should be left aligned."
 
-    parties = {row["partyRole"]: row for row in rows if row["dInvoiceParty"]}
-    assert parties["Seller"]["partyName"] == "売手株式会社"
-    assert parties["Seller"]["partyTaxID"] == "T1234567890123"
-    assert parties["Buyer"]["partyName"] == "買手株式会社"
+    invoice = rows[0]
+    assert invoice["dInvoice"] == "1"
+    assert invoice["InvoiceNumber"] == "INV-2026-0001"
+    assert invoice["InvoiceIssueDate"] == "2026-07-06"
+    assert invoice["DocumentCurrencyCode"] == "JPY"
+    assert invoice["SellerName"] == "Seller Co. Ltd."
+    assert invoice["BuyerName"] == "Buyer Co. Ltd."
+    assert invoice["AmountDueForPayment"] == "11000"
 
-    references = {row["referenceType"]: row["referenceID"] for row in rows if row["dDocumentReference"]}
-    assert references == {"Order": "PO-2026-0001", "Delivery": "DN-2026-0001"}
+    payment = [row for row in rows if row["dPaymentInstructions"]]
+    assert payment
+    assert payment[0]["PaymentMeansTypeCode"] == "30"
+    assert payment[0]["PaymentRemittanceInformation"] == "INV-2026-0001"
 
-    payment = [row for row in rows if row["dPayment"]]
-    assert len(payment) == 1
-    assert payment[0]["paymentDueDate"] == "2026-07-31"
-    assert payment[0]["paymentReference"] == "INV-2026-0001"
-
-    tax_rows = [row for row in rows if row["dTaxBreakdown"]]
-    assert [(row["dTaxBreakdown"], row["taxCategoryCode"], row["taxRate"], row["taxAmount"]) for row in tax_rows] == [
-        ("1", "S", "10", "1232"),
-        ("2", "AA", "8", "240"),
+    vat_rows = [row for row in rows if row["dVatBreakdown"]]
+    assert [(row["dVatBreakdown"], row["VatCategoryCode"], row["VatCategoryRate"], row["VatCategoryTaxAmount"]) for row in vat_rows] == [
+        ("1", "S", "10", "1000"),
     ]
 
-    line_rows = [row for row in rows if row["dInvoiceLine"]]
-    assert not line_rows, "InvoiceLine rows require InvoiceLine bindings; template columns alone are not bindings."
+    line_rows = [row for row in rows if row["dInvoiceLine"] and row["InvoiceLineNetAmount"]]
+    assert len(line_rows) == 1
+    assert line_rows[0]["dInvoice"] == "1"
+    assert line_rows[0]["dInvoiceLine"] == "1"
+    assert line_rows[0]["InvoiceLineIdentifier"] == "1"
+    assert line_rows[0]["InvoiceLineNetAmount"] == "10000"
+    assert line_rows[0]["ItemName"] == "Sample item"
 
     print(f"ok: wrote and checked {out_csv}")
     return 0

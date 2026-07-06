@@ -2,6 +2,16 @@
 
 Run commands from the `UADC_PoC` directory.
 
+## Subdirectories and Supporting Files
+
+- `roundtrip/` - Reviewable round-trip artifacts. Each case keeps source XML,
+  structured CSV, xBRL-CSV metadata JSON, and regenerated XML together.
+- `roundtrip_test_guide.md` - Explains the round-trip artifact layout, test
+  commands, and review points.
+- `test_execution_report.md` - Current test execution report for the PoC.
+- `build_roundtrip_test_artifacts.py` - Rebuilds the round-trip artifact sets
+  from sample XML inputs.
+
 The main syntax binding and round-trip checks are:
 
 ```powershell

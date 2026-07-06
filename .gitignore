@@ -8,6 +8,10 @@ venv/
 # Generated output
 out/
 
+# Local reviewer workbooks
+specs/lhm/EN16931_CIUS_Invoice.xlsx
+specs/lhm/~$EN16931_CIUS_Invoice.xlsx
+
 # Large/generated external data
 XBRL-GL-2026/UNECE/
 *.zip

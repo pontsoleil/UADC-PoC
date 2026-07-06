@@ -12,7 +12,8 @@ reconstructed into UBL Invoice XML with schema-valid syntax.
 1. Forward syntax binding conversion writes xBRL-CSV metadata JSON, not a
    UADC-specific metadata format.
 2. The metadata uses `documentInfo`, `tables`, and `tableTemplates`.
-3. Metadata references the generated `plt-oim` and EN 16931 taxonomy schemas.
+3. Metadata references the generated `plt-oim` taxonomy schema as the xBRL-CSV
+   OIM entry point.
 4. Arelle `loadFromOIM` validation is a regression check for generated metadata.
 5. Reverse conversion reconstructs UBL Invoice XML from structured CSV using
    LHM XPath and syntax binding rules.
