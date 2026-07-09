@@ -1,4 +1,4 @@
-# User Guide: Taxonomy Generation
+﻿# User Guide: Taxonomy Generation
 
 ## 1. Working Directory
 
@@ -13,7 +13,7 @@ All paths below are relative to this directory. The taxonomy generator is includ
 Set the Python command for the local Windows environment:
 
 ```powershell
-$python = 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe'
+$python = 'python'
 ```
 
 ## 2. Input
@@ -138,7 +138,7 @@ Expected result: `False`.
 If Arelle is installed, run:
 
 ```powershell
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\Scripts\arelleCmdLine.exe' `
+& arelleCmdLine.exe `
   --file .\out\taxonomy\plt\plt-oim-2026-07-05.xsd `
   --validate
 ```
@@ -170,7 +170,7 @@ ok: XBRL-GL generator accepted UADC LHM CSV
 Use the full Python path:
 
 ```powershell
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe' --version
+& $python --version
 ```
 
 ### `plt-oim` contains tuple or content definitions
@@ -186,3 +186,4 @@ The current design is xBRL-CSV only. It keeps hypercube, dimension, and primary 
 ### The taxonomy uses an unexpected date
 
 Check the `-n` namespace option. The generator uses the final 10 characters of the namespace as the version date.
+

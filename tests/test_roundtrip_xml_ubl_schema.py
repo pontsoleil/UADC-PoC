@@ -20,7 +20,7 @@ UBL_INVOICE_SCHEMA = ROOT / "out" / "cache" / "UBL-2.1" / "xsd" / "maindoc" / "U
 
 
 def main() -> int:
-    subprocess.run([str(PYTHON), str(ROOT / "tests" / "build_roundtrip_test_artifacts.py")], check=True)
+    subprocess.run([str(PYTHON), str(ROOT / "tools" / "build_roundtrip_test_artifacts.py")], check=True)
     assert UBL_INVOICE_SCHEMA.exists(), f"Missing UBL schema: {UBL_INVOICE_SCHEMA}"
     schema = xmlschema.XMLSchema(str(UBL_INVOICE_SCHEMA))
     xml_files = sorted(TEST_ROOT.glob("*/roundtrip_xml/*.xml"))

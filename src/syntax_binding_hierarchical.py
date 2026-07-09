@@ -1,13 +1,42 @@
 #!/usr/bin/env python3
 # coding: utf-8
 """
-Convert XML to dimension-based hierarchical CSV using a syntax binding CSV.
+Convert XML to dimension-based hierarchical CSV, and optionally reverse it.
 
-This format follows syntax_binding_revised_package/invoice.csv: hierarchy is
-represented by dXXX dimension columns, while facts remain in wide CSV columns.
-The binding CSV provides semantic_path,xpath rows. A template CSV may be used to
-fix the output column order and to infer that root-level semantic fields such as
-paymentDueDate belong to a dPayment row.
+Purpose:
+    Transform UBL invoice XML into the dimension-based hierarchical CSV format
+    used by the UADC proof of concept, or rebuild UBL XML from that CSV format.
+
+Processing overview:
+    In forward mode, the script reads syntax bindings, optional template and LHM
+    layout CSV files, extracts XML facts, assigns dimension columns, drops empty
+    columns, and writes CSV plus JSON metadata. In reverse mode, it reads the
+    hierarchical CSV and binding table, reconstructs XML elements and attributes,
+    applies currency and schema-order rules, and writes UBL XML.
+
+Command-line arguments:
+    input_file: Input XML file, or input CSV when --reverse is used.
+    -b, --binding: Syntax binding CSV file.
+    -o, --output: Output hierarchical CSV, or output XML when --reverse is used.
+    --template-csv: Optional CSV template for column order and dimension placement.
+    --lhm-csv: Optional LHM CSV defining dimensions and business-term columns.
+    --metadata-output: Optional JSON metadata output path.
+    --taxonomy-base: Taxonomy directory referenced by generated metadata.
+    --reverse: Convert hierarchical CSV back to XML.
+    --invoice-namespace: Namespace URI used for reverse XML generation.
+    --d-invoice: dInvoice dimension value written in forward output rows.
+    -e, --encoding: CSV encoding used for input and output.
+
+Results:
+    Forward mode writes hierarchical CSV and metadata JSON; reverse mode writes
+    XML. The script prints generated row/value counts and returns exit code 0 on
+    success or 1 on failure.
+
+Copyright 2026 Sambuichi Professional Engineers Office
+Designed by SAMBUICHI, Nobuyuki
+Produced by ChatGPT & Codex, edited by  SAMBUICHI, Nobuyuki
+MIT License
+CC-BY-NC
 """
 
 from __future__ import annotations
@@ -22,8 +51,6 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
-
-from syntax_binding import collect_namespaces, find_nodes, get_value
 
 
 UBL_NAMESPACES = {
@@ -142,8 +169,297 @@ UBL_CHILD_ORDER = {
 }
 
 
+def xml_local_name(name: str) -> str:
+    """
+    Return the local component of a qualified or prefixed XML name.
+
+    Args:
+        name: Qualified, prefixed, or local XML name.
+
+    Returns:
+        Local XML name without namespace URI or prefix.
+    """
+    if not name:
+        return ""
+    if name.startswith("{"):
+        return name.rsplit("}", 1)[-1]
+    return name.split(":", 1)[-1]
+
+
+def collect_namespaces(xml_file: Path) -> Dict[str, str]:
+    """
+    Collect namespace prefix declarations from an XML file.
+
+    Args:
+        xml_file: XML file to scan.
+
+    Returns:
+        Mapping from namespace prefix to namespace URI.
+    """
+    namespaces: Dict[str, str] = {}
+    for event, value in ET.iterparse(xml_file, events=("start-ns",)):
+        prefix, uri = value
+        namespaces[prefix or ""] = uri
+    return namespaces
+
+
+def xml_qualify_step(step: str, namespaces: Dict[str, str]) -> str:
+    """
+    Convert an XPath step into an ElementTree-qualified tag when possible.
+
+    Args:
+        step: XPath step, possibly with a namespace prefix.
+        namespaces: Namespace prefix map collected from the XML document.
+
+    Returns:
+        ElementTree-qualified tag or the original step.
+    """
+    if not step or step in (".", "*") or step.startswith("@"):
+        return step
+    base = step.split("[", 1)[0] if "[" in step else step
+    if ":" in base:
+        prefix, name = base.split(":", 1)
+        uri = namespaces.get(prefix)
+        return f"{{{uri}}}{name}" if uri else step
+    uri = namespaces.get("")
+    return f"{{{uri}}}{base}" if uri else step
+
+
+def xml_split_step_predicate(step: str) -> Tuple[str, Optional[str]]:
+    """
+    Separate an XPath step from its optional predicate.
+
+    Args:
+        step: XPath step such as `cac:Party[cbc:ID='1']`.
+
+    Returns:
+        Tuple of base step and predicate text, or None when no predicate exists.
+    """
+    if "[" not in step:
+        return step, None
+    base, predicate = step.split("[", 1)
+    return base, predicate.rsplit("]", 1)[0].strip()
+
+
+def xml_split_xpath(xpath: str) -> List[str]:
+    """
+    Split an XPath into steps while preserving predicate expressions.
+
+    Args:
+        xpath: XPath-like path used by the syntax binding CSV.
+
+    Returns:
+        Ordered XPath steps.
+    """
+    xpath = (xpath or "").strip()
+    xpath = re.sub(r"^/+", "", xpath)
+    parts: List[str] = []
+    current: List[str] = []
+    bracket_depth = 0
+    for char in xpath:
+        if char == "[":
+            bracket_depth += 1
+        elif char == "]":
+            bracket_depth -= 1
+        if char == "/" and bracket_depth == 0:
+            part = "".join(current)
+            if part and part != ".":
+                parts.append(part)
+            current = []
+        else:
+            current.append(char)
+    part = "".join(current)
+    if part and part != ".":
+        parts.append(part)
+    return parts
+
+
+def xml_split_terminal_attribute(xpath: str) -> Tuple[str, str]:
+    """
+    Separate a terminal attribute selector from an XPath.
+
+    Args:
+        xpath: XPath that may end with `/@attribute`.
+
+    Returns:
+        Tuple of element XPath and terminal attribute name.
+    """
+    bracket_depth = 0
+    last_attribute_at = -1
+    for index in range(len(xpath) - 1):
+        char = xpath[index]
+        if char == "[":
+            bracket_depth += 1
+        elif char == "]":
+            bracket_depth -= 1
+        elif char == "/" and bracket_depth == 0 and xpath[index + 1] == "@":
+            last_attribute_at = index
+    if last_attribute_at >= 0:
+        return xpath[:last_attribute_at], xpath[last_attribute_at + 2 :]
+    return xpath, ""
+
+
+def xml_path_value(context: ET.Element, path: str, namespaces: Dict[str, str], root: Optional[ET.Element] = None) -> str:
+    """
+    Resolve a scalar value from an XML context using a relative path.
+
+    Args:
+        context: XML element used as the relative context.
+        path: Relative or absolute XPath-like expression.
+        namespaces: Namespace prefix map.
+        root: Optional document root for absolute lookups.
+
+    Returns:
+        Text or attribute value, or an empty string when no match exists.
+    """
+    path = (path or "").strip()
+    if not path:
+        return ""
+    base_context = root if path.startswith("/") and root is not None else context
+    if "/@" in path:
+        element_xpath, attr_name = path.rsplit("/@", 1)
+        nodes = find_nodes(base_context, element_xpath, namespaces, root)
+        return nodes[0].attrib.get(attr_name, "") if nodes else ""
+    if path.startswith("@"):
+        return context.attrib.get(path[1:], "")
+    nodes = find_nodes(base_context, path, namespaces, root)
+    return " ".join((nodes[0].text or "").split()) if nodes else ""
+
+
+def xml_predicate_matches(
+    child: ET.Element,
+    predicate: Optional[str],
+    namespaces: Dict[str, str],
+    root: Optional[ET.Element] = None,
+) -> bool:
+    """
+    Evaluate the supported XPath predicate forms against an XML element.
+
+    Args:
+        child: XML child element being tested.
+        predicate: Predicate text without square brackets.
+        namespaces: Namespace prefix map.
+        root: Optional document root for absolute references.
+
+    Returns:
+        True when the predicate is absent or matches.
+    """
+    if not predicate:
+        return True
+    path_pattern = r"([A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*(?:/(?:@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*))*)"
+    match = re.fullmatch(path_pattern + r"\s*=\s*(true|false)\(\)", predicate)
+    if match:
+        element_path, expected = match.groups()
+        expected_text = "true" if expected == "true" else "false"
+        return xml_path_value(child, element_path, namespaces, root).lower() == expected_text
+    match = re.fullmatch(path_pattern + r"\s*(=|!=)\s*'([^']*)'", predicate)
+    if match:
+        element_path, operator, expected_text = match.groups()
+        actual = xml_path_value(child, element_path, namespaces, root)
+        return actual == expected_text if operator == "=" else bool(actual) and actual != expected_text
+    match = re.fullmatch(path_pattern + r"\s*(=|!=)\s*(/[A-Za-z_][\w.-]*(?::[A-Za-z_][\w.-]*)?(?:/[A-Za-z_][\w.-]*(?::[A-Za-z_][\w.-]*)?)*)", predicate)
+    if match:
+        element_path, operator, reference_path = match.groups()
+        actual = xml_path_value(child, element_path, namespaces, root)
+        expected = xml_path_value(root if root is not None else child, reference_path, namespaces, root)
+        return actual == expected if operator == "=" else bool(actual) and actual != expected
+    return True
+
+
+def xml_child_matches(child: ET.Element, step: str, namespaces: Dict[str, str], root: Optional[ET.Element] = None) -> bool:
+    """
+    Check whether a child element matches an XPath step and predicate.
+
+    Args:
+        child: XML child element being tested.
+        step: XPath step from the syntax binding.
+        namespaces: Namespace prefix map.
+        root: Optional document root.
+
+    Returns:
+        True when the child matches the step.
+    """
+    base_step, predicate = xml_split_step_predicate(step)
+    qualified = xml_qualify_step(base_step, namespaces)
+    if qualified == "*":
+        return xml_predicate_matches(child, predicate, namespaces, root)
+    return (
+        child.tag == qualified or xml_local_name(child.tag) == xml_local_name(base_step)
+    ) and xml_predicate_matches(child, predicate, namespaces, root)
+
+
+def find_nodes(
+    context: ET.Element,
+    xpath: str,
+    namespaces: Dict[str, str],
+    root: Optional[ET.Element] = None,
+) -> List[ET.Element]:
+    """
+    Find XML nodes matching the limited XPath subset used by syntax bindings.
+
+    Args:
+        context: XML element used as the search context.
+        xpath: XPath-like expression.
+        namespaces: Namespace prefix map.
+        root: Optional document root.
+
+    Returns:
+        Matching XML elements.
+    """
+    if root is None:
+        root = context
+    nodes = [context]
+    parts = xml_split_xpath(xpath)
+    if parts and xml_local_name(parts[0]) == xml_local_name(context.tag):
+        parts = parts[1:]
+    for part in parts:
+        if part.startswith("@"):
+            return []
+        next_nodes: List[ET.Element] = []
+        for node in nodes:
+            next_nodes.extend(child for child in list(node) if xml_child_matches(child, part, namespaces, root))
+        nodes = next_nodes
+    return nodes
+
+
+def get_value(context: ET.Element, xpath: str, namespaces: Dict[str, str]) -> str:
+    """
+    Extract text or a terminal attribute value from an XML context.
+
+    Args:
+        context: XML element used as the extraction context.
+        xpath: XPath-like expression from the syntax binding.
+        namespaces: Namespace prefix map.
+
+    Returns:
+        Extracted text or attribute value, joined by `|` when multiple text
+        nodes match.
+    """
+    xpath = (xpath or "").strip()
+    if not xpath:
+        return ""
+    element_xpath, attr_name = xml_split_terminal_attribute(xpath)
+    if attr_name:
+        nodes = find_nodes(context, element_xpath, namespaces)
+        return nodes[0].attrib.get(attr_name, "") if nodes else ""
+    if xpath.startswith("@"):
+        return context.attrib.get(xpath[1:], "")
+    nodes = find_nodes(context, xpath, namespaces)
+    values = [" ".join((node.text or "").split()) for node in nodes if (node.text or "").strip()]
+    return "|".join(values)
+
+
 @dataclass(frozen=True)
 class Binding:
+    """
+    Describe one syntax binding from a semantic field to an XML XPath.
+
+    Args:
+        None.
+
+    Returns:
+        Dataclass instance storing the described metadata.
+    """
     order: int
     semantic_path: str
     xpath: str
@@ -156,6 +472,15 @@ class Binding:
 
 @dataclass(frozen=True)
 class LhmLayout:
+    """
+    Hold LHM-derived dimension, fact, and ordering metadata.
+
+    Args:
+        None.
+
+    Returns:
+        Dataclass instance storing the described metadata.
+    """
     fieldnames: List[str]
     field_dimension: Dict[str, str]
     semantic_path_dimension: Dict[str, str]
@@ -169,6 +494,16 @@ class LhmLayout:
 
 
 def first_present(row: Dict[str, str], names: Iterable[str]) -> str:
+    """
+    Return the first non-empty value from a set of candidate field names.
+
+    Args:
+        row: Input value used by first_present.
+        names: Input value used by first_present.
+
+    Returns:
+        Result produced by first_present.
+    """
     for name in names:
         value = row.get(name)
         if value:
@@ -177,6 +512,16 @@ def first_present(row: Dict[str, str], names: Iterable[str]) -> str:
 
 
 def parse_order(value: str, fallback: int = 0) -> int:
+    """
+    Parse a row-order value with a fallback for blanks or invalid input.
+
+    Args:
+        value: Input value used by parse_order.
+        fallback: Input value used by parse_order.
+
+    Returns:
+        Result produced by parse_order.
+    """
     value = (value or "").strip()
     if not value:
         return fallback
@@ -187,6 +532,15 @@ def parse_order(value: str, fallback: int = 0) -> int:
 
 
 def upper_camel(value: str) -> str:
+    """
+    Convert text to UpperCamelCase.
+
+    Args:
+        value: Input value used by upper_camel.
+
+    Returns:
+        Result produced by upper_camel.
+    """
     value = re.sub(r"[^0-9A-Za-z_]+", "_", value or "").strip("_")
     if not value:
         return ""
@@ -194,10 +548,28 @@ def upper_camel(value: str) -> str:
 
 
 def dimension_name(element: str) -> str:
+    """
+    Build a d-prefixed dimension column name from an element name.
+
+    Args:
+        element: Input value used by dimension_name.
+
+    Returns:
+        Result produced by dimension_name.
+    """
     return "d" + upper_camel(element)
 
 
 def multiplicity_repeats(multiplicity: str) -> bool:
+    """
+    Return whether an LHM multiplicity allows repeated rows.
+
+    Args:
+        multiplicity: Input value used by multiplicity_repeats.
+
+    Returns:
+        Result produced by multiplicity_repeats.
+    """
     multiplicity = (multiplicity or "").strip().lower()
     if ".." not in multiplicity:
         return False
@@ -211,6 +583,16 @@ def multiplicity_repeats(multiplicity: str) -> bool:
 
 
 def read_lhm_layout(lhm_csv: Optional[Path], encoding: str) -> LhmLayout:
+    """
+    Read LHM rows and classify dimensions, facts, and row ordering.
+
+    Args:
+        lhm_csv: Input value used by read_lhm_layout.
+        encoding: Input value used by read_lhm_layout.
+
+    Returns:
+        Result produced by read_lhm_layout.
+    """
     if not lhm_csv:
         return LhmLayout([], {}, {}, {}, {}, {}, {}, {}, {}, {})
     with lhm_csv.open(newline="", encoding=encoding) as f:
@@ -260,6 +642,15 @@ def read_lhm_layout(lhm_csv: Optional[Path], encoding: str) -> LhmLayout:
                 dimension_ancestors[dim] = ancestors
 
     def nearest_dimension(semantic_path: str) -> str:
+        """
+        Run the nearest_dimension helper operation.
+
+        Args:
+            semantic_path: Input value used by nearest_dimension.
+
+        Returns:
+            Result produced by nearest_dimension.
+        """
         current = semantic_path
         while current:
             dimension = path_dimension.get(current, "")
@@ -304,6 +695,16 @@ def read_lhm_layout(lhm_csv: Optional[Path], encoding: str) -> LhmLayout:
 
 
 def read_template(template_csv: Optional[Path], encoding: str) -> Tuple[List[str], Dict[str, str]]:
+    """
+    Read an optional template CSV and infer dimension placement rules.
+
+    Args:
+        template_csv: Input value used by read_template.
+        encoding: Input value used by read_template.
+
+    Returns:
+        Result produced by read_template.
+    """
     if not template_csv:
         return [], {}
     with template_csv.open(newline="", encoding=encoding) as f:
@@ -331,6 +732,15 @@ def read_template(template_csv: Optional[Path], encoding: str) -> Tuple[List[str
 
 
 def is_dimension_column(name: str) -> bool:
+    """
+    Return whether a column name represents a dimension column.
+
+    Args:
+        name: Input value used by is_dimension_column.
+
+    Returns:
+        Result produced by is_dimension_column.
+    """
     return bool(re.fullmatch(r"d[A-Z][A-Za-z0-9_]*", name or ""))
 
 
@@ -342,7 +752,30 @@ def parse_semantic_path(
     field_by_semantic_path: Optional[Dict[str, str]] = None,
     semantic_path_dimension: Optional[Dict[str, str]] = None,
 ) -> Optional[Binding]:
+    """
+    Parse a semantic path into hierarchy parts and a leaf field.
+
+    Args:
+        semantic_path: Input value used by parse_semantic_path.
+        xpath: Input value used by parse_semantic_path.
+        order: Input value used by parse_semantic_path.
+        path_dimension: Input value used by parse_semantic_path.
+        field_by_semantic_path: Input value used by parse_semantic_path.
+        semantic_path_dimension: Input value used by parse_semantic_path.
+
+    Returns:
+        Result produced by parse_semantic_path.
+    """
     def nearest_dimension(semantic_path_value: str) -> str:
+        """
+        Run the nearest_dimension helper operation.
+
+        Args:
+            semantic_path_value: Input value used by nearest_dimension.
+
+        Returns:
+            Result produced by nearest_dimension.
+        """
         current = semantic_path_value
         dimensions = path_dimension or {}
         while current:
@@ -393,6 +826,19 @@ def read_bindings(
     field_by_semantic_path: Optional[Dict[str, str]] = None,
     semantic_path_dimension: Optional[Dict[str, str]] = None,
 ) -> List[Binding]:
+    """
+    Read usable binding rows from a CSV file.
+
+    Args:
+        binding_csv: Input value used by read_bindings.
+        encoding: Input value used by read_bindings.
+        path_dimension: Input value used by read_bindings.
+        field_by_semantic_path: Input value used by read_bindings.
+        semantic_path_dimension: Input value used by read_bindings.
+
+    Returns:
+        Result produced by read_bindings.
+    """
     with binding_csv.open(newline="", encoding=encoding) as f:
         reader = csv.DictReader(f)
         if not reader.fieldnames:
@@ -420,12 +866,30 @@ def read_bindings(
 
 
 def xpath_element_path(xpath: str) -> str:
+    """
+    Return the element portion of an XPath without a terminal attribute.
+
+    Args:
+        xpath: Input value used by xpath_element_path.
+
+    Returns:
+        Result produced by xpath_element_path.
+    """
     xpath = xpath.strip()
     element_xpath, _ = split_terminal_attribute(xpath)
     return element_xpath
 
 
 def xpath_parent(xpath: str) -> str:
+    """
+    Return the parent XPath for an element or attribute XPath.
+
+    Args:
+        xpath: Input value used by xpath_parent.
+
+    Returns:
+        Result produced by xpath_parent.
+    """
     parts = split_xpath_steps(xpath_element_path(xpath))
     if len(parts) <= 1:
         return "/" + "/".join(parts)
@@ -433,6 +897,15 @@ def xpath_parent(xpath: str) -> str:
 
 
 def common_xpath_prefix(xpaths: List[str]) -> str:
+    """
+    Find the common path prefix across XPath strings.
+
+    Args:
+        xpaths: Input value used by common_xpath_prefix.
+
+    Returns:
+        Result produced by common_xpath_prefix.
+    """
     split_paths = [split_xpath_steps(xpath_element_path(xpath)) for xpath in xpaths]
     if not split_paths:
         return ""
@@ -445,6 +918,15 @@ def common_xpath_prefix(xpaths: List[str]) -> str:
 
 
 def infer_repeat_path(bindings: List[Binding]) -> str:
+    """
+    Infer the repeated XML context path from binding rows.
+
+    Args:
+        bindings: Input value used by infer_repeat_path.
+
+    Returns:
+        Result produced by infer_repeat_path.
+    """
     if len(bindings) == 1:
         return xpath_parent(bindings[0].xpath)
     common = common_xpath_prefix([binding.xpath for binding in bindings])
@@ -454,6 +936,16 @@ def infer_repeat_path(bindings: List[Binding]) -> str:
 
 
 def relative_xpath(full_xpath: str, context_xpath: str) -> str:
+    """
+    Make a binding XPath relative to a context XPath.
+
+    Args:
+        full_xpath: Input value used by relative_xpath.
+        context_xpath: Input value used by relative_xpath.
+
+    Returns:
+        Result produced by relative_xpath.
+    """
     full = xpath_element_path(full_xpath) if "/@" not in full_xpath else full_xpath
     context = context_xpath.rstrip("/")
     if full == context:
@@ -464,6 +956,16 @@ def relative_xpath(full_xpath: str, context_xpath: str) -> str:
 
 
 def qname(name: str, namespaces: Dict[str, str]) -> str:
+    """
+    Build an ElementTree QName from a prefixed XML name.
+
+    Args:
+        name: Input value used by qname.
+        namespaces: Input value used by qname.
+
+    Returns:
+        Result produced by qname.
+    """
     if ":" in name:
         prefix, local = name.split(":", 1)
         uri = namespaces.get(prefix)
@@ -473,12 +975,30 @@ def qname(name: str, namespaces: Dict[str, str]) -> str:
 
 
 def element_local_name(tag: str) -> str:
+    """
+    Return the local XML element name from a tag or step.
+
+    Args:
+        tag: Input value used by element_local_name.
+
+    Returns:
+        Result produced by element_local_name.
+    """
     if tag.startswith("{"):
         return tag.rsplit("}", 1)[-1]
     return tag.split(":", 1)[-1]
 
 
 def step_base_and_predicate(step: str) -> Tuple[str, str]:
+    """
+    Split an XPath step into its base name and predicate text.
+
+    Args:
+        step: Input value used by step_base_and_predicate.
+
+    Returns:
+        Result produced by step_base_and_predicate.
+    """
     if "[" not in step:
         return step, ""
     base, predicate = step.split("[", 1)
@@ -486,6 +1006,15 @@ def step_base_and_predicate(step: str) -> Tuple[str, str]:
 
 
 def predicate_child_value(predicate: str) -> Tuple[str, str, str]:
+    """
+    Parse a simple child-equals-literal predicate.
+
+    Args:
+        predicate: Input value used by predicate_child_value.
+
+    Returns:
+        Result produced by predicate_child_value.
+    """
     path_pattern = r"([A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*(?:/(?:@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*))*)"
     match = re.fullmatch(path_pattern + r"\s*(!=|=)\s*(true|false)\(\)", predicate)
     if match:
@@ -503,6 +1032,17 @@ def predicate_child_value(predicate: str) -> Tuple[str, str, str]:
 
 
 def find_predicate_value(parent: ET.Element, relative_path: str, namespaces: Dict[str, str]) -> str:
+    """
+    Read the value referenced by a predicate child path.
+
+    Args:
+        parent: Input value used by find_predicate_value.
+        relative_path: Input value used by find_predicate_value.
+        namespaces: Input value used by find_predicate_value.
+
+    Returns:
+        Result produced by find_predicate_value.
+    """
     current = parent
     parts = relative_path.split("/")
     for index, step in enumerate(parts):
@@ -521,6 +1061,18 @@ def find_predicate_value(parent: ET.Element, relative_path: str, namespaces: Dic
 
 
 def set_predicate_value(parent: ET.Element, relative_path: str, value: str, namespaces: Dict[str, str]) -> None:
+    """
+    Write the value referenced by a predicate child path.
+
+    Args:
+        parent: Input value used by set_predicate_value.
+        relative_path: Input value used by set_predicate_value.
+        value: Input value used by set_predicate_value.
+        namespaces: Input value used by set_predicate_value.
+
+    Returns:
+        None. The XML parent subtree is modified in place.
+    """
     current = parent
     parts = relative_path.split("/")
     for index, step in enumerate(parts):
@@ -533,6 +1085,15 @@ def set_predicate_value(parent: ET.Element, relative_path: str, value: str, name
 
 
 def split_xpath_steps(xpath: str) -> List[str]:
+    """
+    Split an XML path into steps while preserving predicates.
+
+    Args:
+        xpath: Input value used by split_xpath_steps.
+
+    Returns:
+        Result produced by split_xpath_steps.
+    """
     xpath = (xpath or "").strip().strip("/")
     parts: List[str] = []
     current: List[str] = []
@@ -556,6 +1117,15 @@ def split_xpath_steps(xpath: str) -> List[str]:
 
 
 def split_terminal_attribute(xpath: str) -> Tuple[str, str]:
+    """
+    Separate a terminal XML attribute from an XPath.
+
+    Args:
+        xpath: Input value used by split_terminal_attribute.
+
+    Returns:
+        Result produced by split_terminal_attribute.
+    """
     bracket_depth = 0
     last_attribute_at = -1
     for index in range(len(xpath) - 1):
@@ -572,6 +1142,17 @@ def split_terminal_attribute(xpath: str) -> Tuple[str, str]:
 
 
 def child_satisfies_predicate(child: ET.Element, predicate: str, namespaces: Dict[str, str]) -> bool:
+    """
+    Check whether a child element satisfies a simple predicate.
+
+    Args:
+        child: Input value used by child_satisfies_predicate.
+        predicate: Input value used by child_satisfies_predicate.
+        namespaces: Input value used by child_satisfies_predicate.
+
+    Returns:
+        Result produced by child_satisfies_predicate.
+    """
     predicate_name, operator, predicate_value = predicate_child_value(predicate)
     if not predicate_name:
         return True
@@ -584,6 +1165,18 @@ def child_satisfies_predicate(child: ET.Element, predicate: str, namespaces: Dic
 
 
 def find_or_create_child(parent: ET.Element, step: str, namespaces: Dict[str, str], force_new: bool = False) -> ET.Element:
+    """
+    Find an existing matching child or create a new XML child.
+
+    Args:
+        parent: Input value used by find_or_create_child.
+        step: Input value used by find_or_create_child.
+        namespaces: Input value used by find_or_create_child.
+        force_new: Input value used by find_or_create_child.
+
+    Returns:
+        Result produced by find_or_create_child.
+    """
     base, predicate = step_base_and_predicate(step)
     tag = qname(base, namespaces)
     if not force_new:
@@ -598,6 +1191,15 @@ def find_or_create_child(parent: ET.Element, step: str, namespaces: Dict[str, st
 
 
 def split_xml_path(xpath: str) -> Tuple[List[str], str]:
+    """
+    Split an XML path into element steps and terminal attribute name.
+
+    Args:
+        xpath: Input value used by split_xml_path.
+
+    Returns:
+        Result produced by split_xml_path.
+    """
     xpath = (xpath or "").strip()
     xpath, attribute = split_terminal_attribute(xpath)
     parts = split_xpath_steps(xpath)
@@ -605,6 +1207,18 @@ def split_xml_path(xpath: str) -> Tuple[List[str], str]:
 
 
 def ensure_path(root: ET.Element, xpath: str, namespaces: Dict[str, str], force_new_leaf: bool = False) -> Tuple[ET.Element, str]:
+    """
+    Ensure an XML path exists and return its final element and attribute.
+
+    Args:
+        root: Input value used by ensure_path.
+        xpath: Input value used by ensure_path.
+        namespaces: Input value used by ensure_path.
+        force_new_leaf: Input value used by ensure_path.
+
+    Returns:
+        Result produced by ensure_path.
+    """
     parts, attribute = split_xml_path(xpath)
     if parts and element_local_name(parts[0]) == element_local_name(root.tag):
         parts = parts[1:]
@@ -615,6 +1229,18 @@ def ensure_path(root: ET.Element, xpath: str, namespaces: Dict[str, str], force_
 
 
 def set_xml_value(root: ET.Element, xpath: str, value: str, namespaces: Dict[str, str]) -> None:
+    """
+    Set an XML element text or attribute value by XPath.
+
+    Args:
+        root: Input value used by set_xml_value.
+        xpath: Input value used by set_xml_value.
+        value: Input value used by set_xml_value.
+        namespaces: Input value used by set_xml_value.
+
+    Returns:
+        None. The XML tree is modified in place.
+    """
     if not value:
         return
     element, attribute = ensure_path(root, xpath, namespaces)
@@ -625,6 +1251,15 @@ def set_xml_value(root: ET.Element, xpath: str, value: str, namespaces: Dict[str
 
 
 def is_amount_xpath(xpath: str) -> bool:
+    """
+    Return whether an XPath points to an amount element.
+
+    Args:
+        xpath: Input value used by is_amount_xpath.
+
+    Returns:
+        Result produced by is_amount_xpath.
+    """
     parts, attribute = split_xml_path(xpath)
     if attribute:
         return False
@@ -632,6 +1267,18 @@ def is_amount_xpath(xpath: str) -> bool:
 
 
 def apply_currency_attribute(element: ET.Element, xpath: str, document_currency: str, tax_currency: str) -> None:
+    """
+    Set currencyID on amount elements when appropriate.
+
+    Args:
+        element: Input value used by apply_currency_attribute.
+        xpath: Input value used by apply_currency_attribute.
+        document_currency: Input value used by apply_currency_attribute.
+        tax_currency: Input value used by apply_currency_attribute.
+
+    Returns:
+        None. The XML element is modified in place.
+    """
     if not is_amount_xpath(xpath) or element.get("currencyID"):
         return
     currency = tax_currency if "TaxCurrencyCode" in xpath else document_currency
@@ -640,6 +1287,17 @@ def apply_currency_attribute(element: ET.Element, xpath: str, document_currency:
 
 
 def resolve_currency_references(xpath: str, document_currency: str, tax_currency: str) -> str:
+    """
+    Replace currency reference paths with currency codes.
+
+    Args:
+        xpath: Input value used by resolve_currency_references.
+        document_currency: Input value used by resolve_currency_references.
+        tax_currency: Input value used by resolve_currency_references.
+
+    Returns:
+        Result produced by resolve_currency_references.
+    """
     if document_currency:
         xpath = xpath.replace("=/Invoice/cbc:DocumentCurrencyCode", f"='{document_currency}'")
         xpath = xpath.replace("!=/Invoice/cbc:DocumentCurrencyCode", f"!='{document_currency}'")
@@ -656,6 +1314,19 @@ def create_context(
     document_currency: str = "",
     tax_currency: str = "",
 ) -> ET.Element:
+    """
+    Create the root XML context for reverse hierarchical conversion.
+
+    Args:
+        root: Input value used by create_context.
+        xpath: Input value used by create_context.
+        namespaces: Input value used by create_context.
+        document_currency: Input value used by create_context.
+        tax_currency: Input value used by create_context.
+
+    Returns:
+        Result produced by create_context.
+    """
     resolved_xpath = resolve_currency_references(xpath, document_currency, tax_currency)
     element, _ = ensure_path(root, resolved_xpath, namespaces, force_new_leaf=True)
     return element
@@ -669,6 +1340,20 @@ def set_xml_value_with_currency(
     document_currency: str,
     tax_currency: str,
 ) -> None:
+    """
+    Set an XML value and apply currency attributes or references.
+
+    Args:
+        root: Input value used by set_xml_value_with_currency.
+        xpath: Input value used by set_xml_value_with_currency.
+        value: Input value used by set_xml_value_with_currency.
+        namespaces: Input value used by set_xml_value_with_currency.
+        document_currency: Input value used by set_xml_value_with_currency.
+        tax_currency: Input value used by set_xml_value_with_currency.
+
+    Returns:
+        None. The XML tree is modified in place.
+    """
     if not value:
         return
     resolved_xpath = resolve_currency_references(xpath, document_currency, tax_currency)
@@ -688,6 +1373,20 @@ def set_relative_xml_value(
     document_currency: str = "",
     tax_currency: str = "",
 ) -> None:
+    """
+    Set a value below a row-specific XML context.
+
+    Args:
+        context: Input value used by set_relative_xml_value.
+        xpath: Input value used by set_relative_xml_value.
+        value: Input value used by set_relative_xml_value.
+        namespaces: Input value used by set_relative_xml_value.
+        document_currency: Input value used by set_relative_xml_value.
+        tax_currency: Input value used by set_relative_xml_value.
+
+    Returns:
+        None. The XML context subtree is modified in place.
+    """
     if not value:
         return
     if xpath == ".":
@@ -704,6 +1403,15 @@ def set_relative_xml_value(
 
 
 def child_order_for(element: ET.Element) -> Dict[str, int]:
+    """
+    Return the schema child-order map for an element.
+
+    Args:
+        element: Input value used by child_order_for.
+
+    Returns:
+        Result produced by child_order_for.
+    """
     local = element_local_name(element.tag)
     order = UBL_CHILD_ORDER.get(local)
     if order is None and local.endswith("Address"):
@@ -716,6 +1424,15 @@ def child_order_for(element: ET.Element) -> Dict[str, int]:
 
 
 def sort_children_for_ubl_schema(element: ET.Element) -> None:
+    """
+    Recursively sort UBL children according to schema order.
+
+    Args:
+        element: Input value used by sort_children_for_ubl_schema.
+
+    Returns:
+        None. The XML tree is sorted in place.
+    """
     for child in list(element):
         sort_children_for_ubl_schema(child)
     order = child_order_for(element)
@@ -730,6 +1447,16 @@ def sort_children_for_ubl_schema(element: ET.Element) -> None:
 
 
 def find_child_by_local_name(element: ET.Element, local_name: str) -> Optional[ET.Element]:
+    """
+    Find the first direct child with a local element name.
+
+    Args:
+        element: Input value used by find_child_by_local_name.
+        local_name: Input value used by find_child_by_local_name.
+
+    Returns:
+        Result produced by find_child_by_local_name.
+    """
     for child in list(element):
         if element_local_name(child.tag) == local_name:
             return child
@@ -737,6 +1464,16 @@ def find_child_by_local_name(element: ET.Element, local_name: str) -> Optional[E
 
 
 def ensure_tax_scheme_defaults(root: ET.Element, namespaces: Dict[str, str]) -> None:
+    """
+    Add required TaxScheme ID defaults when missing.
+
+    Args:
+        root: Input value used by ensure_tax_scheme_defaults.
+        namespaces: Input value used by ensure_tax_scheme_defaults.
+
+    Returns:
+        None. Missing default XML children are added in place.
+    """
     for element in root.iter():
         local = element_local_name(element.tag)
         if local == "AllowanceCharge" and find_child_by_local_name(element, "ChargeIndicator") is None:
@@ -753,6 +1490,16 @@ def ensure_tax_scheme_defaults(root: ET.Element, namespaces: Dict[str, str]) -> 
 
 
 def indent_xml(element: ET.Element, level: int = 0) -> None:
+    """
+    Apply readable indentation to XML elements.
+
+    Args:
+        element: Input value used by indent_xml.
+        level: Input value used by indent_xml.
+
+    Returns:
+        None. The XML tree is formatted in place.
+    """
     indentation = "\n" + level * "  "
     if len(element):
         if not element.text or not element.text.strip():
@@ -766,6 +1513,16 @@ def indent_xml(element: ET.Element, level: int = 0) -> None:
 
 
 def new_row(fieldnames: List[str], d_invoice: str) -> Dict[str, str]:
+    """
+    Create an empty hierarchical CSV row with an invoice dimension value.
+
+    Args:
+        fieldnames: Input value used by new_row.
+        d_invoice: Input value used by new_row.
+
+    Returns:
+        Result produced by new_row.
+    """
     row = {field: "" for field in fieldnames}
     if "dInvoice" in row:
         row["dInvoice"] = d_invoice
@@ -773,10 +1530,30 @@ def new_row(fieldnames: List[str], d_invoice: str) -> Dict[str, str]:
 
 
 def row_has_values(row: Dict[str, str], dimension_columns: List[str]) -> bool:
+    """
+    Return whether a row has any non-dimension fact values.
+
+    Args:
+        row: Input value used by row_has_values.
+        dimension_columns: Input value used by row_has_values.
+
+    Returns:
+        Result produced by row_has_values.
+    """
     return any(value for field, value in row.items() if field not in dimension_columns)
 
 
 def drop_empty_columns(rows: List[Dict[str, str]], fieldnames: List[str]) -> Tuple[List[Dict[str, str]], List[str]]:
+    """
+    Remove columns that are empty across all rows.
+
+    Args:
+        rows: Input value used by drop_empty_columns.
+        fieldnames: Input value used by drop_empty_columns.
+
+    Returns:
+        Result produced by drop_empty_columns.
+    """
     used = {
         field
         for field in fieldnames
@@ -788,6 +1565,16 @@ def drop_empty_columns(rows: List[Dict[str, str]], fieldnames: List[str]) -> Tup
 
 
 def add_derived_fieldnames(fieldnames: List[str], bindings: List[Binding]) -> List[str]:
+    """
+    Add binding-derived field names missing from a template.
+
+    Args:
+        fieldnames: Input value used by add_derived_fieldnames.
+        bindings: Input value used by add_derived_fieldnames.
+
+    Returns:
+        Result produced by add_derived_fieldnames.
+    """
     if fieldnames:
         return fieldnames
     names = ["dInvoice"]
@@ -802,6 +1589,16 @@ def add_derived_fieldnames(fieldnames: List[str], bindings: List[Binding]) -> Li
 
 
 def relative_metadata_path(path: Optional[Path], metadata_file: Path) -> str:
+    """
+    Format a metadata path relative to its JSON metadata file.
+
+    Args:
+        path: Input value used by relative_metadata_path.
+        metadata_file: Input value used by relative_metadata_path.
+
+    Returns:
+        Result produced by relative_metadata_path.
+    """
     if not path:
         return ""
     try:
@@ -811,11 +1608,31 @@ def relative_metadata_path(path: Optional[Path], metadata_file: Path) -> str:
 
 
 def latest_file(directory: Path, pattern: str) -> Optional[Path]:
+    """
+    Find the latest matching file in a directory.
+
+    Args:
+        directory: Input value used by latest_file.
+        pattern: Input value used by latest_file.
+
+    Returns:
+        Result produced by latest_file.
+    """
     files = sorted(directory.glob(pattern))
     return files[-1] if files else None
 
 
 def taxonomy_entrypoints(taxonomy_base: Optional[Path], metadata_file: Path) -> Dict[str, str]:
+    """
+    Build metadata links to available taxonomy entrypoint files.
+
+    Args:
+        taxonomy_base: Input value used by taxonomy_entrypoints.
+        metadata_file: Input value used by taxonomy_entrypoints.
+
+    Returns:
+        Result produced by taxonomy_entrypoints.
+    """
     if not taxonomy_base:
         raise ValueError("--taxonomy-base is required when writing xBRL-CSV metadata.")
     xbrl_csv_schema = latest_file(taxonomy_base / "plt", "plt-oim-*.xsd")
@@ -830,6 +1647,15 @@ def taxonomy_entrypoints(taxonomy_base: Optional[Path], metadata_file: Path) -> 
 
 
 def taxonomy_version(entrypoints: Dict[str, str]) -> str:
+    """
+    Infer a taxonomy version label from entrypoint file names.
+
+    Args:
+        entrypoints: Input value used by taxonomy_version.
+
+    Returns:
+        Result produced by taxonomy_version.
+    """
     for value in entrypoints.values():
         match = re.search(r"(\d{4}-\d{2}-\d{2})", value or "")
         if match:
@@ -838,6 +1664,15 @@ def taxonomy_version(entrypoints: Dict[str, str]) -> str:
 
 
 def xbrl_csv_column_definition(column: Dict[str, str]) -> Dict[str, Dict[str, str]]:
+    """
+    Build one XBRL CSV metadata column definition.
+
+    Args:
+        column: Input value used by xbrl_csv_column_definition.
+
+    Returns:
+        Result produced by xbrl_csv_column_definition.
+    """
     dimensions = {"concept": column["taxonomyConcept"]}
     datatype = (column.get("datatype") or "").lower()
     if "amount" in datatype or column.get("name", "").endswith("Amount"):
@@ -846,6 +1681,16 @@ def xbrl_csv_column_definition(column: Dict[str, str]) -> Dict[str, Dict[str, st
 
 
 def lhm_column_metadata(lhm_csv: Optional[Path], encoding: str) -> Dict[str, Dict[str, str]]:
+    """
+    Build column metadata from an LHM CSV file.
+
+    Args:
+        lhm_csv: Input value used by lhm_column_metadata.
+        encoding: Input value used by lhm_column_metadata.
+
+    Returns:
+        Result produced by lhm_column_metadata.
+    """
     if not lhm_csv:
         return {}
     with lhm_csv.open(newline="", encoding=encoding) as f:
@@ -900,6 +1745,23 @@ def write_csv_metadata(
     taxonomy_base: Optional[Path],
     encoding: str,
 ) -> None:
+    """
+    Write JSON metadata for a hierarchical CSV file.
+
+    Args:
+        metadata_file: Input value used by write_csv_metadata.
+        csv_file: Input value used by write_csv_metadata.
+        xml_file: Input value used by write_csv_metadata.
+        binding_csv: Input value used by write_csv_metadata.
+        lhm_csv: Input value used by write_csv_metadata.
+        fieldnames: Input value used by write_csv_metadata.
+        row_count: Input value used by write_csv_metadata.
+        taxonomy_base: Input value used by write_csv_metadata.
+        encoding: Input value used by write_csv_metadata.
+
+    Returns:
+        None. The JSON metadata file is written.
+    """
     columns = lhm_column_metadata(lhm_csv, encoding)
     entrypoints = taxonomy_entrypoints(taxonomy_base, metadata_file)
     version = taxonomy_version(entrypoints)
@@ -965,6 +1827,24 @@ def write_hierarchical_csv(
     d_invoice: str = "1",
     drop_empty: bool = False,
 ) -> Tuple[int, List[str]]:
+    """
+    Extract XML data and write hierarchical CSV plus metadata.
+
+    Args:
+        xml_file: Input value used by write_hierarchical_csv.
+        binding_csv: Input value used by write_hierarchical_csv.
+        out_csv: Input value used by write_hierarchical_csv.
+        template_csv: Input value used by write_hierarchical_csv.
+        lhm_csv: Input value used by write_hierarchical_csv.
+        metadata_output: Input value used by write_hierarchical_csv.
+        taxonomy_base: Input value used by write_hierarchical_csv.
+        encoding: Input value used by write_hierarchical_csv.
+        d_invoice: Input value used by write_hierarchical_csv.
+        drop_empty: Input value used by write_hierarchical_csv.
+
+    Returns:
+        Result produced by write_hierarchical_csv.
+    """
     namespaces = collect_namespaces(xml_file)
     root = ET.parse(xml_file).getroot()
     lhm_layout = read_lhm_layout(lhm_csv, encoding)
@@ -992,6 +1872,16 @@ def write_hierarchical_csv(
     dimension_counts: Dict[str, int] = {}
 
     def get_dimension_row(dimension: str, discriminator: str) -> Dict[str, str]:
+        """
+        Run the get_dimension_row helper operation.
+
+        Args:
+            dimension: Input value used by get_dimension_row.
+            discriminator: Input value used by get_dimension_row.
+
+        Returns:
+            Result produced by get_dimension_row.
+        """
         key = (dimension, discriminator, d_invoice)
         if key not in dimension_rows:
             dimension_counts[dimension] = dimension_counts.get(dimension, 0) + 1
@@ -1067,14 +1957,44 @@ def write_hierarchical_csv(
 
 
 def row_value(row: Dict[str, str], field: str) -> str:
+    """
+    Return a stripped value from a CSV row field.
+
+    Args:
+        row: Input value used by row_value.
+        field: Input value used by row_value.
+
+    Returns:
+        Result produced by row_value.
+    """
     return (row.get(field) or "").strip()
 
 
 def row_has_dimension(row: Dict[str, str], dimension: str) -> bool:
+    """
+    Return whether a row has a value for a dimension column.
+
+    Args:
+        row: Input value used by row_has_dimension.
+        dimension: Input value used by row_has_dimension.
+
+    Returns:
+        Result produced by row_has_dimension.
+    """
     return bool(row_value(row, dimension))
 
 
 def first_row_value(rows: List[Dict[str, str]], fields: Iterable[str]) -> str:
+    """
+    Return the first non-empty value among fields across rows.
+
+    Args:
+        rows: Input value used by first_row_value.
+        fields: Input value used by first_row_value.
+
+    Returns:
+        Result produced by first_row_value.
+    """
     for row in rows:
         for field in fields:
             value = row_value(row, field)
@@ -1092,6 +2012,21 @@ def write_xml_from_hierarchical_csv(
     encoding: str,
     namespaces: Optional[Dict[str, str]] = None,
 ) -> int:
+    """
+    Rebuild XML from hierarchical CSV rows and bindings.
+
+    Args:
+        input_csv: Input value used by write_xml_from_hierarchical_csv.
+        binding_csv: Input value used by write_xml_from_hierarchical_csv.
+        out_xml: Input value used by write_xml_from_hierarchical_csv.
+        template_csv: Input value used by write_xml_from_hierarchical_csv.
+        lhm_csv: Input value used by write_xml_from_hierarchical_csv.
+        encoding: Input value used by write_xml_from_hierarchical_csv.
+        namespaces: Input value used by write_xml_from_hierarchical_csv.
+
+    Returns:
+        Result produced by write_xml_from_hierarchical_csv.
+    """
     ns = namespaces or UBL_NAMESPACES
     for prefix, uri in ns.items():
         ET.register_namespace(prefix, uri)
@@ -1192,6 +2127,15 @@ def write_xml_from_hierarchical_csv(
 
 
 def main() -> int:
+    """
+    Parse command-line arguments, run the script workflow, and return an exit code.
+
+    Args:
+        None.
+
+    Returns:
+        Process exit status: 0 for success and 1 for handled errors where applicable.
+    """
     parser = argparse.ArgumentParser(
         description="Convert XML to dXXX dimension-based hierarchical CSV using syntax bindings."
     )

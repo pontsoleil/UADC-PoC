@@ -3,12 +3,30 @@
 """
 Convert structured CSV to flat CSV using a semantic binding CSV.
 
-The semantic binding CSV maps structured CSV columns to flat CSV columns.
-Supported columns:
+Purpose:
+    Flatten UADA structured CSV data into a conventional flat CSV layout by
+    applying semantic bindings between source columns and target columns.
 
-    column / flat_column / target_column       output flat CSV column
-    source_column / structured_column / value  input structured CSV column
-    fixedValue / fixed_value / default         fixed or fallback value
+Processing overview:
+    The script reads semantic binding rows, accepts several legacy column names,
+    maps each source structured CSV row into target flat CSV columns, applies
+    fixed fallback values when configured, and writes the flat CSV output.
+
+Command-line arguments:
+    structured_csv: Input structured CSV file.
+    -b, --binding: Semantic binding CSV file.
+    -o, --output: Output flat CSV path.
+    -e, --encoding: CSV encoding used for input and output.
+
+Results:
+    Writes the flat CSV and prints the output row and column counts.
+    Returns exit code 0 on success and 1 on failure.
+
+Copyright 2026 Sambuichi Professional Engineers Office
+Designed by SAMBUICHI, Nobuyuki
+Produced by ChatGPT & Codex, edited by  SAMBUICHI, Nobuyuki
+MIT License
+CC-BY-NC
 """
 
 from __future__ import annotations
@@ -21,6 +39,16 @@ from typing import Dict, Iterable, List, Tuple
 
 
 def first_present(row: Dict[str, str], names: Iterable[str]) -> str:
+    """
+    Return the first non-empty value from a set of candidate field names.
+
+    Args:
+        row: Input value used by first_present.
+        names: Input value used by first_present.
+
+    Returns:
+        Result produced by first_present.
+    """
     for name in names:
         value = row.get(name)
         if value:
@@ -29,6 +57,15 @@ def first_present(row: Dict[str, str], names: Iterable[str]) -> str:
 
 
 def tail(path: str) -> str:
+    """
+    Return the final segment of a slash- or dot-delimited path.
+
+    Args:
+        path: Input value used by tail.
+
+    Returns:
+        Result produced by tail.
+    """
     if not path:
         return ""
     path = path.strip().strip("/")
@@ -40,6 +77,16 @@ def tail(path: str) -> str:
 
 
 def read_bindings(binding_csv: Path, encoding: str) -> List[Dict[str, str]]:
+    """
+    Read usable binding rows from a CSV file.
+
+    Args:
+        binding_csv: Input value used by read_bindings.
+        encoding: Input value used by read_bindings.
+
+    Returns:
+        Result produced by read_bindings.
+    """
     with binding_csv.open(newline="", encoding=encoding) as f:
         rows = [dict(row) for row in csv.DictReader(f)]
     bindings = []
@@ -64,6 +111,18 @@ def convert_structured_to_flat(
     out_csv: Path,
     encoding: str,
 ) -> Tuple[int, List[str]]:
+    """
+    Convert a structured CSV file to a flat CSV file.
+
+    Args:
+        structured_csv: Input value used by convert_structured_to_flat.
+        binding_csv: Input value used by convert_structured_to_flat.
+        out_csv: Input value used by convert_structured_to_flat.
+        encoding: Input value used by convert_structured_to_flat.
+
+    Returns:
+        Result produced by convert_structured_to_flat.
+    """
     bindings = read_bindings(binding_csv, encoding)
     if not bindings:
         raise ValueError("No usable semantic bindings found.")
@@ -88,6 +147,15 @@ def convert_structured_to_flat(
 
 
 def main() -> int:
+    """
+    Parse command-line arguments, run the script workflow, and return an exit code.
+
+    Args:
+        None.
+
+    Returns:
+        Process exit status: 0 for success and 1 for handled errors where applicable.
+    """
     parser = argparse.ArgumentParser(description="Convert structured CSV to flat CSV using semantic bindings.")
     parser.add_argument("structured_csv", type=Path, help="Input structured CSV")
     parser.add_argument("-b", "--binding", required=True, type=Path, help="Semantic binding CSV")

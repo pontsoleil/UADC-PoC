@@ -3,15 +3,31 @@
 """
 Convert XML to structured CSV using a syntax binding CSV.
 
-The binding CSV maps XML locations to structured CSV columns. Supported binding
-columns are intentionally permissive so the tool can read existing UADA files:
+Purpose:
+    Extract values from XML documents into UADA structured CSV columns by using
+    a syntax binding CSV that maps output columns to XML XPath locations.
 
-    column / element / name          output column
-    xpath / source_xpath / xml_path  XML XPath
-    default / fixedValue             fallback value
+Processing overview:
+    The script collects XML namespaces, reads permissive binding column names,
+    evaluates XPath-like paths with predicate support, optionally repeats output
+    rows for a row context XPath, and writes a structured CSV file.
 
-Use --row-xpath when one output row should be produced for each repeated XML
-element. Without --row-xpath a single row is produced.
+Command-line arguments:
+    xml_file: Input XML file.
+    -b, --binding: Syntax binding CSV file.
+    -o, --output: Output structured CSV path.
+    -r, --row-xpath: Optional XPath selecting repeated row/context elements.
+    -e, --encoding: CSV encoding used for binding input and CSV output.
+
+Results:
+    Writes the structured CSV and prints the output row and column counts.
+    Returns exit code 0 on success and 1 on failure.
+
+Copyright 2026 Sambuichi Professional Engineers Office
+Designed by SAMBUICHI, Nobuyuki
+Produced by ChatGPT & Codex, edited by  SAMBUICHI, Nobuyuki
+MIT License
+CC-BY-NC
 """
 
 from __future__ import annotations
@@ -26,6 +42,15 @@ from typing import Dict, Iterable, List, Optional, Tuple
 
 
 def local_name(name: str) -> str:
+    """
+    Return the local component of a qualified or prefixed name.
+
+    Args:
+        name: Input value used by local_name.
+
+    Returns:
+        Result produced by local_name.
+    """
     if not name:
         return ""
     if name.startswith("{"):
@@ -34,6 +59,15 @@ def local_name(name: str) -> str:
 
 
 def collect_namespaces(xml_file: Path) -> Dict[str, str]:
+    """
+    Collect namespace prefix declarations from an XML file.
+
+    Args:
+        xml_file: Input value used by collect_namespaces.
+
+    Returns:
+        Result produced by collect_namespaces.
+    """
     namespaces: Dict[str, str] = {}
     for event, value in ET.iterparse(xml_file, events=("start-ns",)):
         prefix, uri = value
@@ -42,6 +76,16 @@ def collect_namespaces(xml_file: Path) -> Dict[str, str]:
 
 
 def qualify_step(step: str, namespaces: Dict[str, str]) -> str:
+    """
+    Convert one XPath step to an ElementTree-qualified tag when possible.
+
+    Args:
+        step: Input value used by qualify_step.
+        namespaces: Input value used by qualify_step.
+
+    Returns:
+        Result produced by qualify_step.
+    """
     if not step or step in (".", "*") or step.startswith("@"):
         return step
     if "[" in step:
@@ -57,6 +101,15 @@ def qualify_step(step: str, namespaces: Dict[str, str]) -> str:
 
 
 def split_step_predicate(step: str) -> Tuple[str, Optional[str]]:
+    """
+    Separate an XPath step from its optional predicate.
+
+    Args:
+        step: Input value used by split_step_predicate.
+
+    Returns:
+        Result produced by split_step_predicate.
+    """
     if "[" not in step:
         return step, None
     base, predicate = step.split("[", 1)
@@ -64,6 +117,18 @@ def split_step_predicate(step: str) -> Tuple[str, Optional[str]]:
 
 
 def path_value(context: ET.Element, path: str, namespaces: Dict[str, str], root: Optional[ET.Element] = None) -> str:
+    """
+    Resolve a scalar value from an XML context using a relative path.
+
+    Args:
+        context: Input value used by path_value.
+        path: Input value used by path_value.
+        namespaces: Input value used by path_value.
+        root: Input value used by path_value.
+
+    Returns:
+        Result produced by path_value.
+    """
     path = (path or "").strip()
     if not path:
         return ""
@@ -84,6 +149,18 @@ def predicate_matches(
     namespaces: Dict[str, str],
     root: Optional[ET.Element] = None,
 ) -> bool:
+    """
+    Evaluate a supported XPath predicate against an XML element.
+
+    Args:
+        child: Input value used by predicate_matches.
+        predicate: Input value used by predicate_matches.
+        namespaces: Input value used by predicate_matches.
+        root: Input value used by predicate_matches.
+
+    Returns:
+        Result produced by predicate_matches.
+    """
     if not predicate:
         return True
     path_pattern = r"([A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*(?:/(?:@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*))*)"
@@ -107,6 +184,18 @@ def predicate_matches(
 
 
 def child_matches(child: ET.Element, step: str, namespaces: Dict[str, str], root: Optional[ET.Element] = None) -> bool:
+    """
+    Check whether a child element matches an XPath step and predicate.
+
+    Args:
+        child: Input value used by child_matches.
+        step: Input value used by child_matches.
+        namespaces: Input value used by child_matches.
+        root: Input value used by child_matches.
+
+    Returns:
+        Result produced by child_matches.
+    """
     base_step, predicate = split_step_predicate(step)
     qualified = qualify_step(base_step, namespaces)
     if qualified == "*":
@@ -117,6 +206,15 @@ def child_matches(child: ET.Element, step: str, namespaces: Dict[str, str], root
 
 
 def split_xpath(xpath: str) -> List[str]:
+    """
+    Split an XPath into path steps while respecting predicates.
+
+    Args:
+        xpath: Input value used by split_xpath.
+
+    Returns:
+        Result produced by split_xpath.
+    """
     xpath = (xpath or "").strip()
     xpath = re.sub(r"^/+", "", xpath)
     parts: List[str] = []
@@ -141,6 +239,15 @@ def split_xpath(xpath: str) -> List[str]:
 
 
 def split_terminal_attribute(xpath: str) -> Tuple[str, str]:
+    """
+    Separate a terminal XML attribute from an XPath.
+
+    Args:
+        xpath: Input value used by split_terminal_attribute.
+
+    Returns:
+        Result produced by split_terminal_attribute.
+    """
     bracket_depth = 0
     last_attribute_at = -1
     for index in range(len(xpath) - 1):
@@ -162,6 +269,18 @@ def find_nodes(
     namespaces: Dict[str, str],
     root: Optional[ET.Element] = None,
 ) -> List[ET.Element]:
+    """
+    Find XML nodes matching a limited XPath expression.
+
+    Args:
+        context: Input value used by find_nodes.
+        xpath: Input value used by find_nodes.
+        namespaces: Input value used by find_nodes.
+        root: Input value used by find_nodes.
+
+    Returns:
+        Result produced by find_nodes.
+    """
     if root is None:
         root = context
     nodes = [context]
@@ -179,6 +298,17 @@ def find_nodes(
 
 
 def get_value(context: ET.Element, xpath: str, namespaces: Dict[str, str]) -> str:
+    """
+    Extract a text or attribute value from an XML context.
+
+    Args:
+        context: Input value used by get_value.
+        xpath: Input value used by get_value.
+        namespaces: Input value used by get_value.
+
+    Returns:
+        Result produced by get_value.
+    """
     xpath = (xpath or "").strip()
     if not xpath:
         return ""
@@ -194,6 +324,16 @@ def get_value(context: ET.Element, xpath: str, namespaces: Dict[str, str]) -> st
 
 
 def first_present(row: Dict[str, str], names: Iterable[str]) -> str:
+    """
+    Return the first non-empty value from a set of candidate field names.
+
+    Args:
+        row: Input value used by first_present.
+        names: Input value used by first_present.
+
+    Returns:
+        Result produced by first_present.
+    """
     for name in names:
         value = row.get(name)
         if value:
@@ -202,6 +342,16 @@ def first_present(row: Dict[str, str], names: Iterable[str]) -> str:
 
 
 def read_bindings(binding_csv: Path, encoding: str) -> List[Dict[str, str]]:
+    """
+    Read usable binding rows from a CSV file.
+
+    Args:
+        binding_csv: Input value used by read_bindings.
+        encoding: Input value used by read_bindings.
+
+    Returns:
+        Result produced by read_bindings.
+    """
     with binding_csv.open(newline="", encoding=encoding) as f:
         rows = [dict(row) for row in csv.DictReader(f)]
     bindings = []
@@ -223,6 +373,19 @@ def write_structured_csv(
     row_xpath: Optional[str],
     encoding: str,
 ) -> Tuple[int, List[str]]:
+    """
+    Extract XML values and write a structured CSV file.
+
+    Args:
+        xml_file: Input value used by write_structured_csv.
+        binding_csv: Input value used by write_structured_csv.
+        out_csv: Input value used by write_structured_csv.
+        row_xpath: Input value used by write_structured_csv.
+        encoding: Input value used by write_structured_csv.
+
+    Returns:
+        Result produced by write_structured_csv.
+    """
     namespaces = collect_namespaces(xml_file)
     root = ET.parse(xml_file).getroot()
     bindings = read_bindings(binding_csv, encoding)
@@ -248,6 +411,15 @@ def write_structured_csv(
 
 
 def main() -> int:
+    """
+    Parse command-line arguments, run the script workflow, and return an exit code.
+
+    Args:
+        None.
+
+    Returns:
+        Process exit status: 0 for success and 1 for handled errors where applicable.
+    """
     parser = argparse.ArgumentParser(description="Convert XML to structured CSV using syntax bindings.")
     parser.add_argument("xml_file", type=Path, help="Input XML file")
     parser.add_argument("-b", "--binding", required=True, type=Path, help="Syntax binding CSV")

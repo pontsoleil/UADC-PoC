@@ -1,4 +1,4 @@
-# User Guide: LHM Generation
+﻿# User Guide: LHM Generation
 
 ## 1. Working Directory
 
@@ -13,7 +13,7 @@ All paths below are relative to this directory.
 Set the Python command for the local Windows environment:
 
 ```powershell
-$python = 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe'
+$python = 'python'
 ```
 
 ## 2. Edit the LHM Source
@@ -165,3 +165,4 @@ Set `semantic_path_override` in the source CSV and rebuild the LHM.
 ### Missing PDF descriptions
 
 Check the PDF page range. Some rows may need manual `description` values in the source CSV because PDF table extraction can split cells.
+

@@ -3,8 +3,29 @@
 """
 Normalize LHM semantic_path values from business terms.
 
-Each semantic path element is generated from the row's business term (`name`)
-using lowerCamelCaseConcatenated. The hierarchy is taken from the `path` column.
+Purpose:
+    Rebuild LHM semantic_path values from row names and hierarchy paths so the
+    LHM CSV can be used consistently by UADA binding and conversion tools.
+
+Processing overview:
+    The script converts each row name to lowerCamelCaseConcatenated, follows the
+    path column to assemble hierarchical semantic path segments, updates the
+    semantic_path column, and writes the result in place or to a new file.
+
+Command-line arguments:
+    input_csv: Input LHM CSV file.
+    -o, --output: Output LHM CSV path; defaults to overwriting input_csv.
+    -e, --encoding: CSV encoding used for input and output.
+
+Results:
+    Writes the normalized LHM CSV and prints the number of processed rows.
+    Returns exit code 0 on success and 1 on failure.
+
+Copyright 2026 Sambuichi Professional Engineers Office
+Designed by SAMBUICHI, Nobuyuki
+Produced by ChatGPT & Codex, edited by  SAMBUICHI, Nobuyuki
+MIT License
+CC-BY-NC
 """
 
 from __future__ import annotations
@@ -18,6 +39,15 @@ from typing import Dict, List
 
 
 def lower_camel_case_concatenated(term: str) -> str:
+    """
+    Convert a business term to lowerCamelCaseConcatenated.
+
+    Args:
+        term: Input value used by lower_camel_case_concatenated.
+
+    Returns:
+        Result produced by lower_camel_case_concatenated.
+    """
     words = re.findall(r"[A-Za-z0-9]+", term or "")
     if not words:
         return "unnamed"
@@ -30,6 +60,15 @@ def lower_camel_case_concatenated(term: str) -> str:
 
 
 def normalize_rows(rows: List[Dict[str, str]]) -> List[Dict[str, str]]:
+    """
+    Update semantic_path values for in-memory LHM rows.
+
+    Args:
+        rows: Input value used by normalize_rows.
+
+    Returns:
+        Result produced by normalize_rows.
+    """
     segment_by_id: Dict[str, str] = {}
     for row in rows:
         row_id = row.get("id", "")
@@ -45,6 +84,17 @@ def normalize_rows(rows: List[Dict[str, str]]) -> List[Dict[str, str]]:
 
 
 def normalize_file(input_csv: Path, output_csv: Path, encoding: str) -> int:
+    """
+    Normalize semantic_path values in an LHM CSV file.
+
+    Args:
+        input_csv: Input value used by normalize_file.
+        output_csv: Input value used by normalize_file.
+        encoding: Input value used by normalize_file.
+
+    Returns:
+        Result produced by normalize_file.
+    """
     with input_csv.open(newline="", encoding=encoding) as f:
         reader = csv.DictReader(f)
         if not reader.fieldnames:
@@ -62,6 +112,15 @@ def normalize_file(input_csv: Path, output_csv: Path, encoding: str) -> int:
 
 
 def main() -> int:
+    """
+    Parse command-line arguments, run the script workflow, and return an exit code.
+
+    Args:
+        None.
+
+    Returns:
+        Process exit status: 0 for success and 1 for handled errors where applicable.
+    """
     parser = argparse.ArgumentParser(description="Normalize LHM semantic_path values.")
     parser.add_argument("input_csv", type=Path, help="Input LHM CSV")
     parser.add_argument("-o", "--output", type=Path, help="Output LHM CSV; defaults to in-place")

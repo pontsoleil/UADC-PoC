@@ -29,7 +29,7 @@ def arelle_command() -> str:
 
 
 def main() -> int:
-    subprocess.run([str(PYTHON), str(ROOT / "tests" / "build_roundtrip_test_artifacts.py")], check=True)
+    subprocess.run([str(PYTHON), str(ROOT / "tools" / "build_roundtrip_test_artifacts.py")], check=True)
     arelle = arelle_command()
     metadata_files = sorted(TEST_ROOT.glob("*/metadata_json/*.metadata.json"))
     assert metadata_files, "No generated metadata files found."

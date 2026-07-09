@@ -16,13 +16,10 @@ Program:
 src/syntax_binding_hierarchical.py
 ```
 
-Supporting XML extraction module:
-
-```text
-src/syntax_binding.py
-```
-
-The hierarchical converter imports namespace and XPath helper functions from `syntax_binding.py`.
+The converter is self-contained for the supported namespace and XPath helper
+functions. The older simple converter is kept as `tools/syntax_binding.py` for
+legacy/reference checks, but it is not required by the operational hierarchical
+converter.
 
 ## 3. Input Files
 

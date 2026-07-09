@@ -1,4 +1,4 @@
-# Round-Trip Test Guide
+﻿# Round-Trip Test Guide
 
 ## Purpose
 
@@ -63,8 +63,8 @@ CreditNote samples are not included in this Invoice round-trip test.
 Run from the `UADC_PoC` directory:
 
 ```powershell
-$python = 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe'
-& $python .\tests\build_roundtrip_test_artifacts.py
+$python = 'python'
+& $python .\tools\build_roundtrip_test_artifacts.py
 ```
 
 The script refreshes all four artifact directories for each dataset.
@@ -200,3 +200,4 @@ Run these when changing syntax binding, LHM XPath, or currency handling:
 & $python .\tests\test_xbrl_csv_metadata_arelle.py
 & $python .\tests\test_roundtrip_xml_ubl_schema.py
 ```
+

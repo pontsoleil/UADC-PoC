@@ -9,25 +9,25 @@ Run commands from the `UADC_PoC` directory.
 - `roundtrip_test_guide.md` - Explains the round-trip artifact layout, test
   commands, and review points.
 - `test_execution_report.md` - Current test execution report for the PoC.
-- `build_roundtrip_test_artifacts.py` - Rebuilds the round-trip artifact sets
-  from sample XML inputs.
+- `../tools/build_roundtrip_test_artifacts.py` - Rebuilds the round-trip
+  artifact sets from sample XML inputs.
 
 The main syntax binding and round-trip checks are:
 
 ```powershell
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe' tests\test_openpeppol_invoice_conversion.py
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe' tests\test_lhm_hierarchical_csv_layout.py
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe' tests\test_syntax_binding_hierarchical.py
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe' tests\test_syntax_binding_reverse.py
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe' tests\test_bis_billing3_examples_conversion.py
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe' tests\test_roundtrip_artifacts.py
+& $python .\tests\test_openpeppol_invoice_conversion.py
+& $python .\tests\test_lhm_hierarchical_csv_layout.py
+& $python .\tests\test_syntax_binding_hierarchical.py
+& $python .\tests\test_syntax_binding_reverse.py
+& $python .\tests\test_bis_billing3_examples_conversion.py
+& $python .\tests\test_roundtrip_artifacts.py
 ```
 
 The LHM and taxonomy checks are:
 
 ```powershell
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe' tests\test_lhm_semantic_paths.py
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe' tests\test_xbrlgl_generator_uadc_lhm.py
+& $python .\tests\test_lhm_semantic_paths.py
+& $python .\tests\test_xbrlgl_generator_uadc_lhm.py
 ```
 
 Round-trip test artifacts are documented in:

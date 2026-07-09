@@ -24,10 +24,11 @@ This project was previously developed under the UADA repository and has now been
 
 ## Working directory
 
-Use this directory as the main local working repository:
+Use the directory where the GitHub repository was cloned as the main local
+working repository:
 
 ```text
-C:\Users\nobuy\GitHub\UADC_GIT
+<local-clone-directory>\UADC-PoC
 ```
 
 The Git remote must point to:
@@ -36,10 +37,11 @@ The Git remote must point to:
 https://github.com/pontsoleil/UADC-PoC.git
 ```
 
-Do not use the old development directory as the GitHub synchronization target:
+Do not use an old development directory as the GitHub synchronization target.
+For example, avoid reusing legacy local workspaces such as:
 
 ```text
-C:\Users\nobuy\GitHub\UADA
+<old-local-development-directory>
 ```
 
 The old directory may contain unrelated local history, large files, and legacy workspaces.

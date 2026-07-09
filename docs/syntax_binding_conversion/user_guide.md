@@ -1,4 +1,4 @@
-# User Guide: Syntax Binding XML-to-Hierarchical-CSV Conversion
+﻿# User Guide: Syntax Binding XML-to-Hierarchical-CSV Conversion
 
 ## 1. Working Directory
 
@@ -13,7 +13,7 @@ All paths below are relative to this directory unless they begin with `../`.
 Set the Python command for the local Windows environment:
 
 ```powershell
-$python = 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe'
+$python = 'python'
 ```
 
 ## 2. Main Script
@@ -139,7 +139,7 @@ tests/roundtrip/
 Run:
 
 ```powershell
-& $python .\tests\build_roundtrip_test_artifacts.py
+& $python .\tools\build_roundtrip_test_artifacts.py
 ```
 
 The generated layout is:
@@ -302,3 +302,4 @@ Template columns alone do not create rows. Invoice line rows require invoice lin
 ### Reverse XML does not match the original file order
 
 Reverse XML is reconstructed from binding rows and hierarchical CSV values. Populate LHM `syntax_sequence` from the UBL schema when XML element order must be checked. Unbound XML content still cannot be reproduced until it is represented by a binding or fixed-value rule.
+

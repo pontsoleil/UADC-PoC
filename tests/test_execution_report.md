@@ -1,4 +1,4 @@
-# Test Execution Report
+﻿# Test Execution Report
 
 ## Summary
 
@@ -31,16 +31,16 @@ Working directory:
 UADC_PoC
 ```
 
-Python used by Codex runtime:
+Python used for the recorded run:
 
 ```text
-C:\Users\nobuy\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe
+python
 ```
 
 Project Python path shown in user-facing guides:
 
 ```text
-C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe
+python
 ```
 
 ## Input Data
@@ -259,7 +259,7 @@ Taxonomy validation commands:
 
 ```powershell
 & $python .\tests\validate_taxonomy.py
-& 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\Scripts\arelleCmdLine.exe' `
+& arelleCmdLine.exe `
   --file .\out\taxonomy\plt\plt-oim-2026-07-05.xsd `
   --validate
 ```
@@ -275,3 +275,4 @@ Known expected differences may include:
 - Indentation.
 - Unbound XML content.
 - UBL-required support elements that are not EN 16931 BT values.
+

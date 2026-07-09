@@ -70,7 +70,7 @@ def check_case(source_xml: Path, structured_csv: Path, metadata_json: Path, roun
 
 
 def main() -> int:
-    subprocess.run([str(PYTHON), str(ROOT / "tests" / "build_roundtrip_test_artifacts.py")], check=True)
+    subprocess.run([str(PYTHON), str(ROOT / "tools" / "build_roundtrip_test_artifacts.py")], check=True)
 
     cases = 0
     for dataset_dir in sorted(TEST_ROOT.iterdir()):
