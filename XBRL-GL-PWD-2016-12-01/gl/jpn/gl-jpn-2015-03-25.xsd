@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) 2025 XBRL Japan, Inc. -->
+<schema targetNamespace="http://www.xbrl.org/int/gl/jpn/2015-03-25"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrll="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:gl-cor="http://www.xbrl.org/int/gl/cor/2015-03-25"
+  xmlns:gl-jpn="http://www.xbrl.org/int/gl/jpn/2015-03-25"
+  xmlns:gl-gen="http://www.xbrl.org/int/gl/gen/2015-03-25"
+  elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <annotation>
+    <appinfo>
+      <xbrll:linkbaseRef xlink:type="simple" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"
+        xlink:href="gl-jpn-2015-03-25-presentation.xml" xlink:title="Presentation Links, all"
+        xlink:role="http://www.xbrl.org/2003/role/presentationLinkbaseRef"/>
+    </appinfo>
+  </annotation>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <import namespace="http://www.xbrl.org/int/gl/gen/2015-03-25" schemaLocation="../gen/gl-gen-2015-03-25.xsd"/>
+  <element name="debitAccount" id="gl-jpn_debitAccount" type="gl-jpn:debitAccountComplexType" substitutionGroup="xbrli:tuple" nillable="true"/>
+  <element name="debitAccountMainDescription" id="gl-jpn_debitAccountMainDescription" type="gl-jpn:accountMainDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitAccountMainID" id="gl-jpn_debitAccountMainID" type="gl-jpn:accountMainIDItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitAccountPurposeCode" id="gl-jpn_debitAccountPurposeCode" type="gl-gen:accountPurposeCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitAccountPurposeDescription" id="gl-jpn_debitAccountPurposeDescription" type="gl-jpn:accountPurposeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitAccountActive" id="gl-jpn_debitAccountActive" type="gl-gen:activeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitAccountSub" id="gl-jpn_debitAccountSub" type="gl-jpn:debitAccountSubComplexType" substitutionGroup="xbrli:tuple" nillable="true"/>
+  <element name="debitAccountSubDescription" id="gl-jpn_debitAccountSubDescription" type="gl-jpn:accountSubDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitAccountSubID" id="gl-jpn_debitAccountSubID" type="gl-jpn:accountSubIDItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitAccountSubType" id="gl-jpn_debitAccountSubType" type="gl-jpn:accountSubTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitAccountType" id="gl-jpn_debitAccountType" type="gl-gen:accountTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitAccountTypeDescription" id="gl-jpn_debitAccountTypeDescription" type="gl-jpn:accountTypeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitMainAccountTypeDescription" id="gl-jpn_debitMainAccountTypeDescription" type="gl-jpn:accountTypeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="signOfDebitAmount" id="gl-jpn_signOfDebitAmount" type="gl-gen:signOfAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>  
+  <element name="debitAmount" id="gl-jpn_debitAmount" type="gl-gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitMainAccountType" id="gl-jpn_debitMainAccountType" type="gl-gen:mainAccountTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitSegmentParentTuple" id="gl-jpn_debitSegmentParentTuple" type="gl-jpn:debitSegmentParentTupleComplexType" substitutionGroup="xbrli:tuple" nillable="true"/>
+  <element name="parentDebitAccountMainID" id="gl-jpn_parentDebitAccountMainID" type="gl-jpn:parentAccountMainIDItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitParentSubaccountCode" id="gl-jpn_debitParentSubaccountCode" type="gl-jpn:parentSubaccountCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitParentSubaccountProportion" id="gl-jpn_debitParentSubaccountProportion" type="gl-jpn:parentSubaccountProportionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitParentSubaccountType" id="gl-jpn_debitParentSubaccountType" type="gl-jpn:parentSubaccountTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitReportingTreeIdentifier" id="gl-jpn_debitReportingTreeIdentifier" type="gl-jpn:reportingTreeIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+
+  <element name="creditAccount" id="gl-jpn_creditAccount" type="gl-jpn:creditAccountComplexType" substitutionGroup="xbrli:tuple" nillable="true"/>
+  <element name="creditAccountMainDescription" id="gl-jpn_creditAccountMainDescription" type="gl-jpn:accountMainDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAccountMainID" id="gl-jpn_creditAccountMainID" type="gl-jpn:accountMainIDItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAccountPurposeCode" id="gl-jpn_creditAccountPurposeCode" type="gl-gen:accountPurposeCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAccountPurposeDescription" id="gl-jpn_creditAccountPurposeDescription" type="gl-jpn:accountPurposeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAccountActive" id="gl-jpn_creditAccountActive" type="gl-gen:activeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAccountSub" id="gl-jpn_creditAccountSub" type="gl-jpn:creditAccountSubComplexType" substitutionGroup="xbrli:tuple" nillable="true"/>
+  <element name="creditAccountSubDescription" id="gl-jpn_creditAccountSubDescription" type="gl-jpn:accountSubDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAccountSubID" id="gl-jpn_creditAccountSubID" type="gl-jpn:accountSubIDItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAccountSubType" id="gl-jpn_creditAccountSubType" type="gl-jpn:accountSubTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAccountType" id="gl-jpn_creditAccountType" type="gl-gen:accountTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAccountTypeDescription" id="gl-jpn_creditAccountTypeDescription" type="gl-jpn:accountTypeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditMainAccountTypeDescription" id="gl-jpn_creditMainAccountTypeDescription" type="gl-jpn:accountTypeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="signOfCreditAmount" id="gl-jpn_signOfCreditAmount" type="gl-gen:signOfAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditAmount" id="gl-jpn_creditAmount" type="gl-gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditMainAccountType" id="gl-jpn_creditMainAccountType" type="gl-gen:mainAccountTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditSegmentParentTuple" id="gl-jpn_creditSegmentParentTuple" type="gl-jpn:creditSegmentParentTupleComplexType" substitutionGroup="xbrli:tuple" nillable="true"/>
+  <element name="parentCreditAccountMainID" id="gl-jpn_parentCreditAccountMainID" type="gl-jpn:parentAccountMainIDItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditParentSubaccountCode" id="gl-jpn_creditParentSubaccountCode" type="gl-jpn:parentSubaccountCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditParentSubaccountProportion" id="gl-jpn_creditParentSubaccountProportion" type="gl-jpn:parentSubaccountProportionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditParentSubaccountType" id="gl-jpn_creditParentSubaccountType" type="gl-jpn:parentSubaccountTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditReportingTreeIdentifier" id="gl-jpn_creditReportingTreeIdentifier" type="gl-jpn:reportingTreeIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+
+  <element name="debitTaxAuthority" id="gl-jpn_debitTaxAuthority" type="gl-jpn:taxAuthorityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitTaxTableCode" id="gl-jpn_debitTaxTableCode" type="gl-jpn:taxTableCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitTaxAmount" id="gl-jpn_debitTaxAmount" type="gl-jpn:taxAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitTaxBasis" id="gl-jpn_debitTaxBasis" type="gl-jpn:taxBasisItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitTaxCode" id="gl-jpn_debitTaxCode" type="gl-jpn:taxCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitTaxCommentExemption" id="gl-jpn_debitTaxCommentExemption" type="gl-jpn:taxCommentExemptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitTaxDescription" id="gl-jpn_debitTaxDescription" type="gl-jpn:taxDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitTaxes" id="gl-jpn_debitTaxes" type="gl-jpn:debitTaxesComplexType" substitutionGroup="xbrli:tuple" nillable="true"/>
+  <element name="debitTaxExchangeRate" id="gl-jpn_debitTaxExchangeRate" type="gl-jpn:taxExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitTaxPercentageRate" id="gl-jpn_debitTaxPercentageRate" type="gl-jpn:taxPercentageRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+
+  <element name="creditTaxAuthority" id="gl-jpn_creditTaxAuthority" type="gl-jpn:taxAuthorityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditTaxTableCode" id="gl-jpn_creditTaxTableCode" type="gl-jpn:taxTableCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditTaxAmount" id="gl-jpn_creditTaxAmount" type="gl-jpn:taxAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditTaxBasis" id="gl-jpn_creditTaxBasis" type="gl-jpn:taxBasisItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditTaxCode" id="gl-jpn_creditTaxCode" type="gl-jpn:taxCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditTaxCommentExemption" id="gl-jpn_creditTaxCommentExemption" type="gl-jpn:taxCommentExemptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditTaxDescription" id="gl-jpn_creditTaxDescription" type="gl-jpn:taxDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditTaxes" id="gl-jpn_creditTaxes" type="gl-jpn:creditTaxesComplexType" substitutionGroup="xbrli:tuple" nillable="true"/>
+  <element name="creditTaxExchangeRate" id="gl-jpn_creditTaxExchangeRate" type="gl-jpn:taxExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="creditTaxPercentageRate" id="gl-jpn_creditTaxPercentageRate" type="gl-jpn:taxPercentageRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+
+</schema>

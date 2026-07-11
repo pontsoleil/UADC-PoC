@@ -23,6 +23,36 @@ The main syntax binding and round-trip checks are:
 & $python .\tests\test_roundtrip_artifacts.py
 ```
 
+The Phase 2 downstream XBRL GL target checks are:
+
+```powershell
+& $python .\tests\test_ads_invoices_received_xbrl_gl.py
+& $python .\tests\test_ads_invoices_generated_xbrl_gl.py
+& $python .\tests\test_ads_invoices_received_lines_xbrl_gl.py
+& $python .\tests\test_ads_invoices_generated_lines_xbrl_gl.py
+& $python .\tests\test_ads_supplier_listing_xbrl_gl.py
+& $python .\tests\test_ads_customer_master_xbrl_gl.py
+```
+
+These tests first regenerate the Phase 1 structured CSV as
+`out/phase1/EN16931_Core_Invoice.csv`, then use the ADS XBRL GL syntax binding
+CSV files under `specs/bindings/syntax/` to write Figure 1 target instances
+directly under `out/phase2/ADS_XBRL_GL/`:
+
+```text
+Invoices_Received.xbrl
+Invoices_Generated.xbrl
+Invoices_Received_Lines.xbrl
+Invoices_Generated_Lines.xbrl
+Supplier_Listing.xbrl
+Customer_Master.xbrl
+```
+
+The current party direction is tested explicitly: `Invoices_Received` includes
+invoice Seller data as Supplier data, `Invoices_Generated` includes invoice
+Buyer data as Customer data, `Supplier_Listing` is derived from invoice Seller
+terms, and `Customer_Master` is derived from invoice Buyer terms.
+
 The LHM and taxonomy checks are:
 
 ```powershell

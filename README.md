@@ -20,7 +20,8 @@ generation:
   views and AICPA ADS O2C/P2P invoice views.
 
 This repository is the working implementation space for that proposal. The
-current implementation is Phase 1 of the PoC.
+current implementation includes the Phase 1 Structured CSV baseline and the
+first Phase 2 ADS XBRL GL target projections.
 
 The first PoC checkpoint is the EN 16931-1 invoice semantic model represented
 as an LHM/HMD-style CSV, plus binding-driven conversion from UBL Invoice XML to
@@ -150,10 +151,10 @@ Later interoperability tests
 - `references/` - External source notes and links used to interpret standards, source specifications, and implementation references. Keep large licensed source documents outside the repository and record only reproducible notes or pointers here.
 - `XBRL_GL_Next_UADC_PoC.pdf` - Proposal document that motivates this repository and defines the broader UADC direction beyond the current Phase 1 implementation.
 - `specs/lhm/` - LHM/HMD semantic model definitions for the EN 16931 invoice PoC. The generated/current CSV is stored here, while `specs/lhm/source/` keeps the editable source CSV used to regenerate or adjust the LHM. Local reviewer workbooks are ignored by Git.
-- `specs/bindings/` - Binding definitions. The active UBL Invoice syntax binding is `specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv`; it maps LHM semantic paths to UBL XPath expressions and selector predicates used by forward and reverse conversion.
+- `specs/bindings/` - Binding definitions. The active UBL Invoice syntax binding is `specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv`; it maps LHM semantic paths to UBL XPath expressions and selector predicates used by forward and reverse conversion. Phase 2 ADS XBRL GL binding CSV files and the review workbook `specs/bindings/syntax/ADS_XBRL_GL_Bindings.xlsx` define the target projections shown in Figure 1.
 - `samples/input/` - Small sample input files committed for baseline checks, including the minimal UBL Invoice sample and selected BIS Billing example invoices.
 - `samples/expected/` - Checked expected output for lightweight regression checks where a stable expected artifact is useful.
-- `src/` - Operational conversion scripts and beginner tutorial wrappers. The main converter is `src/syntax_binding_hierarchical.py`; it generates hierarchical Structured CSV, writes xBRL-CSV metadata JSON, and performs Structured-CSV-to-XML round trips. `src/ads_invoices_received_xbrl_gl.py` generates ADS Invoices Received XBRL GL instances, and `src/tutorial/` provides simple learning scripts.
+- `src/` - Operational conversion scripts and beginner tutorial wrappers. The main converter is `src/syntax_binding_hierarchical.py`; it generates hierarchical Structured CSV, writes xBRL-CSV metadata JSON, and performs Structured-CSV-to-XML round trips. `src/ads_invoices_received_xbrl_gl.py` generates the Phase 2 ADS XBRL GL target instances, and `src/tutorial/` provides simple learning scripts.
 - `tests/` - Regression checks, test documentation, generated round-trip review artifacts, and the current test execution report. `tests/roundtrip/` keeps source XML, structured CSV, xBRL-CSV metadata JSON, and regenerated XML side by side for review.
 - `tools/` - Initial setup, supporting generation, environment-maintenance, and development helper tools. This includes the round-trip artifact builder `tools/build_roundtrip_test_artifacts.py`, legacy/simple converters, LHM and binding maintenance scripts, and the local taxonomy generator in `tools/taxonomy/`.
 - `out/` - Generated local output, ignored by Git. This includes taxonomy output, structured CSV output, reverse-conversion output, temporary caches, and rendered document QA artifacts.
@@ -169,9 +170,14 @@ Tuple/content taxonomy schemas such as `plt-all-<version>.xsd` and `en16931-cont
 3. Generate xBRL-CSV metadata that references the `plt-oim` taxonomy entry point.
 4. Validate generated xBRL-CSV metadata with Arelle.
 5. Reconstruct UBL Invoice XML from Structured CSV and validate it with UBL 2.1 schemas.
-6. Keep OpenPeppol BIS Billing as the first CIUS/profile layer on top of the EN 16931 baseline.
-7. Prepare the design for additional source inputs: UN/CEFACT Invoice and XBRL GL invoice examples.
-8. Prepare target-format projection from the generic Structured CSV to Peppol Invoice, UN/CEFACT Invoice, and XBRL GL invoice.
+6. Generate Phase 2 ADS XBRL GL target views from the Phase 1 Structured CSV.
+   The current ADS XBRL GL outputs are `Invoices_Received.xbrl`,
+   `Invoices_Generated.xbrl`, `Invoices_Received_Lines.xbrl`,
+   `Invoices_Generated_Lines.xbrl`, `Supplier_Listing.xbrl`, and
+   `Customer_Master.xbrl`.
+7. Keep OpenPeppol BIS Billing as the first CIUS/profile layer on top of the EN 16931 baseline.
+8. Prepare the design for additional source inputs: UN/CEFACT Invoice and XBRL GL invoice examples.
+9. Prepare additional target-format projections from the generic Structured CSV to Peppol Invoice, UN/CEFACT Invoice, and XBRL GL invoice.
 
 ## Tasks
 
@@ -209,6 +215,12 @@ The resulting artifacts are therefore checked at two levels: xBRL-CSV reports an
 & $python .\tests\test_bis_billing3_examples_conversion.py
 & $python .\tests\test_roundtrip_artifacts.py
 & $python .\tests\test_xbrl_csv_metadata_arelle.py
+& $python .\tests\test_ads_invoices_received_xbrl_gl.py
+& $python .\tests\test_ads_invoices_generated_xbrl_gl.py
+& $python .\tests\test_ads_invoices_received_lines_xbrl_gl.py
+& $python .\tests\test_ads_invoices_generated_lines_xbrl_gl.py
+& $python .\tests\test_ads_supplier_listing_xbrl_gl.py
+& $python .\tests\test_ads_customer_master_xbrl_gl.py
 ```
 
 The sample UBL Invoice XML and BIS Billing examples are converted using

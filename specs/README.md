@@ -10,6 +10,8 @@ pipeline.
   syntax or downstream targets.
 - `XBRL-GL/` - XBRL GL tuple taxonomy definition table derived from the
   `gl-plt-all-2016-12-01.xsd` profile and its imported XBRL GL modules.
+- `Currency.csv` - Currency code to minor unit table used to determine XBRL
+  `decimals` values for monetary facts.
 
 The files here are inputs to scripts in `src/` and `tools/`. They should remain
 small, reviewable, and deterministic.

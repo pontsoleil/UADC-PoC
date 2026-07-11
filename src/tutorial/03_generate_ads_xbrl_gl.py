@@ -48,13 +48,13 @@ def main() -> int:
         str(ROOT / "src" / "ads_invoices_received_xbrl_gl.py"),
         str(structured_csv),
         "-b",
-        str(ROOT / "specs" / "bindings" / "syntax" / "ADS_Invoices_Received_syntax_binding.csv"),
+        str(ROOT / "specs" / "bindings" / "syntax" / "ADS_Invoices_Received_XBRL_GL_Binding.csv"),
         "--lhm-csv",
         str(ROOT / "specs" / "lhm" / "EN16931_CIUS_Invoice_LHM.csv"),
+        "--currency-csv",
+        str(ROOT / "specs" / "Currency.csv"),
         "-o",
         str(output_dir),
-        "--monetary-decimals",
-        "2",
     ]
     subprocess.run(command, check=True)
     print(f"XBRL GL output directory: {output_dir}")

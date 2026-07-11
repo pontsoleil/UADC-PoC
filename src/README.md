@@ -61,16 +61,16 @@ Forward conversion example:
   .\samples\input\openpeppol_ubl_invoice_minimal.xml `
   -b .\specs\bindings\syntax\EN16931_UBL_Invoice_Syntax_Binding.csv `
   --lhm-csv .\specs\lhm\EN16931_CIUS_Invoice_LHM.csv `
-  --metadata-output .\out\hierarchical\openpeppol_ubl_invoice_minimal.metadata.json `
+  --metadata-output .\out\phase1\EN16931_Core_Invoice.json `
   --taxonomy-base .\out\taxonomy `
-  -o .\out\hierarchical\openpeppol_ubl_invoice_minimal.csv
+  -o .\out\phase1\EN16931_Core_Invoice.csv
 ```
 
 Reverse conversion example:
 
 ```powershell
 & $python .\src\syntax_binding_hierarchical.py `
-  .\out\hierarchical\openpeppol_ubl_invoice_minimal.csv `
+  .\out\phase1\EN16931_Core_Invoice.csv `
   --reverse `
   -b .\specs\bindings\syntax\EN16931_UBL_Invoice_Syntax_Binding.csv `
   --lhm-csv .\specs\lhm\EN16931_CIUS_Invoice_LHM.csv `
@@ -79,28 +79,92 @@ Reverse conversion example:
 
 ### `ads_invoices_received_xbrl_gl.py`
 
-Generates XBRL GL tuple instances for ADS Invoices Received.
+Generates XBRL GL tuple instances for ADS target views.
 
 Position:
 Operational downstream generator that consumes Structured CSV produced by
-`syntax_binding_hierarchical.py`.
+`syntax_binding_hierarchical.py`. The script name remains historical; the same
+implementation now generates all current ADS XBRL GL Figure 1 targets.
 
 Inputs:
 Structured CSV file or directory, ADS syntax binding CSV, LHM CSV, schema href,
-and monetary decimal setting.
+currency minor-unit CSV, and optional fallback monetary decimal setting.
 
 Outputs:
-One `*.xbrl.xml` XBRL GL tuple instance per input CSV.
+One `*.xbrl` XBRL GL tuple instance per target view.
 
 Example:
 
 ```powershell
 & $python .\src\ads_invoices_received_xbrl_gl.py `
-  .\out\hierarchical\openpeppol_ubl_invoice_minimal.csv `
-  -b .\specs\bindings\syntax\ADS_Invoices_Received_syntax_binding.csv `
+  .\out\phase1\EN16931_Core_Invoice.csv `
+  -b .\specs\bindings\syntax\ADS_Invoices_Received_XBRL_GL_Binding.csv `
   --lhm-csv .\specs\lhm\EN16931_CIUS_Invoice_LHM.csv `
-  -o .\out\xbrl-gl\ADS_Invoices_Received_syntax_binding `
-  --monetary-decimals 2
+  --currency-csv .\specs\Currency.csv `
+  -o .\out\phase2\ADS_XBRL_GL `
+  --output-filename Invoices_Received.xbrl
+```
+
+Phase 2 Invoices Generated example:
+
+```powershell
+& $python .\src\ads_invoices_received_xbrl_gl.py `
+  .\out\phase1\EN16931_Core_Invoice.csv `
+  -b .\specs\bindings\syntax\ADS_Invoices_Generated_XBRL_GL_Binding.csv `
+  --lhm-csv .\specs\lhm\EN16931_CIUS_Invoice_LHM.csv `
+  --currency-csv .\specs\Currency.csv `
+  -o .\out\phase2\ADS_XBRL_GL `
+  --output-filename Invoices_Generated.xbrl
+```
+
+Phase 2 Invoices Received Lines example:
+
+```powershell
+& $python .\src\ads_invoices_received_xbrl_gl.py `
+  .\out\phase1\EN16931_Core_Invoice.csv `
+  -b .\specs\bindings\syntax\ADS_Invoices_Received_Lines_XBRL_GL_Binding.csv `
+  --lhm-csv .\specs\lhm\EN16931_CIUS_Invoice_LHM.csv `
+  --currency-csv .\specs\Currency.csv `
+  -o .\out\phase2\ADS_XBRL_GL `
+  --output-filename Invoices_Received_Lines.xbrl
+```
+
+Phase 2 Invoices Generated Lines example:
+
+```powershell
+& $python .\src\ads_invoices_received_xbrl_gl.py `
+  .\out\phase1\EN16931_Core_Invoice.csv `
+  -b .\specs\bindings\syntax\ADS_Invoices_Generated_Lines_XBRL_GL_Binding.csv `
+  --lhm-csv .\specs\lhm\EN16931_CIUS_Invoice_LHM.csv `
+  --currency-csv .\specs\Currency.csv `
+  -o .\out\phase2\ADS_XBRL_GL `
+  --output-filename Invoices_Generated_Lines.xbrl
+```
+
+Phase 2 Supplier Listing example. This maps invoice Seller data to the ADS
+Supplier Listing target:
+
+```powershell
+& $python .\src\ads_invoices_received_xbrl_gl.py `
+  .\out\phase1\EN16931_Core_Invoice.csv `
+  -b .\specs\bindings\syntax\ADS_Supplier_Listing_XBRL_GL_Binding.csv `
+  --lhm-csv .\specs\lhm\EN16931_CIUS_Invoice_LHM.csv `
+  --currency-csv .\specs\Currency.csv `
+  -o .\out\phase2\ADS_XBRL_GL `
+  --output-filename Supplier_Listing.xbrl
+```
+
+Phase 2 Customer Master example. This maps invoice Buyer data to the ADS
+Customer Master target:
+
+```powershell
+& $python .\src\ads_invoices_received_xbrl_gl.py `
+  .\out\phase1\EN16931_Core_Invoice.csv `
+  -b .\specs\bindings\syntax\ADS_Customer_Master_XBRL_GL_Binding.csv `
+  --lhm-csv .\specs\lhm\EN16931_CIUS_Invoice_LHM.csv `
+  --currency-csv .\specs\Currency.csv `
+  -o .\out\phase2\ADS_XBRL_GL `
+  --output-filename Customer_Master.xbrl
 ```
 
 ## Tutorial Scripts

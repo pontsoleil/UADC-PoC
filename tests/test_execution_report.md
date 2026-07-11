@@ -190,7 +190,7 @@ ok: converted and checked 9 BIS Billing 3 Invoice example(s)
 Reverse conversion:
 
 ```text
-ok: reversed out/hierarchical/en16931_lhm_hierarchical.csv to out/reverse/en16931_reverse_invoice.xml
+ok: reversed out/phase1/EN16931_Core_Invoice.csv to out/reverse/en16931_reverse_invoice.xml
 ```
 
 OpenPeppol structured conversion:
@@ -204,7 +204,7 @@ LHM checks:
 ```text
 ok: checked 197 semantic path(s)
 ok: checked 197 LHM row(s)
-ok: wrote and checked out/hierarchical/en16931_lhm_hierarchical.csv
+ok: wrote and checked out/phase1/EN16931_Core_Invoice.csv
 ```
 
 ## Verification Points

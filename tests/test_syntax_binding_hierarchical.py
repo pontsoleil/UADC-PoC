@@ -14,6 +14,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON = Path(sys.executable)
+SOURCE_XML_NAME = "openpeppol_ubl_invoice_minimal"
+PHASE1_CSV_NAME = "EN16931_Core_Invoice.csv"
 
 
 def ensure_taxonomy() -> None:
@@ -27,15 +29,15 @@ def ensure_taxonomy() -> None:
 
 def main() -> int:
     ensure_taxonomy()
-    out_dir = ROOT / "out" / "hierarchical"
+    out_dir = ROOT / "out" / "phase1"
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_csv = out_dir / "openpeppol_minimal_hierarchical.csv"
+    out_csv = out_dir / PHASE1_CSV_NAME
     binding = ROOT / "specs" / "bindings" / "syntax" / "EN16931_UBL_Invoice_Syntax_Binding.csv"
     lhm = ROOT / "specs" / "lhm" / "EN16931_CIUS_Invoice_LHM.csv"
     cmd = [
         str(PYTHON),
         str(ROOT / "src" / "syntax_binding_hierarchical.py"),
-        str(ROOT / "samples" / "input" / "openpeppol_ubl_invoice_minimal.xml"),
+        str(ROOT / "samples" / "input" / f"{SOURCE_XML_NAME}.xml"),
         "-b",
         str(binding),
         "--lhm-csv",

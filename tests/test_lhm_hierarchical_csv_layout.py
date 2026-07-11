@@ -14,14 +14,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON = Path(sys.executable)
+SOURCE_XML_NAME = "openpeppol_ubl_invoice_minimal"
+PHASE1_CSV_NAME = "EN16931_Core_Invoice.csv"
 
 
 def main() -> int:
-    out_csv = ROOT / "out" / "hierarchical" / "en16931_lhm_hierarchical.csv"
+    out_csv = ROOT / "out" / "phase1" / PHASE1_CSV_NAME
     cmd = [
         str(PYTHON),
         str(ROOT / "src" / "syntax_binding_hierarchical.py"),
-        str(ROOT / "samples" / "input" / "openpeppol_ubl_invoice_minimal.xml"),
+        str(ROOT / "samples" / "input" / f"{SOURCE_XML_NAME}.xml"),
         "-b",
         str(ROOT / "specs" / "bindings" / "syntax" / "EN16931_UBL_Invoice_Syntax_Binding.csv"),
         "--lhm-csv",

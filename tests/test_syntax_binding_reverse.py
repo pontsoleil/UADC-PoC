@@ -15,6 +15,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON = Path(sys.executable)
+SOURCE_XML_NAME = "openpeppol_ubl_invoice_minimal"
+PHASE1_CSV_NAME = "EN16931_Core_Invoice.csv"
 
 
 def read_rows(csv_file: Path) -> list[dict[str, str]]:
@@ -31,7 +33,7 @@ def first_row_with(rows: list[dict[str, str]], field: str) -> dict[str, str]:
 
 def main() -> int:
     out_dir = ROOT / "out" / "reverse"
-    source_csv = ROOT / "out" / "hierarchical" / "en16931_lhm_hierarchical.csv"
+    source_csv = ROOT / "out" / "phase1" / PHASE1_CSV_NAME
     reverse_xml = out_dir / "en16931_reverse_invoice.xml"
     roundtrip_csv = out_dir / "en16931_reverse_roundtrip.csv"
     binding = ROOT / "specs" / "bindings" / "syntax" / "EN16931_UBL_Invoice_Syntax_Binding.csv"
@@ -41,7 +43,7 @@ def main() -> int:
         [
             str(PYTHON),
             str(ROOT / "src" / "syntax_binding_hierarchical.py"),
-            str(ROOT / "samples" / "input" / "openpeppol_ubl_invoice_minimal.xml"),
+            str(ROOT / "samples" / "input" / f"{SOURCE_XML_NAME}.xml"),
             "-b",
             str(binding),
             "--lhm-csv",

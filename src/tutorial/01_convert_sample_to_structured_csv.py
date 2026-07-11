@@ -45,7 +45,7 @@ def main() -> int:
     out_dir = ROOT / "out" / "tutorial"
     out_dir.mkdir(parents=True, exist_ok=True)
     output_csv = out_dir / "openpeppol_ubl_invoice_minimal.csv"
-    metadata_json = out_dir / "openpeppol_ubl_invoice_minimal.metadata.json"
+    metadata_json = out_dir / "openpeppol_ubl_invoice_minimal.json"
     command = [
         str(PYTHON),
         str(ROOT / "src" / "syntax_binding_hierarchical.py"),

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) 2025 XBRL Japan, Inc. -->
+<linkbase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"
+    xmlns="http://www.xbrl.org/2003/linkbase"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+        <!-- Debit -->
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccount" xlink:label="debitAccount"/>
+        <label xlink:type="resource" xlink:label="label_debitAccount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_debitAccount">タプル。勘定科目番号と識別子の親コンテナ。 ここには記入されないが、個々の明細行は、異なるGAAPでの報告や、日本の見返勘定や、連結勘定科目に対する個別情報の連結会計システムへの伝達などのための、複数の勘定科目を持ちうる。例えば、勘定科目4783HG-QOWI-192837-1000は、次のように表現されうる。&#13;
+/debitAccount/debitAccountMainID 1000
+/debitAccount/debitAccountMainDescription Cash
+/debitAccount/debitAccountSub/debitAccountSubID 4783HG
+/debitAccount/debitAccountSub/debitAccountSubDescription Department
+/debitAccount/debitAccountSub/debitAccountSubID QOWI
+/debitAccount/debitAccountSub/debitAccountSubDescription Branch
+/debitAccount/debitAccountSub/debitAccountSubID 192837
+/debitAccount/debitAccountSub/debitAccountSubDescription Division
+        </label>
+        <label xlink:type="resource" xlink:label="label_debitAccount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_debitAccount_2">【借方科目識別子】</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitAccount" xlink:to="label_debitAccount"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccount" xlink:label="creditAccount"/>
+        <label xlink:type="resource" xlink:label="label_creditAccount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_creditAccount">タプル。勘定科目番号と識別子の親コンテナ。 ここには記入されないが、個々の明細行は、異なるGAAPでの報告や、日本の見返勘定や、連結勘定科目に対する個別情報の連結会計システムへの伝達などのための、複数の勘定科目を持ちうる。例えば、勘定科目4783HG-QOWI-192837-1000は、次のように表現されうる。&#13;
+/creditAccount/creditAccountMainID 1000
+/creditAccount/creditAccountMainDescription Cash
+/creditAccount/creditAccountSub/creditAccountSubID 4783HG
+/creditAccount/creditAccountSub/creditAccountSubDescription Department
+/creditAccount/creditAccountSub/creditAccountSubID QOWI
+/creditAccount/creditAccountSub/creditAccountSubDescription Branch
+/creditAccount/creditAccountSub/creditAccountSubID 192837
+/creditAccount/creditAccountSub/creditAccountSubDescription Division
+        </label>
+        <label xlink:type="resource" xlink:label="label_creditAccount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_creditAccount_2">【貸方科目識別子】</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditAccount" xlink:to="label_creditAccount"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountMainDescription" xlink:label="accountMainDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountMainDescription" xlink:label="accountMainDescription"/>
+        <label xlink:type="resource" xlink:label="label_accountMainDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountMainDescription">主勘定科目コードの説明。主勘定科目コードとして使用されるコードについての、人が読める記述。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountMainDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountMainDescription_2">主勘定科目説明</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountMainDescription" xlink:to="label_accountMainDescription"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountMainID" xlink:label="accountMainID"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountMainID" xlink:label="accountMainID"/>
+        <label xlink:type="resource" xlink:label="label_accountMainID" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountMainID">主勘定科目。仕訳が関連する会計バケットを特定するためのコード。例えば、現金を表す1000、販売費を表す567GAAZ、税を表すZ。&#13;
+部門、支店、事業部、マネージャ、その他の識別子は、Subaccount領域に記述される。転記の必要がなければ、勘定科目は必要ではない。総勘定元帳に転記するにはほとんどの場合必要。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountMainID" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountMainID_2">主勘定科目コード</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountMainID" xlink:to="label_accountMainID"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountPurposeCode" xlink:label="accountPurposeCode"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountPurposeCode" xlink:label="accountPurposeCode"/>
+        <label xlink:type="resource" xlink:label="label_accountPurposeCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountPurposeCode">勘定科目群の使用法を示すコード。連結、European, IFRS, 見返、プライマリ, 税, USGAAP, Japanese,その他。日本企業では、見返仕訳で要求される税務処理に利用するかもしれない。空白の場合、企業の既定の勘定方法とみなす。&#13;
+[設定値のリスト]&#13;
+(consolidating：連結)、(european：ヨーロッパ)、(ifrs：IFRS)、(offsetting：見返)、(primary：プライマリ)、(tax：税)、(usgaap：US GAAP)、(japanese：日本)、(other：その他)&#13;
+&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountPurposeCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountPurposeCode_2">勘定科目目的</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountPurposeCode" xlink:to="label_accountPurposeCode"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountPurposeDescription" xlink:label="accountPurposeDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountPurposeDescription" xlink:label="accountPurposeDescription"/>
+        <label xlink:type="resource" xlink:label="label_accountPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountPurposeDescription">勘定科目群の使用法の説明。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountPurposeDescription_2">勘定科目目的説明</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountPurposeDescription" xlink:to="label_accountPurposeDescription"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountSubDescription" xlink:label="accountSubDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountSubDescription" xlink:label="accountSubDescription"/>
+        <label xlink:type="resource" xlink:label="label_accountSubDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountSubDescription">accountSubIDに関する説明。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountSubDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountSubDescription_2">サブ科目説明</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountSubDescription" xlink:to="label_accountSubDescription"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountSub" xlink:label="debitAccountSub"/>
+        <label xlink:type="resource" xlink:label="label_accountSub" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountSub">複数のaccountSubIDと説明文を含むタプル。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_debitAccountSub" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_debitAccountSub_2">【借方サブ科目情報】</label>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountSub" xlink:label="creditAccountSub"/>
+        <label xlink:type="resource" xlink:label="label_creditAccountSub" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_creditAccountSub_2">【貸方サブ科目情報】</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitAccountSub" xlink:to="label_debitAccountSub"/>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditAccountSub" xlink:to="label_creditAccountSub"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountSubID" xlink:label="accountSubID"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountSubID" xlink:label="accountSubID"/>
+        <label xlink:type="resource" xlink:label="label_accountSubID" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountSubID">主勘定科目をaccountMainIDに指定したときに、各プロフィットセンタ、事業部、事業体、基金、プログラム、支店、プロジェクト、クラス、su-クラス又は他の修飾子に使用されるコードはここに指定する。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountSubID" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountSubID_2">サブ科目コード</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountSubID" xlink:to="label_accountSubID"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountSubType" xlink:label="accountSubType"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountSubType" xlink:label="accountSubType"/>
+        <label xlink:type="resource" xlink:label="label_accountSubType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountSubType">小勘定科目の種別。プロフィットセンタ、事業部、事業体、基金、プログラム、支店、プロジェクト、クラス、su-クラス又は他の修飾子がここに配置される。 例えば、責任単位、事業単位、クラス、部、プロジェクト、基金、プログラム、ジョブ、プロフィットセンター、支店、セットアップクラス、部門、ユニット&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountSubType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountSubType_2">サブ科目種別</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountSubType" xlink:to="label_accountSubType"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountType" xlink:label="accountType"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountType" xlink:label="accountType"/>
+        <label xlink:type="resource" xlink:label="label_accountType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountType">科目の種別。&#13;
+[設定値のリスト]&#13;
+(account：勘定科目)、(bank：銀行)、(employee：従業員)、(customer：顧客)、(job：ジョブ)、(vendor：仕入先)、(measurable：計測可能物)、(statistical：統計)、(other：その他) &#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountType_2">科目種別</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountType" xlink:to="label_accountType"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAmount" xlink:label="debitAmount"/>
+        <label xlink:type="resource" xlink:label="label_amount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_amount">entryDetailの代表的な金額を示す。entryDetailごとにひとつの値を持つ。たとえば、仕訳帳の行、残高、請求書の行の金額。明細が会計業務用でなく、measurableQuantityなどの他の要素が設定されている場合は不要。符号付数値であり、金額を解釈するために用意されたsignOfAmountおよびdebitCreditCodeとあわせて使用される。通貨単位はamountCurrencyで決定される。amountCurrencyが指定されない場合は、既定または自国の通貨単位となる。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_debitAmount_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_debitAmount_2">借方金額</label>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAmount" xlink:label="creditAmount"/>
+        <label xlink:type="resource" xlink:label="label_creditAmount_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_creditAmount_2">貸方金額</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitAmount" xlink:to="label_amount"/>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditAmount" xlink:to="label_amount"/>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitAmount" xlink:to="label_debitAmount_2"/>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditAmount" xlink:to="label_creditAmount_2"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitMainAccountType" xlink:label="mainAccountType"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditMainAccountType" xlink:label="mainAccountType"/>
+        <label xlink:type="resource" xlink:label="label_mainAccountType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_mainAccountType">主勘定科目の種別。FASB Concepts 6および、同様の国際的な様式。xbrlInfoが他のXBRL項目と関係付けられる場合、データ交換より現存システム(audit)を示すべき。&#13;
+[設定値のリスト]&#13;
+(asset：資産)、(liability：負債)、(equity：資本)、(income：収益)、(gain：利得)、(expense：費用)、(loss：損失)、(contr-to-equity：資本増加)、(distr-from-equity：資本減少)、(comprehensive-income：包括利益)、(other：その他) &#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_mainAccountType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_mainAccountType_2">主勘定科目区分</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="mainAccountType" xlink:to="label_mainAccountType"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_parentDebitAccountMainID" xlink:label="parentAccountMainID"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_parentCreditAccountMainID" xlink:label="parentAccountMainID"/>
+        <label xlink:type="resource" xlink:label="label_parentAccountMainID" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_parentAccountMainID">子勘定科目から親勘定科目に包み込む科目。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_parentAccountMainID" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_parentAccountMainID_2">親勘定科目コード</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="parentAccountMainID" xlink:to="label_parentAccountMainID"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitParentSubaccountCode" xlink:label="parentSubaccountCode"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditParentSubaccountCode" xlink:label="parentSubaccountCode"/>
+        <label xlink:type="resource" xlink:label="label_parentSubaccountCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_parentSubaccountCode">この小勘定科目のロールアップ先の小勘定科目の番号-ロールアップ先の小勘定科目の種別も参照。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_parentSubaccountCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_parentSubaccountCode_2">親サブ科目コード</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="parentSubaccountCode" xlink:to="label_parentSubaccountCode"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitParentSubaccountProportion" xlink:label="parentSubaccountProportion"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditParentSubaccountProportion" xlink:label="parentSubaccountProportion"/>
+        <label xlink:type="resource" xlink:label="label_parentSubaccountProportion" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_parentSubaccountProportion">異なる親科目に配分する場合に、親科目に割り当てるパーセンテージ。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_parentSubaccountProportion" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_parentSubaccountProportion_2">親サブ科目配分パーセンテージ</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="parentSubaccountProportion" xlink:to="label_parentSubaccountProportion"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitParentSubaccountType" xlink:label="parentSubaccountType"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditParentSubaccountType" xlink:label="parentSubaccountType"/>
+        <label xlink:type="resource" xlink:label="label_parentSubaccountType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_parentSubaccountType">この小勘定科目のロールアップ先のセグメントの説明。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_parentSubaccountType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_parentSubaccountType_2">親サブ科目種別</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="parentSubaccountType" xlink:to="label_parentSubaccountType"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitReportingTreeIdentifier" xlink:label="reportingTreeIdentifier"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditReportingTreeIdentifier" xlink:label="reportingTreeIdentifier"/>
+        <label xlink:type="resource" xlink:label="label_reportingTreeIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_reportingTreeIdentifier">報告系統の説明に使用される。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_reportingTreeIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_reportingTreeIdentifier_2">報告系統識別子</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="reportingTreeIdentifier" xlink:to="label_reportingTreeIdentifier"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitSegmentParentTuple" xlink:label="segmentParentTuple"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditSegmentParentTuple" xlink:label="segmentParentTuple"/>
+        <label xlink:type="resource" xlink:label="label_segmentParentTuple" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_segmentParentTuple">セグメント（小勘定科目の種別）間のロールアップ時に必要な詳細情報を示すタプル。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_segmentParentTuple" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_segmentParentTuple_2">【親セグメント情報】</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="segmentParentTuple" xlink:to="label_segmentParentTuple"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_signOfDebitAmount" xlink:label="signOfDebitAmount"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_signOfCreditAmount" xlink:label="signOfCreditAmount"/>
+        <label xlink:type="resource" xlink:label="label_signOfAmount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_signOfAmount">金額の符号。貸借識別子と関連して使用される場合にだけ、4つの可能なフィールドを提供する。記入エラー後の総貸借が膨張しないように、おもに仕訳の訂正に使用される。 D+は借方を増加させる。D-は借方を減少させる。C+は貸方を減少させる。C-は貸方を増加させる。&#13;
+[設定値のリスト]&#13;
+(+)、(-)、(plus：プラス)、(minus：マイナス) &#13;
+        </label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="signOfDebitAmount" xlink:to="label_signOfAmount"/>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="signOfCreditAmount" xlink:to="label_signOfAmount"/>
+        <label xlink:type="resource" xlink:label="label_signOfDebitAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_signOfDebitAmount">借方金額符号</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="signOfDebitAmount" xlink:to="label_signOfDebitAmount"/>
+        <label xlink:type="resource" xlink:label="label_signOfCreditAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_signOfCreditAmount">貸方金額符号</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="signOfCreditAmount" xlink:to="label_signOfCreditAmount"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxAmount" xlink:label="taxAmount"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxAmount" xlink:label="taxAmount"/>
+        <label xlink:type="resource" xlink:label="label_taxAmount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxAmount">税額。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_taxAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_taxAmount_2">税額</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxAmount" xlink:to="label_taxAmount"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxBasis" xlink:label="taxBasis"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxBasis" xlink:label="taxBasis"/>
+        <label xlink:type="resource" xlink:label="label_taxBasis" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxBasis">課税基準。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_taxBasis" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_taxBasis_2">課税基準</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxBasis" xlink:to="label_taxBasis"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxCode" xlink:label="taxCode"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxCode" xlink:label="taxCode"/>
+        <label xlink:type="resource" xlink:label="label_taxCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxCode">税のクラス又はカテゴリ。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_taxCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_taxCode_2">税区分</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxCode" xlink:to="label_taxCode"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxCommentExemption" xlink:label="taxCommentExemption"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxCommentExemption" xlink:label="taxCommentExemption"/>
+        <label xlink:type="resource" xlink:label="label_taxCommentExemption" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxCommentExemption">免税理由やその他のコメントのための、追加の文またはコード。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_taxCommentExemption" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_taxCommentExemption_2">税コメント/免税理由</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxCommentExemption" xlink:to="label_taxCommentExemption"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxDescription" xlink:label="taxDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxDescription" xlink:label="taxDescription"/>
+        <label xlink:type="resource" xlink:label="label_taxDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxDescription">課税庁の説明。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_taxDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_taxDescription_2">課税庁説明</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxDescription" xlink:to="label_taxDescription"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxes" xlink:label="debitTaxes"/>
+        <label xlink:type="resource" xlink:label="label_taxes" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxes">税関連の情報のタプル。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_debitTaxes_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_debitTaxes_2">【借方税情報】</label>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxes" xlink:label="creditTaxes"/>
+        <label xlink:type="resource" xlink:label="label_creditTaxes_2" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_creditTaxes_2">【貸方税情報】</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitTaxes" xlink:to="label_taxes"/>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditTaxes" xlink:to="label_taxes"/>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitTaxes" xlink:to="label_debitTaxes_2"/>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditTaxes" xlink:to="label_creditTaxes_2"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxExchangeRate" xlink:label="taxExchangeRate"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxExchangeRate" xlink:label="taxExchangeRate"/>
+        <label xlink:type="resource" xlink:label="label_taxExchangeRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxExchangeRate">[非推奨 gl-mucで定義されているtaxExchangeRateを使用すべき] 原取引通貨に外貨を適用するための値。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_taxExchangeRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_taxExchangeRate_2">[非推奨] 税額換算用レート</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxExchangeRate" xlink:to="label_taxExchangeRate"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxPercentageRate" xlink:label="taxPercentageRate"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxPercentageRate" xlink:label="taxPercentageRate"/>
+        <label xlink:type="resource" xlink:label="label_taxPercentageRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxPercentageRate">VAT(物品税)またはその他の税のパーセント比率。&#13;
+0から1.0の間の値。たとえば50%は0.5とあらわす。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_taxPercentageRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_taxPercentageRate_2">税率</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxPercentageRate" xlink:to="label_taxPercentageRate"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxAuthority" xlink:label="taxAuthority"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxAuthority" xlink:label="taxAuthority"/>
+        <label xlink:type="resource" xlink:label="label_taxAuthority" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxAuthority">関係する課税庁の名前。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_taxAuthority" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_taxAuthority_2">課税庁</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxAuthority" xlink:to="label_taxAuthority"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxTableCode" xlink:label="taxTableCode"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxTableCode" xlink:label="taxTableCode"/>
+        <label xlink:type="resource" xlink:label="label_taxTableCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_taxTableCode">関係する課税庁で使用される税率表のコード。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_taxTableCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_taxTableCode_2">税率表コード</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxTableCode" xlink:to="label_taxTableCode"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountActive" xlink:label="accountActive"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountActive" xlink:label="accountActive"/>
+        <label xlink:type="resource" xlink:label="label_accountActive" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountActive">科目が有効か無効かを示すブール値。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountActive" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountActive_2">科目有効性</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountActive" xlink:to="label_accountActive"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitMainAccountTypeDescription" xlink:label="mainAccountTypeDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditMainAccountTypeDescription" xlink:label="mainAccountTypeDescription"/>
+        <label xlink:type="resource" xlink:label="label_mainAccountTypeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_mainAccountTypeDescription">主勘定科目の区分の説明。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_mainAccountTypeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_mainAccountTypeDescription_2">主勘定科目区分説明</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="mainAccountTypeDescription" xlink:to="label_mainAccountTypeDescription"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountTypeDescription" xlink:label="accountTypeDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountTypeDescription" xlink:label="accountTypeDescription"/>
+        <label xlink:type="resource" xlink:label="label_accountTypeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja" id="label_accountTypeDescription">科目の種別の説明。&#13;
+        </label>
+        <label xlink:type="resource" xlink:label="label_accountTypeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja" id="label_accountTypeDescription_2">科目種別説明</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountTypeDescription" xlink:to="label_accountTypeDescription"/>
+
+
+    </labelLink>
+</linkbase>

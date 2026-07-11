@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) 2025 XBRL Japan, Inc. -->
+<linkbase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"
+    xmlns="http://www.xbrl.org/2003/linkbase"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccount" xlink:label="debitAccount"/>
+        <label xlink:type="resource" xlink:label="debiitAccount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tuple: parent container for debit account numbers and identifiers. No entry is made here, but each detail line may have multiple accounts assigned to it for reporting in different GAAPs, offsetting accounts in Japan, passing along information to consolidation systems about local versus consolidating accounts, etc. For example, the account 4783HG-QOWI-192837-1000 may be expressed so: 
+/debiitAccount/debiitAccountMainID 1000 
+/debiitAccount/debiitAccountMainDescription Cash 
+/debiitAccount/debiitAccountSub/debiitAccountSubID 4783HG 
+/debiitAccount/debiitAccountSub/debiitAccountSubDescription Department 
+/debiitAccount/debiitAccountSub/debiitAccountSubID QOWI 
+/debiitAccount/debiitAccountSub/debiitAccountSubDescription Branch 
+/debiitAccount/debiitAccountSub/debiitAccountSubID 192837 
+/debiitAccount/debiitAccountSub/debiitAccountSubDescription Division 
+        </label>
+        <label xlink:type="resource" xlink:label="debiitAccount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_debiitAccount_en" xml:lang="en">Debit Account Identifier</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitAccount" xlink:to="debiitAccount_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccount" xlink:label="creditAccount"/>
+        <label xlink:type="resource" xlink:label="crediitAccount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tuple: parent container for credit account numbers and identifiers. No entry is made here, but each detail line may have multiple accounts assigned to it for reporting in different GAAPs, offsetting accounts in Japan, passing along information to consolidation systems about local versus consolidating accounts, etc. For example, the account 4783HG-QOWI-192837-1000 may be expressed so: 
+/crediitAccount/crediitAccountMainID 1000 
+/crediitAccount/crediitAccountMainDescription Cash 
+/crediitAccount/crediitAccountSub/crediitAccountSubID 4783HG 
+/crediitAccount/crediitAccountSub/crediitAccountSubDescription Department 
+/crediitAccount/crediitAccountSub/crediitAccountSubID QOWI 
+/crediitAccount/crediitAccountSub/crediitAccountSubDescription Branch 
+/crediitAccount/crediitAccountSub/crediitAccountSubID 192837 
+/crediitAccount/crediitAccountSub/crediitAccountSubDescription Division 
+        </label>
+        <label xlink:type="resource" xlink:label="crediitAccount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_crediitAccount_en" xml:lang="en">Credit Account Identifier</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditAccount" xlink:to="crediitAccount_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountMainDescription" xlink:label="accountMainDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountMainDescription" xlink:label="accountMainDescription"/>
+        <label xlink:type="resource" xlink:label="accountMainDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Description of accountMainID - the human readable describer that accompanies the code used in accountMainID</label>
+        <label xlink:type="resource" xlink:label="accountMainDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_accountMainDescription_en" xml:lang="en">Main Account Description</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountMainDescription" xlink:to="accountMainDescription_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountMainID" xlink:label="accountMainID"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountMainID" xlink:label="accountMainID"/>
+        <label xlink:type="resource" xlink:label="accountMainID_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Main account - the code used to identify the accounting bucket the entry has been assigned to. Examples might be 1000 for Cash, 567GAAZ for Sales Expense or Z for tax payments. Identifiers such as department, branch, division, manager, or other modifiers are noted in the Subaccount area. Before needing to post, account is not necessary. Posting to the general ledger almost always requires an entry here.</label>
+        <label xlink:type="resource" xlink:label="accountMainID_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_accountMainID_en" xml:lang="en">Main Account Number</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountMainID" xlink:to="accountMainID_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountPurposeCode" xlink:label="accountPurposeCode"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountPurposeCode" xlink:label="accountPurposeCode"/>
+        <label xlink:type="resource" xlink:label="accountPurposeCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code related to usage for account aggregate - Consolidating, European, IFRS, Offsetting, Primary, Tax, USGAAP, Japanese, Other. Japanese companies will use this for the tax required offsetting entry. If left blank, assumes default accounting method for company.</label>
+        <label xlink:type="resource" xlink:label="accountPurposeCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_accountPurposeCode_en" xml:lang="en">Purpose of Account</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountPurposeCode" xlink:to="accountPurposeCode_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountPurposeDescription" xlink:label="accountPurposeDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountPurposeDescription" xlink:label="accountPurposeDescription"/>
+        <label xlink:type="resource" xlink:label="accountPurposeDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Description of usage for aggregate account</label>
+        <label xlink:type="resource" xlink:label="accountPurposeDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_accountPurposeDescription_en" xml:lang="en">Description of Purpose of Account</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountPurposeDescription" xlink:to="accountPurposeDescription_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountSubDescription" xlink:label="accountSubDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountSubDescription" xlink:label="accountSubDescription"/>
+        <label xlink:type="resource" xlink:label="accountSubDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">The description that accompanies accountSubID belongs here.</label>
+        <label xlink:type="resource" xlink:label="accountSubDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_accountSubDescription_en" xml:lang="en">Subaccount Description</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountSubDescription" xlink:to="accountSubDescription_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountSub" xlink:label="debitAccountSub"/>
+        <label xlink:type="resource" xlink:label="debitAccountSub_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tuple to hold multiple accountSubIDs and Descriptions</label>
+        <label xlink:type="resource" xlink:label="debitAccountSub_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_debitAccountSub_en" xml:lang="en">Debit Subaccount Information</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitAccountSub" xlink:to="debitAccountSub_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountSub" xlink:label="creditAccountSub"/>
+        <label xlink:type="resource" xlink:label="creditAccountSub_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tuple to hold multiple accountSubIDs and Descriptions</label>
+        <label xlink:type="resource" xlink:label="creditAccountSub_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_creditAcountSub_en" xml:lang="en">Credit Subaccount Information</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditAccountSub" xlink:to="creditAccountSub_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountSubID" xlink:label="accountSubID"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountSubID" xlink:label="accountSubID"/>
+        <label xlink:type="resource" xlink:label="accountSubID_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Where the primary account was placed in accountMainID, the code used for each profit center, division, business unit, fund, program, branch, project, class, su-class or other modifier is placed here.</label>
+        <label xlink:type="resource" xlink:label="accountSubID_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_accountSubID_en" xml:lang="en">Subaccount</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountSubID" xlink:to="accountSubID_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountSubType" xlink:label="accountSubType"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountSubType" xlink:label="accountSubType"/>
+        <label xlink:type="resource" xlink:label="accountSubType_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Type of sub-account - profit center, division, business unit, fund, program, branch, project, class, su-class or other modifier is placed here. For example:: Accountability center: Business unit: Class:Department: Project: Fund: Program:Job: Profit center: Branch: Setup class: Division: Unit</label>
+        <label xlink:type="resource" xlink:label="accountSubType_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_accountSubType_en" xml:lang="en">Type of Subaccount</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountSubType" xlink:to="accountSubType_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountType" xlink:label="accountType"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountType" xlink:label="accountType"/>
+        <label xlink:type="resource" xlink:label="accountType_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Type of account. Enumerated as: account, bank, employee, customer, job, vendor, measurable, statistical, other.</label>
+        <label xlink:type="resource" xlink:label="accountType_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_accountType_en" xml:lang="en">Account Type</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountType" xlink:to="accountType_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAmount" xlink:label="debitAmount"/>
+        <label xlink:type="resource" xlink:label="creditAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">This field (amount) represents the primary monetary amount related to the subject of the entryDetail line. There is one primary monetary amount per entryDetail structure. It may, for example, represent the amount of one line of a journal entry, the balance on a document, or the extended amount of a line item on an invoice. Amount is not required if detailed entry is used for non-financial work and other elements are populated, in particular measurableQuantity. The amount field is a signed number (either positive or negative itself) and used in conjunction with a separate signOfAmount and a separate debitCreditCode, which together are considered for understanding the monetary amount. The unit of measure is determined by amountCurrency if present, and by the default or home currency if amountCurrency is not present.</label>
+        <label xlink:type="resource" xlink:label="debitAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_debitAmount_en" xml:lang="en">Debit Monetary Amount</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitAmount" xlink:to="debitAmount_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAmount" xlink:label="creditAmount"/>
+        <label xlink:type="resource" xlink:label="creditAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">This field (amount) represents the primary monetary amount related to the subject of the entryDetail line. There is one primary monetary amount per entryDetail structure. It may, for example, represent the amount of one line of a journal entry, the balance on a document, or the extended amount of a line item on an invoice. Amount is not required if detailed entry is used for non-financial work and other elements are populated, in particular measurableQuantity. The amount field is a signed number (either positive or negative itself) and used in conjunction with a separate signOfAmount and a separate debitCreditCode, which together are considered for understanding the monetary amount. The unit of measure is determined by amountCurrency if present, and by the default or home currency if amountCurrency is not present.</label>
+        <label xlink:type="resource" xlink:label="creditAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_creditAmount_en" xml:lang="en">Creit Monetary Amount</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditAmount" xlink:to="creditAmount_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitMainAccountType" xlink:label="mainAccountType"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditMainAccountType" xlink:label="mainAccountType"/>
+        <label xlink:type="resource" xlink:label="mainAccountType_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Account type - FASB Concepts 6 and similar international designs. When xbrlInfo is used to associated other XBRL reporting items, this field is more suited to representing existing systems (audit) than data interchange. Enumerated as: asset, liability, equity, income, gain, expense, loss, contr-to-equity, distr-from-equity, comprehensive-income, other.</label>
+        <label xlink:type="resource" xlink:label="mainAccountType_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_mainAccountType_en" xml:lang="en">Account Classification</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="mainAccountType" xlink:to="mainAccountType_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_parentDebitAccountMainID" xlink:label="parentAccountMainID"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_parentCreditAccountMainID" xlink:label="parentAccountMainID"/>
+        <label xlink:type="resource" xlink:label="parentAccountMainID_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Roll up item from child natural account to parent natural account.</label>
+        <label xlink:type="resource" xlink:label="parentAccountMainID_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_parentAccountMainID" xml:lang="en">Parent Account Number</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="parentAccountMainID" xlink:to="parentAccountMainID_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitParentSubaccountCode" xlink:label="parentSubaccountCode"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditParentSubaccountCode" xlink:label="parentSubaccountCode"/>
+        <label xlink:type="resource" xlink:label="parentSubaccountCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Subaccount NUMBER this subaccount rolls up to - see also subaccount type it rolls up to.</label>
+        <label xlink:type="resource" xlink:label="parentSubaccountCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_parentSubaccountCode" xml:lang="en">Parent Subaccount Code</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="parentSubaccountCode" xlink:to="parentSubaccountCode_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitParentSubaccountProportion" xlink:label="parentSubaccountProportion"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditParentSubaccountProportion" xlink:label="parentSubaccountProportion"/>
+        <label xlink:type="resource" xlink:label="parentSubaccountProportion_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">For partial allocations of amounts to different parents, the percentage of a child that will be allocated to a parent.</label>
+        <label xlink:type="resource" xlink:label="parentSubaccountProportion_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_parentSubaccountProportion" xml:lang="en">Parent Subaccount Percentage</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="parentSubaccountProportion" xlink:to="parentSubaccountProportion_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitParentSubaccountType" xlink:label="parentSubaccountType"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditParentSubaccountType" xlink:label="parentSubaccountType"/>
+        <label xlink:type="resource" xlink:label="parentSubaccountType_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">The describer of the segment this subaccount rolls up to.</label>
+        <label xlink:type="resource" xlink:label="parentSubaccountType_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_parentSubaccountType" xml:lang="en">Parent Subaccount Type</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="parentSubaccountType" xlink:to="parentSubaccountType_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitSegmentParentTuple" xlink:label="segmentParentTuple"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditSegmentParentTuple" xlink:label="segmentParentTuple"/>
+        <label xlink:type="resource" xlink:label="segmentParentTuple_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tuple for showing the detail necessary to roll up from one segment (type of subaccount) to another.)</label>
+        <label xlink:type="resource" xlink:label="segmentParentTuple_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_segmentParentTuple" xml:lang="en">Segment Parent Information</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="segmentParentTuple" xlink:to="segmentParentTuple_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_signOfDebitAmount" xlink:label="signOfAmount"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_signOfCreditAmount" xlink:label="signOfAmount"/>
+        <label xlink:type="resource" xlink:label="signOfAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Sign of amount; provides 4 possible fields only when used in conjunction with debitCreditCode; primarily used for correcting entries so total debits and credits after an entry error are not inflated. D + increase DebitsD - decrease debitsC + decreases creditC - increases credit</label>
+        <label xlink:type="resource" xlink:label="signOfAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_signOfAmount_en" xml:lang="en">Sign Indication for Amount</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="signOfAmount" xlink:to="signOfAmount_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxAmount" xlink:label="taxAmount"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxAmount" xlink:label="taxAmount"/>
+        <label xlink:type="resource" xlink:label="taxAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Amount of taxes</label>
+        <label xlink:type="resource" xlink:label="taxAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxAmount" xml:lang="en">Amount of Taxes</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxAmount" xlink:to="taxAmount_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxBasis" xlink:label="taxBasis"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxBasis" xlink:label="taxBasis"/>
+        <label xlink:type="resource" xlink:label="taxBasis_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Basis for taxation</label>
+        <label xlink:type="resource" xlink:label="taxBasis_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxBasis" xml:lang="en">Basis for Taxation</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxBasis" xlink:to="taxBasis_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxCode" xlink:label="taxCode"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxCode" xlink:label="taxCode"/>
+        <label xlink:type="resource" xlink:label="taxCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">A class or category of taxes</label>
+        <label xlink:type="resource" xlink:label="taxCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxCode" xml:lang="en">Tax Category</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxCode" xlink:to="taxCode_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxCommentExemption" xlink:label="taxCommentExemption"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxCommentExemption" xlink:label="taxCommentExemption"/>
+        <label xlink:type="resource" xlink:label="taxCommentExemption_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Additional text/code for exemption reasons or other comments.</label>
+        <label xlink:type="resource" xlink:label="taxCommentExemption_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_TaxCommentExemption" xml:lang="en">Tax Comment/Exemption Reason</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxCommentExemption" xlink:to="taxCommentExemption_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxDescription" xlink:label="taxDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxDescription" xlink:label="taxDescription"/>
+        <label xlink:type="resource" xlink:label="taxDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Description of tax authority</label>
+        <label xlink:type="resource" xlink:label="taxDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxDescription" xml:lang="en">Tax Description</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxDescription" xlink:to="taxDescription_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxes" xlink:label="debitTaxes"/>
+        <label xlink:type="resource" xlink:label="debitTaxes_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tuple for holding tax related information</label>
+        <label xlink:type="resource" xlink:label="debitTaxes_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxes" xml:lang="en">Debit Tax Information</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="debitTaxes" xlink:to="debitTaxes_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxes" xlink:label="creditTaxes"/>
+        <label xlink:type="resource" xlink:label="creditTaxes_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tuple for holding tax related information</label>
+        <label xlink:type="resource" xlink:label="creditTaxes_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxes" xml:lang="en">Credit Tax Information</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="creditTaxes" xlink:to="creditTaxes_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxExchangeRate" xlink:label="taxExchangeRate"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxExchangeRate" xlink:label="taxExchangeRate"/>
+        <label xlink:type="resource" xlink:label="taxExchangeRate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">[DEPRECATED. taxExchangeRate should be used one in gl-muc pallette] Amount for foreign currency tracking in original currency</label>
+        <label xlink:type="resource" xlink:label="taxExchangeRate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxExchangeRate" xml:lang="en">[DEPRECATED. taxExchangeRate should be used one in gl-muc pallette] Exchange Rate for Tax</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxExchangeRate" xlink:to="taxExchangeRate_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxPercentageRate" xlink:label="taxPercentageRate"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxPercentageRate" xlink:label="taxPercentageRate"/>
+        <label xlink:type="resource" xlink:label="taxPercentageRate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Percent rate for VAT or other taxes normally a number between 0 and 1.0 - e.g. 50% is represented as 0.5</label>
+        <label xlink:type="resource" xlink:label="taxPercentageRate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxPercentageRate" xml:lang="en">Tax Percentage Rate</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxPercentageRate" xlink:to="taxPercentageRate_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxAuthority" xlink:label="taxAuthority" xlink:title="label_taxAuthority"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxAuthority" xlink:label="taxAuthority" xlink:title="label_taxAuthority"/>
+        <label xlink:type="resource" xlink:label="label_taxAuthority" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxAuthority" xml:lang="en">Tax Authority</label>
+        <label xlink:type="resource" xlink:label="label_taxAuthority" xlink:role="http://www.xbrl.org/2003/role/documentation" xlink:title="label_taxAuthority" xml:lang="en">Name of the relevant tax authority</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxAuthority" xlink:to="label_taxAuthority" xlink:title="label: taxAuthority to label_taxAuthority"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitTaxTableCode" xlink:label="taxTableCode" xlink:title="label_taxTableCode"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditTaxTableCode" xlink:label="taxTableCode" xlink:title="label_taxTableCode"/>
+        <label xlink:type="resource" xlink:label="label_taxTableCode" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_taxTableCode" xml:lang="en" id="label_taxTableCode_0">Tax Table Code</label>
+        <label xlink:type="resource" xlink:label="label_taxTableCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xlink:title="label_taxTableCode" xml:lang="en" id="label_taxTableCode_1">Tax table code used by the relevant tax authority</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="taxTableCode" xlink:to="label_taxTableCode" xlink:title="label: taxTableCode to label_taxTableCode"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountActive" xlink:label="accountActive" xlink:title="label_accountActive"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountActive" xlink:label="accountActive" xlink:title="label_accountActive"/>
+        <label xlink:type="resource" xlink:label="label_accountActive" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="label_accountActive" xml:lang="en" id="label_accountActive_0">Account Active</label>
+        <label xlink:type="resource" xlink:label="label_accountActive" xlink:role="http://www.xbrl.org/2003/role/documentation" xlink:title="label_accountActive" xml:lang="en" id="label_accountActive_1">Boolean to indicate whether the account is active (="true") or inactive (="false")</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountActive" xlink:to="label_accountActive" xlink:title="label: accountActive to label_accountActive"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitMainAccountTypeDescription" xlink:label="mainAccountTypeDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditMainAccountTypeDescription" xlink:label="mainAccountTypeDescription"/>
+        <label xlink:type="resource" xlink:label="mainAccountTypeDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the account classification</label>
+        <label xlink:type="resource" xlink:label="mainAccountTypeDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_mainAccountTypeDescription_en" xml:lang="en">Account Classification Description</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="mainAccountTypeDescription" xlink:to="mainAccountTypeDescription_lbl"/>
+
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_debitAccountTypeDescription" xlink:label="accountTypeDescription"/>
+        <loc xlink:type="locator" xlink:href="../gl-jpn-2015-03-25.xsd#gl-jpn_creditAccountTypeDescription" xlink:label="accountTypeDescription"/>
+        <label xlink:type="resource" xlink:label="accountTypeDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the account type</label>
+        <label xlink:type="resource" xlink:label="accountTypeDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="gl-jpn_accountTypeDescription_en" xml:lang="en">Account Type Description</label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="accountTypeDescription" xlink:to="accountTypeDescription_lbl"/>
+
+    </labelLink>
+</linkbase>

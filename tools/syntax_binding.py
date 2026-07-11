@@ -357,6 +357,8 @@ def read_bindings(binding_csv: Path, encoding: str) -> List[Dict[str, str]]:
     bindings = []
     for row in rows:
         column = first_present(row, ("column", "element", "name", "target", "target_column"))
+        if row.get("type") == "C" and row.get("abbreviation_path"):
+            column = row["abbreviation_path"].replace(".", "_").strip()
         xpath = first_present(row, ("source_xpath", "xml_path", "source", "xpath"))
         if column and xpath:
             row["_column"] = column.split(":", 1)[-1]

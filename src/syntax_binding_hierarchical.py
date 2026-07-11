@@ -1951,7 +1951,7 @@ def write_hierarchical_csv(
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
-    metadata_file = metadata_output or out_csv.with_suffix(out_csv.suffix + ".metadata.json")
+    metadata_file = metadata_output or out_csv.with_suffix(".json")
     write_csv_metadata(metadata_file, out_csv, xml_file, binding_csv, lhm_csv, fieldnames, len(rows), taxonomy_base, encoding)
     return len(rows), fieldnames
 
@@ -2144,7 +2144,7 @@ def main() -> int:
     parser.add_argument("-o", "--output", required=True, type=Path, help="Output hierarchical CSV, or output XML when --reverse is used")
     parser.add_argument("--template-csv", type=Path, help="CSV template defining column order and dimension placement")
     parser.add_argument("--lhm-csv", type=Path, help="LHM CSV defining BG dimension columns and BT value columns")
-    parser.add_argument("--metadata-output", type=Path, help="Output JSON metadata path. Default is OUTPUT_CSV.metadata.json")
+    parser.add_argument("--metadata-output", type=Path, help="Output JSON metadata path. Default is OUTPUT_CSV with .json suffix")
     parser.add_argument("--taxonomy-base", type=Path, default=Path("out/taxonomy"), help="Taxonomy output directory referenced by JSON metadata")
     parser.add_argument("--reverse", action="store_true", help="Convert hierarchical CSV back to XML")
     parser.add_argument(

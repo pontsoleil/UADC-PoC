@@ -20,7 +20,7 @@ REQUIRED_PATHS = [
     ROOT / "tools" / "taxonomy" / "xBRLGL_TaxonomyGenerator.py",
     ROOT / "specs" / "lhm" / "EN16931_CIUS_Invoice_LHM.csv",
     ROOT / "specs" / "bindings" / "syntax" / "EN16931_UBL_Invoice_Syntax_Binding.csv",
-    ROOT / "specs" / "bindings" / "syntax" / "ADS_Invoices_Received_syntax_binding.csv",
+    ROOT / "specs" / "bindings" / "syntax" / "ADS_Invoices_Received_XBRL_GL_Binding.csv",
     ROOT / "samples" / "input" / "openpeppol_ubl_invoice_minimal.xml",
 ]
 
