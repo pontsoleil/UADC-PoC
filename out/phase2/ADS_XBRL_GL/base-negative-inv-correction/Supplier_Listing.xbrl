@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<xbrli:xbrl xmlns:gl-cor="http://www.xbrl.org/int/gl/cor/2016-12-01" xmlns:gl-muc="http://www.xbrl.org/int/gl/muc/2016-12-01" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:xbrll="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:iso639="http://www.xbrl.org/2005/iso639" xsi:schemaLocation="http://www.xbrl.org/int/gl/plt/2016-12-01 ../../../../XBRL-GL-PWD-2016-12-01/gl/plt/case-c-b-m-u-e-t-s/gl-plt-all-2016-12-01.xsd">
+<xbrli:xbrl xmlns:gl-bus="http://www.xbrl.org/int/gl/bus/2016-12-01" xmlns:gl-cor="http://www.xbrl.org/int/gl/cor/2016-12-01" xmlns:gl-muc="http://www.xbrl.org/int/gl/muc/2016-12-01" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:xbrll="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:iso639="http://www.xbrl.org/2005/iso639" xsi:schemaLocation="http://www.xbrl.org/int/gl/plt/2016-12-01 ../../../../XBRL-GL-PWD-2016-12-01/gl/plt/case-c-b-m-u-e-t-s/gl-plt-all-2016-12-01.xsd">
   <xbrll:schemaRef xlink:type="simple" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="../../../../XBRL-GL-PWD-2016-12-01/gl/plt/case-c-b-m-u-e-t-s/gl-plt-all-2016-12-01.xsd" />
   <xbrli:context id="now">
     <xbrli:entity>
@@ -29,6 +29,12 @@
           <gl-cor:identifierCode contextRef="now">99887766</gl-cor:identifierCode>
           <gl-cor:identifierDescription contextRef="now">SupplierOfficialName Ltd</gl-cor:identifierDescription>
           <gl-cor:identifierType contextRef="now">V</gl-cor:identifierType>
+          <gl-bus:identifierAddress>
+            <gl-bus:identifierAddressStreet2 contextRef="now">Postbox 123</gl-bus:identifierAddressStreet2>
+            <gl-bus:identifierCity contextRef="now">London</gl-bus:identifierCity>
+            <gl-bus:identifierCountry contextRef="now">GB</gl-bus:identifierCountry>
+            <gl-bus:identifierZipOrPostalCode contextRef="now">GB 123 EW</gl-bus:identifierZipOrPostalCode>
+          </gl-bus:identifierAddress>
         </gl-cor:identifierReference>
       </gl-cor:entryDetail>
     </gl-cor:entryHeader>

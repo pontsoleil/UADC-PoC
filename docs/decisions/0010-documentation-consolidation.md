@@ -7,7 +7,9 @@ The project documentation is maintained under **docs/**. The documentation descr
 ## Decision
 
 1. Keep operational command summaries in **docs/development/README.md** and **docs/testing/README.md**.
-2. Keep binding-table authoring instructions in **docs/bindings/README.md**.
+2. Keep syntax-binding authoring instructions in
+   **docs/syntax_binding_conversion/** and semantic-binding authoring
+   instructions in **docs/semantic_binding_conversion/**.
 3. Keep implementation-level script processing details in **docs/README_SCRIPT_PROCESSING.md**.
 4. Use **docs/README_SCRIPT_PROCESSING.md** as the primary explanation for:
    XPath context processing, Semantic Path interpretation, **dInvoice** and
@@ -16,7 +18,9 @@ The project documentation is maintained under **docs/**. The documentation descr
 5. Keep **docs/syntax_binding_conversion/** as the syntax-binding program
    specification and operating guide, but point readers to the consolidated
    processing guide for implementation-level details.
-6. Use **docs/**, not **doc/**, as the documentation directory.
+6. Keep **docs/semantic_binding_conversion/** as the semantic-binding program
+   specification, target coverage report, and operating guide.
+7. Use **docs/**, not **doc/**, as the documentation directory.
 
 ## Consequences
 

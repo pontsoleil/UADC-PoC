@@ -24,6 +24,7 @@ PHASE1_CSV_NAME = "openpeppol_ubl_invoice_minimal.csv"
 OUTPUT_XBRL_NAME = f"{TARGET_NAME}.xbrl"
 NS = {
     "gl-cor": "http://www.xbrl.org/int/gl/cor/2016-12-01",
+    "gl-bus": "http://www.xbrl.org/int/gl/bus/2016-12-01",
 }
 
 
@@ -80,6 +81,11 @@ def main() -> int:
     assert text(root, f"{seller}/gl-cor:identifierType") == "V"
     assert text(root, f"{seller}/gl-cor:identifierCode") == "SELLER-ID"
     assert text(root, f"{seller}/gl-cor:identifierDescription") == "Seller Co. Ltd."
+    address = f"{seller}/gl-bus:identifierAddress"
+    assert text(root, f"{address}/gl-bus:identifierStreet") == "1-1-1 Chiyoda"
+    assert text(root, f"{address}/gl-bus:identifierCity") == "Tokyo"
+    assert text(root, f"{address}/gl-bus:identifierCountry") == "JP"
+    assert text(root, f"{address}/gl-bus:identifierZipOrPostalCode") == "100-0001"
 
     print(f"ok: generated and checked {xbrl_file}")
     return 0

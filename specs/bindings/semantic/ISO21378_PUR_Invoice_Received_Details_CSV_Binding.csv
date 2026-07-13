@@ -1,0 +1,45 @@
+field_no,field_name,level,flat_file_data_type,length,description,source_document,semantic_path,type,multiplicity,mapping_status,mapping_note
+,Invoice,,,,EN 16931 invoice semantic root.,UADC Structured CSV model,$.invoice,C,1..1,,
+,InvoiceLine,,,,Invoice line.,UADC Structured CSV model,$.invoice.invoiceLine,C,1..*,,
+,PriceDetails,,,,Invoice line price details.,UADC Structured CSV model,$.invoice.invoiceLine.priceDetails,C,1..1,,
+,ItemInformation,,,,Invoice line item information.,UADC Structured CSV model,$.invoice.invoiceLine.itemInformation,C,1..1,,
+,LineVatInformation,,,,Invoice line VAT information.,UADC Structured CSV model,$.invoice.invoiceLine.lineVatInformation,C,1..1,,
+1,Invoice_ID,2,IDENTIFIER,60,Invoice identifier.,ISO 21378:2019 Table 54,$.invoice.invoiceNumber,A,,direct,
+2,Invoice_Line_ID,2,IDENTIFIER,60,Unique invoice line identifier.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.invoiceLineIdentifier,A,,direct,
+3,Invoice_Line_Number,2,TEXT,10,Invoice line number.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.invoiceLineIdentifier,A,,direct,EN 16931 uses the line identifier as the line number.
+4,Order_ID,2,IDENTIFIER,100,Purchase order identifier.,ISO 21378:2019 Table 54,$.invoice.purchaseOrderReference,A,,direct,
+5,Order_Line_ID,2,IDENTIFIER,60,Purchase order line identifier.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.referencedPurchaseOrderLineReference,A,,direct,
+6,Product_ID,2,IDENTIFIER,75,Product identifier.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.itemInformation.itemBuyerIdentifier,A,,direct,Buyer item identifier is used for a received invoice.
+7,Basic_UOM_Quantity,2,QUANTITY,,Quantity in the basic unit of measure.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 contains the invoiced quantity but no separate basic-unit quantity.
+8,Basic_UOM_Code,2,MEASUREMENT UNIT CODE,,Basic unit of measure code.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 contains the invoiced quantity unit but no separate basic unit.
+9,Invoice_Quantity,2,QUANTITY,,Invoiced quantity.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.invoicedQuantity,A,,direct,
+10,UOM_Code,2,MEASUREMENT UNIT CODE,,Invoice quantity unit code.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.invoicedQuantityUnitCode,A,,direct,
+11,Tax_Exclude_Unit_Price,2,PRICE,,Unit price excluding tax.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.priceDetails.itemNetPrice,A,,direct,
+12,Tax_Include_Unit_Price,2,PRICE,,Unit price including tax.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 does not define a gross unit price including VAT.
+13,Tax_Exclude_Amount,2,AMOUNT,,Line amount excluding tax.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.invoiceLineNetAmount,A,,direct,
+14,Tax_Include_Amount,2,AMOUNT,,Line amount including tax.,ISO 21378:2019 Table 54,,A,,requires_transformation,Requires line tax calculation; EN 16931 has no direct gross line amount.
+15,Invoice_Line_Transaction_Amount,2,AMOUNT,,Invoice line transaction amount.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.invoiceLineNetAmount,A,,direct,Line net amount is used as the transaction amount.
+16,Grouping_Code,2,TEXT,100,Grouping code for related invoice lines.,ISO 21378:2019 Table 54,,A,,not_available,No line-level grouping identifier exists in the current UADC model.
+17,GL_Line_Debit_Account_Number,2,GL ACCOUNT NUMBER,100,Debit general ledger account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+18,GL_Line_Credit_Account_Number,2,GL ACCOUNT NUMBER,100,Credit general ledger account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+19,Tax1_Type_Code,3,TAX TYPE CODE,,Line tax type code.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.lineVatInformation.invoicedItemVatCategoryCode,A,,direct,EN 16931 permits one VAT classification per invoice line.
+20,Tax1_Transaction_Amount,3,AMOUNT,,Line tax transaction amount.,ISO 21378:2019 Table 54,,A,,requires_transformation,Must be calculated from line amount and VAT rate or allocated from VAT breakdown.
+21,Tax1_GL_Debit_Account_Number,3,GL ACCOUNT NUMBER,100,Tax debit account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+22,Tax1_GL_Credit_Account_Number,3,GL ACCOUNT NUMBER,100,Tax credit account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+23,Tax2_Type_Code,3,TAX TYPE CODE,,Second line tax type code.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 permits one VAT classification per invoice line.
+24,Tax2_Transaction_Amount,3,AMOUNT,,Second line tax amount.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 permits one VAT classification per invoice line.
+25,Tax2_GL_Debit_Account_Number,3,GL ACCOUNT NUMBER,100,Second tax debit account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+26,Tax2_GL_Credit_Account_Number,3,GL ACCOUNT NUMBER,100,Second tax credit account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+27,Tax3_Type_Code,3,TAX TYPE CODE,,Third line tax type code.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 permits one VAT classification per invoice line.
+28,Tax3_Transaction_Amount,3,AMOUNT,,Third line tax amount.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 permits one VAT classification per invoice line.
+29,Tax3_GL_Debit_Account_Number,3,GL ACCOUNT NUMBER,100,Third tax debit account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+30,Tax3_GL_Credit_Account_Number,3,GL ACCOUNT NUMBER,100,Third tax credit account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+31,Tax4_Type_Code,3,TAX TYPE CODE,,Fourth line tax type code.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 permits one VAT classification per invoice line.
+32,Tax4_Transaction_Amount,3,AMOUNT,,Fourth line tax amount.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 permits one VAT classification per invoice line.
+33,Tax4_GL_Debit_Account_Number,3,GL ACCOUNT NUMBER,100,Fourth tax debit account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+34,Tax4_GL_Credit_Account_Number,3,GL ACCOUNT NUMBER,100,Fourth tax credit account number.,ISO 21378:2019 Table 54,,A,,not_available,Accounting posting data is outside EN 16931.
+35,Business_Segment_01,3,IDENTIFIER,25,First business segment code.,ISO 21378:2019 Table 54,$.invoice.invoiceLine.invoiceLineBuyerAccountingReference,A,,approximate,Line buyer accounting reference is the nearest available business segment value.
+36,Business_Segment_02,3,IDENTIFIER,25,Second business segment code.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 line buyer accounting reference is singular.
+37,Business_Segment_03,3,IDENTIFIER,25,Third business segment code.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 line buyer accounting reference is singular.
+38,Business_Segment_04,3,IDENTIFIER,25,Fourth business segment code.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 line buyer accounting reference is singular.
+39,Business_Segment_05,3,IDENTIFIER,25,Fifth business segment code.,ISO 21378:2019 Table 54,,A,,not_available,EN 16931 line buyer accounting reference is singular.

@@ -94,7 +94,11 @@ Binding files are under:
 specs/bindings/
 ```
 
-Detailed binding authoring rules are documented in **../bindings/README.md**.
+Binding authoring and conversion rules are documented in:
+
+- **../syntax_binding_conversion/README.md** for syntax bindings;
+- **../semantic_binding_conversion/README.md** for semantic bindings;
+- **../README_SCRIPT_PROCESSING.md** for the shared row-scope and function-level processing model.
 
 Binding files connect:
 

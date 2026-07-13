@@ -27,6 +27,8 @@ def main() -> int:
     structured_csv = structured_dir / PHASE1_CSV_NAME
     output_dir = ROOT / "out" / "phase2" / "CSV_FORMAT_TEST"
     output_csv = output_dir / Path(PHASE1_CSV_NAME).stem / "Invoices_Received.csv"
+    iso_output_dir = ROOT / "out" / "phase2" / "ISO21378_ADC_CSV_TEST"
+    iso_output_csv = iso_output_dir / Path(PHASE1_CSV_NAME).stem / "PUR_Invoice_Received.csv"
     structured_dir.mkdir(parents=True, exist_ok=True)
 
     subprocess.run(
@@ -68,7 +70,39 @@ def main() -> int:
     assert row["Supplier_Account_ID"] == "SELLER-ID"
     assert row["Invoice_Amount_Currency"] == "JPY"
 
-    print(f"ok: generated and checked {output_csv}")
+    subprocess.run(
+        [
+            str(PYTHON),
+            str(ROOT / "src" / "semantic_binding.py"),
+            str(structured_csv),
+            "-b",
+            str(
+                ROOT
+                / "specs"
+                / "bindings"
+                / "semantic"
+                / "ISO21378_PUR_Invoice_Received_CSV_Binding.csv"
+            ),
+            "--format",
+            "csv",
+            "-o",
+            str(iso_output_dir),
+        ],
+        check=True,
+    )
+
+    assert iso_output_csv.exists(), f"Missing generated ISO 21378 CSV file: {iso_output_csv}"
+    with iso_output_csv.open(newline="", encoding="utf-8") as handle:
+        iso_rows = list(csv.DictReader(handle))
+
+    assert len(iso_rows) == 1
+    iso_row = iso_rows[0]
+    assert iso_row["Invoice_ID"] == "INV-2026-0001"
+    assert iso_row["Supplier_Account_ID"] == "SELLER-ID"
+    assert iso_row["Invoice_Transaction_CUR_Code"] == "JPY"
+    assert iso_row["Invoice_Transaction_Amount"] == "11000"
+
+    print(f"ok: generated and checked {output_csv} and {iso_output_csv}")
     return 0
 
 

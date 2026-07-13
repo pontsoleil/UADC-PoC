@@ -106,7 +106,34 @@ Output:
 out/phase2/ADS_CSV/openpeppol_ubl_invoice_minimal/Invoices_Received.csv
 ```
 
-## 7. Command Options
+## 7. Generate ISO 21378 ADC Invoice CSV
+
+Use the purchase invoice header binding for ISO 21378:2019 Table 53:
+
+```
+& $python .\src\semantic_binding.py `
+  .\out\phase1\bis-billing3-examples\Allowance-example.csv `
+  -b .\specs\bindings\semantic\ISO21378_PUR_Invoice_Received_CSV_Binding.csv `
+  -o .\out\phase2\ISO21378_ADC `
+  --format csv
+```
+
+Output:
+
+```
+out/phase2/ISO21378_ADC/Allowance-example/PUR_Invoice_Received.csv
+```
+
+Use **ISO21378_PUR_Invoice_Received_Details_CSV_Binding.csv** for Table 54. Use the corresponding **SAL** files for Tables 38 and 39.
+
+Review **mapping_status** in each binding before treating the output as a complete ADC submission:
+
+- **direct** means the UADC value can be copied.
+- **approximate** means the closest EN 16931 value is copied but the semantics are not identical.
+- **requires_transformation** means a calculation, parsing rule, code conversion, or accounting calendar is required.
+- **not_available** means the EN 16931 invoice does not contain the required ERP or audit datum.
+
+## 8. Command Options
 
 Basic form:
 
@@ -127,7 +154,7 @@ Options:
 - **--extension**: explicit output extension. This overrides **--format**.
 - **--output-filename**: explicit output filename for single-file input.
 
-## 8. Binding Table Review Points
+## 9. Binding Table Review Points
 
 For target fields:
 
@@ -148,7 +175,7 @@ For horizontally repeated values:
 - Use zero-based indexed paths such as **$.invoice.vatBreakdown[0].vatCategoryCode**.
 - Include the repeated class as a **type=C** row in the same binding table.
 
-## 9. Troubleshooting
+## 10. Troubleshooting
 
 If an output column is blank, check that the **semantic_path** final segment matches the Structured CSV source column after UpperCamelCase conversion.
 

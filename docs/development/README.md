@@ -201,8 +201,11 @@ After syntax binding changes:
 ```
 & $python .\tests\test_syntax_binding.py
 & $python .\tests\test_syntax_binding_reverse.py
+& $python .\tests\test_ads_supplier_listing_xbrl_gl.py
 & $python .\tests\test_phase2_outputs_by_structured_csv_stem.py
 ```
+
+When an ADS XBRL GL binding changes, run its target-specific test and validate representative generated instances with Arelle. Supplier Listing changes must verify that the **identifierType=V** selector and its **identifierAddress** children remain in the same vendor identifier reference.
 
 Semantic binding CSVs live under:
 
@@ -223,6 +226,7 @@ After semantic binding changes:
 ```
 & $python .\tests\test_ads_invoices_received_psv.py
 & $python .\tests\test_ads_invoices_generated_psv.py
+& $python .\tests\test_semantic_binding_csv_format.py
 & $python .\tests\test_phase2_outputs_by_structured_csv_stem.py
 ```
 

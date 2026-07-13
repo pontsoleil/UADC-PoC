@@ -59,6 +59,11 @@ Supplier_Listing.xbrl
 Customer_Master.xbrl
 ```
 
+**test_ads_supplier_listing_xbrl_gl.py** verifies that Seller name and
+identifier are written to the **identifierType=V** identifier reference and
+that Seller Street, City, Country, and Postal Code are written below its
+**gl-bus:identifierAddress** tuple.
+
 ## Phase 2 ADS PSV And CSV Tests
 
 These tests use semantic binding files under **specs/bindings/semantic/**.
@@ -155,8 +160,15 @@ Recorded result:
 PASS
 ```
 
+The complete set of 22 **tests/test_*.py** regression scripts was executed on
+2026-07-13. All 22 completed successfully with no failures.
+
 Scope included EN 16931 LHM-driven syntax binding conversion, Structured CSV generation, xBRL-CSV metadata generation, Arelle validation, UBL reverse conversion, BIS Billing 3 example conversion, LHM checks, and local taxonomy generation checks.
 
-The taxonomy/LHM checks, OpenPeppol conversion, all nine BIS Billing 3 conversions, Structured CSV metadata, ten round-trip artifact cases, and Arelle validation of all ten xBRL-CSV metadata files passed. Absolute currency-filtered XPath evaluation was corrected so **Allowance-example.xml** now writes BT-110 as **1225.00** and BT-111 as **9324.00**. Because this changed Structured CSV output, all Phase 2 ADS XBRL GL and ADS PSV/CSV outputs were regenerated and their tests passed.
+The taxonomy/LHM checks, OpenPeppol conversion, all nine BIS Billing 3 conversions, Structured CSV metadata, ten round-trip artifact cases, and Arelle validation of all ten xBRL-CSV metadata files passed. Absolute currency-filtered XPath evaluation was corrected so **Allowance-example.xml** now writes BT-110 as **1225.00** and BT-111 as **9324.00**. All Phase 2 ADS XBRL GL and ADS PSV/CSV outputs were regenerated and their tests passed.
+
+The Supplier Listing XBRL GL binding was then completed with Seller postal address facts under the **identifierType=V** identifier reference. Supplier Listing was regenerated from all ten Phase 1 inputs, and all ten resulting **Supplier_Listing.xbrl** instances passed Arelle validation. The four ISO 21378 ADC invoice bindings were also applied to all ten Phase 1 inputs, generating 40 CSV target files. Detailed ISO field coverage and known source-data gaps are recorded in **../semantic_binding_conversion/iso21378_adc_invoice_coverage.md**.
+
+These results complete the planned Phase 1 and Phase 2 PoC baseline. ISO 21378 completion here means that the four planned invoice views, their mappings, outputs, and gap classifications are complete; it does not mean that EN 16931 contains every audit-system field defined by ISO 21378.
 
 The reverse converter keeps absolute binding XPaths rooted at the UBL document when a semantic child is stored outside its repeated syntax context. This prevents BT-90 from creating a nested **Invoice** below **PaymentMeans**. All ten regenerated round-trip XML files pass the UBL 2.1 Invoice schema validation when the test is run with an environment containing **xmlschema**.

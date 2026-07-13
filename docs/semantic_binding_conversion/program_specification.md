@@ -4,7 +4,7 @@
 
 This document specifies the semantic binding conversion program used by the UADC Proof of Concept.
 
-The program converts a Phase 1 UADC Structured CSV into a Phase 2 target flat file by applying a semantic binding CSV. The target flat file can be pipe-separated PSV or comma-separated CSV. The current ADS PSV files and future ISO 21378 ADC CSV files use the same processing model.
+The program converts a Phase 1 UADC Structured CSV into a Phase 2 target flat file by applying a semantic binding CSV. The target flat file can be pipe-separated PSV or comma-separated CSV. The ADS PSV files and ISO 21378 ADC invoice CSV files use the same processing model.
 
 Implementation-level processing details are also summarized in **../README_SCRIPT_PROCESSING.md**.
 
@@ -53,12 +53,23 @@ ADS_Supplier_Listing_PSV_Binding.csv
 ADS_Customer_Master_PSV_Binding.csv
 ```
 
+Current ISO 21378:2019 ADC invoice files include:
+
+```
+ISO21378_SAL_Invoice_Generated_CSV_Binding.csv
+ISO21378_SAL_Invoice_Generated_Details_CSV_Binding.csv
+ISO21378_PUR_Invoice_Received_CSV_Binding.csv
+ISO21378_PUR_Invoice_Received_Details_CSV_Binding.csv
+```
+
+They implement the flat invoice views from Tables 38, 39, 53, and 54. Repeated TAX groups are expanded to **Tax1** through **Tax4** columns. Repeated BUSINESS SEGMENT values are represented by **Business_Segment_01** through **Business_Segment_05** columns. This physical expansion is needed because a CSV header cannot contain repeated field names.
+
 ## 4. Binding Table Contract
 
 The semantic binding table starts from the target definition table and adds UADC mapping columns:
 
 ```
-field_no,field_name,level,flat_file_data_type,length,description,source_document,semantic_path,type,multiplicity
+field_no,field_name,level,flat_file_data_type,length,description,source_document,semantic_path,type,multiplicity,mapping_status,mapping_note
 ```
 
 ### 4.1 A rows
@@ -71,6 +82,8 @@ Important fields:
 - **field_name** is the emitted target column name.
 - **semantic_path** identifies the UADC Structured CSV value.
 - **description** comes from the target definition document.
+- **mapping_status** is **direct**, **approximate**, **requires_transformation**, or **not_available**.
+- **mapping_note** explains a semantic approximation or data gap.
 
 The converter derives the Structured CSV source column from the final segment of **semantic_path**.
 
@@ -125,6 +138,8 @@ $.invoice.vatBreakdown[2].vatCategoryCode
 ```
 
 Indexed paths do not create additional output rows. They select the specified occurrence inside the current invoice or current repeated row context.
+
+The ISO 21378 header bindings use indexed VAT breakdown paths for **Tax1** through **Tax4**. Invoice notes and payment instructions also use occurrence zero because their ADC header fields are singular. The detail bindings use the repeated **InvoiceLine** class as the output row scope. EN 16931 permits one VAT classification per invoice line, so only **Tax1_Type_Code** can be mapped directly on detail rows.
 
 ## 7. Internal Data Structures
 
@@ -206,6 +221,7 @@ The target view stem is derived from the binding file name. For example:
 ```
 ADS_Invoices_Received_PSV_Binding.csv -> Invoices_Received.psv
 ADS_Customer_Master_PSV_Binding.csv -> Customer_Master.psv
+ISO21378_PUR_Invoice_Received_CSV_Binding.csv -> PUR_Invoice_Received.csv
 ```
 
 ## 10. Non-Goals
@@ -215,3 +231,6 @@ ADS_Customer_Master_PSV_Binding.csv -> Customer_Master.psv
 - The converter does not infer mappings from target column names alone.
 - The converter does not read an external LHM CSV at runtime.
 - The converter does not generate xBRL-CSV metadata JSON.
+- The converter does not derive fiscal year or accounting period without an accounting calendar.
+- The converter does not calculate line gross amounts or line tax amounts.
+- The converter does not invent ERP audit trail, posting account, status, or additional business segment values that are absent from EN 16931.

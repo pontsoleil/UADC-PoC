@@ -8,7 +8,23 @@ The proposal defines UADC as a Universal Audit Data Converter that uses hierarch
 - the common semantic layer preserves document-level invoice information, parties, tax subtotals, invoice lines, identifiers, dates, currencies, and monetary amounts;
 - semantic binding then projects the common dataset into downstream audit views, including ISO 21378:2019 Audit data collection Sales/Purchase invoice views and AICPA ADS O2C/P2P invoice views.
 
-This repository is the working implementation space for that proposal. The current implementation includes the Phase 1 Structured CSV baseline and the first Phase 2 ADS XBRL GL target projections.
+This repository is the working implementation space for that proposal. The current implementation completes the planned Phase 1 and Phase 2 PoC baseline. Phase 1 provides the EN 16931 Structured CSV, xBRL-CSV taxonomy and metadata, validation, and UBL round trip. Phase 2 provides ADS XBRL GL and ADS PSV target views plus ISO 21378 ADC invoice CSV views with explicit mapping-gap classification.
+
+ADS and ISO 21378 ADC assume a wider ERP environment in which user activity
+history is captured and detailed accounting records continue into period-end
+processing and annual-report preparation. An invoice alone therefore cannot
+populate every audit-data field. This PoC makes that boundary explicit: it
+shows which audit views can be derived from invoice data, which fields require
+transformation or semantic approximation, and which fields must be supplied by
+ERP ledgers, master data, workflow logs, or other operational systems.
+
+Source and target interface files may remain organization-specific. By binding
+those interfaces to the common UADC semantic structure, an organization can
+separate changing application formats from the meaning, hierarchy, provenance,
+and validation rules of the retained data. The PoC therefore demonstrates a
+practical foundation for stable, long-term data retention that remains
+traceable and usable in audits, while allowing ERP products and interface
+formats to change over time.
 
 The first PoC checkpoint is the EN 16931-1 invoice semantic model represented as an LHM/HMD-style CSV, plus binding-driven conversion from UBL Invoice XML to structured CSV, xBRL-CSV JSON metadata, and round-trip UBL Invoice XML.
 
@@ -80,8 +96,8 @@ The phases below describe the UADC processing model, not project management mile
 
 | Phase | Processing Step | Main Inputs And Outputs | Current Status |
 | --- | --- | --- | --- |
-| Phase 1 | Create a generic Structured CSV from source invoice syntaxes. | Input starts with Peppol UBL Invoice XML. The source syntax binding maps invoice facts into the common EN 16931 / UADC hierarchical Structured CSV. The same phase writes xBRL-CSV metadata JSON and validates the generic representation against the generated xBRL-CSV taxonomy. | Current repository baseline. Peppol UBL input, Structured CSV generation, metadata JSON generation, and UBL round-trip checks are functioning. |
-| Phase 2 | Convert the generic Structured CSV into purpose-specific common formats. | The generic Structured CSV becomes the reusable source for target formats such as Peppol Invoice, UN/CEFACT Invoice, XBRL GL invoice, ISO 21378 Sales/Purchase invoice views, and AICPA ADS O2C/P2P invoice views. | Planned next step after the generic Structured CSV baseline is stable. |
+| Phase 1 | Create a generic Structured CSV from source invoice syntaxes. | Input starts with Peppol UBL Invoice XML. The source syntax binding maps invoice facts into the common EN 16931 / UADC hierarchical Structured CSV. The same phase writes xBRL-CSV metadata JSON and validates the generic representation against the generated xBRL-CSV taxonomy. | **Complete for the PoC baseline.** Peppol UBL input, Structured CSV generation, metadata JSON generation, taxonomy and metadata validation, and UBL round-trip schema checks are functioning. |
+| Phase 2 | Convert the generic Structured CSV into purpose-specific common formats. | The current targets are six ADS XBRL GL views, six ADS PSV views, and ISO 21378:2019 ADC Tables 38, 39, 53, and 54 CSV views. | **Complete for the planned PoC scope.** Target bindings, generation, regression tests, and documented ISO mapping gaps are in place. |
 | Phase 3 | Expand supported input syntaxes and interoperability tests. | Add UN/CEFACT Invoice and XBRL GL invoice examples as additional source inputs, alongside Peppol UBL. Add corresponding output conversions to Peppol Invoice, UN/CEFACT Invoice, and XBRL GL invoice. | Future direction. The later test target includes XBRL GL profiles being discussed in Finland and Estonia. |
 
 Phase 1 intentionally focuses on the neutral intermediate representation: a generic, hierarchical Structured CSV that can be validated and round-tripped. Phase 2 uses that common representation as the source for multiple downstream formats. This separation is the core UADC idea: source syntax conversion is kept separate from target-format projection.
@@ -100,12 +116,18 @@ Phase 1 source syntax conversion
 
 Phase 2 target-format projection
   generic EN 16931 / UADC Structured CSV
-    -> semantic binding / target binding
+    -> ADS XBRL GL syntax binding
+       -> Invoices Received/Generated and Lines
+       -> Supplier Listing and Customer Master
+    -> ADS semantic binding
+       -> ADS O2C/P2P PSV views
+    -> ISO 21378 semantic binding
+       -> ADC Tables 38, 39, 53, and 54 CSV views
+
+Future additional target projections
     -> Peppol Invoice
     -> UN/CEFACT Invoice
-    -> XBRL GL invoice
-    -> ISO 21378 Sales/Purchase invoice views
-    -> AICPA ADS O2C/P2P invoice views
+    -> other XBRL GL invoice profiles
 
 Later interoperability tests
   -> XBRL GL invoice examples and profiles
@@ -114,10 +136,10 @@ Later interoperability tests
 
 ## Directory Layout
 
-- **docs/** - Human-readable project documentation. Start with **docs/README.md**. Script processing is explained in **docs/README_SCRIPT_PROCESSING.md**; binding table definition rules in **docs/bindings/README.md**; specification CSV roles in **docs/specifications/README.md**; syntax binding conversion in **docs/syntax_binding_conversion/**; semantic binding conversion in **docs/semantic_binding_conversion/**; setup and tool usage in **docs/development/README.md**; test and round-trip procedures in **docs/testing/README.md**; sample and reference files in **docs/repository_files/README.md**; and design decisions in **docs/decisions/**.
+- **docs/** - Human-readable project documentation. Start with **docs/README.md**. Script processing is explained in **docs/README_SCRIPT_PROCESSING.md**; binding contracts are documented in **docs/syntax_binding_conversion/** and **docs/semantic_binding_conversion/**; specification CSV roles in **docs/specifications/README.md**; setup and tool usage in **docs/development/README.md**; test and round-trip procedures in **docs/testing/README.md**; sample and reference files in **docs/repository_files/README.md**; and design decisions in **docs/decisions/**.
 - **references/** - External source notes and links used to interpret standards, source specifications, and implementation references. Keep large licensed source documents outside the repository and record only reproducible notes or pointers here.
 - **specs/lhm/** - LHM/HMD semantic model definitions for the EN 16931 invoice PoC. The generated/current CSV is stored here, while **specs/lhm/source/** keeps the editable source CSV used to regenerate or adjust the LHM. Local reviewer workbooks are ignored by Git.
-- **specs/bindings/** - Binding definitions. The active UBL Invoice syntax binding is **specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv**; it maps LHM semantic paths to UBL XPath expressions and selector predicates used by forward and reverse conversion. Phase 2 ADS XBRL GL binding CSV files and the review workbook **specs/bindings/syntax/ADS_XBRL_GL_Bindings.xlsx** define the target projections shown in Figure 1.
+- **specs/bindings/** - Binding definitions. The active UBL Invoice syntax binding is **specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv**; it maps LHM semantic paths to UBL XPath expressions and selector predicates used by forward and reverse conversion. Phase 2 ADS XBRL GL binding CSV files are under **specs/bindings/syntax/**. The review workbook is **specs/bindings/ADS_XBRL_GL_Bindings.xlsx**. ADS PSV and ISO 21378 ADC CSV bindings are under **specs/bindings/semantic/**.
 - **samples/input/** - Small sample input files committed for baseline checks, including the minimal UBL Invoice sample and selected BIS Billing example invoices.
 - **samples/expected/** - Checked expected output for lightweight regression checks where a stable expected artifact is useful.
 - **src/** - Operational conversion scripts and beginner tutorial wrappers. The main converter is **src/syntax_binding.py**; it generates hierarchical Structured CSV, writes xBRL-CSV metadata JSON, and performs Structured-CSV-to-XML round trips. **src/syntax_binding_ads_xbrl_gl.py** generates the Phase 2 ADS XBRL GL target instances, and **src/tutorial/** provides simple learning scripts.
@@ -135,9 +157,9 @@ The taxonomy generator is included at **tools/taxonomy/xBRLGL_TaxonomyGenerator.
 4. Validate generated xBRL-CSV metadata with Arelle.
 5. Reconstruct UBL Invoice XML from Structured CSV and validate it with UBL 2.1 schemas.
 6. Generate Phase 2 ADS XBRL GL target views from the Phase 1 Structured CSV. The current ADS XBRL GL outputs are written under **out/phase2/ADS_XBRL_GL/<structured-csv-stem>/** as **Invoices_Received.xbrl**, **Invoices_Generated.xbrl**, **Invoices_Received_Lines.xbrl**, **Invoices_Generated_Lines.xbrl**, **Supplier_Listing.xbrl**, and **Customer_Master.xbrl**.
-7. Keep OpenPeppol BIS Billing as the first CIUS/profile layer on top of the EN 16931 baseline.
-8. Prepare the design for additional source inputs: UN/CEFACT Invoice and XBRL GL invoice examples.
-9. Prepare additional target-format projections from the generic Structured CSV to Peppol Invoice, UN/CEFACT Invoice, and XBRL GL invoice.
+7. Generate Phase 2 ADS PSV views under **out/phase2/ADS_PSV/** and ISO 21378 ADC invoice CSV views under **out/phase2/ISO21378_ADC/**.
+8. Keep OpenPeppol BIS Billing as the first CIUS/profile layer on top of the EN 16931 baseline.
+9. Prepare the next-phase design for additional source inputs and target profiles, including UN/CEFACT Invoice and other XBRL GL invoice examples.
 
 ## Tasks
 
@@ -151,7 +173,7 @@ The taxonomy generator is included at **tools/taxonomy/xBRLGL_TaxonomyGenerator.
 
 5. Add additional source syntaxes after the Peppol UBL baseline is stable. Planned source inputs include UN/CEFACT Invoice and XBRL GL invoice examples. These should map into the same generic Structured CSV wherever the semantic model overlaps.
 
-6. Add target-format projections from the generic Structured CSV. Planned outputs include Peppol Invoice, UN/CEFACT Invoice, XBRL GL invoice, ISO 21378 Sales/Purchase invoice views, and AICPA ADS O2C/P2P invoice views. Later XBRL GL testing should include profiles being discussed in Finland and Estonia.
+6. Complete the planned Phase 2 target projections from the generic Structured CSV. ADS O2C/P2P XBRL GL and PSV bindings and ISO 21378:2019 ADC Tables 38, 39, 53, and 54 CSV bindings are defined and tested. Supplier Listing places Seller postal address under the **identifierType=V** identifier reference. The ISO bindings identify direct mappings, semantic approximations, required transformations, and data absent from EN 16931. This completes Phase 2 for the PoC scope; it does not claim that EN 16931 alone supplies every ISO 21378 audit field.
 
 The resulting artifacts are therefore checked at two levels: xBRL-CSV reports and taxonomy are verified with Arelle, while regenerated XML instances are verified with XML parsing and UBL schema validation.
 

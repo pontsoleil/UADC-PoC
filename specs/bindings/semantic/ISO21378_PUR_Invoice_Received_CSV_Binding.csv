@@ -1,0 +1,52 @@
+field_no,field_name,level,flat_file_data_type,length,description,source_document,semantic_path,type,multiplicity,mapping_status,mapping_note
+,Invoice,,,,EN 16931 invoice semantic root.,UADC Structured CSV model,$.invoice,C,1..1,,
+,InvoiceNote,,,,Invoice notes.,UADC Structured CSV model,$.invoice.invoiceNote,C,0..*,,
+,PaymentInstructions,,,,Payment instructions.,UADC Structured CSV model,$.invoice.paymentInstructions,C,0..*,,
+,DocumentTotals,,,,Document monetary totals.,UADC Structured CSV model,$.invoice.documentTotals,C,1..1,,
+,VatBreakdown,,,,VAT breakdown.,UADC Structured CSV model,$.invoice.vatBreakdown,C,1..*,,
+,InvoiceLine,,,,Invoice line.,UADC Structured CSV model,$.invoice.invoiceLine,C,1..*,,
+,PriceDetails,,,,Invoice line price details.,UADC Structured CSV model,$.invoice.invoiceLine.priceDetails,C,1..1,,
+,ItemInformation,,,,Invoice line item information.,UADC Structured CSV model,$.invoice.invoiceLine.itemInformation,C,1..1,,
+,LineVatInformation,,,,Invoice line VAT information.,UADC Structured CSV model,$.invoice.invoiceLine.lineVatInformation,C,1..1,,
+1,Invoice_ID,2,IDENTIFIER,60,Unique invoice identifier.,ISO 21378:2019 Table 53,$.invoice.invoiceNumber,A,,direct,EN 16931 invoice number is used as the stable invoice identifier.
+2,Invoice_Number,2,TEXT,100,Invoice number.,ISO 21378:2019 Table 53,$.invoice.invoiceNumber,A,,direct,
+3,Fiscal_Year,2,YEAR IDENTIFIER,4,Fiscal year containing the invoice date.,ISO 21378:2019 Table 53,,A,,requires_transformation,Requires an accounting calendar and a date-to-fiscal-year rule.
+4,Accounting_Period,2,PERIOD IDENTIFIER,,Accounting period containing the invoice date.,ISO 21378:2019 Table 53,,A,,requires_transformation,Requires an accounting calendar and a date-to-period rule.
+5,Official_Invoice_Code,2,TEXT,25,Official code assigned by a tax authority.,ISO 21378:2019 Table 53,,A,,not_available,No equivalent EN 16931 business term in the current UADC model.
+6,Invoice_Type_Name,2,TEXT,60,Name of the invoice type.,ISO 21378:2019 Table 53,$.invoice.invoiceTypeCode,A,,approximate,Source is an invoice type code and may require code-to-name conversion.
+7,Invoice_Date,2,DATE,,Invoice issue date.,ISO 21378:2019 Table 53,$.invoice.invoiceIssueDate,A,,direct,
+8,Invoice_Due_Date,2,DATE,,Invoice payment due date.,ISO 21378:2019 Table 53,$.invoice.paymentDueDate,A,,direct,
+9,Supplier_Account_ID,2,IDENTIFIER,100,Supplier account identifier.,ISO 21378:2019 Table 53,$.invoice.seller.sellerIdentifier,A,,direct,
+10,Settlement_Organization_Code,2,IDENTIFIER,25,Organization responsible for settlement.,ISO 21378:2019 Table 53,$.invoice.buyerAccountingReference,A,,approximate,Buyer accounting reference is the nearest available organizational value.
+11,Settlement_Method_Code,2,IDENTIFIER,60,Settlement method code.,ISO 21378:2019 Table 53,$.invoice.paymentInstructions[0].paymentMeansTypeCode,A,,direct,First payment instruction is used for the flat target field.
+12,Invoice_Transaction_Amount,2,AMOUNT,,Invoice transaction amount.,ISO 21378:2019 Table 53,$.invoice.documentTotals.invoiceTotalAmountWithVat,A,,direct,EN 16931 total including VAT is used.
+13,Invoice_Transaction_CUR_Code,2,CURRENCY CODE,3,Invoice transaction currency code.,ISO 21378:2019 Table 53,$.invoice.documentCurrencyCode,A,,direct,
+14,Payment_Term_Code,2,PAYMENT TERM CODE,80,Payment term code.,ISO 21378:2019 Table 53,$.invoice.paymentTerms,A,,approximate,EN 16931 provides payment terms as text rather than a normalized code.
+15,Terms_Discount_Percentage,2,PERCENTAGE,,Early payment discount percentage.,ISO 21378:2019 Table 53,,A,,requires_transformation,May be parsed from payment terms text but no canonical UADC field exists.
+16,Terms_Discount_Days,2,NUMBER,6,Early payment discount days.,ISO 21378:2019 Table 53,,A,,requires_transformation,May be parsed from payment terms text but no canonical UADC field exists.
+17,Terms_Due_Days,2,NUMBER,6,Net payment term days.,ISO 21378:2019 Table 53,,A,,requires_transformation,May be derived from invoice date and due date.
+18,Grouping_Code,2,TEXT,100,Grouping code for related invoices.,ISO 21378:2019 Table 53,$.invoice.projectReference,A,,approximate,Project reference is the nearest available grouping identifier.
+19,Status,2,STATUS CODE,30,Invoice processing status.,ISO 21378:2019 Table 53,,A,,not_available,Invoice lifecycle status is outside EN 16931.
+20,Remark,2,TEXT,500,Free-form invoice remark.,ISO 21378:2019 Table 53,$.invoice.invoiceNote[0].invoiceNote,A,,direct,First invoice note is used for the flat target field.
+21,Tax1_Type_Code,3,TAX TYPE CODE,,First tax type code.,ISO 21378:2019 Table 53,$.invoice.vatBreakdown[0].vatCategoryCode,A,,direct,
+22,Tax1_Transaction_Amount,3,AMOUNT,,First tax transaction amount.,ISO 21378:2019 Table 53,$.invoice.vatBreakdown[0].vatCategoryTaxAmount,A,,direct,
+23,Tax2_Type_Code,3,TAX TYPE CODE,,Second tax type code.,ISO 21378:2019 Table 53,$.invoice.vatBreakdown[1].vatCategoryCode,A,,direct,
+24,Tax2_Transaction_Amount,3,AMOUNT,,Second tax transaction amount.,ISO 21378:2019 Table 53,$.invoice.vatBreakdown[1].vatCategoryTaxAmount,A,,direct,
+25,Tax3_Type_Code,3,TAX TYPE CODE,,Third tax type code.,ISO 21378:2019 Table 53,$.invoice.vatBreakdown[2].vatCategoryCode,A,,direct,
+26,Tax3_Transaction_Amount,3,AMOUNT,,Third tax transaction amount.,ISO 21378:2019 Table 53,$.invoice.vatBreakdown[2].vatCategoryTaxAmount,A,,direct,
+27,Tax4_Type_Code,3,TAX TYPE CODE,,Fourth tax type code.,ISO 21378:2019 Table 53,$.invoice.vatBreakdown[3].vatCategoryCode,A,,direct,
+28,Tax4_Transaction_Amount,3,AMOUNT,,Fourth tax transaction amount.,ISO 21378:2019 Table 53,$.invoice.vatBreakdown[3].vatCategoryTaxAmount,A,,direct,
+29,Created_User_ID,3,IDENTIFIER,25,User that created the record.,ISO 21378:2019 Table 53,,A,,not_available,Source invoice does not carry ERP audit trail data.
+30,Created_Date,3,DATE,,Record creation date.,ISO 21378:2019 Table 53,,A,,not_available,Source invoice does not carry ERP audit trail data.
+31,Created_Time,3,TIME,,Record creation time.,ISO 21378:2019 Table 53,,A,,not_available,Source invoice does not carry ERP audit trail data.
+32,Approved_User_ID,3,IDENTIFIER,25,User that approved the record.,ISO 21378:2019 Table 53,,A,,not_available,Source invoice does not carry ERP audit trail data.
+33,Approved_Date,3,DATE,,Record approval date.,ISO 21378:2019 Table 53,,A,,not_available,Source invoice does not carry ERP audit trail data.
+34,Approved_Time,3,TIME,,Record approval time.,ISO 21378:2019 Table 53,,A,,not_available,Source invoice does not carry ERP audit trail data.
+35,Last_Modified_User_ID,3,IDENTIFIER,25,User that last modified the record.,ISO 21378:2019 Table 53,,A,,not_available,Source invoice does not carry ERP audit trail data.
+36,Last_Modified_Date,3,DATE,,Last modification date.,ISO 21378:2019 Table 53,,A,,not_available,Source invoice does not carry ERP audit trail data.
+37,Last_Modified_Time,3,TIME,,Last modification time.,ISO 21378:2019 Table 53,,A,,not_available,Source invoice does not carry ERP audit trail data.
+38,Business_Segment_01,3,IDENTIFIER,25,First business segment code.,ISO 21378:2019 Table 53,$.invoice.buyerAccountingReference,A,,approximate,Buyer accounting reference is the nearest available business segment value.
+39,Business_Segment_02,3,IDENTIFIER,25,Second business segment code.,ISO 21378:2019 Table 53,,A,,not_available,The EN 16931 buyer accounting reference is singular.
+40,Business_Segment_03,3,IDENTIFIER,25,Third business segment code.,ISO 21378:2019 Table 53,,A,,not_available,The EN 16931 buyer accounting reference is singular.
+41,Business_Segment_04,3,IDENTIFIER,25,Fourth business segment code.,ISO 21378:2019 Table 53,,A,,not_available,The EN 16931 buyer accounting reference is singular.
+42,Business_Segment_05,3,IDENTIFIER,25,Fifth business segment code.,ISO 21378:2019 Table 53,,A,,not_available,The EN 16931 buyer accounting reference is singular.

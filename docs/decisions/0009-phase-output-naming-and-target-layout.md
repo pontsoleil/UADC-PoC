@@ -18,10 +18,12 @@ from Phase 2 target-view generation.
    not **.csv.metadata.json**.
 4. Phase 2 ADS XBRL GL outputs are written under **out/phase2/ADS_XBRL_GL/**.
 5. Phase 2 ADS PSV outputs are written under **out/phase2/ADS_PSV/**.
-6. For directory input, Phase 2 outputs are grouped by Structured CSV stem.
-7. Target filenames follow the Figure 1 target view names, such as
+6. Phase 2 ISO 21378 ADC CSV outputs are written under **out/phase2/ISO21378_ADC/**.
+7. For directory input, Phase 2 outputs are grouped by Structured CSV stem.
+8. Target filenames follow the Figure 1 target view names, such as
    **Invoices_Received.xbrl**, **Invoices_Generated_Lines.xbrl**,
-   **Supplier_Listing.psv**, and **Customer_Master.psv**.
+   **Supplier_Listing.psv**, **Customer_Master.psv**, and
+   **PUR_Invoice_Received.csv**.
 
 ## Consequences
 
@@ -31,5 +33,7 @@ from Phase 2 target-view generation.
 - A Phase 2 XBRL GL output for **Allowance-example.csv** becomes
   **out/phase2/ADS_XBRL_GL/Allowance-example/Invoices_Received_Lines.xbrl**.
 - ADS PSV follows the same grouping convention under **out/phase2/ADS_PSV/**.
+- ISO 21378 ADC CSV follows the same grouping convention under
+  **out/phase2/ISO21378_ADC/**.
 - Phase 2 outputs can be compared by source Structured CSV and by target view.
 - Test scripts are expected to use these names and directories.

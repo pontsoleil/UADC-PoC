@@ -490,7 +490,10 @@ Input:
 
 Output:
 
-- ADS XBRL GL tuple instance, such as **Invoices_Received_Lines.xbrl**.
+- One of six ADS XBRL GL tuple views: **Invoices_Received.xbrl**,
+  **Invoices_Generated.xbrl**, **Invoices_Received_Lines.xbrl**,
+  **Invoices_Generated_Lines.xbrl**, **Supplier_Listing.xbrl**, or
+  **Customer_Master.xbrl**.
 
 ### Binding Interpretation
 
@@ -575,7 +578,7 @@ column.
 
 ### XBRL XML Construction
 
-**build_instance(...)** creates an **ET.Element** tree rooted at **xbrli:xbrl**. It adds context, units, **gl-cor:accountingEntries**, **entryHeader**, **entryDetail**, and **documentReference**.
+**build_instance(...)** creates an **ET.Element** tree rooted at **xbrli:xbrl**. It adds context, units, XBRL GL document metadata, and the tuple containers required by the selected binding paths. Invoice bindings create document structures; Supplier Listing and Customer Master create the applicable identifier reference structures.
 
 Path handling:
 
@@ -585,6 +588,21 @@ Path handling:
 - **ensure_child(...)** finds or creates tuple containers.
 - **selector_matches(...)** checks whether an existing element satisfies selector child values.
 - **append_item(...)** creates the final item element and writes the value.
+
+The Supplier Listing binding selects the vendor identifier with
+**gl-cor:identifierReference[gl-cor:identifierType="V"]**. Seller postal
+address facts use target paths below that selected identifier reference and
+create **gl-bus:identifierAddress** with **identifierStreet**,
+**identifierAddressStreet2**, **identifierCity**,
+**identifierStateOrProvince**, **identifierCountry**, and
+**identifierZipOrPostalCode** children. The selector identifies the vendor
+tuple; it does not create address children unless corresponding fact rows are
+present in the binding table.
+
+The Seller address must not be written as **gl-bus:organizationAddress**.
+That tuple describes the reporting entity under **entityInformation**. A
+supplier represented by the vendor identifier reference uses
+**gl-bus:identifierAddress** below the same **identifierType=V** tuple.
 
 Rows are selected by **rows_for_binding(rows, binding)**. A binding for invoice lines selects rows where the relevant source column and line dimension are present. A document-level binding selects the document row.
 
@@ -601,7 +619,9 @@ Construction then finishes as follows:
 2. **add_context_and_units(...)** adds the default context and initial units.
 3. **add_document_info(...)** writes required XBRL GL document metadata.
 4. **build_instance(...)** writes VAT occurrences and other bound facts.
-5. **reorder_tree(...)** applies the supported XBRL GL child order.
+5. **reorder_tree(...)** applies the supported XBRL GL child order, including
+   **identifierAddress** under **identifierReference** and the schema order of
+   the address facts.
 6. **add_missing_units(...)** declares any unit referenced by generated facts.
 7. **convert_file(...)** indents and writes the XML document.
 8. **main(...)** resolves one file or directory with **input_files(...)** and
@@ -850,6 +870,8 @@ This first-non-empty rule is important because Structured CSV rows are sparse an
 
 ## Source Documents
 
-Detailed binding-table entry rules are documented in **docs/bindings/README.md**.
+Detailed binding-table entry rules are documented in
+**docs/syntax_binding_conversion/README.md** and
+**docs/semantic_binding_conversion/README.md**.
 
 Operational command examples are documented in **docs/development/README.md** and **docs/testing/README.md**.

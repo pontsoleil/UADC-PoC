@@ -5,7 +5,7 @@ This directory contains human-readable project documentation for the UADC PoC. I
 ## Subdirectories
 
 - **README_SCRIPT_PROCESSING.md** - Integrated script-processing guide. This is the main technical explanation of how binding rows, XPath, Semantic Path, repeated dimensions such as **dInvoice** and **dInvoiceLine**, and the implementation functions build Structured CSV, UBL XML, ADS XBRL GL, and ADS PSV/CSV outputs.
-- **bindings/** - Syntax binding and semantic binding CSV guide. It explains the binding columns, class rows, fact rows, XPath rules, Semantic Path rules, and target-output mapping rules.
+- **syntax_binding_conversion/** and **semantic_binding_conversion/** - Binding CSV contracts, class and fact rows, XPath and Semantic Path rules, target mapping, command usage, and limitations.
 - **decisions/** - Architecture and design decision records. These capture the important choices made during the PoC, such as EN 16931-first scope, **lhm_level**, xBRL-CSV-only taxonomy output, metadata policy, and local taxonomy generator ownership.
 - **development/** - Clone, setup, tooling, model-maintenance, taxonomy generation, and continuing development guide.
 - **lhm_generation/** - Program specification and operating guide for building the EN 16931 LHM CSV from the editable source CSV.
@@ -17,3 +17,5 @@ This directory contains human-readable project documentation for the UADC PoC. I
 - **testing/** - Test execution and round-trip artifact guide.
 
 The files in this directory are the source documentation. Generated PDFs should be recreated from these Markdown files when needed.
+
+The planned PoC baseline for Phase 1 and Phase 2 is complete. Phase 1 covers the EN 16931 Structured CSV, xBRL-CSV taxonomy and metadata, and UBL round trip. Phase 2 covers ADS XBRL GL, ADS PSV, and the four documented ISO 21378 ADC invoice CSV views. Later source syntaxes and additional target profiles belong to the next expansion phase.
