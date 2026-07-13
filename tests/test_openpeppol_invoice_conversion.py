@@ -22,7 +22,7 @@ def main() -> int:
     out_csv = out_dir / "openpeppol_ubl_invoice_structured.csv"
     cmd = [
         str(PYTHON),
-        str(ROOT / "tools" / "syntax_binding_sample.py"),
+        str(ROOT / "tools" / "tutorial" / "syntax_binding_sample.py"),
         str(ROOT / "samples" / "input" / "openpeppol_ubl_invoice_minimal.xml"),
         "-b",
         str(ROOT / "specs" / "bindings" / "syntax" / "EN16931_UBL_Invoice_Syntax_Binding.csv"),

@@ -205,7 +205,7 @@ def main() -> int:
             args.structured_csv, args.binding, args.output, args.encoding
         )
     except Exception as exc:
-        print(f"semantic_binding.py: {exc}", file=sys.stderr)
+        print(f"semantic_binding_sample.py: {exc}", file=sys.stderr)
         return 1
     print(f"Wrote {count} row(s), {len(fields)} column(s) to {args.output}")
     return 0

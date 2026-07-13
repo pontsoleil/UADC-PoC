@@ -151,7 +151,7 @@ The regenerated XML is not expected to be byte-for-byte identical to the source 
 Last recorded report date:
 
 ```
-2026-07-13
+2026-07-14
 ```
 
 Recorded result:
@@ -161,7 +161,9 @@ PASS
 ```
 
 The complete set of 22 **tests/test_*.py** regression scripts was executed on
-2026-07-13. All 22 completed successfully with no failures.
+2026-07-14 after moving the two simplified converter implementations to
+**tools/tutorial/**. All 22 completed successfully with no failures. All 14
+Python programs under **tools/** also passed **py_compile**.
 
 Scope included EN 16931 LHM-driven syntax binding conversion, Structured CSV generation, xBRL-CSV metadata generation, Arelle validation, UBL reverse conversion, BIS Billing 3 example conversion, LHM checks, and local taxonomy generation checks.
 

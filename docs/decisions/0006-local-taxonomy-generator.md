@@ -18,5 +18,7 @@ Taxonomy generation is part of the UADC PoC repository. A clean checkout of **UA
 
 - **tests/test_xbrlgl_generator_uadc_lhm.py** can run from a fresh clone.
 - The repository carries the generator code needed for the PoC checkpoint.
-- Generated taxonomy output under **out/** remains ignored and is not committed.
+- Generated taxonomy output under **out/** is committed as reproducible PoC
+  evidence. It must be regenerated from the local generator and source
+  definitions rather than edited manually.
 - Future changes to taxonomy generation are made in **tools/taxonomy/xBRLGL_TaxonomyGenerator.py**.

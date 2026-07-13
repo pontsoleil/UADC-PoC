@@ -10,7 +10,7 @@ tools/    setup, model maintenance, taxonomy generation, and test artifact helpe
 tests/    regression checks
 specs/    committed LHM, binding, currency, and model definition CSVs
 samples/  committed sample XML and expected outputs
-out/      local generated output, ignored by Git
+out/      generated PoC evidence and target output tracked by Git
 ```
 
 The main invoice conversion runtime is in **src/**. Use **tools/** for setup, regeneration, test artifact building, taxonomy output, and specification maintenance.
@@ -96,8 +96,8 @@ update_lhm_syntax_sequence_from_ubl_xsd.py
 Tutorial and sample converters:
 
 ```
-syntax_binding_sample.py
-semantic_binding.py
+tools/tutorial/syntax_binding_sample.py
+tools/tutorial/semantic_binding_sample.py
 ```
 
 Operational runtime converters are in **src/**, not **tools/**.
@@ -122,7 +122,14 @@ out/phase2/
 tests/roundtrip/
 ```
 
-**out/** is local generated output and is normally ignored by Git.
+**out/** contains generated evidence and target outputs. It is included in Git
+for the current PoC so Phase 1 and Phase 2 results remain reviewable through
+GitHub. Regenerate committed outputs from their source definitions and scripts
+rather than editing them manually.
+
+Detailed purpose, input/output, command-line, processing, function, validation,
+dependency, and side-effect specifications for all 15 programs under **tools/**
+are documented in **../tools/program_specification.md**.
 
 ## Taxonomy Generation
 

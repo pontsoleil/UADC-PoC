@@ -15,6 +15,7 @@ This directory contains human-readable project documentation for the UADC PoC. I
 - **syntax_binding_conversion/** - Program specification and operating guide for converting UBL Invoice XML to structured CSV and reconstructing XML from structured CSV.
 - **taxonomy_generation/** - Program specification and operating guide for generating the xBRL-CSV taxonomy from the LHM CSV.
 - **testing/** - Test execution and round-trip artifact guide.
+- **tools/** - Program specification for all supporting scripts and the PSV viewer under **tools/**.
 
 The files in this directory are the source documentation. Generated PDFs should be recreated from these Markdown files when needed.
 
