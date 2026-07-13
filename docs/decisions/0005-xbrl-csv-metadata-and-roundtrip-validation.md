@@ -11,15 +11,15 @@ reconstructed into UBL Invoice XML with schema-valid syntax.
 
 1. Forward syntax binding conversion writes xBRL-CSV metadata JSON, not a
    UADC-specific metadata format.
-2. The metadata uses `documentInfo`, `tables`, and `tableTemplates`.
-3. Metadata references the generated `plt-oim` taxonomy schema as the xBRL-CSV
+2. The metadata uses **documentInfo**, **tables**, and **tableTemplates**.
+3. Metadata references the generated **plt-oim** taxonomy schema as the xBRL-CSV
    OIM entry point.
-4. Arelle `loadFromOIM` validation is a regression check for generated metadata.
+4. Arelle **loadFromOIM** validation is a regression check for generated metadata.
 5. Reverse conversion reconstructs UBL Invoice XML from structured CSV using
    LHM XPath and syntax binding rules.
 6. Reverse conversion adds UBL-required support values that are not EN 16931 BT
-   values when required for schema validity, such as `cac:TaxScheme/cbc:ID` and
-   missing `cbc:ChargeIndicator=false` for price allowance contexts.
+   values when required for schema validity, such as **cac:TaxScheme/cbc:ID** and
+   missing **cbc:ChargeIndicator=false** for price allowance contexts.
 7. Reverse conversion normalizes supported UBL child element order before
    writing XML.
 8. UBL 2.1 schema validation is a regression check for regenerated XML.

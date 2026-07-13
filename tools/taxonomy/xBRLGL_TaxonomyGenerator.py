@@ -9,7 +9,7 @@ designed by SAMBUICHI, Nobuyuki (Sambuichi Professional Engineers Office)
 written by SAMBUICHI, Nobuyuki (Sambuichi Professional Engineers Office)
 
 Creation Date: 2025-04-03
-Last Modified: 2025-12-14
+Last Modified: 2026-07-13
 
 MIT License
 

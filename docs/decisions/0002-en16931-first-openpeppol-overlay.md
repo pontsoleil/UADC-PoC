@@ -19,9 +19,9 @@ syntax-specific requirements.
 
 ## Consequences
 
-- `specs/lhm/EN16931_CIUS_Invoice_LHM.csv` is audited against EN 16931-1 BG/BT
+- **specs/lhm/EN16931_CIUS_Invoice_LHM.csv** is audited against EN 16931-1 BG/BT
   identifiers.
-- `specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv` is the current
+- **specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv** is the current
   conversion baseline.
 - OpenPeppol-specific constraints should be documented and tested separately
   after the EN 16931 baseline is stable.

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # coding: utf-8
 """
 Check that LHM semantic_path elements use lowerCamelCaseConcatenated.
@@ -60,3 +60,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+

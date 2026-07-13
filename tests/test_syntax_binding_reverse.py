@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # coding: utf-8
 """
 Regression test for hierarchical CSV to XML reverse conversion.
@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON = Path(sys.executable)
 SOURCE_XML_NAME = "openpeppol_ubl_invoice_minimal"
-PHASE1_CSV_NAME = "EN16931_Core_Invoice.csv"
+PHASE1_CSV_NAME = "openpeppol_ubl_invoice_minimal.csv"
 
 
 def read_rows(csv_file: Path) -> list[dict[str, str]]:
@@ -42,12 +42,12 @@ def main() -> int:
     subprocess.run(
         [
             str(PYTHON),
-            str(ROOT / "src" / "syntax_binding_hierarchical.py"),
+            str(ROOT / "src" / "syntax_binding.py"),
             str(ROOT / "samples" / "input" / f"{SOURCE_XML_NAME}.xml"),
             "-b",
             str(binding),
-            "--lhm-csv",
-            str(lhm),
+            "--taxonomy-base",
+            str(ROOT / "out" / "taxonomy"),
             "-o",
             str(source_csv),
         ],
@@ -56,13 +56,13 @@ def main() -> int:
     subprocess.run(
         [
             str(PYTHON),
-            str(ROOT / "src" / "syntax_binding_hierarchical.py"),
+            str(ROOT / "src" / "syntax_binding.py"),
             str(source_csv),
             "--reverse",
             "-b",
             str(binding),
-            "--lhm-csv",
-            str(lhm),
+            "--taxonomy-base",
+            str(ROOT / "out" / "taxonomy"),
             "-o",
             str(reverse_xml),
         ],
@@ -71,12 +71,12 @@ def main() -> int:
     subprocess.run(
         [
             str(PYTHON),
-            str(ROOT / "src" / "syntax_binding_hierarchical.py"),
+            str(ROOT / "src" / "syntax_binding.py"),
             str(reverse_xml),
             "-b",
             str(binding),
-            "--lhm-csv",
-            str(lhm),
+            "--taxonomy-base",
+            str(ROOT / "out" / "taxonomy"),
             "-o",
             str(roundtrip_csv),
         ],
@@ -126,3 +126,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+

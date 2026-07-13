@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # coding: utf-8
 """
 Check round-trip artifacts under tests/roundtrip.
@@ -95,3 +95,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+

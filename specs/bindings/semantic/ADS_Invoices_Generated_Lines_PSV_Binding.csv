@@ -1,0 +1,46 @@
+﻿field_no,field_name,level,flat_file_data_type,length,description,source_document,semantic_path,type,multiplicity
+,Invoice,,,,EN 16931 invoice semantic root.,UADC Structured CSV model,$.invoice,C,1..1
+,DocumentLevelAllowances,,,,information about allowances applicable to the Invoice as a whole.,UADC Structured CSV model,$.invoice.documentLevelAllowances,C,0..*
+,DocumentLevelCharges,,,,"information about charges and taxes other than VAT, applicable to the Invoice as a whole. The amount of a charge, without",UADC Structured CSV model,$.invoice.documentLevelCharges,C,0..*
+,VatBreakdown,,,,"information about VAT breakdown by different categories, rates and exemption reasons Sum of all taxable amounts subject",UADC Structured CSV model,$.invoice.vatBreakdown,C,1..*
+,InvoiceLine,,,,information on individual Invoice lines.,UADC Structured CSV model,$.invoice.invoiceLine,C,1..*
+,InvoiceLineAllowances,,,,information about allowances applicable to the individual Invoice line.,UADC Structured CSV model,$.invoice.invoiceLine.invoiceLineAllowances,C,0..*
+,InvoiceLineCharges,,,,information about charges and taxes other than VAT applicable to the individual Invoice line.,UADC Structured CSV model,$.invoice.invoiceLine.invoiceLineCharges,C,0..*
+,ItemAttributes,,,,A group of business terms providing information about properties of the goods and services invoiced.,UADC Structured CSV model,$.invoice.invoiceLine.itemInformation.itemAttributes,C,0..*
+1,Invoice_ID,1,TEXT,100,"Unique identifier for each invoice. This ID may need to be created by concatenating fields (for example, document number, document type, and year) to uniquely identify each transaction. The same ID must be used for all tables with invoice data (Invoices_Generated_YYYYMMDD_YY YYMMDD, Open_Accounts_Receivable_YYYYMM DD, AR_Cash_Application_YYYYMMDD_Y YYYMMDD, and AR_Adjustments_YYYYMMDD_YYYY MMDD).",auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceNumber,A,
+2,Invoice_Line_ID,1,TEXT,10,Line item number of the invoice.,auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceLine.invoiceLineIdentifier,A,
+3,Sales_Order_ID,1,TEXT,100,"Sales order ID for invoiced items. Must match Sales_Order_ID in the Sales_Orders_YYYYMMDD_YYYYMM DD file. If no sales order, leave blank.",auditdatastandards.O2C.july2015.pdf,$.invoice.salesOrderReference,A,
+4,Sales_Order_Line_ID,1,TEXT,10,"Identifier for sales order line number. Must match Sales_Order_Line_ID used in Sales_Orders_Lines_YYYYMMDD_YY YYMMDD file. If no sales order, leave blank.",auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceLine.referencedPurchaseOrderLineReference,A,
+5,Invoice_Product_ID,1,TEXT,25,Identifier that is unique for each sales product.,auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceLine.itemInformation.itemSellerIdentifier,A,
+6,Invoice_Product_Description,1,TEXT,100,Product (plain English) description to indicate the name or other identifying characteristics of the product.,auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceLine.itemInformation.itemDescription,A,
+7,Invoice_Product_Group_01,2,TEXT,25,"Product descriptor #1, for example, tires or accessories.",auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceLine.itemInformation.itemClassificationIdentifier,A,
+8,Invoice_Product_Group_02,2,TEXT,25,"Product descriptor #2, for example, brand.",auditdatastandards.O2C.july2015.pdf,,A,
+9,Invoice_Line_Amount,1,NUMERIC,,Transaction monetary amount recorded in the functional or group currency. No multicurrency translation should need to be performed on this amount because all transactions should be recorded in a single currency.,auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceLine.invoiceLineNetAmount,A,
+10,Invoice_Line_Amount_Currency,1,TEXT,3,The functional or group currency related to the invoice amount. See ISO 4217 coding.,auditdatastandards.O2C.july2015.pdf,$.invoice.documentCurrencyCode,A,
+11,Invoice_Line_Amount_Reporting,1,NUMERIC,,Transaction monetary amount recorded in the reporting currency.,auditdatastandards.O2C.july2015.pdf,,A,
+12,Invoice_Line_Reporting_Currency,1,TEXT,3,The reporting currency related to the invoice reporting amount for nonconsolidated reporting. See ISO 4217 coding.,auditdatastandards.O2C.july2015.pdf,,A,
+13,Invoice_Line_Amount_Local,1,NUMERIC,,Transaction monetary amount in local currency.,auditdatastandards.O2C.july2015.pdf,,A,
+14,Invoice_Line_Local_Currency,1,TEXT,3,The currency for local reporting requirements. See ISO 4217 coding.,auditdatastandards.O2C.july2015.pdf,$.invoice.documentCurrencyCode,A,
+15,Grouping_Code,2,TEXT,100,"Grouping mechanism for related items in a batch or grouping of invoices, such as the invoice grouping found in certain ERP systems",auditdatastandards.O2C.july2015.pdf,$.invoice.projectReference,A,
+16,Tax1_Type,1,TEXT,25,"Code for Tax1 type (for example, Sales, VAT). This field should agree with the Regulator_Code field in the Tax_Table_YYYYMMDD",auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceLine.lineVatInformation.invoicedItemVatCategoryCode,A,
+17,Tax2_Type,1,TEXT,25,"Code for Tax2 type (for example, Sales, VAT). This field should agree with the Regulator_Code field in the Tax_Table_YYYYMMDD",auditdatastandards.O2C.july2015.pdf,,A,
+18,Tax3_Type,1,TEXT,25,"Code for Tax3 type (for example, Sales, VAT). This field should agree with the Regulator_Code field in the Tax_Table_YYYYMMDD",auditdatastandards.O2C.july2015.pdf,,A,
+19,Tax1_Type_Description,1,TEXT,100,"Description of Tax1 type (for example, authority tax is paid to and other information to identify tax).",auditdatastandards.O2C.july2015.pdf,,A,
+20,Tax2_Type_Description,1,TEXT,100,"Description of Tax2 type (for example, authority tax is paid to and other information to identify tax).",auditdatastandards.O2C.july2015.pdf,,A,
+21,Tax3_Type_Description,1,TEXT,100,"Description of Tax3 type (for example, authority tax is paid to and other information to identify tax).",auditdatastandards.O2C.july2015.pdf,,A,
+22,Tax1_Local,2,NUMERIC,,The amount of Tax1_Type included in the transaction. Recorded in local currency.,auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceLine.lineVatInformation.invoicedItemVatRate,A,
+23,Tax2_Local,2,NUMERIC,,The amount of Tax2_Type included in the transaction. Recorded in local currency.,auditdatastandards.O2C.july2015.pdf,,A,
+24,Tax3_Local,2,NUMERIC,,The amount of Tax3_Type included in the transaction. Recorded in local currency.,auditdatastandards.O2C.july2015.pdf,,A,
+25,GL_Line_Debit_Account_Number,1,TEXT,100,GL account number on which the debit side of the transaction has been posted.,auditdatastandards.O2C.july2015.pdf,,A,
+26,GL_Line_Credit_Account_Number,1,TEXT,100,GL account number on which the credit side of the transaction has been posted.,auditdatastandards.O2C.july2015.pdf,,A,
+27,GL_Tax1_Debit_Account_Number,1,TEXT,100,GL account number on which the debit side of the Tax1 transaction has been posted.,auditdatastandards.O2C.july2015.pdf,,A,
+28,GL_Tax1_Credit_Account_Number,1,TEXT,100,GL account number on which the credit side of the Tax1 transaction has been posted.,auditdatastandards.O2C.july2015.pdf,,A,
+29,GL_Tax2_Debit_Account_Number,1,TEXT,100,GL account number on which the debit side of the Tax2 transaction has been posted.,auditdatastandards.O2C.july2015.pdf,,A,
+30,GL_Tax2_Credit_Account_Number,1,TEXT,100,GL account number on which the credit side of the Tax2 transaction has been posted.,auditdatastandards.O2C.july2015.pdf,,A,
+31,GL_Tax3_Debit_Account_Number,1,TEXT,100,GL account number on which the debit side of the Tax3 transaction has been posted.,auditdatastandards.O2C.july2015.pdf,,A,
+32,GL_Tax3_Credit_Account_Number,1,TEXT,100,GL account number on which the credit side of the Tax3 transaction has been posted.,auditdatastandards.O2C.july2015.pdf,,A,
+32,Segment01,2,TEXT,25,"Reserved segment field that can be used for profit center, division, fund, program, branch, project, and so on.",auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceLine.invoiceLineBuyerAccountingReference,A,
+33,Segment02,2,TEXT,25,See above,auditdatastandards.O2C.july2015.pdf,,A,
+34,Segment03,2,TEXT,25,See above,auditdatastandards.O2C.july2015.pdf,,A,
+35,Segment04,2,TEXT,25,See above,auditdatastandards.O2C.july2015.pdf,,A,
+36,Segment05,2,TEXT,25,See above,auditdatastandards.O2C.july2015.pdf,,A,

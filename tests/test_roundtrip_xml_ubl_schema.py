@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # coding: utf-8
 """
 Validate regenerated round-trip XML files against the UBL 2.1 Invoice schema.
@@ -44,3 +44,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+

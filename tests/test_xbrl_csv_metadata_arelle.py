@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # coding: utf-8
 """
 Validate generated xBRL-CSV metadata files with Arelle.
@@ -60,3 +60,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+

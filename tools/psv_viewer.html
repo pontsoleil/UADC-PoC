@@ -1,0 +1,497 @@
+<!doctype html>
+<!--
+ADS PSV Viewer
+
+Purpose:
+    Display generated ADS PSV or CSV files as a scrollable browser table.
+
+Creation Date: 2026-07-11
+Last Modified: 2026-07-13
+
+Copyright 2026 Sambuichi Professional Engineers Office
+Designed by SAMBUICHI, Nobuyuki
+Produced by ChatGPT & Codex, edited by  SAMBUICHI, Nobuyuki
+MIT License
+
+(c) 2026 Sambuichi Professional Engineers Office
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+CC-BY-NC
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADS PSV Viewer</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7f8;
+      --panel: #ffffff;
+      --line: #cfd7df;
+      --line-strong: #9aa8b4;
+      --text: #18212b;
+      --muted: #5e6b77;
+      --accent: #146c94;
+      --accent-strong: #0f5575;
+      --warn: #8a5a00;
+      --empty: #f3f6f8;
+      --shadow: 0 1px 3px rgb(12 28 44 / 14%);
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    main {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: calc(100vh - 57px);
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(260px, 1.4fr) 130px minmax(180px, 0.8fr) auto;
+      gap: 10px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+      background: #eef2f5;
+      align-items: center;
+    }
+
+    .dropzone {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 8px 10px;
+      border: 1px dashed var(--line-strong);
+      background: var(--panel);
+    }
+
+    .dropzone.dragover {
+      border-color: var(--accent);
+      background: #e8f4f8;
+    }
+
+    input[type="file"],
+    input[type="search"],
+    select {
+      width: 100%;
+      min-height: 34px;
+      border: 1px solid var(--line-strong);
+      background: var(--panel);
+      color: var(--text);
+      padding: 6px 8px;
+      font: inherit;
+    }
+
+    button {
+      min-height: 34px;
+      border: 1px solid var(--accent-strong);
+      background: var(--accent);
+      color: white;
+      padding: 6px 12px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      min-height: 0;
+      background: var(--panel);
+      width: 100%;
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 100%;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 6px 8px;
+      white-space: nowrap;
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: top;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #dfe8ee;
+      border-bottom-color: var(--line-strong);
+      text-align: left;
+      font-weight: 650;
+    }
+
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      background: #edf2f5;
+      color: var(--muted);
+      text-align: right;
+      min-width: 52px;
+      max-width: 52px;
+    }
+
+    th:first-child {
+      z-index: 3;
+      background: #d6e1e8;
+    }
+
+    tr.filtered {
+      display: none;
+    }
+
+    td.empty {
+      background: var(--empty);
+      color: #87929d;
+    }
+
+    .message {
+      padding: 28px;
+      color: var(--muted);
+    }
+
+    .warning {
+      color: var(--warn);
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ADS PSV Viewer</h1>
+    <div class="meta" id="meta">
+      <span>No file loaded</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="toolbar" aria-label="Viewer controls">
+      <label class="dropzone" id="dropzone">
+        <span>Open PSV</span>
+        <input id="fileInput" type="file" accept=".psv,.txt,.csv">
+      </label>
+      <select id="delimiter" aria-label="Delimiter">
+        <option value="|">Pipe delimiter</option>
+        <option value=",">Comma delimiter</option>
+        <option value="\t">Tab delimiter</option>
+      </select>
+      <input id="filterInput" type="search" placeholder="Filter rows">
+      <button id="clearButton" type="button" disabled>Clear</button>
+    </section>
+
+    <div class="table-wrap" id="tableWrap">
+      <div class="message">Select or drop a PSV file to display it as a table.</div>
+    </div>
+  </main>
+
+  <script>
+    const fileInput = document.getElementById("fileInput");
+    const delimiterSelect = document.getElementById("delimiter");
+    const filterInput = document.getElementById("filterInput");
+    const clearButton = document.getElementById("clearButton");
+    const tableWrap = document.getElementById("tableWrap");
+    const dropzone = document.getElementById("dropzone");
+    const meta = document.getElementById("meta");
+
+    let currentFile = null;
+    let parsedRows = [];
+
+    function parseDelimited(text, delimiter) {
+      const rows = [];
+      let row = [];
+      let field = "";
+      let quoted = false;
+
+      for (let index = 0; index < text.length; index += 1) {
+        const char = text[index];
+        const next = text[index + 1];
+
+        if (char === "\"") {
+          if (quoted && next === "\"") {
+            field += "\"";
+            index += 1;
+          } else {
+            quoted = !quoted;
+          }
+          continue;
+        }
+
+        if (!quoted && char === delimiter) {
+          row.push(field);
+          field = "";
+          continue;
+        }
+
+        if (!quoted && (char === "\n" || char === "\r")) {
+          if (char === "\r" && next === "\n") {
+            index += 1;
+          }
+          row.push(field);
+          if (row.some((value) => value !== "")) {
+            rows.push(row);
+          }
+          row = [];
+          field = "";
+          continue;
+        }
+
+        field += char;
+      }
+
+      row.push(field);
+      if (row.some((value) => value !== "")) {
+        rows.push(row);
+      }
+      return rows;
+    }
+
+    function normalizedDelimiter() {
+      return delimiterSelect.value === "\\t" ? "\t" : delimiterSelect.value;
+    }
+
+    function renderMessage(message, isWarning = false) {
+      tableWrap.innerHTML = "";
+      const div = document.createElement("div");
+      div.className = isWarning ? "message warning" : "message";
+      div.textContent = message;
+      tableWrap.appendChild(div);
+    }
+
+    function renderTable(rows) {
+      if (!rows.length) {
+        renderMessage("The file is empty.", true);
+        return;
+      }
+
+      const headers = rows[0];
+      const bodyRows = rows.slice(1);
+      const visibleIndexes = headers
+        .map((_, index) => index)
+        .filter((index) => bodyRows.some((row) => (row[index] || "").trim() !== ""));
+      const displayIndexes = visibleIndexes.length ? visibleIndexes : headers.map((_, index) => index);
+      const table = document.createElement("table");
+      const thead = document.createElement("thead");
+      const headRow = document.createElement("tr");
+      const rowNumberHead = document.createElement("th");
+      rowNumberHead.textContent = "#";
+      headRow.appendChild(rowNumberHead);
+
+      displayIndexes.forEach((index) => {
+        const th = document.createElement("th");
+        const header = headers[index];
+        th.textContent = header || `Column ${index + 1}`;
+        th.title = th.textContent;
+        headRow.appendChild(th);
+      });
+
+      thead.appendChild(headRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+      bodyRows.forEach((row, rowIndex) => {
+        const tr = document.createElement("tr");
+        tr.dataset.search = row.join(" ").toLowerCase();
+        const number = document.createElement("td");
+        number.textContent = String(rowIndex + 1);
+        tr.appendChild(number);
+
+        displayIndexes.forEach((colIndex) => {
+          const td = document.createElement("td");
+          const value = row[colIndex] || "";
+          td.textContent = value;
+          td.title = value;
+          if (!value) {
+            td.className = "empty";
+          }
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+      tableWrap.innerHTML = "";
+      tableWrap.dataset.hiddenColumnCount = String(headers.length - displayIndexes.length);
+      tableWrap.appendChild(table);
+      updateMeta(currentFile ? currentFile.name : "Loaded PSV", rows, headers.length - displayIndexes.length);
+      applyFilter();
+    }
+
+    function updateMeta(fileName, rows, hiddenColumnCount = 0) {
+      const columnCount = rows.length ? rows[0].length : 0;
+      const rowCount = rows.length ? rows.length - 1 : 0;
+      meta.innerHTML = "";
+      const details = [fileName, `${rowCount} rows`, `${columnCount} columns`];
+      if (hiddenColumnCount) {
+        details.push(`${hiddenColumnCount} empty columns hidden`);
+      }
+      details.forEach((text) => {
+        const span = document.createElement("span");
+        span.textContent = text;
+        meta.appendChild(span);
+      });
+    }
+
+    function applyFilter() {
+      const query = filterInput.value.trim().toLowerCase();
+      const rows = tableWrap.querySelectorAll("tbody tr");
+      let visible = 0;
+      rows.forEach((row) => {
+        const matched = !query || row.dataset.search.includes(query);
+        row.classList.toggle("filtered", !matched);
+        if (matched) {
+          visible += 1;
+        }
+      });
+      if (parsedRows.length) {
+        const fileName = currentFile ? currentFile.name : "Loaded PSV";
+        const suffix = query ? `, ${visible} shown` : "";
+        const hiddenColumnCount = Number(tableWrap.dataset.hiddenColumnCount || "0");
+        updateMeta(fileName, parsedRows, hiddenColumnCount);
+        const span = document.createElement("span");
+        span.textContent = suffix ? suffix.slice(2) : "all rows shown";
+        meta.appendChild(span);
+      }
+    }
+
+    function loadFile(file) {
+      currentFile = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const delimiter = normalizedDelimiter();
+        const text = String(reader.result || "").replace(/^\uFEFF/, "");
+        parsedRows = parseDelimited(text, delimiter);
+        renderTable(parsedRows);
+        clearButton.disabled = false;
+      };
+      reader.onerror = () => {
+        renderMessage("The file could not be read.", true);
+      };
+      reader.readAsText(file, "utf-8");
+    }
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files && fileInput.files[0];
+      if (file) {
+        loadFile(file);
+      }
+    });
+
+    delimiterSelect.addEventListener("change", () => {
+      if (currentFile) {
+        loadFile(currentFile);
+      }
+    });
+
+    filterInput.addEventListener("input", applyFilter);
+
+    clearButton.addEventListener("click", () => {
+      currentFile = null;
+      parsedRows = [];
+      fileInput.value = "";
+      filterInput.value = "";
+      clearButton.disabled = true;
+      meta.innerHTML = "<span>No file loaded</span>";
+      renderMessage("Select or drop a PSV file to display it as a table.");
+    });
+
+    ["dragenter", "dragover"].forEach((eventName) => {
+      dropzone.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        dropzone.classList.add("dragover");
+      });
+    });
+
+    ["dragleave", "drop"].forEach((eventName) => {
+      dropzone.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        dropzone.classList.remove("dragover");
+      });
+    });
+
+    dropzone.addEventListener("drop", (event) => {
+      const file = event.dataTransfer.files && event.dataTransfer.files[0];
+      if (file) {
+        loadFile(file);
+      }
+    });
+  </script>
+</body>
+</html>

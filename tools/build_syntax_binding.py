@@ -22,10 +22,33 @@ Results:
     Writes the syntax binding CSV and prints the number of generated rows.
     Returns exit code 0 on success and 1 on validation or conversion failure.
 
+Creation Date: 2026-07-05
+Last Modified: 2026-07-13
+
 Copyright 2026 Sambuichi Professional Engineers Office
 Designed by SAMBUICHI, Nobuyuki
 Produced by ChatGPT & Codex, edited by  SAMBUICHI, Nobuyuki
 MIT License
+
+(c) 2026 Sambuichi Professional Engineers Office
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 CC-BY-NC
 """
 
@@ -53,9 +76,7 @@ LHM_HEADER = [
     "module",
     "class_term",
     "id",
-    "path",
     "semantic_path",
-    "abbreviation_path",
     "label_local",
     "definition_local",
     "element",
@@ -285,9 +306,7 @@ def build_lhm_rows(source_rows: List[Dict[str, str]]) -> List[Dict[str, str]]:
                 "module": "syntax",
                 "class_term": segment_label(parts[-1]),
                 "id": record_id,
-                "path": "/" + "/".join(seen_classes["$." + ".".join(parts[:i])] for i in range(1, len(parts) + 1)),
                 "semantic_path": semantic_path,
-                "abbreviation_path": ".".join(segment_element(part) for part in parts),
                 "label_local": "",
                 "definition_local": "",
                 "element": element,
@@ -305,8 +324,6 @@ def build_lhm_rows(source_rows: List[Dict[str, str]]) -> List[Dict[str, str]]:
 
         element = unique_name(semantic_path_to_column(source_row["semantic_path"]), used_elements)
         parent_parts = parts[:-1]
-        parent_path = "$." + ".".join(parent_parts)
-        parent_id = seen_classes.get(parent_path, "")
         record_id = f"A{sequence:04d}"
         rows.append(
             {
@@ -323,9 +340,7 @@ def build_lhm_rows(source_rows: List[Dict[str, str]]) -> List[Dict[str, str]]:
                 "module": "syntax",
                 "class_term": segment_label(parent_parts[-1]) if parent_parts else "",
                 "id": record_id,
-                "path": f"/{parent_id}/{record_id}" if parent_id else f"/{record_id}",
                 "semantic_path": source_row["semantic_path"],
-                "abbreviation_path": ".".join(segment_element(part) for part in parts),
                 "label_local": "",
                 "definition_local": "",
                 "element": element,

@@ -1,0 +1,51 @@
+﻿field_no,field_name,level,flat_file_data_type,length,description,source_document,semantic_path,type,multiplicity
+,Invoice,,,,EN 16931 invoice semantic root.,UADC Structured CSV model,$.invoice,C,1..1
+,DocumentLevelAllowances,,,,information about allowances applicable to the Invoice as a whole.,UADC Structured CSV model,$.invoice.documentLevelAllowances,C,0..*
+,DocumentLevelCharges,,,,"information about charges and taxes other than VAT, applicable to the Invoice as a whole. The amount of a charge, without",UADC Structured CSV model,$.invoice.documentLevelCharges,C,0..*
+,VatBreakdown,,,,"information about VAT breakdown by different categories, rates and exemption reasons Sum of all taxable amounts subject",UADC Structured CSV model,$.invoice.vatBreakdown,C,1..*
+,InvoiceLine,,,,information on individual Invoice lines.,UADC Structured CSV model,$.invoice.invoiceLine,C,1..*
+,InvoiceLineAllowances,,,,information about allowances applicable to the individual Invoice line.,UADC Structured CSV model,$.invoice.invoiceLine.invoiceLineAllowances,C,0..*
+,InvoiceLineCharges,,,,information about charges and taxes other than VAT applicable to the individual Invoice line.,UADC Structured CSV model,$.invoice.invoiceLine.invoiceLineCharges,C,0..*
+,ItemAttributes,,,,A group of business terms providing information about properties of the goods and services invoiced.,UADC Structured CSV model,$.invoice.invoiceLine.itemInformation.itemAttributes,C,0..*
+1,Invoice_ID,1,TEXT,100,"Unique identifier for each invoice. This ID may need to be created by concatenating fields (for example, document number, document type, and year) to uniquely identify each transaction. The same ID must be used for all tables with invoice data (Invoices_Generated_YYYYMMDD_YYYYM MDD, Open_Accounts_Receivable_YYYYMMDD, AR_Cash_Application_YYYYMMDD_YYYY MMDD, and AR_Adjustments_YYYYMMDD_YYYYMMD D).",auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceNumber,A,
+2,Invoice_Number,1,TEXT,100,Identification number for an internally generated invoice.,auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceNumber,A,
+3,Invoice_Date,1,DATE,,"The date of the invoice, regardless of the date the invoice is entered. This is the date from which the due date is calculated based on the invoice terms.",auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceIssueDate,A,
+4,Invoice_Fiscal_Year,1,TEXT,4,"Fiscal year in which the Invoice_Date occurs—YYYY for delimited, CCYY-MM-DD fiscal year end (ISO 8601) for extensible business reporting language global ledger taxonomy framework (XBRL GL).",auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceIssueDate,A,
+5,Invoice_Period,1,TEXT,10,"Fiscal period in which the Invoice_Date occurs. Examples include W1–W53 for weekly periods, M1–M12 for monthly periods, and Q1–Q4 for quarterly periods.",auditdatastandards.O2C.july2015.pdf,$.invoice.invoiceIssueDate,A,
+6,Invoice_Due_Date,1,DATE,,The date payment is due from the customer. Aging of a receivable is usually calculated based on this date.,auditdatastandards.O2C.july2015.pdf,$.invoice.paymentDueDate,A,
+7,Sales_Order_ID,1,TEXT,100,"Sales order ID for invoiced items. Must match Sales_Order_ID in the Sales_Orders_YYYYMMDD_YYYYMMDD file. If no sales order, leave blank.",auditdatastandards.O2C.july2015.pdf,$.invoice.salesOrderReference,A,
+8,Business_Unit_Code,1,TEXT,50,"Used to identify the business unit, region, branch, and so on at the level that financial statements are being audited. Must match a Business_Unit_Code in the Business_Unit_Listing file.",auditdatastandards.O2C.july2015.pdf,$.invoice.buyerAccountingReference,A,
+9,Customer_Account_ID,1,TEXT,100,Identifier of the customer from whom payment is expected or to whom unused credits have been applied. Must match a Customer_Account_ID in the Customer_Master_Listing_YYYYMMDD file.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerIdentifier,A,
+10,Terms_Discount_Percentage,2,NUMERIC,,"The discount percentage the customer may take if an invoice is paid before a certain number of days. In the flat file, terms are represented as digits to one decimal place (for example, 10% would be represented as 10.0). In extensible business reporting language global ledger taxonomy framework (XBRL GL), the three fields Terms_Discount_Percentage, Terms_Discount_Days and Terms_Due_Days would be entered in the form ""xx.x% dd Net dd,"" such as 2% 10 Net 30 for 2% discount if paid within 10 days, with the net due in 30 days.",auditdatastandards.O2C.july2015.pdf,$.invoice.paymentTerms,A,
+11,Terms_Discount_Days,2,NUMERIC,,"The number of days from the invoice date the customer has to take advantage of discounted terms. Terms are represented as digits with no decimal places (for example, nnn).",auditdatastandards.O2C.july2015.pdf,,A,
+12,Terms_Due_Days,2,NUMERIC,,The number of days allowed to meet the obligation before an invoice becomes overdue.,auditdatastandards.O2C.july2015.pdf,,A,
+13,Entered_By,1,TEXT,100,User_ID (from User_Listing file) for person who created the record.,auditdatastandards.O2C.july2015.pdf,,A,
+14,Entered_Date,2,DATE,,"Date the transaction was entered into the system. This is sometimes referred to as the creation date. This should be a system- generated date (rather than user-entered date), when possible. This date does not necessarily correspond with the date of the transaction itself.",auditdatastandards.O2C.july2015.pdf,,A,
+15,Entered_Time,2,TIME,,"The time this transaction was entered into the system. ISO 8601 representing time in 24-hour time (hhmm) (for example, 1:00 PM = 1300).",auditdatastandards.O2C.july2015.pdf,,A,
+16,Approved_By,2,TEXT,100,User_ID (from User_Listing file) for person who approved customer master additions or changes.,auditdatastandards.O2C.july2015.pdf,,A,
+17,Approved_Date,2,DATE,,Date the entry was approved.,auditdatastandards.O2C.july2015.pdf,,A,
+18,Approved_Time,2,TIME,,"The time the entry was approved. ISO 8601 representing time in 24-hour time (hhmm) (for example, 1:00 PM = 1300).",auditdatastandards.O2C.july2015.pdf,,A,
+19,Last_Modified_By,2,TEXT,100,User_ID (from User_Listing file) for the last person modifying this entry.,auditdatastandards.O2C.july2015.pdf,,A,
+20,Last_Modified_Date,2,DATE,,The date the entry was last modified.,auditdatastandards.O2C.july2015.pdf,,A,
+21,Last_Modified_Time,2,TIME,,"The time the entry was last modified. ISO 8601 representing time in 24-hour time (hhmm) (for example, 1:00 PM = 1300).",auditdatastandards.O2C.july2015.pdf,,A,
+22,Grouping_Code,2,TEXT,100,"Grouping mechanism for related items in a batch or grouping of invoices, such as the invoice grouping found in certain ERP systems",auditdatastandards.O2C.july2015.pdf,$.invoice.projectReference,A,
+23,Invoice_Amount,1,NUMERIC,,Transaction monetary amount recorded in the functional or group currency. No multicurrency translation should need to be performed on this amount because all transactions should be recorded in a single currency.,auditdatastandards.O2C.july2015.pdf,$.invoice.documentTotals.invoiceTotalAmountWithVat,A,
+24,Invoice_Amount_Currency,1,TEXT,3,The functional or group currency related to the invoice amount. See ISO 4217 coding.,auditdatastandards.O2C.july2015.pdf,$.invoice.documentCurrencyCode,A,
+25,Invoice_Amount_Reporting,1,NUMERIC,,Transaction monetary amount recorded in the reporting currency.,auditdatastandards.O2C.july2015.pdf,,A,
+26,Invoice_Reporting_Currency,1,TEXT,3,The reporting currency related to the invoice reporting amount for nonconsolidated reporting. See ISO 4217 coding.,auditdatastandards.O2C.july2015.pdf,,A,
+27,Invoice_Amount_Local,1,NUMERIC,,Transaction monetary amount in local currency. Usually the amount seen on the original invoice document.,auditdatastandards.O2C.july2015.pdf,,A,
+28,Invoice_Local_Currency,1,TEXT,3,The currency for local reporting requirements. See ISO 4217 coding.,auditdatastandards.O2C.july2015.pdf,$.invoice.documentCurrencyCode,A,
+29,Tax1_Type,1,TEXT,25,"Code for Tax1 type (for example, Sales, VAT). This field should agree with the Regulator_Code field in the Tax_Table_YYYYMMDD",auditdatastandards.O2C.july2015.pdf,$.invoice.vatBreakdown.vatCategoryCode,A,
+30,Tax2_Type,1,TEXT,25,"Code for Tax2 type (for example, Sales, VAT). This field should agree with the Regulator_Code field in the Tax_Table_YYYYMMDD",auditdatastandards.O2C.july2015.pdf,,A,
+31,Tax3_Type,1,TEXT,25,"Code for Tax3 type (for example, Sales, VAT). This field should agree with the Regulator_Code field in the Tax_Table_YYYYMMDD",auditdatastandards.O2C.july2015.pdf,,A,
+32,Tax1_Type_Description,1,TEXT,100,"Description of Tax1 type (for example, authority tax is paid to and other information to identify tax).",auditdatastandards.O2C.july2015.pdf,$.invoice.vatBreakdown.vatExemptionReasonText,A,
+33,Tax2_Type_Description,1,TEXT,100,"Description of Tax2 type (for example, authority tax is paid to and other information to identify tax).",auditdatastandards.O2C.july2015.pdf,,A,
+34,Tax3_Type_Description,1,TEXT,100,"Description of Tax3 type (for example, authority tax is paid to and other information to identify tax).",auditdatastandards.O2C.july2015.pdf,,A,
+35,Tax1_Local,2,NUMERIC,,The amount of Tax1_Type included in the transaction. Recorded in local currency.,auditdatastandards.O2C.july2015.pdf,$.invoice.vatBreakdown.vatCategoryTaxAmount,A,
+36,Tax2_Local,2,NUMERIC,,The amount of Tax2_Type included in the transaction. Recorded in local currency.,auditdatastandards.O2C.july2015.pdf,,A,
+37,Tax3_Local,2,NUMERIC,,The amount of Tax3_Type included in the transaction. Recorded in local currency.,auditdatastandards.O2C.july2015.pdf,,A,
+38,Segment01,2,TEXT,25,"Reserved segment field that can be used for profit center, division, fund, program, branch, project, and so on.",auditdatastandards.O2C.july2015.pdf,$.invoice.buyerAccountingReference,A,
+39,Segment02,2,TEXT,25,See above,auditdatastandards.O2C.july2015.pdf,,A,
+40,Segment03,2,TEXT,25,See above,auditdatastandards.O2C.july2015.pdf,,A,
+41,Segment04,2,TEXT,25,See above,auditdatastandards.O2C.july2015.pdf,,A,
+42,Segment05,2,TEXT,25,See above,auditdatastandards.O2C.july2015.pdf,,A,

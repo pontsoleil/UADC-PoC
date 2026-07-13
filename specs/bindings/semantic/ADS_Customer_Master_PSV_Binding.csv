@@ -1,0 +1,44 @@
+﻿field_no,field_name,level,flat_file_data_type,length,description,source_document,semantic_path,type,multiplicity
+,Invoice,,,,EN 16931 invoice semantic root.,UADC Structured CSV model,$.invoice,C,1..1
+,DocumentLevelAllowances,,,,information about allowances applicable to the Invoice as a whole.,UADC Structured CSV model,$.invoice.documentLevelAllowances,C,0..*
+,DocumentLevelCharges,,,,"information about charges and taxes other than VAT, applicable to the Invoice as a whole. The amount of a charge, without",UADC Structured CSV model,$.invoice.documentLevelCharges,C,0..*
+,VatBreakdown,,,,"information about VAT breakdown by different categories, rates and exemption reasons Sum of all taxable amounts subject",UADC Structured CSV model,$.invoice.vatBreakdown,C,1..*
+,InvoiceLine,,,,information on individual Invoice lines.,UADC Structured CSV model,$.invoice.invoiceLine,C,1..*
+,InvoiceLineAllowances,,,,information about allowances applicable to the individual Invoice line.,UADC Structured CSV model,$.invoice.invoiceLine.invoiceLineAllowances,C,0..*
+,InvoiceLineCharges,,,,information about charges and taxes other than VAT applicable to the individual Invoice line.,UADC Structured CSV model,$.invoice.invoiceLine.invoiceLineCharges,C,0..*
+,ItemAttributes,,,,A group of business terms providing information about properties of the goods and services invoiced.,UADC Structured CSV model,$.invoice.invoiceLine.itemInformation.itemAttributes,C,0..*
+1,Customer_Account_ID,1,TEXT,100,Identifier of the customer from whom payment is expected or to whom unused credits have been applied.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerIdentifier,A,
+2,Customer_Account_Name,1,TEXT,100,The name of the customer.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerName,A,
+3,Customer_Group,2,TEXT,100,"If the organization segments customers into groups, the group to which this customer is assigned.",auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerTradingName,A,
+4,Customer_Physical_Street_Address1,1,TEXT,100,The physical street address line 1 of the customer.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerAddressLine1,A,
+5,Customer_Physical_Street_Address2,1,TEXT,100,The physical street address line 2 of the customer.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerAddressLine2,A,
+6,Customer_Physical_City,1,TEXT,100,The physical city where the customer is located.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerCity,A,
+7,Customer_Physical_State_Province,1,TEXT,6,The physical state or province where the customer is located. Recommend ISO 3166-2.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerCountrySubdivision,A,
+8,Customer_Physical_ZipPostalCode,1,TEXT,20,The zip code of the city where the customer is physically located.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerPostCode,A,
+9,Customer_Physical_Country,1,TEXT,3,The country code where the customer is physically located. Recommend ISO 3166- 1 Alpha 2 or ISO 3166-1 Alpha 3 format (XX or XXX).,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerCountryCode,A,
+10,Customer_TIN,1,TEXT,100,The customer’s tax identification number.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerVatIdentifier,A,
+11,Customer_Billing_Address1,1,TEXT,100,The billing address line 1 of the customer.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerAddressLine1,A,
+12,Customer_Billing_Address2,1,TEXT,100,The billing address line 2 of the customer.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerAddressLine2,A,
+13,Customer_Billing_City,1,TEXT,100,The billing city of the customer.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerCity,A,
+14,Customer_Billing_State_Province,1,TEXT,6,The billing state or province of the customer. Recommend ISO 3166-2.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerCountrySubdivision,A,
+15,Customer_Billing_ZipPostalCode,1,TEXT,20,The billing zip code of the customer’s city.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerPostCode,A,
+16,Customer_Billing_Country,1,TEXT,3,The billing country code of the customer. Recommend ISO 3166-1 Alpha 2 or ISO 3166-1 Alpha 3 format (XX or XXX).,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerPostalAddress.buyerCountryCode,A,
+17,Active_Date,2,DATE,,Date the customer declared active.,auditdatastandards.O2C.july2015.pdf,,A,
+18,Inactive_Date,2,DATE,,Date the customer was declared inactive.,auditdatastandards.O2C.july2015.pdf,,A,
+19,Transaction_Credit_Limit,2,NUMERIC,,The per invoice credit limit established for this customer.,auditdatastandards.O2C.july2015.pdf,,A,
+20,Overall_Credit_Limit,2,NUMERIC,,The credit limit for this customer’s total outstanding balance.,auditdatastandards.O2C.july2015.pdf,,A,
+21,Terms_Discount_Percentage,2,NUMERIC,,"The discount percentage the customer may take if an invoice is paid before a certain number of days. In the flat file, terms are represented as digits to one decimal place (for example, 10% would be represented as 10.0). In extensible business reporting language global ledger taxonomy framework (XBRL GL), the three fields Terms_Discount_Percentage, Terms_Discount_Days and Terms_Due_Days would be entered in the form ""xx.x% dd Net dd,"" such as 2% 10 Net 30 for 2% discount if paid within 10 days, with the net due in 30 days.",auditdatastandards.O2C.july2015.pdf,,A,
+22,Terms_Discount_Days,2,NUMERIC,,"The number of days from the invoice date the customer has to take advantage of discounted terms. Terms are represented as digits with no decimal places (for example, nnn).",auditdatastandards.O2C.july2015.pdf,,A,
+23,Terms_Due_Days,2,NUMERIC,,The number of days allowed to meet the obligation before an invoice becomes overdue.,auditdatastandards.O2C.july2015.pdf,,A,
+24,Entered_By,1,TEXT,100,User_ID (from User_Listing file) for person who created the record.,auditdatastandards.O2C.july2015.pdf,,A,
+25,Entered_Date,2,DATE,,"Date the order was entered into the system. This is sometimes referred to as the creation date. This should be a system- generated date (rather than user-entered date), when possible.",auditdatastandards.O2C.july2015.pdf,,A,
+26,Entered_Time,2,TIME,,"The time this transaction was entered into the system. ISO 8601 representing time in 24-hour time (hhmm) (for example, 1:00 PM = 1300).",auditdatastandards.O2C.july2015.pdf,,A,
+27,Approved_By,2,TEXT,100,User_ID (from User_Listing file) for person who approved customer master additions or changes.,auditdatastandards.O2C.july2015.pdf,,A,
+28,Approved_Date,2,DATE,,Date the customer master additions or changes were approved.,auditdatastandards.O2C.july2015.pdf,,A,
+29,Approved_Time,2,TIME,,"The time the entry was approved. ISO 8601 representing time in 24-hour time (hhmm) (for example, 1:00 PM = 1300).",auditdatastandards.O2C.july2015.pdf,,A,
+30,Last_Modified_By,2,TEXT,100,User_ID (from User_Listing file) for the last person modifying this entry.,auditdatastandards.O2C.july2015.pdf,,A,
+31,Last_Modified_Date,2,DATE,,The date the customer record was last modified.,auditdatastandards.O2C.july2015.pdf,,A,
+32,Last_Modified_Time,2,TIME,,"The time the entry was last modified. ISO 8601 representing time in 24-hour time (hhmm) (for example, 1:00 PM = 1300).",auditdatastandards.O2C.july2015.pdf,,A,
+33,PrimaryContact_Name,2,TEXT,100,Name of the primary contact at the customer.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerContact.buyerContactPoint,A,
+34,PrimaryContact_Phone,2,NUMERIC,,Phone number of the primary contact at the customer.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerContact.buyerContactTelephoneNumber,A,
+35,PrimaryContact_Email,2,TEXT,100,Email address of the primary contact at the customer.,auditdatastandards.O2C.july2015.pdf,$.invoice.buyer.buyerContact.buyerContactEmailAddress,A,

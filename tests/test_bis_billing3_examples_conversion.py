@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 # coding: utf-8
 """
 Regression test for OpenPeppol BIS Billing 3 invoice examples.
@@ -7,16 +7,14 @@ Regression test for OpenPeppol BIS Billing 3 invoice examples.
 from __future__ import annotations
 
 import csv
-import subprocess
-import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+from phase1_helpers import convert_phase1
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON = Path(sys.executable)
 SAMPLES = ROOT / "samples" / "input" / "bis-billing3-examples"
-OUT_DIR = ROOT / "out" / "hierarchical" / "bis-billing3-examples"
+OUT_DIR = ROOT / "out" / "phase1" / "bis-billing3-examples"
 
 
 def read_rows(csv_file: Path) -> list[dict[str, str]]:
@@ -42,26 +40,10 @@ def main() -> int:
     samples = invoice_samples()
     assert len(samples) == 9, f"Expected 9 Invoice XML samples, found {len(samples)}"
 
-    binding = ROOT / "specs" / "bindings" / "syntax" / "EN16931_UBL_Invoice_Syntax_Binding.csv"
-    lhm = ROOT / "specs" / "lhm" / "EN16931_CIUS_Invoice_LHM.csv"
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     for xml_file in samples:
-        out_csv = OUT_DIR / f"{xml_file.stem}.csv"
-        subprocess.run(
-            [
-                str(PYTHON),
-                str(ROOT / "src" / "syntax_binding_hierarchical.py"),
-                str(xml_file),
-                "-b",
-                str(binding),
-                "--lhm-csv",
-                str(lhm),
-                "-o",
-                str(out_csv),
-            ],
-            check=True,
-        )
+        out_csv = convert_phase1(xml_file, OUT_DIR)
         rows = read_rows(out_csv)
         assert rows, f"No rows written for {xml_file.name}"
         assert values(rows, "InvoiceNumber"), f"Missing InvoiceNumber for {xml_file.name}"
@@ -80,3 +62,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+
+
