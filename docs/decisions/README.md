@@ -4,6 +4,7 @@ This directory records project decisions that should survive beyond individual c
 
 ## Contents
 
+- **0000-hierarchical_csv_binding_spec.md** - Working notes for the hierarchical CSV binding model.
 - **0001-workspace-scope.md** - Defines the repository boundary and treats external XBRL-GL workspaces as references rather than runtime dependencies.
 - **0002-en16931-first-openpeppol-overlay.md** - Establishes EN 16931 as the first conversion baseline and OpenPeppol as a later overlay.
 - **0003-lhm-level-effective-hierarchy.md** - Explains **lhm_level** as the effective hierarchy used by structured CSV and taxonomy generation.
@@ -14,6 +15,5 @@ This directory records project decisions that should survive beyond individual c
 - **0008-xml-parent-context-recursion.md** - Records the Phase 1 forward conversion model that walks XML parent contexts recursively from binding **C** rows.
 - **0009-phase-output-naming-and-target-layout.md** - Records Phase 1 and Phase 2 output directory and filename conventions.
 - **0010-documentation-consolidation.md** - Records that detailed script processing documentation is consolidated under **docs/README_SCRIPT_PROCESSING.md**.
-- **0000-hierarchical_csv_binding_spec.md** - Working notes for the hierarchical CSV binding model.
 
 Add a new numbered decision record when a design choice changes the data model, taxonomy shape, validation approach, repository boundary, or future phase plan.
