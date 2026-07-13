@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) XBRL International.  See http://www.xbrl.org/legal -->
+<schema targetNamespace="http://www.xbrl.org/int/gl/en16931/2026-07-05" attributeFormDefault="unqualified" elementFormDefault="qualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:link="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+  xmlns:gen="http://www.xbrl.org/int/gl/gen/2026-07-05"
+  xmlns:en16931="http://www.xbrl.org/int/gl/en16931/2026-07-05"
+>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+  <import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
+  <import namespace="http://www.xbrl.org/int/gl/gen/2026-07-05" schemaLocation="../gen/gl-gen-2026-07-05.xsd"/>
+  <!-- item element -->
+  <element name="InvoiceNumber" id="en16931_InvoiceNumber" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceIssueDate" id="en16931_InvoiceIssueDate" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTypeCode" id="en16931_InvoiceTypeCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentCurrencyCode" id="en16931_DocumentCurrencyCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxAccountingCurrencyCode" id="en16931_TaxAccountingCurrencyCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ValueAddedTaxPointDate" id="en16931_ValueAddedTaxPointDate" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ValueAddedTaxPointDateCode" id="en16931_ValueAddedTaxPointDateCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentDueDate" id="en16931_PaymentDueDate" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerReference" id="en16931_BuyerReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ProjectReference" id="en16931_ProjectReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ContractReference" id="en16931_ContractReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PurchaseOrderReference" id="en16931_PurchaseOrderReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SalesOrderReference" id="en16931_SalesOrderReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ReceivingAdviceReference" id="en16931_ReceivingAdviceReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DespatchAdviceReference" id="en16931_DespatchAdviceReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TenderOrLotReference" id="en16931_TenderOrLotReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedObjectIdentifier" id="en16931_InvoicedObjectIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerAccountingReference" id="en16931_BuyerAccountingReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentTerms" id="en16931_PaymentTerms" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BusinessProcessType" id="en16931_BusinessProcessType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SpecificationIdentifier" id="en16931_SpecificationIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerName" id="en16931_SellerName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerTradingName" id="en16931_SellerTradingName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerIdentifier" id="en16931_SellerIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerLegalRegistrationIdentifier" id="en16931_SellerLegalRegistrationIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerVatIdentifier" id="en16931_SellerVatIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerTaxRegistrationIdentifier" id="en16931_SellerTaxRegistrationIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerAdditionalLegalInformation" id="en16931_SellerAdditionalLegalInformation" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerElectronicAddress" id="en16931_SellerElectronicAddress" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerAddressLine1" id="en16931_SellerAddressLine1" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerAddressLine2" id="en16931_SellerAddressLine2" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerAddressLine3" id="en16931_SellerAddressLine3" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerCity" id="en16931_SellerCity" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerPostCode" id="en16931_SellerPostCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerCountrySubdivision" id="en16931_SellerCountrySubdivision" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerCountryCode" id="en16931_SellerCountryCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerContactPoint" id="en16931_SellerContactPoint" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerContactTelephoneNumber" id="en16931_SellerContactTelephoneNumber" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerContactEmailAddress" id="en16931_SellerContactEmailAddress" type="gen:emailAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerName" id="en16931_BuyerName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerTradingName" id="en16931_BuyerTradingName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerIdentifier" id="en16931_BuyerIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerLegalRegistrationIdentifier" id="en16931_BuyerLegalRegistrationIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerVatIdentifier" id="en16931_BuyerVatIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerElectronicAddress" id="en16931_BuyerElectronicAddress" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerAddressLine1" id="en16931_BuyerAddressLine1" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerAddressLine2" id="en16931_BuyerAddressLine2" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerAddressLine3" id="en16931_BuyerAddressLine3" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerCity" id="en16931_BuyerCity" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerPostCode" id="en16931_BuyerPostCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerCountrySubdivision" id="en16931_BuyerCountrySubdivision" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerCountryCode" id="en16931_BuyerCountryCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerContactPoint" id="en16931_BuyerContactPoint" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerContactTelephoneNumber" id="en16931_BuyerContactTelephoneNumber" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerContactEmailAddress" id="en16931_BuyerContactEmailAddress" type="gen:emailAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PayeeName" id="en16931_PayeeName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PayeeIdentifier" id="en16931_PayeeIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PayeeLegalRegistrationIdentifier" id="en16931_PayeeLegalRegistrationIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerTaxRepresentativeName" id="en16931_SellerTaxRepresentativeName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerTaxRepresentativeVatIdentifier" id="en16931_SellerTaxRepresentativeVatIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeAddressLine1" id="en16931_TaxRepresentativeAddressLine1" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeAddressLine2" id="en16931_TaxRepresentativeAddressLine2" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeAddressLine3" id="en16931_TaxRepresentativeAddressLine3" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeCity" id="en16931_TaxRepresentativeCity" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativePostCode" id="en16931_TaxRepresentativePostCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeCountrySubdivision" id="en16931_TaxRepresentativeCountrySubdivision" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeCountryCode" id="en16931_TaxRepresentativeCountryCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToPartyName" id="en16931_DeliverToPartyName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToLocationIdentifier" id="en16931_DeliverToLocationIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ActualDeliveryDate" id="en16931_ActualDeliveryDate" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicingPeriodStartDate" id="en16931_InvoicingPeriodStartDate" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicingPeriodEndDate" id="en16931_InvoicingPeriodEndDate" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToAddressLine1" id="en16931_DeliverToAddressLine1" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToAddressLine2" id="en16931_DeliverToAddressLine2" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToAddressLine3" id="en16931_DeliverToAddressLine3" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToCity" id="en16931_DeliverToCity" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToPostCode" id="en16931_DeliverToPostCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToCountrySubdivision" id="en16931_DeliverToCountrySubdivision" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToCountryCode" id="en16931_DeliverToCountryCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SumOfInvoiceLineNetAmount" id="en16931_SumOfInvoiceLineNetAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SumOfAllowancesOnDocumentLevel" id="en16931_SumOfAllowancesOnDocumentLevel" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SumOfChargesOnDocumentLevel" id="en16931_SumOfChargesOnDocumentLevel" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTotalAmountWithoutVat" id="en16931_InvoiceTotalAmountWithoutVat" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTotalVatAmount" id="en16931_InvoiceTotalVatAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTotalVatAmountInAccountingCurrency" id="en16931_InvoiceTotalVatAmountInAccountingCurrency" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTotalAmountWithVat" id="en16931_InvoiceTotalAmountWithVat" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaidAmount" id="en16931_PaidAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="RoundingAmount" id="en16931_RoundingAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="AmountDueForPayment" id="en16931_AmountDueForPayment" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceNoteSubjectCode" id="en16931_InvoiceNoteSubjectCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceNoteInvoiceNote" id="en16931_InvoiceNoteInvoiceNote" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PrecedingInvoiceReferencePrecedingInvoiceReference" id="en16931_PrecedingInvoiceReferencePrecedingInvoiceReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PrecedingInvoiceIssueDate" id="en16931_PrecedingInvoiceIssueDate" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentMeansTypeCode" id="en16931_PaymentMeansTypeCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentMeansText" id="en16931_PaymentMeansText" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentRemittanceInformation" id="en16931_PaymentRemittanceInformation" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentCardPrimaryAccountNumber" id="en16931_PaymentCardPrimaryAccountNumber" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentCardHolderName" id="en16931_PaymentCardHolderName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="MandateReferenceIdentifier" id="en16931_MandateReferenceIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BankAssignedCreditorIdentifier" id="en16931_BankAssignedCreditorIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DebitedAccountIdentifier" id="en16931_DebitedAccountIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentAccountIdentifier" id="en16931_PaymentAccountIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentAccountName" id="en16931_PaymentAccountName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentServiceProviderIdentifier" id="en16931_PaymentServiceProviderIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceAmount" id="en16931_DocumentLevelAllowanceAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceBaseAmount" id="en16931_DocumentLevelAllowanceBaseAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowancePercentage" id="en16931_DocumentLevelAllowancePercentage" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceVatCategoryCode" id="en16931_DocumentLevelAllowanceVatCategoryCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceVatRate" id="en16931_DocumentLevelAllowanceVatRate" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceReason" id="en16931_DocumentLevelAllowanceReason" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceReasonCode" id="en16931_DocumentLevelAllowanceReasonCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeAmount" id="en16931_DocumentLevelChargeAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeBaseAmount" id="en16931_DocumentLevelChargeBaseAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargePercentage" id="en16931_DocumentLevelChargePercentage" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeVatCategoryCode" id="en16931_DocumentLevelChargeVatCategoryCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeVatRate" id="en16931_DocumentLevelChargeVatRate" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeReason" id="en16931_DocumentLevelChargeReason" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeReasonCode" id="en16931_DocumentLevelChargeReasonCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatCategoryTaxableAmount" id="en16931_VatCategoryTaxableAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatCategoryTaxAmount" id="en16931_VatCategoryTaxAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatCategoryCode" id="en16931_VatCategoryCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatCategoryRate" id="en16931_VatCategoryRate" type="xbrli:decimalItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatExemptionReasonText" id="en16931_VatExemptionReasonText" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatExemptionReasonCode" id="en16931_VatExemptionReasonCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SupportingDocumentReference" id="en16931_SupportingDocumentReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SupportingDocumentDescription" id="en16931_SupportingDocumentDescription" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ExternalDocumentLocation" id="en16931_ExternalDocumentLocation" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="AttachedDocument" id="en16931_AttachedDocument" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineIdentifier" id="en16931_InvoiceLineIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineNote" id="en16931_InvoiceLineNote" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineObjectIdentifier" id="en16931_InvoiceLineObjectIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedQuantity" id="en16931_InvoicedQuantity" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedQuantityUnitCode" id="en16931_InvoicedQuantityUnitCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineNetAmount" id="en16931_InvoiceLineNetAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ReferencedPurchaseOrderLineReference" id="en16931_ReferencedPurchaseOrderLineReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineBuyerAccountingReference" id="en16931_InvoiceLineBuyerAccountingReference" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLinePeriodStartDate" id="en16931_InvoiceLinePeriodStartDate" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLinePeriodEndDate" id="en16931_InvoiceLinePeriodEndDate" type="xbrli:dateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemNetPrice" id="en16931_ItemNetPrice" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemPriceDiscount" id="en16931_ItemPriceDiscount" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemGrossPrice" id="en16931_ItemGrossPrice" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemPriceBaseQuantity" id="en16931_ItemPriceBaseQuantity" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemPriceBaseQuantityUnitCode" id="en16931_ItemPriceBaseQuantityUnitCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedItemVatCategoryCode" id="en16931_InvoicedItemVatCategoryCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedItemVatRate" id="en16931_InvoicedItemVatRate" type="xbrli:decimalItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemName" id="en16931_ItemName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemDescription" id="en16931_ItemDescription" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemSellerIdentifier" id="en16931_ItemSellerIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemBuyerIdentifier" id="en16931_ItemBuyerIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemStandardIdentifier" id="en16931_ItemStandardIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemClassificationIdentifier" id="en16931_ItemClassificationIdentifier" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemCountryOfOrigin" id="en16931_ItemCountryOfOrigin" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowanceAmount" id="en16931_InvoiceLineAllowanceAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowanceBaseAmount" id="en16931_InvoiceLineAllowanceBaseAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowancePercentage" id="en16931_InvoiceLineAllowancePercentage" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowanceReason" id="en16931_InvoiceLineAllowanceReason" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowanceReasonCode" id="en16931_InvoiceLineAllowanceReasonCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargeAmount" id="en16931_InvoiceLineChargeAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargeBaseAmount" id="en16931_InvoiceLineChargeBaseAmount" type="gen:amountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargePercentage" id="en16931_InvoiceLineChargePercentage" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargeReason" id="en16931_InvoiceLineChargeReason" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargeReasonCode" id="en16931_InvoiceLineChargeReasonCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemAttributeName" id="en16931_ItemAttributeName" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemAttributeValue" id="en16931_ItemAttributeValue" type="xbrli:stringItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+</schema>

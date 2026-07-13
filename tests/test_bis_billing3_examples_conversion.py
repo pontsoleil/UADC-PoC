@@ -53,8 +53,9 @@ def main() -> int:
         assert values(rows, "InvoiceTotalVatAmount"), f"Missing InvoiceTotalVatAmount for {xml_file.name}"
 
     allowance_rows = read_rows(OUT_DIR / "Allowance-example.csv")
-    assert values(allowance_rows, "TaxAccountingCurrencyCode") == ["SEK"]
+    assert values(allowance_rows, "InvoiceTotalVatAmount") == ["1225.00"]
     assert values(allowance_rows, "InvoiceTotalVatAmountInAccountingCurrency") == ["9324.00"]
+    assert values(allowance_rows, "TaxAccountingCurrencyCode") == ["SEK"]
 
     print(f"ok: converted and checked {len(samples)} BIS Billing 3 Invoice example(s)")
     return 0

@@ -6,6 +6,7 @@ Regression test for ADS Invoices Received Lines XBRL GL generation.
 
 from __future__ import annotations
 
+import csv
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
@@ -96,6 +97,35 @@ def main() -> int:
     assert amount is not None and amount.attrib["unitRef"] == "JPY" and amount.attrib["decimals"] == "0"
     assert quantity is not None and quantity.attrib["unitRef"] == "EA" and quantity.attrib["decimals"] == "2"
     assert cost_per_unit is not None and cost_per_unit.attrib["unitRef"] == "JPY" and cost_per_unit.attrib["decimals"] == "0"
+
+    with structured_csv.open(newline="", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        fieldnames = reader.fieldnames or []
+        invalid_rows = list(reader)
+    invalid_rows[0]["dInvoiceLine"] = "1"
+    invalid_rows[0]["InvoiceLineIdentifier"] = "mixed-child-1"
+    invalid_csv = xbrl_dir / "invalid_mixed_parent_child.csv"
+    with invalid_csv.open("w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(invalid_rows)
+    invalid_result = subprocess.run(
+        [
+            str(PYTHON),
+            str(ROOT / "src" / "syntax_binding_ads_xbrl_gl.py"),
+            str(invalid_csv),
+            "-b",
+            str(ROOT / "specs" / "bindings" / "syntax" / BINDING_CSV_NAME),
+            "-o",
+            str(xbrl_dir / "invalid"),
+        ],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+    assert invalid_result.returncode != 0
+    assert "Repeated child facts must be written on separate child rows" in invalid_result.stdout
 
     print(f"ok: generated and checked {xbrl_file}")
     return 0

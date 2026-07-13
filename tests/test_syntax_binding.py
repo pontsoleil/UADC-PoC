@@ -7,6 +7,7 @@ Regression test for dXXX dimension-based hierarchical CSV conversion.
 from __future__ import annotations
 
 import csv
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -21,7 +22,7 @@ PHASE1_CSV_NAME = "openpeppol_ubl_invoice_minimal.csv"
 
 def ensure_taxonomy() -> None:
     taxonomy_base = ROOT / "out" / "taxonomy"
-    oim_schema = taxonomy_base / "plt" / "plt-oim-2026-07-05.xsd"
+    oim_schema = taxonomy_base / "plt" / "en16931-oim-2026-07-05.xsd"
     module_schema = taxonomy_base / "en16931" / "en16931-2026-07-05.xsd"
     if oim_schema.exists() and module_schema.exists():
         return
@@ -49,6 +50,12 @@ def main() -> int:
     assert rows, "No hierarchical rows were written."
     dimension_fields = [name for name in fieldnames if name.startswith("d") and name[1:2].isupper()]
     assert fieldnames[: len(dimension_fields)] == dimension_fields, "BG dimension columns should be left aligned."
+
+    metadata_file = out_csv.with_suffix(".json")
+    metadata = json.loads(metadata_file.read_text(encoding="utf-8"))
+    template_columns = metadata["tableTemplates"]["structured"]["columns"]
+    assert set(fieldnames) == set(template_columns), "Every CSV header must be declared in the table template."
+    assert template_columns["InvoiceNumber"]["dimensions"]["concept"] == "en16931:InvoiceNumber"
 
     invoice = rows[0]
     assert invoice["dInvoice"] == "1"

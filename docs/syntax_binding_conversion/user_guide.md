@@ -91,6 +91,8 @@ Options:
 - **--metadata-output**: set the JSON metadata output path. Default is the output CSV path with **.json** extension.
 - **--taxonomy-base**: set the generated taxonomy directory referenced by JSON metadata. Default is **out/taxonomy**.
 - **--reverse**: convert hierarchical CSV back to XML.
+- **--ubl-schema-root**: local directory containing extracted UBL XSD files. In reverse mode, child element order is derived from XSD **xs:sequence** declarations.
+- **--ubl-schema-url**: UBL Invoice XSD URL. In reverse mode, imported and included schemas are followed from this URL and child element order is derived from XSD **xs:sequence** declarations.
 - **--drop-empty-columns**: remove output columns that have no values.
 - **--d-invoice**: set the **dInvoice** value. Default is **1**.
 - **-e**, **--encoding**: CSV encoding. Default is **utf-8-sig**.
@@ -123,12 +125,29 @@ Output:
 out/reverse/en16931_reverse_invoice.xml
 ```
 
+To derive child element order from a local UBL schema package, add **--ubl-schema-root**:
+
+```
+& $python .\src\syntax_binding.py `
+  .\out\phase1\openpeppol_ubl_invoice_minimal.csv `
+  --reverse `
+  -b .\specs\bindings\syntax\EN16931_UBL_Invoice_Syntax_Binding.csv `
+  --ubl-schema-root .\out\cache\UBL-2.1\xsd `
+  -o .\out\reverse\en16931_reverse_invoice.xml
+```
+
+To derive child element order from an online UBL Invoice schema entry point, use **--ubl-schema-url**. The converter follows imported and included schemas from that URL.
+
 The reverse XML is generated from bound CSV values. It is intended for round-trip verification and may not reproduce unbound XML content. When the LHM has **syntax_sequence** values, reverse output uses them to follow UBL schema order.
 
 Amount **currencyID** attributes are derived during reverse conversion:
 
 - **DocumentCurrencyCode** is used for ordinary invoice amount elements.
 - **TaxAccountingCurrencyCode** is used for the tax accounting currency TaxTotal branch.
+
+Forward conversion also uses those currency terms to distinguish TaxTotal branches. In **Allowance-example.xml**, BT-110 selects the TaxAmount whose **currencyID** matches **DocumentCurrencyCode** (**1225.00 EUR**), while BT-111 selects the TaxAmount whose **currencyID** matches **TaxAccountingCurrencyCode** (**9324.00 SEK**).
+
+Some semantic children are stored outside their repeated UBL syntax context. BT-90 belongs semantically to payment instructions/direct debit, but its UBL XPath is below **AccountingSupplierParty**. During reverse conversion, an absolute binding XPath that is not contained by the current repeated XPath is written from the document root. It must not produce a nested **Invoice** below **PaymentMeans**.
 
 ## 7. Generate Test Artifacts with Metadata
 
@@ -204,6 +223,27 @@ dInvoice,dVatBreakdown,dInvoiceLine,InvoiceNumber,InvoiceIssueDate,...
 1,1,,,,...
 1,,1,,,...
 ```
+
+For a parent **dAaa** and child **dBbb**, a non-repeating child is flattened into
+the parent row:
+
+```csv
+dAaa,dBbb,a1,a2,b1,b2,b3
+1,,a1V1,a2V1,b1V1,b2V1,b3V1
+```
+
+If **dBbb** is repeating, the parent row must leave all child facts empty, and
+the first child occurrence must already be on a separate row:
+
+```csv
+dAaa,dBbb,a1,a2,b1,b2,b3
+1,,a1V1,a2V1,,,
+1,1,,,b1V1,b2V1,b3V1
+1,2,,,b1V2,b2V2,b3V2
+```
+
+Do not put parent and repeated-child facts together on the first child row.
+Reverse conversion reports an error for that mixed row layout.
 
 ## 10. JSON Metadata Layout
 
@@ -283,7 +323,7 @@ The converter must write a non-empty **documentInfo.taxonomy** array. Generate t
 & $python .\tests\test_xbrlgl_generator_uadc_lhm.py
 ```
 
-Or pass **--taxonomy-base** with the directory containing **plt/plt-oim-*.xsd**. If this schema is missing, metadata generation fails instead of writing an empty taxonomy list.
+Or pass **--taxonomy-base** with the directory containing **plt/en16931-oim-*.xsd**. If this schema is missing, metadata generation fails instead of writing an empty taxonomy list.
 
 ### Repeating rows are missing
 

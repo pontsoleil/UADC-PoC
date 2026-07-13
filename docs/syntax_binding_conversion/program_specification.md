@@ -140,9 +140,9 @@ out/phase1/openpeppol_ubl_invoice_minimal.json
 The metadata is an xBRL-CSV metadata document that Arelle can load with the
 **loadFromOIM** plugin. It links the structured CSV table to the generated
 xBRL-CSV taxonomy entry points and maps CSV columns to taxonomy concepts. The
-report **documentInfo.taxonomy** property must not be empty; missing **plt-oim** is
+report **documentInfo.taxonomy** property must not be empty; missing **en16931-oim** is
 treated as a conversion error. The JSON metadata names the xBRL-CSV OIM taxonomy
-entry point **out/taxonomy/plt/plt-oim-<version>.xsd**.
+entry point **out/taxonomy/plt/en16931-oim-<version>.xsd**.
 
 ## 5. Reverse Output
 
@@ -162,6 +162,8 @@ The reverse converter:
 - creates UBL Invoice XML elements from bound XPath expressions;
 - creates one XML context for each repeated dimension row that has bound values.
 - derives required **currencyID** attributes for amount elements from invoice currency fields.
+- keeps out-of-context absolute XPaths rooted at the document even when the semantic term belongs to a repeated class;
+- writes BT-90 below **AccountingSupplierParty** and never creates a nested **Invoice** below **PaymentMeans**.
 
 ## 6. Command-Line Interface
 
@@ -261,6 +263,21 @@ For repeated BG rows:
 6. Each repeated occurrence receives a 1-based dimension value, such as **dInvoiceLine=2**.
 7. Ancestor repeated dimension values are copied into nested repeated rows.
 
+A non-repeating child class is flattened into its parent row. A repeating
+child class is not flattened: its first and subsequent occurrences are all
+written on separate child rows. For example:
+
+```csv
+dAaa,dBbb,a1,a2,b1,b2,b3
+1,,a1V1,a2V1,,,
+1,1,,,b1V1,b2V1,b3V1
+1,2,,,b1V2,b2V2,b3V2
+```
+
+The parent row therefore has empty **b1**, **b2**, and **b3** fields. A row such as
+**1,1,a1V1,a2V1,b1V1,b2V1,b3V1** is invalid because it mixes facts owned by
+**dAaa** with facts owned by the repeating **dBbb** scope.
+
 ### 7.5 Column handling
 
 If the LHM is used, field order is:
@@ -311,14 +328,16 @@ In reverse mode:
 
 1. The converter reads the input hierarchical CSV with **csv.DictReader**.
 2. The converter reads the binding-derived layout and binding CSV in the same way as forward mode.
-3. Root-level fields are written to XML paths directly below the invoice root.
-4. Dimension fields are grouped by their **d*** dimension column.
-5. For each dimension row with bound values, the converter creates a repeated XML context from the BG XPath.
-6. Bound field values are written to relative XPaths under that context.
-7. XPath predicates such as **cbc:ChargeIndicator=false()** and **cbc:DocumentTypeCode='130'** are materialized as child values when a matching XML context is created.
-8. Amount elements receive **currencyID** from the invoice document currency field. Tax accounting currency TaxTotal paths receive **currencyID** from the tax accounting currency field.
-9. UBL-required supporting elements that are not EN 16931 BT values are added where needed for schema validation, including **cac:TaxScheme/cbc:ID** and missing **cbc:ChargeIndicator=false**.
-10. Generated UBL child elements are normalized to the UBL 2.1 sequence for the supported Invoice structures.
+3. Before XML creation, each fact is checked against the deepest populated dimension on its row. Facts owned by an ancestor dimension are rejected on a repeated child row, so a mixed parent/child row cannot be reverse-converted.
+4. Root-level fields are written to XML paths directly below the invoice root.
+5. Dimension fields are grouped by their **d*** dimension column.
+6. For each dimension row with bound values, the converter creates a repeated XML context from the BG XPath.
+7. Bound field values are written to relative XPaths under that context.
+8. XPath predicates such as **cbc:ChargeIndicator=false()** and **cbc:DocumentTypeCode='130'** are materialized as child values when a matching XML context is created.
+9. Amount elements receive **currencyID** from the invoice document currency field. Tax accounting currency TaxTotal paths receive **currencyID** from the tax accounting currency field.
+10. If **relative_xpath(binding.xpath, repeat_path)** remains absolute, the binding is outside the repeated syntax context and is written from the document root. Only contained paths are written relative to the repeated element.
+11. UBL-required supporting elements that are not EN 16931 BT values are added where needed for schema validation, including **cac:TaxScheme/cbc:ID** and missing **cbc:ChargeIndicator=false**.
+12. Generated UBL child elements are normalized to UBL schema sequence. When **--ubl-schema-root** or **--ubl-schema-url** is supplied, the converter derives child order from XSD **xs:sequence** declarations. Without a schema source, it uses the built-in fallback order for the supported Invoice structures.
 
 The reverse converter currently targets the PoC UBL Invoice binding pattern. It is intended for round-trip verification of the structured CSV representation rather than canonical XML reproduction.
 
@@ -331,6 +350,10 @@ The syntax binding treats **currencyID** as syntax metadata derived from semanti
 - BT-110 and BG-23 use the UBL path predicate **cbc:TaxAmount/@currencyID=/Invoice/cbc:DocumentCurrencyCode**.
 - BT-111 uses the UBL path predicate **cbc:TaxAmount/@currencyID=/Invoice/cbc:TaxCurrencyCode**.
 
+Forward conversion evaluates these absolute predicate reference paths from the document root. For **Allowance-example.xml**, BT-110 resolves to **1225.00 EUR** and BT-111 resolves to **9324.00 SEK**.
+
+BT-90 illustrates a cross-scope reverse mapping. Its semantic path is under payment instructions/direct debit, but its UBL XPath points to **/Invoice/cac:AccountingSupplierParty/.../cbc:ID**. Reverse conversion therefore keeps that XPath document-rooted rather than constructing **PaymentMeans/Invoice/AccountingSupplierParty**.
+
 The CSV therefore stores semantic amount values and currency code values separately. Reverse conversion writes the required UBL **currencyID** attributes.
 
 ## 11. Constraints
@@ -341,7 +364,7 @@ The CSV therefore stores semantic amount values and currency code values separat
 - The converter does not evaluate full XPath 2.0.
 - Supported predicates are intentionally limited to the cases used by the PoC bindings.
 - Template columns alone do not create rows; rows require matching bindings.
-- Reverse XML element order follows the supported UBL 2.1 child-order normalization table in **syntax_binding.py**.
+- Reverse XML element order can be derived from a supplied UBL XSD schema root or UBL Invoice schema URL. The built-in child-order table in **syntax_binding.py** is only the fallback when no schema source is supplied.
 - Reverse XML may omit unbound XML content.
 - Reverse XML is generated from bound CSV values and is not intended to be byte-for-byte identical to the source XML.
 

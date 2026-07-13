@@ -1,0 +1,197 @@
+--- PAGE 1 ---
+PoC Proposal for XBRL GL Next:
+A Hierarchical Tidy Data Universal Audit Data
+Converter for Invoice Reuse
+Status Draft for discussion
+Author Nobuyuki Sambuichi
+Date 4 July 2026
+For XBRL Europe Transactional Reporting Working Group / XBRL GL Next PoC discussion
+Subject PoC proposal for a hierarchical tidy data Universal Audit Data Converter (UADC)
+GItHub https://github.com/pontsoleil/UADC-PoC/
+Abstract
+This paper proposes an early Proof of Concept for XBRL GL Next based on a Universal Audit Data
+Converter (UADC) using hierarchical tidy data as the common semantic representation. The proposed
+PoC converts OpenPeppol invoice XML, together with a syntax binding definition in CSV, into
+hierarchical tidy data CSV for the EN 16931 core invoice semantic model based on the XBRL GL Next
+OIM taxonomy. The semantic invoice model represents both document-level information and line-
+item information. Accordingly, the converted invoice has materialized as related invoice CSV and line
+CSV datasets, together with reusable seller and buyer instances across multiple invoices. From that
+common semantic dataset, semantic binding definitions in CSV are used to generate downstream
+outputs including an ISO 21378:2019 Audit data collection Sales/Purchase invoice view and AICPA
+ADS (Audit Data Standard) O2C/P2P invoice views. For the AICPA target, the PoC recognizes support
+for both pipe-delimited flat files and XBRL GL in XBRL 2.1 tuple syntax. The PoC is intended to
+demonstrate deterministic transformation, semantic reuse, traceability, and audit-oriented
+interoperability.
+Background
+The current XBRL GL Next direction emphasizes that transactional information remains
+fragmented across software platforms, data formats, organizational boundaries, and reporting
+domains, while users increasingly require reusable access to the underlying business events from
+which reports are derived.
+The Transactional Reporting Working Group Charter calls for modernization of XBRL GL,
+interoperable transactional reporting, assurance-ready data, trusted data exchange, AI and
+automation readiness, and practical Proofs of Concept demonstrating traceability and interoperability
+across reporting domains.
+The XBRL GL Next Requirements Specification further defines XBRL GL Next as the core
+semantic data file or dataset for a Universal Adapter pattern connecting EDI, ERP, accounting, audit,
+tax, statistical, and reporting systems. It also requires hierarchically meaningful, self-explanatory
+business data, deterministic transformation, continuity with existing XML-based implementations,
+and OIM-based realizations such as xBRL-CSV.
+1
+
+--- PAGE 2 ---
+For these reasons, a UADC PoC is not an isolated experiment. It is a direct test of whether XBRL
+GL Next can provide the common semantic layer needed for invoice transformation, audit reuse, and
+future multi-domain interoperability. Because the semantic representation is based on the EN 16931
+core invoice semantic model, the same approach can also be used to map proprietary domestic e-
+invoices to an EN 16931 CIUS.
+Proposal
+The proposed PoC scenario is the following formal conversion pattern:
+• OpenPeppol invoice XML + Syntax binding definition in CSV
+→ UADC
+→ hierarchical tidy data CSV for the EN 16931 core invoice semantic model based on the XBRL
+GL Next OIM taxonomy
+• Hierarchical tidy data CSV based on the XBRL GL Next OIM taxonomy + Semantic binding
+definition in CSV
+→ UADC
+→ ISO 21378:2019 Audit data collection Sales/Purchase invoice view
+• Hierarchical tidy data CSV based on the XBRL GL Next OIM taxonomy + Semantic binding
+definition for piped ADS in CSV
+→ UADC
+→ AICPA ADS (Audit Data Standard) O2C/P2P invoice view, in pipe-delimited flat-file form
+• Hierarchical tidy data CSV based on the XBRL GL Next OIM taxonomy + Semantic binding
+definition for XBRL GL tuple ADS in CSV
+→ UADC
+→ AICPA ADS (Audit Data Standard) O2C/P2P invoice view, in XBRL GL in XBRL 2.1 tuple form
+In this architecture, syntax binding definitions support XML-to-CSV conversion from the source
+syntax into a common semantic representation. The result of syntax binding is hierarchical tidy data
+CSV for the EN 16931 core invoice semantic model, including buyer and seller data across multiple
+invoices.
+Semantic binding definitions in CSV then support CSV-to-CSV conversion from that common
+semantic representation into separated target CSVs and other audit-oriented target views. The same
+invoice data can therefore produce SAL_Invoices_Generated for the seller side and
+PUR_Invoices_Received for the buyer side. Where line-level separation is required, the same semantic
+source can also produce the corresponding detail outputs. For supplier-oriented audit data, buyer
+information in the invoice is transformed into customer-oriented target CSVs. For buyer-oriented
+audit data, seller information in the invoice is transformed into supplier-oriented target CSVs.
+The key design principle is that no source syntax should become the internal canonical model.
+Instead, the source invoice is mapped into a common semantic representation, and all downstream
+outputs are generated from that representation.
+Processing Flow
+Figure 1 summarizes the proposed two-stage UADC process. Stage 1 transforms OpenPeppol
+invoice XML into the common semantic representation, where the EN 16931 core invoice semantic
+2
+
+--- PAGE 3 ---
+model materialized as hierarchical tidy data CSV. That representation includes related invoice CSV
+and line CSV datasets, together with reusable sales invoice, purchase invoice, supplier, and customer
+instances across multiple invoices. Stage 2 reuses that semantic dataset, through semantic binding
+definitions in CSV, to produce downstream views including ISO 21378:2019 Audit data collection
+output and AICPA ADS O2C/P2P output. For the AICPA side, the PoC should allow realization either as
+pipe-delimited flat files or as XBRL GL in XBRL 2.1 tuple syntax.
+Figure 1. Processing flow for the proposed hierarchical tidy data UADC PoC, including EN
+16931 core invoice semantic-model generation, separated invoice CSV and line CSV datasets,
+ISO 21378:2019 Audit data collection outputs, and alternative AICPA ADS output forms.
+3
+
+--- PAGE 4 ---
+Functional Architecture
+1. Source-side conversion
+OpenPeppol invoice XML is combined with a syntax binding definition in CSV. The syntax
+binding definition identifies how physical source XML elements are mapped to the semantic items and
+hierarchical structures of the XBRL GL Next OIM model. It also supports generation of hierarchical
+tidy data CSV for the EN 16931 core invoice semantic model, including the decomposition of the
+source invoice into related invoice CSV and line CSV datasets.
+2. Common semantic layer
+The result is hierarchical tidy data CSV based on the XBRL GL Next OIM taxonomy. The semantic
+invoice model represents both invoice document information and invoice line items. Accordingly, the
+converted invoice consists of related invoice CSV and line CSV datasets. This intermediate dataset is
+not a flat extract. CIUS does not itself distinguish between sales invoices and purchase invoices.
+However, the same invoice can be interpreted as a sales invoice from the seller’s perspective and as a
+purchase invoice from the buyer’s perspective.
+It preserves grouped business meaning and represents seller-side sales invoice instances, buyer-
+side purchase invoice instances, supplier instances, and customer instances across multiple invoices.
+3. Target-side conversion
+Semantic binding definitions in CSV are then applied to the common semantic dataset. Their role
+is not to reinterpret business meaning, but to reorganize and project the semantic dataset into target
+formats required by different audit frameworks. They support separate CSV outputs in different
+target formats, including document-level and line-level outputs where required. In particular, the
+same invoice data can be projected as SAL_Invoices_Generated for the seller view and as
+PUR_Invoices_Received for the buyer view.
+4. Converter roles
+Syntax binding supports XML-to-CSV conversion into the common semantic representation,
+including generation of separated invoice CSV and line CSV datasets.
+Semantic binding supports CSV-to-CSV conversion from the common semantic dataset to
+separated or reformatted target CSVs and other target views, including ISO 21378:2019 invoice views
+and AICPA ADS O2C/P2P views. The same invoice data can therefore support both seller-side and
+buyer-side audit views from one common semantic source.
+The UADC therefore separates physical syntax transformation from semantic re-expression. It
+also separates formation of the common semantic invoice representation from production of
+downstream target layouts and serializations.
+Why Hierarchical Tidy Data
+Ordinary tidy data is valuable because it supports machine processing, validation, and reuse.
+However, transactional business data is not only tabular. It is also hierarchical, contextual, repeated,
+and linked across multiple business objects.
+A business invoice contains document-level information, parties, references, tax subtotals, and
+line items. Across multiple invoices, sellers and buyers recur as reusable semantic objects. In this PoC,
+the semantic invoice model represents both document and line items, while the converted invoice
+4
+
+--- PAGE 5 ---
+materialized as related invoice CSV and line CSV datasets. If this information is reduced to
+disconnected flat tables or reassembled only through local code and joins, meaning must be
+reconstructed externally, which weakens traceability, reuse, and auditability.
+Hierarchical tidy data extends the tidy data idea by preserving explicit hierarchy and semantic
+grouping while retaining machine processability. In this PoC, that means invoice structure remains
+explicit, repeated parties can be represented as reusable instances, invoice and line datasets can be
+generated without losing their semantic relationship, and downstream views can be generated
+deterministically.
+PoC Scope and Instance Model
+The PoC should explicitly support at least the following semantic instance groups across multiple
+invoices:
+• sales/purchase invoice instances at document level
+• supplier instances and customer instances
+• invoice line instances and tax subtotals
+• document references, identifiers, dates, currencies, and monetary amounts
+This multi-invoice scope makes the PoC stronger than a single-document transformation. It
+demonstrates that the common semantic representation is a reusable transaction-level dataset rather
+than a one-off interchange snapshot. It also demonstrates that semantic binding definitions can
+transform the common representation into separated invoice CSV and line CSV structures without
+loss of meaning.
+Deliverables
+• sample OpenPeppol invoice XML instances
+• a syntax binding definition in CSV for source XML mapping
+• a hierarchical tidy data CSV dataset based on the XBRL GL Next OIM taxonomy, including
+related invoice CSV and line CSV datasets
+• instances for sales/purchase invoices, suppliers, and customers across multiple invoices
+• semantic binding definitions in CSV for target view generation, including separated CSV
+outputs where required
+• an ISO 21378:2019 Audit data collection Sales/Purchase invoice output
+• AICPA ADS (Audit Data Standard) O2C/P2P outputs in pipe-delimited flat-file form and/or
+XBRL GL in XBRL 2.1 tuple form
+• a traceability demonstration from source invoice facts to semantic items and then to each
+target view
+• a short lesson-learned note on semantic coverage, mapping gaps, reuse patterns, and
+extension needs
+Next Steps
+• Agree the constrained business scope and the minimum dataset for the first PoC iteration.
+• Define the XBRL GL Next profile, including relevant modules, roots, identifiers, and
+validation constraints.
+5
+
+--- PAGE 6 ---
+• Prepare representative OpenPeppol invoice XML samples and the initial syntax binding
+CSV.
+• Define the initial hierarchical tidy data CSV model, including invoice CSV and line CSV
+datasets, and prepare the semantic binding CSV definitions for the target views.
+• Implement Stage 1 and Stage 2 transformation logic in the UADC.
+• Validate deterministic transformation, traceability, and reuse across multiple invoices.
+• Document lessons learned for architecture, profile design, extension governance,
+separated CSV generation, and future standardization.
+References
+• Transactional Reporting Working Group Charter Statement (2026)
+• XBRL GL Vision Statement (2026)
+• XBRL GL Next Requirements Specification (2026)
+• XBRL GL Next Taxonomy Framework — Part 1: General rules
+• XBRL GL Next Taxonomy Framework — Part 3: xBRL-CSV palette taxonomy
+■
+6

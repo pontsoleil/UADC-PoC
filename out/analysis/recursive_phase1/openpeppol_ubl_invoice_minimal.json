@@ -1,0 +1,33 @@
+{
+  "documentInfo": {
+    "documentType": "https://xbrl.org/2021/xbrl-csv",
+    "namespaces": {
+      "en16931": "http://www.xbrl.org/int/gl/en16931/2026-07-05",
+      "plt": "http://www.xbrl.org/int/gl/plt/2026-07-05",
+      "iso4217": "http://www.xbrl.org/2003/iso4217",
+      "scheme": "http://www.example.com",
+      "xbrl": "https://xbrl.org/2021"
+    },
+    "taxonomy": [
+      "../../taxonomy/plt/plt-oim-2026-07-05.xsd"
+    ]
+  },
+  "tables": {
+    "structured": {
+      "template": "structured",
+      "url": "openpeppol_ubl_invoice_minimal.csv"
+    }
+  },
+  "tableTemplates": {
+    "structured": {
+      "dimensions": {
+        "period": "2026-07-06T00:00:00",
+        "entity": "scheme:UADC-PoC",
+        "plt:d_en16931_Invoice": "$dInvoice"
+      },
+      "columns": {
+        "dInvoice": {}
+      }
+    }
+  }
+}

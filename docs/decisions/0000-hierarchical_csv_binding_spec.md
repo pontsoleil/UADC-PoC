@@ -32,6 +32,41 @@ Each output row represents one BG occurrence or the invoice root.
 - Repeated BGs increment their own dimension value in XML occurrence order.
 - BT values are written to the row for their owning BG.
 
+### Parent and child row separation
+
+Assume that **dBbb** is a child of **dAaa**, and that the columns are:
+
+```csv
+dAaa,dBbb,a1,a2,b1,b2,b3
+```
+
+When **dBbb** is non-repeating, it has no dimension value or separate row. Its
+facts are merged into the **dAaa** row:
+
+```csv
+1,,a1V1,a2V1,b1V1,b2V1,b3V1
+```
+
+When **dBbb** is repeating, every occurrence, including the first occurrence,
+is written on a separate child row. The parent row contains only **dAaa** facts,
+and all **dBbb** facts on that parent row are empty:
+
+```csv
+1,,a1V1,a2V1,,,
+1,1,,,b1V1,b2V1,b3V1
+1,2,,,b1V2,b2V2,b3V2
+```
+
+The following mixed parent/child row is invalid:
+
+```csv
+1,1,a1V1,a2V1,b1V1,b2V1,b3V1
+1,2,,,b1V2,b2V2,b3V2
+```
+
+Reverse conversion validates this row scope rule and rejects a row when a
+fact owned by an ancestor dimension is populated on a repeated child row.
+
 ## Binding Rules
 
 The syntax binding CSV provides **semantic_path** and **xpath**.

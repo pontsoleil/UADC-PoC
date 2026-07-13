@@ -155,16 +155,19 @@ list[dict[str, str]]
 
 Each dictionary is one CSV row keyed by the header.
 
-**read_binding_layout(...)** and **build_layout_from_rows(...)** build **LhmLayout**, the runtime Structured CSV layout derived from the binding table.
+**read_binding_layout(...)** and **build_layout_from_rows(...)** build **BindingLayout**, the runtime Structured CSV layout derived from the binding table.
 
-Important fields in **LhmLayout**:
+Important fields in **BindingLayout**:
 
 - **fieldnames: list[str]**: final Structured CSV column order.
 - **dimensions: list[str]**: dimension columns.
-- **columns: dict[str, dict[str, str]]**: metadata for each Structured CSV column.
 - **field_dimension: dict[str, str]**: value column to dimension column.
 - **field_by_semantic_path: dict[str, str]**: semantic path to Structured CSV value column.
 - **semantic_path_dimension: dict[str, str]**: semantic class path to dimension column.
+- **dimension_xpath: dict[str, str]**: dimension column to XML context XPath.
+- **dimension_ancestors: dict[str, list[str]]**: repeated ancestor dimensions.
+- **dimension_repeats: dict[str, bool]**: repeat status for each emitted dimension.
+- **syntax_sequence_by_field** and **syntax_sequence_by_dimension**: reverse XML ordering hints.
 
 **read_bindings(...)** builds:
 
@@ -179,7 +182,6 @@ bindings: list[Binding]
 - **xpath**;
 - **field**, the Structured CSV value column;
 - **dimension**, the row-scope dimension column;
-- **datatype**;
 - optional filter fields and values.
 
 Example:
@@ -199,9 +201,9 @@ Each **BindingClass** stores:
 
 - **semantic_path**;
 - **xpath**;
-- **field**, the class column;
+- **column**, the class column;
 - **dimension**, such as **dInvoiceLine**;
-- **repeated**, based on **multiplicity**;
+- **repeats**, based on **multiplicity**;
 - **children: list[BindingClass]**.
 
 The class tree is the semantic and XML context tree used by the converter. It is built from the binding table, not inferred from the source XML.
@@ -213,6 +215,31 @@ direct_fields_by_class: dict[str, list[Binding]]
 ```
 
 This prevents a parent class from extracting descendant facts too early.
+
+### Dimension Ownership Resolution
+
+The forward and reverse paths use the same ownership metadata derived from the
+syntax binding table.
+
+1. **multiplicity_repeats(multiplicity)** recognizes **\***, **n**, **unbounded**, or
+   a numeric upper bound greater than 1 as repeating.
+2. **build_layout_from_rows(rows)** reads every **type=C** class row. The
+   invoice root becomes **dInvoice**. Other class rows become **dXxx** only
+   when their multiplicity repeats.
+3. While reading each **type=A** row, the nested **nearest_dimension(...)**
+   helper walks upward through its **semantic_path** until it finds the nearest
+   class that owns a dimension.
+4. The result is stored in **BindingLayout.field_dimension** and copied into
+   each normalized **Binding.dimension** by **read_bindings(...)**.
+
+Therefore a non-repeating child class belongs to its nearest repeating
+ancestor row. For example, non-repeating item information below a repeating
+invoice line belongs to **dInvoiceLine**. A repeating child class owns its own
+dimension and is not merged into its parent row.
+
+The ownership rule is independent of the target XML QName. It is determined
+by **type=C**, **multiplicity**, and **semantic_path**, while
+**structured_csv_column** supplies the actual fact and class column names.
 
 ### XPath Context Recursion
 
@@ -243,7 +270,7 @@ For each class context, **fill_direct_fields(row, context, class_node)** process
 
 For each **Binding**:
 
-1. **relative_xpath(binding.xpath, class_node.xpath)** converts the absolute binding XPath into a path relative to the current class context.
+1. **relative_xpath(binding.xpath, class_node.xpath)** converts the absolute binding XPath into a path relative to the current class context. If the binding points outside that context, the path remains absolute and forward extraction evaluates it from the document root.
 2. **get_value(context, relative_xpath, namespaces, root)** extracts text or attribute value.
 3. The value is written to **row[binding.field]**.
 
@@ -273,7 +300,7 @@ The converter extracts **cbc:ID** from the current **cac:InvoiceLine** context a
 
 ### How Repeated Dimensions Are Decided
 
-Repeated dimensions are decided from **BindingClass.repeated**, which is derived from the class row **multiplicity**.
+Repeated dimensions are decided from **BindingClass.repeats**, which is derived from the class row **multiplicity**.
 
 When **process_class(...)** sees a child class:
 
@@ -333,7 +360,26 @@ The final output is:
 rows: list[dict[str, str]]
 ```
 
-This is written by **csv.DictWriter** using **fieldnames** from **LhmLayout**.
+This is written by **csv.DictWriter** using **fieldnames** from **BindingLayout**.
+
+For a repeating child, **process_class(...)** completes and appends the parent
+row before processing **repeated_children**. It then calls **new_row(...)** for
+every child occurrence, including occurrence 1. Consequently the first child
+cannot share the parent row:
+
+```csv
+dAaa,dBbb,a1,a2,b1,b2,b3
+1,,a1V1,a2V1,,,
+1,1,,,b1V1,b2V1,b3V1
+1,2,,,b1V2,b2V2,b3V2
+```
+
+When **dBbb** is non-repeating, **process_class(...)** passes the same
+**current_row** to the child and the result is instead:
+
+```csv
+1,,a1V1,a2V1,b1V1,b2V1,b3V1
+```
 
 ## Phase 1 Reverse Conversion: Structured CSV To UBL XML
 
@@ -379,6 +425,21 @@ InvoiceLineNetAmount=1000
 
 This means the value belongs under the second **cac:InvoiceLine**.
 
+Before XML construction, **validate_hierarchical_row_scopes(rows, fieldnames,
+field_dimension)** applies the ownership metadata built by
+**build_layout_from_rows(...)**:
+
+1. It identifies dimension columns with **is_dimension_column(...)**.
+2. For each input row, it takes the deepest populated dimension as the row
+   scope.
+3. For each populated fact, it looks up the owner in
+   **BindingLayout.field_dimension**.
+4. It raises **ValueError** when the owner differs from the row scope.
+
+This rejects a mixed row such as
+**1,1,a1V1,a2V1,b1V1,b2V1,b3V1**. The parent facts must remain on the parent
+row and the repeating child facts must start on a separate child row.
+
 ### XML Construction
 
 The reverse writer creates:
@@ -395,11 +456,14 @@ Important helper functions:
 - **find_or_create_child(parent, step, namespaces, force_new=False)**: finds a child element matching a tag and predicate or creates it.
 - **create_context(...)**: creates or reuses the XML parent context for a repeated row.
 - **set_xml_value_with_currency(...)**: writes a value and applies **currencyID** when the target is an amount.
+- **set_relative_xml_value(...)**: writes paths contained by the current repeated syntax context.
+- An absolute XPath that remains outside the repeated context is passed to **set_xml_value_with_currency(...)** with the document root. This covers cross-scope mappings such as BT-90: its semantic path is below payment instructions, while its UBL XPath is below **AccountingSupplierParty**.
 - **set_relative_xml_value(...)**: writes a value below a repeated context.
 - **ensure_tax_scheme_defaults(...)**: adds required UBL tax scheme defaults.
-- **sort_children_for_ubl_schema(...)**: reorders children using **UBL_CHILD_ORDER**.
+- **load_ubl_child_order(...)**: reads UBL XSD files from **--ubl-schema-root** or **--ubl-schema-url** and builds child element order from **xs:sequence**.
+- **sort_children_for_ubl_schema(...)**: reorders children using generated UBL schema order. If no schema source is supplied, it uses the built-in fallback order for the current PoC structures.
 
-The reverse process is path-construction based. It uses the same binding table, but currently does not use the same recursive **BindingClass** tree as forward mode. It remains schema-order aware and supports the round-trip tests.
+The reverse process is path-construction based. It uses the same binding table, but currently does not use the same recursive **BindingClass** tree as forward mode. Repeated-context paths are made relative only when the binding XPath is contained by the repeated syntax path; out-of-context absolute paths remain document-rooted. It remains schema-order aware and can use UBL XSD order for UBL 2.1 through later UBL versions when a schema root or schema URL is supplied.
 
 ## Phase 2 Syntax Binding: Structured CSV To ADS XBRL GL
 
@@ -413,6 +477,7 @@ Main functions:
 
 ```
 load_bindings(...)
+validate_hierarchical_row_scopes(...)
 build_instance(...)
 convert_file(...)
 ```
@@ -430,6 +495,13 @@ Output:
 ### Binding Interpretation
 
 ADS XBRL GL bindings use **semantic_path** and **structured_csv_column** to select the source Structured CSV value. They use **element** and **xpath** to identify the target XBRL GL item and tuple location.
+
+Before building the XBRL GL instance, **validate_hierarchical_row_scopes(...)**
+derives each fact's owning dimension from binding **type=C**, **multiplicity**,
+and **semantic_path** rows. A non-repeating child belongs to its nearest
+repeating ancestor row. A repeating child owns a separate row from its first
+occurrence. The converter rejects input that populates parent facts and
+repeating-child facts on the same child row.
 
 Example binding dictionary:
 
@@ -453,6 +525,54 @@ rows: list[dict[str, str]]
 currency_minor_units: dict[str, str]
 ```
 
+### ADS Dimension Ownership And Input Validation
+
+**load_bindings(binding_csv)** retains the binding properties needed for both
+XBRL construction and Structured CSV validation:
+
+- **type** distinguishes class (**C**) and fact (**A**) rows;
+- **multiplicity** determines whether a class repeats;
+- **semantic_path** defines class ancestry;
+- **structured_csv_column** becomes **source_column**;
+- **element** and **xpath** identify the XBRL GL target.
+
+**validate_hierarchical_row_scopes(rows, bindings)** performs these steps:
+
+1. It scans **type=C** rows. The invoice root and classes for which
+   **multiplicity_repeats(...)** is true are registered in
+   **class_dimensions**.
+2. **dimension_name(source_column)** converts a class column such as
+   **InvoiceLine** into **dInvoiceLine**.
+3. For every **type=A** fact, it removes semantic path segments from the right
+   until it finds the nearest registered class dimension. The result is stored
+   in **field_dimensions**.
+4. For each Structured CSV row, it finds the deepest populated **dXxx** column.
+5. It rejects the row if any populated ADS-bound fact belongs to a different
+   dimension.
+
+This means a single child class has no independent row scope and its facts
+belong to the nearest repeating ancestor. A repeating child has its own row
+scope from occurrence 1. Parent facts and repeating-child facts cannot be
+populated together on that first child row.
+
+The validation is called by **convert_file(...)** immediately after
+**read_csv(...)** and before **build_instance(...)**, so invalid hierarchy is
+not partially written to an XBRL GL instance.
+
+### ADS Row Selection
+
+After validation, **rows_for_binding(rows, binding)** selects the sparse input
+rows used by each fact binding:
+
+- VAT breakdown facts require a populated **dVatBreakdown**;
+- invoice-line facts require a populated **dInvoiceLine**;
+- document-level facts use the first row containing the source value.
+
+**first_non_empty(...)** obtains document-wide currency, date, and entity
+values. The selected source row is also passed to **unit_ref_from_rule(...)**,
+so a monetary fact can obtain its unit from a bound Structured CSV currency
+column.
+
 ### XBRL XML Construction
 
 **build_instance(...)** creates an **ET.Element** tree rooted at **xbrli:xbrl**. It adds context, units, **gl-cor:accountingEntries**, **entryHeader**, **entryDetail**, and **documentReference**.
@@ -474,6 +594,19 @@ Numeric facts use:
 - **decimals_for_item(...)** for **decimals**.
 - **load_currency_minor_units(...)** to get currency minor units from **specs/Currency.csv**.
 - **add_missing_units(...)** to ensure every referenced unit is declared.
+
+Construction then finishes as follows:
+
+1. **make_xbrl_root(...)** creates **xbrli:xbrl** and **schemaRef**.
+2. **add_context_and_units(...)** adds the default context and initial units.
+3. **add_document_info(...)** writes required XBRL GL document metadata.
+4. **build_instance(...)** writes VAT occurrences and other bound facts.
+5. **reorder_tree(...)** applies the supported XBRL GL child order.
+6. **add_missing_units(...)** declares any unit referenced by generated facts.
+7. **convert_file(...)** indents and writes the XML document.
+8. **main(...)** resolves one file or directory with **input_files(...)** and
+   derives output names with **binding_target_stem(...)** and
+   **schema_href_for_output(...)**.
 
 ## Phase 2 Semantic Binding: Structured CSV To PSV Or CSV
 
@@ -564,6 +697,35 @@ $.invoice.vatBreakdown[0].vatCategoryTaxAmount
 -> repeat index: 0
 ```
 
+### Semantic Dimension Ownership Resolution
+
+Semantic binding resolves fact ownership from the same three binding
+properties used by syntax binding: **type=C**, **multiplicity**, and
+**semantic_path**.
+
+1. **load_bindings(...)** reads all rows with **read_csv_rows(...)**.
+2. For each **type=C** row, **multiplicity_repeats(...)** decides whether the
+   class defines a repeated row scope. Only repeating classes are placed in
+   **repeated_classes** because a single class does not create a Structured CSV
+   dimension row.
+3. **indexed_semantic_path(...)** removes an explicit occurrence selector such
+   as **[0]** while preserving its zero-based **repeat_index**.
+4. **source_column_for_path(...)** maps the last semantic path segment to the
+   Structured CSV fact column.
+5. **deepest_repeated_class_ancestor(...)** finds the nearest repeated class
+   above each fact.
+6. **dimension_column_for_path(...)** converts that class path to its **dXxx**
+   column.
+7. **resolve_bindings_for_classes(...)** stores the result in
+   **SemanticBinding.repeat_group_path** and
+   **SemanticBinding.repeat_group_column**.
+
+Thus a fact below a non-repeating child is assigned to the nearest repeating
+ancestor. A fact below a repeating child is assigned to that child's own
+dimension from its first occurrence. This ownership controls which sparse
+Structured CSV rows may supply the fact; it does not by itself copy parent
+facts onto a Structured CSV child row.
+
 ### Row Scope Selection
 
 **resolve_bindings_for_classes(bindings, repeated_classes)** assigns row-scope information to each **SemanticBinding**. For non-indexed paths, it searches the deepest repeated **C** ancestor in the binding table.
@@ -620,6 +782,12 @@ Working variables:
 
 Rows with **dInvoice** and no selected **scope_column** fill **parent_context**. Rows with the selected **scope_column** start or continue a repeated output row. When the **scope_column** value changes, the current target row is appended to **output_rows** and a new row starts from **parent_context**.
 
+The first populated repeated dimension value therefore starts the first
+independent target record. Parent values are copied from **parent_context**
+into that flat target record; they are not expected to be duplicated on the
+input Structured CSV child row. This distinction preserves the hierarchical
+input rule while still producing self-contained ADS line records.
+
 ### Value Merge Rules
 
 **merge_values(target_row, source_row, bindings, repeat_indices)** is the only function that writes values into a target row.
@@ -634,22 +802,51 @@ Rules:
 
 This first-non-empty rule is important because Structured CSV rows are sparse and hierarchical.
 
+### Semantic Binding Output And Orchestration
+
+1. **row_has_bound_data(...)** ignores sparse rows irrelevant to the selected
+   target view.
+2. **row_scope_group(...)** selects invoice-level transformation or the
+   deepest non-indexed repeated target scope.
+3. **row_repeat_indices(...)** and **repeated_group_present(...)** maintain
+   zero-based indices used by explicitly indexed semantic bindings.
+4. **transform_rows(...)** dispatches to invoice-level merging or
+   **transform_repeated_group_rows(...)**.
+5. **write_target_file(...)** writes binding-order columns with the selected
+   delimiter.
+6. **output_format_options(...)** resolves PSV or CSV defaults and command-line
+   overrides.
+7. **output_path(...)** and **binding_target_stem(...)** derive the target file
+   location and name.
+8. **convert_file(...)** performs one input-file conversion, while
+   **main(...)** expands directory inputs with **input_files(...)**.
+
 ## Function-Level Map
 
 | Function | Script | Role |
 | --- | --- | --- |
 | **write_hierarchical_csv** | **syntax_binding.py** | Converts UBL XML to Structured CSV and metadata. |
+| **build_layout_from_rows** | **syntax_binding.py** | Derives dimensions and fact ownership from **C/A**, multiplicity, and semantic paths. |
+| **multiplicity_repeats** | **syntax_binding.py** | Determines whether a class creates a repeated dimension. |
 | **build_binding_class_tree** | **syntax_binding.py** | Builds semantic class tree from **C** rows. |
 | **process_class** | **syntax_binding.py** | Recursively walks XML contexts and creates rows. |
 | **fill_direct_fields** | **syntax_binding.py** | Extracts direct **A** values for the current class. |
+| **validate_hierarchical_row_scopes** | **syntax_binding.py** | Rejects mixed parent/repeating-child rows before reverse conversion. |
 | **write_xml_from_hierarchical_csv** | **syntax_binding.py** | Converts Structured CSV back to UBL XML. |
+| **load_bindings** | **syntax_binding_ads_xbrl_gl.py** | Loads ADS class/fact properties and XBRL target paths. |
+| **validate_hierarchical_row_scopes** | **syntax_binding_ads_xbrl_gl.py** | Derives ADS fact ownership and rejects mixed input rows. |
+| **rows_for_binding** | **syntax_binding_ads_xbrl_gl.py** | Selects document, VAT, or invoice-line source rows. |
 | **build_instance** | **syntax_binding_ads_xbrl_gl.py** | Builds one ADS XBRL GL tuple instance. |
 | **container_for_path** | **syntax_binding_ads_xbrl_gl.py** | Finds or creates XBRL GL tuple containers from XPath. |
 | **append_item** | **syntax_binding_ads_xbrl_gl.py** | Writes one XBRL GL item. |
 | **load_bindings** | **semantic_binding.py** | Loads semantic binding rows and resolves source columns and row scopes. |
+| **deepest_repeated_class_ancestor** | **semantic_binding.py** | Finds the nearest repeated class owning a fact. |
+| **resolve_bindings_for_classes** | **semantic_binding.py** | Assigns source columns and repeated dimensions to target bindings. |
+| **row_scope_group** | **semantic_binding.py** | Selects the repeated class used for target record emission. |
 | **transform_rows** | **semantic_binding.py** | Creates target rows from Structured CSV. |
 | **transform_repeated_group_rows** | **semantic_binding.py** | Emits one target row per repeated dimension. |
 | **merge_values** | **semantic_binding.py** | Copies source values into target cells. |
+| **convert_file** | **all three scripts** | Runs one input-file conversion and writes the script-specific output. |
 
 ## Source Documents
 

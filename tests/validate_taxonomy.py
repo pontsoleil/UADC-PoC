@@ -43,14 +43,15 @@ def check_references(base_file: Path, root: ET.Element) -> None:
 
 
 def main() -> int:
-    oim_xsd = TAXONOMY / "plt" / f"plt-oim-{VERSION}.xsd"
-    def_linkbase = TAXONOMY / "plt" / f"plt-def-{VERSION}.xml"
+    oim_xsd = TAXONOMY / "plt" / f"en16931-oim-{VERSION}.xsd"
+    def_linkbase = TAXONOMY / "plt" / f"en16931-def-{VERSION}.xml"
     module_xsd = TAXONOMY / "en16931" / f"en16931-{VERSION}.xsd"
+    presentation_linkbase = TAXONOMY / "en16931" / f"en16931-{VERSION}-presentation.xml"
     content_xsd = TAXONOMY / "plt" / f"en16931-content-{VERSION}.xsd"
     gl_gen_xsd = TAXONOMY / "gen" / f"gl-gen-{VERSION}.xsd"
     plt_all_xsd = TAXONOMY / "plt" / f"plt-all-{VERSION}.xsd"
 
-    for path in (oim_xsd, def_linkbase, module_xsd, gl_gen_xsd):
+    for path in (oim_xsd, def_linkbase, module_xsd, presentation_linkbase, gl_gen_xsd):
         assert_exists(path)
     assert not plt_all_xsd.exists(), f"Tuple entry point must not exist: {plt_all_xsd}"
     assert not content_xsd.exists(), f"Content schema must not exist: {content_xsd}"
@@ -59,12 +60,14 @@ def main() -> int:
         oim_xsd: parse(oim_xsd),
         def_linkbase: parse(def_linkbase),
         module_xsd: parse(module_xsd),
+        presentation_linkbase: parse(presentation_linkbase),
         gl_gen_xsd: parse(gl_gen_xsd),
     }
     for path, root in roots.items():
         check_references(path, root)
 
     oim_elements = [element for element in roots[oim_xsd] if element.tag.endswith("element")]
+    assert roots[oim_xsd].attrib["targetNamespace"] == f"http://www.xbrl.org/int/gl/en16931/{VERSION}"
     oim_groups = {element.attrib.get("substitutionGroup", "") for element in oim_elements}
     assert "xbrldt:hypercubeItem" in oim_groups
     assert "xbrldt:dimensionItem" in oim_groups

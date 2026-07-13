@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) XBRL International.  See http://www.xbrl.org/legal -->
+<schema targetNamespace="http://www.xbrl.org/int/gl/en16931/2026-07-05" attributeFormDefault="unqualified" elementFormDefault="qualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:link="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+  xmlns:en16931="http://www.xbrl.org/int/gl/en16931/2026-07-05">
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+  <import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
+  <annotation>
+    <appinfo>
+      <link:linkbaseRef xlink:type="simple" xlink:href="../en16931/lang/en16931-2026-07-05-label.xml" xlink:title="Label Links, all" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+      <link:linkbaseRef xlink:type="simple" xlink:href="../en16931/lang/en16931-2026-07-05-label-ja.xml" xlink:title="Label Links, ja" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+      <link:linkbaseRef xlink:type="simple" xlink:href="../en16931/en16931-2026-07-05-presentation.xml" xlink:title="Presentation" xlink:role="http://www.xbrl.org/2003/role/presentationLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+      <link:linkbaseRef xlink:type="simple" xlink:href="en16931-def-2026-07-05.xml" xlink:title="Definition" xlink:role="http://www.xbrl.org/2003/role/definitionLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+      <!-- 
+        role type
+      -->
+      <link:roleType id="xbrl-gl-role" roleURI="http://www.xbrl.org/xbrl-gl/role">
+        <link:definition>link xbrl-gl</link:definition>
+        <link:usedOn>link:definitionLink</link:usedOn>
+        <link:usedOn>link:presentationLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_Invoice" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_Invoice">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_InvoiceInvoiceNote" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_InvoiceInvoiceNote">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_InvoicePrecedingInvoiceReference" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_InvoicePrecedingInvoiceReference">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_PaymentInstructions" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_PaymentInstructions">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_CreditTransfer" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_CreditTransfer">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_DocumentLevelAllowances" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_DocumentLevelAllowances">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_DocumentLevelCharges" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_DocumentLevelCharges">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_VatBreakdown" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_VatBreakdown">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_AdditionalSupportingDocuments" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_AdditionalSupportingDocuments">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_InvoiceLine" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_InvoiceLine">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_InvoiceLineAllowances" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_InvoiceLineAllowances">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_InvoiceLineCharges" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_InvoiceLineCharges">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_en16931_ItemAttributes" roleURI="http://www.xbrl.org/xbrl-gl/role/link_en16931_ItemAttributes">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+    </appinfo>
+  </annotation>
+  <!-- typed dimension referenced element -->
+  <element name="_v" id="_v">
+    <simpleType>
+    <restriction base="string"/>
+    </simpleType>
+  </element>
+  <!-- Hypercube -->
+  <element name="h_en16931_Invoice" id="h_en16931_Invoice" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_InvoiceInvoiceNote" id="h_en16931_InvoiceInvoiceNote" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_InvoicePrecedingInvoiceReference" id="h_en16931_InvoicePrecedingInvoiceReference" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_PaymentInstructions" id="h_en16931_PaymentInstructions" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_CreditTransfer" id="h_en16931_CreditTransfer" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_DocumentLevelAllowances" id="h_en16931_DocumentLevelAllowances" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_DocumentLevelCharges" id="h_en16931_DocumentLevelCharges" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_VatBreakdown" id="h_en16931_VatBreakdown" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_AdditionalSupportingDocuments" id="h_en16931_AdditionalSupportingDocuments" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_InvoiceLine" id="h_en16931_InvoiceLine" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_InvoiceLineAllowances" id="h_en16931_InvoiceLineAllowances" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_InvoiceLineCharges" id="h_en16931_InvoiceLineCharges" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_en16931_ItemAttributes" id="h_en16931_ItemAttributes" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <!-- Dimension -->
+  <element name="d_en16931_Invoice" id="d_en16931_Invoice" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_InvoiceInvoiceNote" id="d_en16931_InvoiceInvoiceNote" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_InvoicePrecedingInvoiceReference" id="d_en16931_InvoicePrecedingInvoiceReference" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_PaymentInstructions" id="d_en16931_PaymentInstructions" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_CreditTransfer" id="d_en16931_CreditTransfer" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_DocumentLevelAllowances" id="d_en16931_DocumentLevelAllowances" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_DocumentLevelCharges" id="d_en16931_DocumentLevelCharges" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_VatBreakdown" id="d_en16931_VatBreakdown" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_AdditionalSupportingDocuments" id="d_en16931_AdditionalSupportingDocuments" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_InvoiceLine" id="d_en16931_InvoiceLine" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_InvoiceLineAllowances" id="d_en16931_InvoiceLineAllowances" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_InvoiceLineCharges" id="d_en16931_InvoiceLineCharges" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_en16931_ItemAttributes" id="d_en16931_ItemAttributes" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <!-- Primary -->
+  <element name="p_en16931_Invoice" id="p_en16931_Invoice" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_InvoiceInvoiceNote" id="p_en16931_InvoiceInvoiceNote" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_InvoicePrecedingInvoiceReference" id="p_en16931_InvoicePrecedingInvoiceReference" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_PaymentInstructions" id="p_en16931_PaymentInstructions" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_CreditTransfer" id="p_en16931_CreditTransfer" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_DocumentLevelAllowances" id="p_en16931_DocumentLevelAllowances" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_DocumentLevelCharges" id="p_en16931_DocumentLevelCharges" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_VatBreakdown" id="p_en16931_VatBreakdown" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_AdditionalSupportingDocuments" id="p_en16931_AdditionalSupportingDocuments" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_InvoiceLine" id="p_en16931_InvoiceLine" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_InvoiceLineAllowances" id="p_en16931_InvoiceLineAllowances" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_InvoiceLineCharges" id="p_en16931_InvoiceLineCharges" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_en16931_ItemAttributes" id="p_en16931_ItemAttributes" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+</schema>

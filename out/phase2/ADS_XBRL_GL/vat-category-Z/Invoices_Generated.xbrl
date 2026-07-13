@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xbrli:xbrl xmlns:gl-bus="http://www.xbrl.org/int/gl/bus/2016-12-01" xmlns:gl-cor="http://www.xbrl.org/int/gl/cor/2016-12-01" xmlns:gl-muc="http://www.xbrl.org/int/gl/muc/2016-12-01" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:xbrll="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:iso639="http://www.xbrl.org/2005/iso639" xsi:schemaLocation="http://www.xbrl.org/int/gl/plt/2016-12-01 ../../../../XBRL-GL-PWD-2016-12-01/gl/plt/case-c-b-m-u-e-t-s/gl-plt-all-2016-12-01.xsd">
+  <xbrll:schemaRef xlink:type="simple" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="../../../../XBRL-GL-PWD-2016-12-01/gl/plt/case-c-b-m-u-e-t-s/gl-plt-all-2016-12-01.xsd" />
+  <xbrli:context id="now">
+    <xbrli:entity>
+      <xbrli:identifier scheme="https://example.com/uadc-poc">The Buyercompany</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2018-08-30</xbrli:instant>
+    </xbrli:period>
+  </xbrli:context>
+  <xbrli:unit id="GBP">
+    <xbrli:measure>iso4217:GBP</xbrli:measure>
+  </xbrli:unit>
+  <xbrli:unit id="NotUsed">
+    <xbrli:measure>pure</xbrli:measure>
+  </xbrli:unit>
+  <gl-cor:accountingEntries>
+    <gl-cor:documentInfo>
+      <gl-cor:entriesType contextRef="now">other</gl-cor:entriesType>
+      <gl-cor:language contextRef="now">iso639:en</gl-cor:language>
+      <gl-cor:creationDate contextRef="now">2018-08-30</gl-cor:creationDate>
+      <gl-cor:entriesComment contextRef="now">Generated UADC PoC ADS XBRL GL instance</gl-cor:entriesComment>
+      <gl-muc:defaultCurrency contextRef="now">iso4217:GBP</gl-muc:defaultCurrency>
+    </gl-cor:documentInfo>
+    <gl-cor:entityInformation>
+      <gl-bus:fiscalYearEnd contextRef="now">2018-08-30</gl-bus:fiscalYearEnd>
+    </gl-cor:entityInformation>
+    <gl-cor:entryHeader>
+      <gl-bus:postingCode contextRef="now">2018-08-30</gl-bus:postingCode>
+      <gl-cor:entryDetail>
+        <gl-cor:amount contextRef="now" decimals="2" unitRef="GBP">1200.00</gl-cor:amount>
+        <gl-muc:amountCurrency contextRef="now">GBP</gl-muc:amountCurrency>
+        <gl-cor:identifierReference>
+          <gl-cor:identifierDescription contextRef="now">The Buyercompany</gl-cor:identifierDescription>
+          <gl-cor:identifierType contextRef="now">C</gl-cor:identifierType>
+        </gl-cor:identifierReference>
+        <gl-cor:documentNumber contextRef="now">Vat-Z</gl-cor:documentNumber>
+        <gl-cor:documentReference contextRef="now">Vat-Z</gl-cor:documentReference>
+        <gl-cor:documentDate contextRef="now">2018-08-30</gl-cor:documentDate>
+        <gl-cor:terms contextRef="now">Payment within 30 days</gl-cor:terms>
+        <gl-cor:taxes>
+          <gl-cor:taxAmount contextRef="now" decimals="2" unitRef="GBP">0.00</gl-cor:taxAmount>
+          <gl-cor:taxCode contextRef="now">Z</gl-cor:taxCode>
+        </gl-cor:taxes>
+      </gl-cor:entryDetail>
+    </gl-cor:entryHeader>
+  </gl-cor:accountingEntries>
+</xbrli:xbrl>

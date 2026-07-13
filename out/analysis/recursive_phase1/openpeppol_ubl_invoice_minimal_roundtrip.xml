@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+  <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+  <cbc:ID>INV-2026-0001</cbc:ID>
+  <cbc:IssueDate>2026-07-06</cbc:IssueDate>
+  <cbc:DueDate>2026-08-05</cbc:DueDate>
+  <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+  <cbc:DocumentCurrencyCode>JPY</cbc:DocumentCurrencyCode>
+  <cbc:BuyerReference>BUYER-REF-001</cbc:BuyerReference>
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID>SELLER-ID</cbc:ID>
+        </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>Seller Trading Name</cbc:Name>
+        </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:CityName>Tokyo</cbc:CityName>
+        <cbc:PostalZone>100-0001</cbc:PostalZone>
+        <cac:AddressLine>
+          <cbc:Line>1-1-1 Chiyoda</cbc:Line>
+          </cac:AddressLine>
+        <cac:Country>
+          <cbc:IdentificationCode>JP</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>T1234567890123</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+          </cac:TaxScheme>
+        </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Seller Co. Ltd.</cbc:RegistrationName>
+        <cbc:CompanyID>SELLER-REG</cbc:CompanyID>
+        </cac:PartyLegalEntity>
+      </cac:Party>
+    </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID>BUYER-ID</cbc:ID>
+        </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>Buyer Trading Name</cbc:Name>
+        </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:CityName>Osaka</cbc:CityName>
+        <cbc:PostalZone>530-0001</cbc:PostalZone>
+        <cac:AddressLine>
+          <cbc:Line>2-2-2 Kita</cbc:Line>
+          </cac:AddressLine>
+        <cac:Country>
+          <cbc:IdentificationCode>JP</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:PostalAddress>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Buyer Co. Ltd.</cbc:RegistrationName>
+        <cbc:CompanyID>BUYER-REG</cbc:CompanyID>
+        </cac:PartyLegalEntity>
+      </cac:Party>
+    </cac:AccountingCustomerParty>
+  <cac:Delivery>
+    <cbc:ActualDeliveryDate>2026-07-05</cbc:ActualDeliveryDate>
+    </cac:Delivery>
+  <cac:PaymentMeans>
+    <cbc:PaymentMeansCode>30</cbc:PaymentMeansCode>
+    <cbc:PaymentID>INV-2026-0001</cbc:PaymentID>
+    <cac:PayeeFinancialAccount>
+      <cbc:ID>JP00BANK0000000001</cbc:ID>
+      </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+  <cac:PaymentTerms>
+    <cbc:Note>Payment due within 30 days.</cbc:Note>
+    </cac:PaymentTerms>
+  <cac:AllowanceCharge>
+    <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+    <cbc:AllowanceChargeReasonCode>95</cbc:AllowanceChargeReasonCode>
+    <cbc:AllowanceChargeReason>Document level discount</cbc:AllowanceChargeReason>
+    <cbc:MultiplierFactorNumeric>5</cbc:MultiplierFactorNumeric>
+    <cbc:Amount currencyID="JPY">500</cbc:Amount>
+    <cbc:BaseAmount currencyID="JPY">10000</cbc:BaseAmount>
+    <cac:TaxCategory>
+      <cbc:ID>S</cbc:ID>
+      <cbc:Percent>10</cbc:Percent>
+      <cac:TaxScheme>
+        <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:AllowanceCharge>
+  <cac:AllowanceCharge>
+    <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+    <cbc:AllowanceChargeReasonCode>FC</cbc:AllowanceChargeReasonCode>
+    <cbc:AllowanceChargeReason>Freight service</cbc:AllowanceChargeReason>
+    <cbc:MultiplierFactorNumeric>2</cbc:MultiplierFactorNumeric>
+    <cbc:Amount currencyID="JPY">200</cbc:Amount>
+    <cbc:BaseAmount currencyID="JPY">10000</cbc:BaseAmount>
+    <cac:TaxCategory>
+      <cbc:ID>S</cbc:ID>
+      <cbc:Percent>10</cbc:Percent>
+      <cac:TaxScheme>
+        <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:AllowanceCharge>
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="JPY" />
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="JPY">10000</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="JPY">1000</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>10</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+          </cac:TaxScheme>
+        </cac:TaxCategory>
+      </cac:TaxSubtotal>
+    </cac:TaxTotal>
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="JPY">10000</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="JPY">10000</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="JPY">11000</cbc:TaxInclusiveAmount>
+    <cbc:AllowanceTotalAmount currencyID="JPY">500</cbc:AllowanceTotalAmount>
+    <cbc:ChargeTotalAmount currencyID="JPY">200</cbc:ChargeTotalAmount>
+    <cbc:PrepaidAmount currencyID="JPY">1000</cbc:PrepaidAmount>
+    <cbc:PayableRoundingAmount currencyID="JPY">0</cbc:PayableRoundingAmount>
+    <cbc:PayableAmount currencyID="JPY">11000</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+  <cac:InvoiceLine>
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="JPY">10000</cbc:LineExtensionAmount>
+    <cbc:AccountingCost>ACCT-100</cbc:AccountingCost>
+    <cac:InvoicePeriod>
+      <cbc:StartDate>2026-07-01</cbc:StartDate>
+      <cbc:EndDate>2026-07-31</cbc:EndDate>
+      </cac:InvoicePeriod>
+    <cac:OrderLineReference>
+      <cbc:LineID>PO-LINE-1</cbc:LineID>
+      </cac:OrderLineReference>
+    <cac:DocumentReference>
+      <cbc:ID>OBJ-001</cbc:ID>
+      </cac:DocumentReference>
+    <cac:AllowanceCharge>
+      <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+      <cbc:AllowanceChargeReasonCode>95</cbc:AllowanceChargeReasonCode>
+      <cbc:AllowanceChargeReason>Line discount</cbc:AllowanceChargeReason>
+      <cbc:MultiplierFactorNumeric>3</cbc:MultiplierFactorNumeric>
+      <cbc:Amount currencyID="JPY">300</cbc:Amount>
+      <cbc:BaseAmount currencyID="JPY">10000</cbc:BaseAmount>
+      </cac:AllowanceCharge>
+    <cac:AllowanceCharge>
+      <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+      <cbc:AllowanceChargeReasonCode>HD</cbc:AllowanceChargeReasonCode>
+      <cbc:AllowanceChargeReason>Handling charge</cbc:AllowanceChargeReason>
+      <cbc:MultiplierFactorNumeric>1</cbc:MultiplierFactorNumeric>
+      <cbc:Amount currencyID="JPY">100</cbc:Amount>
+      <cbc:BaseAmount currencyID="JPY">10000</cbc:BaseAmount>
+      </cac:AllowanceCharge>
+    <cac:Item>
+      <cbc:Description>OpenPeppol UBL Invoice PoC sample item.</cbc:Description>
+      <cbc:Name>Sample item</cbc:Name>
+      <cac:SellersItemIdentification>
+        <cbc:ID>ITEM-001</cbc:ID>
+        </cac:SellersItemIdentification>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>10</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+          </cac:TaxScheme>
+        </cac:ClassifiedTaxCategory>
+      </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="JPY">1000</cbc:PriceAmount>
+      <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+      </cac:Price>
+    </cac:InvoiceLine>
+  </Invoice>

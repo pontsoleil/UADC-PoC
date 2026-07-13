@@ -13,4 +13,4 @@ This directory documents how the xBRL-CSV taxonomy is generated from the LHM.
 - **../../specs/lhm/** - LHM CSV used as the taxonomy source.
 - **../../out/taxonomy/** - Generated taxonomy output. This directory is ignored by Git.
 
-Phase 1 generates **plt-oim-<version>.xsd** as the xBRL-CSV taxonomy entry point. It does not generate **plt-all-<version>.xsd** or **<module>-content-<version>.xsd** tuple/content schemas.
+Phase 1 generates **en16931-oim-<version>.xsd** as the xBRL-CSV taxonomy entry point and **en16931-def-<version>.xml** as its dimensional definition linkbase. The entry point references the EN 16931 presentation linkbase so the LHM hierarchy is visible to taxonomy processors. It does not generate **plt-all-<version>.xsd** or **<module>-content-<version>.xsd** tuple/content schemas.

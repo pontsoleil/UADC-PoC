@@ -125,13 +125,13 @@ Later interoperability tests
 - **tools/** - Initial setup, supporting generation, environment-maintenance, and development helper tools. This includes the round-trip artifact builder **tools/build_roundtrip_test_artifacts.py**, tutorial/sample converters, LHM and binding maintenance scripts, and the local taxonomy generator in **tools/taxonomy/**.
 - **out/** - Generated local output, ignored by Git. This includes taxonomy output, structured CSV output, reverse-conversion output, temporary caches, and rendered document QA artifacts.
 
-The taxonomy generator is included at **tools/taxonomy/xBRLGL_TaxonomyGenerator.py**. The generated xBRL-CSV taxonomy entry point is **out/taxonomy/plt/plt-oim-2026-07-05.xsd**. Tuple/content taxonomy schemas such as **plt-all-<version>.xsd** and **en16931-content-<version>.xsd** are not generated for this PoC.
+The taxonomy generator is included at **tools/taxonomy/xBRLGL_TaxonomyGenerator.py**. The generated xBRL-CSV taxonomy entry point is **out/taxonomy/plt/en16931-oim-2026-07-05.xsd** and its dimensional definition linkbase is **out/taxonomy/plt/en16931-def-2026-07-05.xml**. The entry point also discovers the EN 16931 presentation linkbase so Arelle displays the LHM hierarchy. Tuple/content taxonomy schemas such as **plt-all-<version>.xsd** and **en16931-content-<version>.xsd** are not generated for this PoC.
 
 ## Current Scope
 
 1. Define and audit the EN 16931 invoice LHM used by the generic Structured CSV.
 2. Convert Peppol UBL Invoice XML into the generic UADC Structured CSV.
-3. Generate xBRL-CSV metadata that references the **plt-oim** taxonomy entry point.
+3. Generate xBRL-CSV metadata that references the **en16931-oim** taxonomy entry point.
 4. Validate generated xBRL-CSV metadata with Arelle.
 5. Reconstruct UBL Invoice XML from Structured CSV and validate it with UBL 2.1 schemas.
 6. Generate Phase 2 ADS XBRL GL target views from the Phase 1 Structured CSV. The current ADS XBRL GL outputs are written under **out/phase2/ADS_XBRL_GL/<structured-csv-stem>/** as **Invoices_Received.xbrl**, **Invoices_Generated.xbrl**, **Invoices_Received_Lines.xbrl**, **Invoices_Generated_Lines.xbrl**, **Supplier_Listing.xbrl**, and **Customer_Master.xbrl**.
@@ -143,11 +143,11 @@ The taxonomy generator is included at **tools/taxonomy/xBRLGL_TaxonomyGenerator.
 
 1. Define the LHM for the generic Structured CSV. The LHM describes the EN 16931 invoice business terms as a hierarchy. It includes semantic paths, effective **lhm_level** values, and syntax binding references. The first syntax binding maps Peppol UBL Invoice XML into this neutral Structured CSV representation.
 
-2. Define the xBRL-CSV taxonomy for the LHM. The taxonomy generator reads the LHM CSV and emits the EN 16931 module schema plus the **plt-oim** xBRL-CSV taxonomy schema and definition linkbase. Hypercubes, dimensions, and primary items are derived from the effective LHM hierarchy. The generated taxonomy is checked with Arelle using **out/taxonomy/plt/plt-oim-2026-07-05.xsd** as the entry point.
+2. Define the xBRL-CSV taxonomy for the LHM. The taxonomy generator reads the LHM CSV and emits the EN 16931 module schema, **en16931-oim** entry point, **en16931-def** dimensional definition linkbase, labels, and presentation linkbase. Hypercubes, dimensions, primary items, and presentation parent-child relationships are derived from the effective LHM hierarchy. Class/BG presentation nodes use OIM primary items; BT/fact nodes use module concepts. The generated taxonomy is checked with Arelle using **out/taxonomy/plt/en16931-oim-2026-07-05.xsd** as the entry point.
 
 3. Convert XML instances to structured CSV with JSON metadata. The syntax binding converter reads a Peppol UBL Invoice XML instance, applies the LHM XPath bindings, and writes a hierarchical Structured CSV. At the same time it writes xBRL-CSV JSON metadata that links CSV dimensions and fact columns to the generated taxonomy. The JSON metadata is validated with Arelle **loadFromOIM**.
 
-4. Perform round trip conversion from structured CSV to XML instances. The reverse conversion reads the structured CSV and the same LHM/syntax binding definitions, reconstructs a UBL Invoice XML instance, and adds required syntax support values where needed for UBL schema validity. The resulting XML is checked with an XML parser and UBL 2.1 schema validation.
+4. Perform round trip conversion from structured CSV to XML instances. The reverse conversion reads the structured CSV and the same LHM/syntax binding definitions, reconstructs a UBL Invoice XML instance, and adds required syntax support values where needed for UBL schema validity. Absolute binding XPaths that point outside a repeated semantic context remain rooted at the UBL document; for example, BT-90 is semantically under payment instructions but is written to **AccountingSupplierParty**, not below **PaymentMeans**. The resulting XML is checked with an XML parser and UBL 2.1 schema validation.
 
 5. Add additional source syntaxes after the Peppol UBL baseline is stable. Planned source inputs include UN/CEFACT Invoice and XBRL GL invoice examples. These should map into the same generic Structured CSV wherever the semantic model overlaps.
 
@@ -180,4 +180,3 @@ Semantic path elements are generated from Business Terms using **lowerCamelCaseC
 Invoice issue date -> invoiceIssueDate
 Seller postal address -> sellerPostalAddress
 ```
-

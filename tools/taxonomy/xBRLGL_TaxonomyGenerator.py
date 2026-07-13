@@ -273,7 +273,7 @@ class xBRLGL_TaxonomyGenerator:
                 if not target_id in self.locs_defined[primary_id]:
                     self.locs_defined[primary_id].add(target_id)
                     self.lines.append(
-                        f'    <link:loc xlink:type="locator" xlink:href="plt-oim-{self.version}.xsd#{target_id}" xlink:label="{target_id}" xlink:title="{target_id} {child_name}"/>\n'
+                        f'    <link:loc xlink:type="locator" xlink:href="en16931-oim-{self.version}.xsd#{target_id}" xlink:label="{target_id}" xlink:title="{target_id} {child_name}"/>\n'
                     )
                 self.count += 1
                 arc_id = f"{primary_id} TO {target_link}"
@@ -329,8 +329,8 @@ class xBRLGL_TaxonomyGenerator:
             f'  <link:definitionLink xlink:type="extended" xlink:role="http://www.xbrl.org/xbrl-gl/role/{link_id}">\n',
             # all (has-hypercube)
             f"    <!-- {primary_id} all (has-hypercube) {hypercube_id} {link_id} -->\n",
-            f'    <link:loc xlink:type="locator" xlink:href="plt-oim-{self.version}.xsd#{primary_id}" xlink:label="{primary_id}" xlink:title="{primary_id}"/>\n',
-            f'    <link:loc xlink:type="locator" xlink:href="plt-oim-{self.version}.xsd#{hypercube_id}" xlink:label="{hypercube_id}" xlink:title="{hypercube_id}"/>\n',
+            f'    <link:loc xlink:type="locator" xlink:href="en16931-oim-{self.version}.xsd#{primary_id}" xlink:label="{primary_id}" xlink:title="{primary_id}"/>\n',
+            f'    <link:loc xlink:type="locator" xlink:href="en16931-oim-{self.version}.xsd#{hypercube_id}" xlink:label="{hypercube_id}" xlink:title="{hypercube_id}"/>\n',
             f'    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/all" xlink:from="{primary_id}" xlink:to="{hypercube_id}" xlink:title="all (has-hypercube): {primary_id} to {hypercube_id}" order="1" xbrldt:closed="true" xbrldt:contextElement="segment"/>\n',
         ]
         self.debug_print(f"all(has-hypercube) {primary_id} to {hypercube_id} ")
@@ -339,7 +339,7 @@ class xBRLGL_TaxonomyGenerator:
         self.count = 0
         for dimension_id in dimension_id_list:
             self.lines.append(
-                f'    <link:loc xlink:type="locator" xlink:href="plt-oim-{self.version}.xsd#{dimension_id}" xlink:label="{dimension_id}" xlink:title="{dimension_id}"/>\n'
+                f'    <link:loc xlink:type="locator" xlink:href="en16931-oim-{self.version}.xsd#{dimension_id}" xlink:label="{dimension_id}" xlink:title="{dimension_id}"/>\n'
             )
             self.count += 1
             self.lines.append(
@@ -375,10 +375,15 @@ class xBRLGL_TaxonomyGenerator:
             return
         module = element_id[: element_id.index("_")]
         name = record["name"]
-        if not element_id in self.locs_defined:
-            self.locs_defined[element_id] = name
+        presentation_id = f"p_{element_id}" if record["type"] == "C" else element_id
+        if not presentation_id in self.locs_defined:
+            self.locs_defined[presentation_id] = name
             self.lines.append(f"    <!-- {name} -->\n")
-            if _module==module:
+            if record["type"] == "C":
+                self.lines.append(
+                    f'    <loc xlink:type="locator" xlink:href="../plt/en16931-oim-{self.version}.xsd#{presentation_id}" xlink:label="{presentation_id}" xlink:title="loc: {presentation_id}"/>\n'
+                )
+            elif _module==module:
                 self.lines.append(
                     f'    <loc xlink:type="locator" xlink:href="{module}-{self.version}.xsd#{element_id}" xlink:label="{element_id}" xlink:title="loc: {element_id}"/>\n'
                 )
@@ -394,19 +399,25 @@ class xBRLGL_TaxonomyGenerator:
                 continue
             child_module = child_element_id[:child_element_id.index("_")]
             child_name = child["name"]
+            child_presentation_id = f"p_{child_element_id}" if child["type"] == "C" else child_element_id
             order += 10
-            arc_id = f"{element_id} to {child_element_id}"
+            arc_id = f"{presentation_id} to {child_presentation_id}"
             if arc_id not in self.arcs_defined:
-                self.arcs_defined[arc_id] = f"presentation: {element_id} to {child_element_id}"
-                if _module==child_module:
+                self.arcs_defined[arc_id] = f"presentation: {presentation_id} to {child_presentation_id}"
+                if child["type"] == "C":
                     self.lines += [
-                        f'    <loc xlink:type="locator" xlink:href="{child_module}-{self.version}.xsd#{child_element_id}" xlink:label="{child_element_id}" xlink:title="presentation: {element_id} to {child_element_id} {child_name}"/>\n',
-                        f'    <presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="{element_id}" xlink:to="{child_element_id}" xlink:title="presentation: {element_id} to {child_element_id}" use="optional" order="{order}"/>\n',
+                        f'    <loc xlink:type="locator" xlink:href="../plt/en16931-oim-{self.version}.xsd#{child_presentation_id}" xlink:label="{child_presentation_id}" xlink:title="presentation: {presentation_id} to {child_presentation_id} {child_name}"/>\n',
+                        f'    <presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="{presentation_id}" xlink:to="{child_presentation_id}" xlink:title="presentation: {presentation_id} to {child_presentation_id}" use="optional" order="{order}"/>\n',
+                    ]
+                elif _module==child_module:
+                    self.lines += [
+                        f'    <loc xlink:type="locator" xlink:href="{child_module}-{self.version}.xsd#{child_element_id}" xlink:label="{child_element_id}" xlink:title="presentation: {presentation_id} to {child_element_id} {child_name}"/>\n',
+                        f'    <presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="{presentation_id}" xlink:to="{child_element_id}" xlink:title="presentation: {presentation_id} to {child_element_id}" use="optional" order="{order}"/>\n',
                     ]
                 else:
                     self.lines += [
-                        f'    <loc xlink:type="locator" xlink:href="../{child_module}/{child_module}-{self.version}.xsd#{child_element_id}" xlink:label="{child_element_id}" xlink:title="presentation: {element_id} to {child_element_id} {child_name}"/>\n',
-                        f'    <presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="{element_id}" xlink:to="{child_element_id}" xlink:title="presentation: {element_id} to {child_element_id}" use="optional" order="{order}"/>\n',
+                        f'    <loc xlink:type="locator" xlink:href="../{child_module}/{child_module}-{self.version}.xsd#{child_element_id}" xlink:label="{child_element_id}" xlink:title="presentation: {presentation_id} to {child_element_id} {child_name}"/>\n',
+                        f'    <presentationArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xlink:from="{presentation_id}" xlink:to="{child_element_id}" xlink:title="presentation: {presentation_id} to {child_element_id}" use="optional" order="{order}"/>\n',
                     ]
             if child_element_id in self.presentation_dict:
                 grand_children = self.presentation_dict[child_element_id]
@@ -920,13 +931,13 @@ class xBRLGL_TaxonomyGenerator:
         html = [
             '<?xml version="1.0" encoding="UTF-8"?>\n',
             "<!-- (c) XBRL International.  See http://www.xbrl.org/legal -->\n",
-            f'<schema targetNamespace="http://www.xbrl.org/int/gl/plt/{self.version}" attributeFormDefault="unqualified" elementFormDefault="qualified"\n',
+            f'<schema targetNamespace="http://www.xbrl.org/int/gl/en16931/{self.version}" attributeFormDefault="unqualified" elementFormDefault="qualified"\n',
             '  xmlns="http://www.w3.org/2001/XMLSchema"\n',
             '  xmlns:xbrli="http://www.xbrl.org/2003/instance"\n',
             '  xmlns:link="http://www.xbrl.org/2003/linkbase"\n',
             '  xmlns:xlink="http://www.w3.org/1999/xlink"\n',
             '  xmlns:xbrldt="http://xbrl.org/2005/xbrldt"\n',
-            f'  xmlns:plt="http://www.xbrl.org/int/gl/plt/{self.version}">\n'
+            f'  xmlns:en16931="http://www.xbrl.org/int/gl/en16931/{self.version}">\n'
         ]
 
         html += [
@@ -943,18 +954,19 @@ class xBRLGL_TaxonomyGenerator:
         for module in modules:
             html += [
                 f'      <link:linkbaseRef xlink:type="simple" xlink:href="../{module}/lang/{module}-{self.version}-label.xml" xlink:title="Label Links, all" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>\n',
-                f'      <link:linkbaseRef xlink:type="simple" xlink:href="../{module}/lang/{module}-{self.version}-label-ja.xml" xlink:title="Label Links, ja" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>\n'
+                f'      <link:linkbaseRef xlink:type="simple" xlink:href="../{module}/lang/{module}-{self.version}-label-ja.xml" xlink:title="Label Links, ja" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>\n',
+                f'      <link:linkbaseRef xlink:type="simple" xlink:href="../{module}/{module}-{self.version}-presentation.xml" xlink:title="Presentation" xlink:role="http://www.xbrl.org/2003/role/presentationLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>\n'
             ]
 
         html.append(
-            f'      <link:linkbaseRef xlink:type="simple" xlink:href="plt-def-{self.version}.xml" xlink:title="Definition" xlink:role="http://www.xbrl.org/2003/role/definitionLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>\n',
+            f'      <link:linkbaseRef xlink:type="simple" xlink:href="en16931-def-{self.version}.xml" xlink:title="Definition" xlink:role="http://www.xbrl.org/2003/role/definitionLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>\n',
         )
 
         html += [
             "      <!-- \n",
             "        role type\n",
             "      -->\n",
-            '      <link:roleType id="xbrl-role" roleURI="http://www.xbrl.org/xbrl-gl/role">\n',
+            '      <link:roleType id="xbrl-gl-role" roleURI="http://www.xbrl.org/xbrl-gl/role">\n',
             "        <link:definition>link xbrl-gl</link:definition>\n",
             "        <link:usedOn>link:definitionLink</link:usedOn>\n",
             "        <link:usedOn>link:presentationLink</link:usedOn>\n",
@@ -1012,7 +1024,7 @@ class xBRLGL_TaxonomyGenerator:
         Write xBRL-CSV schema file
         """
         xsd_file = file_path(
-            f"{xbrl_base}/plt/plt-oim-{self.version}.xsd"
+            f"{xbrl_base}/plt/en16931-oim-{self.version}.xsd"
         )
         with open(xsd_file, "w", encoding=self.encoding, newline="") as f:
             f.writelines(html)
@@ -1032,16 +1044,22 @@ class xBRLGL_TaxonomyGenerator:
             ]
 
             for record in data:
-                if "A" != record["type"]:
+                if record["type"] not in ("A", "C"):
                     continue
                 element = record["element"]
                 name = record["name"]
                 desc = record["definition"].replace('\\n','\n') if "definition" in record else None
                 module = element[:element.index(":")]
                 element_name = element[1 + element.index(":"):]
+                concept_id = f"p_{module}_{element_name}" if record["type"] == "C" else f"{module}_{element_name}"
+                concept_href = (
+                    f"../../plt/en16931-oim-{self.version}.xsd#{concept_id}"
+                    if record["type"] == "C"
+                    else f"../{module}-{self.version}.xsd#{concept_id}"
+                )
                 self.lines += [
                     f"        <!-- {element} {name} -->\n",
-                    f'        <loc xlink:type="locator" xlink:href="../{module}-{self.version}.xsd#{module}_{element_name}" xlink:label="{element_name}"/>\n',
+                    f'        <loc xlink:type="locator" xlink:href="{concept_href}" xlink:label="{element_name}"/>\n',
                     f'        <label xlink:type="resource" xlink:label="{element_name}_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="{module}_{element_name}_en" xml:lang="en">{name}</label>\n',
                     f'        <label xlink:type="resource" xlink:label="{element_name}_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="{self.lang}">{desc}</label>\n',
                     f'        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="{element_name}" xlink:to="{element_name}_lbl"/>\n',
@@ -1079,7 +1097,7 @@ class xBRLGL_TaxonomyGenerator:
             ]
 
             for record in data:
-                if "A" != record["type"]:
+                if record["type"] not in ("A", "C"):
                     continue
                 element = record["element"]
                 label_local = record["label_local"]
@@ -1088,9 +1106,15 @@ class xBRLGL_TaxonomyGenerator:
                 )
                 module = element[:element.index(":")]
                 element_name = element[1 + element.index(":"):]
+                concept_id = f"p_{module}_{element_name}" if record["type"] == "C" else f"{module}_{element_name}"
+                concept_href = (
+                    f"../../plt/en16931-oim-{self.version}.xsd#{concept_id}"
+                    if record["type"] == "C"
+                    else f"../{module}-{self.version}.xsd#{concept_id}"
+                )
                 self.lines += [
                     f"        <!-- {element} {label_local} -->\n",
-                    f'        <loc xlink:type="locator" xlink:href="../{module}-{self.version}.xsd#{module}_{element_name}" xlink:label="{element_name}"/>\n',
+                    f'        <loc xlink:type="locator" xlink:href="{concept_href}" xlink:label="{element_name}"/>\n',
                     f'        <label xlink:type="resource" xlink:label="{element_name}_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="{module}_{element_name}_{self.lang}" xml:lang="en">{label_local}</label>\n',
                     f'        <label xlink:type="resource" xlink:label="{element_name}_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="{self.lang}">{definition_local}</label>\n',
                     f'        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="{element_name}" xlink:to="{element_name}_lbl"/>\n',
@@ -1164,7 +1188,7 @@ class xBRLGL_TaxonomyGenerator:
         for record in self.roleMap.values():
             taxonomy_schema, link_id, href = self.roleRecord(record['element_id'])
             self.lines.append(
-                f'  <link:roleRef roleURI="http://www.xbrl.org/xbrl-gl/role/{link_id}" xlink:type="simple" xlink:href="plt-oim-{self.version}.xsd#{link_id}"/>\n'
+                f'  <link:roleRef roleURI="http://www.xbrl.org/xbrl-gl/role/{link_id}" xlink:type="simple" xlink:href="en16931-oim-{self.version}.xsd#{link_id}"/>\n'
             )
 
         self.lines += [
@@ -1183,7 +1207,7 @@ class xBRLGL_TaxonomyGenerator:
         self.lines.append("</link:linkbase>\n")
 
         cor_definition_file = file_path(
-            f"{xbrl_base}/plt/plt-def-{self.version}.xml"
+            f"{xbrl_base}/plt/en16931-def-{self.version}.xml"
         )
         with open(cor_definition_file, "w", encoding=self.encoding, newline="") as f:
             f.writelines(self.lines)
@@ -1213,7 +1237,7 @@ class xBRLGL_TaxonomyGenerator:
                     "ehm": f"http://www.xbrl.org/int/gl/ehm/{self.version}",
                     "lnk": f"http://www.xbrl.org/int/gl/lnk/{self.version}",
                     "btx": f"http://www.xbrl.org/int/gl/btx/{self.version}",
-                    "plt": f"http://www.xbrl.org/int/gl/plt/{self.version}"
+                    "en16931": f"http://www.xbrl.org/int/gl/en16931/{self.version}"
                 },
                 "taxonomy": [
                     taxonomy
@@ -1258,13 +1282,13 @@ class xBRLGL_TaxonomyGenerator:
             ]
 
             json_meta["tableTemplates"]["xbrl-gl_template"]["dimensions"][
-                f"plt:d_{root_name}"
+                f"en16931:d_{root_name}"
             ] = f"${root_name}"
             json_meta["tableTemplates"]["xbrl-gl_template"]["columns"][root_name] = {}
 
             for dimension in dimensions[1:]:
                 dimension_name = dimension.replace(":","_")
-                json_meta["tableTemplates"]["xbrl-gl_template"]["dimensions"][f"plt:d_{dimension_name}"] = f"${dimension_name}"
+                json_meta["tableTemplates"]["xbrl-gl_template"]["dimensions"][f"en16931:d_{dimension_name}"] = f"${dimension_name}"
                 json_meta["tableTemplates"]["xbrl-gl_template"]["columns"][dimension_name] = {}
                 self.trace_print(f"json meta columns:{dimension_name}")
                 header_columns.append(dimension_name)
@@ -1398,7 +1422,7 @@ def main():
     generator.generate_taxonomy_files(generator.xbrl_base)
 
     version = generator.namespace[-10:]
-    generator.json_meta_file(f"plt/plt-oim-{version}.xsd", generator.xbrl_base)
+    generator.json_meta_file(f"plt/en16931-oim-{version}.xsd", generator.xbrl_base)
 
 if __name__ == "__main__":
     main()

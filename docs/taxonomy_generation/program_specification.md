@@ -97,8 +97,8 @@ out/taxonomy/en16931/en16931-2026-07-05-presentation.xml
 out/taxonomy/en16931/lang/en16931-2026-07-05-label.xml
 out/taxonomy/en16931/lang/en16931-2026-07-05-label-ja.xml
 out/taxonomy/gen/gl-gen-2026-07-05.xsd
-out/taxonomy/plt/plt-def-2026-07-05.xml
-out/taxonomy/plt/plt-oim-2026-07-05.xsd
+out/taxonomy/plt/en16931-def-2026-07-05.xml
+out/taxonomy/plt/en16931-oim-2026-07-05.xsd
 ```
 
 ### 5.1 Module schema
@@ -147,7 +147,7 @@ Responsibilities:
 File pattern:
 
 ```
-out/taxonomy/plt/plt-oim-<version>.xsd
+out/taxonomy/plt/en16931-oim-<version>.xsd
 ```
 
 Responsibilities:
@@ -156,42 +156,50 @@ Responsibilities:
 - define **d_*** dimension concepts using **xbrldt:dimensionItem**;
 - define **p_*** primary item concepts using **xbrli:item**;
 - define the typed dimension domain element **_v**;
-- define role types used by the xBRL-CSV definition linkbase.
+- define role types used by the xBRL-CSV definition linkbase;
+- reference **en16931-def-<version>.xml**, module labels, and the module presentation linkbase;
+- use the EN 16931 target namespace for OIM primary items and dimensions.
 
 Restrictions:
 
-- **plt-oim** must not define tuple-supporting **complexType**.
-- **plt-oim** must not define **xbrli:tuple** concepts.
-- **plt-oim** must not import the module content schema.
+- **en16931-oim** must not define tuple-supporting **complexType**.
+- **en16931-oim** must not define **xbrli:tuple** concepts.
+- **en16931-oim** must not import the module content schema.
 
 ### 5.5 Definition linkbase
 
 File pattern:
 
 ```
-out/taxonomy/plt/plt-def-<version>.xml
+out/taxonomy/plt/en16931-def-<version>.xml
 ```
 
 Responsibilities:
 
-- reference **plt-oim** role types and dimensional concepts;
+- reference **en16931-oim** role types and dimensional concepts;
 - connect primary items, hypercubes, and dimensions;
 - represent BG-to-BG hierarchy using dimensional relationships for xBRL-CSV.
 
-The definition linkbase locators for dimensional relationships point to **plt-oim**.
+The definition linkbase locators for dimensional relationships point to **en16931-oim**.
+
+### 5.6 Presentation hierarchy
+
+The OIM entry point references **out/taxonomy/en16931/en16931-<version>-presentation.xml**. The presentation hierarchy is derived from the LHM parent-child tree. Class/BG rows resolve to the corresponding **p_en16931_*** primary items in **en16931-oim**; BT/fact rows resolve to concepts in the EN 16931 module schema. This makes the LHM hierarchy visible in Arelle's Presentation view without introducing tuple concepts.
 
 ## 6. Validation Rules
 
 The taxonomy regression checks verify that:
 
-- **plt-oim** contains hypercube, dimension, and primary item definitions;
-- **plt-oim** contains no **xbrli:tuple**;
-- **plt-oim** contains no **complexType**;
-- **plt-oim** does not import **en16931-content**;
+- **en16931-oim** contains hypercube, dimension, and primary item definitions;
+- **en16931-oim** contains no **xbrli:tuple**;
+- **en16931-oim** contains no **complexType**;
+- **en16931-oim** does not import **en16931-content**;
+- the OIM entry point discovers the presentation linkbase;
+- every presentation locator resolves to an OIM primary item or module fact;
 - **plt-all** is not generated;
 - **en16931-content** is not generated;
 - module schemas import **../gen/gl-gen-<version>.xsd**;
-- **xbrli:item** elements generated in **plt-oim** have **xbrli:periodType="instant"**.
+- **xbrli:item** elements generated in **en16931-oim** have **xbrli:periodType="instant"**.
 
 ## 7. Dependencies
 

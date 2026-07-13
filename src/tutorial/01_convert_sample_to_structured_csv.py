@@ -8,10 +8,25 @@ Last Modified: 2026-07-13
 
 Copyright 2026 Sambuichi Professional Engineers Office
 Designed by SAMBUICHI, Nobuyuki
-Produced by ChatGPT & Codex, edited by  SAMBUICHI, Nobuyuki
+Produced by ChatGPT and Codex, edited by SAMBUICHI, Nobuyuki
+
+License:
+    This software source code is licensed under the MIT License.
+
+    Non-code materials in the UADC-PoC project, including original mapping
+    tables, syntax binding definitions, semantic binding definitions,
+    transformation rules, explanatory notes, and documentation, may be licensed
+    separately under Creative Commons Attribution-NonCommercial 4.0
+    International License (CC BY-NC 4.0), where so indicated.
+
+    Third-party standards, schemas, taxonomies, code lists, field names,
+    descriptions, and excerpts remain subject to their original copyright
+    notices and licenses. This license notice does not relicense third-party
+    materials.
+
 MIT License
 
-(c) 2026 Sambuichi Professional Engineers Office
+Copyright (c) 2026 Sambuichi Professional Engineers Office
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +45,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-CC-BY-NC
 """
 
 from __future__ import annotations
@@ -54,7 +68,7 @@ def ensure_taxonomy() -> None:
     Returns:
         None. The taxonomy files are generated under out/taxonomy when needed.
     """
-    taxonomy = ROOT / "out" / "taxonomy" / "plt" / "plt-oim-2026-07-05.xsd"
+    taxonomy = ROOT / "out" / "taxonomy" / "plt" / "en16931-oim-2026-07-05.xsd"
     if taxonomy.exists():
         return
     subprocess.run([str(PYTHON), str(ROOT / "tests" / "test_xbrlgl_generator_uadc_lhm.py")], check=True)

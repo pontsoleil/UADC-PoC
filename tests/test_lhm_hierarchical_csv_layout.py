@@ -55,11 +55,23 @@ def main() -> int:
     assert invoice_row["SellerCity"] == "Tokyo"
     assert invoice_row["BuyerName"] == "Buyer Co. Ltd."
     assert invoice_row["BuyerCity"] == "Osaka"
+    assert not invoice_row["InvoiceLineIdentifier"], (
+        "A repeating child fact must be empty on the invoice parent row."
+    )
+    assert not invoice_row["InvoiceLineNetAmount"], (
+        "A repeating child amount must be empty on the invoice parent row."
+    )
 
     line_rows = [row for row in rows if row["dInvoiceLine"] and row["InvoiceLineNetAmount"]]
     assert [row["dInvoiceLine"] for row in line_rows] == ["1"]
     assert line_rows[0]["dInvoice"] == "1"
     assert line_rows[0]["InvoiceLineNetAmount"] == "10000"
+    assert not line_rows[0]["InvoiceNumber"], (
+        "An invoice parent fact must be empty on a repeated invoice-line row."
+    )
+    assert not line_rows[0]["InvoiceIssueDate"], (
+        "Parent facts and repeated child facts must not share the first child row."
+    )
 
     vat_rows = [row for row in rows if row["dVatBreakdown"]]
     assert vat_rows, "VAT breakdown BG should be represented as a dimension row."

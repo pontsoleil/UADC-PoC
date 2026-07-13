@@ -3,13 +3,12 @@
     "documentType": "https://xbrl.org/2021/xbrl-csv",
     "namespaces": {
       "en16931": "http://www.xbrl.org/int/gl/en16931/2026-07-05",
-      "plt": "http://www.xbrl.org/int/gl/plt/2026-07-05",
       "iso4217": "http://www.xbrl.org/2003/iso4217",
       "scheme": "http://www.example.com",
       "xbrl": "https://xbrl.org/2021"
     },
     "taxonomy": [
-      "../../../../out/taxonomy/plt/plt-oim-2026-07-05.xsd"
+      "../../../../out/taxonomy/plt/en16931-oim-2026-07-05.xsd"
     ]
   },
   "tables": {
@@ -23,19 +22,19 @@
       "dimensions": {
         "period": "2026-07-06T00:00:00",
         "entity": "scheme:UADC-PoC",
-        "plt:d_en16931_Invoice": "$dInvoice",
-        "plt:d_en16931_InvoiceInvoiceNote": "$dInvoiceInvoiceNote",
-        "plt:d_en16931_InvoicePrecedingInvoiceReference": "$dInvoicePrecedingInvoiceReference",
-        "plt:d_en16931_PaymentInstructions": "$dPaymentInstructions",
-        "plt:d_en16931_CreditTransfer": "$dCreditTransfer",
-        "plt:d_en16931_DocumentLevelAllowances": "$dDocumentLevelAllowances",
-        "plt:d_en16931_DocumentLevelCharges": "$dDocumentLevelCharges",
-        "plt:d_en16931_VatBreakdown": "$dVatBreakdown",
-        "plt:d_en16931_AdditionalSupportingDocuments": "$dAdditionalSupportingDocuments",
-        "plt:d_en16931_InvoiceLine": "$dInvoiceLine",
-        "plt:d_en16931_InvoiceLineAllowances": "$dInvoiceLineAllowances",
-        "plt:d_en16931_InvoiceLineCharges": "$dInvoiceLineCharges",
-        "plt:d_en16931_ItemAttributes": "$dItemAttributes"
+        "en16931:d_en16931_Invoice": "$dInvoice",
+        "en16931:d_en16931_InvoiceInvoiceNote": "$dInvoiceInvoiceNote",
+        "en16931:d_en16931_InvoicePrecedingInvoiceReference": "$dInvoicePrecedingInvoiceReference",
+        "en16931:d_en16931_PaymentInstructions": "$dPaymentInstructions",
+        "en16931:d_en16931_CreditTransfer": "$dCreditTransfer",
+        "en16931:d_en16931_DocumentLevelAllowances": "$dDocumentLevelAllowances",
+        "en16931:d_en16931_DocumentLevelCharges": "$dDocumentLevelCharges",
+        "en16931:d_en16931_VatBreakdown": "$dVatBreakdown",
+        "en16931:d_en16931_AdditionalSupportingDocuments": "$dAdditionalSupportingDocuments",
+        "en16931:d_en16931_InvoiceLine": "$dInvoiceLine",
+        "en16931:d_en16931_InvoiceLineAllowances": "$dInvoiceLineAllowances",
+        "en16931:d_en16931_InvoiceLineCharges": "$dInvoiceLineCharges",
+        "en16931:d_en16931_ItemAttributes": "$dItemAttributes"
       },
       "columns": {
         "dInvoice": {},

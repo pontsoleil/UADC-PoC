@@ -5,15 +5,14 @@ Generate ADS XBRL GL tuple instances from UADC structured CSV files.
 
 Purpose:
     Convert UADC proof-of-concept structured CSV data into XBRL GL tuple
-    instances by applying ADS XBRL GL binding CSV files and LHM semantic
-    column mappings.
+    instances by applying ADS XBRL GL binding CSV files.
 
 Processing overview:
     The script reads one structured CSV file, or all CSV files in a directory.
-    It resolves semantic paths to source columns through an LHM CSV, applies
-    the selected ADS XBRL GL binding XPath targets, builds XBRL GL contexts,
-    units, document info, tax structures, and ordered tuple elements, then
-    writes Figure 1 target instance files.
+    It reads source column names from the selected ADS XBRL GL binding table,
+    applies the binding XPath targets, builds XBRL GL contexts, units, document
+    info, tax structures, and ordered tuple elements, then writes Figure 1
+    target instance files.
 
     The same generator is used for these Phase 2 ADS XBRL GL views:
     Invoices_Received, Invoices_Generated, Invoices_Received_Lines,
@@ -22,7 +21,6 @@ Processing overview:
 Command-line arguments:
     input: Structured CSV file, or directory containing structured CSV files.
     -b, --binding-csv: ADS syntax binding CSV with semantic_path, element, and xpath.
-    --lhm-csv: LHM CSV used to resolve semantic_path values to CSV columns.
     -o, --output-dir: Directory for generated XBRL GL XML instance files.
     --schema-href: schemaRef href for the XBRL GL tuple taxonomy entry point.
     --currency-csv: Currency minor-unit table used to determine monetary decimals.
@@ -40,10 +38,25 @@ Last Modified: 2026-07-13
 
 Copyright 2026 Sambuichi Professional Engineers Office
 Designed by SAMBUICHI, Nobuyuki
-Produced by ChatGPT & Codex, edited by  SAMBUICHI, Nobuyuki
+Produced by ChatGPT and Codex, edited by SAMBUICHI, Nobuyuki
+
+License:
+    This software source code is licensed under the MIT License.
+
+    Non-code materials in the UADC-PoC project, including original mapping
+    tables, syntax binding definitions, semantic binding definitions,
+    transformation rules, explanatory notes, and documentation, may be licensed
+    separately under Creative Commons Attribution-NonCommercial 4.0
+    International License (CC BY-NC 4.0), where so indicated.
+
+    Third-party standards, schemas, taxonomies, code lists, field names,
+    descriptions, and excerpts remain subject to their original copyright
+    notices and licenses. This license notice does not relicense third-party
+    materials.
+
 MIT License
 
-(c) 2026 Sambuichi Professional Engineers Office
+Copyright (c) 2026 Sambuichi Professional Engineers Office
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +75,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-CC-BY-NC
 """
 
 from __future__ import annotations
@@ -277,34 +289,32 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
-def load_lhm_semantic_columns(lhm_csv: Path | None) -> dict[str, str]:
-    """
-    Load semantic_path to element-column mappings from an LHM CSV.
-
-    Args:
-        lhm_csv: Input value used by load_lhm_semantic_columns.
-
-    Returns:
-        Result produced by load_lhm_semantic_columns.
-    """
-    if not lhm_csv:
-        return {}
-    mapping: dict[str, str] = {}
-    for row in read_csv(lhm_csv):
-        semantic_path = (row.get("semantic_path") or "").strip()
-        element = (row.get("element") or "").strip()
-        if semantic_path and element:
-            mapping[semantic_path] = element
-    return mapping
+def dimension_name(column: str) -> str:
+    """Return the Structured CSV dimension name for a class column."""
+    column = re.sub(r"[^0-9A-Za-z_]+", "_", column or "").strip("_")
+    return "d" + (column[0].upper() + column[1:] if column else "")
 
 
-def load_bindings(binding_csv: Path, lhm_columns: dict[str, str]) -> list[dict[str, str]]:
+def multiplicity_repeats(multiplicity: str) -> bool:
+    """Return whether an LHM multiplicity has more than one occurrence."""
+    value = (multiplicity or "").strip().lower()
+    if ".." not in value:
+        return False
+    upper = value.rsplit("..", 1)[1]
+    if upper in {"*", "n", "unbounded"}:
+        return True
+    try:
+        return int(upper) > 1
+    except ValueError:
+        return False
+
+
+def load_bindings(binding_csv: Path) -> list[dict[str, str]]:
     """
     Load usable ADS binding rows and attach resolved source columns.
 
     Args:
         binding_csv: Input value used by load_bindings.
-        lhm_columns: Input value used by load_bindings.
 
     Returns:
         Result produced by load_bindings.
@@ -317,7 +327,6 @@ def load_bindings(binding_csv: Path, lhm_columns: dict[str, str]) -> list[dict[s
         source_column = (
             row.get("structured_csv_column")
             or row.get("source_column")
-            or lhm_columns.get(semantic_path)
             or ""
         ).strip()
         if not source_column or not xpath or not target_element:
@@ -332,9 +341,57 @@ def load_bindings(binding_csv: Path, lhm_columns: dict[str, str]) -> list[dict[s
                 "label": (row.get("label_local") or "").strip(),
                 "unit_ref_rule": (row.get("unit_ref_rule") or "").strip(),
                 "decimals": (row.get("decimals") or "").strip(),
+                "type": (row.get("type") or "").strip().upper(),
+                "multiplicity": (row.get("multiplicity") or "").strip(),
             }
         )
     return bindings
+
+
+def validate_hierarchical_row_scopes(
+    rows: list[dict[str, str]], bindings: list[dict[str, str]]
+) -> None:
+    """Reject ADS input rows that mix parent and repeated-child facts."""
+    if not rows:
+        return
+
+    class_dimensions: dict[str, str] = {}
+    for binding in bindings:
+        if binding.get("type") != "C":
+            continue
+        semantic_path = binding["semantic_path"]
+        if semantic_path == "$.invoice" or multiplicity_repeats(binding.get("multiplicity", "")):
+            class_dimensions[semantic_path] = dimension_name(binding["source_column"])
+
+    field_dimensions: dict[str, str] = {}
+    for binding in bindings:
+        if binding.get("type") != "A":
+            continue
+        current = binding["semantic_path"].rsplit(".", 1)[0]
+        while current:
+            owner = class_dimensions.get(current)
+            if owner:
+                field_dimensions[binding["source_column"]] = owner
+                break
+            if "." not in current:
+                break
+            current = current.rsplit(".", 1)[0]
+
+    dimensions = [
+        field for field in rows[0] if field.startswith("d") and field[1:2].isupper()
+    ]
+    for row_number, row in enumerate(rows, start=2):
+        active_dimensions = [dimension for dimension in dimensions if (row.get(dimension) or "").strip()]
+        if not active_dimensions:
+            continue
+        row_scope = active_dimensions[-1]
+        for field, owner in field_dimensions.items():
+            if (row.get(field) or "").strip() and owner != row_scope:
+                raise ValueError(
+                    f"Invalid hierarchical CSV row {row_number}: {field} belongs to {owner}, "
+                    f"but the row scope is {row_scope}. Repeated child facts must be written "
+                    "on separate child rows."
+                )
 
 
 def load_currency_minor_units(currency_csv: Path) -> dict[str, str]:
@@ -913,6 +970,7 @@ def convert_file(
         None. The XML file is written to output_file.
     """
     rows = read_csv(csv_file)
+    validate_hierarchical_row_scopes(rows, bindings)
     root = build_instance(rows, bindings, schema_href, monetary_decimals, currency_minor_units)
     indent(root)
     output_file.parent.mkdir(parents=True, exist_ok=True)
@@ -983,7 +1041,6 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Generate XBRL GL tuple instances from structured CSV.")
     parser.add_argument("input", type=Path, help="Structured CSV file or directory containing CSV files")
     parser.add_argument("-b", "--binding-csv", type=Path, required=True, help="ADS syntax binding CSV")
-    parser.add_argument("--lhm-csv", type=Path, help="Optional LHM CSV fallback used when a binding row has no structured_csv_column")
     parser.add_argument("-o", "--output-dir", type=Path, required=True, help="Output directory for XBRL GL XML instances")
     parser.add_argument(
         "--schema-href",
@@ -1018,8 +1075,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    lhm_columns = load_lhm_semantic_columns(args.lhm_csv)
-    bindings = load_bindings(args.binding_csv, lhm_columns)
+    bindings = load_bindings(args.binding_csv)
     if not bindings:
         raise SystemExit("No usable bindings were found.")
     currency_minor_units = load_currency_minor_units(args.currency_csv)

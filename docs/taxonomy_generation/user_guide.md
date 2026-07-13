@@ -76,16 +76,17 @@ out/taxonomy/en16931/en16931-2026-07-05-presentation.xml
 out/taxonomy/en16931/lang/en16931-2026-07-05-label.xml
 out/taxonomy/en16931/lang/en16931-2026-07-05-label-ja.xml
 out/taxonomy/gen/gl-gen-2026-07-05.xsd
-out/taxonomy/plt/plt-def-2026-07-05.xml
-out/taxonomy/plt/plt-oim-2026-07-05.xsd
+out/taxonomy/plt/en16931-def-2026-07-05.xml
+out/taxonomy/plt/en16931-oim-2026-07-05.xsd
 ```
 
 Meaning:
 
 - **en16931/en16931-2026-07-05.xsd**: module item concepts.
 - **gen/gl-gen-2026-07-05.xsd**: GL generic item type schema referenced as **../gen/gl-gen-<version>.xsd**.
-- **plt/plt-oim-2026-07-05.xsd**: xBRL-CSV taxonomy schema with hypercubes, dimensions, and primary items.
-- **plt/plt-def-2026-07-05.xml**: xBRL-CSV dimensional definition linkbase.
+- **plt/en16931-oim-2026-07-05.xsd**: xBRL-CSV taxonomy entry point with hypercubes, dimensions, primary items, and references to labels, presentation, and definition relationships.
+- **plt/en16931-def-2026-07-05.xml**: xBRL-CSV dimensional definition linkbase.
+- **en16931/en16931-2026-07-05-presentation.xml**: LHM parent-child hierarchy; BG/Class nodes point to OIM primary items and BT nodes point to module facts.
 
 ## 6. Verify the Taxonomy Separation
 
@@ -101,19 +102,19 @@ Expected output:
 ok: local taxonomy checks passed
 ```
 
-Check that **plt-oim** does not contain tuple or content schema definitions:
+Check that **en16931-oim** does not contain tuple or content schema definitions:
 
 ```
-Select-String -Path .\out\taxonomy\plt\plt-oim-2026-07-05.xsd `
+Select-String -Path .\out\taxonomy\plt\en16931-oim-2026-07-05.xsd `
   -Pattern 'en16931-content','complexType','xbrli:tuple'
 ```
 
 Expected result: no matches.
 
-Check that **plt-oim** contains hypercube, dimension, and primary item concepts:
+Check that **en16931-oim** contains hypercube, dimension, and primary item concepts:
 
 ```
-Select-String -Path .\out\taxonomy\plt\plt-oim-2026-07-05.xsd `
+Select-String -Path .\out\taxonomy\plt\en16931-oim-2026-07-05.xsd `
   -Pattern 'xbrldt:hypercubeItem','xbrldt:dimensionItem','substitutionGroup="xbrli:item"'
 ```
 
@@ -139,7 +140,7 @@ If Arelle is installed, run:
 
 ```
 & arelleCmdLine.exe `
-  --file .\out\taxonomy\plt\plt-oim-2026-07-05.xsd `
+  --file .\out\taxonomy\plt\en16931-oim-2026-07-05.xsd `
   --validate
 ```
 
@@ -173,7 +174,7 @@ Use the full Python path:
 & $python --version
 ```
 
-### **plt-oim** contains tuple or content definitions
+### **en16931-oim** contains tuple or content definitions
 
 Regenerate with the current generator:
 
@@ -181,7 +182,7 @@ Regenerate with the current generator:
 & $python .\tests\test_xbrlgl_generator_uadc_lhm.py
 ```
 
-The current design is xBRL-CSV only. It keeps hypercube, dimension, and primary item definitions in **plt-oim**; it does not generate XBRL 2.1 tuple concepts.
+The current design is xBRL-CSV only. It keeps hypercube, dimension, and primary item definitions in **en16931-oim**; it does not generate XBRL 2.1 tuple concepts.
 
 ### The taxonomy uses an unexpected date
 

@@ -18,11 +18,16 @@ These tests verify UBL Invoice XML to Structured CSV, xBRL-CSV metadata, and UBL
 & $python .\tests\test_lhm_hierarchical_csv_layout.py
 & $python .\tests\test_syntax_binding.py
 & $python .\tests\test_syntax_binding_reverse.py
+& $python .\tests\test_ubl_schema_child_order.py
 & $python .\tests\test_bis_billing3_examples_conversion.py
 & $python .\tests\test_roundtrip_artifacts.py
 ```
 
 The forward Phase 1 conversion uses XML parent context recursion, so nested repeated classes preserve parent dimension values such as **dInvoiceLine** with child dimensions such as **dItemAttributes**.
+
+The reverse conversion can derive UBL child element order from XSD files by using **--ubl-schema-root** or **--ubl-schema-url**. **test_ubl_schema_child_order.py** checks this XSD-derived ordering logic without downloading the full UBL package.
+
+**test_syntax_binding_reverse.py** also checks cross-scope absolute XPath handling: BT-90 must be written below the root **AccountingSupplierParty**, and **PaymentMeans/Invoice** must not exist. **test_bis_billing3_examples_conversion.py** checks the currency-filtered totals in **Allowance-example.xml**: BT-110 is **1225.00** and BT-111 is **9324.00**.
 
 ## Phase 2 ADS XBRL GL Tests
 
@@ -141,7 +146,7 @@ The regenerated XML is not expected to be byte-for-byte identical to the source 
 Last recorded report date:
 
 ```
-2026-07-06
+2026-07-13
 ```
 
 Recorded result:
@@ -150,4 +155,8 @@ Recorded result:
 PASS
 ```
 
-Scope included EN 16931 LHM-driven syntax binding conversion, Structured CSV generation, xBRL-CSV metadata generation, Arelle validation, UBL reverse conversion, UBL 2.1 schema validation, BIS Billing 3 example conversion, LHM checks, and local taxonomy generation checks.
+Scope included EN 16931 LHM-driven syntax binding conversion, Structured CSV generation, xBRL-CSV metadata generation, Arelle validation, UBL reverse conversion, BIS Billing 3 example conversion, LHM checks, and local taxonomy generation checks.
+
+The taxonomy/LHM checks, OpenPeppol conversion, all nine BIS Billing 3 conversions, Structured CSV metadata, ten round-trip artifact cases, and Arelle validation of all ten xBRL-CSV metadata files passed. Absolute currency-filtered XPath evaluation was corrected so **Allowance-example.xml** now writes BT-110 as **1225.00** and BT-111 as **9324.00**. Because this changed Structured CSV output, all Phase 2 ADS XBRL GL and ADS PSV/CSV outputs were regenerated and their tests passed.
+
+The reverse converter keeps absolute binding XPaths rooted at the UBL document when a semantic child is stored outside its repeated syntax context. This prevents BT-90 from creating a nested **Invoice** below **PaymentMeans**. All ten regenerated round-trip XML files pass the UBL 2.1 Invoice schema validation when the test is run with an environment containing **xmlschema**.

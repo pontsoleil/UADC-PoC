@@ -37,10 +37,10 @@ def main() -> int:
     ]
     subprocess.run(cmd, check=True)
 
-    oim_xsd = out_dir / "plt" / "plt-oim-2026-07-05.xsd"
+    oim_xsd = out_dir / "plt" / "en16931-oim-2026-07-05.xsd"
     plt_all_xsd = out_dir / "plt" / "plt-all-2026-07-05.xsd"
     content_xsd = out_dir / "plt" / "en16931-content-2026-07-05.xsd"
-    definition = out_dir / "plt" / "plt-def-2026-07-05.xml"
+    definition = out_dir / "plt" / "en16931-def-2026-07-05.xml"
     module_xsd = out_dir / "en16931" / "en16931-2026-07-05.xsd"
     gl_gen_xsd = out_dir / "gen" / "gl-gen-2026-07-05.xsd"
     for path in (oim_xsd, definition, module_xsd, gl_gen_xsd):
@@ -49,6 +49,7 @@ def main() -> int:
     assert not content_xsd.exists(), f"Content schema must not be generated: {content_xsd}"
 
     root = ET.parse(oim_xsd).getroot()
+    assert root.attrib["targetNamespace"] == "http://www.xbrl.org/int/gl/en16931/2026-07-05"
     elements = [element for element in root if element.tag.endswith("element")]
     substitution_groups = {element.attrib.get("substitutionGroup", "") for element in elements}
     assert "xbrli:tuple" not in substitution_groups

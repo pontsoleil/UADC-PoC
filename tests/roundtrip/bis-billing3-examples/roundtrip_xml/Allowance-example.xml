@@ -217,20 +217,6 @@
       <cbc:Amount currencyID="EUR">101</cbc:Amount>
       </cac:AllowanceCharge>
     <cac:AllowanceCharge>
-      <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
-      <cbc:AllowanceChargeReasonCode>95</cbc:AllowanceChargeReasonCode>
-      <cbc:AllowanceChargeReason>Discount</cbc:AllowanceChargeReason>
-      <cbc:Amount currencyID="EUR">101</cbc:Amount>
-      </cac:AllowanceCharge>
-    <cac:AllowanceCharge>
-      <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
-      <cbc:AllowanceChargeReasonCode>CG</cbc:AllowanceChargeReasonCode>
-      <cbc:AllowanceChargeReason>Cleaning</cbc:AllowanceChargeReason>
-      <cbc:MultiplierFactorNumeric>1</cbc:MultiplierFactorNumeric>
-      <cbc:Amount currencyID="EUR">1</cbc:Amount>
-      <cbc:BaseAmount currencyID="EUR">100</cbc:BaseAmount>
-      </cac:AllowanceCharge>
-    <cac:AllowanceCharge>
       <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
       <cbc:AllowanceChargeReasonCode>CG</cbc:AllowanceChargeReasonCode>
       <cbc:AllowanceChargeReason>Charge</cbc:AllowanceChargeReason>
@@ -257,10 +243,6 @@
           <cbc:ID>VAT</cbc:ID>
           </cac:TaxScheme>
         </cac:ClassifiedTaxCategory>
-      <cac:AdditionalItemProperty>
-        <cbc:Name>AdditionalItemName</cbc:Name>
-        <cbc:Value>AdditionalItemValue</cbc:Value>
-        </cac:AdditionalItemProperty>
       <cac:AdditionalItemProperty>
         <cbc:Name>AdditionalItemName</cbc:Name>
         <cbc:Value>AdditionalItemValue</cbc:Value>

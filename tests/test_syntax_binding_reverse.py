@@ -115,10 +115,44 @@ def main() -> int:
     tax_amount = tree.find("./cac:TaxTotal/cbc:TaxAmount", ns)
     assert tax_amount is not None
     assert tax_amount.attrib.get("currencyID") == original_invoice["DocumentCurrencyCode"]
+    assert tree.find("./cac:PaymentMeans/inv:Invoice", ns) is None
+    creditor_identifier = tree.find(
+        "./cac:AccountingSupplierParty/cac:Party/cac:PartyIdentification/cbc:ID",
+        ns,
+    )
+    assert creditor_identifier is not None
+    assert creditor_identifier.text == first_row_with(original, "BankAssignedCreditorIdentifier")["BankAssignedCreditorIdentifier"]
     allowance_amount = tree.find("./cac:AllowanceCharge[cbc:ChargeIndicator='false']/cbc:Amount", ns)
     charge_amount = tree.find("./cac:AllowanceCharge[cbc:ChargeIndicator='true']/cbc:Amount", ns)
     assert allowance_amount is not None and allowance_amount.attrib.get("currencyID") == original_invoice["DocumentCurrencyCode"]
     assert charge_amount is not None and charge_amount.attrib.get("currencyID") == original_invoice["DocumentCurrencyCode"]
+
+    invalid_csv = out_dir / "invalid_mixed_parent_child.csv"
+    invalid_rows = [dict(row) for row in original]
+    invalid_rows[0]["dInvoiceLine"] = "1"
+    invalid_rows[0]["InvoiceLineIdentifier"] = "mixed-child-1"
+    with invalid_csv.open("w", newline="", encoding="utf-8-sig") as f:
+        writer = csv.DictWriter(f, fieldnames=list(original[0]))
+        writer.writeheader()
+        writer.writerows(invalid_rows)
+    invalid_result = subprocess.run(
+        [
+            str(PYTHON),
+            str(ROOT / "src" / "syntax_binding.py"),
+            str(invalid_csv),
+            "--reverse",
+            "-b",
+            str(binding),
+            "-o",
+            str(out_dir / "invalid_mixed_parent_child.xml"),
+        ],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+    assert invalid_result.returncode != 0
+    assert "Repeated child facts must be written on separate child rows" in invalid_result.stdout
 
     print(f"ok: reversed {source_csv} to {reverse_xml} and checked {roundtrip_csv}")
     return 0

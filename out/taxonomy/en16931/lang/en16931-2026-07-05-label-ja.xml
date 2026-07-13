@@ -1,0 +1,893 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) XBRL International.  See http://www.xbrl.org/legal -->
+<linkbase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"
+    xmlns="http://www.xbrl.org/2003/linkbase"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+        <!-- en16931:Invoice  -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_Invoice" xlink:label="Invoice"/>
+        <label xlink:type="resource" xlink:label="Invoice_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_Invoice_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="Invoice_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="Invoice" xlink:to="Invoice_lbl"/>
+        <!-- en16931:InvoiceNumber  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceNumber" xlink:label="InvoiceNumber"/>
+        <label xlink:type="resource" xlink:label="InvoiceNumber_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceNumber_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceNumber_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceNumber" xlink:to="InvoiceNumber_lbl"/>
+        <!-- en16931:InvoiceIssueDate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceIssueDate" xlink:label="InvoiceIssueDate"/>
+        <label xlink:type="resource" xlink:label="InvoiceIssueDate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceIssueDate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceIssueDate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceIssueDate" xlink:to="InvoiceIssueDate_lbl"/>
+        <!-- en16931:InvoiceTypeCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceTypeCode" xlink:label="InvoiceTypeCode"/>
+        <label xlink:type="resource" xlink:label="InvoiceTypeCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceTypeCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceTypeCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceTypeCode" xlink:to="InvoiceTypeCode_lbl"/>
+        <!-- en16931:DocumentCurrencyCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentCurrencyCode" xlink:label="DocumentCurrencyCode"/>
+        <label xlink:type="resource" xlink:label="DocumentCurrencyCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentCurrencyCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentCurrencyCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentCurrencyCode" xlink:to="DocumentCurrencyCode_lbl"/>
+        <!-- en16931:TaxAccountingCurrencyCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_TaxAccountingCurrencyCode" xlink:label="TaxAccountingCurrencyCode"/>
+        <label xlink:type="resource" xlink:label="TaxAccountingCurrencyCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_TaxAccountingCurrencyCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="TaxAccountingCurrencyCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TaxAccountingCurrencyCode" xlink:to="TaxAccountingCurrencyCode_lbl"/>
+        <!-- en16931:ValueAddedTaxPointDate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ValueAddedTaxPointDate" xlink:label="ValueAddedTaxPointDate"/>
+        <label xlink:type="resource" xlink:label="ValueAddedTaxPointDate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ValueAddedTaxPointDate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ValueAddedTaxPointDate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ValueAddedTaxPointDate" xlink:to="ValueAddedTaxPointDate_lbl"/>
+        <!-- en16931:ValueAddedTaxPointDateCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ValueAddedTaxPointDateCode" xlink:label="ValueAddedTaxPointDateCode"/>
+        <label xlink:type="resource" xlink:label="ValueAddedTaxPointDateCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ValueAddedTaxPointDateCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ValueAddedTaxPointDateCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ValueAddedTaxPointDateCode" xlink:to="ValueAddedTaxPointDateCode_lbl"/>
+        <!-- en16931:PaymentDueDate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentDueDate" xlink:label="PaymentDueDate"/>
+        <label xlink:type="resource" xlink:label="PaymentDueDate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentDueDate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentDueDate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentDueDate" xlink:to="PaymentDueDate_lbl"/>
+        <!-- en16931:BuyerReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerReference" xlink:label="BuyerReference"/>
+        <label xlink:type="resource" xlink:label="BuyerReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerReference" xlink:to="BuyerReference_lbl"/>
+        <!-- en16931:ProjectReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ProjectReference" xlink:label="ProjectReference"/>
+        <label xlink:type="resource" xlink:label="ProjectReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ProjectReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ProjectReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ProjectReference" xlink:to="ProjectReference_lbl"/>
+        <!-- en16931:ContractReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ContractReference" xlink:label="ContractReference"/>
+        <label xlink:type="resource" xlink:label="ContractReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ContractReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ContractReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ContractReference" xlink:to="ContractReference_lbl"/>
+        <!-- en16931:PurchaseOrderReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PurchaseOrderReference" xlink:label="PurchaseOrderReference"/>
+        <label xlink:type="resource" xlink:label="PurchaseOrderReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PurchaseOrderReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PurchaseOrderReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PurchaseOrderReference" xlink:to="PurchaseOrderReference_lbl"/>
+        <!-- en16931:SalesOrderReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SalesOrderReference" xlink:label="SalesOrderReference"/>
+        <label xlink:type="resource" xlink:label="SalesOrderReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SalesOrderReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SalesOrderReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SalesOrderReference" xlink:to="SalesOrderReference_lbl"/>
+        <!-- en16931:ReceivingAdviceReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ReceivingAdviceReference" xlink:label="ReceivingAdviceReference"/>
+        <label xlink:type="resource" xlink:label="ReceivingAdviceReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ReceivingAdviceReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ReceivingAdviceReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ReceivingAdviceReference" xlink:to="ReceivingAdviceReference_lbl"/>
+        <!-- en16931:DespatchAdviceReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DespatchAdviceReference" xlink:label="DespatchAdviceReference"/>
+        <label xlink:type="resource" xlink:label="DespatchAdviceReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DespatchAdviceReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DespatchAdviceReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DespatchAdviceReference" xlink:to="DespatchAdviceReference_lbl"/>
+        <!-- en16931:TenderOrLotReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_TenderOrLotReference" xlink:label="TenderOrLotReference"/>
+        <label xlink:type="resource" xlink:label="TenderOrLotReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_TenderOrLotReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="TenderOrLotReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TenderOrLotReference" xlink:to="TenderOrLotReference_lbl"/>
+        <!-- en16931:InvoicedObjectIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoicedObjectIdentifier" xlink:label="InvoicedObjectIdentifier"/>
+        <label xlink:type="resource" xlink:label="InvoicedObjectIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoicedObjectIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoicedObjectIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoicedObjectIdentifier" xlink:to="InvoicedObjectIdentifier_lbl"/>
+        <!-- en16931:BuyerAccountingReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerAccountingReference" xlink:label="BuyerAccountingReference"/>
+        <label xlink:type="resource" xlink:label="BuyerAccountingReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerAccountingReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerAccountingReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerAccountingReference" xlink:to="BuyerAccountingReference_lbl"/>
+        <!-- en16931:PaymentTerms  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentTerms" xlink:label="PaymentTerms"/>
+        <label xlink:type="resource" xlink:label="PaymentTerms_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentTerms_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentTerms_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentTerms" xlink:to="PaymentTerms_lbl"/>
+        <!-- en16931:InvoiceInvoiceNote  -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_InvoiceInvoiceNote" xlink:label="InvoiceInvoiceNote"/>
+        <label xlink:type="resource" xlink:label="InvoiceInvoiceNote_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceInvoiceNote_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceInvoiceNote_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceInvoiceNote" xlink:to="InvoiceInvoiceNote_lbl"/>
+        <!-- en16931:BusinessProcessType  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BusinessProcessType" xlink:label="BusinessProcessType"/>
+        <label xlink:type="resource" xlink:label="BusinessProcessType_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BusinessProcessType_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BusinessProcessType_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BusinessProcessType" xlink:to="BusinessProcessType_lbl"/>
+        <!-- en16931:SpecificationIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SpecificationIdentifier" xlink:label="SpecificationIdentifier"/>
+        <label xlink:type="resource" xlink:label="SpecificationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SpecificationIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SpecificationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SpecificationIdentifier" xlink:to="SpecificationIdentifier_lbl"/>
+        <!-- en16931:InvoicePrecedingInvoiceReference  -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_InvoicePrecedingInvoiceReference" xlink:label="InvoicePrecedingInvoiceReference"/>
+        <label xlink:type="resource" xlink:label="InvoicePrecedingInvoiceReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoicePrecedingInvoiceReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoicePrecedingInvoiceReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoicePrecedingInvoiceReference" xlink:to="InvoicePrecedingInvoiceReference_lbl"/>
+        <!-- en16931:SellerName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerName" xlink:label="SellerName"/>
+        <label xlink:type="resource" xlink:label="SellerName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerName" xlink:to="SellerName_lbl"/>
+        <!-- en16931:SellerTradingName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerTradingName" xlink:label="SellerTradingName"/>
+        <label xlink:type="resource" xlink:label="SellerTradingName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerTradingName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerTradingName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerTradingName" xlink:to="SellerTradingName_lbl"/>
+        <!-- en16931:SellerIdentifier sellerIdentifier -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerIdentifier" xlink:label="SellerIdentifier"/>
+        <label xlink:type="resource" xlink:label="SellerIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerIdentifier_ja" xml:lang="en">sellerIdentifier</label>
+        <label xlink:type="resource" xlink:label="SellerIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerIdentifier" xlink:to="SellerIdentifier_lbl"/>
+        <!-- en16931:SellerLegalRegistrationIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerLegalRegistrationIdentifier" xlink:label="SellerLegalRegistrationIdentifier"/>
+        <label xlink:type="resource" xlink:label="SellerLegalRegistrationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerLegalRegistrationIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerLegalRegistrationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerLegalRegistrationIdentifier" xlink:to="SellerLegalRegistrationIdentifier_lbl"/>
+        <!-- en16931:SellerVatIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerVatIdentifier" xlink:label="SellerVatIdentifier"/>
+        <label xlink:type="resource" xlink:label="SellerVatIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerVatIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerVatIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerVatIdentifier" xlink:to="SellerVatIdentifier_lbl"/>
+        <!-- en16931:SellerTaxRegistrationIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerTaxRegistrationIdentifier" xlink:label="SellerTaxRegistrationIdentifier"/>
+        <label xlink:type="resource" xlink:label="SellerTaxRegistrationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerTaxRegistrationIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerTaxRegistrationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerTaxRegistrationIdentifier" xlink:to="SellerTaxRegistrationIdentifier_lbl"/>
+        <!-- en16931:SellerAdditionalLegalInformation  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerAdditionalLegalInformation" xlink:label="SellerAdditionalLegalInformation"/>
+        <label xlink:type="resource" xlink:label="SellerAdditionalLegalInformation_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerAdditionalLegalInformation_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerAdditionalLegalInformation_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerAdditionalLegalInformation" xlink:to="SellerAdditionalLegalInformation_lbl"/>
+        <!-- en16931:SellerElectronicAddress  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerElectronicAddress" xlink:label="SellerElectronicAddress"/>
+        <label xlink:type="resource" xlink:label="SellerElectronicAddress_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerElectronicAddress_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerElectronicAddress_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerElectronicAddress" xlink:to="SellerElectronicAddress_lbl"/>
+        <!-- en16931:SellerAddressLine1  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerAddressLine1" xlink:label="SellerAddressLine1"/>
+        <label xlink:type="resource" xlink:label="SellerAddressLine1_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerAddressLine1_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerAddressLine1_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerAddressLine1" xlink:to="SellerAddressLine1_lbl"/>
+        <!-- en16931:SellerAddressLine2  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerAddressLine2" xlink:label="SellerAddressLine2"/>
+        <label xlink:type="resource" xlink:label="SellerAddressLine2_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerAddressLine2_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerAddressLine2_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerAddressLine2" xlink:to="SellerAddressLine2_lbl"/>
+        <!-- en16931:SellerAddressLine3  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerAddressLine3" xlink:label="SellerAddressLine3"/>
+        <label xlink:type="resource" xlink:label="SellerAddressLine3_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerAddressLine3_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerAddressLine3_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerAddressLine3" xlink:to="SellerAddressLine3_lbl"/>
+        <!-- en16931:SellerCity  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerCity" xlink:label="SellerCity"/>
+        <label xlink:type="resource" xlink:label="SellerCity_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerCity_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerCity_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerCity" xlink:to="SellerCity_lbl"/>
+        <!-- en16931:SellerPostCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerPostCode" xlink:label="SellerPostCode"/>
+        <label xlink:type="resource" xlink:label="SellerPostCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerPostCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerPostCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerPostCode" xlink:to="SellerPostCode_lbl"/>
+        <!-- en16931:SellerCountrySubdivision  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerCountrySubdivision" xlink:label="SellerCountrySubdivision"/>
+        <label xlink:type="resource" xlink:label="SellerCountrySubdivision_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerCountrySubdivision_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerCountrySubdivision_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerCountrySubdivision" xlink:to="SellerCountrySubdivision_lbl"/>
+        <!-- en16931:SellerCountryCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerCountryCode" xlink:label="SellerCountryCode"/>
+        <label xlink:type="resource" xlink:label="SellerCountryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerCountryCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerCountryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerCountryCode" xlink:to="SellerCountryCode_lbl"/>
+        <!-- en16931:SellerContactPoint  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerContactPoint" xlink:label="SellerContactPoint"/>
+        <label xlink:type="resource" xlink:label="SellerContactPoint_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerContactPoint_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerContactPoint_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerContactPoint" xlink:to="SellerContactPoint_lbl"/>
+        <!-- en16931:SellerContactTelephoneNumber  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerContactTelephoneNumber" xlink:label="SellerContactTelephoneNumber"/>
+        <label xlink:type="resource" xlink:label="SellerContactTelephoneNumber_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerContactTelephoneNumber_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerContactTelephoneNumber_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerContactTelephoneNumber" xlink:to="SellerContactTelephoneNumber_lbl"/>
+        <!-- en16931:SellerContactEmailAddress  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerContactEmailAddress" xlink:label="SellerContactEmailAddress"/>
+        <label xlink:type="resource" xlink:label="SellerContactEmailAddress_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerContactEmailAddress_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerContactEmailAddress_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerContactEmailAddress" xlink:to="SellerContactEmailAddress_lbl"/>
+        <!-- en16931:BuyerName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerName" xlink:label="BuyerName"/>
+        <label xlink:type="resource" xlink:label="BuyerName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerName" xlink:to="BuyerName_lbl"/>
+        <!-- en16931:BuyerTradingName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerTradingName" xlink:label="BuyerTradingName"/>
+        <label xlink:type="resource" xlink:label="BuyerTradingName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerTradingName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerTradingName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerTradingName" xlink:to="BuyerTradingName_lbl"/>
+        <!-- en16931:BuyerIdentifier buyerIdentifier -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerIdentifier" xlink:label="BuyerIdentifier"/>
+        <label xlink:type="resource" xlink:label="BuyerIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerIdentifier_ja" xml:lang="en">buyerIdentifier</label>
+        <label xlink:type="resource" xlink:label="BuyerIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerIdentifier" xlink:to="BuyerIdentifier_lbl"/>
+        <!-- en16931:BuyerLegalRegistrationIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerLegalRegistrationIdentifier" xlink:label="BuyerLegalRegistrationIdentifier"/>
+        <label xlink:type="resource" xlink:label="BuyerLegalRegistrationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerLegalRegistrationIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerLegalRegistrationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerLegalRegistrationIdentifier" xlink:to="BuyerLegalRegistrationIdentifier_lbl"/>
+        <!-- en16931:BuyerVatIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerVatIdentifier" xlink:label="BuyerVatIdentifier"/>
+        <label xlink:type="resource" xlink:label="BuyerVatIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerVatIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerVatIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerVatIdentifier" xlink:to="BuyerVatIdentifier_lbl"/>
+        <!-- en16931:BuyerElectronicAddress  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerElectronicAddress" xlink:label="BuyerElectronicAddress"/>
+        <label xlink:type="resource" xlink:label="BuyerElectronicAddress_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerElectronicAddress_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerElectronicAddress_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerElectronicAddress" xlink:to="BuyerElectronicAddress_lbl"/>
+        <!-- en16931:BuyerAddressLine1  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerAddressLine1" xlink:label="BuyerAddressLine1"/>
+        <label xlink:type="resource" xlink:label="BuyerAddressLine1_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerAddressLine1_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerAddressLine1_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerAddressLine1" xlink:to="BuyerAddressLine1_lbl"/>
+        <!-- en16931:BuyerAddressLine2  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerAddressLine2" xlink:label="BuyerAddressLine2"/>
+        <label xlink:type="resource" xlink:label="BuyerAddressLine2_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerAddressLine2_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerAddressLine2_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerAddressLine2" xlink:to="BuyerAddressLine2_lbl"/>
+        <!-- en16931:BuyerAddressLine3  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerAddressLine3" xlink:label="BuyerAddressLine3"/>
+        <label xlink:type="resource" xlink:label="BuyerAddressLine3_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerAddressLine3_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerAddressLine3_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerAddressLine3" xlink:to="BuyerAddressLine3_lbl"/>
+        <!-- en16931:BuyerCity  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerCity" xlink:label="BuyerCity"/>
+        <label xlink:type="resource" xlink:label="BuyerCity_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerCity_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerCity_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerCity" xlink:to="BuyerCity_lbl"/>
+        <!-- en16931:BuyerPostCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerPostCode" xlink:label="BuyerPostCode"/>
+        <label xlink:type="resource" xlink:label="BuyerPostCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerPostCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerPostCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerPostCode" xlink:to="BuyerPostCode_lbl"/>
+        <!-- en16931:BuyerCountrySubdivision  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerCountrySubdivision" xlink:label="BuyerCountrySubdivision"/>
+        <label xlink:type="resource" xlink:label="BuyerCountrySubdivision_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerCountrySubdivision_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerCountrySubdivision_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerCountrySubdivision" xlink:to="BuyerCountrySubdivision_lbl"/>
+        <!-- en16931:BuyerCountryCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerCountryCode" xlink:label="BuyerCountryCode"/>
+        <label xlink:type="resource" xlink:label="BuyerCountryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerCountryCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerCountryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerCountryCode" xlink:to="BuyerCountryCode_lbl"/>
+        <!-- en16931:BuyerContactPoint  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerContactPoint" xlink:label="BuyerContactPoint"/>
+        <label xlink:type="resource" xlink:label="BuyerContactPoint_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerContactPoint_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerContactPoint_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerContactPoint" xlink:to="BuyerContactPoint_lbl"/>
+        <!-- en16931:BuyerContactTelephoneNumber  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerContactTelephoneNumber" xlink:label="BuyerContactTelephoneNumber"/>
+        <label xlink:type="resource" xlink:label="BuyerContactTelephoneNumber_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerContactTelephoneNumber_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerContactTelephoneNumber_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerContactTelephoneNumber" xlink:to="BuyerContactTelephoneNumber_lbl"/>
+        <!-- en16931:BuyerContactEmailAddress  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BuyerContactEmailAddress" xlink:label="BuyerContactEmailAddress"/>
+        <label xlink:type="resource" xlink:label="BuyerContactEmailAddress_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BuyerContactEmailAddress_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BuyerContactEmailAddress_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BuyerContactEmailAddress" xlink:to="BuyerContactEmailAddress_lbl"/>
+        <!-- en16931:PayeeName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PayeeName" xlink:label="PayeeName"/>
+        <label xlink:type="resource" xlink:label="PayeeName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PayeeName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PayeeName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PayeeName" xlink:to="PayeeName_lbl"/>
+        <!-- en16931:PayeeIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PayeeIdentifier" xlink:label="PayeeIdentifier"/>
+        <label xlink:type="resource" xlink:label="PayeeIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PayeeIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PayeeIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PayeeIdentifier" xlink:to="PayeeIdentifier_lbl"/>
+        <!-- en16931:PayeeLegalRegistrationIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PayeeLegalRegistrationIdentifier" xlink:label="PayeeLegalRegistrationIdentifier"/>
+        <label xlink:type="resource" xlink:label="PayeeLegalRegistrationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PayeeLegalRegistrationIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PayeeLegalRegistrationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PayeeLegalRegistrationIdentifier" xlink:to="PayeeLegalRegistrationIdentifier_lbl"/>
+        <!-- en16931:SellerTaxRepresentativeName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerTaxRepresentativeName" xlink:label="SellerTaxRepresentativeName"/>
+        <label xlink:type="resource" xlink:label="SellerTaxRepresentativeName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerTaxRepresentativeName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerTaxRepresentativeName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerTaxRepresentativeName" xlink:to="SellerTaxRepresentativeName_lbl"/>
+        <!-- en16931:SellerTaxRepresentativeVatIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SellerTaxRepresentativeVatIdentifier" xlink:label="SellerTaxRepresentativeVatIdentifier"/>
+        <label xlink:type="resource" xlink:label="SellerTaxRepresentativeVatIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SellerTaxRepresentativeVatIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SellerTaxRepresentativeVatIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SellerTaxRepresentativeVatIdentifier" xlink:to="SellerTaxRepresentativeVatIdentifier_lbl"/>
+        <!-- en16931:TaxRepresentativeAddressLine1  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_TaxRepresentativeAddressLine1" xlink:label="TaxRepresentativeAddressLine1"/>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeAddressLine1_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_TaxRepresentativeAddressLine1_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeAddressLine1_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TaxRepresentativeAddressLine1" xlink:to="TaxRepresentativeAddressLine1_lbl"/>
+        <!-- en16931:TaxRepresentativeAddressLine2  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_TaxRepresentativeAddressLine2" xlink:label="TaxRepresentativeAddressLine2"/>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeAddressLine2_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_TaxRepresentativeAddressLine2_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeAddressLine2_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TaxRepresentativeAddressLine2" xlink:to="TaxRepresentativeAddressLine2_lbl"/>
+        <!-- en16931:TaxRepresentativeAddressLine3  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_TaxRepresentativeAddressLine3" xlink:label="TaxRepresentativeAddressLine3"/>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeAddressLine3_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_TaxRepresentativeAddressLine3_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeAddressLine3_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TaxRepresentativeAddressLine3" xlink:to="TaxRepresentativeAddressLine3_lbl"/>
+        <!-- en16931:TaxRepresentativeCity  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_TaxRepresentativeCity" xlink:label="TaxRepresentativeCity"/>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeCity_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_TaxRepresentativeCity_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeCity_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TaxRepresentativeCity" xlink:to="TaxRepresentativeCity_lbl"/>
+        <!-- en16931:TaxRepresentativePostCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_TaxRepresentativePostCode" xlink:label="TaxRepresentativePostCode"/>
+        <label xlink:type="resource" xlink:label="TaxRepresentativePostCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_TaxRepresentativePostCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="TaxRepresentativePostCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TaxRepresentativePostCode" xlink:to="TaxRepresentativePostCode_lbl"/>
+        <!-- en16931:TaxRepresentativeCountrySubdivision  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_TaxRepresentativeCountrySubdivision" xlink:label="TaxRepresentativeCountrySubdivision"/>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeCountrySubdivision_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_TaxRepresentativeCountrySubdivision_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeCountrySubdivision_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TaxRepresentativeCountrySubdivision" xlink:to="TaxRepresentativeCountrySubdivision_lbl"/>
+        <!-- en16931:TaxRepresentativeCountryCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_TaxRepresentativeCountryCode" xlink:label="TaxRepresentativeCountryCode"/>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeCountryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_TaxRepresentativeCountryCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="TaxRepresentativeCountryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="TaxRepresentativeCountryCode" xlink:to="TaxRepresentativeCountryCode_lbl"/>
+        <!-- en16931:DeliverToPartyName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DeliverToPartyName" xlink:label="DeliverToPartyName"/>
+        <label xlink:type="resource" xlink:label="DeliverToPartyName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DeliverToPartyName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DeliverToPartyName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DeliverToPartyName" xlink:to="DeliverToPartyName_lbl"/>
+        <!-- en16931:DeliverToLocationIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DeliverToLocationIdentifier" xlink:label="DeliverToLocationIdentifier"/>
+        <label xlink:type="resource" xlink:label="DeliverToLocationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DeliverToLocationIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DeliverToLocationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DeliverToLocationIdentifier" xlink:to="DeliverToLocationIdentifier_lbl"/>
+        <!-- en16931:ActualDeliveryDate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ActualDeliveryDate" xlink:label="ActualDeliveryDate"/>
+        <label xlink:type="resource" xlink:label="ActualDeliveryDate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ActualDeliveryDate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ActualDeliveryDate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ActualDeliveryDate" xlink:to="ActualDeliveryDate_lbl"/>
+        <!-- en16931:InvoicingPeriodStartDate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoicingPeriodStartDate" xlink:label="InvoicingPeriodStartDate"/>
+        <label xlink:type="resource" xlink:label="InvoicingPeriodStartDate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoicingPeriodStartDate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoicingPeriodStartDate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoicingPeriodStartDate" xlink:to="InvoicingPeriodStartDate_lbl"/>
+        <!-- en16931:InvoicingPeriodEndDate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoicingPeriodEndDate" xlink:label="InvoicingPeriodEndDate"/>
+        <label xlink:type="resource" xlink:label="InvoicingPeriodEndDate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoicingPeriodEndDate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoicingPeriodEndDate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoicingPeriodEndDate" xlink:to="InvoicingPeriodEndDate_lbl"/>
+        <!-- en16931:DeliverToAddressLine1  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DeliverToAddressLine1" xlink:label="DeliverToAddressLine1"/>
+        <label xlink:type="resource" xlink:label="DeliverToAddressLine1_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DeliverToAddressLine1_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DeliverToAddressLine1_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DeliverToAddressLine1" xlink:to="DeliverToAddressLine1_lbl"/>
+        <!-- en16931:DeliverToAddressLine2  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DeliverToAddressLine2" xlink:label="DeliverToAddressLine2"/>
+        <label xlink:type="resource" xlink:label="DeliverToAddressLine2_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DeliverToAddressLine2_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DeliverToAddressLine2_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DeliverToAddressLine2" xlink:to="DeliverToAddressLine2_lbl"/>
+        <!-- en16931:DeliverToAddressLine3  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DeliverToAddressLine3" xlink:label="DeliverToAddressLine3"/>
+        <label xlink:type="resource" xlink:label="DeliverToAddressLine3_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DeliverToAddressLine3_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DeliverToAddressLine3_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DeliverToAddressLine3" xlink:to="DeliverToAddressLine3_lbl"/>
+        <!-- en16931:DeliverToCity  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DeliverToCity" xlink:label="DeliverToCity"/>
+        <label xlink:type="resource" xlink:label="DeliverToCity_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DeliverToCity_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DeliverToCity_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DeliverToCity" xlink:to="DeliverToCity_lbl"/>
+        <!-- en16931:DeliverToPostCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DeliverToPostCode" xlink:label="DeliverToPostCode"/>
+        <label xlink:type="resource" xlink:label="DeliverToPostCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DeliverToPostCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DeliverToPostCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DeliverToPostCode" xlink:to="DeliverToPostCode_lbl"/>
+        <!-- en16931:DeliverToCountrySubdivision  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DeliverToCountrySubdivision" xlink:label="DeliverToCountrySubdivision"/>
+        <label xlink:type="resource" xlink:label="DeliverToCountrySubdivision_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DeliverToCountrySubdivision_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DeliverToCountrySubdivision_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DeliverToCountrySubdivision" xlink:to="DeliverToCountrySubdivision_lbl"/>
+        <!-- en16931:DeliverToCountryCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DeliverToCountryCode" xlink:label="DeliverToCountryCode"/>
+        <label xlink:type="resource" xlink:label="DeliverToCountryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DeliverToCountryCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DeliverToCountryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DeliverToCountryCode" xlink:to="DeliverToCountryCode_lbl"/>
+        <!-- en16931:PaymentInstructions paymentInstructions -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_PaymentInstructions" xlink:label="PaymentInstructions"/>
+        <label xlink:type="resource" xlink:label="PaymentInstructions_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentInstructions_ja" xml:lang="en">paymentInstructions</label>
+        <label xlink:type="resource" xlink:label="PaymentInstructions_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentInstructions" xlink:to="PaymentInstructions_lbl"/>
+        <!-- en16931:DocumentLevelAllowances documentLevelAllowances -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_DocumentLevelAllowances" xlink:label="DocumentLevelAllowances"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowances_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelAllowances_ja" xml:lang="en">documentLevelAllowances</label>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowances_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelAllowances" xlink:to="DocumentLevelAllowances_lbl"/>
+        <!-- en16931:DocumentLevelCharges documentLevelCharges -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_DocumentLevelCharges" xlink:label="DocumentLevelCharges"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelCharges_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelCharges_ja" xml:lang="en">documentLevelCharges</label>
+        <label xlink:type="resource" xlink:label="DocumentLevelCharges_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelCharges" xlink:to="DocumentLevelCharges_lbl"/>
+        <!-- en16931:SumOfInvoiceLineNetAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SumOfInvoiceLineNetAmount" xlink:label="SumOfInvoiceLineNetAmount"/>
+        <label xlink:type="resource" xlink:label="SumOfInvoiceLineNetAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SumOfInvoiceLineNetAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SumOfInvoiceLineNetAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SumOfInvoiceLineNetAmount" xlink:to="SumOfInvoiceLineNetAmount_lbl"/>
+        <!-- en16931:SumOfAllowancesOnDocumentLevel  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SumOfAllowancesOnDocumentLevel" xlink:label="SumOfAllowancesOnDocumentLevel"/>
+        <label xlink:type="resource" xlink:label="SumOfAllowancesOnDocumentLevel_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SumOfAllowancesOnDocumentLevel_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SumOfAllowancesOnDocumentLevel_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SumOfAllowancesOnDocumentLevel" xlink:to="SumOfAllowancesOnDocumentLevel_lbl"/>
+        <!-- en16931:SumOfChargesOnDocumentLevel  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SumOfChargesOnDocumentLevel" xlink:label="SumOfChargesOnDocumentLevel"/>
+        <label xlink:type="resource" xlink:label="SumOfChargesOnDocumentLevel_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SumOfChargesOnDocumentLevel_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SumOfChargesOnDocumentLevel_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SumOfChargesOnDocumentLevel" xlink:to="SumOfChargesOnDocumentLevel_lbl"/>
+        <!-- en16931:InvoiceTotalAmountWithoutVat  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceTotalAmountWithoutVat" xlink:label="InvoiceTotalAmountWithoutVat"/>
+        <label xlink:type="resource" xlink:label="InvoiceTotalAmountWithoutVat_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceTotalAmountWithoutVat_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceTotalAmountWithoutVat_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceTotalAmountWithoutVat" xlink:to="InvoiceTotalAmountWithoutVat_lbl"/>
+        <!-- en16931:InvoiceTotalVatAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceTotalVatAmount" xlink:label="InvoiceTotalVatAmount"/>
+        <label xlink:type="resource" xlink:label="InvoiceTotalVatAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceTotalVatAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceTotalVatAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceTotalVatAmount" xlink:to="InvoiceTotalVatAmount_lbl"/>
+        <!-- en16931:InvoiceTotalVatAmountInAccountingCurrency  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceTotalVatAmountInAccountingCurrency" xlink:label="InvoiceTotalVatAmountInAccountingCurrency"/>
+        <label xlink:type="resource" xlink:label="InvoiceTotalVatAmountInAccountingCurrency_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceTotalVatAmountInAccountingCurrency_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceTotalVatAmountInAccountingCurrency_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceTotalVatAmountInAccountingCurrency" xlink:to="InvoiceTotalVatAmountInAccountingCurrency_lbl"/>
+        <!-- en16931:InvoiceTotalAmountWithVat  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceTotalAmountWithVat" xlink:label="InvoiceTotalAmountWithVat"/>
+        <label xlink:type="resource" xlink:label="InvoiceTotalAmountWithVat_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceTotalAmountWithVat_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceTotalAmountWithVat_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceTotalAmountWithVat" xlink:to="InvoiceTotalAmountWithVat_lbl"/>
+        <!-- en16931:PaidAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaidAmount" xlink:label="PaidAmount"/>
+        <label xlink:type="resource" xlink:label="PaidAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaidAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaidAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaidAmount" xlink:to="PaidAmount_lbl"/>
+        <!-- en16931:RoundingAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_RoundingAmount" xlink:label="RoundingAmount"/>
+        <label xlink:type="resource" xlink:label="RoundingAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_RoundingAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="RoundingAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="RoundingAmount" xlink:to="RoundingAmount_lbl"/>
+        <!-- en16931:AmountDueForPayment  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_AmountDueForPayment" xlink:label="AmountDueForPayment"/>
+        <label xlink:type="resource" xlink:label="AmountDueForPayment_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_AmountDueForPayment_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="AmountDueForPayment_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AmountDueForPayment" xlink:to="AmountDueForPayment_lbl"/>
+        <!-- en16931:VatBreakdown vatBreakdown -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_VatBreakdown" xlink:label="VatBreakdown"/>
+        <label xlink:type="resource" xlink:label="VatBreakdown_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_VatBreakdown_ja" xml:lang="en">vatBreakdown</label>
+        <label xlink:type="resource" xlink:label="VatBreakdown_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="VatBreakdown" xlink:to="VatBreakdown_lbl"/>
+        <!-- en16931:AdditionalSupportingDocuments  -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_AdditionalSupportingDocuments" xlink:label="AdditionalSupportingDocuments"/>
+        <label xlink:type="resource" xlink:label="AdditionalSupportingDocuments_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_AdditionalSupportingDocuments_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="AdditionalSupportingDocuments_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AdditionalSupportingDocuments" xlink:to="AdditionalSupportingDocuments_lbl"/>
+        <!-- en16931:InvoiceLine invoiceLine -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_InvoiceLine" xlink:label="InvoiceLine"/>
+        <label xlink:type="resource" xlink:label="InvoiceLine_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLine_ja" xml:lang="en">invoiceLine</label>
+        <label xlink:type="resource" xlink:label="InvoiceLine_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLine" xlink:to="InvoiceLine_lbl"/>
+        <!-- en16931:InvoiceNoteSubjectCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceNoteSubjectCode" xlink:label="InvoiceNoteSubjectCode"/>
+        <label xlink:type="resource" xlink:label="InvoiceNoteSubjectCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceNoteSubjectCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceNoteSubjectCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceNoteSubjectCode" xlink:to="InvoiceNoteSubjectCode_lbl"/>
+        <!-- en16931:InvoiceNoteInvoiceNote  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceNoteInvoiceNote" xlink:label="InvoiceNoteInvoiceNote"/>
+        <label xlink:type="resource" xlink:label="InvoiceNoteInvoiceNote_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceNoteInvoiceNote_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceNoteInvoiceNote_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceNoteInvoiceNote" xlink:to="InvoiceNoteInvoiceNote_lbl"/>
+        <!-- en16931:PrecedingInvoiceReferencePrecedingInvoiceReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PrecedingInvoiceReferencePrecedingInvoiceReference" xlink:label="PrecedingInvoiceReferencePrecedingInvoiceReference"/>
+        <label xlink:type="resource" xlink:label="PrecedingInvoiceReferencePrecedingInvoiceReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PrecedingInvoiceReferencePrecedingInvoiceReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PrecedingInvoiceReferencePrecedingInvoiceReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PrecedingInvoiceReferencePrecedingInvoiceReference" xlink:to="PrecedingInvoiceReferencePrecedingInvoiceReference_lbl"/>
+        <!-- en16931:PrecedingInvoiceIssueDate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PrecedingInvoiceIssueDate" xlink:label="PrecedingInvoiceIssueDate"/>
+        <label xlink:type="resource" xlink:label="PrecedingInvoiceIssueDate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PrecedingInvoiceIssueDate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PrecedingInvoiceIssueDate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PrecedingInvoiceIssueDate" xlink:to="PrecedingInvoiceIssueDate_lbl"/>
+        <!-- en16931:PaymentMeansTypeCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentMeansTypeCode" xlink:label="PaymentMeansTypeCode"/>
+        <label xlink:type="resource" xlink:label="PaymentMeansTypeCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentMeansTypeCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentMeansTypeCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentMeansTypeCode" xlink:to="PaymentMeansTypeCode_lbl"/>
+        <!-- en16931:PaymentMeansText  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentMeansText" xlink:label="PaymentMeansText"/>
+        <label xlink:type="resource" xlink:label="PaymentMeansText_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentMeansText_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentMeansText_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentMeansText" xlink:to="PaymentMeansText_lbl"/>
+        <!-- en16931:PaymentRemittanceInformation  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentRemittanceInformation" xlink:label="PaymentRemittanceInformation"/>
+        <label xlink:type="resource" xlink:label="PaymentRemittanceInformation_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentRemittanceInformation_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentRemittanceInformation_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentRemittanceInformation" xlink:to="PaymentRemittanceInformation_lbl"/>
+        <!-- en16931:CreditTransfer  -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_CreditTransfer" xlink:label="CreditTransfer"/>
+        <label xlink:type="resource" xlink:label="CreditTransfer_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_CreditTransfer_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="CreditTransfer_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="CreditTransfer" xlink:to="CreditTransfer_lbl"/>
+        <!-- en16931:PaymentCardPrimaryAccountNumber  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentCardPrimaryAccountNumber" xlink:label="PaymentCardPrimaryAccountNumber"/>
+        <label xlink:type="resource" xlink:label="PaymentCardPrimaryAccountNumber_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentCardPrimaryAccountNumber_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentCardPrimaryAccountNumber_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentCardPrimaryAccountNumber" xlink:to="PaymentCardPrimaryAccountNumber_lbl"/>
+        <!-- en16931:PaymentCardHolderName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentCardHolderName" xlink:label="PaymentCardHolderName"/>
+        <label xlink:type="resource" xlink:label="PaymentCardHolderName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentCardHolderName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentCardHolderName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentCardHolderName" xlink:to="PaymentCardHolderName_lbl"/>
+        <!-- en16931:MandateReferenceIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_MandateReferenceIdentifier" xlink:label="MandateReferenceIdentifier"/>
+        <label xlink:type="resource" xlink:label="MandateReferenceIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_MandateReferenceIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="MandateReferenceIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="MandateReferenceIdentifier" xlink:to="MandateReferenceIdentifier_lbl"/>
+        <!-- en16931:BankAssignedCreditorIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_BankAssignedCreditorIdentifier" xlink:label="BankAssignedCreditorIdentifier"/>
+        <label xlink:type="resource" xlink:label="BankAssignedCreditorIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_BankAssignedCreditorIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="BankAssignedCreditorIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="BankAssignedCreditorIdentifier" xlink:to="BankAssignedCreditorIdentifier_lbl"/>
+        <!-- en16931:DebitedAccountIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DebitedAccountIdentifier" xlink:label="DebitedAccountIdentifier"/>
+        <label xlink:type="resource" xlink:label="DebitedAccountIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DebitedAccountIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DebitedAccountIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DebitedAccountIdentifier" xlink:to="DebitedAccountIdentifier_lbl"/>
+        <!-- en16931:PaymentAccountIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentAccountIdentifier" xlink:label="PaymentAccountIdentifier"/>
+        <label xlink:type="resource" xlink:label="PaymentAccountIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentAccountIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentAccountIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentAccountIdentifier" xlink:to="PaymentAccountIdentifier_lbl"/>
+        <!-- en16931:PaymentAccountName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentAccountName" xlink:label="PaymentAccountName"/>
+        <label xlink:type="resource" xlink:label="PaymentAccountName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentAccountName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentAccountName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentAccountName" xlink:to="PaymentAccountName_lbl"/>
+        <!-- en16931:PaymentServiceProviderIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_PaymentServiceProviderIdentifier" xlink:label="PaymentServiceProviderIdentifier"/>
+        <label xlink:type="resource" xlink:label="PaymentServiceProviderIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_PaymentServiceProviderIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="PaymentServiceProviderIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="PaymentServiceProviderIdentifier" xlink:to="PaymentServiceProviderIdentifier_lbl"/>
+        <!-- en16931:DocumentLevelAllowanceAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelAllowanceAmount" xlink:label="DocumentLevelAllowanceAmount"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelAllowanceAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelAllowanceAmount" xlink:to="DocumentLevelAllowanceAmount_lbl"/>
+        <!-- en16931:DocumentLevelAllowanceBaseAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelAllowanceBaseAmount" xlink:label="DocumentLevelAllowanceBaseAmount"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceBaseAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelAllowanceBaseAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceBaseAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelAllowanceBaseAmount" xlink:to="DocumentLevelAllowanceBaseAmount_lbl"/>
+        <!-- en16931:DocumentLevelAllowancePercentage  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelAllowancePercentage" xlink:label="DocumentLevelAllowancePercentage"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowancePercentage_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelAllowancePercentage_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowancePercentage_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelAllowancePercentage" xlink:to="DocumentLevelAllowancePercentage_lbl"/>
+        <!-- en16931:DocumentLevelAllowanceVatCategoryCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelAllowanceVatCategoryCode" xlink:label="DocumentLevelAllowanceVatCategoryCode"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceVatCategoryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelAllowanceVatCategoryCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceVatCategoryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelAllowanceVatCategoryCode" xlink:to="DocumentLevelAllowanceVatCategoryCode_lbl"/>
+        <!-- en16931:DocumentLevelAllowanceVatRate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelAllowanceVatRate" xlink:label="DocumentLevelAllowanceVatRate"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceVatRate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelAllowanceVatRate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceVatRate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelAllowanceVatRate" xlink:to="DocumentLevelAllowanceVatRate_lbl"/>
+        <!-- en16931:DocumentLevelAllowanceReason  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelAllowanceReason" xlink:label="DocumentLevelAllowanceReason"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceReason_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelAllowanceReason_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceReason_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelAllowanceReason" xlink:to="DocumentLevelAllowanceReason_lbl"/>
+        <!-- en16931:DocumentLevelAllowanceReasonCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelAllowanceReasonCode" xlink:label="DocumentLevelAllowanceReasonCode"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelAllowanceReasonCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelAllowanceReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelAllowanceReasonCode" xlink:to="DocumentLevelAllowanceReasonCode_lbl"/>
+        <!-- en16931:DocumentLevelChargeAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelChargeAmount" xlink:label="DocumentLevelChargeAmount"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelChargeAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelChargeAmount" xlink:to="DocumentLevelChargeAmount_lbl"/>
+        <!-- en16931:DocumentLevelChargeBaseAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelChargeBaseAmount" xlink:label="DocumentLevelChargeBaseAmount"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeBaseAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelChargeBaseAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeBaseAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelChargeBaseAmount" xlink:to="DocumentLevelChargeBaseAmount_lbl"/>
+        <!-- en16931:DocumentLevelChargePercentage  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelChargePercentage" xlink:label="DocumentLevelChargePercentage"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargePercentage_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelChargePercentage_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargePercentage_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelChargePercentage" xlink:to="DocumentLevelChargePercentage_lbl"/>
+        <!-- en16931:DocumentLevelChargeVatCategoryCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelChargeVatCategoryCode" xlink:label="DocumentLevelChargeVatCategoryCode"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeVatCategoryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelChargeVatCategoryCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeVatCategoryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelChargeVatCategoryCode" xlink:to="DocumentLevelChargeVatCategoryCode_lbl"/>
+        <!-- en16931:DocumentLevelChargeVatRate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelChargeVatRate" xlink:label="DocumentLevelChargeVatRate"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeVatRate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelChargeVatRate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeVatRate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelChargeVatRate" xlink:to="DocumentLevelChargeVatRate_lbl"/>
+        <!-- en16931:DocumentLevelChargeReason  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelChargeReason" xlink:label="DocumentLevelChargeReason"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeReason_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelChargeReason_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeReason_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelChargeReason" xlink:to="DocumentLevelChargeReason_lbl"/>
+        <!-- en16931:DocumentLevelChargeReasonCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_DocumentLevelChargeReasonCode" xlink:label="DocumentLevelChargeReasonCode"/>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_DocumentLevelChargeReasonCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="DocumentLevelChargeReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="DocumentLevelChargeReasonCode" xlink:to="DocumentLevelChargeReasonCode_lbl"/>
+        <!-- en16931:VatCategoryTaxableAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_VatCategoryTaxableAmount" xlink:label="VatCategoryTaxableAmount"/>
+        <label xlink:type="resource" xlink:label="VatCategoryTaxableAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_VatCategoryTaxableAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="VatCategoryTaxableAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="VatCategoryTaxableAmount" xlink:to="VatCategoryTaxableAmount_lbl"/>
+        <!-- en16931:VatCategoryTaxAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_VatCategoryTaxAmount" xlink:label="VatCategoryTaxAmount"/>
+        <label xlink:type="resource" xlink:label="VatCategoryTaxAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_VatCategoryTaxAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="VatCategoryTaxAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="VatCategoryTaxAmount" xlink:to="VatCategoryTaxAmount_lbl"/>
+        <!-- en16931:VatCategoryCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_VatCategoryCode" xlink:label="VatCategoryCode"/>
+        <label xlink:type="resource" xlink:label="VatCategoryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_VatCategoryCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="VatCategoryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="VatCategoryCode" xlink:to="VatCategoryCode_lbl"/>
+        <!-- en16931:VatCategoryRate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_VatCategoryRate" xlink:label="VatCategoryRate"/>
+        <label xlink:type="resource" xlink:label="VatCategoryRate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_VatCategoryRate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="VatCategoryRate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="VatCategoryRate" xlink:to="VatCategoryRate_lbl"/>
+        <!-- en16931:VatExemptionReasonText  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_VatExemptionReasonText" xlink:label="VatExemptionReasonText"/>
+        <label xlink:type="resource" xlink:label="VatExemptionReasonText_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_VatExemptionReasonText_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="VatExemptionReasonText_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="VatExemptionReasonText" xlink:to="VatExemptionReasonText_lbl"/>
+        <!-- en16931:VatExemptionReasonCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_VatExemptionReasonCode" xlink:label="VatExemptionReasonCode"/>
+        <label xlink:type="resource" xlink:label="VatExemptionReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_VatExemptionReasonCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="VatExemptionReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="VatExemptionReasonCode" xlink:to="VatExemptionReasonCode_lbl"/>
+        <!-- en16931:SupportingDocumentReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SupportingDocumentReference" xlink:label="SupportingDocumentReference"/>
+        <label xlink:type="resource" xlink:label="SupportingDocumentReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SupportingDocumentReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SupportingDocumentReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SupportingDocumentReference" xlink:to="SupportingDocumentReference_lbl"/>
+        <!-- en16931:SupportingDocumentDescription  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_SupportingDocumentDescription" xlink:label="SupportingDocumentDescription"/>
+        <label xlink:type="resource" xlink:label="SupportingDocumentDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_SupportingDocumentDescription_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="SupportingDocumentDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="SupportingDocumentDescription" xlink:to="SupportingDocumentDescription_lbl"/>
+        <!-- en16931:ExternalDocumentLocation  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ExternalDocumentLocation" xlink:label="ExternalDocumentLocation"/>
+        <label xlink:type="resource" xlink:label="ExternalDocumentLocation_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ExternalDocumentLocation_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ExternalDocumentLocation_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ExternalDocumentLocation" xlink:to="ExternalDocumentLocation_lbl"/>
+        <!-- en16931:AttachedDocument  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_AttachedDocument" xlink:label="AttachedDocument"/>
+        <label xlink:type="resource" xlink:label="AttachedDocument_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_AttachedDocument_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="AttachedDocument_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="AttachedDocument" xlink:to="AttachedDocument_lbl"/>
+        <!-- en16931:InvoiceLineIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineIdentifier" xlink:label="InvoiceLineIdentifier"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineIdentifier" xlink:to="InvoiceLineIdentifier_lbl"/>
+        <!-- en16931:InvoiceLineNote  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineNote" xlink:label="InvoiceLineNote"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineNote_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineNote_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineNote_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineNote" xlink:to="InvoiceLineNote_lbl"/>
+        <!-- en16931:InvoiceLineObjectIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineObjectIdentifier" xlink:label="InvoiceLineObjectIdentifier"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineObjectIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineObjectIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineObjectIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineObjectIdentifier" xlink:to="InvoiceLineObjectIdentifier_lbl"/>
+        <!-- en16931:InvoicedQuantity  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoicedQuantity" xlink:label="InvoicedQuantity"/>
+        <label xlink:type="resource" xlink:label="InvoicedQuantity_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoicedQuantity_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoicedQuantity_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoicedQuantity" xlink:to="InvoicedQuantity_lbl"/>
+        <!-- en16931:InvoicedQuantityUnitCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoicedQuantityUnitCode" xlink:label="InvoicedQuantityUnitCode"/>
+        <label xlink:type="resource" xlink:label="InvoicedQuantityUnitCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoicedQuantityUnitCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoicedQuantityUnitCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoicedQuantityUnitCode" xlink:to="InvoicedQuantityUnitCode_lbl"/>
+        <!-- en16931:InvoiceLineNetAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineNetAmount" xlink:label="InvoiceLineNetAmount"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineNetAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineNetAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineNetAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineNetAmount" xlink:to="InvoiceLineNetAmount_lbl"/>
+        <!-- en16931:ReferencedPurchaseOrderLineReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ReferencedPurchaseOrderLineReference" xlink:label="ReferencedPurchaseOrderLineReference"/>
+        <label xlink:type="resource" xlink:label="ReferencedPurchaseOrderLineReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ReferencedPurchaseOrderLineReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ReferencedPurchaseOrderLineReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ReferencedPurchaseOrderLineReference" xlink:to="ReferencedPurchaseOrderLineReference_lbl"/>
+        <!-- en16931:InvoiceLineBuyerAccountingReference  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineBuyerAccountingReference" xlink:label="InvoiceLineBuyerAccountingReference"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineBuyerAccountingReference_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineBuyerAccountingReference_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineBuyerAccountingReference_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineBuyerAccountingReference" xlink:to="InvoiceLineBuyerAccountingReference_lbl"/>
+        <!-- en16931:InvoiceLinePeriodStartDate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLinePeriodStartDate" xlink:label="InvoiceLinePeriodStartDate"/>
+        <label xlink:type="resource" xlink:label="InvoiceLinePeriodStartDate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLinePeriodStartDate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLinePeriodStartDate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLinePeriodStartDate" xlink:to="InvoiceLinePeriodStartDate_lbl"/>
+        <!-- en16931:InvoiceLinePeriodEndDate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLinePeriodEndDate" xlink:label="InvoiceLinePeriodEndDate"/>
+        <label xlink:type="resource" xlink:label="InvoiceLinePeriodEndDate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLinePeriodEndDate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLinePeriodEndDate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLinePeriodEndDate" xlink:to="InvoiceLinePeriodEndDate_lbl"/>
+        <!-- en16931:InvoiceLineAllowances  -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_InvoiceLineAllowances" xlink:label="InvoiceLineAllowances"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowances_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineAllowances_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowances_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineAllowances" xlink:to="InvoiceLineAllowances_lbl"/>
+        <!-- en16931:InvoiceLineCharges  -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_InvoiceLineCharges" xlink:label="InvoiceLineCharges"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineCharges_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineCharges_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineCharges_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineCharges" xlink:to="InvoiceLineCharges_lbl"/>
+        <!-- en16931:ItemNetPrice  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemNetPrice" xlink:label="ItemNetPrice"/>
+        <label xlink:type="resource" xlink:label="ItemNetPrice_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemNetPrice_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemNetPrice_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemNetPrice" xlink:to="ItemNetPrice_lbl"/>
+        <!-- en16931:ItemPriceDiscount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemPriceDiscount" xlink:label="ItemPriceDiscount"/>
+        <label xlink:type="resource" xlink:label="ItemPriceDiscount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemPriceDiscount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemPriceDiscount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemPriceDiscount" xlink:to="ItemPriceDiscount_lbl"/>
+        <!-- en16931:ItemGrossPrice  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemGrossPrice" xlink:label="ItemGrossPrice"/>
+        <label xlink:type="resource" xlink:label="ItemGrossPrice_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemGrossPrice_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemGrossPrice_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemGrossPrice" xlink:to="ItemGrossPrice_lbl"/>
+        <!-- en16931:ItemPriceBaseQuantity  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemPriceBaseQuantity" xlink:label="ItemPriceBaseQuantity"/>
+        <label xlink:type="resource" xlink:label="ItemPriceBaseQuantity_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemPriceBaseQuantity_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemPriceBaseQuantity_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemPriceBaseQuantity" xlink:to="ItemPriceBaseQuantity_lbl"/>
+        <!-- en16931:ItemPriceBaseQuantityUnitCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemPriceBaseQuantityUnitCode" xlink:label="ItemPriceBaseQuantityUnitCode"/>
+        <label xlink:type="resource" xlink:label="ItemPriceBaseQuantityUnitCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemPriceBaseQuantityUnitCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemPriceBaseQuantityUnitCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemPriceBaseQuantityUnitCode" xlink:to="ItemPriceBaseQuantityUnitCode_lbl"/>
+        <!-- en16931:InvoicedItemVatCategoryCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoicedItemVatCategoryCode" xlink:label="InvoicedItemVatCategoryCode"/>
+        <label xlink:type="resource" xlink:label="InvoicedItemVatCategoryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoicedItemVatCategoryCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoicedItemVatCategoryCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoicedItemVatCategoryCode" xlink:to="InvoicedItemVatCategoryCode_lbl"/>
+        <!-- en16931:InvoicedItemVatRate  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoicedItemVatRate" xlink:label="InvoicedItemVatRate"/>
+        <label xlink:type="resource" xlink:label="InvoicedItemVatRate_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoicedItemVatRate_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoicedItemVatRate_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoicedItemVatRate" xlink:to="InvoicedItemVatRate_lbl"/>
+        <!-- en16931:ItemName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemName" xlink:label="ItemName"/>
+        <label xlink:type="resource" xlink:label="ItemName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemName" xlink:to="ItemName_lbl"/>
+        <!-- en16931:ItemDescription  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemDescription" xlink:label="ItemDescription"/>
+        <label xlink:type="resource" xlink:label="ItemDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemDescription_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemDescription_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemDescription" xlink:to="ItemDescription_lbl"/>
+        <!-- en16931:ItemSellerIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemSellerIdentifier" xlink:label="ItemSellerIdentifier"/>
+        <label xlink:type="resource" xlink:label="ItemSellerIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemSellerIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemSellerIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemSellerIdentifier" xlink:to="ItemSellerIdentifier_lbl"/>
+        <!-- en16931:ItemBuyerIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemBuyerIdentifier" xlink:label="ItemBuyerIdentifier"/>
+        <label xlink:type="resource" xlink:label="ItemBuyerIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemBuyerIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemBuyerIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemBuyerIdentifier" xlink:to="ItemBuyerIdentifier_lbl"/>
+        <!-- en16931:ItemStandardIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemStandardIdentifier" xlink:label="ItemStandardIdentifier"/>
+        <label xlink:type="resource" xlink:label="ItemStandardIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemStandardIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemStandardIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemStandardIdentifier" xlink:to="ItemStandardIdentifier_lbl"/>
+        <!-- en16931:ItemClassificationIdentifier  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemClassificationIdentifier" xlink:label="ItemClassificationIdentifier"/>
+        <label xlink:type="resource" xlink:label="ItemClassificationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemClassificationIdentifier_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemClassificationIdentifier_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemClassificationIdentifier" xlink:to="ItemClassificationIdentifier_lbl"/>
+        <!-- en16931:ItemCountryOfOrigin  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemCountryOfOrigin" xlink:label="ItemCountryOfOrigin"/>
+        <label xlink:type="resource" xlink:label="ItemCountryOfOrigin_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemCountryOfOrigin_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemCountryOfOrigin_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemCountryOfOrigin" xlink:to="ItemCountryOfOrigin_lbl"/>
+        <!-- en16931:ItemAttributes  -->
+        <loc xlink:type="locator" xlink:href="../../plt/en16931-oim-2026-07-05.xsd#p_en16931_ItemAttributes" xlink:label="ItemAttributes"/>
+        <label xlink:type="resource" xlink:label="ItemAttributes_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemAttributes_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemAttributes_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemAttributes" xlink:to="ItemAttributes_lbl"/>
+        <!-- en16931:InvoiceLineAllowanceAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineAllowanceAmount" xlink:label="InvoiceLineAllowanceAmount"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowanceAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineAllowanceAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowanceAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineAllowanceAmount" xlink:to="InvoiceLineAllowanceAmount_lbl"/>
+        <!-- en16931:InvoiceLineAllowanceBaseAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineAllowanceBaseAmount" xlink:label="InvoiceLineAllowanceBaseAmount"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowanceBaseAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineAllowanceBaseAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowanceBaseAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineAllowanceBaseAmount" xlink:to="InvoiceLineAllowanceBaseAmount_lbl"/>
+        <!-- en16931:InvoiceLineAllowancePercentage  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineAllowancePercentage" xlink:label="InvoiceLineAllowancePercentage"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowancePercentage_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineAllowancePercentage_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowancePercentage_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineAllowancePercentage" xlink:to="InvoiceLineAllowancePercentage_lbl"/>
+        <!-- en16931:InvoiceLineAllowanceReason  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineAllowanceReason" xlink:label="InvoiceLineAllowanceReason"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowanceReason_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineAllowanceReason_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowanceReason_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineAllowanceReason" xlink:to="InvoiceLineAllowanceReason_lbl"/>
+        <!-- en16931:InvoiceLineAllowanceReasonCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineAllowanceReasonCode" xlink:label="InvoiceLineAllowanceReasonCode"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowanceReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineAllowanceReasonCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineAllowanceReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineAllowanceReasonCode" xlink:to="InvoiceLineAllowanceReasonCode_lbl"/>
+        <!-- en16931:InvoiceLineChargeAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineChargeAmount" xlink:label="InvoiceLineChargeAmount"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargeAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineChargeAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargeAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineChargeAmount" xlink:to="InvoiceLineChargeAmount_lbl"/>
+        <!-- en16931:InvoiceLineChargeBaseAmount  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineChargeBaseAmount" xlink:label="InvoiceLineChargeBaseAmount"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargeBaseAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineChargeBaseAmount_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargeBaseAmount_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineChargeBaseAmount" xlink:to="InvoiceLineChargeBaseAmount_lbl"/>
+        <!-- en16931:InvoiceLineChargePercentage  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineChargePercentage" xlink:label="InvoiceLineChargePercentage"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargePercentage_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineChargePercentage_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargePercentage_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineChargePercentage" xlink:to="InvoiceLineChargePercentage_lbl"/>
+        <!-- en16931:InvoiceLineChargeReason  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineChargeReason" xlink:label="InvoiceLineChargeReason"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargeReason_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineChargeReason_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargeReason_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineChargeReason" xlink:to="InvoiceLineChargeReason_lbl"/>
+        <!-- en16931:InvoiceLineChargeReasonCode  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_InvoiceLineChargeReasonCode" xlink:label="InvoiceLineChargeReasonCode"/>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargeReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_InvoiceLineChargeReasonCode_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="InvoiceLineChargeReasonCode_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="InvoiceLineChargeReasonCode" xlink:to="InvoiceLineChargeReasonCode_lbl"/>
+        <!-- en16931:ItemAttributeName  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemAttributeName" xlink:label="ItemAttributeName"/>
+        <label xlink:type="resource" xlink:label="ItemAttributeName_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemAttributeName_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemAttributeName_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemAttributeName" xlink:to="ItemAttributeName_lbl"/>
+        <!-- en16931:ItemAttributeValue  -->
+        <loc xlink:type="locator" xlink:href="../en16931-2026-07-05.xsd#en16931_ItemAttributeValue" xlink:label="ItemAttributeValue"/>
+        <label xlink:type="resource" xlink:label="ItemAttributeValue_lbl" xlink:role="http://www.xbrl.org/2003/role/label" xlink:title="en16931_ItemAttributeValue_ja" xml:lang="en"></label>
+        <label xlink:type="resource" xlink:label="ItemAttributeValue_lbl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja"></label>
+        <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="ItemAttributeValue" xlink:to="ItemAttributeValue_lbl"/>
+  </labelLink>
+</linkbase>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xbrli:xbrl xmlns:gl-bus="http://www.xbrl.org/int/gl/bus/2016-12-01" xmlns:gl-cor="http://www.xbrl.org/int/gl/cor/2016-12-01" xmlns:gl-muc="http://www.xbrl.org/int/gl/muc/2016-12-01" xmlns:gl-taf="http://www.xbrl.org/int/gl/taf/2016-12-01" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:xbrll="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:iso639="http://www.xbrl.org/2005/iso639" xsi:schemaLocation="http://www.xbrl.org/int/gl/plt/2016-12-01 ../../../../XBRL-GL-PWD-2016-12-01/gl/plt/case-c-b-m-u-e-t-s/gl-plt-all-2016-12-01.xsd">
+  <xbrll:schemaRef xlink:type="simple" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="../../../../XBRL-GL-PWD-2016-12-01/gl/plt/case-c-b-m-u-e-t-s/gl-plt-all-2016-12-01.xsd" />
+  <xbrli:context id="now">
+    <xbrli:entity>
+      <xbrli:identifier scheme="https://example.com/uadc-poc">Buyer Official Name</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2017-11-13</xbrli:instant>
+    </xbrli:period>
+  </xbrli:context>
+  <xbrli:unit id="EUR">
+    <xbrli:measure>iso4217:EUR</xbrli:measure>
+  </xbrli:unit>
+  <xbrli:unit id="NotUsed">
+    <xbrli:measure>pure</xbrli:measure>
+  </xbrli:unit>
+  <gl-cor:accountingEntries>
+    <gl-cor:documentInfo>
+      <gl-cor:entriesType contextRef="now">other</gl-cor:entriesType>
+      <gl-cor:language contextRef="now">iso639:en</gl-cor:language>
+      <gl-cor:creationDate contextRef="now">2017-11-13</gl-cor:creationDate>
+      <gl-cor:entriesComment contextRef="now">Generated UADC PoC ADS XBRL GL instance</gl-cor:entriesComment>
+      <gl-muc:defaultCurrency contextRef="now">iso4217:EUR</gl-muc:defaultCurrency>
+    </gl-cor:documentInfo>
+    <gl-cor:entityInformation>
+      <gl-bus:organizationIdentifiers>
+        <gl-bus:organizationIdentifier contextRef="now">4025:123:4343</gl-bus:organizationIdentifier>
+      </gl-bus:organizationIdentifiers>
+      <gl-bus:fiscalYearEnd contextRef="now">2017-11-13</gl-bus:fiscalYearEnd>
+    </gl-cor:entityInformation>
+    <gl-cor:entryHeader>
+      <gl-bus:postingCode contextRef="now">2017-11-13</gl-bus:postingCode>
+      <gl-cor:entryDetail>
+        <gl-cor:account>
+          <gl-cor:accountSub>
+            <gl-cor:accountSubID contextRef="now">4025:123:4343</gl-cor:accountSubID>
+          </gl-cor:accountSub>
+        </gl-cor:account>
+        <gl-cor:amount contextRef="now" decimals="2" unitRef="EUR">1656.25</gl-cor:amount>
+        <gl-muc:amountCurrency contextRef="now">EUR</gl-muc:amountCurrency>
+        <gl-cor:identifierReference>
+          <gl-cor:identifierCode contextRef="now">FR23342</gl-cor:identifierCode>
+          <gl-cor:identifierDescription contextRef="now">Buyer Official Name</gl-cor:identifierDescription>
+          <gl-cor:identifierType contextRef="now">C</gl-cor:identifierType>
+        </gl-cor:identifierReference>
+        <gl-cor:documentNumber contextRef="now">Snippet1</gl-cor:documentNumber>
+        <gl-cor:documentReference contextRef="now">Snippet1</gl-cor:documentReference>
+        <gl-cor:documentDate contextRef="now">2017-11-13</gl-cor:documentDate>
+        <gl-cor:maturityDate contextRef="now">2017-12-01</gl-cor:maturityDate>
+        <gl-cor:terms contextRef="now">Payment within 10 days, 2% discount</gl-cor:terms>
+        <gl-cor:taxes>
+          <gl-cor:taxAmount contextRef="now" decimals="2" unitRef="EUR">331.25</gl-cor:taxAmount>
+          <gl-cor:taxCode contextRef="now">S</gl-cor:taxCode>
+        </gl-cor:taxes>
+        <gl-taf:originatingDocumentStructure>
+          <gl-taf:originatingDocumentType contextRef="now">order-vendor</gl-taf:originatingDocumentType>
+          <gl-taf:originatingDocumentNumber contextRef="now">NA</gl-taf:originatingDocumentNumber>
+        </gl-taf:originatingDocumentStructure>
+      </gl-cor:entryDetail>
+    </gl-cor:entryHeader>
+  </gl-cor:accountingEntries>
+</xbrli:xbrl>

@@ -24,6 +24,8 @@ Command-line arguments:
     --metadata-output: Optional JSON metadata output path.
     --taxonomy-base: Taxonomy directory referenced by generated metadata.
     --reverse: Convert hierarchical CSV back to XML.
+    --ubl-schema-root: Optional local UBL XSD directory used for reverse XML child order.
+    --ubl-schema-url: Optional UBL Invoice XSD URL used for reverse XML child order.
     --invoice-namespace: Namespace URI used for reverse XML generation.
     --d-invoice: dInvoice dimension value written in forward output rows.
     -e, --encoding: CSV encoding used for input and output.
@@ -38,10 +40,25 @@ Last Modified: 2026-07-13
 
 Copyright 2026 Sambuichi Professional Engineers Office
 Designed by SAMBUICHI, Nobuyuki
-Produced by ChatGPT & Codex, edited by  SAMBUICHI, Nobuyuki
+Produced by ChatGPT and Codex, edited by SAMBUICHI, Nobuyuki
+
+License:
+    This software source code is licensed under the MIT License.
+
+    Non-code materials in the UADC-PoC project, including original mapping
+    tables, syntax binding definitions, semantic binding definitions,
+    transformation rules, explanatory notes, and documentation, may be licensed
+    separately under Creative Commons Attribution-NonCommercial 4.0
+    International License (CC BY-NC 4.0), where so indicated.
+
+    Third-party standards, schemas, taxonomies, code lists, field names,
+    descriptions, and excerpts remain subject to their original copyright
+    notices and licenses. This license notice does not relicense third-party
+    materials.
+
 MIT License
 
-(c) 2026 Sambuichi Professional Engineers Office
+Copyright (c) 2026 Sambuichi Professional Engineers Office
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -60,13 +77,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-CC-BY-NC
 """
 
 from __future__ import annotations
 
 import argparse
 import csv
+import io
 import json
 import os
 import re
@@ -75,6 +92,8 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
+from urllib.parse import urljoin
+from urllib.request import urlopen
 
 
 UBL_NAMESPACES = {
@@ -82,6 +101,8 @@ UBL_NAMESPACES = {
     "cac": "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2",
     "cbc": "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2",
 }
+
+XSD_NS = "{http://www.w3.org/2001/XMLSchema}"
 
 UBL_CHILD_ORDER = {
     "Invoice": [
@@ -191,6 +212,129 @@ UBL_CHILD_ORDER = {
     ],
     "Country": ["IdentificationCode", "Name"],
 }
+
+
+@dataclass(frozen=True)
+class UblElementDecl:
+    """One global UBL schema element declaration."""
+
+    qname: Tuple[str, str]
+    type_qname: Optional[Tuple[str, str]]
+
+
+class UblSchemaIndex:
+    """Index UBL XSD element declarations and complex type child sequences."""
+
+    def __init__(self) -> None:
+        self.elements: Dict[Tuple[str, str], UblElementDecl] = {}
+        self.types: Dict[Tuple[str, str], List[Tuple[str, str]]] = {}
+        self.loaded_sources: set[str] = set()
+
+    @staticmethod
+    def nsmap_from_file(path: Path) -> Dict[str, str]:
+        namespaces: Dict[str, str] = {}
+        for _, item in ET.iterparse(path, events=("start-ns",)):
+            prefix, uri = item
+            namespaces[prefix or ""] = uri
+        return namespaces
+
+    @staticmethod
+    def nsmap_from_bytes(data: bytes) -> Dict[str, str]:
+        namespaces: Dict[str, str] = {}
+        for _, item in ET.iterparse(io.BytesIO(data), events=("start-ns",)):
+            prefix, uri = item
+            namespaces[prefix or ""] = uri
+        return namespaces
+
+    @staticmethod
+    def resolve_qname(value: str, namespaces: Dict[str, str], default_ns: str) -> Tuple[str, str]:
+        if ":" in value:
+            prefix, local = value.split(":", 1)
+            return namespaces.get(prefix, ""), local
+        return default_ns, value
+
+    @staticmethod
+    def sequence_elements(parent: ET.Element, namespaces: Dict[str, str], target_ns: str) -> List[Tuple[str, str]]:
+        sequence = parent.find(f"{XSD_NS}sequence")
+        if sequence is None:
+            extension = parent.find(f"{XSD_NS}complexContent/{XSD_NS}extension")
+            sequence = extension.find(f"{XSD_NS}sequence") if extension is not None else None
+        if sequence is None:
+            return []
+        children: List[Tuple[str, str]] = []
+        for child in list(sequence):
+            if child.tag != f"{XSD_NS}element":
+                continue
+            ref = child.get("ref")
+            name = child.get("name")
+            if ref:
+                children.append(UblSchemaIndex.resolve_qname(ref, namespaces, target_ns))
+            elif name:
+                children.append((target_ns, name))
+        return children
+
+    def load_xsd_root(self, root: ET.Element, namespaces: Dict[str, str]) -> None:
+        target_ns = root.get("targetNamespace", "")
+        for element in root.findall(f"{XSD_NS}element"):
+            name = element.get("name")
+            if not name:
+                continue
+            type_name = element.get("type")
+            type_qname = self.resolve_qname(type_name, namespaces, target_ns) if type_name else None
+            qname = (target_ns, name)
+            self.elements[qname] = UblElementDecl(qname, type_qname)
+            inline_sequence = self.sequence_elements(element, namespaces, target_ns)
+            if inline_sequence:
+                self.types[qname] = inline_sequence
+        for complex_type in root.findall(f"{XSD_NS}complexType"):
+            name = complex_type.get("name")
+            if not name:
+                continue
+            qname = (target_ns, name)
+            sequence = self.sequence_elements(complex_type, namespaces, target_ns)
+            if sequence:
+                self.types[qname] = sequence
+
+    def load_xsd_file(self, path: Path) -> None:
+        key = str(path.resolve())
+        if key in self.loaded_sources:
+            return
+        self.loaded_sources.add(key)
+        namespaces = self.nsmap_from_file(path)
+        root = ET.parse(path).getroot()
+        self.load_xsd_root(root, namespaces)
+
+    def load_directory(self, schema_root: Path) -> None:
+        for path in sorted(schema_root.rglob("*.xsd")):
+            self.load_xsd_file(path)
+
+    def load_url(self, url: str) -> None:
+        if url in self.loaded_sources:
+            return
+        self.loaded_sources.add(url)
+        with urlopen(url) as response:
+            data = response.read()
+        namespaces = self.nsmap_from_bytes(data)
+        root = ET.fromstring(data)
+        for child in root:
+            if child.tag not in {f"{XSD_NS}import", f"{XSD_NS}include"}:
+                continue
+            location = child.get("schemaLocation")
+            if location:
+                self.load_url(urljoin(url, location))
+        self.load_xsd_root(root, namespaces)
+
+    def child_order_by_element_name(self) -> Dict[str, List[str]]:
+        order: Dict[str, List[str]] = {}
+        for (namespace, local_name), decl in self.elements.items():
+            sequence: List[Tuple[str, str]] = []
+            if decl.type_qname and decl.type_qname in self.types:
+                sequence = self.types[decl.type_qname]
+            elif decl.qname in self.types:
+                sequence = self.types[decl.qname]
+            if sequence:
+                order[local_name] = [child_local for _, child_local in sequence]
+        return order
 
 
 def xml_local_name(name: str) -> str:
@@ -468,13 +612,18 @@ def get_value(
     xpath = (xpath or "").strip()
     if not xpath:
         return ""
+    # A binding may remain absolute when its fact is selected outside the
+    # current semantic-class XML context (for example BT-110/BT-111 select
+    # sibling TaxTotal elements by currency).  Absolute paths must always be
+    # evaluated from the document root, not from the current class node.
+    search_context = root if xpath.startswith("/") and root is not None else context
     element_xpath, attr_name = xml_split_terminal_attribute(xpath)
     if attr_name:
-        nodes = find_nodes(context, element_xpath, namespaces, root)
+        nodes = find_nodes(search_context, element_xpath, namespaces, root)
         return nodes[0].attrib.get(attr_name, "") if nodes else ""
     if xpath.startswith("@"):
         return context.attrib.get(xpath[1:], "")
-    nodes = find_nodes(context, xpath, namespaces, root)
+    nodes = find_nodes(search_context, xpath, namespaces, root)
     values = [" ".join((node.text or "").split()) for node in nodes if (node.text or "").strip()]
     return "|".join(values)
 
@@ -501,9 +650,9 @@ class Binding:
 
 
 @dataclass(frozen=True)
-class LhmLayout:
+class BindingLayout:
     """
-    Hold LHM-derived dimension, fact, and ordering metadata.
+    Hold binding-derived dimension, fact, and ordering metadata.
 
     Args:
         None.
@@ -633,28 +782,7 @@ def multiplicity_repeats(multiplicity: str) -> bool:
         return False
 
 
-def read_lhm_layout(lhm_csv: Optional[Path], encoding: str) -> LhmLayout:
-    """
-    Read LHM rows and classify dimensions, facts, and row ordering.
-
-    Args:
-        lhm_csv: Input value used by read_lhm_layout.
-        encoding: Input value used by read_lhm_layout.
-
-    Returns:
-        Result produced by read_lhm_layout.
-    """
-    if not lhm_csv:
-        return LhmLayout([], {}, {}, {}, {}, {}, {}, {}, {}, {})
-    with lhm_csv.open(newline="", encoding=encoding) as f:
-        reader = csv.DictReader(f)
-        if not reader.fieldnames:
-            raise ValueError("LHM CSV has no header.")
-        rows = [{key.lstrip("\ufeff"): (value or "").strip() for key, value in row.items()} for row in reader]
-    return build_layout_from_rows(rows)
-
-
-def read_binding_layout(binding_csv: Path, encoding: str) -> LhmLayout:
+def read_binding_layout(binding_csv: Path, encoding: str) -> BindingLayout:
     """
     Read LHM-style class and attribute rows embedded in a syntax binding CSV.
 
@@ -673,7 +801,7 @@ def read_binding_layout(binding_csv: Path, encoding: str) -> LhmLayout:
     return build_layout_from_rows(rows)
 
 
-def build_layout_from_rows(rows: List[Dict[str, str]]) -> LhmLayout:
+def build_layout_from_rows(rows: List[Dict[str, str]]) -> BindingLayout:
     """
     Build Structured CSV layout metadata from LHM-style C/A rows.
 
@@ -763,7 +891,7 @@ def build_layout_from_rows(rows: List[Dict[str, str]]) -> LhmLayout:
             field_dimension[csv_column] = parent_dimension
             semantic_path_dimension[semantic_path] = parent_dimension
 
-    return LhmLayout(
+    return BindingLayout(
         dimensions + fields,
         field_dimension,
         semantic_path_dimension,
@@ -1593,40 +1721,71 @@ def set_relative_xml_value(
         apply_currency_attribute(element, resolved_xpath, document_currency, tax_currency)
 
 
-def child_order_for(element: ET.Element) -> Dict[str, int]:
+def load_ubl_child_order(
+    schema_root: Optional[Path] = None,
+    schema_url: str = "",
+) -> Optional[Dict[str, List[str]]]:
+    """
+    Load UBL child element order from a local schema root or schema URL.
+
+    Args:
+        schema_root: Directory containing extracted UBL XSD files.
+        schema_url: URL of the UBL Invoice schema entry point.
+
+    Returns:
+        Mapping from parent element local name to ordered child local names, or
+        None when no schema source is supplied.
+    """
+    if not schema_root and not schema_url:
+        return None
+    index = UblSchemaIndex()
+    if schema_root:
+        index.load_directory(schema_root)
+    if schema_url:
+        index.load_url(schema_url)
+    return index.child_order_by_element_name()
+
+
+def child_order_for(element: ET.Element, schema_child_order: Optional[Dict[str, List[str]]] = None) -> Dict[str, int]:
     """
     Return the schema child-order map for an element.
 
     Args:
         element: Input value used by child_order_for.
+        schema_child_order: Child order generated from UBL XSD, if available.
 
     Returns:
         Result produced by child_order_for.
     """
     local = element_local_name(element.tag)
-    order = UBL_CHILD_ORDER.get(local)
+    order_source = schema_child_order or UBL_CHILD_ORDER
+    order = order_source.get(local)
     if order is None and local.endswith("Address"):
-        order = UBL_CHILD_ORDER["Address"]
+        order = order_source.get("Address")
     if order is None and local.endswith("DocumentReference"):
-        order = UBL_CHILD_ORDER["DocumentReference"]
+        order = order_source.get("DocumentReference")
     if order is None and local.endswith("MonetaryTotal"):
-        order = UBL_CHILD_ORDER["MonetaryTotal"]
+        order = order_source.get("MonetaryTotal")
     return {name: index for index, name in enumerate(order or [])}
 
 
-def sort_children_for_ubl_schema(element: ET.Element) -> None:
+def sort_children_for_ubl_schema(
+    element: ET.Element,
+    schema_child_order: Optional[Dict[str, List[str]]] = None,
+) -> None:
     """
     Recursively sort UBL children according to schema order.
 
     Args:
         element: Input value used by sort_children_for_ubl_schema.
+        schema_child_order: Child order generated from UBL XSD, if available.
 
     Returns:
         None. The XML tree is sorted in place.
     """
     for child in list(element):
-        sort_children_for_ubl_schema(child)
-    order = child_order_for(element)
+        sort_children_for_ubl_schema(child, schema_child_order)
+    order = child_order_for(element, schema_child_order)
     if not order:
         return
     children = list(element)
@@ -1734,6 +1893,36 @@ def row_has_values(row: Dict[str, str], dimension_columns: List[str]) -> bool:
     return any(value for field, value in row.items() if field not in dimension_columns)
 
 
+def validate_hierarchical_row_scopes(
+    rows: List[Dict[str, str]],
+    fieldnames: List[str],
+    field_dimension: Dict[str, str],
+) -> None:
+    """Reject rows that mix facts belonging to different row scopes.
+
+    A non-repeated child class shares its nearest repeated ancestor's row.  A
+    repeated child class owns separate rows, even for its first occurrence.
+    Therefore every populated fact on a row must belong to that row's deepest
+    populated dimension.
+    """
+    dimensions = [field for field in fieldnames if is_dimension_column(field)]
+    for row_number, row in enumerate(rows, start=2):
+        active_dimensions = [dimension for dimension in dimensions if row.get(dimension)]
+        if not active_dimensions:
+            continue
+        row_scope = active_dimensions[-1]
+        for field in fieldnames:
+            if field in dimensions or not row.get(field):
+                continue
+            owner = field_dimension.get(field, "")
+            if owner and owner != row_scope:
+                raise ValueError(
+                    f"Invalid hierarchical CSV row {row_number}: {field} belongs to {owner}, "
+                    f"but the row scope is {row_scope}. Repeated child facts must be written "
+                    "on separate child rows."
+                )
+
+
 def drop_empty_columns(rows: List[Dict[str, str]], fieldnames: List[str]) -> Tuple[List[Dict[str, str]], List[str]]:
     """
     Remove columns that are empty across all rows.
@@ -1826,13 +2015,13 @@ def taxonomy_entrypoints(taxonomy_base: Optional[Path], metadata_file: Path) -> 
     """
     if not taxonomy_base:
         raise ValueError("--taxonomy-base is required when writing xBRL-CSV metadata.")
-    xbrl_csv_schema = latest_file(taxonomy_base / "plt", "plt-oim-*.xsd")
+    xbrl_csv_schema = latest_file(taxonomy_base / "plt", "en16931-oim-*.xsd")
     module_schema = latest_file(taxonomy_base / "en16931", "en16931-*.xsd")
     if not xbrl_csv_schema:
         raise ValueError(f"Missing xBRL-CSV taxonomy schema under {taxonomy_base / 'plt'}.")
     return {
         "xbrlCsvSchema": relative_metadata_path(xbrl_csv_schema, metadata_file),
-        "definitionLinkbase": relative_metadata_path(latest_file(taxonomy_base / "plt", "plt-def-*.xml"), metadata_file),
+        "definitionLinkbase": relative_metadata_path(latest_file(taxonomy_base / "plt", "en16931-def-*.xml"), metadata_file),
         "moduleSchema": relative_metadata_path(module_schema, metadata_file),
     }
 
@@ -1871,20 +2060,18 @@ def xbrl_csv_column_definition(column: Dict[str, str]) -> Dict[str, Dict[str, st
     return {"dimensions": dimensions}
 
 
-def lhm_column_metadata(lhm_csv: Optional[Path], encoding: str) -> Dict[str, Dict[str, str]]:
+def binding_column_metadata(binding_csv: Path, encoding: str) -> Dict[str, Dict[str, str]]:
     """
-    Build column metadata from an LHM CSV file.
+    Build column metadata from a syntax binding CSV file.
 
     Args:
-        lhm_csv: Input value used by lhm_column_metadata.
-        encoding: Input value used by lhm_column_metadata.
+        binding_csv: Syntax binding CSV to read.
+        encoding: CSV encoding used for input.
 
     Returns:
-        Result produced by lhm_column_metadata.
+        Column metadata keyed by Structured CSV column name.
     """
-    if not lhm_csv:
-        return {}
-    with lhm_csv.open(newline="", encoding=encoding) as f:
+    with binding_csv.open(newline="", encoding=encoding) as f:
         reader = csv.DictReader(f)
         if not reader.fieldnames:
             return {}
@@ -1893,7 +2080,10 @@ def lhm_column_metadata(lhm_csv: Optional[Path], encoding: str) -> Dict[str, Dic
     metadata: Dict[str, Dict[str, str]] = {}
     for row in rows:
         row_type = first_present(row, ("type", "kind")).upper()
-        element = first_present(row, ("element", "name"))
+        # The binding's ``element`` field is the source XML QName (for example
+        # ``cbc:ID``).  xBRL-CSV metadata must instead use the actual Structured
+        # CSV header and the corresponding generated taxonomy concept name.
+        element = first_present(row, ("structured_csv_column", "column", "name", "element"))
         module = first_present(row, ("module",)) or "en16931"
         if not element:
             continue
@@ -1913,8 +2103,8 @@ def lhm_column_metadata(lhm_csv: Optional[Path], encoding: str) -> Dict[str, Dic
             metadata[dimension] = {
                 **common,
                 "kind": "dimension",
-                "taxonomyConcept": f"plt:d_{module}_{element}",
-                "primaryItem": f"plt:p_{module}_{element}",
+                "taxonomyConcept": f"en16931:d_{module}_{element}",
+                "primaryItem": f"en16931:p_{module}_{element}",
             }
         elif row_type.startswith("A") or row_type.startswith("F"):
             metadata[element] = {
@@ -1930,7 +2120,6 @@ def write_csv_metadata(
     csv_file: Path,
     xml_file: Path,
     binding_csv: Path,
-    lhm_csv: Optional[Path],
     fieldnames: List[str],
     row_count: int,
     taxonomy_base: Optional[Path],
@@ -1944,7 +2133,6 @@ def write_csv_metadata(
         csv_file: Input value used by write_csv_metadata.
         xml_file: Input value used by write_csv_metadata.
         binding_csv: Input value used by write_csv_metadata.
-        lhm_csv: Input value used by write_csv_metadata.
         fieldnames: Input value used by write_csv_metadata.
         row_count: Input value used by write_csv_metadata.
         taxonomy_base: Input value used by write_csv_metadata.
@@ -1953,7 +2141,7 @@ def write_csv_metadata(
     Returns:
         None. The JSON metadata file is written.
     """
-    columns = lhm_column_metadata(lhm_csv or binding_csv, encoding)
+    columns = binding_column_metadata(binding_csv, encoding)
     entrypoints = taxonomy_entrypoints(taxonomy_base, metadata_file)
     version = taxonomy_version(entrypoints)
     template_dimensions = {
@@ -1976,7 +2164,6 @@ def write_csv_metadata(
             "documentType": "https://xbrl.org/2021/xbrl-csv",
             "namespaces": {
                 "en16931": f"http://www.xbrl.org/int/gl/en16931/{version}",
-                "plt": f"http://www.xbrl.org/int/gl/plt/{version}",
                 "iso4217": "http://www.xbrl.org/2003/iso4217",
                 "scheme": "http://www.example.com",
                 "xbrl": "https://xbrl.org/2021",
@@ -2011,7 +2198,6 @@ def write_hierarchical_csv(
     binding_csv: Path,
     out_csv: Path,
     template_csv: Optional[Path],
-    lhm_csv: Optional[Path],
     metadata_output: Optional[Path],
     taxonomy_base: Optional[Path],
     encoding: str,
@@ -2026,7 +2212,6 @@ def write_hierarchical_csv(
         binding_csv: Input value used by write_hierarchical_csv.
         out_csv: Input value used by write_hierarchical_csv.
         template_csv: Input value used by write_hierarchical_csv.
-        lhm_csv: Input value used by write_hierarchical_csv.
         metadata_output: Input value used by write_hierarchical_csv.
         taxonomy_base: Input value used by write_hierarchical_csv.
         encoding: Input value used by write_hierarchical_csv.
@@ -2039,23 +2224,21 @@ def write_hierarchical_csv(
     namespaces = collect_namespaces(xml_file)
     root = ET.parse(xml_file).getroot()
     binding_layout = read_binding_layout(binding_csv, encoding)
-    lhm_layout = binding_layout if binding_layout.fieldnames else read_lhm_layout(lhm_csv, encoding)
+    if not binding_layout.fieldnames:
+        raise ValueError("The syntax binding table has no usable C/A rows.")
     bindings = read_bindings(
         binding_csv,
         encoding,
-        lhm_layout.path_dimension,
-        lhm_layout.field_by_semantic_path,
-        lhm_layout.semantic_path_dimension,
+        binding_layout.path_dimension,
+        binding_layout.field_by_semantic_path,
+        binding_layout.semantic_path_dimension,
     )
     if not bindings:
         raise ValueError("No usable semantic_path/xpath bindings found.")
 
-    template_fields, field_dimension = read_template(template_csv, encoding)
-    if lhm_layout.fieldnames:
-        fieldnames = lhm_layout.fieldnames
-        field_dimension = {**lhm_layout.field_dimension, **field_dimension}
-    else:
-        fieldnames = add_derived_fieldnames(template_fields, bindings)
+    _, field_dimension = read_template(template_csv, encoding)
+    fieldnames = binding_layout.fieldnames
+    field_dimension = {**binding_layout.field_dimension, **field_dimension}
     dimension_columns = [name for name in fieldnames if is_dimension_column(name)]
 
     class_root = build_binding_class_tree(read_binding_rows(binding_csv, encoding))
@@ -2177,7 +2360,7 @@ def write_hierarchical_csv(
         writer.writeheader()
         writer.writerows(rows)
     metadata_file = metadata_output or out_csv.with_suffix(".json")
-    write_csv_metadata(metadata_file, out_csv, xml_file, binding_csv, lhm_csv, fieldnames, len(rows), taxonomy_base, encoding)
+    write_csv_metadata(metadata_file, out_csv, xml_file, binding_csv, fieldnames, len(rows), taxonomy_base, encoding)
     return len(rows), fieldnames
 
 
@@ -2233,9 +2416,10 @@ def write_xml_from_hierarchical_csv(
     binding_csv: Path,
     out_xml: Path,
     template_csv: Optional[Path],
-    lhm_csv: Optional[Path],
     encoding: str,
     namespaces: Optional[Dict[str, str]] = None,
+    ubl_schema_root: Optional[Path] = None,
+    ubl_schema_url: str = "",
 ) -> int:
     """
     Rebuild XML from hierarchical CSV rows and bindings.
@@ -2245,9 +2429,10 @@ def write_xml_from_hierarchical_csv(
         binding_csv: Input value used by write_xml_from_hierarchical_csv.
         out_xml: Input value used by write_xml_from_hierarchical_csv.
         template_csv: Input value used by write_xml_from_hierarchical_csv.
-        lhm_csv: Input value used by write_xml_from_hierarchical_csv.
         encoding: Input value used by write_xml_from_hierarchical_csv.
         namespaces: Input value used by write_xml_from_hierarchical_csv.
+        ubl_schema_root: Local UBL XSD root used to derive child element order.
+        ubl_schema_url: UBL Invoice schema URL used to derive child element order.
 
     Returns:
         Result produced by write_xml_from_hierarchical_csv.
@@ -2257,19 +2442,20 @@ def write_xml_from_hierarchical_csv(
         ET.register_namespace(prefix, uri)
 
     binding_layout = read_binding_layout(binding_csv, encoding)
-    lhm_layout = binding_layout if binding_layout.fieldnames else read_lhm_layout(lhm_csv, encoding)
+    if not binding_layout.fieldnames:
+        raise ValueError("The syntax binding table has no usable C/A rows.")
     bindings = read_bindings(
         binding_csv,
         encoding,
-        lhm_layout.path_dimension,
-        lhm_layout.field_by_semantic_path,
-        lhm_layout.semantic_path_dimension,
+        binding_layout.path_dimension,
+        binding_layout.field_by_semantic_path,
+        binding_layout.semantic_path_dimension,
     )
     if not bindings:
         raise ValueError("No usable semantic_path/xpath bindings found.")
 
     template_fields, template_field_dimension = read_template(template_csv, encoding)
-    field_dimension = {**lhm_layout.field_dimension, **template_field_dimension}
+    field_dimension = {**binding_layout.field_dimension, **template_field_dimension}
 
     with input_csv.open(newline="", encoding=encoding) as f:
         reader = csv.DictReader(f)
@@ -2280,6 +2466,8 @@ def write_xml_from_hierarchical_csv(
 
     if not rows:
         raise ValueError("Input CSV has no data rows.")
+
+    validate_hierarchical_row_scopes(rows, fieldnames, field_dimension)
 
     root = ET.Element(qname("Invoice", ns))
     written = 0
@@ -2296,15 +2484,15 @@ def write_xml_from_hierarchical_csv(
 
     binding_order = {
         binding: (
-            lhm_layout.syntax_sequence_by_field.get(binding.field)
-            or lhm_layout.syntax_sequence_by_dimension.get(binding.dimension)
+            binding_layout.syntax_sequence_by_field.get(binding.field)
+            or binding_layout.syntax_sequence_by_dimension.get(binding.dimension)
             or binding.order
         )
         for binding in bindings
     }
     context_by_dimension_row: Dict[Tuple[str, str], ET.Element] = {}
     repeat_path_by_dimension = {
-        dimension: lhm_layout.dimension_xpath.get(dimension) or infer_repeat_path(group_bindings)
+        dimension: binding_layout.dimension_xpath.get(dimension) or infer_repeat_path(group_bindings)
         for dimension, group_bindings in dimension_bindings.items()
     }
 
@@ -2325,14 +2513,31 @@ def write_xml_from_hierarchical_csv(
                 if key not in context_by_dimension_row:
                     context_by_dimension_row[key] = create_context(root, repeat_path, ns, document_currency, tax_currency)
                 relative = relative_xpath(binding.xpath, repeat_path)
-                set_relative_xml_value(
-                    context_by_dimension_row[key],
-                    relative,
-                    row_value(row, binding.field),
-                    ns,
-                    document_currency,
-                    tax_currency,
-                )
+                if relative.startswith("/"):
+                    # Some semantic children of a repeated class are stored
+                    # elsewhere in the source syntax.  EN 16931 BT-90, for
+                    # example, belongs to payment instructions semantically
+                    # but is represented under AccountingSupplierParty in
+                    # UBL.  Keep such absolute, out-of-context paths rooted at
+                    # the document instead of creating a nested Invoice below
+                    # the repeated context.
+                    set_xml_value_with_currency(
+                        root,
+                        binding.xpath,
+                        row_value(row, binding.field),
+                        ns,
+                        document_currency,
+                        tax_currency,
+                    )
+                else:
+                    set_relative_xml_value(
+                        context_by_dimension_row[key],
+                        relative,
+                        row_value(row, binding.field),
+                        ns,
+                        document_currency,
+                        tax_currency,
+                    )
                 written += 1
             continue
 
@@ -2343,8 +2548,9 @@ def write_xml_from_hierarchical_csv(
                 written += 1
                 break
 
+    schema_child_order = load_ubl_child_order(ubl_schema_root, ubl_schema_url)
     ensure_tax_scheme_defaults(root, ns)
-    sort_children_for_ubl_schema(root)
+    sort_children_for_ubl_schema(root, schema_child_order)
     indent_xml(root)
     out_xml.parent.mkdir(parents=True, exist_ok=True)
     tree = ET.ElementTree(root)
@@ -2373,9 +2579,19 @@ def main() -> int:
     parser.add_argument("--taxonomy-base", type=Path, default=Path("out/taxonomy"), help="Taxonomy output directory referenced by JSON metadata")
     parser.add_argument("--reverse", action="store_true", help="Convert hierarchical CSV back to XML")
     parser.add_argument(
+        "--ubl-schema-root",
+        type=Path,
+        help="Directory containing extracted UBL XSD files used for reverse XML child order",
+    )
+    parser.add_argument(
+        "--ubl-schema-url",
+        default="",
+        help="URL of the UBL Invoice XSD entry point used for reverse XML child order",
+    )
+    parser.add_argument(
         "--drop-empty-columns",
         action="store_true",
-        help="Drop columns that have no values, matching the Japan_core xml2tidy/fillTable behavior.",
+        help="Drop columns that have no values in the generated Structured CSV.",
     )
     parser.add_argument("--d-invoice", default="1", help="dInvoice value written to output rows")
     parser.add_argument("-e", "--encoding", default="utf-8-sig", help="CSV encoding")
@@ -2388,8 +2604,10 @@ def main() -> int:
                 args.binding,
                 args.output,
                 args.template_csv,
-                None,
                 args.encoding,
+                None,
+                args.ubl_schema_root,
+                args.ubl_schema_url,
             )
             print(f"Wrote XML with {count} value(s) to {args.output}")
             return 0
@@ -2398,7 +2616,6 @@ def main() -> int:
             args.binding,
             args.output,
             args.template_csv,
-            None,
             args.metadata_output,
             args.taxonomy_base,
             args.encoding,

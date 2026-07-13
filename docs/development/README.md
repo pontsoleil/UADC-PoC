@@ -150,8 +150,8 @@ Expected local output includes:
 ```
 out/taxonomy/en16931/en16931-2026-07-05.xsd
 out/taxonomy/gen/gl-gen-2026-07-05.xsd
-out/taxonomy/plt/plt-oim-2026-07-05.xsd
-out/taxonomy/plt/plt-def-2026-07-05.xml
+out/taxonomy/plt/en16931-oim-2026-07-05.xsd
+out/taxonomy/plt/en16931-def-2026-07-05.xml
 ```
 
 **src/syntax_binding.py** does not generate taxonomy files. It references them through **--taxonomy-base** when writing xBRL-CSV metadata JSON.
