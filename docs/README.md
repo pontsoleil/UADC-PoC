@@ -1,22 +1,38 @@
-# Documentation Directory
+# UADC PoC Documentation
 
-This directory contains human-readable project documentation for the UADC PoC. It explains what the scripts do, how to run them, and why the current design choices were made.
+This directory contains the current operating guides, data-model specification,
+and architecture decision records for the UADC PoC.
 
-## Subdirectories
+## Documentation Set
 
-- **README_SCRIPT_PROCESSING.md** - Integrated script-processing guide. This is the main technical explanation of how binding rows, XPath, Semantic Path, repeated dimensions such as **dInvoice** and **dInvoiceLine**, and the implementation functions build Structured CSV, UBL XML, ADS XBRL GL, and ADS PSV/CSV outputs.
-- **syntax_binding_conversion/** and **semantic_binding_conversion/** - Binding CSV contracts, class and fact rows, XPath and Semantic Path rules, target mapping, command usage, and limitations.
-- **decisions/** - Architecture and design decision records. These capture the important choices made during the PoC, such as EN 16931-first scope, **lhm_level**, xBRL-CSV-only taxonomy output, metadata policy, and local taxonomy generator ownership.
-- **development/** - Clone, setup, tooling, model-maintenance, taxonomy generation, and continuing development guide.
-- **lhm_generation/** - Program specification and operating guide for building the EN 16931 LHM CSV from the editable source CSV.
-- **repository_files/** - Guide for sample files, expected files, references, and figure assets.
-- **semantic_binding_conversion/** - Program specification and operating guide for converting Structured CSV into semantic target flat files such as ADS PSV or CSV.
-- **specifications/** - Guide for machine-readable specification CSV files under **specs/**.
-- **syntax_binding_conversion/** - Program specification and operating guide for converting UBL Invoice XML to structured CSV and reconstructing XML from structured CSV.
-- **taxonomy_generation/** - Program specification and operating guide for generating the xBRL-CSV taxonomy from the LHM CSV.
-- **testing/** - Test execution and round-trip artifact guide.
-- **tools/** - Program specification for all supporting scripts and the PSV viewer under **tools/**.
+1. [**SETUP.md**](SETUP.md) - Explains GitHub setup, the Python environment,
+   source definitions, generated data, environment checks, regression tests,
+   repository maintenance, and the Markdown PDF workflow.
+2. [**TUTORIAL.md**](TUTORIAL.md) - Provides a short end-to-end exercise for
+   understanding Phase 1 and Phase 2 processing and inspecting their outputs.
+3. [**SYNTAX_BINDING.md**](SYNTAX_BINDING.md) - Specifies Phase 1 syntax
+   binding, UBL input placement, Structured CSV and metadata generation,
+   reverse UBL conversion, command usage, internal processing, and validation.
+4. [**SEMANTIC_BINDING.md**](SEMANTIC_BINDING.md) - Specifies Phase 2 semantic
+   binding and conversion to ADS PSV, ADS XBRL GL, and ISO 21378 ADC, including
+   target coverage, command usage, internal processing, and validation.
+5. [**DATA_MODEL.md**](DATA_MODEL.md) - Defines the LHM, Hierarchical Tidy Data,
+   Structured CSV as an alternative normalization form, hierarchy and
+   multiplicity rules, semantic paths, OIM taxonomy structure, currency and
+   selector rules, audit-data boundaries, and all supporting tools.
 
-The files in this directory are the source documentation. Generated PDFs should be recreated from these Markdown files when needed.
+## Architecture Decisions
 
-The planned PoC baseline for Phase 1 and Phase 2 is complete. Phase 1 covers the EN 16931 Structured CSV, xBRL-CSV taxonomy and metadata, and UBL round trip. Phase 2 covers ADS XBRL GL, ADS PSV, and the four documented ISO 21378 ADC invoice CSV views. Later source syntaxes and additional target profiles belong to the next expansion phase.
+[**decisions/**](decisions/README.md) contains the architecture decision records.
+They explain the reasons for important scope, hierarchy, taxonomy, binding,
+validation, output-layout, and documentation choices.
+
+## Documentation Sources
+
+The Markdown files are the documentation sources. PDFs are generated from the
+current Markdown when preparing a publication or synchronized release.
+
+Short GitHub-browser summaries for program directories are provided separately
+in **src/README.md**, **src/tutorial/README.md**, **tools/README.md**,
+**tools/taxonomy/README.md**, **tools/tutorial/README.md**, and
+**tests/README.md**.

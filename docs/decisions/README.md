@@ -14,6 +14,8 @@ This directory records project decisions that should survive beyond individual c
 - **0007-binding-tables-are-runtime-authority.md** - Records that operational converters use binding tables, not runtime LHM fallback, to determine source columns and repeated row scope.
 - **0008-xml-parent-context-recursion.md** - Records the Phase 1 forward conversion model that walks XML parent contexts recursively from binding **C** rows.
 - **0009-phase-output-naming-and-target-layout.md** - Records Phase 1 and Phase 2 output directory and filename conventions.
-- **0010-documentation-consolidation.md** - Records that detailed script processing documentation is consolidated under **docs/README_SCRIPT_PROCESSING.md**.
+- **0010-documentation-consolidation.md** - Records that current documentation
+  is consolidated into five chapter-numbered guides, with short README files in
+  script directories.
 
 Add a new numbered decision record when a design choice changes the data model, taxonomy shape, validation approach, repository boundary, or future phase plan.

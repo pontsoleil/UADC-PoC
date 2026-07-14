@@ -22,4 +22,5 @@ that call the operational converters. This **tools/tutorial/** directory instead
 contains the simplified converter implementations themselves.
 
 Detailed behavior, arguments, functions, limitations, and validation guidance
-are documented in **docs/tools/program_specification.md**.
+are documented in [**docs/DATA_MODEL.md**](../../docs/DATA_MODEL.md). The
+operational walkthrough is in [**docs/TUTORIAL.md**](../../docs/TUTORIAL.md).

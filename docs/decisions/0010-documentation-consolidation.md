@@ -1,29 +1,29 @@
-# Decision: Consolidate Script Processing Documentation Under docs
+# Decision: Consolidate Current Documentation into Five Guides
 
 ## Context
 
-The project documentation is maintained under **docs/**. The documentation describes the current specification directly: how binding rows, XPath, Semantic Path, Structured CSV dimensions, and converter functions work together.
+Topic-specific subdirectories duplicated setup, operation, test, and internal
+processing descriptions. Readers could not easily tell which file contained the
+current specification.
 
 ## Decision
 
-1. Keep operational command summaries in **docs/development/README.md** and **docs/testing/README.md**.
-2. Keep syntax-binding authoring instructions in
-   **docs/syntax_binding_conversion/** and semantic-binding authoring
-   instructions in **docs/semantic_binding_conversion/**.
-3. Keep implementation-level script processing details in **docs/README_SCRIPT_PROCESSING.md**.
-4. Use **docs/README_SCRIPT_PROCESSING.md** as the primary explanation for:
-   XPath context processing, Semantic Path interpretation, **dInvoice** and
-   **dInvoiceLine** dimension assignment, internal dictionaries and lists, and
-   function-level conversion flow.
-5. Keep **docs/syntax_binding_conversion/** as the syntax-binding program
-   specification and operating guide, but point readers to the consolidated
-   processing guide for implementation-level details.
-6. Keep **docs/semantic_binding_conversion/** as the semantic-binding program
-   specification, target coverage report, and operating guide.
-7. Use **docs/**, not **doc/**, as the documentation directory.
+1. Keep the current documentation in five chapter-numbered files under
+   **docs/**: **SETUP.md**, **TUTORIAL.md**, **SYNTAX_BINDING.md**,
+   **SEMANTIC_BINDING.md**, and **DATA_MODEL.md**.
+2. Include operating procedures and function-level implementation detail in the
+   relevant guide instead of maintaining a separate script-processing manual.
+3. Keep **docs/decisions/** as historical architecture rationale.
+4. Place a short **README.md** in each script-oriented directory so GitHub users
+   can understand its contents without first navigating to **docs/**.
+5. Treat Markdown as source and regenerate PDFs for a synchronized release.
 
 ## Consequences
 
-- Script internals are documented in **docs/README_SCRIPT_PROCESSING.md**.
-- Subdirectory documents focus on their subject areas.
-- Behavior changes update **docs/** together with the corresponding scripts and CSV definitions.
+- The five guides are the only current normative human-readable documentation.
+- Old duplicated guide directories are removed after their unique content is
+  migrated.
+- Script behavior changes update the applicable guide and directory README in
+  the same change.
+- Architecture records remain concise and refer to current guides rather than
+  restating their implementation details.
