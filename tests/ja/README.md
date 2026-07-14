@@ -14,4 +14,4 @@
 
 **phase1_helpers.py**共有 Phase 1 変換パスとヘルパーを提供します。**roundtrip/**には、生成されたソース、CSV、メタデータ、およびテストで使用されるXMLアーティファクトの再生が含まれています。
 
-[**docs/SETUP.md**](../../docs/ja/SETUP.md)を使用してスイートを実行して解釈します。 フェーズ固有の期待は[**docs/SYNTAX_BINDING.md**](../../docs/ja/SYNTAX_BINDING.md)と[**docs/SEMANTIC_BINDING.md**](../../docs/ja/SEMANTIC_BINDING.md)で書かれています。
+[**環境、テスト及びチュートリアル**](../../docs/ja/01_ENVIRONMENT_TESTS_TUTORIAL.md)を参照してテスト一式を実行し、結果を確認します。Phase別の想定結果は、[**docs/README.md**](../../docs/ja/README.md)に掲載したPhase 1 UBL構文結合及びPhase 2 ADS結合の各文書に記載しています。

@@ -17,7 +17,7 @@ The tests cover:
 **roundtrip/** contains generated source, CSV, metadata, and regenerated XML
 artifacts used by the tests.
 
-Run and interpret the suite using [**docs/SETUP.md**](../docs/SETUP.md).
-Phase-specific expectations are documented in
-[**docs/SYNTAX_BINDING.md**](../docs/SYNTAX_BINDING.md) and
-[**docs/SEMANTIC_BINDING.md**](../docs/SEMANTIC_BINDING.md).
+Run and interpret the suite using
+[**Environment, Tests, and Tutorial**](../docs/01_ENVIRONMENT_TESTS_TUTORIAL.md).
+Phase-specific expectations are documented in the Phase 1 UBL syntax-binding
+and Phase 2 ADS binding documents listed in [**docs/README.md**](../docs/README.md).

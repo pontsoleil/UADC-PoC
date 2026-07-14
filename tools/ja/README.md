@@ -13,6 +13,6 @@
 **docs/ja/TERMINOLOGY.csv**;
 - **psv_viewer.html**でローカル ADS PSV と CSV の検査。
 
-15プログラムの完全なリスト、その引数、関数、副作用、依存性、検証ルールは[[**docs/DATA_MODEL.md**]](../../docs/ja/DATA_MODEL.md)にあります。 環境・テストコマンドは[[**docs/SETUP.md**]](../../docs/ja/SETUP.md)内にあります。
+15プログラムの一覧、引数、関数、副作用、依存関係及び検証規則は、[**構造化CSV、LHM及び結合**](../../docs/ja/02_STRUCTURED_CSV_LHM_BINDINGS.md)に記載しています。環境及びテストのコマンドは、[**環境、テスト及びチュートリアル**](../../docs/ja/01_ENVIRONMENT_TESTS_TUTORIAL.md)に記載しています。
 
-Excelで日本語の用語を編集した後、rootリポジトリから**tools/translate_markdown_ja.py**を実行します。 [**docs/SETUP.md**]の第1章(../docs/SETUP.md)に、詳細な設定、再生、検証コマンドが組み込まれています。
+Excelで日本語用語を編集した後、リポジトリのルートから **tools/translate_markdown_ja.py** を実行します。詳細な設定、再生成及び検証コマンドは、[**環境、テスト及びチュートリアル**](../../docs/ja/01_ENVIRONMENT_TESTS_TUTORIAL.md)の第10.1節に記載しています。

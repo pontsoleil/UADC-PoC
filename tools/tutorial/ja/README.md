@@ -17,4 +17,4 @@ src/semantic_binding.py
 
 別々の**src/tutorial/**ディレクトリには、操作上のコンバータを呼び出す初心者ワークフローラッパーが含まれています。 この**tools/tutorial/**ディレクトリには、単純化されたコンバーターの実装が含まれている。
 
-[**docs/DATA_MODEL.md**](../../../docs/ja/DATA_MODEL.md)で、詳細な動作、引数、関数、制限、検証ガイダンスが文書化されます。 運用ウォークスルーは[**docs/TUTORIAL.md**](../../../docs/ja/TUTORIAL.md)にあります。
+詳細な動作、引数、関数、制限及び検証方法は、[**構造化CSV、LHM及び結合**](../../../docs/ja/02_STRUCTURED_CSV_LHM_BINDINGS.md)に記載しています。運用手順は、[**環境、テスト及びチュートリアル**](../../../docs/ja/01_ENVIRONMENT_TESTS_TUTORIAL.md)に記載しています。

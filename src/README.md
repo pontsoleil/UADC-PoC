@@ -12,9 +12,10 @@ This directory contains the production PoC converters.
 
 Documentation:
 
-- [**docs/SYNTAX_BINDING.md**](../docs/SYNTAX_BINDING.md)
-- [**docs/SEMANTIC_BINDING.md**](../docs/SEMANTIC_BINDING.md)
-- [**docs/TUTORIAL.md**](../docs/TUTORIAL.md)
+- [**Phase 1 UBL syntax binding**](../docs/03_PHASE1_UBL_SYNTAX_BINDING.md)
+- [**Phase 2 ADS PSV semantic binding**](../docs/04_PHASE2_ADS_PSV_SEMANTIC_BINDING.md)
+- [**Phase 2 ADS XBRL GL syntax binding**](../docs/05_PHASE2_ADS_XBRL_GL_SYNTAX_BINDING.md)
+- [**Environment, tests, and tutorial**](../docs/01_ENVIRONMENT_TESTS_TUTORIAL.md)
 
 Programs under **tools/tutorial/** are simplified teaching implementations and
 must not be confused with the operational converters in this directory.

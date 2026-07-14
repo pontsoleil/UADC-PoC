@@ -82,10 +82,10 @@ $PYTHON ./tests/test_roundtrip_artifacts.py
 
 This creates the local xBRL-CSV taxonomy under **out/taxonomy/** and refreshes reviewable round-trip artifacts under **tests/roundtrip/**.
 
-For environment setup and tests, see **docs/SETUP.md**. For the end-to-end
-learning flow, see **docs/TUTORIAL.md**. Conversion contracts and implementation
-details are in **docs/SYNTAX_BINDING.md**, **docs/SEMANTIC_BINDING.md**, and
-**docs/DATA_MODEL.md**.
+For environment setup, tests, and the end-to-end learning flow, see
+**docs/01_ENVIRONMENT_TESTS_TUTORIAL.md**. The Structured CSV and LHM contract
+is in **docs/02_STRUCTURED_CSV_LHM_BINDINGS.md**. Phase 1 UBL, Phase 2 ADS PSV,
+and Phase 2 ADS XBRL GL conversion details are in documents 03 through 05.
 
 ## Figure 1
 
@@ -140,9 +140,9 @@ Later interoperability tests
 ## Directory Layout
 
 - **docs/** - Human-readable project documentation. Start with **docs/README.md**.
-  The canonical guides are **SETUP.md**, **TUTORIAL.md**,
-  **SYNTAX_BINDING.md**, **SEMANTIC_BINDING.md**, and **DATA_MODEL.md**.
-  Architecture decision history remains under **docs/decisions/**.
+  The canonical guides are the numbered documents 01 through 05 covering the
+  environment and tutorial, Structured CSV and LHM, Phase 1 UBL syntax binding,
+  Phase 2 ADS PSV semantic binding, and Phase 2 ADS XBRL GL syntax binding.
 - **references/** - External source notes and links used to interpret standards, source specifications, and implementation references. Keep large licensed source documents outside the repository and record only reproducible notes or pointers here.
 - **specs/lhm/** - LHM/HMD semantic model definitions for the EN 16931 invoice PoC. The generated/current CSV is stored here, while **specs/lhm/source/** keeps the editable source CSV used to regenerate or adjust the LHM. Local reviewer workbooks are ignored by Git.
 - **specs/bindings/** - Binding definitions. The active UBL Invoice syntax binding is **specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv**; it maps LHM semantic paths to UBL XPath expressions and selector predicates used by forward and reverse conversion. Phase 2 ADS XBRL GL binding CSV files are under **specs/bindings/syntax/**. The review workbook is **specs/bindings/ADS_XBRL_GL_Bindings.xlsx**. ADS PSV and ISO 21378 ADC CSV bindings are under **specs/bindings/semantic/**.
@@ -155,7 +155,7 @@ Later interoperability tests
 - **tools/** - Initial setup, supporting generation, environment-maintenance,
   and development helper tools. See **tools/README.md**,
   **tools/taxonomy/README.md**, and **tools/tutorial/README.md**. All 15 tools
-  are specified in **docs/DATA_MODEL.md**.
+  are specified in **docs/02_STRUCTURED_CSV_LHM_BINDINGS.md**.
 - **out/** - Generated PoC evidence and target output tracked by Git. This includes taxonomy output, Structured CSV output, reverse-conversion output, Phase 2 target views, and selected rendered document QA artifacts. Regenerate these files from their source definitions rather than editing them directly.
 - [**XBRL_GL_Next_UADC_PoC.pdf**](XBRL_GL_Next_UADC_PoC.pdf) - Project overview document for the UADC PoC
   and its relationship to XBRL GL Next.

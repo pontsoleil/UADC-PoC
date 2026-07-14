@@ -1,37 +1,32 @@
-﻿# Phase 1 Syntax Binding
+# 3. Phase 1 UBL Syntax Binding: Environment, Conversion Operations, and Function-Level Processing
 
-## Table of Contents
+This document covers **src/syntax_binding.py**: Phase 1 input definitions, syntax-binding tables, forward conversion, reverse conversion, xBRL-CSV metadata, validation, and function-level processing.
 
-1. Purpose
-2. Main Program
-3. Input Files
-4. Forward Output
-5. Reverse Output
-6. Command-Line Interface
-7. Forward Processing Model
-8. Metadata JSON Processing Model
-9. Reverse Processing Model
-10. Currency Attribute Rules
-11. Constraints
-12. Regression Tests
-13. Non-Goals
-14. Operational Workflow
-15. Function-Level Processing Reference
-16. Syntax Binding Conversion Overview
-17. Syntax Binding User Guide
+## Processing Flow
 
-## 1. Purpose
+```text
+UBL Invoice XML
+  → load binding and LHM layout
+  → evaluate XPath/selectors
+  → resolve dimension ownership
+  → emit sparse Structured CSV rows
+  → generate xBRL-CSV metadata
+  → (reverse) reconstruct and schema-order UBL XML
+```
+
+## Complete Phase 1 Contract and User Guide
+
+### 1. Purpose
 
 This document specifies the syntax binding conversion program used by the UADC Proof of Concept.
 
 The program converts an XML invoice document into a dimension-based hierarchical CSV by applying a syntax binding CSV. During forward conversion it also writes JSON metadata that relates the CSV columns to the generated taxonomy. It can also reverse a hierarchical CSV back to XML with the same binding information.
 
-Implementation-level processing details are included in Chapters 7 through 10
-and Chapter 15 of this document.
+Implementation-level processing details are included in Chapters 7 through 10 and Chapter 15 of this document.
 
 All paths in this document are relative to the **UADC_PoC** working directory after the repository is pushed or cloned, except paths beginning with **../**, which refer to sibling directories of **UADC_PoC**.
 
-## 2. Main Program
+### 2. Main Program
 
 Program:
 
@@ -41,9 +36,9 @@ src/syntax_binding.py
 
 The converter is self-contained for the supported namespace and XPath helper functions used by the operational hierarchical converter.
 
-## 3. Input Files
+### 3. Input Files
 
-### 3.1 XML input
+#### 3.1 XML input
 
 The XML input is a UBL Invoice XML document.
 
@@ -59,7 +54,7 @@ Package sample:
 ../syntax_binding_revised_package/invoice.xml
 ```
 
-### 3.2 Syntax binding CSV
+#### 3.2 Syntax binding CSV
 
 The binding CSV maps semantic model paths to XML XPath expressions.
 
@@ -93,7 +88,7 @@ xpath
 
 Rows without both **semantic_path** and **xpath** are ignored for fact extraction. **type=C** rows define semantic class contexts and repeated row scopes. **type=A** rows define extractable or generatable values.
 
-### 3.3 Binding-Embedded LHM Layout
+#### 3.3 Binding-Embedded LHM Layout
 
 The syntax binding CSV is defined by copying the required LHM columns and preserving the LHM row order. The converter therefore uses the binding table itself to define:
 
@@ -110,7 +105,7 @@ The LHM source remains the governance source for these columns:
 specs/lhm/EN16931_CIUS_Invoice_LHM.csv
 ```
 
-### 3.4 Template CSV
+#### 3.4 Template CSV
 
 When **--template-csv** is supplied, the converter uses its header as the output column order and infers some field-to-dimension placement from non-empty template rows.
 
@@ -122,7 +117,7 @@ Package template:
 
 If **--template-csv** is supplied, the binding-derived layout controls the main field order and the template may still provide field placement hints.
 
-## 4. Forward Output
+### 4. Forward Output
 
 The output is a UTF-8-SIG CSV file.
 
@@ -158,14 +153,9 @@ For example:
 out/phase1/openpeppol_ubl_invoice_minimal.json
 ```
 
-The metadata is an xBRL-CSV metadata document that Arelle can load with the
-**loadFromOIM** plugin. It links the structured CSV table to the generated
-xBRL-CSV taxonomy entry points and maps CSV columns to taxonomy concepts. The
-report **documentInfo.taxonomy** property must not be empty; missing **en16931-oim** is
-treated as a conversion error. The JSON metadata names the xBRL-CSV OIM taxonomy
-entry point **out/taxonomy/plt/en16931-oim-<version>.xsd**.
+The metadata is an xBRL-CSV metadata document that Arelle can load with the **loadFromOIM** plugin. It links the structured CSV table to the generated xBRL-CSV taxonomy entry points and maps CSV columns to taxonomy concepts. The report **documentInfo.taxonomy** property must not be empty; missing **en16931-oim** is treated as a conversion error. The JSON metadata names the xBRL-CSV OIM taxonomy entry point **out/taxonomy/plt/en16931-oim-<version>.xsd**.
 
-## 5. Reverse Output
+### 5. Reverse Output
 
 When **--reverse** is used, the input is a hierarchical CSV and the output is an XML file.
 
@@ -186,7 +176,7 @@ The reverse converter:
 - keeps out-of-context absolute XPaths rooted at the document even when the semantic term belongs to a repeated class;
 - writes BT-90 below **AccountingSupplierParty** and never creates a nested **Invoice** below **PaymentMeans**.
 
-## 6. Command-Line Interface
+### 6. Command-Line Interface
 
 ```
 syntax_binding.py XML_FILE -b BINDING_CSV -o OUTPUT_CSV [options]
@@ -212,9 +202,9 @@ Arguments:
 - **--d-invoice**: value written into the **dInvoice** column. Default is **1**.
 - **-e**, **--encoding**: CSV encoding. Default is **utf-8-sig**.
 
-## 7. Forward Processing Model
+### 7. Forward Processing Model
 
-### 7.1 Namespace handling
+#### 7.1 Namespace handling
 
 The converter collects XML namespace declarations from the input XML using **xml.etree.ElementTree.iterparse**.
 
@@ -225,7 +215,7 @@ XPath helper functions support namespace-prefixed elements such as:
 /Invoice/cac:AccountingSupplierParty/cac:Party/cac:PartyName/cbc:Name
 ```
 
-### 7.2 Binding-Embedded LHM Layout Loading
+#### 7.2 Binding-Embedded LHM Layout Loading
 
 When the syntax binding table is loaded:
 
@@ -247,7 +237,7 @@ unbounded
 
 or a numeric value greater than **1**.
 
-### 7.3 Binding parsing
+#### 7.3 Binding parsing
 
 Each binding row is converted into an internal binding record:
 
@@ -267,7 +257,7 @@ The converter supports:
 - dimension paths with optional filter predicates;
 - generic nested semantic paths resolved through the nearest LHM dimension.
 
-### 7.4 Row generation
+#### 7.4 Row generation
 
 Forward conversion uses XML parent context recursion rather than processing repeated groups independently. The converter creates:
 
@@ -284,9 +274,7 @@ For repeated BG rows:
 6. Each repeated occurrence receives a 1-based dimension value, such as **dInvoiceLine=2**.
 7. Ancestor repeated dimension values are copied into nested repeated rows.
 
-A non-repeating child class is flattened into its parent row. A repeating
-child class is not flattened: its first and subsequent occurrences are all
-written on separate child rows. For example:
+A non-repeating child class is flattened into its parent row. A repeating child class is not flattened: its first and subsequent occurrences are all written on separate child rows. For example:
 
 ```csv
 dAaa,dBbb,a1,a2,b1,b2,b3
@@ -295,11 +283,9 @@ dAaa,dBbb,a1,a2,b1,b2,b3
 1,2,,,b1V2,b2V2,b3V2
 ```
 
-The parent row therefore has empty **b1**, **b2**, and **b3** fields. A row such as
-**1,1,a1V1,a2V1,b1V1,b2V1,b3V1** is invalid because it mixes facts owned by
-**dAaa** with facts owned by the repeating **dBbb** scope.
+The parent row therefore has empty **b1**, **b2**, and **b3** fields. A row such as **1,1,a1V1,a2V1,b1V1,b2V1,b3V1** is invalid because it mixes facts owned by **dAaa** with facts owned by the repeating **dBbb** scope.
 
-### 7.5 Column handling
+#### 7.5 Column handling
 
 If the LHM is used, field order is:
 
@@ -311,7 +297,7 @@ If a template is used without LHM, the template header controls the output order
 
 If neither LHM nor template provides a header, field names are derived from bindings.
 
-## 8. Metadata JSON Processing Model
+### 8. Metadata JSON Processing Model
 
 In forward mode the converter writes JSON metadata after the structured CSV is generated.
 
@@ -343,7 +329,7 @@ Example:
 
 Amount facts receive a default test unit of **iso4217:JPY** in metadata when the LHM datatype indicates an amount. Production use should derive the unit from the applicable currency term.
 
-## 9. Reverse Processing Model
+### 9. Reverse Processing Model
 
 In reverse mode:
 
@@ -362,7 +348,7 @@ In reverse mode:
 
 The reverse converter currently targets the PoC UBL Invoice binding pattern. It is intended for round-trip verification of the structured CSV representation rather than canonical XML reproduction.
 
-## 10. Currency Attribute Rules
+### 10. Currency Attribute Rules
 
 The syntax binding treats **currencyID** as syntax metadata derived from semantic currency terms:
 
@@ -377,7 +363,7 @@ BT-90 illustrates a cross-scope reverse mapping. Its semantic path is under paym
 
 The CSV therefore stores semantic amount values and currency code values separately. Reverse conversion writes the required UBL **currencyID** attributes.
 
-## 11. Constraints
+### 11. Constraints
 
 - The converter does not validate the XML against UBL schemas internally; the regression test **tests/test_roundtrip_xml_ubl_schema.py** performs UBL 2.1 schema validation.
 - The converter does not validate EN 16931 business rules.
@@ -389,7 +375,7 @@ The CSV therefore stores semantic amount values and currency code values separat
 - Reverse XML may omit unbound XML content.
 - Reverse XML is generated from bound CSV values and is not intended to be byte-for-byte identical to the source XML.
 
-## 12. Regression Tests
+### 12. Regression Tests
 
 PoC LHM-driven conversion test:
 
@@ -421,7 +407,7 @@ Round-trip artifact and metadata test:
 tests/test_roundtrip_artifacts.py
 ```
 
-## 13. Non-Goals
+### 13. Non-Goals
 
 The syntax binding converter does not:
 
@@ -431,115 +417,80 @@ The syntax binding converter does not:
 - perform full EN 16931 or OpenPeppol validation;
 - perform repository synchronization or publication.
 
-## 14. Operational Workflow
+### 14. Operational Workflow
 
-### 14.1 Prepare Phase 1 Inputs
+#### 14.1 Prepare Phase 1 Inputs
 
-Place source UBL invoices in the configured input directory and select the
-matching syntax-binding CSV. Binding rows with **type=C** define the class tree;
-rows with **type=A** define fact extraction and reverse-writing rules. Verify
-the binding version before processing because the table is runtime authority.
+Place source UBL invoices in the configured input directory and select the matching syntax-binding CSV. Binding rows with **type=C** define the class tree; rows with **type=A** define fact extraction and reverse-writing rules. Verify the binding version before processing because the table is runtime authority.
 
-### 14.2 Convert and Inspect
+#### 14.2 Convert and Inspect
 
-Run **src/syntax_binding.py** for one XML document or an input directory. Inspect
-the generated Structured CSV for sparse parent and repeated-child rows, and
-inspect the JSON metadata for taxonomy entry points, dimensions, and units.
-Chapter 4 of **DATA_MODEL.md** defines the required row pattern.
+Run **src/syntax_binding.py** for one XML document or an input directory. Inspect the generated Structured CSV for sparse parent and repeated-child rows, and inspect the JSON metadata for taxonomy entry points, dimensions, and units. Chapter 4 of **02_STRUCTURED_CSV_LHM_BINDINGS.md** defines the required row pattern.
 
-### 14.3 Reverse and Validate
+#### 14.3 Reverse and Validate
 
-Use reverse mode to reconstruct UBL. The converter starts from the document root,
-creates absolute XPath ancestors in schema order, applies predicates and
-currency attributes, and omits empty decimal elements. Validate the resulting
-XML with the UBL schema and compare a second forward conversion with the original
-Structured CSV.
+Use reverse mode to reconstruct UBL. The converter starts from the document root, creates absolute XPath ancestors in schema order, applies predicates and currency attributes, and omits empty decimal elements. Validate the resulting XML with the UBL schema and compare a second forward conversion with the original Structured CSV.
 
-## 15. Function-Level Processing Reference
+### 15. Function-Level Processing Reference
 
-### 15.1 Binding and Layout Loading
+#### 15.1 Binding and Layout Loading
 
 - **read_binding_rows** reads the binding CSV without losing row order.
-- **build_layout_from_rows** derives columns, dimension ownership, class
-  multiplicity, and binding-embedded LHM layout.
-- **read_bindings** converts attribute rows into binding objects and resolves
-  semantic paths.
-- **build_binding_class_tree** builds the nested class model used by both
-  directions.
-- **direct_class_fields** and **walk_binding_classes** associate facts with
-  their owning class and traverse it deterministically.
+- **build_layout_from_rows** derives columns, dimension ownership, class multiplicity, and binding-embedded LHM layout.
+- **read_bindings** converts attribute rows into binding objects and resolves semantic paths.
+- **build_binding_class_tree** builds the nested class model used by both directions.
+- **direct_class_fields** and **walk_binding_classes** associate facts with their owning class and traverse it deterministically.
 
-### 15.2 XPath Evaluation
+#### 15.2 XPath Evaluation
 
 - **collect_namespaces** records namespaces declared by the input XML.
-- **xml_split_xpath**, **xml_split_step_predicate**, and
-  **xml_split_terminal_attribute** decompose binding XPath safely.
-- **find_nodes**, **xml_predicate_matches**, and **get_value** evaluate XPath
-  relative to the current class context while allowing document-root references
-  in predicates.
-- **infer_repeat_path**, **common_xpath_prefix**, and **relative_xpath** derive
-  the XML node scope for repeated classes.
+- **xml_split_xpath**, **xml_split_step_predicate**, and **xml_split_terminal_attribute** decompose binding XPath safely.
+- **find_nodes**, **xml_predicate_matches**, and **get_value** evaluate XPath relative to the current class context while allowing document-root references in predicates.
+- **infer_repeat_path**, **common_xpath_prefix**, and **relative_xpath** derive the XML node scope for repeated classes.
 
-### 15.3 Forward Row Emission
+#### 15.3 Forward Row Emission
 
-- **write_hierarchical_csv** orchestrates recursive XML traversal, dimension
-  numbering, sparse row emission, column ordering, and metadata creation.
+- **write_hierarchical_csv** orchestrates recursive XML traversal, dimension numbering, sparse row emission, column ordering, and metadata creation.
 - **new_row** creates a row with its ancestor dimensions.
 - **row_has_values** prevents structurally empty output rows.
-- **validate_hierarchical_row_scopes** rejects a repeated child's first values
-  when they have been merged into the parent row.
-- **drop_empty_columns** removes unused value columns while preserving required
-  dimensions.
+- **validate_hierarchical_row_scopes** rejects a repeated child's first values when they have been merged into the parent row.
+- **drop_empty_columns** removes unused value columns while preserving required dimensions.
 
-For a singular child, extracted fields remain on the nearest repeated ancestor
-row. For a repeated child, the parent row is emitted separately and every child,
-including occurrence 1, is emitted on its own dimension row.
+For a singular child, extracted fields remain on the nearest repeated ancestor row. For a repeated child, the parent row is emitted separately and every child, including occurrence 1, is emitted on its own dimension row.
 
-### 15.4 Metadata Generation
+#### 15.4 Metadata Generation
 
-- **binding_column_metadata** derives concept, datatype, dimension, and unit
-  information from the binding.
+- **binding_column_metadata** derives concept, datatype, dimension, and unit information from the binding.
 - **taxonomy_entrypoints** selects the dated taxonomy entry point.
 - **xbrl_csv_column_definition** creates OIM-compatible column definitions.
 - **write_csv_metadata** writes JSON metadata and relative table paths.
 
-### 15.5 Reverse XML Construction
+#### 15.5 Reverse XML Construction
 
-- **write_xml_from_hierarchical_csv** groups rows by dimension scope and drives
-  XML reconstruction.
-- **split_xml_path**, **ensure_path**, and **find_or_create_child** process the
-  absolute XPath from the UBL root; they never search globally for a matching
-  descendant.
-- **set_xml_value**, **set_relative_xml_value**, and
-  **set_xml_value_with_currency** write values only when a non-empty source
-  value exists.
-- **apply_currency_attribute** and **resolve_currency_references** distinguish
-  document currency from tax accounting currency for conditional amounts.
-- **load_ubl_child_order** and **sort_children_for_ubl_schema** place elements
-  in UBL schema sequence before serialization.
+- **write_xml_from_hierarchical_csv** groups rows by dimension scope and drives XML reconstruction.
+- **split_xml_path**, **ensure_path**, and **find_or_create_child** process the absolute XPath from the UBL root; they never search globally for a matching descendant.
+- **set_xml_value**, **set_relative_xml_value**, and **set_xml_value_with_currency** write values only when a non-empty source value exists.
+- **apply_currency_attribute** and **resolve_currency_references** distinguish document currency from tax accounting currency for conditional amounts.
+- **load_ubl_child_order** and **sort_children_for_ubl_schema** place elements in UBL schema sequence before serialization.
 
-### 15.6 Validation Boundary
+#### 15.6 Validation Boundary
 
-The converter validates its hierarchical row contract and reconstructs
-schema-shaped XML, but external UBL schema validation remains a required test
-step. Business-rule validation such as EN 16931 and Peppol Schematron is outside
-the converter and should be run by the surrounding workflow.
+The converter validates its hierarchical row contract and reconstructs schema-shaped XML, but external UBL schema validation remains a required test step. Business-rule validation such as EN 16931 and Peppol Schematron is outside the converter and should be run by the surrounding workflow.
 
+### 16. Syntax Binding Conversion Overview
 
-## 16. Syntax Binding Conversion Overview
-
-### Syntax Binding Conversion Documentation
+#### Syntax Binding Conversion Documentation
 
 This directory documents the XML-to-structured-CSV and structured-CSV-to-XML conversion program.
 
-For the detailed implementation-level explanation of XPath context processing, Semantic Path resolution, **dInvoice** and **dInvoiceLine** dimension handling, internal **dict/list/dataclass** objects, and function-level data flow, use **DATA_MODEL.md**, Chapter 15. This document remains the program specification and operating guide for the syntax-binding command.
+For the detailed implementation-level explanation of XPath context processing, Semantic Path resolution, **dInvoice** and **dInvoiceLine** dimension handling, internal **dict/list/dataclass** objects, and function-level data flow, use **02_STRUCTURED_CSV_LHM_BINDINGS.md**, Chapter 15. This document remains the program specification and operating guide for the syntax-binding command.
 
-#### Files
+##### Files
 
 - **program_specification.md** - Defines converter inputs, outputs, dimension behavior, JSON metadata generation, reverse conversion, currency handling, XPath selector handling, and non-goals.
 - **user_guide.md** - Gives command examples for forward conversion, reverse conversion, round-trip artifacts, and troubleshooting.
 
-#### Related Directories
+##### Related Directories
 
 - **../../src/** - Converter implementation, especially **syntax_binding.py**.
 - **../../specs/bindings/syntax/** - Active UBL Invoice syntax binding CSV.
@@ -548,13 +499,11 @@ For the detailed implementation-level explanation of XPath context processing, S
 
 Phase 1 uses EN 16931 syntax binding as the stable baseline. OpenPeppol CIUS checks are planned as a later overlay.
 
+### 17. Syntax Binding User Guide
 
+#### User Guide: Syntax Binding XML-to-Hierarchical-CSV Conversion
 
-## 17. Syntax Binding User Guide
-
-### User Guide: Syntax Binding XML-to-Hierarchical-CSV Conversion
-
-#### 1. Working Directory
+##### 1. Working Directory
 
 Run commands from the **UADC_PoC** directory:
 
@@ -570,7 +519,7 @@ Set the Python command for the local Windows environment:
 $python = 'python'
 ```
 
-#### 2. Main Script
+##### 2. Main Script
 
 Use:
 
@@ -578,12 +527,11 @@ Use:
 src/syntax_binding.py
 ```
 
-This script converts XML to dimension-based hierarchical CSV using a syntax binding CSV.
-It also supports reverse conversion from hierarchical CSV back to XML with **--reverse**.
+This script converts XML to dimension-based hierarchical CSV using a syntax binding CSV. It also supports reverse conversion from hierarchical CSV back to XML with **--reverse**.
 
-For implementation details, including XPath parent-context recursion, Semantic Path resolution, **dInvoice** and **dInvoiceLine** assignment, and function-level data flow, see **DATA_MODEL.md**, Chapter 15.
+For implementation details, including XPath parent-context recursion, Semantic Path resolution, **dInvoice** and **dInvoiceLine** assignment, and function-level data flow, see **02_STRUCTURED_CSV_LHM_BINDINGS.md**, Chapter 15.
 
-#### 3. Convert the PoC OpenPeppol Sample
+##### 3. Convert the PoC OpenPeppol Sample
 
 Run:
 
@@ -607,7 +555,7 @@ This command uses the LHM-derived columns embedded in the syntax binding CSV to 
 
 The converter treats **lhm_level** as the effective hierarchy for Structured CSV. BG rows with blank **lhm_level**, such as non-repeating Seller or Buyer groups, are semantic grouping nodes only; their BT values are written in the nearest ancestor dimension row.
 
-#### 4. Convert the Revised Package Sample
+##### 4. Convert the Revised Package Sample
 
 Run:
 
@@ -629,7 +577,7 @@ out/phase1/package_invoice_hierarchical.json
 
 This command uses the package template CSV to preserve the expected output column order.
 
-#### 5. Command Options
+##### 5. Command Options
 
 Basic form:
 
@@ -651,7 +599,7 @@ Options:
 - **--d-invoice**: set the **dInvoice** value. Default is **1**.
 - **-e**, **--encoding**: CSV encoding. Default is **utf-8-sig**.
 
-#### 6. Reverse Hierarchical CSV to XML
+##### 6. Reverse Hierarchical CSV to XML
 
 First create or confirm the hierarchical CSV:
 
@@ -703,7 +651,7 @@ Forward conversion also uses those currency terms to distinguish TaxTotal branch
 
 Some semantic children are stored outside their repeated UBL syntax context. BT-90 belongs semantically to payment instructions/direct debit, but its UBL XPath is below **AccountingSupplierParty**. During reverse conversion, an absolute binding XPath that is not contained by the current repeated XPath is written from the document root. It must not produce a nested **Invoice** below **PaymentMeans**.
 
-#### 7. Generate Test Artifacts with Metadata
+##### 7. Generate Test Artifacts with Metadata
 
 Round-trip test artifacts are built under:
 
@@ -736,7 +684,7 @@ Meaning:
 
 The script uses **--metadata-output** to place metadata JSON in **metadata_json/**.
 
-#### 8. Input Binding CSV
+##### 8. Input Binding CSV
 
 The binding CSV should contain:
 
@@ -759,7 +707,7 @@ source_xpath
 xml_path
 ```
 
-#### 9. Output CSV Layout
+##### 9. Output CSV Layout
 
 The hierarchical CSV uses:
 
@@ -778,16 +726,14 @@ dInvoice,dVatBreakdown,dInvoiceLine,InvoiceNumber,InvoiceIssueDate,...
 1,,1,,,...
 ```
 
-For a parent **dAaa** and child **dBbb**, a non-repeating child is flattened into
-the parent row:
+For a parent **dAaa** and child **dBbb**, a non-repeating child is flattened into the parent row:
 
 ```csv
 dAaa,dBbb,a1,a2,b1,b2,b3
 1,,a1V1,a2V1,b1V1,b2V1,b3V1
 ```
 
-If **dBbb** is repeating, the parent row must leave all child facts empty, and
-the first child occurrence must already be on a separate row:
+If **dBbb** is repeating, the parent row must leave all child facts empty, and the first child occurrence must already be on a separate row:
 
 ```csv
 dAaa,dBbb,a1,a2,b1,b2,b3
@@ -796,10 +742,9 @@ dAaa,dBbb,a1,a2,b1,b2,b3
 1,2,,,b1V2,b2V2,b3V2
 ```
 
-Do not put parent and repeated-child facts together on the first child row.
-Reverse conversion reports an error for that mixed row layout.
+Do not put parent and repeated-child facts together on the first child row. Reverse conversion reports an error for that mixed row layout.
 
-#### 10. JSON Metadata Layout
+##### 10. JSON Metadata Layout
 
 The metadata file is an xBRL-CSV metadata document. It has these main sections:
 
@@ -815,7 +760,7 @@ tableTemplates.structured.columns.InvoiceNumber.dimensions.concept -> "en16931:I
 tableTemplates.structured.columns.DocumentCurrencyCode.dimensions.concept -> "en16931:DocumentCurrencyCode"
 ```
 
-#### 11. Run Regression Checks
+##### 11. Run Regression Checks
 
 Run the LHM-driven OpenPeppol sample conversion check:
 
@@ -859,17 +804,17 @@ Validate the regenerated round-trip XML against the UBL 2.1 Invoice schema:
 & $python .\tests\test_roundtrip_xml_ubl_schema.py
 ```
 
-#### 12. Troubleshooting
+##### 12. Troubleshooting
 
-##### No usable bindings found
+###### No usable bindings found
 
 Check that the binding CSV contains **semantic_path** and **xpath** values.
 
-##### Missing output columns
+###### Missing output columns
 
 If **--drop-empty-columns** is used, columns with no generated values are removed. Run without this option when a stable full header is required.
 
-##### Metadata JSON cannot locate the taxonomy
+###### Metadata JSON cannot locate the taxonomy
 
 The converter must write a non-empty **documentInfo.taxonomy** array. Generate the taxonomy first:
 
@@ -879,7 +824,7 @@ The converter must write a non-empty **documentInfo.taxonomy** array. Generate t
 
 Or pass **--taxonomy-base** with the directory containing **plt/en16931-oim-*.xsd**. If this schema is missing, metadata generation fails instead of writing an empty taxonomy list.
 
-##### Repeating rows are missing
+###### Repeating rows are missing
 
 Check that:
 
@@ -887,14 +832,363 @@ Check that:
 - the BG row has an XPath that points to the repeated XML context;
 - the syntax binding CSV contains bindings under that BG semantic path.
 
-##### Values are written to the invoice root row instead of a dimension row
+###### Values are written to the invoice root row instead of a dimension row
 
 Check that the syntax binding CSV contains the LHM-derived **type**, **multiplicity**, **semantic_path**, and **structured_csv_column** columns. The converter resolves each BT semantic path to its nearest repeated C-row dimension from the binding table itself.
 
-##### Package sample line rows are empty
+###### Package sample line rows are empty
 
 Template columns alone do not create rows. Invoice line rows require invoice line bindings.
 
-##### Reverse XML does not match the original file order
+###### Reverse XML does not match the original file order
 
 Reverse XML is reconstructed from binding rows and hierarchical CSV values. Populate LHM **syntax_sequence** from the UBL schema when XML element order must be checked. Unbound XML content still cannot be reproduced until it is represented by a binding or fixed-value rule.
+
+## Detailed Internal Walkthrough
+
+### Phase 1 Forward Conversion: UBL XML To Structured CSV
+
+Script:
+
+```
+src/syntax_binding.py
+```
+
+Main function:
+
+```
+write_hierarchical_csv(...)
+```
+
+Input:
+
+- UBL Invoice XML.
+- Syntax binding CSV, currently **specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv**.
+
+Output:
+
+- Phase 1 Structured CSV.
+- xBRL-CSV metadata JSON.
+
+#### Binding Table Interpretation
+
+The syntax binding table contains both class rows and fact rows.
+
+Class row:
+
+```
+type=C
+semantic_path=$.invoice.invoiceLine
+structured_csv_column=InvoiceLine
+multiplicity=1..*
+xpath=/Invoice/cac:InvoiceLine
+```
+
+Fact row:
+
+```
+type=A
+semantic_path=$.invoice.invoiceLine.invoiceLineIdentifier
+structured_csv_column=InvoiceLineIdentifier
+xpath=/Invoice/cac:InvoiceLine/cbc:ID
+```
+
+The class row tells the converter where the XML context is and whether it repeats. The fact row tells the converter which value to extract inside that context.
+
+#### Internal Data Structures
+
+**read_binding_rows(binding_csv, encoding)** returns the raw binding table as:
+
+```
+list[dict[str, str]]
+```
+
+Each dictionary is one CSV row keyed by the header.
+
+**read_binding_layout(...)** and **build_layout_from_rows(...)** build **BindingLayout**, the runtime Structured CSV layout derived from the binding table.
+
+Important fields in **BindingLayout**:
+
+- **fieldnames: list[str]**: final Structured CSV column order.
+- **dimensions: list[str]**: dimension columns.
+- **field_dimension: dict[str, str]**: value column to dimension column.
+- **field_by_semantic_path: dict[str, str]**: semantic path to Structured CSV value column.
+- **semantic_path_dimension: dict[str, str]**: semantic class path to dimension column.
+- **dimension_xpath: dict[str, str]**: dimension column to XML context XPath.
+- **dimension_ancestors: dict[str, list[str]]**: repeated ancestor dimensions.
+- **dimension_repeats: dict[str, bool]**: repeat status for each emitted dimension.
+- **syntax_sequence_by_field** and **syntax_sequence_by_dimension**: reverse XML ordering hints.
+
+**read_bindings(...)** builds:
+
+```
+bindings: list[Binding]
+```
+
+**Binding** is a dataclass normalized from **type=A** rows. It stores:
+
+- **order**;
+- **semantic_path**;
+- **xpath**;
+- **field**, the Structured CSV value column;
+- **dimension**, the row-scope dimension column;
+- optional filter fields and values.
+
+Example:
+
+```
+Binding(
+  semantic_path="$.invoice.invoiceLine.invoiceLineIdentifier",
+  xpath="/Invoice/cac:InvoiceLine/cbc:ID",
+  field="InvoiceLineIdentifier",
+  dimension="dInvoiceLine"
+)
+```
+
+**build_binding_class_tree(rows)** builds a tree of **BindingClass** nodes from **type=C** rows.
+
+Each **BindingClass** stores:
+
+- **semantic_path**;
+- **xpath**;
+- **column**, the class column;
+- **dimension**, such as **dInvoiceLine**;
+- **repeats**, based on **multiplicity**;
+- **children: list[BindingClass]**.
+
+The class tree is the semantic and XML context tree used by the converter. It is built from the binding table, not inferred from the source XML.
+
+**direct_class_fields(class_path, bindings)** groups fact bindings by their direct semantic parent. The result is used as:
+
+```
+direct_fields_by_class: dict[str, list[Binding]]
+```
+
+This prevents a parent class from extracting descendant facts too early.
+
+#### Dimension Ownership Resolution
+
+The forward and reverse paths use the same ownership metadata derived from the syntax binding table.
+
+1. **multiplicity_repeats(multiplicity)** recognizes **\***, **n**, **unbounded**, or a numeric upper bound greater than 1 as repeating.
+2. **build_layout_from_rows(rows)** reads every **type=C** class row. The invoice root becomes **dInvoice**. Other class rows become **dXxx** only when their multiplicity repeats.
+3. While reading each **type=A** row, the nested **nearest_dimension(...)** helper walks upward through its **semantic_path** until it finds the nearest class that owns a dimension.
+4. The result is stored in **BindingLayout.field_dimension** and copied into each normalized **Binding.dimension** by **read_bindings(...)**.
+
+Therefore a non-repeating child class belongs to its nearest repeating ancestor row. For example, non-repeating item information below a repeating invoice line belongs to **dInvoiceLine**. A repeating child class owns its own dimension and is not merged into its parent row.
+
+The ownership rule is independent of the target XML QName. It is determined by **type=C**, **multiplicity**, and **semantic_path**, while **structured_csv_column** supplies the actual fact and class column names.
+
+#### XPath Context Recursion
+
+The forward conversion uses XML parent-context recursion. The central nested function inside **write_hierarchical_csv(...)** is:
+
+```
+process_class(context, class_node, dimension_values, current_row)
+```
+
+Arguments:
+
+- **context: ET.Element**: XML element for the current class.
+- **class_node: BindingClass**: semantic class being processed.
+- **dimension_values: dict[str, str]**: active dimension values inherited from parent contexts.
+- **current_row: dict[str, str] | None**: current Structured CSV row.
+
+At the root, the converter calls:
+
+```
+process_class(root_context, class_root, {"dInvoice": "1"}, None)
+```
+
+This means the first invoice has **dInvoice=1**.
+
+#### How A Rows Are Filled
+
+For each class context, **fill_direct_fields(row, context, class_node)** processes only the direct **A** rows for that class.
+
+For each **Binding**:
+
+1. **relative_xpath(binding.xpath, class_node.xpath)** converts the absolute binding XPath into a path relative to the current class context. If the binding points outside that context, the path remains absolute and forward extraction evaluates it from the document root.
+2. **get_value(context, relative_xpath, namespaces, root)** extracts text or attribute value.
+3. The value is written to **row[binding.field]**.
+
+Example:
+
+Class:
+
+```
+$.invoice.invoiceLine
+/Invoice/cac:InvoiceLine
+```
+
+Fact:
+
+```
+$.invoice.invoiceLine.invoiceLineIdentifier
+/Invoice/cac:InvoiceLine/cbc:ID
+```
+
+Relative XPath:
+
+```
+cbc:ID
+```
+
+The converter extracts **cbc:ID** from the current **cac:InvoiceLine** context and writes it to **InvoiceLineIdentifier**.
+
+#### How Repeated Dimensions Are Decided
+
+Repeated dimensions are decided from **BindingClass.repeats**, which is derived from the class row **multiplicity**.
+
+When **process_class(...)** sees a child class:
+
+- if the child is non-repeated, it processes that child using the same **current_row**;
+- if the child is repeated and has a dimension, it delays that child into **repeated_children**.
+
+After the current row is filled and written if needed, repeated children are processed one occurrence at a time.
+
+For each repeated child occurrence:
+
+1. **class_contexts(parent_context, parent_class, child_class)** finds child XML contexts under the current parent XML context.
+2. The occurrence number starts at 1.
+3. A new **child_dimensions** dictionary is created by copying parent dimensions.
+4. The child dimension is set.
+5. A new row is created.
+6. The function recurses into the child XML context.
+
+Example:
+
+```
+Parent dimensions:
+{
+  "dInvoice": "1"
+}
+
+Second invoice line:
+{
+  "dInvoice": "1",
+  "dInvoiceLine": "2"
+}
+
+First item attribute under that line:
+{
+  "dInvoice": "1",
+  "dInvoiceLine": "2",
+  "dItemAttributes": "1"
+}
+```
+
+This is how **dInvoice**, **dInvoiceLine**, and deeper dimension values are determined. The value is the 1-based occurrence number inside the current XML parent context.
+
+#### Row Creation And Sparse Rows
+
+Rows are dictionaries:
+
+```
+dict[str, str]
+```
+
+**new_row(fieldnames, d_invoice)** creates a row with all columns initialized to blank and **dInvoice** initialized.
+
+**row_has_values(row, dimension_columns)** prevents dimension-only empty rows from being appended.
+
+The final output is:
+
+```
+rows: list[dict[str, str]]
+```
+
+This is written by **csv.DictWriter** using **fieldnames** from **BindingLayout**.
+
+For a repeating child, **process_class(...)** completes and appends the parent row before processing **repeated_children**. It then calls **new_row(...)** for every child occurrence, including occurrence 1. Consequently the first child cannot share the parent row:
+
+```csv
+dAaa,dBbb,a1,a2,b1,b2,b3
+1,,a1V1,a2V1,,,
+1,1,,,b1V1,b2V1,b3V1
+1,2,,,b1V2,b2V2,b3V2
+```
+
+When **dBbb** is non-repeating, **process_class(...)** passes the same **current_row** to the child and the result is instead:
+
+```csv
+1,,a1V1,a2V1,b1V1,b2V1,b3V1
+```
+
+### Phase 1 Reverse Conversion: Structured CSV To UBL XML
+
+Script:
+
+```
+src/syntax_binding.py --reverse
+```
+
+Main function:
+
+```
+write_xml_from_hierarchical_csv(...)
+```
+
+Input:
+
+- Structured CSV.
+- Same UBL syntax binding table.
+
+Output:
+
+- UBL Invoice XML.
+
+#### Reverse Data Interpretation
+
+Reverse mode reads:
+
+```
+rows: list[dict[str, str]]
+bindings: list[Binding]
+```
+
+Each Structured CSV row is sparse. Dimension columns determine where the row belongs in the XML hierarchy.
+
+Example:
+
+```
+dInvoice=1
+dInvoiceLine=2
+InvoiceLineNetAmount=1000
+```
+
+This means the value belongs under the second **cac:InvoiceLine**.
+
+Before XML construction, **validate_hierarchical_row_scopes(rows, fieldnames, field_dimension)** applies the ownership metadata built by **build_layout_from_rows(...)**:
+
+1. It identifies dimension columns with **is_dimension_column(...)**.
+2. For each input row, it takes the deepest populated dimension as the row scope.
+3. For each populated fact, it looks up the owner in **BindingLayout.field_dimension**.
+4. It raises **ValueError** when the owner differs from the row scope.
+
+This rejects a mixed row such as **1,1,a1V1,a2V1,b1V1,b2V1,b3V1**. The parent facts must remain on the parent row and the repeating child facts must start on a separate child row.
+
+#### XML Construction
+
+The reverse writer creates:
+
+```
+root: ET.Element
+```
+
+It then writes values using binding XPaths.
+
+Important helper functions:
+
+- **ensure_path(root, xpath, namespaces, force_new_leaf=False)**: walks an XPath and creates missing XML elements.
+- **find_or_create_child(parent, step, namespaces, force_new=False)**: finds a child element matching a tag and predicate or creates it.
+- **create_context(...)**: creates or reuses the XML parent context for a repeated row.
+- **set_xml_value_with_currency(...)**: writes a value and applies **currencyID** when the target is an amount.
+- **set_relative_xml_value(...)**: writes paths contained by the current repeated syntax context.
+- An absolute XPath that remains outside the repeated context is passed to **set_xml_value_with_currency(...)** with the document root. This covers cross-scope mappings such as BT-90: its semantic path is below payment instructions, while its UBL XPath is below **AccountingSupplierParty**.
+- **set_relative_xml_value(...)**: writes a value below a repeated context.
+- **ensure_tax_scheme_defaults(...)**: adds required UBL tax scheme defaults.
+- **load_ubl_child_order(...)**: reads UBL XSD files from **--ubl-schema-root** or **--ubl-schema-url** and builds child element order from **xs:sequence**.
+- **sort_children_for_ubl_schema(...)**: reorders children using generated UBL schema order. If no schema source is supplied, it uses the built-in fallback order for the current PoC structures.
+
+The reverse process is path-construction based. It uses the same binding table, but currently does not use the same recursive **BindingClass** tree as forward mode. Repeated-context paths are made relative only when the binding XPath is contained by the repeated syntax path; out-of-context absolute paths remain document-rooted. It remains schema-order aware and can use UBL XSD order for UBL 2.1 through later UBL versions when a schema root or schema URL is supplied.

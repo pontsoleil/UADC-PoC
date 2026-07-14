@@ -1,38 +1,23 @@
-# UADC Setup, Definitions, and Test Environment
+# 1. Environment Setup, Tests, Maintenance, and End-to-End Tutorial
 
-## Table of Contents
+This document combines repository setup, Python environment checks, definition-table locations, regression tests, round-trip artifact generation, maintenance, and the end-to-end tutorial.
 
-1. [Purpose](#1-purpose)
-2. [Repository Layout](#2-repository-layout)
-3. [Clone and Python Setup](#3-clone-and-python-setup)
-4. [Definition Tables](#4-definition-tables)
-5. [Samples and Generated Evidence](#5-samples-and-generated-evidence)
-6. [Environment Verification](#6-environment-verification)
-7. [Regression Tests](#7-regression-tests)
-8. [Test Internals](#8-test-internals)
-9. [GitHub Workflow](#9-github-workflow)
-10. [Documentation PDF Workflow](#10-documentation-pdf-workflow)
-11. [Troubleshooting](#11-troubleshooting)
-12. [Development Environment and Maintenance](#12-development-environment-and-maintenance)
-13. [Machine-Readable Specification Files](#13-machine-readable-specification-files)
-14. [Repository Files and Evidence](#14-repository-files-and-evidence)
-15. [Complete Test and Round-Trip Procedure](#15-complete-test-and-round-trip-procedure)
+For the conversion model, see [02_STRUCTURED_CSV_LHM_BINDINGS.md](02_STRUCTURED_CSV_LHM_BINDINGS.md). For implementation details, use the phase-specific documents.
 
-## 1. Purpose
+## Part A. Environment, Definitions, Tests, and Maintenance
 
-This document explains how to prepare and verify the GitHub workspace used by
-the UADC PoC. It identifies the editable and generated EN 16931, UBL, ADS, and
-ISO 21378 ADC definition tables, the required Python environment, the test
-programs, and the committed output evidence.
+### 1. Purpose
+
+This document explains how to prepare and verify the GitHub workspace used by the UADC PoC. It identifies the editable and generated EN 16931, UBL, ADS, and ISO 21378 ADC definition tables, the required Python environment, the test programs, and the committed output evidence.
 
 The processing guides are separate:
 
-- **TUTORIAL.md** provides a short end-to-end walkthrough.
-- **SYNTAX_BINDING.md** specifies Phase 1.
-- **SEMANTIC_BINDING.md** specifies Phase 2.
-- **DATA_MODEL.md** specifies the common model, taxonomy, and supporting tools.
+- **01_ENVIRONMENT_TESTS_TUTORIAL.md** provides a short end-to-end walkthrough.
+- **03_PHASE1_UBL_SYNTAX_BINDING.md** specifies Phase 1.
+- **04_PHASE2_ADS_PSV_SEMANTIC_BINDING.md** specifies Phase 2.
+- **02_STRUCTURED_CSV_LHM_BINDINGS.md** specifies the common model, taxonomy, and supporting tools.
 
-## 2. Repository Layout
+### 2. Repository Layout
 
 | Directory | Role |
 |---|---|
@@ -46,13 +31,11 @@ The processing guides are separate:
 | **out/** | Generated taxonomy, Phase 1, Phase 2, reverse, tutorial, and QA evidence tracked by Git. |
 | **docs/** | The five canonical guides and decision records. |
 
-Each script directory contains a short **README.md** for GitHub browsing. The
-five documents in **docs/** are the authoritative operating and implementation
-guides.
+Each script directory contains a short **README.md** for GitHub browsing. The five documents in **docs/** are the authoritative operating and implementation guides.
 
-## 3. Clone and Python Setup
+### 3. Clone and Python Setup
 
-### 3.1 Windows PowerShell
+#### 3.1 Windows PowerShell
 
 ```
 git clone https://github.com/pontsoleil/UADC-PoC.git
@@ -68,7 +51,7 @@ $python = 'C:\Users\<user>\AppData\Local\Programs\Python\Python310\python.exe'
 & $python --version
 ```
 
-### 3.2 macOS or Linux
+#### 3.2 macOS or Linux
 
 ```
 git clone https://github.com/pontsoleil/UADC-PoC.git
@@ -77,7 +60,7 @@ PYTHON=python3
 $PYTHON --version
 ```
 
-### 3.3 Core Compilation Check
+#### 3.3 Core Compilation Check
 
 ```
 & $python -m py_compile `
@@ -94,9 +77,9 @@ Get-ChildItem .\tools -Recurse -Filter *.py | ForEach-Object {
 }
 ```
 
-## 4. Definition Tables
+### 4. Definition Tables
 
-### 4.1 EN 16931 LHM
+#### 4.1 EN 16931 LHM
 
 | File | Purpose |
 |---|---|
@@ -104,10 +87,9 @@ Get-ChildItem .\tools -Recurse -Filter *.py | ForEach-Object {
 | **specs/lhm/EN16931_CIUS_Invoice_LHM.csv** | Generated operational LHM consumed by converters and taxonomy generation. |
 | **specs/lhm/EN16931_CIUS_Invoice.xlsx** | Local reviewer workbook; not the runtime authority. |
 
-The LHM records semantic hierarchy, class and attribute type, multiplicity,
-effective **lhm_level**, semantic path, element name, datatype, and UBL XPath.
+The LHM records semantic hierarchy, class and attribute type, multiplicity, effective **lhm_level**, semantic path, element name, datatype, and UBL XPath.
 
-### 4.2 Phase 1 UBL Syntax Binding
+#### 4.2 Phase 1 UBL Syntax Binding
 
 The operational UBL Invoice binding is:
 
@@ -115,10 +97,9 @@ The operational UBL Invoice binding is:
 specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv
 ```
 
-It contains both class rows and fact rows. It is the runtime authority for XML
-locations, selectors, Structured CSV columns, and repeated row scopes.
+It contains both class rows and fact rows. It is the runtime authority for XML locations, selectors, Structured CSV columns, and repeated row scopes.
 
-### 4.3 Phase 2 ADS XBRL GL Bindings
+#### 4.3 Phase 2 ADS XBRL GL Bindings
 
 Six syntax-binding CSVs under **specs/bindings/syntax/** define:
 
@@ -135,13 +116,11 @@ The review workbook is:
 specs/bindings/ADS_XBRL_GL_Bindings.xlsx
 ```
 
-### 4.4 Phase 2 ADS PSV Bindings
+#### 4.4 Phase 2 ADS PSV Bindings
 
-Six semantic-binding CSVs under **specs/bindings/semantic/** define the same
-header, line, supplier, and customer target families as delimiter-separated
-files.
+Six semantic-binding CSVs under **specs/bindings/semantic/** define the same header, line, supplier, and customer target families as delimiter-separated files.
 
-### 4.5 ISO 21378 ADC Bindings
+#### 4.5 ISO 21378 ADC Bindings
 
 The four ISO 21378:2019 invoice views are:
 
@@ -152,29 +131,26 @@ ISO21378_PUR_Invoice_Received_CSV_Binding.csv
 ISO21378_PUR_Invoice_Received_Details_CSV_Binding.csv
 ```
 
-They represent Tables 38, 39, 53, and 54. Mapping status and notes distinguish
-direct values, approximations, transformations, and ERP information unavailable
-from an EN 16931 invoice.
+They represent Tables 38, 39, 53, and 54. Mapping status and notes distinguish direct values, approximations, transformations, and ERP information unavailable from an EN 16931 invoice.
 
-### 4.6 Reference Tables
+#### 4.6 Reference Tables
 
 - **specs/Currency.csv** maps ISO 4217 currency codes to minor units.
 - **specs/CountryCurrency.csv** provides country/currency example data.
 - **specs/XBRL-GL/** contains XBRL GL definition references used for bindings.
 
-## 5. Samples and Generated Evidence
+### 5. Samples and Generated Evidence
 
-### 5.1 Phase 1 Inputs
+#### 5.1 Phase 1 Inputs
 
 ```
 samples/input/openpeppol_ubl_invoice_minimal.xml
 samples/input/bis-billing3-examples/*.xml
 ```
 
-The current regression set contains one minimal invoice and nine BIS Billing 3
-examples.
+The current regression set contains one minimal invoice and nine BIS Billing 3 examples.
 
-### 5.2 Output Layout
+#### 5.2 Output Layout
 
 ```
 out/taxonomy/
@@ -186,10 +162,9 @@ out/reverse/
 out/tutorial/
 ```
 
-Generated evidence is committed for review. Regenerate it from definitions and
-scripts instead of editing it manually.
+Generated evidence is committed for review. Regenerate it from definitions and scripts instead of editing it manually.
 
-## 6. Environment Verification
+### 6. Environment Verification
 
 Run the tutorial prerequisite check:
 
@@ -197,9 +172,7 @@ Run the tutorial prerequisite check:
 & $python .\src\tutorial\00_check_environment.py
 ```
 
-It verifies the three operational scripts, the taxonomy generator, LHM, UBL and
-ADS bindings, and the minimal sample. A missing generated taxonomy is reported
-as a next action rather than a missing source definition.
+It verifies the three operational scripts, the taxonomy generator, LHM, UBL and ADS bindings, and the minimal sample. A missing generated taxonomy is reported as a next action rather than a missing source definition.
 
 Generate and validate the local taxonomy when needed:
 
@@ -217,11 +190,11 @@ Optional dependencies:
 | **pypdf** | EN 16931 coverage audit against a PDF. |
 | **pdfplumber** | Updating LHM definitions from EN 16931 Table 2. |
 
-## 7. Regression Tests
+### 7. Regression Tests
 
 Tests are plain Python scripts and can be executed directly.
 
-### 7.1 Phase 1
+#### 7.1 Phase 1
 
 ```
 & $python .\tests\test_lhm_semantic_paths.py
@@ -234,7 +207,7 @@ Tests are plain Python scripts and can be executed directly.
 & $python .\tests\test_xbrl_csv_metadata_arelle.py
 ```
 
-### 7.2 Phase 2 ADS XBRL GL
+#### 7.2 Phase 2 ADS XBRL GL
 
 Run all target-specific scripts named **test_ads_*_xbrl_gl.py**, followed by:
 
@@ -242,7 +215,7 @@ Run all target-specific scripts named **test_ads_*_xbrl_gl.py**, followed by:
 & $python .\tests\test_phase2_outputs_by_structured_csv_stem.py
 ```
 
-### 7.3 Phase 2 Semantic Outputs
+#### 7.3 Phase 2 Semantic Outputs
 
 ```
 & $python .\tests\test_ads_invoices_received_psv.py
@@ -251,7 +224,7 @@ Run all target-specific scripts named **test_ads_*_xbrl_gl.py**, followed by:
 & $python .\tests\test_semantic_binding_indexed_paths.py
 ```
 
-### 7.4 Full Direct Run
+#### 7.4 Full Direct Run
 
 ```
 Get-ChildItem .\tests\test_*.py | Sort-Object Name | ForEach-Object {
@@ -262,22 +235,15 @@ Get-ChildItem .\tests\test_*.py | Sort-Object Name | ForEach-Object {
 
 The latest recorded run completed 22 scripts with no failures.
 
-## 8. Test Internals
+### 8. Test Internals
 
-Tests create subprocess commands with the current Python executable so the
-converter and test use the same environment. **phase1_helpers.py** centralizes
-the Phase 1 binding path and conversion helper used by target tests.
+Tests create subprocess commands with the current Python executable so the converter and test use the same environment. **phase1_helpers.py** centralizes the Phase 1 binding path and conversion helper used by target tests.
 
-The round-trip builder recreates four artifact folders for every case: source
-XML, Structured CSV, metadata JSON, and regenerated UBL XML. The schema test
-checks XML validity rather than byte-for-byte identity. The Arelle test checks
-the metadata JSON and its taxonomy references.
+The round-trip builder recreates four artifact folders for every case: source XML, Structured CSV, metadata JSON, and regenerated UBL XML. The schema test checks XML validity rather than byte-for-byte identity. The Arelle test checks the metadata JSON and its taxonomy references.
 
-Target tests assert semantic facts, hierarchy, selectors, row scopes, XBRL GL
-tuple placement, monetary decimals, and output naming. They are regression
-contracts, not only smoke tests.
+Target tests assert semantic facts, hierarchy, selectors, row scopes, XBRL GL tuple placement, monetary decimals, and output naming. They are regression contracts, not only smoke tests.
 
-## 9. GitHub Workflow
+### 9. GitHub Workflow
 
 Before work:
 
@@ -295,27 +261,20 @@ After changes:
 5. Review **git diff** and **git status**.
 6. Commit and push to the intended branch.
 
-The binding CSV and source LHM definitions are reviewed source files. Generated
-CSV, JSON, XML, XSD, linkbase, and PDF evidence must remain reproducible from
-those files and the committed scripts.
+The binding CSV and source LHM definitions are reviewed source files. Generated CSV, JSON, XML, XSD, linkbase, and PDF evidence must remain reproducible from those files and the committed scripts.
 
-## 10. Documentation PDF Workflow
+### 10. Documentation PDF Workflow
 
-Markdown is the editable source. PDFs are generated with the VSCode Markdown
-PDF extension using the configured margins:
+Markdown is the editable source. PDFs are generated with the VSCode Markdown PDF extension using the configured margins:
 
 - top and bottom: **20mm**;
 - left and right: **18mm**.
 
-After export, inspect the first and last pages and any pages containing large
-tables or code blocks. Commit the Markdown and corresponding PDF together.
+After export, inspect the first and last pages and any pages containing large tables or code blocks. Commit the Markdown and corresponding PDF together.
 
-### 10.1 Regenerating Japanese Documentation
+#### 10.1 Regenerating Japanese Documentation
 
-Japanese Markdown is generated below a **ja/** subdirectory in every directory
-that contains first-party project documentation. The English Markdown remains
-the structural source. Project terminology and approved Japanese expressions
-are defined in **docs/ja/TERMINOLOGY.csv**.
+Japanese Markdown is generated below a **ja/** subdirectory in every directory that contains first-party project documentation. The English Markdown remains the structural source. Project terminology and approved Japanese expressions are defined in **docs/ja/TERMINOLOGY.csv**.
 
 The terminology CSV uses these columns:
 
@@ -327,9 +286,7 @@ The terminology CSV uses these columns:
 | **match_mode** | **literal** for case-sensitive identifiers or **phrase** for natural-language matching. |
 | **notes** | Editorial guidance, abbreviations, or plural-form notes. |
 
-Edit the CSV in Excel and save it as **CSV UTF-8 (comma delimited)**. Confirm
-that the saved file retains the UTF-8 BOM. The generator reads it with
-**utf-8-sig**, so the BOM is accepted and excluded from the first column name.
+Edit the CSV in Excel and save it as **CSV UTF-8 (comma delimited)**. Confirm that the saved file retains the UTF-8 BOM. The generator reads it with **utf-8-sig**, so the BOM is accepted and excluded from the first column name.
 
 From the repository root, regenerate all Japanese Markdown:
 
@@ -338,10 +295,7 @@ $python = 'C:\Users\nobuy\AppData\Local\Programs\Python\Python310\python.exe'
 & $python .\tools\translate_markdown_ja.py
 ```
 
-The local Argos Translate runtime and English-to-Japanese model must already
-exist under **.translation_runtime/** and **.translation_data/**. These large
-local dependencies are ignored by Git. The generator sends no document text to
-an external translation service.
+The local Argos Translate runtime and English-to-Japanese model must already exist under **.translation_runtime/** and **.translation_data/**. These large local dependencies are ignored by Git. The generator sends no document text to an external translation service.
 
 Validate the generated set without rewriting it:
 
@@ -349,42 +303,33 @@ Validate the generated set without rewriting it:
 & $python .\tools\translate_markdown_ja.py --check
 ```
 
-The check confirms that every supported English Markdown file has a Japanese
-counterpart, that code-fence counts match, and that every output contains
-Japanese text. Before publication, also review terminology, relative links,
-tables, commands, paths, XPath, and the absence of unreplaced protection
-markers. A correction to **ja_term** is applied to every generated Japanese
-document on the next full run.
+The check confirms that every supported English Markdown file has a Japanese counterpart, that code-fence counts match, and that every output contains Japanese text. Before publication, also review terminology, relative links, tables, commands, paths, XPath, and the absence of unreplaced protection markers. A correction to **ja_term** is applied to every generated Japanese document on the next full run.
 
-## 11. Troubleshooting
+### 11. Troubleshooting
 
-### 11.1 Python is not found
+#### 11.1 Python is not found
 
 Set **$python** or **PYTHON** to an absolute executable path.
 
-### 11.2 PDF tools cannot import a dependency
+#### 11.2 PDF tools cannot import a dependency
 
-Install only the required package in the selected Python environment, or skip
-the optional PDF-derived maintenance action.
+Install only the required package in the selected Python environment, or skip the optional PDF-derived maintenance action.
 
-### 11.3 Arelle or UBL schema validation is unavailable
+#### 11.3 Arelle or UBL schema validation is unavailable
 
 Run the remaining tests and report the omitted external validation explicitly.
 
-### 11.4 Generated output differs unexpectedly
+#### 11.4 Generated output differs unexpectedly
 
-Check the active binding path, input stem, encoding, taxonomy version, currency
-table, and whether the output was regenerated with the operational script under
-**src/** rather than a simplified tutorial tool.
+Check the active binding path, input stem, encoding, taxonomy version, currency table, and whether the output was regenerated with the operational script under **src/** rather than a simplified tutorial tool.
 
+### 12. Development Environment and Maintenance
 
-## 12. Development Environment and Maintenance
-
-### Development And Tooling Guide
+#### Development And Tooling Guide
 
 This guide explains clone-time setup, local development checks, and model-maintenance tools.
 
-#### Directory Roles
+##### Directory Roles
 
 ```
 src/      operational conversion scripts
@@ -397,7 +342,7 @@ out/      generated PoC evidence and target output tracked by Git
 
 The main invoice conversion runtime is in **src/**. Use **tools/** for setup, regeneration, test artifact building, taxonomy output, and specification maintenance.
 
-#### Initial Setup After Clone
+##### Initial Setup After Clone
 
 Windows PowerShell:
 
@@ -426,7 +371,7 @@ $PYTHON --version
 
 Use **$PYTHON script.py** on macOS/Linux. Use **& $python script.py** only in Windows PowerShell.
 
-#### Compile Core Scripts
+##### Compile Core Scripts
 
 Compile before running broad checks:
 
@@ -450,7 +395,7 @@ $PYTHON -m py_compile \
   ./tools/taxonomy/xBRLGL_TaxonomyGenerator.py
 ```
 
-#### Tool Classification
+##### Tool Classification
 
 GitHub and development environment support:
 
@@ -484,7 +429,7 @@ tools/tutorial/semantic_binding_sample.py
 
 Operational runtime converters are in **src/**, not **tools/**.
 
-#### Model Inputs And Generated Outputs
+##### Model Inputs And Generated Outputs
 
 Committed source definitions:
 
@@ -504,16 +449,11 @@ out/phase2/
 tests/roundtrip/
 ```
 
-**out/** contains generated evidence and target outputs. It is included in Git
-for the current PoC so Phase 1 and Phase 2 results remain reviewable through
-GitHub. Regenerate committed outputs from their source definitions and scripts
-rather than editing them manually.
+**out/** contains generated evidence and target outputs. It is included in Git for the current PoC so Phase 1 and Phase 2 results remain reviewable through GitHub. Regenerate committed outputs from their source definitions and scripts rather than editing them manually.
 
-Detailed purpose, input/output, command-line, processing, function, validation,
-dependency, and side-effect specifications for all 15 programs under **tools/**
-are documented in **DATA_MODEL.md**.
+Detailed purpose, input/output, command-line, processing, function, validation, dependency, and side-effect specifications for all 15 programs under **tools/** are documented in **02_STRUCTURED_CSV_LHM_BINDINGS.md**.
 
-#### Taxonomy Generation
+##### Taxonomy Generation
 
 Primary script:
 
@@ -545,7 +485,7 @@ out/taxonomy/plt/en16931-def-2026-07-05.xml
 
 **src/syntax_binding.py** does not generate taxonomy files. It references them through **--taxonomy-base** when writing xBRL-CSV metadata JSON.
 
-#### LHM Maintenance
+##### LHM Maintenance
 
 Scripts:
 
@@ -570,7 +510,7 @@ Typical checks after LHM edits:
 & $python .\tests\validate_taxonomy.py
 ```
 
-#### Binding Maintenance
+##### Binding Maintenance
 
 Syntax binding CSVs live under:
 
@@ -619,7 +559,7 @@ After semantic binding changes:
 & $python .\tests\test_phase2_outputs_by_structured_csv_stem.py
 ```
 
-#### Round-Trip Artifact Regeneration
+##### Round-Trip Artifact Regeneration
 
 When LHM, syntax binding, or taxonomy metadata behavior changes:
 
@@ -637,7 +577,7 @@ xBRL-CSV metadata JSON
 regenerated UBL XML
 ```
 
-#### Continuing Development Workflow
+##### Continuing Development Workflow
 
 Before editing:
 
@@ -663,21 +603,19 @@ After editing LHM or binding CSV files:
 
 Before sharing changes, run a broad local check and report clearly if Arelle or the UBL schema cache is not available.
 
-#### psv_viewer.html
+##### psv_viewer.html
 
 **tools/psv_viewer.html** displays generated ADS PSV files as a browser table. It runs entirely in the browser and does not require a local web server. It supports pipe, comma, and tab delimiters, row filtering, sticky headers, horizontal scrolling, and automatic hiding of columns that are empty in every data row.
 
+### 13. Machine-Readable Specification Files
 
-
-## 13. Machine-Readable Specification Files
-
-### Specification Files Guide
+#### Specification Files Guide
 
 This guide explains the specification files under **specs/** and how those files are defined and maintained.
 
 The **specs/** directory contains machine-readable CSV specifications used by the UADC PoC conversion pipeline. These files are inputs to scripts under **src/** and **tools/**. They should remain small, reviewable, and deterministic.
 
-#### Directory Map
+##### Directory Map
 
 ```
 specs/
@@ -688,7 +626,7 @@ specs/
   XBRL-GL/
 ```
 
-#### Currency Tables
+##### Currency Tables
 
 **Currency.csv** maps ISO 4217 currency codes to minor units. It is used when XBRL GL monetary facts need a **decimals** value.
 
@@ -716,7 +654,7 @@ EE,Estonia,EUR,2,Euro
 
 Runtime XBRL units still use the ISO 4217 currency code from **Currency.csv**.
 
-#### LHM Specification Files
+##### LHM Specification Files
 
 The LHM files are under:
 
@@ -739,7 +677,7 @@ The LHM defines:
 - UBL XPath binding references;
 - fields needed for Structured CSV and xBRL-CSV taxonomy generation.
 
-##### LHM Source CSV
+###### LHM Source CSV
 
 Use **specs/lhm/source/EN16931_CIUS_Invoice_LHM_Source.csv** for individual adjustments to PDF-derived EN 16931-1 Table 2 items.
 
@@ -759,7 +697,7 @@ Optional override columns:
 
 When **element_override** is blank, the generator creates a unique UpperCamelCase element name from the semantic path. If final path segments duplicate, it uses the shortest unique semantic path suffix.
 
-#### Binding Specification Files
+##### Binding Specification Files
 
 Binding files are under:
 
@@ -769,9 +707,9 @@ specs/bindings/
 
 Binding authoring and conversion rules are documented in:
 
-- **SYNTAX_BINDING.md** for syntax bindings;
-- **SEMANTIC_BINDING.md** for semantic bindings;
-- **DATA_MODEL.md** for the shared row-scope and function-level processing model.
+- **03_PHASE1_UBL_SYNTAX_BINDING.md** for syntax bindings;
+- **04_PHASE2_ADS_PSV_SEMANTIC_BINDING.md** for semantic bindings;
+- **02_STRUCTURED_CSV_LHM_BINDINGS.md** for the shared row-scope and function-level processing model.
 
 Binding files connect:
 
@@ -779,7 +717,7 @@ Binding files connect:
 - UADC Structured CSV to downstream target syntax;
 - UADC Structured CSV to flat semantic target tables.
 
-#### XBRL GL Specification Files
+##### XBRL GL Specification Files
 
 The XBRL GL definition table is under:
 
@@ -795,7 +733,7 @@ The table preserves existing English and Japanese labels where available. The se
 
 The **XPath** column records the absolute tuple or fact path from **xbrli:xbrl**. It is generated from the taxonomy parent-child tree so binding tables can point directly to the target XBRL GL location without carrying internal row IDs.
 
-#### Maintenance Rules
+##### Maintenance Rules
 
 - Keep CSV files UTF-8 or UTF-8 BOM where spreadsheet editing requires it.
 - Use structured CSV writers or spreadsheet tools that preserve quoted fields, because descriptions can contain commas.
@@ -803,15 +741,13 @@ The **XPath** column records the absolute tuple or fact path from **xbrli:xbrl**
 - Regenerate derived CSV files from their source CSVs or scripts rather than editing generated files by hand when a generator exists.
 - Keep runtime-derived data out of binding tables unless it is deliberately part of the binding contract.
 
+### 14. Repository Files and Evidence
 
-
-## 14. Repository Files and Evidence
-
-### Repository Files Guide
+#### Repository Files Guide
 
 This guide explains the repository sample files, expected files, references, and figure assets.
 
-#### Samples
+##### Samples
 
 Committed sample files are under:
 
@@ -833,7 +769,7 @@ BIS Billing 3 examples exercise allowances, VAT categories, negative correction 
 
 Generated Structured CSV, metadata JSON, and regenerated XML are kept in **tests/roundtrip/** or **out/**, not under **samples/**.
 
-#### References
+##### References
 
 Lightweight reference material is under:
 
@@ -860,7 +796,7 @@ The current LHM extension includes EN 16931 groups for document-level allowances
 
 OpenPeppol BIS Billing is treated as a CIUS and syntax-binding source layered on top of the EN 16931 semantic model, not as the primary source of the LHM.
 
-#### Figures
+##### Figures
 
 Figure assets are under:
 
@@ -874,22 +810,20 @@ Important file:
 
 When adding figures, prefer stable PNG files with descriptive names. Keep intermediate render files only when they are useful for traceability.
 
+### 15. Complete Test and Round-Trip Procedure
 
-
-## 15. Complete Test and Round-Trip Procedure
-
-### Testing And Round-Trip Artifacts Guide
+#### Testing And Round-Trip Artifacts Guide
 
 This guide explains test execution and round-trip review artifacts.
 
 Run commands from the **UADC_PoC** directory. Test scripts are plain Python scripts and can be executed directly with **$python**. Some can also be run through **pytest** when pytest is installed.
 
-#### Supporting Files
+##### Supporting Files
 
 - **tests/roundtrip/**: reviewable round-trip artifacts. Each case keeps source XML, Structured CSV, xBRL-CSV metadata JSON, and regenerated XML together.
 - **tools/build_roundtrip_test_artifacts.py**: rebuilds round-trip artifact sets from sample XML inputs.
 
-#### Phase 1 Syntax Binding Tests
+##### Phase 1 Syntax Binding Tests
 
 These tests verify UBL Invoice XML to Structured CSV, xBRL-CSV metadata, and UBL round-trip behavior.
 
@@ -909,7 +843,7 @@ The reverse conversion can derive UBL child element order from XSD files by usin
 
 **test_syntax_binding_reverse.py** also checks cross-scope absolute XPath handling: BT-90 must be written below the root **AccountingSupplierParty**, and **PaymentMeans/Invoice** must not exist. **test_bis_billing3_examples_conversion.py** checks the currency-filtered totals in **Allowance-example.xml**: BT-110 is **1225.00** and BT-111 is **9324.00**.
 
-#### Phase 2 ADS XBRL GL Tests
+##### Phase 2 ADS XBRL GL Tests
 
 These tests regenerate Phase 1 Structured CSV first, then use ADS XBRL GL syntax binding CSV files under **specs/bindings/syntax/**.
 
@@ -939,12 +873,9 @@ Supplier_Listing.xbrl
 Customer_Master.xbrl
 ```
 
-**test_ads_supplier_listing_xbrl_gl.py** verifies that Seller name and
-identifier are written to the **identifierType=V** identifier reference and
-that Seller Street, City, Country, and Postal Code are written below its
-**gl-bus:identifierAddress** tuple.
+**test_ads_supplier_listing_xbrl_gl.py** verifies that Seller name and identifier are written to the **identifierType=V** identifier reference and that Seller Street, City, Country, and Postal Code are written below its **gl-bus:identifierAddress** tuple.
 
-#### Phase 2 ADS PSV And CSV Tests
+##### Phase 2 ADS PSV And CSV Tests
 
 These tests use semantic binding files under **specs/bindings/semantic/**.
 
@@ -962,7 +893,7 @@ Expected output:
 out/phase2/ADS_PSV/<structured-csv-stem>/<target-view>.psv
 ```
 
-#### Taxonomy And LHM Checks
+##### Taxonomy And LHM Checks
 
 ```
 & $python .\tests\test_lhm_semantic_paths.py
@@ -970,7 +901,7 @@ out/phase2/ADS_PSV/<structured-csv-stem>/<target-view>.psv
 & $python .\tests\validate_taxonomy.py
 ```
 
-#### Round-Trip Artifacts
+##### Round-Trip Artifacts
 
 Round-trip flow:
 
@@ -1010,7 +941,7 @@ Verify:
 
 The test checks source XML, Structured CSV, metadata JSON, and round-trip XML correspondence. It also checks representative values such as **InvoiceNumber**, **DocumentCurrencyCode**, **InvoiceLineIdentifier**, amount **currencyID**, taxonomy entry points, and xBRL-CSV column concept mappings.
 
-#### Optional Validation
+##### Optional Validation
 
 Arelle metadata validation:
 
@@ -1026,7 +957,7 @@ UBL 2.1 schema validation:
 
 The regenerated XML is not expected to be byte-for-byte identical to the source XML. It is reconstructed from bound CSV values and may differ in XML declaration formatting, namespace placement, indentation, and unbound XML content.
 
-#### Current Test Execution Report
+##### Current Test Execution Report
 
 Last recorded report date:
 
@@ -1040,17 +971,192 @@ Recorded result:
 PASS
 ```
 
-The complete set of 22 **tests/test_*.py** regression scripts was executed on
-2026-07-14 after moving the two simplified converter implementations to
-**tools/tutorial/**. All 22 completed successfully with no failures. All 14
-Python programs under **tools/** also passed **py_compile**.
+The complete set of 22 **tests/test_*.py** regression scripts was executed on 2026-07-14 after moving the two simplified converter implementations to **tools/tutorial/**. All 22 completed successfully with no failures. All 14 Python programs under **tools/** also passed **py_compile**.
 
 Scope included EN 16931 LHM-driven syntax binding conversion, Structured CSV generation, xBRL-CSV metadata generation, Arelle validation, UBL reverse conversion, BIS Billing 3 example conversion, LHM checks, and local taxonomy generation checks.
 
 The taxonomy/LHM checks, OpenPeppol conversion, all nine BIS Billing 3 conversions, Structured CSV metadata, ten round-trip artifact cases, and Arelle validation of all ten xBRL-CSV metadata files passed. Absolute currency-filtered XPath evaluation was corrected so **Allowance-example.xml** now writes BT-110 as **1225.00** and BT-111 as **9324.00**. All Phase 2 ADS XBRL GL and ADS PSV/CSV outputs were regenerated and their tests passed.
 
-The Supplier Listing XBRL GL binding was then completed with Seller postal address facts under the **identifierType=V** identifier reference. Supplier Listing was regenerated from all ten Phase 1 inputs, and all ten resulting **Supplier_Listing.xbrl** instances passed Arelle validation. The four ISO 21378 ADC invoice bindings were also applied to all ten Phase 1 inputs, generating 40 CSV target files. Detailed ISO field coverage and known source-data gaps are recorded in **SEMANTIC_BINDING.md**, Chapter 19.
+The Supplier Listing XBRL GL binding was then completed with Seller postal address facts under the **identifierType=V** identifier reference. Supplier Listing was regenerated from all ten Phase 1 inputs, and all ten resulting **Supplier_Listing.xbrl** instances passed Arelle validation. The four ISO 21378 ADC invoice bindings were also applied to all ten Phase 1 inputs, generating 40 CSV target files. Detailed ISO field coverage and known source-data gaps are recorded in **04_PHASE2_ADS_PSV_SEMANTIC_BINDING.md**, Chapter 19.
 
 These results complete the planned Phase 1 and Phase 2 PoC baseline. ISO 21378 completion here means that the four planned invoice views, their mappings, outputs, and gap classifications are complete; it does not mean that EN 16931 contains every audit-system field defined by ISO 21378.
 
 The reverse converter keeps absolute binding XPaths rooted at the UBL document when a semantic child is stored outside its repeated syntax context. This prevents BT-90 from creating a nested **Invoice** below **PaymentMeans**. All ten regenerated round-trip XML files pass the UBL 2.1 Invoice schema validation when the test is run with an environment containing **xmlschema**.
+
+## Part B. End-to-End Tutorial
+
+### 1. Purpose
+
+This tutorial demonstrates the common UADC flow without requiring the reader to construct long commands. The scripts under **src/tutorial/** call the same operational converters used by the full Phase 1 and Phase 2 workflows.
+
+Run all commands from the repository root.
+
+### 2. Tutorial Flow
+
+```
+UBL Invoice XML
+  -> Phase 1 syntax binding
+  -> Structured CSV and xBRL-CSV metadata
+  -> reverse syntax binding
+  -> regenerated UBL Invoice XML
+
+Structured CSV
+  -> Phase 2 ADS syntax binding
+  -> ADS Invoices Received XBRL GL
+```
+
+Tutorial output is written under **out/tutorial/**.
+
+### 3. Check the Environment
+
+Windows PowerShell:
+
+```
+$python = 'python'
+& $python .\src\tutorial\00_check_environment.py
+```
+
+The script reports:
+
+- the Python executable;
+- the detected repository root;
+- missing operational scripts or definitions;
+- whether the generated OIM taxonomy entry point already exists.
+
+Internally, **REQUIRED_PATHS** lists the LHM, UBL and ADS bindings, sample XML, runtime converters, round-trip builder, and taxonomy generator. The script returns status **1** when any required source file is missing.
+
+### 4. Generate Phase 1 Structured CSV
+
+```
+& $python .\src\tutorial\01_convert_sample_to_structured_csv.py
+```
+
+Input:
+
+```
+samples/input/openpeppol_ubl_invoice_minimal.xml
+```
+
+Outputs:
+
+```
+out/tutorial/openpeppol_ubl_invoice_minimal.csv
+out/tutorial/openpeppol_ubl_invoice_minimal.json
+```
+
+The wrapper first calls **ensure_taxonomy**. If the local taxonomy is missing, it runs the taxonomy generator regression script. It then invokes **src/syntax_binding.py** with the EN 16931 UBL binding, metadata output path, and taxonomy base.
+
+Open the CSV and observe:
+
+- **dInvoice** on the invoice row;
+- separate rows for repeated invoice lines or VAT breakdowns;
+- sparse cells outside the class that owns them;
+- fact columns named from the LHM element definitions.
+
+Open the JSON and observe the OIM document type, taxonomy entry point, table template, dimensions, concepts, and currency units.
+
+### 5. Round Trip to UBL XML
+
+```
+& $python .\src\tutorial\02_roundtrip_structured_csv_to_xml.py
+```
+
+Output:
+
+```
+out/tutorial/openpeppol_ubl_invoice_minimal.roundtrip.xml
+```
+
+**ensure_structured_csv** runs the previous tutorial step when necessary. The wrapper invokes **src/syntax_binding.py** with **--reverse** and the same UBL binding.
+
+The regenerated XML is semantic output, not a byte-for-byte copy. Namespace placement, indentation, XML declaration, and unbound content may differ. The important checks are bound values, hierarchy, UBL child order, and schema validity.
+
+### 6. Generate a Phase 2 ADS XBRL GL View
+
+```
+& $python .\src\tutorial\03_generate_ads_xbrl_gl.py
+```
+
+Output directory:
+
+```
+out/tutorial/xbrl-gl/
+```
+
+The wrapper uses:
+
+```
+src/syntax_binding_ads_xbrl_gl.py
+specs/bindings/syntax/ADS_Invoices_Received_XBRL_GL_Binding.csv
+specs/lhm/EN16931_CIUS_Invoice_LHM.csv
+specs/Currency.csv
+```
+
+The generated instance contains XBRL contexts and units plus the XBRL GL tuple hierarchy required by the target view.
+
+### 7. Inspect the Results
+
+#### 7.1 Structured CSV
+
+Use a spreadsheet editor that preserves quoted CSV cells. Confirm that a parent invoice row and repeated child rows do not combine unrelated class facts.
+
+#### 7.2 Metadata JSON
+
+Confirm that the taxonomy entry is:
+
+```
+out/taxonomy/plt/en16931-oim-2026-07-05.xsd
+```
+
+#### 7.3 Round-trip XML
+
+Run:
+
+```
+& $python .\tests\test_syntax_binding_reverse.py
+& $python .\tests\test_roundtrip_xml_ubl_schema.py
+```
+
+#### 7.4 XBRL GL
+
+Load the generated instance in Arelle. Confirm tuple hierarchy and facts rather than expecting a presentation view identical to tuple-oriented legacy samples.
+
+#### 7.5 PSV or CSV
+
+For delimiter-separated Phase 2 output, use **tools/psv_viewer.html**. It reads files locally, supports pipe, comma, and tab delimiters, filters rows, keeps headers visible, and hides wholly empty columns.
+
+### 8. What Happens Internally
+
+The tutorial wrappers use **subprocess.run** with **check=True**. A child converter failure therefore stops the wrapper immediately.
+
+Phase 1 performs these internal steps:
+
+1. load binding class and fact rows;
+2. derive dimensions and direct class fields;
+3. walk XML class contexts recursively;
+4. emit the parent row and repeated child rows;
+5. write metadata using the same column and dimension layout.
+
+Reverse conversion groups rows by dimensions, rebuilds XML nodes from absolute binding XPaths, applies predicates and attributes, then orders UBL children from schema-derived syntax sequences.
+
+ADS XBRL GL generation validates fact ownership, selects the source rows for the target view, creates contexts and currency units, follows target XPaths, and writes facts in XBRL GL schema order.
+
+### 9. Simplified Tutorial Implementations
+
+The programs under **tools/tutorial/** are different from the wrappers above. They implement smaller converters for learning and binding experiments:
+
+```
+tools/tutorial/syntax_binding_sample.py
+tools/tutorial/semantic_binding_sample.py
+```
+
+They do not implement the complete hierarchical row ownership, repeated scope, metadata, reverse UBL, or Phase 2 behavior. Use them to understand a small algorithm, not to generate PoC deliverables.
+
+### 10. Next Steps
+
+After completing the tutorial:
+
+1. Read **02_STRUCTURED_CSV_LHM_BINDINGS.md** for LHM, dimensions, and Structured CSV rules.
+2. Read **03_PHASE1_UBL_SYNTAX_BINDING.md** before changing Phase 1 bindings.
+3. Read **04_PHASE2_ADS_PSV_SEMANTIC_BINDING.md** before generating ADS PSV, ADS XBRL GL, or ADC.
+4. Use **01_ENVIRONMENT_TESTS_TUTORIAL.md** to run the relevant regression and external validations.

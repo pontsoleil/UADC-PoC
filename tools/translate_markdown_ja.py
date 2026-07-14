@@ -82,7 +82,16 @@ from pathlib import Path
 from typing import Callable, Iterable
 
 
-EXCLUDED_DIRECTORY_NAMES = {".git", ".translation_runtime", ".translation_data", ".translation_cache", "ja", "out"}
+EXCLUDED_DIRECTORY_NAMES = {
+    ".git",
+    ".translation_runtime",
+    ".translation_data",
+    ".translation_cache",
+    "docs_a",
+    "docs_codex",
+    "ja",
+    "out",
+}
 EXCLUDED_FILES = {"AGENTS.md"}
 TECHNICAL_TOKEN_RE = re.compile(
     r"https?://[^\s)]+"

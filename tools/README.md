@@ -16,10 +16,11 @@ The tools cover:
 
 The full list of 15 programs, their arguments, functions, side effects,
 dependencies, and validation rules is in
-[**docs/DATA_MODEL.md**](../docs/DATA_MODEL.md). Environment and test commands
-are in [**docs/SETUP.md**](../docs/SETUP.md).
+[**Structured CSV, LHM, and Bindings**](../docs/02_STRUCTURED_CSV_LHM_BINDINGS.md).
+Environment and test commands are in
+[**Environment, Tests, and Tutorial**](../docs/01_ENVIRONMENT_TESTS_TUTORIAL.md).
 
 After editing Japanese terminology in Excel, run
 **tools/translate_markdown_ja.py** from the repository root. Detailed setup,
-regeneration, and validation commands are in Chapter 10.1 of
-[**docs/SETUP.md**](../docs/SETUP.md).
+regeneration, and validation commands are in Section 10.1 of
+[**Environment, Tests, and Tutorial**](../docs/01_ENVIRONMENT_TESTS_TUTORIAL.md).

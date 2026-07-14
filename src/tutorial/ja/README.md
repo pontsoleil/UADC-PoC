@@ -9,4 +9,4 @@
 |**02_roundtrip_structured_csv_to_xml.py**| チュートリアルCSVからUBL Invoiceを再生 |
 |**03_generate_ads_xbrl_gl.py**| XBRL GL 受信したADS インボイス を作成 |
 
-リポジトリのルートから実行します。 [**docs/TUTORIAL.md**](../../../docs/ja/TUTORIAL.md) のコマンド、想定されたファイル、内部フロー、および検証ポイントを参照してください。
+リポジトリのルートから実行します。[**環境、テスト及びチュートリアル**](../../../docs/ja/01_ENVIRONMENT_TESTS_TUTORIAL.md)に記載したコマンド、想定ファイル、内部処理及び検証ポイントを参照してください。

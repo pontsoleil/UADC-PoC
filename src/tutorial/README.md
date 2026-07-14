@@ -10,5 +10,6 @@ calling the operational converters under **src/**.
 | **02_roundtrip_structured_csv_to_xml.py** | Regenerates a UBL Invoice from tutorial CSV. |
 | **03_generate_ads_xbrl_gl.py** | Creates an ADS Invoices Received XBRL GL view. |
 
-Run them from the repository root. See [**docs/TUTORIAL.md**](../../docs/TUTORIAL.md) for commands,
-expected files, internal flow, and verification points.
+Run them from the repository root. See
+[**Environment, Tests, and Tutorial**](../../docs/01_ENVIRONMENT_TESTS_TUTORIAL.md)
+for commands, expected files, internal flow, and verification points.

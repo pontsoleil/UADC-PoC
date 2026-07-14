@@ -8,6 +8,10 @@ venv/
 .translation_data/
 .translation_cache/
 
+# Local documentation backups
+docs_a/
+docs_codex/
+
 # Local reviewer workbooks
 specs/lhm/EN16931_CIUS_Invoice.xlsx
 specs/lhm/~$EN16931_CIUS_Invoice.xlsx

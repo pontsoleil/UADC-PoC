@@ -10,5 +10,5 @@ generic schema template used by it.
 
 The current OIM entry point is **en16931-oim-2026-07-05.xsd** and the dimensional
 definition linkbase is **en16931-def-2026-07-05.xml**. See
-[**docs/DATA_MODEL.md**](../../docs/DATA_MODEL.md) for the taxonomy model and
-generator internals.
+[**Structured CSV, LHM, and Bindings**](../../docs/02_STRUCTURED_CSV_LHM_BINDINGS.md)
+for the taxonomy model and generator internals.

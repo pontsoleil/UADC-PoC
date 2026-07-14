@@ -12,8 +12,9 @@ GLインスタンス変換。
 
 文書:
 
-- [**docs/SYNTAX_BINDING.md**](../../docs/ja/SYNTAX_BINDING.md)
-- [**docs/SEMANTIC_BINDING.md**](../../docs/ja/SEMANTIC_BINDING.md)
-- [**docs/TUTORIAL.md**](../../docs/ja/TUTORIAL.md)
+- [**Phase 1 UBL構文結合**](../../docs/ja/03_PHASE1_UBL_SYNTAX_BINDING.md)
+- [**Phase 2 ADS PSVセマンティック結合**](../../docs/ja/04_PHASE2_ADS_PSV_SEMANTIC_BINDING.md)
+- [**Phase 2 ADS XBRL GL構文結合**](../../docs/ja/05_PHASE2_ADS_XBRL_GL_SYNTAX_BINDING.md)
+- [**環境、テスト及びチュートリアル**](../../docs/ja/01_ENVIRONMENT_TESTS_TUTORIAL.md)
 
 **tools/tutorial/**のプログラムは、単純化された教育の実装であり、このディレクトリの運用コンバーターと混同してはならない。
