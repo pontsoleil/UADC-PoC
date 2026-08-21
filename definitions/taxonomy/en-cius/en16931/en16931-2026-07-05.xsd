@@ -1,0 +1,1035 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) XBRL International.  See http://www.xbrl.org/legal -->
+<schema targetNamespace="http://www.xbrl.org/int/gl/en16931/2026-07-05" attributeFormDefault="unqualified" elementFormDefault="qualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:link="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+  xmlns:gen="http://www.xbrl.org/int/gl/gen/2026-07-05"
+  xmlns:en16931="http://www.xbrl.org/int/gl/en16931/2026-07-05"
+>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+  <import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
+  <import namespace="http://www.xbrl.org/int/gl/gen/2026-07-05" schemaLocation="../gen/gl-gen-2026-07-05.xsd"/>
+  <!-- reusable item type -->
+  <complexType name="InvoiceNumberItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceIssueDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceTypeCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentCurrencyCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="TaxAccountingCurrencyCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ValueAddedTaxPointDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ValueAddedTaxPointDateCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentDueDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ProjectReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ContractReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PurchaseOrderReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SalesOrderReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ReceivingAdviceReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DespatchAdviceReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="TenderOrLotReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoicedObjectIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerAccountingReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentTermsItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceNoteSubjectCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceNoteInvoiceNoteItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BusinessProcessTypeItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SpecificationIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PrecedingInvoiceReferencePrecedingInvoiceReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PrecedingInvoiceIssueDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerTradingNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerLegalRegistrationIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerVatIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerTaxRegistrationIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerAdditionalLegalInformationItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerElectronicAddressItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerAddressLine1ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerAddressLine2ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerAddressLine3ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerCityItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerPostCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerCountrySubdivisionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerCountryCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerContactPointItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerContactTelephoneNumberItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerContactEmailAddressItemType">
+    <simpleContent>
+      <restriction base="gen:emailAddressItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerTradingNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerLegalRegistrationIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerVatIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerElectronicAddressItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerAddressLine1ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerAddressLine2ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerAddressLine3ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerCityItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerPostCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerCountrySubdivisionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerCountryCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerContactPointItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerContactTelephoneNumberItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BuyerContactEmailAddressItemType">
+    <simpleContent>
+      <restriction base="gen:emailAddressItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PayeeNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PayeeIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PayeeLegalRegistrationIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerTaxRepresentativeNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SellerTaxRepresentativeVatIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="TaxRepresentativeAddressLine1ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="TaxRepresentativeAddressLine2ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="TaxRepresentativeAddressLine3ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="TaxRepresentativeCityItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="TaxRepresentativePostCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="TaxRepresentativeCountrySubdivisionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="TaxRepresentativeCountryCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DeliverToPartyNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DeliverToLocationIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ActualDeliveryDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoicingPeriodStartDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoicingPeriodEndDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DeliverToAddressLine1ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DeliverToAddressLine2ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DeliverToAddressLine3ItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DeliverToCityItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DeliverToPostCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DeliverToCountrySubdivisionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DeliverToCountryCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentMeansTypeCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentMeansTextItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentRemittanceInformationItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentAccountIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentAccountNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentServiceProviderIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentCardPrimaryAccountNumberItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaymentCardHolderNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="MandateReferenceIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="BankAssignedCreditorIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DebitedAccountIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelAllowanceAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelAllowanceBaseAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelAllowancePercentageItemType">
+    <simpleContent>
+      <restriction base="xbrli:pureItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelAllowanceVatCategoryCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelAllowanceVatRateItemType">
+    <simpleContent>
+      <restriction base="xbrli:pureItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelAllowanceReasonItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelAllowanceReasonCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelChargeAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelChargeBaseAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelChargePercentageItemType">
+    <simpleContent>
+      <restriction base="xbrli:pureItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelChargeVatCategoryCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelChargeVatRateItemType">
+    <simpleContent>
+      <restriction base="xbrli:pureItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelChargeReasonItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="DocumentLevelChargeReasonCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SumOfInvoiceLineNetAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SumOfAllowancesOnDocumentLevelItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SumOfChargesOnDocumentLevelItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceTotalAmountWithoutVatItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceTotalVatAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceTotalVatAmountInAccountingCurrencyItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceTotalAmountWithVatItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="PaidAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="RoundingAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="AmountDueForPaymentItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="VatCategoryTaxableAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="VatCategoryTaxAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="VatCategoryCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="VatCategoryRateItemType">
+    <simpleContent>
+      <restriction base="xbrli:decimalItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="VatExemptionReasonTextItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="VatExemptionReasonCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SupportingDocumentReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="SupportingDocumentDescriptionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ExternalDocumentLocationItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="AttachedDocumentItemType">
+    <simpleContent>
+      <restriction base="xbrli:base64BinaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineNoteItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineObjectIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoicedQuantityItemType">
+    <simpleContent>
+      <restriction base="xbrli:decimalItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoicedQuantityUnitCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineNetAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ReferencedPurchaseOrderLineReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineBuyerAccountingReferenceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLinePeriodStartDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLinePeriodEndDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineAllowanceAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineAllowanceBaseAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineAllowancePercentageItemType">
+    <simpleContent>
+      <restriction base="xbrli:pureItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineAllowanceReasonItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineAllowanceReasonCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineChargeAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineChargeBaseAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineChargePercentageItemType">
+    <simpleContent>
+      <restriction base="xbrli:pureItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineChargeReasonItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoiceLineChargeReasonCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemNetPriceItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemPriceDiscountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemGrossPriceItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemPriceBaseQuantityItemType">
+    <simpleContent>
+      <restriction base="xbrli:decimalItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemPriceBaseQuantityUnitCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoicedItemVatCategoryCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="InvoicedItemVatRateItemType">
+    <simpleContent>
+      <restriction base="xbrli:decimalItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemDescriptionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemSellerIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemBuyerIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemStandardIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemClassificationIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemCountryOfOriginItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemAttributeNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="ItemAttributeValueItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <!-- reusable global element declaration -->
+  <element name="Invoice" id="en16931_Invoice" type="en16931:InvoiceComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="InvoiceNumber" id="en16931_InvoiceNumber" type="en16931:InvoiceNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceIssueDate" id="en16931_InvoiceIssueDate" type="en16931:InvoiceIssueDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTypeCode" id="en16931_InvoiceTypeCode" type="en16931:InvoiceTypeCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentCurrencyCode" id="en16931_DocumentCurrencyCode" type="en16931:DocumentCurrencyCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxAccountingCurrencyCode" id="en16931_TaxAccountingCurrencyCode" type="en16931:TaxAccountingCurrencyCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ValueAddedTaxPointDate" id="en16931_ValueAddedTaxPointDate" type="en16931:ValueAddedTaxPointDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ValueAddedTaxPointDateCode" id="en16931_ValueAddedTaxPointDateCode" type="en16931:ValueAddedTaxPointDateCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentDueDate" id="en16931_PaymentDueDate" type="en16931:PaymentDueDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerReference" id="en16931_BuyerReference" type="en16931:BuyerReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ProjectReference" id="en16931_ProjectReference" type="en16931:ProjectReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ContractReference" id="en16931_ContractReference" type="en16931:ContractReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PurchaseOrderReference" id="en16931_PurchaseOrderReference" type="en16931:PurchaseOrderReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SalesOrderReference" id="en16931_SalesOrderReference" type="en16931:SalesOrderReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ReceivingAdviceReference" id="en16931_ReceivingAdviceReference" type="en16931:ReceivingAdviceReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DespatchAdviceReference" id="en16931_DespatchAdviceReference" type="en16931:DespatchAdviceReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TenderOrLotReference" id="en16931_TenderOrLotReference" type="en16931:TenderOrLotReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedObjectIdentifier" id="en16931_InvoicedObjectIdentifier" type="en16931:InvoicedObjectIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerAccountingReference" id="en16931_BuyerAccountingReference" type="en16931:BuyerAccountingReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentTerms" id="en16931_PaymentTerms" type="en16931:PaymentTermsItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceInvoiceNote" id="en16931_InvoiceInvoiceNote" type="en16931:InvoiceInvoiceNoteComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="ProcessControl" id="en16931_ProcessControl" type="en16931:ProcessControlComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="InvoicePrecedingInvoiceReference" id="en16931_InvoicePrecedingInvoiceReference" type="en16931:InvoicePrecedingInvoiceReferenceComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="Seller" id="en16931_Seller" type="en16931:SellerComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="Buyer" id="en16931_Buyer" type="en16931:BuyerComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="Payee" id="en16931_Payee" type="en16931:PayeeComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="SellerTaxRepresentativeParty" id="en16931_SellerTaxRepresentativeParty" type="en16931:SellerTaxRepresentativePartyComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="DeliveryInformation" id="en16931_DeliveryInformation" type="en16931:DeliveryInformationComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="InvoicingPeriod" id="en16931_InvoicingPeriod" type="en16931:InvoicingPeriodComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="PaymentInstructions" id="en16931_PaymentInstructions" type="en16931:PaymentInstructionsComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="DocumentLevelAllowances" id="en16931_DocumentLevelAllowances" type="en16931:DocumentLevelAllowancesComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="DocumentLevelCharges" id="en16931_DocumentLevelCharges" type="en16931:DocumentLevelChargesComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="DocumentTotals" id="en16931_DocumentTotals" type="en16931:DocumentTotalsComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="VatBreakdown" id="en16931_VatBreakdown" type="en16931:VatBreakdownComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="AdditionalSupportingDocuments" id="en16931_AdditionalSupportingDocuments" type="en16931:AdditionalSupportingDocumentsComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="InvoiceLine" id="en16931_InvoiceLine" type="en16931:InvoiceLineComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="InvoiceNoteSubjectCode" id="en16931_InvoiceNoteSubjectCode" type="en16931:InvoiceNoteSubjectCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceNoteInvoiceNote" id="en16931_InvoiceNoteInvoiceNote" type="en16931:InvoiceNoteInvoiceNoteItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BusinessProcessType" id="en16931_BusinessProcessType" type="en16931:BusinessProcessTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SpecificationIdentifier" id="en16931_SpecificationIdentifier" type="en16931:SpecificationIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PrecedingInvoiceReferencePrecedingInvoiceReference" id="en16931_PrecedingInvoiceReferencePrecedingInvoiceReference" type="en16931:PrecedingInvoiceReferencePrecedingInvoiceReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PrecedingInvoiceIssueDate" id="en16931_PrecedingInvoiceIssueDate" type="en16931:PrecedingInvoiceIssueDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerName" id="en16931_SellerName" type="en16931:SellerNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerTradingName" id="en16931_SellerTradingName" type="en16931:SellerTradingNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerIdentifier" id="en16931_SellerIdentifier" type="en16931:SellerIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerLegalRegistrationIdentifier" id="en16931_SellerLegalRegistrationIdentifier" type="en16931:SellerLegalRegistrationIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerVatIdentifier" id="en16931_SellerVatIdentifier" type="en16931:SellerVatIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerTaxRegistrationIdentifier" id="en16931_SellerTaxRegistrationIdentifier" type="en16931:SellerTaxRegistrationIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerAdditionalLegalInformation" id="en16931_SellerAdditionalLegalInformation" type="en16931:SellerAdditionalLegalInformationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerElectronicAddress" id="en16931_SellerElectronicAddress" type="en16931:SellerElectronicAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerPostalAddress" id="en16931_SellerPostalAddress" type="en16931:SellerPostalAddressComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="SellerContact" id="en16931_SellerContact" type="en16931:SellerContactComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="SellerAddressLine1" id="en16931_SellerAddressLine1" type="en16931:SellerAddressLine1ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerAddressLine2" id="en16931_SellerAddressLine2" type="en16931:SellerAddressLine2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerAddressLine3" id="en16931_SellerAddressLine3" type="en16931:SellerAddressLine3ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerCity" id="en16931_SellerCity" type="en16931:SellerCityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerPostCode" id="en16931_SellerPostCode" type="en16931:SellerPostCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerCountrySubdivision" id="en16931_SellerCountrySubdivision" type="en16931:SellerCountrySubdivisionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerCountryCode" id="en16931_SellerCountryCode" type="en16931:SellerCountryCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerContactPoint" id="en16931_SellerContactPoint" type="en16931:SellerContactPointItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerContactTelephoneNumber" id="en16931_SellerContactTelephoneNumber" type="en16931:SellerContactTelephoneNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerContactEmailAddress" id="en16931_SellerContactEmailAddress" type="en16931:SellerContactEmailAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerName" id="en16931_BuyerName" type="en16931:BuyerNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerTradingName" id="en16931_BuyerTradingName" type="en16931:BuyerTradingNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerIdentifier" id="en16931_BuyerIdentifier" type="en16931:BuyerIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerLegalRegistrationIdentifier" id="en16931_BuyerLegalRegistrationIdentifier" type="en16931:BuyerLegalRegistrationIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerVatIdentifier" id="en16931_BuyerVatIdentifier" type="en16931:BuyerVatIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerElectronicAddress" id="en16931_BuyerElectronicAddress" type="en16931:BuyerElectronicAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerPostalAddress" id="en16931_BuyerPostalAddress" type="en16931:BuyerPostalAddressComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="BuyerContact" id="en16931_BuyerContact" type="en16931:BuyerContactComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="BuyerAddressLine1" id="en16931_BuyerAddressLine1" type="en16931:BuyerAddressLine1ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerAddressLine2" id="en16931_BuyerAddressLine2" type="en16931:BuyerAddressLine2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerAddressLine3" id="en16931_BuyerAddressLine3" type="en16931:BuyerAddressLine3ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerCity" id="en16931_BuyerCity" type="en16931:BuyerCityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerPostCode" id="en16931_BuyerPostCode" type="en16931:BuyerPostCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerCountrySubdivision" id="en16931_BuyerCountrySubdivision" type="en16931:BuyerCountrySubdivisionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerCountryCode" id="en16931_BuyerCountryCode" type="en16931:BuyerCountryCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerContactPoint" id="en16931_BuyerContactPoint" type="en16931:BuyerContactPointItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerContactTelephoneNumber" id="en16931_BuyerContactTelephoneNumber" type="en16931:BuyerContactTelephoneNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BuyerContactEmailAddress" id="en16931_BuyerContactEmailAddress" type="en16931:BuyerContactEmailAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PayeeName" id="en16931_PayeeName" type="en16931:PayeeNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PayeeIdentifier" id="en16931_PayeeIdentifier" type="en16931:PayeeIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PayeeLegalRegistrationIdentifier" id="en16931_PayeeLegalRegistrationIdentifier" type="en16931:PayeeLegalRegistrationIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerTaxRepresentativeName" id="en16931_SellerTaxRepresentativeName" type="en16931:SellerTaxRepresentativeNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerTaxRepresentativeVatIdentifier" id="en16931_SellerTaxRepresentativeVatIdentifier" type="en16931:SellerTaxRepresentativeVatIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SellerTaxRepresentativePostalAddress" id="en16931_SellerTaxRepresentativePostalAddress" type="en16931:SellerTaxRepresentativePostalAddressComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="TaxRepresentativeAddressLine1" id="en16931_TaxRepresentativeAddressLine1" type="en16931:TaxRepresentativeAddressLine1ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeAddressLine2" id="en16931_TaxRepresentativeAddressLine2" type="en16931:TaxRepresentativeAddressLine2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeAddressLine3" id="en16931_TaxRepresentativeAddressLine3" type="en16931:TaxRepresentativeAddressLine3ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeCity" id="en16931_TaxRepresentativeCity" type="en16931:TaxRepresentativeCityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativePostCode" id="en16931_TaxRepresentativePostCode" type="en16931:TaxRepresentativePostCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeCountrySubdivision" id="en16931_TaxRepresentativeCountrySubdivision" type="en16931:TaxRepresentativeCountrySubdivisionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="TaxRepresentativeCountryCode" id="en16931_TaxRepresentativeCountryCode" type="en16931:TaxRepresentativeCountryCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToPartyName" id="en16931_DeliverToPartyName" type="en16931:DeliverToPartyNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToLocationIdentifier" id="en16931_DeliverToLocationIdentifier" type="en16931:DeliverToLocationIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ActualDeliveryDate" id="en16931_ActualDeliveryDate" type="en16931:ActualDeliveryDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicingPeriodStartDate" id="en16931_InvoicingPeriodStartDate" type="en16931:InvoicingPeriodStartDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicingPeriodEndDate" id="en16931_InvoicingPeriodEndDate" type="en16931:InvoicingPeriodEndDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToAddress" id="en16931_DeliverToAddress" type="en16931:DeliverToAddressComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="DeliverToAddressLine1" id="en16931_DeliverToAddressLine1" type="en16931:DeliverToAddressLine1ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToAddressLine2" id="en16931_DeliverToAddressLine2" type="en16931:DeliverToAddressLine2ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToAddressLine3" id="en16931_DeliverToAddressLine3" type="en16931:DeliverToAddressLine3ItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToCity" id="en16931_DeliverToCity" type="en16931:DeliverToCityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToPostCode" id="en16931_DeliverToPostCode" type="en16931:DeliverToPostCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToCountrySubdivision" id="en16931_DeliverToCountrySubdivision" type="en16931:DeliverToCountrySubdivisionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DeliverToCountryCode" id="en16931_DeliverToCountryCode" type="en16931:DeliverToCountryCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentMeansTypeCode" id="en16931_PaymentMeansTypeCode" type="en16931:PaymentMeansTypeCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentMeansText" id="en16931_PaymentMeansText" type="en16931:PaymentMeansTextItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentRemittanceInformation" id="en16931_PaymentRemittanceInformation" type="en16931:PaymentRemittanceInformationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="CreditTransfer" id="en16931_CreditTransfer" type="en16931:CreditTransferComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="PaymentCardInformation" id="en16931_PaymentCardInformation" type="en16931:PaymentCardInformationComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="DirectDebit" id="en16931_DirectDebit" type="en16931:DirectDebitComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="PaymentAccountIdentifier" id="en16931_PaymentAccountIdentifier" type="en16931:PaymentAccountIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentAccountName" id="en16931_PaymentAccountName" type="en16931:PaymentAccountNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentServiceProviderIdentifier" id="en16931_PaymentServiceProviderIdentifier" type="en16931:PaymentServiceProviderIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentCardPrimaryAccountNumber" id="en16931_PaymentCardPrimaryAccountNumber" type="en16931:PaymentCardPrimaryAccountNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaymentCardHolderName" id="en16931_PaymentCardHolderName" type="en16931:PaymentCardHolderNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="MandateReferenceIdentifier" id="en16931_MandateReferenceIdentifier" type="en16931:MandateReferenceIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="BankAssignedCreditorIdentifier" id="en16931_BankAssignedCreditorIdentifier" type="en16931:BankAssignedCreditorIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DebitedAccountIdentifier" id="en16931_DebitedAccountIdentifier" type="en16931:DebitedAccountIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceAmount" id="en16931_DocumentLevelAllowanceAmount" type="en16931:DocumentLevelAllowanceAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceBaseAmount" id="en16931_DocumentLevelAllowanceBaseAmount" type="en16931:DocumentLevelAllowanceBaseAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowancePercentage" id="en16931_DocumentLevelAllowancePercentage" type="en16931:DocumentLevelAllowancePercentageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceVatCategoryCode" id="en16931_DocumentLevelAllowanceVatCategoryCode" type="en16931:DocumentLevelAllowanceVatCategoryCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceVatRate" id="en16931_DocumentLevelAllowanceVatRate" type="en16931:DocumentLevelAllowanceVatRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceReason" id="en16931_DocumentLevelAllowanceReason" type="en16931:DocumentLevelAllowanceReasonItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelAllowanceReasonCode" id="en16931_DocumentLevelAllowanceReasonCode" type="en16931:DocumentLevelAllowanceReasonCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeAmount" id="en16931_DocumentLevelChargeAmount" type="en16931:DocumentLevelChargeAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeBaseAmount" id="en16931_DocumentLevelChargeBaseAmount" type="en16931:DocumentLevelChargeBaseAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargePercentage" id="en16931_DocumentLevelChargePercentage" type="en16931:DocumentLevelChargePercentageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeVatCategoryCode" id="en16931_DocumentLevelChargeVatCategoryCode" type="en16931:DocumentLevelChargeVatCategoryCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeVatRate" id="en16931_DocumentLevelChargeVatRate" type="en16931:DocumentLevelChargeVatRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeReason" id="en16931_DocumentLevelChargeReason" type="en16931:DocumentLevelChargeReasonItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="DocumentLevelChargeReasonCode" id="en16931_DocumentLevelChargeReasonCode" type="en16931:DocumentLevelChargeReasonCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SumOfInvoiceLineNetAmount" id="en16931_SumOfInvoiceLineNetAmount" type="en16931:SumOfInvoiceLineNetAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SumOfAllowancesOnDocumentLevel" id="en16931_SumOfAllowancesOnDocumentLevel" type="en16931:SumOfAllowancesOnDocumentLevelItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SumOfChargesOnDocumentLevel" id="en16931_SumOfChargesOnDocumentLevel" type="en16931:SumOfChargesOnDocumentLevelItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTotalAmountWithoutVat" id="en16931_InvoiceTotalAmountWithoutVat" type="en16931:InvoiceTotalAmountWithoutVatItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTotalVatAmount" id="en16931_InvoiceTotalVatAmount" type="en16931:InvoiceTotalVatAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTotalVatAmountInAccountingCurrency" id="en16931_InvoiceTotalVatAmountInAccountingCurrency" type="en16931:InvoiceTotalVatAmountInAccountingCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceTotalAmountWithVat" id="en16931_InvoiceTotalAmountWithVat" type="en16931:InvoiceTotalAmountWithVatItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="PaidAmount" id="en16931_PaidAmount" type="en16931:PaidAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="RoundingAmount" id="en16931_RoundingAmount" type="en16931:RoundingAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="AmountDueForPayment" id="en16931_AmountDueForPayment" type="en16931:AmountDueForPaymentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatCategoryTaxableAmount" id="en16931_VatCategoryTaxableAmount" type="en16931:VatCategoryTaxableAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatCategoryTaxAmount" id="en16931_VatCategoryTaxAmount" type="en16931:VatCategoryTaxAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatCategoryCode" id="en16931_VatCategoryCode" type="en16931:VatCategoryCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatCategoryRate" id="en16931_VatCategoryRate" type="en16931:VatCategoryRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatExemptionReasonText" id="en16931_VatExemptionReasonText" type="en16931:VatExemptionReasonTextItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="VatExemptionReasonCode" id="en16931_VatExemptionReasonCode" type="en16931:VatExemptionReasonCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SupportingDocumentReference" id="en16931_SupportingDocumentReference" type="en16931:SupportingDocumentReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="SupportingDocumentDescription" id="en16931_SupportingDocumentDescription" type="en16931:SupportingDocumentDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ExternalDocumentLocation" id="en16931_ExternalDocumentLocation" type="en16931:ExternalDocumentLocationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="AttachedDocument" id="en16931_AttachedDocument" type="en16931:AttachedDocumentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineIdentifier" id="en16931_InvoiceLineIdentifier" type="en16931:InvoiceLineIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineNote" id="en16931_InvoiceLineNote" type="en16931:InvoiceLineNoteItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineObjectIdentifier" id="en16931_InvoiceLineObjectIdentifier" type="en16931:InvoiceLineObjectIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedQuantity" id="en16931_InvoicedQuantity" type="en16931:InvoicedQuantityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedQuantityUnitCode" id="en16931_InvoicedQuantityUnitCode" type="en16931:InvoicedQuantityUnitCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineNetAmount" id="en16931_InvoiceLineNetAmount" type="en16931:InvoiceLineNetAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ReferencedPurchaseOrderLineReference" id="en16931_ReferencedPurchaseOrderLineReference" type="en16931:ReferencedPurchaseOrderLineReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineBuyerAccountingReference" id="en16931_InvoiceLineBuyerAccountingReference" type="en16931:InvoiceLineBuyerAccountingReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLinePeriod" id="en16931_InvoiceLinePeriod" type="en16931:InvoiceLinePeriodComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="InvoiceLineAllowances" id="en16931_InvoiceLineAllowances" type="en16931:InvoiceLineAllowancesComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="InvoiceLineCharges" id="en16931_InvoiceLineCharges" type="en16931:InvoiceLineChargesComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="PriceDetails" id="en16931_PriceDetails" type="en16931:PriceDetailsComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="LineVatInformation" id="en16931_LineVatInformation" type="en16931:LineVatInformationComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="ItemInformation" id="en16931_ItemInformation" type="en16931:ItemInformationComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="InvoiceLinePeriodStartDate" id="en16931_InvoiceLinePeriodStartDate" type="en16931:InvoiceLinePeriodStartDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLinePeriodEndDate" id="en16931_InvoiceLinePeriodEndDate" type="en16931:InvoiceLinePeriodEndDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowanceAmount" id="en16931_InvoiceLineAllowanceAmount" type="en16931:InvoiceLineAllowanceAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowanceBaseAmount" id="en16931_InvoiceLineAllowanceBaseAmount" type="en16931:InvoiceLineAllowanceBaseAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowancePercentage" id="en16931_InvoiceLineAllowancePercentage" type="en16931:InvoiceLineAllowancePercentageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowanceReason" id="en16931_InvoiceLineAllowanceReason" type="en16931:InvoiceLineAllowanceReasonItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineAllowanceReasonCode" id="en16931_InvoiceLineAllowanceReasonCode" type="en16931:InvoiceLineAllowanceReasonCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargeAmount" id="en16931_InvoiceLineChargeAmount" type="en16931:InvoiceLineChargeAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargeBaseAmount" id="en16931_InvoiceLineChargeBaseAmount" type="en16931:InvoiceLineChargeBaseAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargePercentage" id="en16931_InvoiceLineChargePercentage" type="en16931:InvoiceLineChargePercentageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargeReason" id="en16931_InvoiceLineChargeReason" type="en16931:InvoiceLineChargeReasonItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoiceLineChargeReasonCode" id="en16931_InvoiceLineChargeReasonCode" type="en16931:InvoiceLineChargeReasonCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemNetPrice" id="en16931_ItemNetPrice" type="en16931:ItemNetPriceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemPriceDiscount" id="en16931_ItemPriceDiscount" type="en16931:ItemPriceDiscountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemGrossPrice" id="en16931_ItemGrossPrice" type="en16931:ItemGrossPriceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemPriceBaseQuantity" id="en16931_ItemPriceBaseQuantity" type="en16931:ItemPriceBaseQuantityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemPriceBaseQuantityUnitCode" id="en16931_ItemPriceBaseQuantityUnitCode" type="en16931:ItemPriceBaseQuantityUnitCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedItemVatCategoryCode" id="en16931_InvoicedItemVatCategoryCode" type="en16931:InvoicedItemVatCategoryCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="InvoicedItemVatRate" id="en16931_InvoicedItemVatRate" type="en16931:InvoicedItemVatRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemName" id="en16931_ItemName" type="en16931:ItemNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemDescription" id="en16931_ItemDescription" type="en16931:ItemDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemSellerIdentifier" id="en16931_ItemSellerIdentifier" type="en16931:ItemSellerIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemBuyerIdentifier" id="en16931_ItemBuyerIdentifier" type="en16931:ItemBuyerIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemStandardIdentifier" id="en16931_ItemStandardIdentifier" type="en16931:ItemStandardIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemClassificationIdentifier" id="en16931_ItemClassificationIdentifier" type="en16931:ItemClassificationIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemCountryOfOrigin" id="en16931_ItemCountryOfOrigin" type="en16931:ItemCountryOfOriginItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemAttributes" id="en16931_ItemAttributes" type="en16931:ItemAttributesComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="ItemAttributeName" id="en16931_ItemAttributeName" type="en16931:ItemAttributeNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="ItemAttributeValue" id="en16931_ItemAttributeValue" type="en16931:ItemAttributeValueItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+</schema>

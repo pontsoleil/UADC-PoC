@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.xbrl.org/int/gl/en16931/2026-07-05" elementFormDefault="qualified" attributeFormDefault="unqualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:en16931="http://www.xbrl.org/int/gl/en16931/2026-07-05"
+>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <include schemaLocation="../../en16931/en16931-2026-07-05.xsd"/>
+  <!-- structural ComplexType supplied for the Palette module -->
+  <complexType name="InvoiceComplexType">
+    <sequence>
+      <element ref="en16931:InvoiceNumber"/>
+      <element ref="en16931:InvoiceIssueDate"/>
+      <element ref="en16931:InvoiceTypeCode"/>
+      <element ref="en16931:DocumentCurrencyCode"/>
+      <element ref="en16931:TaxAccountingCurrencyCode" minOccurs="0"/>
+      <element ref="en16931:ValueAddedTaxPointDate" minOccurs="0"/>
+      <element ref="en16931:ValueAddedTaxPointDateCode" minOccurs="0"/>
+      <element ref="en16931:PaymentDueDate" minOccurs="0"/>
+      <element ref="en16931:BuyerReference" minOccurs="0"/>
+      <element ref="en16931:ProjectReference" minOccurs="0"/>
+      <element ref="en16931:ContractReference" minOccurs="0"/>
+      <element ref="en16931:PurchaseOrderReference" minOccurs="0"/>
+      <element ref="en16931:SalesOrderReference" minOccurs="0"/>
+      <element ref="en16931:ReceivingAdviceReference" minOccurs="0"/>
+      <element ref="en16931:DespatchAdviceReference" minOccurs="0"/>
+      <element ref="en16931:TenderOrLotReference" minOccurs="0"/>
+      <element ref="en16931:InvoicedObjectIdentifier" minOccurs="0"/>
+      <element ref="en16931:BuyerAccountingReference" minOccurs="0"/>
+      <element ref="en16931:PaymentTerms" minOccurs="0"/>
+      <element ref="en16931:InvoiceInvoiceNote" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:ProcessControl"/>
+      <element ref="en16931:InvoicePrecedingInvoiceReference" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:Seller"/>
+      <element ref="en16931:Buyer"/>
+      <element ref="en16931:Payee" minOccurs="0"/>
+      <element ref="en16931:SellerTaxRepresentativeParty" minOccurs="0"/>
+      <element ref="en16931:DeliveryInformation" minOccurs="0"/>
+      <element ref="en16931:InvoicingPeriod" minOccurs="0"/>
+      <element ref="en16931:PaymentInstructions" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:DocumentLevelAllowances" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:DocumentLevelCharges" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:DocumentTotals"/>
+      <element ref="en16931:VatBreakdown" maxOccurs="unbounded"/>
+      <element ref="en16931:AdditionalSupportingDocuments" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:InvoiceLine" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="InvoiceInvoiceNoteComplexType">
+    <sequence>
+      <element ref="en16931:InvoiceNoteSubjectCode" minOccurs="0"/>
+      <element ref="en16931:InvoiceNoteInvoiceNote"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="ProcessControlComplexType">
+    <sequence>
+      <element ref="en16931:BusinessProcessType" minOccurs="0"/>
+      <element ref="en16931:SpecificationIdentifier"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="InvoicePrecedingInvoiceReferenceComplexType">
+    <sequence>
+      <element ref="en16931:PrecedingInvoiceReferencePrecedingInvoiceReference"/>
+      <element ref="en16931:PrecedingInvoiceIssueDate" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="SellerComplexType">
+    <sequence>
+      <element ref="en16931:SellerName"/>
+      <element ref="en16931:SellerTradingName" minOccurs="0"/>
+      <element ref="en16931:SellerIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:SellerLegalRegistrationIdentifier" minOccurs="0"/>
+      <element ref="en16931:SellerVatIdentifier" minOccurs="0"/>
+      <element ref="en16931:SellerTaxRegistrationIdentifier" minOccurs="0"/>
+      <element ref="en16931:SellerAdditionalLegalInformation" minOccurs="0"/>
+      <element ref="en16931:SellerElectronicAddress" minOccurs="0"/>
+      <element ref="en16931:SellerPostalAddress"/>
+      <element ref="en16931:SellerContact" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="BuyerComplexType">
+    <sequence>
+      <element ref="en16931:BuyerName"/>
+      <element ref="en16931:BuyerTradingName" minOccurs="0"/>
+      <element ref="en16931:BuyerIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:BuyerLegalRegistrationIdentifier" minOccurs="0"/>
+      <element ref="en16931:BuyerVatIdentifier" minOccurs="0"/>
+      <element ref="en16931:BuyerElectronicAddress" minOccurs="0"/>
+      <element ref="en16931:BuyerPostalAddress"/>
+      <element ref="en16931:BuyerContact" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="PayeeComplexType">
+    <sequence>
+      <element ref="en16931:PayeeName"/>
+      <element ref="en16931:PayeeIdentifier" minOccurs="0"/>
+      <element ref="en16931:PayeeLegalRegistrationIdentifier" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="SellerTaxRepresentativePartyComplexType">
+    <sequence>
+      <element ref="en16931:SellerTaxRepresentativeName"/>
+      <element ref="en16931:SellerTaxRepresentativeVatIdentifier"/>
+      <element ref="en16931:SellerTaxRepresentativePostalAddress"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="DeliveryInformationComplexType">
+    <sequence>
+      <element ref="en16931:DeliverToPartyName" minOccurs="0"/>
+      <element ref="en16931:DeliverToLocationIdentifier" minOccurs="0"/>
+      <element ref="en16931:ActualDeliveryDate" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="InvoicingPeriodComplexType">
+    <sequence>
+      <element ref="en16931:InvoicingPeriodStartDate" minOccurs="0"/>
+      <element ref="en16931:InvoicingPeriodEndDate" minOccurs="0"/>
+      <element ref="en16931:DeliverToAddress" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="PaymentInstructionsComplexType">
+    <sequence>
+      <element ref="en16931:PaymentMeansTypeCode"/>
+      <element ref="en16931:PaymentMeansText" minOccurs="0"/>
+      <element ref="en16931:PaymentRemittanceInformation" minOccurs="0"/>
+      <element ref="en16931:CreditTransfer" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:PaymentCardInformation" minOccurs="0"/>
+      <element ref="en16931:DirectDebit" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="DocumentLevelAllowancesComplexType">
+    <sequence>
+      <element ref="en16931:DocumentLevelAllowanceAmount"/>
+      <element ref="en16931:DocumentLevelAllowanceBaseAmount" minOccurs="0"/>
+      <element ref="en16931:DocumentLevelAllowancePercentage" minOccurs="0"/>
+      <element ref="en16931:DocumentLevelAllowanceVatCategoryCode"/>
+      <element ref="en16931:DocumentLevelAllowanceVatRate" minOccurs="0"/>
+      <element ref="en16931:DocumentLevelAllowanceReason" minOccurs="0"/>
+      <element ref="en16931:DocumentLevelAllowanceReasonCode" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="DocumentLevelChargesComplexType">
+    <sequence>
+      <element ref="en16931:DocumentLevelChargeAmount"/>
+      <element ref="en16931:DocumentLevelChargeBaseAmount" minOccurs="0"/>
+      <element ref="en16931:DocumentLevelChargePercentage" minOccurs="0"/>
+      <element ref="en16931:DocumentLevelChargeVatCategoryCode"/>
+      <element ref="en16931:DocumentLevelChargeVatRate" minOccurs="0"/>
+      <element ref="en16931:DocumentLevelChargeReason" minOccurs="0"/>
+      <element ref="en16931:DocumentLevelChargeReasonCode" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="DocumentTotalsComplexType">
+    <sequence>
+      <element ref="en16931:SumOfInvoiceLineNetAmount"/>
+      <element ref="en16931:SumOfAllowancesOnDocumentLevel" minOccurs="0"/>
+      <element ref="en16931:SumOfChargesOnDocumentLevel" minOccurs="0"/>
+      <element ref="en16931:InvoiceTotalAmountWithoutVat"/>
+      <element ref="en16931:InvoiceTotalVatAmount"/>
+      <element ref="en16931:InvoiceTotalVatAmountInAccountingCurrency" minOccurs="0"/>
+      <element ref="en16931:InvoiceTotalAmountWithVat"/>
+      <element ref="en16931:PaidAmount" minOccurs="0"/>
+      <element ref="en16931:RoundingAmount" minOccurs="0"/>
+      <element ref="en16931:AmountDueForPayment"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="VatBreakdownComplexType">
+    <sequence>
+      <element ref="en16931:VatCategoryTaxableAmount"/>
+      <element ref="en16931:VatCategoryTaxAmount"/>
+      <element ref="en16931:VatCategoryCode"/>
+      <element ref="en16931:VatCategoryRate" minOccurs="0"/>
+      <element ref="en16931:VatExemptionReasonText" minOccurs="0"/>
+      <element ref="en16931:VatExemptionReasonCode" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="AdditionalSupportingDocumentsComplexType">
+    <sequence>
+      <element ref="en16931:SupportingDocumentReference"/>
+      <element ref="en16931:SupportingDocumentDescription" minOccurs="0"/>
+      <element ref="en16931:ExternalDocumentLocation" minOccurs="0"/>
+      <element ref="en16931:AttachedDocument" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="InvoiceLineComplexType">
+    <sequence>
+      <element ref="en16931:InvoiceLineIdentifier"/>
+      <element ref="en16931:InvoiceLineNote" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineObjectIdentifier" minOccurs="0"/>
+      <element ref="en16931:InvoicedQuantity" minOccurs="0"/>
+      <element ref="en16931:InvoicedQuantityUnitCode" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineNetAmount"/>
+      <element ref="en16931:ReferencedPurchaseOrderLineReference" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineBuyerAccountingReference" minOccurs="0"/>
+      <element ref="en16931:InvoiceLinePeriod" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineAllowances" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:InvoiceLineCharges" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:PriceDetails"/>
+      <element ref="en16931:LineVatInformation"/>
+      <element ref="en16931:ItemInformation"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="SellerPostalAddressComplexType">
+    <sequence>
+      <element ref="en16931:SellerAddressLine1" minOccurs="0"/>
+      <element ref="en16931:SellerAddressLine2" minOccurs="0"/>
+      <element ref="en16931:SellerAddressLine3" minOccurs="0"/>
+      <element ref="en16931:SellerCity"/>
+      <element ref="en16931:SellerPostCode"/>
+      <element ref="en16931:SellerCountrySubdivision" minOccurs="0"/>
+      <element ref="en16931:SellerCountryCode"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="SellerContactComplexType">
+    <sequence>
+      <element ref="en16931:SellerContactPoint" minOccurs="0"/>
+      <element ref="en16931:SellerContactTelephoneNumber" minOccurs="0"/>
+      <element ref="en16931:SellerContactEmailAddress" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="BuyerPostalAddressComplexType">
+    <sequence>
+      <element ref="en16931:BuyerAddressLine1" minOccurs="0"/>
+      <element ref="en16931:BuyerAddressLine2" minOccurs="0"/>
+      <element ref="en16931:BuyerAddressLine3" minOccurs="0"/>
+      <element ref="en16931:BuyerCity"/>
+      <element ref="en16931:BuyerPostCode"/>
+      <element ref="en16931:BuyerCountrySubdivision" minOccurs="0"/>
+      <element ref="en16931:BuyerCountryCode"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="BuyerContactComplexType">
+    <sequence>
+      <element ref="en16931:BuyerContactPoint" minOccurs="0"/>
+      <element ref="en16931:BuyerContactTelephoneNumber" minOccurs="0"/>
+      <element ref="en16931:BuyerContactEmailAddress" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="SellerTaxRepresentativePostalAddressComplexType">
+    <sequence>
+      <element ref="en16931:TaxRepresentativeAddressLine1" minOccurs="0"/>
+      <element ref="en16931:TaxRepresentativeAddressLine2" minOccurs="0"/>
+      <element ref="en16931:TaxRepresentativeAddressLine3" minOccurs="0"/>
+      <element ref="en16931:TaxRepresentativeCity" minOccurs="0"/>
+      <element ref="en16931:TaxRepresentativePostCode" minOccurs="0"/>
+      <element ref="en16931:TaxRepresentativeCountrySubdivision" minOccurs="0"/>
+      <element ref="en16931:TaxRepresentativeCountryCode"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="DeliverToAddressComplexType">
+    <sequence>
+      <element ref="en16931:DeliverToAddressLine1" minOccurs="0"/>
+      <element ref="en16931:DeliverToAddressLine2" minOccurs="0"/>
+      <element ref="en16931:DeliverToAddressLine3" minOccurs="0"/>
+      <element ref="en16931:DeliverToCity" minOccurs="0"/>
+      <element ref="en16931:DeliverToPostCode" minOccurs="0"/>
+      <element ref="en16931:DeliverToCountrySubdivision" minOccurs="0"/>
+      <element ref="en16931:DeliverToCountryCode"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="CreditTransferComplexType">
+    <sequence>
+      <element ref="en16931:PaymentAccountIdentifier" minOccurs="0"/>
+      <element ref="en16931:PaymentAccountName" minOccurs="0"/>
+      <element ref="en16931:PaymentServiceProviderIdentifier" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="PaymentCardInformationComplexType">
+    <sequence>
+      <element ref="en16931:PaymentCardPrimaryAccountNumber"/>
+      <element ref="en16931:PaymentCardHolderName" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="DirectDebitComplexType">
+    <sequence>
+      <element ref="en16931:MandateReferenceIdentifier" minOccurs="0"/>
+      <element ref="en16931:BankAssignedCreditorIdentifier" minOccurs="0"/>
+      <element ref="en16931:DebitedAccountIdentifier" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="InvoiceLinePeriodComplexType">
+    <sequence>
+      <element ref="en16931:InvoiceLinePeriodStartDate" minOccurs="0"/>
+      <element ref="en16931:InvoiceLinePeriodEndDate" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="InvoiceLineAllowancesComplexType">
+    <sequence>
+      <element ref="en16931:InvoiceLineAllowanceAmount"/>
+      <element ref="en16931:InvoiceLineAllowanceBaseAmount" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineAllowancePercentage" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineAllowanceReason" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineAllowanceReasonCode" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="InvoiceLineChargesComplexType">
+    <sequence>
+      <element ref="en16931:InvoiceLineChargeAmount"/>
+      <element ref="en16931:InvoiceLineChargeBaseAmount" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineChargePercentage" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineChargeReason" minOccurs="0"/>
+      <element ref="en16931:InvoiceLineChargeReasonCode" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="PriceDetailsComplexType">
+    <sequence>
+      <element ref="en16931:ItemNetPrice"/>
+      <element ref="en16931:ItemPriceDiscount" minOccurs="0"/>
+      <element ref="en16931:ItemGrossPrice" minOccurs="0"/>
+      <element ref="en16931:ItemPriceBaseQuantity" minOccurs="0"/>
+      <element ref="en16931:ItemPriceBaseQuantityUnitCode" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="LineVatInformationComplexType">
+    <sequence>
+      <element ref="en16931:InvoicedItemVatCategoryCode"/>
+      <element ref="en16931:InvoicedItemVatRate" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="ItemInformationComplexType">
+    <sequence>
+      <element ref="en16931:ItemName"/>
+      <element ref="en16931:ItemDescription" minOccurs="0"/>
+      <element ref="en16931:ItemSellerIdentifier" minOccurs="0"/>
+      <element ref="en16931:ItemBuyerIdentifier" minOccurs="0"/>
+      <element ref="en16931:ItemStandardIdentifier" minOccurs="0"/>
+      <element ref="en16931:ItemClassificationIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="en16931:ItemCountryOfOrigin" minOccurs="0"/>
+      <element ref="en16931:ItemAttributes" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="ItemAttributesComplexType">
+    <sequence>
+      <element ref="en16931:ItemAttributeName"/>
+      <element ref="en16931:ItemAttributeValue"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+</schema>

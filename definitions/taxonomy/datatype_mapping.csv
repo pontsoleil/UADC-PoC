@@ -1,0 +1,49 @@
+hmd_datatype,xsd_base_type,xbrl_item_type,unit_semantics,status,source,notes
+Decimal,xs:decimal,xbrli:decimalItemType,measurement-unit,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+Float,xs:float,xbrli:floatItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Double,xs:double,xbrli:doubleItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Integer,xs:integer,xbrli:integerItemType,measurement-unit,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+NonPositiveInteger,xs:nonPositiveInteger,xbrli:nonPositiveIntegerItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+NegativeInteger,xs:negativeInteger,xbrli:negativeIntegerItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Long,xs:long,xbrli:longItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Int,xs:int,xbrli:intItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Short,xs:short,xbrli:shortItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Byte,xs:byte,xbrli:byteItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+NonNegativeInteger,xs:nonNegativeInteger,xbrli:nonNegativeIntegerItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+UnsignedLong,xs:unsignedLong,xbrli:unsignedLongItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+UnsignedInt,xs:unsignedInt,xbrli:unsignedIntItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+UnsignedShort,xs:unsignedShort,xbrli:unsignedShortItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+UnsignedByte,xs:unsignedByte,xbrli:unsignedByteItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+PositiveInteger,xs:positiveInteger,xbrli:positiveIntegerItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Monetary,xs:decimal,xbrli:monetaryItemType,currency,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+Shares,xs:decimal,xbrli:sharesItemType,shares,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Pure,xs:decimal,xbrli:pureItemType,pure,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+Fraction,xs:anySimpleType,xbrli:fractionItemType,measurement-unit,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+String,xs:string,xbrli:stringItemType,none,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+Boolean,xs:boolean,xbrli:booleanItemType,none,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+HexBinary,xs:hexBinary,xbrli:hexBinaryItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Base64Binary,xs:base64Binary,xbrli:base64BinaryItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+anyURI,xs:anyURI,xbrli:anyURIItemType,none,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+QName,xs:QName,xbrli:QNameItemType,none,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+Enumeration,xs:QName,enum:enumerationItemType,none,confirmed,Extensible Enumerations 1.0 and existing Generator,Existing Generator binding retained; value-domain redesign is out of scope.
+Duration,xs:duration,xbrli:durationItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Date Time,xs:dateTime,xbrli:dateTimeItemType,none,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Whitespace-insensitive lookup preserves the former DATETIME key.
+Time,xs:time,xbrli:timeItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Date,xs:date,xbrli:dateItemType,none,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+GYearMonth,xs:gYearMonth,xbrli:gYearMonthItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+GYear,xs:gYear,xbrli:gYearItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+GMonthDay,xs:gMonthDay,xbrli:gMonthDayItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+GDay,xs:gDay,xbrli:gDayItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+GMonth,xs:gMonth,xbrli:gMonthItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+NormalizedString,xs:normalizedString,xbrli:normalizedStringItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Token,xs:token,xbrli:tokenItemType,none,confirmed,XBRL 2.1 and existing XBRL GL Next taxonomy,Existing Generator binding retained.
+Language,xs:language,xbrli:languageItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Name,xs:Name,xbrli:NameItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+NCName,xs:NCName,xbrli:NCNameItemType,none,confirmed,XBRL 2.1 and existing Generator,Existing Generator binding retained.
+Text,xs:string,xbrli:stringItemType,none,confirmed,EN CIUS semantic datatype review,Semantic Text is bound explicitly; no unknown-type fallback.
+Identifier,xs:string,xbrli:stringItemType,none,confirmed,EN CIUS legacy taxonomy observation and semantic review,Identifier lexical constraints remain semantic-domain validation outside XBRL item typing.
+Code,xs:token,xbrli:tokenItemType,none,candidate,EN CIUS and XBRL GL Next datatype review,Normative candidate; differs intentionally from the old EN string fallback.
+Amount,xs:decimal,xbrli:monetaryItemType,currency,candidate,EN CIUS and XBRL 2.1 monetary semantics,Normative candidate; legacy gen:amountItemType remains observed compatibility evidence only.
+Percentage,xs:decimal,xbrli:pureItemType,pure,candidate,EN CIUS and XBRL GL Next percentage concept review,Normative candidate; differs intentionally from the old EN string fallback.
+Quantity,xs:decimal,xbrli:decimalItemType,measurement-unit,candidate,EN CIUS and XBRL GL Next quantity concept review,Normative candidate; instance facts require an explicit applicable unit.
+Binary object,xs:base64Binary,xbrli:base64BinaryItemType,none,confirmed,CEN/TS 16931-3-2 BT-125,"BT-125 is Attachment/cbc:EmbeddedDocumentBinaryObject; BT-124 is the separate ExternalReference/cbc:URI, while BT-125-1 and BT-125-2 are mimeCode and filename attributes."

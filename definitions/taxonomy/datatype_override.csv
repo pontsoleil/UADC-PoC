@@ -1,0 +1,3 @@
+semantic_path,module,local_name,hmd_datatype,xbrl_item_type,status,reason,source,notes
+$.invoice.seller.sellerContact.sellerContactEmailAddress,en16931,SellerContactEmailAddress,Text,gen:emailAddressItemType,legacy-observed,Preserve the explicit email-address item type used by the existing EN16931 taxonomy,EN16931 taxonomy 2026-07-05,Explicit occurrence binding; no local-name suffix inference.
+$.invoice.buyer.buyerContact.buyerContactEmailAddress,en16931,BuyerContactEmailAddress,Text,gen:emailAddressItemType,legacy-observed,Preserve the explicit email-address item type used by the existing EN16931 taxonomy,EN16931 taxonomy 2026-07-05,Explicit occurrence binding; no local-name suffix inference.
