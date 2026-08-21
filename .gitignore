@@ -1,6 +1,7 @@
-﻿# Python
+# Python
 __pycache__/
 *.pyc
+*.pyo
 .pytest_cache/
 .venv/
 venv/
@@ -8,9 +9,32 @@ venv/
 .translation_data/
 .translation_cache/
 
+# Local agent scratch and task evidence
+/.agents/
+/.chatgpt/
+/.codex/
+/docs/ChatGPT/
+/docs/Codex/
+
 # Local documentation backups
 docs_a/
 docs_codex/
+backups/
+*.bak
+*.before
+~$*
+
+# Private accounting inputs, outputs, mappings, and master data
+/private/
+/research/private/
+/data/
+/README_PRIVATE.md
+
+# Generated output and local runtime artifacts
+/out/
+/outputs/
+*.log
+*.tmp
 
 # Local reviewer workbooks
 specs/lhm/EN16931_CIUS_Invoice.xlsx
@@ -19,6 +43,17 @@ specs/lhm/~$EN16931_CIUS_Invoice.xlsx
 # Large/generated external data
 XBRL-GL-2026/UNECE/
 *.zip
+
+# Credentials and machine-local configuration
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.local
+*.local.*
 
 # OS / editor
 .DS_Store

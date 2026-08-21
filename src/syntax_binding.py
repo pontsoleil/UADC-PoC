@@ -45,11 +45,13 @@ Produced by ChatGPT and Codex, edited by SAMBUICHI, Nobuyuki
 License:
     This software source code is licensed under the MIT License.
 
-    Non-code materials in the UADC-PoC project, including original mapping
-    tables, syntax binding definitions, semantic binding definitions,
-    transformation rules, explanatory notes, and documentation, may be licensed
-    separately under Creative Commons Attribution-NonCommercial 4.0
-    International License (CC BY-NC 4.0), where so indicated.
+    Original meaning-bearing content in the UADC-PoC project, including LHM
+    definitions, bindings, mappings, transformation rules, semantic definitions,
+    schemas, labels, dictionaries, public samples, documentation, and diagrams,
+    is licensed under Creative Commons Attribution-ShareAlike 4.0 International
+    (CC BY-SA 4.0), as described in LICENSE-CONTENT. This also applies when such
+    content appears in constants, dictionaries, lists, tables, comments, or
+    docstrings; the surrounding executable logic remains under the MIT License.
 
     Third-party standards, schemas, taxonomies, code lists, field names,
     descriptions, and excerpts remain subject to their original copyright
@@ -515,6 +517,10 @@ def xml_predicate_matches(
     if not predicate:
         return True
     path_pattern = r"([A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*(?:/(?:@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*))*)"
+    match = re.fullmatch(r"not\(\s*" + path_pattern + r"\s*=\s*'([^']*)'\s*\)", predicate)
+    if match:
+        element_path, excluded_text = match.groups()
+        return xml_path_value(child, element_path, namespaces, root) != excluded_text
     match = re.fullmatch(path_pattern + r"\s*=\s*(true|false)\(\)", predicate)
     if match:
         element_path, expected = match.groups()
@@ -640,6 +646,8 @@ class Binding:
         Dataclass instance storing the described metadata.
     """
     order: int
+    syntax_sequence: str
+    default_value: str
     semantic_path: str
     xpath: str
     root: str
@@ -668,8 +676,8 @@ class BindingLayout:
     dimension_ancestors: Dict[str, List[str]]
     dimension_repeats: Dict[str, bool]
     field_by_semantic_path: Dict[str, str]
-    syntax_sequence_by_field: Dict[str, int]
-    syntax_sequence_by_dimension: Dict[str, int]
+    syntax_sequence_by_field: Dict[str, str]
+    syntax_sequence_by_dimension: Dict[str, str]
 
 
 @dataclass
@@ -684,6 +692,7 @@ class BindingClass:
         Dataclass instance storing class metadata and child links.
     """
     order: int
+    syntax_sequence: str
     semantic_path: str
     name: str
     column: str
@@ -729,6 +738,23 @@ def parse_order(value: str, fallback: int = 0) -> int:
         return int(value)
     except ValueError:
         return fallback
+
+
+def syntax_sequence_sort_key(value: str, fallback: int = 0) -> Tuple[int, Tuple[str, ...], int]:
+    """Return a stable sort key for an XSD-derived hierarchical syntax sequence."""
+
+    value = (value or "").strip()
+    if not value:
+        return 1, (), fallback
+    normalized: List[str] = []
+    for component in value.split("."):
+        if component.isdigit():
+            normalized.append(component.zfill(8))
+        elif component.startswith("@"):
+            normalized.append("~" + component[1:])
+        else:
+            normalized.append("~" + component)
+    return 0, tuple(normalized), fallback
 
 
 def upper_camel(value: str) -> str:
@@ -821,8 +847,8 @@ def build_layout_from_rows(rows: List[Dict[str, str]]) -> BindingLayout:
     dimension_ancestors: Dict[str, List[str]] = {}
     dimension_repeats: Dict[str, bool] = {}
     field_by_semantic_path: Dict[str, str] = {}
-    syntax_sequence_by_field: Dict[str, int] = {}
-    syntax_sequence_by_dimension: Dict[str, int] = {}
+    syntax_sequence_by_field: Dict[str, str] = {}
+    syntax_sequence_by_dimension: Dict[str, str] = {}
 
     for row in rows:
         if first_present(row, ("type", "kind")).upper().startswith("C"):
@@ -840,7 +866,7 @@ def build_layout_from_rows(rows: List[Dict[str, str]]) -> BindingLayout:
                 if xpath:
                     dimension_xpath[dim] = xpath
                 dimension_repeats[dim] = repeats
-                syntax_order = parse_order(first_present(row, ("syntax_sequence",)), 0)
+                syntax_order = first_present(row, ("syntax_sequence",))
                 if syntax_order:
                     syntax_sequence_by_dimension[dim] = syntax_order
                 ancestors: List[str] = []
@@ -880,7 +906,7 @@ def build_layout_from_rows(rows: List[Dict[str, str]]) -> BindingLayout:
         if not semantic_path or not csv_column:
             continue
         field_by_semantic_path[semantic_path] = csv_column
-        syntax_order = parse_order(first_present(row, ("syntax_sequence",)), 0)
+        syntax_order = first_present(row, ("syntax_sequence",))
         if syntax_order:
             syntax_sequence_by_field[csv_column] = syntax_order
         if csv_column not in fields:
@@ -959,6 +985,8 @@ def parse_semantic_path(
     semantic_path: str,
     xpath: str,
     order: int,
+    syntax_sequence: str = "",
+    default_value: str = "",
     path_dimension: Optional[Dict[str, str]] = None,
     field_by_semantic_path: Optional[Dict[str, str]] = None,
     semantic_path_dimension: Optional[Dict[str, str]] = None,
@@ -999,13 +1027,13 @@ def parse_semantic_path(
         return ""
 
     if semantic_path.startswith("const:"):
-        return None
+        return Binding(order, syntax_sequence, default_value, semantic_path, xpath, "", "", "", "", "")
     root_match = re.fullmatch(r"\$\.([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)", semantic_path)
     if root_match:
         root, field = root_match.groups()
         field = (field_by_semantic_path or {}).get(semantic_path, field)
         dimension = (semantic_path_dimension or {}).get(semantic_path) or (path_dimension or {}).get(f"$.{root}", "")
-        return Binding(order, semantic_path, xpath, root, dimension, "", "", field)
+        return Binding(order, syntax_sequence, default_value, semantic_path, xpath, root, dimension, "", "", field)
 
     dim_match = re.fullmatch(
         r"\$\.([A-Za-z_][A-Za-z0-9_]*)\."
@@ -1019,14 +1047,14 @@ def parse_semantic_path(
         field = (field_by_semantic_path or {}).get(semantic_path, field)
         dimension = (semantic_path_dimension or {}).get(semantic_path) or dimension
         filter_value = quoted or single_quoted or bare or ""
-        return Binding(order, semantic_path, xpath, root, dimension, filter_field or "", filter_value, field)
+        return Binding(order, syntax_sequence, default_value, semantic_path, xpath, root, dimension, filter_field or "", filter_value, field)
     generic_match = re.fullmatch(r"\$\.([A-Za-z_][A-Za-z0-9_]*)(?:\..+)?\.([A-Za-z_][A-Za-z0-9_]*)", semantic_path)
     if generic_match:
         root, field = generic_match.groups()
         field = (field_by_semantic_path or {}).get(semantic_path, field)
         parent_path = semantic_path.rsplit(".", 1)[0]
         dimension = (semantic_path_dimension or {}).get(semantic_path) or nearest_dimension(parent_path)
-        return Binding(order, semantic_path, xpath, root, dimension, "", "", field)
+        return Binding(order, syntax_sequence, default_value, semantic_path, xpath, root, dimension, "", "", field)
     return None
 
 
@@ -1062,11 +1090,15 @@ def read_bindings(
         xpath = first_present(row, ("xpath", "source_xpath", "xml_path"))
         if not semantic_path or not xpath:
             continue
-        order = parse_order(first_present(row, ("syntax_sequence", "sequence")), fallback_order)
+        order = parse_order(first_present(row, ("sequence",)), fallback_order)
+        syntax_sequence = first_present(row, ("syntax_sequence",))
+        default_value = first_present(row, ("default_value", "default"))
         binding = parse_semantic_path(
             semantic_path,
             xpath,
             order,
+            syntax_sequence,
+            default_value,
             path_dimension,
             field_by_semantic_path,
             semantic_path_dimension,
@@ -1116,7 +1148,8 @@ def build_binding_class_tree(rows: List[Dict[str, str]]) -> Optional[BindingClas
         repeats = multiplicity_repeats(first_present(row, ("multiplicity", "cardinality")))
         dimension = dimension_name(column) if semantic_path == "$.invoice" or repeats else ""
         node = BindingClass(
-            order=parse_order(first_present(row, ("syntax_sequence", "sequence")), fallback_order),
+            order=parse_order(first_present(row, ("sequence",)), fallback_order),
+            syntax_sequence=first_present(row, ("syntax_sequence",)),
             semantic_path=semantic_path,
             name=first_present(row, ("name", "business_term")),
             column=column,
@@ -1138,10 +1171,10 @@ def build_binding_class_tree(rows: List[Dict[str, str]]) -> Optional[BindingClas
             roots.append(node)
 
     for node in ordered_classes:
-        node.children.sort(key=lambda child: child.order)
+        node.children.sort(key=lambda child: syntax_sequence_sort_key(child.syntax_sequence, child.order))
     if not roots:
         return None
-    roots.sort(key=lambda child: child.order)
+    roots.sort(key=lambda child: syntax_sequence_sort_key(child.syntax_sequence, child.order))
     invoice_root = classes_by_path.get("$.invoice")
     return invoice_root or roots[0]
 
@@ -1165,7 +1198,7 @@ def direct_class_fields(class_path: str, bindings: List[Binding]) -> List[Bindin
         remainder = binding.semantic_path[len(prefix):]
         if "." not in remainder:
             direct.append(binding)
-    return sorted(direct, key=lambda binding: binding.order)
+    return sorted(direct, key=lambda binding: syntax_sequence_sort_key(binding.syntax_sequence, binding.order))
 
 
 def walk_binding_classes(root: BindingClass) -> List[BindingClass]:
@@ -1335,6 +1368,14 @@ def predicate_child_value(predicate: str) -> Tuple[str, str, str]:
         Result produced by predicate_child_value.
     """
     path_pattern = r"([A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*(?:/(?:@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*))*)"
+    match = re.fullmatch(r"not\(\s*" + path_pattern + r"\s*=\s*'([^']*)'\s*\)", predicate)
+    if match:
+        child_name, value = match.groups()
+        return child_name, "not=", value
+    match = re.fullmatch(r'not\(\s*' + path_pattern + r'\s*=\s*"([^"]*)"\s*\)', predicate)
+    if match:
+        child_name, value = match.groups()
+        return child_name, "not=", value
     match = re.fullmatch(path_pattern + r"\s*(!=|=)\s*(true|false)\(\)", predicate)
     if match:
         child_name, operator, value = match.groups()
@@ -1480,6 +1521,8 @@ def child_satisfies_predicate(child: ET.Element, predicate: str, namespaces: Dic
         return actual_value == predicate_value
     if operator == "!=":
         return bool(actual_value) and actual_value != predicate_value
+    if operator == "not=":
+        return actual_value != predicate_value
     return True
 
 
@@ -1567,6 +1610,68 @@ def set_xml_value(root: ET.Element, xpath: str, value: str, namespaces: Dict[str
         element.set(attribute, value)
     else:
         element.text = value
+
+
+def find_existing_elements(root: ET.Element, parts: List[str], namespaces: Dict[str, str]) -> List[ET.Element]:
+    """Find existing elements for an absolute binding path without creating nodes."""
+
+    if parts and element_local_name(parts[0]) == element_local_name(root.tag):
+        parts = parts[1:]
+    current = [root]
+    for part in parts:
+        base, predicate = step_base_and_predicate(part)
+        tag = qname(base, namespaces)
+        current = [
+            child
+            for parent in current
+            for child in list(parent)
+            if child.tag == tag and child_satisfies_predicate(child, predicate, namespaces)
+        ]
+        if not current:
+            break
+    return current
+
+
+def apply_default_to_existing_contexts(
+    root: ET.Element,
+    xpath: str,
+    value: str,
+    namespaces: Dict[str, str],
+) -> int:
+    """Apply a syntax-only default only where the bound parent context already exists."""
+
+    if not value:
+        return 0
+    parts, attribute = split_xml_path(xpath)
+    if attribute:
+        targets = find_existing_elements(root, parts, namespaces)
+        applied = 0
+        for target in targets:
+            if not target.get(attribute):
+                target.set(attribute, value)
+                applied += 1
+        return applied
+    if not parts:
+        return 0
+    parents = find_existing_elements(root, parts[:-1], namespaces)
+    applied = 0
+    for parent in parents:
+        base, predicate = step_base_and_predicate(parts[-1])
+        existing = next(
+            (
+                child
+                for child in list(parent)
+                if child.tag == qname(base, namespaces)
+                and child_satisfies_predicate(child, predicate, namespaces)
+            ),
+            None,
+        )
+        if existing is None:
+            existing = find_or_create_child(parent, parts[-1], namespaces)
+        if not (existing.text or "").strip():
+            existing.text = value
+            applied += 1
+    return applied
 
 
 def is_amount_xpath(xpath: str) -> bool:
@@ -2015,13 +2120,14 @@ def taxonomy_entrypoints(taxonomy_base: Optional[Path], metadata_file: Path) -> 
     """
     if not taxonomy_base:
         raise ValueError("--taxonomy-base is required when writing xBRL-CSV metadata.")
-    xbrl_csv_schema = latest_file(taxonomy_base / "plt", "en16931-oim-*.xsd")
+    oim_directory = taxonomy_base / "oim" / "en16931_Invoice"
+    xbrl_csv_schema = latest_file(oim_directory, "en16931-all-oim-*.xsd")
     module_schema = latest_file(taxonomy_base / "en16931", "en16931-*.xsd")
     if not xbrl_csv_schema:
-        raise ValueError(f"Missing xBRL-CSV taxonomy schema under {taxonomy_base / 'plt'}.")
+        raise ValueError(f"Missing xBRL-CSV taxonomy schema under {oim_directory}.")
     return {
         "xbrlCsvSchema": relative_metadata_path(xbrl_csv_schema, metadata_file),
-        "definitionLinkbase": relative_metadata_path(latest_file(taxonomy_base / "plt", "en16931-def-*.xml"), metadata_file),
+        "definitionLinkbase": relative_metadata_path(latest_file(oim_directory, "en16931-all-dim-*.xml"), metadata_file),
         "moduleSchema": relative_metadata_path(module_schema, metadata_file),
     }
 
@@ -2100,10 +2206,11 @@ def binding_column_metadata(binding_csv: Path, encoding: str) -> Dict[str, Dict[
         }
         if row_type.startswith("C") or row_type.startswith("G"):
             dimension = dimension_name(element)
+            dimension_prefix = "plt" if module == "en16931" else "en16931"
             metadata[dimension] = {
                 **common,
                 "kind": "dimension",
-                "taxonomyConcept": f"en16931:d_{module}_{element}",
+                "taxonomyConcept": f"{dimension_prefix}:d_{module}_{element}",
                 "primaryItem": f"en16931:p_{module}_{element}",
             }
         elif row_type.startswith("A") or row_type.startswith("F"):
@@ -2164,6 +2271,7 @@ def write_csv_metadata(
             "documentType": "https://xbrl.org/2021/xbrl-csv",
             "namespaces": {
                 "en16931": f"http://www.xbrl.org/int/gl/en16931/{version}",
+                "plt": f"http://www.xbrl.org/int/gl/plt/{version}",
                 "iso4217": "http://www.xbrl.org/2003/iso4217",
                 "scheme": "http://www.example.com",
                 "xbrl": "https://xbrl.org/2021",
@@ -2482,21 +2590,69 @@ def write_xml_from_hierarchical_csv(
         if dimension and dimension != "dInvoice" and dimension in fieldnames:
             dimension_bindings.setdefault(dimension, []).append(binding)
 
-    binding_order = {
+    binding_sequence = {
         binding: (
-            binding_layout.syntax_sequence_by_field.get(binding.field)
-            or binding_layout.syntax_sequence_by_dimension.get(binding.dimension)
-            or binding.order
+            binding.syntax_sequence
+            or binding_layout.syntax_sequence_by_field.get(binding.field, "")
+            or binding_layout.syntax_sequence_by_dimension.get(binding.dimension, "")
         )
         for binding in bindings
     }
-    context_by_dimension_row: Dict[Tuple[str, str], ET.Element] = {}
+    context_by_dimension_row: Dict[Tuple[Tuple[str, str], ...], ET.Element] = {}
     repeat_path_by_dimension = {
         dimension: binding_layout.dimension_xpath.get(dimension) or infer_repeat_path(group_bindings)
         for dimension, group_bindings in dimension_bindings.items()
     }
 
-    for binding in sorted(bindings, key=lambda item: binding_order.get(item, item.order)):
+    def occurrence_key(dimension: str, row: Dict[str, str]) -> Tuple[Tuple[str, str], ...]:
+        """Identify a repeated occurrence within its complete repeated-parent scope."""
+        lineage = [*binding_layout.dimension_ancestors.get(dimension, []), dimension]
+        return tuple((item, row_value(row, item)) for item in lineage)
+
+    def ensure_repeated_context(dimension: str, row: Dict[str, str]) -> ET.Element:
+        """Create a repeated context relative to its nearest repeated parent."""
+        key = occurrence_key(dimension, row)
+        if key in context_by_dimension_row:
+            return context_by_dimension_row[key]
+
+        repeat_path = repeat_path_by_dimension[dimension]
+        ancestors = [
+            item
+            for item in binding_layout.dimension_ancestors.get(dimension, [])
+            if item in repeat_path_by_dimension
+        ]
+        parent_dimension = ancestors[-1] if ancestors else ""
+        if parent_dimension:
+            parent_context = ensure_repeated_context(parent_dimension, row)
+            context_path = relative_xpath(repeat_path, repeat_path_by_dimension[parent_dimension])
+            if context_path.startswith("/"):
+                parent_context = root
+                context_path = repeat_path
+        else:
+            parent_context = root
+            context_path = repeat_path
+        context = create_context(
+            parent_context,
+            context_path,
+            ns,
+            document_currency,
+            tax_currency,
+        )
+        context_by_dimension_row[key] = context
+        return context
+
+    for binding in sorted(
+        bindings,
+        key=lambda item: syntax_sequence_sort_key(binding_sequence.get(item, ""), item.order),
+    ):
+        if binding.default_value and not binding.field:
+            written += apply_default_to_existing_contexts(
+                root,
+                binding.xpath,
+                binding.default_value,
+                ns,
+            )
+            continue
         if binding.field not in fieldnames:
             continue
         dimension = binding.dimension or field_dimension.get(binding.field, "")
@@ -2509,9 +2665,7 @@ def write_xml_from_hierarchical_csv(
             ]
             dimension_rows.sort(key=lambda row: int(row_value(row, dimension) or "0"))
             for row in dimension_rows:
-                key = (dimension, row_value(row, dimension))
-                if key not in context_by_dimension_row:
-                    context_by_dimension_row[key] = create_context(root, repeat_path, ns, document_currency, tax_currency)
+                context = ensure_repeated_context(dimension, row)
                 relative = relative_xpath(binding.xpath, repeat_path)
                 if relative.startswith("/"):
                     # Some semantic children of a repeated class are stored
@@ -2531,7 +2685,7 @@ def write_xml_from_hierarchical_csv(
                     )
                 else:
                     set_relative_xml_value(
-                        context_by_dimension_row[key],
+                        context,
                         relative,
                         row_value(row, binding.field),
                         ns,
