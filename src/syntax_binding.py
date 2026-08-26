@@ -91,7 +91,7 @@ import os
 import re
 import sys
 import xml.etree.ElementTree as ET
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Tuple
 from urllib.parse import urljoin
@@ -105,6 +105,7 @@ UBL_NAMESPACES = {
 }
 
 XSD_NS = "{http://www.w3.org/2001/XMLSchema}"
+SCHEMA_CHILD_ORDER_CACHE: Dict[str, Dict[str, List[str]]] = {}
 
 UBL_CHILD_ORDER = {
     "Invoice": [
@@ -516,7 +517,7 @@ def xml_predicate_matches(
     """
     if not predicate:
         return True
-    path_pattern = r"([A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*(?:/(?:@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*))*)"
+    path_pattern = r"(@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*(?:/(?:@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*))*)"
     match = re.fullmatch(r"not\(\s*" + path_pattern + r"\s*=\s*'([^']*)'\s*\)", predicate)
     if match:
         element_path, excluded_text = match.groups()
@@ -655,6 +656,12 @@ class Binding:
     filter_field: str
     filter_value: str
     field: str
+    canonical_semantic_path: str = ""
+    selector_key: str = ""
+    selector_negated: bool = False
+    identifier: str = ""
+    transformation: str = ""
+    selector_conditions: Tuple[Tuple[str, bool], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -681,6 +688,19 @@ class BindingLayout:
 
 
 @dataclass
+class BindingClassAlias:
+    """Represent one syntax-specific physical alias of a semantic Class."""
+
+    order: int
+    syntax_sequence: str
+    semantic_path: str
+    xpath: str
+    selector_key: str
+    selector_negated: bool
+    selector_conditions: Tuple[Tuple[str, bool], ...]
+
+
+@dataclass
 class BindingClass:
     """
     Represent one C row in the syntax binding class tree.
@@ -699,7 +719,133 @@ class BindingClass:
     dimension: str
     xpath: str
     repeats: bool
+    aliases: List[BindingClassAlias]
     children: List["BindingClass"]
+
+
+SEMANTIC_SELECTOR_RE = re.compile(
+    r"\[(?:(not)\()?([A-Za-z_][A-Za-z0-9_]*)(?:\))?\]"
+)
+
+
+def parse_semantic_selector(semantic_path: str) -> Tuple[str, str, bool]:
+    """Return canonical path plus the last syntax-variant selector."""
+
+    selectors = list(SEMANTIC_SELECTOR_RE.finditer(semantic_path or ""))
+    canonical_path = SEMANTIC_SELECTOR_RE.sub("", semantic_path or "")
+    if not selectors:
+        return canonical_path, "", False
+    selector = selectors[-1]
+    return canonical_path, selector.group(2), bool(selector.group(1))
+
+
+def parse_semantic_selectors(semantic_path: str) -> Tuple[Tuple[str, bool], ...]:
+    """Return every presence/absence selector in left-to-right AND order."""
+
+    return tuple(
+        (selector.group(2), bool(selector.group(1)))
+        for selector in SEMANTIC_SELECTOR_RE.finditer(semantic_path or "")
+    )
+
+
+def transform_binding_value(
+    value: str, transformation: str, reverse: bool = False
+) -> Optional[str]:
+    """Apply a declared reversible lexical or representation transformation.
+
+    The registry keys are supplied only by the Binding.  ``None`` means that
+    a mutually exclusive physical representation is not applicable; it is not
+    a silent fallback.
+    """
+
+    transformation = (transformation or "").strip()
+    if not transformation or not value:
+        return value
+    if transformation in {"cii_date_format_102", "CII_DATE_102"}:
+        if reverse:
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+                raise ValueError(f"CII_DATE_102 requires ISO date, got {value!r}")
+            return value.replace("-", "")
+        if not re.fullmatch(r"\d{8}", value):
+            raise ValueError(f"CII_DATE_102 requires YYYYMMDD, got {value!r}")
+        return f"{value[:4]}-{value[4:6]}-{value[6:]}"
+    if transformation == "UNCL2005_TO_UNCL2475":
+        forward = {"5": "3", "29": "35", "72": "432"}
+        reverse_map = {semantic: syntax for syntax, semantic in forward.items()}
+        mapping = reverse_map if reverse else forward
+        if value not in mapping:
+            direction = "UNCL2005 to UNCL2475" if reverse else "UNCL2475 to UNCL2005"
+            raise ValueError(f"{direction} has no declared mapping for {value!r}")
+        return mapping[value]
+    if transformation == "CII_ACCOUNT_ID_IF_IBAN":
+        if not reverse:
+            return value
+        compact = re.sub(r"\s+", "", value).upper()
+        is_iban = bool(re.fullmatch(r"[A-Z]{2}\d{2}[A-Z0-9]{11,30}", compact))
+        return compact if is_iban else None
+    if transformation == "CII_ACCOUNT_ID_IF_NOT_IBAN":
+        if not reverse:
+            return value
+        compact = re.sub(r"\s+", "", value).upper()
+        is_iban = bool(re.fullmatch(r"[A-Z]{2}\d{2}[A-Z0-9]{11,30}", compact))
+        return None if is_iban else value
+    if transformation in {
+        "CII_IDENTIFIER_VARIANT_GLOBAL",
+        "CII_IDENTIFIER_VARIANT_LOCAL",
+        "CII_TAX_TOTAL_ACCOUNTING_CURRENCY",
+        "CII_TAX_TOTAL_DOCUMENT_CURRENCY",
+        "cii_header_tax_point_singleton",
+        "cii_payment_means_parent_scalar",
+        "cii_tax_total_accounting_currency",
+        "cii_tax_total_document_currency",
+    }:
+        return value
+    raise ValueError(f"Unknown Syntax Binding transformation: {transformation}")
+
+
+def tax_total_occurrence_value(
+    context: ET.Element,
+    xpath: str,
+    transformation: str,
+    namespaces: Dict[str, str],
+    root: ET.Element,
+) -> str:
+    """Select one same-path tax-total occurrence as declared by a transform."""
+
+    if transformation not in {
+        "CII_TAX_TOTAL_DOCUMENT_CURRENCY",
+        "CII_TAX_TOTAL_ACCOUNTING_CURRENCY",
+    }:
+        return get_value(context, xpath, namespaces, root)
+    search_context = root if xpath.startswith("/") else context
+    nodes = find_nodes(search_context, xpath, namespaces, root)
+    index = 0 if transformation.endswith("DOCUMENT_CURRENCY") else 1
+    if len(nodes) <= index:
+        return ""
+    return " ".join((nodes[index].text or "").split())
+
+
+def tax_total_write_xpath(
+    xpath: str,
+    transformation: str,
+    document_currency: str,
+    tax_currency: str,
+) -> str:
+    """Qualify a same-path tax-total occurrence using declared currency role."""
+
+    if transformation == "CII_TAX_TOTAL_DOCUMENT_CURRENCY":
+        currency = document_currency
+    elif transformation == "CII_TAX_TOTAL_ACCOUNTING_CURRENCY":
+        currency = tax_currency
+    else:
+        return xpath
+    if not currency:
+        return ""
+    parts = xml_split_xpath(xpath)
+    if not parts:
+        return xpath
+    parts[-1] = f"{parts[-1]}[@currencyID='{currency}']"
+    return "/" + "/".join(parts) if xpath.startswith("/") else "/".join(parts)
 
 
 def first_present(row: Dict[str, str], names: Iterable[str]) -> str:
@@ -786,6 +932,19 @@ def dimension_name(element: str) -> str:
     return "d" + upper_camel(element)
 
 
+def effective_structured_column(semantic_path: str, declared: str) -> str:
+    """Disambiguate generic child column labels from semantic-path context."""
+
+    if declared not in {"Identifier", "SchemeIdentifier"}:
+        return declared
+    canonical, _, _ = parse_semantic_selector(semantic_path)
+    parts = canonical.split(".")
+    leaf = parts[-1] if parts else ""
+    if leaf.lower() in {"identifier", "schemeidentifier"} and len(parts) > 1:
+        leaf = parts[-2] + upper_camel(leaf)
+    return upper_camel(leaf) or declared
+
+
 def multiplicity_repeats(multiplicity: str) -> bool:
     """
     Return whether an LHM multiplicity allows repeated rows.
@@ -808,7 +967,46 @@ def multiplicity_repeats(multiplicity: str) -> bool:
         return False
 
 
-def read_binding_layout(binding_csv: Path, encoding: str) -> BindingLayout:
+def read_effective_binding_rows(
+    binding_csv: Path,
+    encoding: str,
+    hmd_file: Optional[Path] = None,
+) -> List[Dict[str, str]]:
+    """Load Binding rows and supplement semantic columns from an HMD."""
+
+    rows = read_binding_rows(binding_csv, encoding)
+    if not hmd_file:
+        return rows
+    hmd_rows = read_binding_rows(hmd_file, encoding)
+    hmd_by_path = {
+        first_present(row, ("semantic_path",)): row
+        for row in hmd_rows
+        if first_present(row, ("semantic_path",))
+    }
+    for row in rows:
+        row_type = first_present(row, ("type", "kind")).upper()
+        if not (row_type.startswith("C") or row_type.startswith("A")):
+            continue
+        canonical_path, _, _ = parse_semantic_selector(first_present(row, ("semantic_path",)))
+        semantic = hmd_by_path.get(canonical_path)
+        if semantic is None:
+            raise ValueError(f"Binding semantic_path does not resolve to HMD: {canonical_path}")
+        row.setdefault("structured_csv_column", first_present(semantic, ("local_name", "element", "name")))
+        row.setdefault("module", first_present(semantic, ("module",)))
+        row.setdefault("class_term", first_present(semantic, ("class_term",)))
+        if not first_present(row, ("id", "identifier")):
+            row["id"] = first_present(semantic, ("source_bsm_id", "id", "identifier"))
+        for field in ("level", "type", "name", "datatype", "multiplicity"):
+            if not row.get(field):
+                row[field] = first_present(semantic, (field,))
+    return rows
+
+
+def read_binding_layout(
+    binding_csv: Path,
+    encoding: str,
+    hmd_file: Optional[Path] = None,
+) -> BindingLayout:
     """
     Read LHM-style class and attribute rows embedded in a syntax binding CSV.
 
@@ -819,11 +1017,7 @@ def read_binding_layout(binding_csv: Path, encoding: str) -> BindingLayout:
     Returns:
         Layout metadata derived from the binding table itself.
     """
-    with binding_csv.open(newline="", encoding=encoding) as f:
-        reader = csv.DictReader(f)
-        if not reader.fieldnames:
-            raise ValueError("Binding CSV has no header.")
-        rows = [{key.lstrip("\ufeff"): (value or "").strip() for key, value in row.items()} for row in reader]
+    rows = read_effective_binding_rows(binding_csv, encoding, hmd_file)
     return build_layout_from_rows(rows)
 
 
@@ -852,7 +1046,8 @@ def build_layout_from_rows(rows: List[Dict[str, str]]) -> BindingLayout:
 
     for row in rows:
         if first_present(row, ("type", "kind")).upper().startswith("C"):
-            semantic_path = first_present(row, ("semantic_path",))
+            full_semantic_path = first_present(row, ("semantic_path",))
+            semantic_path, _, _ = parse_semantic_selector(full_semantic_path)
             csv_column = first_present(row, ("structured_csv_column", "source_column", "element", "name"))
             lhm_level = first_present(row, ("lhm_level", "level"))
             repeats = multiplicity_repeats(first_present(row, ("multiplicity", "cardinality")))
@@ -862,7 +1057,7 @@ def build_layout_from_rows(rows: List[Dict[str, str]]) -> BindingLayout:
                 semantic_path_dimension[semantic_path] = dim
                 if dim not in dimensions:
                     dimensions.append(dim)
-                xpath = first_present(row, ("xpath", "source_xpath", "xml_path"))
+                xpath = first_present(row, ("syntax_path", "xpath", "source_xpath", "xml_path"))
                 if xpath:
                     dimension_xpath[dim] = xpath
                 dimension_repeats[dim] = repeats
@@ -901,11 +1096,17 @@ def build_layout_from_rows(rows: List[Dict[str, str]]) -> BindingLayout:
     for row in rows:
         if not first_present(row, ("type", "kind")).upper().startswith("A"):
             continue
-        semantic_path = first_present(row, ("semantic_path",))
-        csv_column = first_present(row, ("structured_csv_column", "source_column", "element", "name"))
+        full_semantic_path = first_present(row, ("semantic_path",))
+        semantic_path, _, _ = parse_semantic_selector(full_semantic_path)
+        csv_column = effective_structured_column(
+            full_semantic_path,
+            first_present(row, ("structured_csv_column", "source_column", "element", "name")),
+        )
         if not semantic_path or not csv_column:
             continue
         field_by_semantic_path[semantic_path] = csv_column
+        if full_semantic_path != semantic_path:
+            field_by_semantic_path[full_semantic_path] = csv_column
         syntax_order = first_present(row, ("syntax_sequence",))
         if syntax_order:
             syntax_sequence_by_field[csv_column] = syntax_order
@@ -1026,14 +1227,23 @@ def parse_semantic_path(
             current = current.rsplit(".", 1)[0]
         return ""
 
+    full_semantic_path = semantic_path
+    canonical_semantic_path, selector_key, selector_negated = parse_semantic_selector(semantic_path)
+    semantic_path = canonical_semantic_path
     if semantic_path.startswith("const:"):
-        return Binding(order, syntax_sequence, default_value, semantic_path, xpath, "", "", "", "", "")
+        return Binding(
+            order, syntax_sequence, default_value, full_semantic_path, xpath,
+            "", "", "", "", "", canonical_semantic_path, selector_key, selector_negated,
+        )
     root_match = re.fullmatch(r"\$\.([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)", semantic_path)
     if root_match:
         root, field = root_match.groups()
         field = (field_by_semantic_path or {}).get(semantic_path, field)
         dimension = (semantic_path_dimension or {}).get(semantic_path) or (path_dimension or {}).get(f"$.{root}", "")
-        return Binding(order, syntax_sequence, default_value, semantic_path, xpath, root, dimension, "", "", field)
+        return Binding(
+            order, syntax_sequence, default_value, full_semantic_path, xpath, root,
+            dimension, "", "", field, canonical_semantic_path, selector_key, selector_negated,
+        )
 
     dim_match = re.fullmatch(
         r"\$\.([A-Za-z_][A-Za-z0-9_]*)\."
@@ -1047,14 +1257,21 @@ def parse_semantic_path(
         field = (field_by_semantic_path or {}).get(semantic_path, field)
         dimension = (semantic_path_dimension or {}).get(semantic_path) or dimension
         filter_value = quoted or single_quoted or bare or ""
-        return Binding(order, syntax_sequence, default_value, semantic_path, xpath, root, dimension, filter_field or "", filter_value, field)
+        return Binding(
+            order, syntax_sequence, default_value, full_semantic_path, xpath, root,
+            dimension, filter_field or "", filter_value, field,
+            canonical_semantic_path, selector_key, selector_negated,
+        )
     generic_match = re.fullmatch(r"\$\.([A-Za-z_][A-Za-z0-9_]*)(?:\..+)?\.([A-Za-z_][A-Za-z0-9_]*)", semantic_path)
     if generic_match:
         root, field = generic_match.groups()
         field = (field_by_semantic_path or {}).get(semantic_path, field)
         parent_path = semantic_path.rsplit(".", 1)[0]
         dimension = (semantic_path_dimension or {}).get(semantic_path) or nearest_dimension(parent_path)
-        return Binding(order, syntax_sequence, default_value, semantic_path, xpath, root, dimension, "", "", field)
+        return Binding(
+            order, syntax_sequence, default_value, full_semantic_path, xpath, root,
+            dimension, "", "", field, canonical_semantic_path, selector_key, selector_negated,
+        )
     return None
 
 
@@ -1064,6 +1281,7 @@ def read_bindings(
     path_dimension: Optional[Dict[str, str]] = None,
     field_by_semantic_path: Optional[Dict[str, str]] = None,
     semantic_path_dimension: Optional[Dict[str, str]] = None,
+    rows: Optional[List[Dict[str, str]]] = None,
 ) -> List[Binding]:
     """
     Read usable binding rows from a CSV file.
@@ -1078,16 +1296,15 @@ def read_bindings(
     Returns:
         Result produced by read_bindings.
     """
-    with binding_csv.open(newline="", encoding=encoding) as f:
-        reader = csv.DictReader(f)
-        if not reader.fieldnames:
-            raise ValueError("Binding CSV has no header.")
-        rows = [{key.lstrip("\ufeff"): (value or "").strip() for key, value in row.items()} for row in reader]
+    if rows is None:
+        rows = read_binding_rows(binding_csv, encoding)
 
     bindings: List[Binding] = []
     for fallback_order, row in enumerate(rows, start=1):
+        if first_present(row, ("type", "kind")).upper() == "F":
+            continue
         semantic_path = first_present(row, ("semantic_path",))
-        xpath = first_present(row, ("xpath", "source_xpath", "xml_path"))
+        xpath = first_present(row, ("syntax_path", "xpath", "source_xpath", "xml_path"))
         if not semantic_path or not xpath:
             continue
         order = parse_order(first_present(row, ("sequence",)), fallback_order)
@@ -1104,7 +1321,14 @@ def read_bindings(
             semantic_path_dimension,
         )
         if binding:
-            bindings.append(binding)
+            bindings.append(
+                replace(
+                    binding,
+                    identifier=first_present(row, ("id", "identifier")),
+                    transformation=first_present(row, ("transformation",)),
+                    selector_conditions=parse_semantic_selectors(semantic_path),
+                )
+            )
     return bindings
 
 
@@ -1141,25 +1365,51 @@ def build_binding_class_tree(rows: List[Dict[str, str]]) -> Optional[BindingClas
     for fallback_order, row in enumerate(rows, start=1):
         if not first_present(row, ("type", "kind")).upper().startswith("C"):
             continue
-        semantic_path = first_present(row, ("semantic_path",))
-        if not semantic_path:
+        full_semantic_path = first_present(row, ("semantic_path",))
+        if not full_semantic_path:
             continue
+        semantic_path, selector_key, selector_negated = parse_semantic_selector(full_semantic_path)
         column = first_present(row, ("structured_csv_column", "source_column", "element", "name"))
         repeats = multiplicity_repeats(first_present(row, ("multiplicity", "cardinality")))
         dimension = dimension_name(column) if semantic_path == "$.invoice" or repeats else ""
-        node = BindingClass(
+        alias = BindingClassAlias(
             order=parse_order(first_present(row, ("sequence",)), fallback_order),
             syntax_sequence=first_present(row, ("syntax_sequence",)),
-            semantic_path=semantic_path,
-            name=first_present(row, ("name", "business_term")),
-            column=column,
-            dimension=dimension,
-            xpath=first_present(row, ("xpath", "source_xpath", "xml_path")),
-            repeats=repeats,
-            children=[],
+            semantic_path=full_semantic_path,
+            xpath=first_present(row, ("syntax_path", "xpath", "source_xpath", "xml_path")),
+            selector_key=selector_key,
+            selector_negated=selector_negated,
+            selector_conditions=parse_semantic_selectors(full_semantic_path),
         )
-        classes_by_path[semantic_path] = node
-        ordered_classes.append(node)
+        node = classes_by_path.get(semantic_path)
+        if node is None:
+            node = BindingClass(
+                order=alias.order,
+                syntax_sequence=alias.syntax_sequence,
+                semantic_path=semantic_path,
+                name=first_present(row, ("name", "business_term")),
+                column=column,
+                dimension=dimension,
+                xpath=alias.xpath,
+                repeats=repeats,
+                aliases=[alias],
+                children=[],
+            )
+            classes_by_path[semantic_path] = node
+            ordered_classes.append(node)
+        else:
+            if node.column != column or node.repeats != repeats:
+                raise ValueError(
+                    f"Class alias metadata differs for {semantic_path}: "
+                    f"column/multiplicity must match the canonical Class."
+                )
+            identity = (alias.semantic_path, alias.xpath, alias.syntax_sequence)
+            if any(
+                (item.semantic_path, item.xpath, item.syntax_sequence) == identity
+                for item in node.aliases
+            ):
+                raise ValueError(f"Duplicate Class Binding row identity: {identity}")
+            node.aliases.append(alias)
 
     roots: List[BindingClass] = []
     for node in ordered_classes:
@@ -1171,6 +1421,7 @@ def build_binding_class_tree(rows: List[Dict[str, str]]) -> Optional[BindingClas
             roots.append(node)
 
     for node in ordered_classes:
+        node.aliases.sort(key=lambda alias: syntax_sequence_sort_key(alias.syntax_sequence, alias.order))
         node.children.sort(key=lambda child: syntax_sequence_sort_key(child.syntax_sequence, child.order))
     if not roots:
         return None
@@ -1193,12 +1444,24 @@ def direct_class_fields(class_path: str, bindings: List[Binding]) -> List[Bindin
     prefix = class_path + "."
     direct: List[Binding] = []
     for binding in bindings:
-        if not binding.semantic_path.startswith(prefix):
+        semantic_path = binding.canonical_semantic_path or binding.semantic_path
+        if not semantic_path.startswith(prefix):
             continue
-        remainder = binding.semantic_path[len(prefix):]
+        remainder = semantic_path[len(prefix):]
         if "." not in remainder:
             direct.append(binding)
     return sorted(direct, key=lambda binding: syntax_sequence_sort_key(binding.syntax_sequence, binding.order))
+
+
+def binding_applies_to_alias(binding: Binding, alias: BindingClassAlias) -> bool:
+    """Return whether an Attribute Binding belongs to a selected Class alias."""
+
+    if binding.selector_conditions:
+        return all(condition in alias.selector_conditions for condition in binding.selector_conditions)
+    canonical_path = binding.canonical_semantic_path or binding.semantic_path
+    if alias.selector_key and canonical_path.endswith("." + alias.selector_key):
+        return not alias.selector_negated
+    return True
 
 
 def walk_binding_classes(root: BindingClass) -> List[BindingClass]:
@@ -1367,7 +1630,7 @@ def predicate_child_value(predicate: str) -> Tuple[str, str, str]:
     Returns:
         Result produced by predicate_child_value.
     """
-    path_pattern = r"([A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*(?:/(?:@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*))*)"
+    path_pattern = r"(@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*(?:/(?:@[A-Za-z_][\w.-]*|[A-Za-z_][\w.-]*:[A-Za-z_][\w.-]*))*)"
     match = re.fullmatch(r"not\(\s*" + path_pattern + r"\s*=\s*'([^']*)'\s*\)", predicate)
     if match:
         child_name, value = match.groups()
@@ -1817,6 +2080,9 @@ def set_relative_xml_value(
         context.text = value
         apply_currency_attribute(context, xpath, document_currency, tax_currency)
         return
+    if xpath.startswith("@"):
+        context.set(xpath[1:], value)
+        return
     resolved_xpath = resolve_currency_references(xpath, document_currency, tax_currency)
     element, attribute = ensure_path(context, resolved_xpath, namespaces)
     if attribute:
@@ -1843,6 +2109,54 @@ def load_ubl_child_order(
     """
     if not schema_root and not schema_url:
         return None
+    local_schema = Path(schema_url) if schema_url else None
+    if local_schema and local_schema.is_file():
+        cache_key = str(local_schema.resolve())
+        if cache_key in SCHEMA_CHILD_ORDER_CACHE:
+            return SCHEMA_CHILD_ORDER_CACHE[cache_key]
+        try:
+            import xmlschema  # type: ignore
+        except ImportError as exc:
+            raise RuntimeError("Local generic XSD ordering requires xmlschema.") from exc
+        schema = xmlschema.XMLSchema(str(local_schema))
+        orders: Dict[str, List[str]] = {}
+        ambiguous: set[str] = set()
+        for schema_type in schema.maps.types.values():
+            content = getattr(schema_type, "content", None)
+            if content is None:
+                continue
+            try:
+                declarations = list(content.iter_elements())
+            except (AttributeError, TypeError):
+                continue
+            for declaration in declarations:
+                child_content = getattr(getattr(declaration, "type", None), "content", None)
+                if child_content is None:
+                    continue
+                try:
+                    child_order = [child.local_name for child in child_content.iter_elements()]
+                except (AttributeError, TypeError):
+                    continue
+                name = declaration.local_name
+                if not name or not child_order:
+                    continue
+                if name in orders and orders[name] != child_order:
+                    ambiguous.add(name)
+                else:
+                    orders[name] = child_order
+        for name in ambiguous:
+            orders.pop(name, None)
+        root_element = next(
+            (item for item in schema.elements.values() if getattr(item, "local_name", "")), None
+        )
+        if root_element is not None:
+            root_content = getattr(root_element.type, "content", None)
+            if root_content is not None:
+                orders[root_element.local_name] = [
+                    child.local_name for child in root_content.iter_elements()
+                ]
+        SCHEMA_CHILD_ORDER_CACHE[cache_key] = orders
+        return orders
     index = UblSchemaIndex()
     if schema_root:
         index.load_directory(schema_root)
@@ -2120,7 +2434,12 @@ def taxonomy_entrypoints(taxonomy_base: Optional[Path], metadata_file: Path) -> 
     """
     if not taxonomy_base:
         raise ValueError("--taxonomy-base is required when writing xBRL-CSV metadata.")
-    oim_directory = taxonomy_base / "oim" / "en16931_Invoice"
+    # HMD-centric model units flatten the public OIM entry point directly
+    # below taxonomy/. Keep the legacy runtime layout as a fallback while
+    # retained pre-reorganization paths remain available.
+    oim_directory = taxonomy_base / "en16931_Invoice"
+    if not oim_directory.is_dir():
+        oim_directory = taxonomy_base / "oim" / "en16931_Invoice"
     xbrl_csv_schema = latest_file(oim_directory, "en16931-all-oim-*.xsd")
     module_schema = latest_file(taxonomy_base / "en16931", "en16931-*.xsd")
     if not xbrl_csv_schema:
@@ -2166,7 +2485,11 @@ def xbrl_csv_column_definition(column: Dict[str, str]) -> Dict[str, Dict[str, st
     return {"dimensions": dimensions}
 
 
-def binding_column_metadata(binding_csv: Path, encoding: str) -> Dict[str, Dict[str, str]]:
+def binding_column_metadata(
+    binding_csv: Path,
+    encoding: str,
+    rows: Optional[List[Dict[str, str]]] = None,
+) -> Dict[str, Dict[str, str]]:
     """
     Build column metadata from a syntax binding CSV file.
 
@@ -2177,11 +2500,8 @@ def binding_column_metadata(binding_csv: Path, encoding: str) -> Dict[str, Dict[
     Returns:
         Column metadata keyed by Structured CSV column name.
     """
-    with binding_csv.open(newline="", encoding=encoding) as f:
-        reader = csv.DictReader(f)
-        if not reader.fieldnames:
-            return {}
-        rows = [{key.lstrip("\ufeff"): (value or "").strip() for key, value in row.items()} for row in reader]
+    if rows is None:
+        rows = read_binding_rows(binding_csv, encoding)
 
     metadata: Dict[str, Dict[str, str]] = {}
     for row in rows:
@@ -2197,7 +2517,7 @@ def binding_column_metadata(binding_csv: Path, encoding: str) -> Dict[str, Dict[
             "lhmId": first_present(row, ("id",)),
             "lhmName": first_present(row, ("name", "business_term")),
             "semanticPath": first_present(row, ("semantic_path",)),
-            "xpath": first_present(row, ("xpath", "source_xpath", "xml_path")),
+            "xpath": first_present(row, ("syntax_path", "xpath", "source_xpath", "xml_path")),
             "datatype": first_present(row, ("datatype", "semantic_data_type")),
             "multiplicity": first_present(row, ("multiplicity", "cardinality")),
             "lhmLevel": first_present(row, ("lhm_level",)),
@@ -2231,6 +2551,7 @@ def write_csv_metadata(
     row_count: int,
     taxonomy_base: Optional[Path],
     encoding: str,
+    binding_rows: Optional[List[Dict[str, str]]] = None,
 ) -> None:
     """
     Write JSON metadata for a hierarchical CSV file.
@@ -2248,7 +2569,7 @@ def write_csv_metadata(
     Returns:
         None. The JSON metadata file is written.
     """
-    columns = binding_column_metadata(binding_csv, encoding)
+    columns = binding_column_metadata(binding_csv, encoding, binding_rows)
     entrypoints = taxonomy_entrypoints(taxonomy_base, metadata_file)
     version = taxonomy_version(entrypoints)
     template_dimensions = {
@@ -2311,6 +2632,7 @@ def write_hierarchical_csv(
     encoding: str,
     d_invoice: str = "1",
     drop_empty: bool = False,
+    hmd_file: Optional[Path] = None,
 ) -> Tuple[int, List[str]]:
     """
     Extract XML data and write hierarchical CSV plus metadata.
@@ -2331,7 +2653,8 @@ def write_hierarchical_csv(
     """
     namespaces = collect_namespaces(xml_file)
     root = ET.parse(xml_file).getroot()
-    binding_layout = read_binding_layout(binding_csv, encoding)
+    effective_rows = read_effective_binding_rows(binding_csv, encoding, hmd_file)
+    binding_layout = build_layout_from_rows(effective_rows)
     if not binding_layout.fieldnames:
         raise ValueError("The syntax binding table has no usable C/A rows.")
     bindings = read_bindings(
@@ -2340,6 +2663,7 @@ def write_hierarchical_csv(
         binding_layout.path_dimension,
         binding_layout.field_by_semantic_path,
         binding_layout.semantic_path_dimension,
+        effective_rows,
     )
     if not bindings:
         raise ValueError("No usable semantic_path/xpath bindings found.")
@@ -2349,7 +2673,7 @@ def write_hierarchical_csv(
     field_dimension = {**binding_layout.field_dimension, **field_dimension}
     dimension_columns = [name for name in fieldnames if is_dimension_column(name)]
 
-    class_root = build_binding_class_tree(read_binding_rows(binding_csv, encoding))
+    class_root = build_binding_class_tree(effective_rows)
     if class_root is None:
         raise ValueError("No C rows found in the syntax binding table.")
 
@@ -2359,7 +2683,47 @@ def write_hierarchical_csv(
     }
     rows: List[Dict[str, str]] = []
 
-    def class_contexts(parent_context: ET.Element, parent_class: BindingClass, child_class: BindingClass) -> List[ET.Element]:
+    def alias_nodes(
+        parent_context: ET.Element,
+        parent_alias: Optional[BindingClassAlias],
+        alias: BindingClassAlias,
+    ) -> List[ET.Element]:
+        """Find physical nodes represented by one Class alias."""
+
+        if not alias.xpath:
+            return [parent_context]
+        rel = relative_xpath(alias.xpath, parent_alias.xpath) if parent_alias and parent_alias.xpath else alias.xpath
+        contexts = find_nodes(parent_context, rel, namespaces, root)
+        if contexts or rel != alias.xpath:
+            return contexts
+        return find_nodes(root, alias.xpath, namespaces, root)
+
+    def selector_fact_present(
+        context: ET.Element,
+        class_node: BindingClass,
+        alias: BindingClassAlias,
+        selector_key: Optional[str] = None,
+    ) -> bool:
+        """Evaluate a positive selector from same-occurrence semantic facts."""
+
+        key = selector_key or alias.selector_key
+        selector_path = class_node.semantic_path + "." + key
+        selector_bindings = [
+            binding
+            for binding in direct_fields_by_class.get(class_node.semantic_path, [])
+            if (binding.canonical_semantic_path or binding.semantic_path) == selector_path
+        ]
+        for binding in selector_bindings:
+            rel = relative_xpath(binding.xpath, alias.xpath) if alias.xpath else binding.xpath
+            if get_value(context, rel, namespaces, root):
+                return True
+        return False
+
+    def class_contexts(
+        parent_context: ET.Element,
+        parent_alias: Optional[BindingClassAlias],
+        child_class: BindingClass,
+    ) -> List[Tuple[ET.Element, BindingClassAlias]]:
         """
         Find XML contexts for a child class inside its parent class context.
 
@@ -2371,20 +2735,42 @@ def write_hierarchical_csv(
         Returns:
             Matching child XML contexts.
         """
-        if not child_class.xpath:
-            return [parent_context]
-        if parent_class.xpath:
-            rel = relative_xpath(child_class.xpath, parent_class.xpath)
-        else:
-            rel = child_class.xpath
-        contexts = find_nodes(parent_context, rel, namespaces, root)
-        if contexts:
-            return contexts
-        if child_class.xpath != rel:
-            return []
-        return find_nodes(root, child_class.xpath, namespaces, root)
+        physical: Dict[int, Tuple[ET.Element, List[BindingClassAlias]]] = {}
+        for alias in child_class.aliases:
+            for context in alias_nodes(parent_context, parent_alias, alias):
+                conditions = alias.selector_conditions
+                matches = all(
+                    selector_fact_present(context, child_class, alias, key) != negated
+                    for key, negated in conditions
+                )
+                if matches:
+                    physical.setdefault(id(context), (context, []))[1].append(alias)
+        selected: List[Tuple[ET.Element, BindingClassAlias]] = []
+        for context, aliases in physical.values():
+            if len(aliases) != 1:
+                identities = [alias.semantic_path for alias in aliases]
+                raise ValueError(
+                    f"Class alias selection for {child_class.semantic_path} matched "
+                    f"{len(aliases)} aliases: {identities}"
+                )
+            selected.append((context, aliases[0]))
+        if not selected and len(child_class.aliases) == 1:
+            alias = child_class.aliases[0]
+            external_fact_present = any(
+                relative_xpath(binding.xpath, alias.xpath).startswith("/")
+                and get_value(root, binding.xpath, namespaces, root)
+                for binding in direct_fields_by_class.get(child_class.semantic_path, [])
+            )
+            if external_fact_present:
+                selected.append((parent_context, alias))
+        return selected
 
-    def fill_direct_fields(row: Dict[str, str], context: ET.Element, class_node: BindingClass) -> None:
+    def fill_direct_fields(
+        row: Dict[str, str],
+        context: ET.Element,
+        class_node: BindingClass,
+        alias: BindingClassAlias,
+    ) -> None:
         """
         Fill direct A-row fields for one class context into one CSV row.
 
@@ -2396,19 +2782,63 @@ def write_hierarchical_csv(
         Returns:
             None. The row is modified in place.
         """
-        for binding in direct_fields_by_class.get(class_node.semantic_path, []):
-            if binding.field not in fieldnames:
-                continue
-            rel = relative_xpath(binding.xpath, class_node.xpath) if class_node.xpath else binding.xpath
-            value = get_value(context, rel, namespaces, root)
-            if value and not row.get(binding.field):
-                row[binding.field] = value
-            if binding.filter_field and binding.filter_field in fieldnames and binding.filter_value:
-                row[binding.filter_field] = binding.filter_value
+        direct_bindings = direct_fields_by_class.get(class_node.semantic_path, [])
+        grouped: Dict[str, List[Binding]] = {}
+        for binding in direct_bindings:
+            if binding_applies_to_alias(binding, alias):
+                grouped.setdefault(binding.canonical_semantic_path or binding.semantic_path, []).append(binding)
+
+        def extracted_value(binding: Binding) -> str:
+            rel = relative_xpath(binding.xpath, alias.xpath) if alias.xpath else binding.xpath
+            raw_value = tax_total_occurrence_value(
+                context, rel, binding.transformation, namespaces, root
+            )
+            return transform_binding_value(raw_value, binding.transformation) or ""
+
+        def selector_present(binding: Binding) -> bool:
+            selector_path = class_node.semantic_path + "." + binding.selector_key
+            candidates = [
+                item for item in direct_bindings
+                if (item.canonical_semantic_path or item.semantic_path) == selector_path
+            ]
+            if binding.identifier:
+                candidates.extend(
+                    item for item in direct_bindings
+                    if item.identifier == binding.identifier + "-1"
+                )
+            return any(extracted_value(item) for item in dict.fromkeys(candidates))
+
+        for group in grouped.values():
+            selected = group
+            if any(binding.selector_key for binding in group):
+                positive = [
+                    binding for binding in group
+                    if binding.selector_key and not binding.selector_negated
+                    and extracted_value(binding)
+                    and selector_present(binding)
+                ]
+                selected = positive or [
+                    binding for binding in group
+                    if binding.selector_key and binding.selector_negated and extracted_value(binding)
+                ]
+                if len(selected) > 1:
+                    raise ValueError(
+                        f"Attribute alias selection for {group[0].canonical_semantic_path} "
+                        f"matched {len(selected)} rows."
+                    )
+            for binding in selected:
+                if binding.field not in fieldnames:
+                    continue
+                value = extracted_value(binding)
+                if value and not row.get(binding.field):
+                    row[binding.field] = value
+                if binding.filter_field and binding.filter_field in fieldnames and binding.filter_value:
+                    row[binding.filter_field] = binding.filter_value
 
     def process_class(
         context: ET.Element,
         class_node: BindingClass,
+        alias: BindingClassAlias,
         dimension_values: Dict[str, str],
         current_row: Optional[Dict[str, str]],
     ) -> None:
@@ -2432,33 +2862,37 @@ def write_hierarchical_csv(
                 if dimension in row:
                     row[dimension] = value
 
-        fill_direct_fields(row, context, class_node)
+        fill_direct_fields(row, context, class_node, alias)
 
-        repeated_children: List[Tuple[BindingClass, List[ET.Element]]] = []
+        repeated_children: List[Tuple[BindingClass, List[Tuple[ET.Element, BindingClassAlias]]]] = []
         for child_class in class_node.children:
-            child_contexts = class_contexts(context, class_node, child_class)
+            child_contexts = class_contexts(context, alias, child_class)
             if not child_contexts:
                 continue
             if child_class.repeats and child_class.dimension:
                 repeated_children.append((child_class, child_contexts))
             else:
-                process_class(child_contexts[0], child_class, dimension_values, row)
+                child_context, child_alias = child_contexts[0]
+                process_class(child_context, child_class, child_alias, dimension_values, row)
 
         if owns_row and row_has_values(row, dimension_columns):
             rows.append(row)
 
         for child_class, child_contexts in repeated_children:
-            for index, child_context in enumerate(child_contexts, start=1):
+            for index, (child_context, child_alias) in enumerate(child_contexts, start=1):
                 child_dimensions = dict(dimension_values)
                 child_dimensions[child_class.dimension] = str(index)
                 child_row = new_row(fieldnames, d_invoice)
                 for dimension, value in child_dimensions.items():
                     if dimension in child_row:
                         child_row[dimension] = value
-                process_class(child_context, child_class, child_dimensions, child_row)
+                process_class(child_context, child_class, child_alias, child_dimensions, child_row)
 
-    root_contexts = find_nodes(root, class_root.xpath, namespaces, root) if class_root.xpath else [root]
-    process_class(root_contexts[0] if root_contexts else root, class_root, {"dInvoice": d_invoice}, None)
+    root_contexts = class_contexts(root, None, class_root)
+    if not root_contexts:
+        raise ValueError(f"Root Class alias not found for {class_root.semantic_path}")
+    root_context, root_alias = root_contexts[0]
+    process_class(root_context, class_root, root_alias, {"dInvoice": d_invoice}, None)
 
     out_csv.parent.mkdir(parents=True, exist_ok=True)
     if drop_empty:
@@ -2468,7 +2902,10 @@ def write_hierarchical_csv(
         writer.writeheader()
         writer.writerows(rows)
     metadata_file = metadata_output or out_csv.with_suffix(".json")
-    write_csv_metadata(metadata_file, out_csv, xml_file, binding_csv, fieldnames, len(rows), taxonomy_base, encoding)
+    write_csv_metadata(
+        metadata_file, out_csv, xml_file, binding_csv, fieldnames, len(rows),
+        taxonomy_base, encoding, effective_rows,
+    )
     return len(rows), fieldnames
 
 
@@ -2528,6 +2965,7 @@ def write_xml_from_hierarchical_csv(
     namespaces: Optional[Dict[str, str]] = None,
     ubl_schema_root: Optional[Path] = None,
     ubl_schema_url: str = "",
+    hmd_file: Optional[Path] = None,
 ) -> int:
     """
     Rebuild XML from hierarchical CSV rows and bindings.
@@ -2549,7 +2987,8 @@ def write_xml_from_hierarchical_csv(
     for prefix, uri in ns.items():
         ET.register_namespace(prefix, uri)
 
-    binding_layout = read_binding_layout(binding_csv, encoding)
+    effective_rows = read_effective_binding_rows(binding_csv, encoding, hmd_file)
+    binding_layout = build_layout_from_rows(effective_rows)
     if not binding_layout.fieldnames:
         raise ValueError("The syntax binding table has no usable C/A rows.")
     bindings = read_bindings(
@@ -2558,6 +2997,7 @@ def write_xml_from_hierarchical_csv(
         binding_layout.path_dimension,
         binding_layout.field_by_semantic_path,
         binding_layout.semantic_path_dimension,
+        effective_rows,
     )
     if not bindings:
         raise ValueError("No usable semantic_path/xpath bindings found.")
@@ -2577,7 +3017,47 @@ def write_xml_from_hierarchical_csv(
 
     validate_hierarchical_row_scopes(rows, fieldnames, field_dimension)
 
-    root = ET.Element(qname("Invoice", ns))
+    class_root = build_binding_class_tree(effective_rows)
+    if class_root is None:
+        raise ValueError("No C rows found in the syntax binding table.")
+
+    def select_alias(class_node: BindingClass, row: Dict[str, str]) -> BindingClassAlias:
+        """Select exactly one physical alias from same-occurrence semantic facts."""
+
+        matched: List[BindingClassAlias] = []
+        for alias in class_node.aliases:
+            if not alias.selector_conditions:
+                matched.append(alias)
+                continue
+            conditions_match = True
+            for selector_key, selector_negated in alias.selector_conditions:
+                selector_path = class_node.semantic_path + "." + selector_key
+                selector_fields = [
+                    item.field
+                    for item in bindings
+                    if item.field
+                    and (item.canonical_semantic_path or item.semantic_path) == selector_path
+                ]
+                present = any(row_value(row, field) for field in dict.fromkeys(selector_fields))
+                if present == selector_negated:
+                    conditions_match = False
+                    break
+            if conditions_match:
+                matched.append(alias)
+        if len(matched) != 1:
+            identities = [alias.semantic_path for alias in matched]
+            raise ValueError(
+                f"Class alias selection for {class_node.semantic_path} matched "
+                f"{len(matched)} aliases: {identities}"
+            )
+        return matched[0]
+
+    root_alias = select_alias(class_root, rows[0])
+    root_parts = xml_split_xpath(root_alias.xpath)
+    if not root_parts:
+        raise ValueError(f"Root Class alias has no element path: {root_alias.xpath}")
+    root_step, _ = xml_split_step_predicate(root_parts[-1])
+    root = ET.Element(xml_qualify_step(root_step, ns))
     written = 0
     document_currency = first_row_value(rows, ("DocumentCurrencyCode", "documentCurrencyCode", "currencyCode"))
     tax_currency = first_row_value(rows, ("TaxAccountingCurrencyCode", "taxAccountingCurrencyCode", "TaxCurrencyCode"))
@@ -2599,8 +3079,19 @@ def write_xml_from_hierarchical_csv(
         for binding in bindings
     }
     context_by_dimension_row: Dict[Tuple[Tuple[str, str], ...], ET.Element] = {}
+    context_path_by_dimension_row: Dict[Tuple[Tuple[str, str], ...], str] = {}
+    alias_by_dimension_row: Dict[Tuple[Tuple[str, str], ...], BindingClassAlias] = {}
+    class_by_dimension = {
+        node.dimension: node
+        for node in walk_binding_classes(class_root)
+        if node.dimension
+    }
     repeat_path_by_dimension = {
-        dimension: binding_layout.dimension_xpath.get(dimension) or infer_repeat_path(group_bindings)
+        dimension: (
+            class_by_dimension[dimension].aliases[0].xpath
+            if dimension in class_by_dimension
+            else binding_layout.dimension_xpath.get(dimension) or infer_repeat_path(group_bindings)
+        )
         for dimension, group_bindings in dimension_bindings.items()
     }
 
@@ -2615,7 +3106,9 @@ def write_xml_from_hierarchical_csv(
         if key in context_by_dimension_row:
             return context_by_dimension_row[key]
 
-        repeat_path = repeat_path_by_dimension[dimension]
+        class_node = class_by_dimension.get(dimension)
+        alias = select_alias(class_node, row) if class_node else None
+        repeat_path = alias.xpath if alias else repeat_path_by_dimension[dimension]
         ancestors = [
             item
             for item in binding_layout.dimension_ancestors.get(dimension, [])
@@ -2624,7 +3117,9 @@ def write_xml_from_hierarchical_csv(
         parent_dimension = ancestors[-1] if ancestors else ""
         if parent_dimension:
             parent_context = ensure_repeated_context(parent_dimension, row)
-            context_path = relative_xpath(repeat_path, repeat_path_by_dimension[parent_dimension])
+            parent_key = occurrence_key(parent_dimension, row)
+            parent_path = context_path_by_dimension_row[parent_key]
+            context_path = relative_xpath(repeat_path, parent_path)
             if context_path.startswith("/"):
                 parent_context = root
                 context_path = repeat_path
@@ -2639,12 +3134,80 @@ def write_xml_from_hierarchical_csv(
             tax_currency,
         )
         context_by_dimension_row[key] = context
+        context_path_by_dimension_row[key] = repeat_path
+        if alias:
+            alias_by_dimension_row[key] = alias
         return context
+
+    def binding_selector_matches(binding: Binding, row: Dict[str, str]) -> bool:
+        """Evaluate an Attribute-level selector against the same semantic scope."""
+
+        if not binding.selector_conditions:
+            return True
+        class_path = (binding.canonical_semantic_path or binding.semantic_path).rsplit(".", 1)[0]
+        for selector_key, selector_negated in binding.selector_conditions:
+            candidate_fields = [
+                item.field
+                for item in bindings
+                if item.field
+                and (
+                    item.identifier == binding.identifier + "-1"
+                    or (item.canonical_semantic_path or item.semantic_path)
+                    == class_path + "." + selector_key
+                )
+            ]
+            present = any(row_value(row, field) for field in dict.fromkeys(candidate_fields))
+            if present == selector_negated:
+                return False
+        return True
+
+    syntax_only_rows = sorted(
+        [row for row in effective_rows if first_present(row, ("type",)).upper() == "F"],
+        key=lambda row: syntax_sequence_sort_key(
+            first_present(row, ("syntax_sequence",)),
+            parse_order(first_present(row, ("sequence",))),
+        ),
+    )
+    syntax_only_index = 0
+
+    def emit_syntax_only_before(limit: Optional[Tuple[int, Tuple[str, ...], int]]) -> None:
+        """Emit Binding-declared syntax-only nodes in syntax-sequence order."""
+
+        nonlocal syntax_only_index, written
+        while syntax_only_index < len(syntax_only_rows):
+            row = syntax_only_rows[syntax_only_index]
+            key = syntax_sequence_sort_key(
+                first_present(row, ("syntax_sequence",)),
+                parse_order(first_present(row, ("sequence",))),
+            )
+            if limit is not None and key > limit:
+                break
+            syntax_only_index += 1
+            xpath = first_present(row, ("syntax_path", "xpath", "source_xpath", "xml_path"))
+            default = first_present(row, ("default_value", "default"))
+            if not xpath:
+                raise ValueError(
+                    f"Syntax-only Binding row {first_present(row, ('sequence',))} has no XPath."
+                )
+            _, attribute = xml_split_terminal_attribute(xpath)
+            if attribute:
+                written += apply_default_to_existing_contexts(root, xpath, default, ns)
+            elif default == "NA":
+                create_context(root, xpath, ns, document_currency, tax_currency)
+                written += 1
+            elif default:
+                set_xml_value_with_currency(
+                    root, xpath, default, ns, document_currency, tax_currency
+                )
+                written += 1
 
     for binding in sorted(
         bindings,
         key=lambda item: syntax_sequence_sort_key(binding_sequence.get(item, ""), item.order),
     ):
+        emit_syntax_only_before(
+            syntax_sequence_sort_key(binding_sequence.get(binding, ""), binding.order)
+        )
         if binding.default_value and not binding.field:
             written += apply_default_to_existing_contexts(
                 root,
@@ -2666,7 +3229,12 @@ def write_xml_from_hierarchical_csv(
             dimension_rows.sort(key=lambda row: int(row_value(row, dimension) or "0"))
             for row in dimension_rows:
                 context = ensure_repeated_context(dimension, row)
-                relative = relative_xpath(binding.xpath, repeat_path)
+                key = occurrence_key(dimension, row)
+                selected_alias = alias_by_dimension_row.get(key)
+                if selected_alias and not binding_applies_to_alias(binding, selected_alias):
+                    continue
+                selected_path = context_path_by_dimension_row.get(key, repeat_path)
+                relative = relative_xpath(binding.xpath, selected_path)
                 if relative.startswith("/"):
                     # Some semantic children of a repeated class are stored
                     # elsewhere in the source syntax.  EN 16931 BT-90, for
@@ -2675,36 +3243,55 @@ def write_xml_from_hierarchical_csv(
                     # UBL.  Keep such absolute, out-of-context paths rooted at
                     # the document instead of creating a nested Invoice below
                     # the repeated context.
-                    set_xml_value_with_currency(
-                        root,
-                        binding.xpath,
-                        row_value(row, binding.field),
-                        ns,
-                        document_currency,
-                        tax_currency,
+                    transformed = transform_binding_value(
+                        row_value(row, binding.field), binding.transformation, reverse=True
                     )
+                    write_xpath = tax_total_write_xpath(
+                        binding.xpath, binding.transformation, document_currency, tax_currency
+                    )
+                    if transformed and write_xpath:
+                        set_xml_value_with_currency(
+                            root, write_xpath, transformed, ns, document_currency, tax_currency
+                        )
+                        written += 1
                 else:
-                    set_relative_xml_value(
-                        context,
-                        relative,
-                        row_value(row, binding.field),
-                        ns,
-                        document_currency,
-                        tax_currency,
+                    transformed = transform_binding_value(
+                        row_value(row, binding.field), binding.transformation, reverse=True
                     )
-                written += 1
+                    write_xpath = tax_total_write_xpath(
+                        relative, binding.transformation, document_currency, tax_currency
+                    )
+                    if transformed and write_xpath:
+                        set_relative_xml_value(
+                            context, write_xpath, transformed, ns, document_currency, tax_currency
+                        )
+                        written += 1
             continue
 
         for row in rows:
             value = row_value(row, binding.field)
-            if value:
-                set_xml_value_with_currency(root, binding.xpath, value, ns, document_currency, tax_currency)
-                written += 1
+            if value and binding_selector_matches(binding, row):
+                transformed = transform_binding_value(
+                    value, binding.transformation, reverse=True
+                )
+                write_xpath = tax_total_write_xpath(
+                    binding.xpath, binding.transformation, document_currency, tax_currency
+                )
+                if transformed and write_xpath:
+                    set_xml_value_with_currency(
+                        root, write_xpath, transformed, ns, document_currency, tax_currency
+                    )
+                    written += 1
                 break
 
+    emit_syntax_only_before(None)
+
     schema_child_order = load_ubl_child_order(ubl_schema_root, ubl_schema_url)
-    ensure_tax_scheme_defaults(root, ns)
-    sort_children_for_ubl_schema(root, schema_child_order)
+    if xml_local_name(root.tag) == "Invoice" and "cac" in ns and "cbc" in ns:
+        ensure_tax_scheme_defaults(root, ns)
+        sort_children_for_ubl_schema(root, schema_child_order)
+    elif schema_child_order:
+        sort_children_for_ubl_schema(root, schema_child_order)
     indent_xml(root)
     out_xml.parent.mkdir(parents=True, exist_ok=True)
     tree = ET.ElementTree(root)
@@ -2729,6 +3316,7 @@ def main() -> int:
     parser.add_argument("-b", "--binding", required=True, type=Path, help="Syntax binding CSV")
     parser.add_argument("-o", "--output", required=True, type=Path, help="Output hierarchical CSV, or output XML when --reverse is used")
     parser.add_argument("--template-csv", type=Path, help="CSV template defining column order and dimension placement")
+    parser.add_argument("--hmd-file", type=Path, help="Canonical HMD used with the 14-column Syntax Binding contract")
     parser.add_argument("--metadata-output", type=Path, help="Output JSON metadata path. Default is OUTPUT_CSV with .json suffix")
     parser.add_argument("--taxonomy-base", type=Path, default=Path("out/taxonomy"), help="Taxonomy output directory referenced by JSON metadata")
     parser.add_argument("--reverse", action="store_true", help="Convert hierarchical CSV back to XML")
@@ -2762,6 +3350,7 @@ def main() -> int:
                 None,
                 args.ubl_schema_root,
                 args.ubl_schema_url,
+                args.hmd_file,
             )
             print(f"Wrote XML with {count} value(s) to {args.output}")
             return 0
@@ -2775,6 +3364,7 @@ def main() -> int:
             args.encoding,
             args.d_invoice,
             args.drop_empty_columns,
+            args.hmd_file,
         )
     except Exception as exc:
         print(f"syntax_binding.py: {exc}", file=sys.stderr)

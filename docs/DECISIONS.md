@@ -1,6 +1,6 @@
 # UADC_PoC Decisions
 
-更新日: 2026-08-14 (JST)
+更新日: 2026-08-26 (JST)
 
 ## 採用済み設計指針
 
@@ -30,6 +30,14 @@
 
 - 公開テストは合成または公開sampleだけで実行する。
 - ログ、変換結果、抽出masterも個別承認なしにGitへ追加しない。
+
+### D-006 CII BindingはCEN/TS Table 2を正本としgeneric runtimeで実行する
+
+- CII D16B Syntax Bindingのsemantic path、XPath、cardinalityおよび順序はCEN/TS 16931-3-3:2020 Table 2を正本としてレビューする。
+- Table 3は逆変換時の選択制約とambiguity判定に使用する。
+- required empty container、predicate、alias-relative path、named transformation、XSD child orderはBinding／schemaから汎用的に処理し、CII項目別分岐をruntimeへ追加しない。
+- 正式baselineは237行Binding SHA-256 `B529F2585CA2A5FBFDAF673A6F96B98135CE274B8B022C1B791FF9863C23BD23`、runtime SHA-256 `7CA92B9DB1724D1A5A3AE9C0FDD9A081ED73F34D1125A8626C880BE2AE5B11A9`とする。
+- 購入済み規格PDFとtask-local抽出物はFormal repositoryへ格納しない。
 
 ## 保留事項
 

@@ -1,6 +1,14 @@
 # UADC_PoC Handoff
 
-更新日: 2026-08-14 (JST)
+更新日: 2026-08-26 (JST)
+
+## CII D16B formal promotion (2026-08-26)
+
+- CEN/TS 16931-3-3:2020 Table 2に対する237/237行レビューと13件の訂正確認はPASSした。
+- CII Bindingとgeneric runtimeはCanonicalとFormalでbyte-identicalである。
+- 配置後検証は代表値380のCII順逆変換、XML Schema、semantic diff、およびSyntax Binding限定unit testに限定し、すべてPASSした。
+- 同一前提の9コード往復、runtime/reference/identifier/cross-routeのaccepted evidenceは再利用し、不要な再実行を行っていない。
+- 購入済みCEN/TS PDFおよびその抽出物はFormal repositoryへ含めていない。
 
 ## 前回作業の結果
 
@@ -24,6 +32,7 @@
 
 ## 未完了・未確認
 
+- CII profile Schematronは今回のformal review scope外であり、未実行のままである。
 - WORK差分の採否と全回帰テスト結果は未確定。
 - LedgerExplorer向け正式column mappingは未作成。
 - 連携検証で使用するXBRL-GL-Next commit／HMD SHAの固定方法は未確定。
