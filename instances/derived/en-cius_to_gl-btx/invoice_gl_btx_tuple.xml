@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='utf-8'?>
+<xbrli:xbrl xmlns:btx="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/btx" xmlns:bus="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/bus" xmlns:cor="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/cor" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gen="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/gen" xmlns:iso4217="http://www.xbrl.org/2003/iso4217">
+  <link:schemaRef xlink:type="simple" xlink:href="../../../taxonomy/tuple/btx_businessTransactions/btx-all-2026-12-31.xsd" />
+  <xbrli:context id="c-1">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.example.com">UADC-PoC</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2026-08-26</xbrli:instant>
+    </xbrli:period>
+  </xbrli:context>
+  <xbrli:unit id="u-iso4217-EUR">
+    <xbrli:measure>iso4217:EUR</xbrli:measure>
+  </xbrli:unit>
+  <xbrli:unit id="u-xbrli-pure">
+    <xbrli:measure>xbrli:pure</xbrli:measure>
+  </xbrli:unit>
+  <btx:businessTransactions>
+    <cor:documentInformation>
+      <cor:documentType contextRef="c-1" xsi:nil="true" />
+    </cor:documentInformation>
+    <btx:entityParty>
+      <btx:partyName contextRef="c-1">Seller Co. Ltd.</btx:partyName>
+      <bus:partyAddress>
+        <bus:entityAddressDescription contextRef="c-1">1-1-1 Chiyoda</bus:entityAddressDescription>
+        <bus:entityAddressPurpose contextRef="c-1">gen:vdAddressPurposePostal</bus:entityAddressPurpose>
+        <bus:entityAddressStreet contextRef="c-1">1-1-1 Chiyoda</bus:entityAddressStreet>
+        <bus:entityAddressCity contextRef="c-1">Tokyo</bus:entityAddressCity>
+        <bus:entityAddressCountry contextRef="c-1">JP</bus:entityAddressCountry>
+        <bus:entityAddressZipOrPostalCode contextRef="c-1">100-0001</bus:entityAddressZipOrPostalCode>
+      </bus:partyAddress>
+      <btx:entityPartyType contextRef="c-1">gen:vdPartyTypeSeller</btx:entityPartyType>
+    </btx:entityParty>
+    <btx:entityParty>
+      <btx:partyName contextRef="c-1">Buyer Co. Ltd.</btx:partyName>
+      <bus:partyAddress>
+        <bus:entityAddressDescription contextRef="c-1">2-2-2 Kita</bus:entityAddressDescription>
+        <bus:entityAddressPurpose contextRef="c-1">gen:vdAddressPurposePostal</bus:entityAddressPurpose>
+        <bus:entityAddressStreet contextRef="c-1">2-2-2 Kita</bus:entityAddressStreet>
+        <bus:entityAddressCity contextRef="c-1">Osaka</bus:entityAddressCity>
+        <bus:entityAddressCountry contextRef="c-1">JP</bus:entityAddressCountry>
+        <bus:entityAddressZipOrPostalCode contextRef="c-1">530-0001</bus:entityAddressZipOrPostalCode>
+      </bus:partyAddress>
+      <btx:entityPartyType contextRef="c-1">gen:vdPartyTypeBuyer</btx:entityPartyType>
+    </btx:entityParty>
+    <btx:transactionHeader>
+      <btx:headerInvoiceType contextRef="c-1">gen:vdN1001InvoiceCreditNoteTypeN380</btx:headerInvoiceType>
+      <btx:headerDocumentNumber contextRef="c-1">INV-2026-0001</btx:headerDocumentNumber>
+      <btx:headerMaturityDateOrDateDue contextRef="c-1">2026-08-05T00:00:00</btx:headerMaturityDateOrDateDue>
+      <btx:headerPaymentTerms contextRef="c-1">Payment due within 30 days.</btx:headerPaymentTerms>
+      <btx:headerIdentifierReference>
+        <btx:headerIdentifierPurpose contextRef="c-1">gen:vdIdentifierPurposeLegalRegistration</btx:headerIdentifierPurpose>
+        <btx:headerIdentifierType contextRef="c-1">gen:vdIdentifierTypeVendor</btx:headerIdentifierType>
+        <btx:registeredIdentifier>
+          <btx:headerIdentifierRegisteredId contextRef="c-1">SELLER-REG</btx:headerIdentifierRegisteredId>
+          <btx:headerIdentifierRegisteredIdIdentificationScheme contextRef="c-1" xsi:nil="true" />
+        </btx:registeredIdentifier>
+      </btx:headerIdentifierReference>
+      <btx:headerIdentifierReference>
+        <btx:headerIdentifierPurpose contextRef="c-1">gen:vdIdentifierPurposeVAT</btx:headerIdentifierPurpose>
+        <btx:headerIdentifierType contextRef="c-1">gen:vdIdentifierTypeVendor</btx:headerIdentifierType>
+        <btx:registeredIdentifier>
+          <btx:headerIdentifierRegisteredId contextRef="c-1">T1234567890123</btx:headerIdentifierRegisteredId>
+          <btx:headerIdentifierRegisteredIdIdentificationScheme contextRef="c-1" xsi:nil="true" />
+        </btx:registeredIdentifier>
+      </btx:headerIdentifierReference>
+      <btx:headerIdentifierReference>
+        <btx:headerIdentifierPurpose contextRef="c-1">gen:vdIdentifierPurposeLegalRegistration</btx:headerIdentifierPurpose>
+        <btx:headerIdentifierType contextRef="c-1">gen:vdIdentifierTypeCustomer</btx:headerIdentifierType>
+        <btx:registeredIdentifier>
+          <btx:headerIdentifierRegisteredId contextRef="c-1">BUYER-REG</btx:headerIdentifierRegisteredId>
+          <btx:headerIdentifierRegisteredIdIdentificationScheme contextRef="c-1" xsi:nil="true" />
+        </btx:registeredIdentifier>
+      </btx:headerIdentifierReference>
+      <btx:headerTax>
+        <btx:headerAmountOfTaxes contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">1000</btx:headerAmountOfTaxes>
+        <btx:headerBasisForTaxation contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">10000</btx:headerBasisForTaxation>
+        <btx:headerTaxPercentageRate contextRef="c-1" unitRef="u-xbrli-pure" decimals="INF">0.1</btx:headerTaxPercentageRate>
+        <btx:headerTaxCategory contextRef="c-1">S</btx:headerTaxCategory>
+        <btx:taxType contextRef="c-1">gen:vdTaxTypeVAT</btx:taxType>
+      </btx:headerTax>
+      <btx:headerAmountStructure>
+        <btx:headerAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">10000</btx:headerAmount>
+        <btx:headerAmountType contextRef="c-1">gen:vdAmountTypeLineNetTotal</btx:headerAmountType>
+      </btx:headerAmountStructure>
+      <btx:headerAmountStructure>
+        <btx:headerAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">500</btx:headerAmount>
+        <btx:headerAmountType contextRef="c-1">gen:vdAmountTypeAllowanceTotal</btx:headerAmountType>
+      </btx:headerAmountStructure>
+      <btx:headerAmountStructure>
+        <btx:headerAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">200</btx:headerAmount>
+        <btx:headerAmountType contextRef="c-1">gen:vdAmountTypeChargeTotal</btx:headerAmountType>
+      </btx:headerAmountStructure>
+      <btx:headerAmountStructure>
+        <btx:headerAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">10000</btx:headerAmount>
+        <btx:headerAmountType contextRef="c-1">gen:vdAmountTypeTaxExclusiveTotal</btx:headerAmountType>
+      </btx:headerAmountStructure>
+      <btx:headerAmountStructure>
+        <btx:headerAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">1000</btx:headerAmount>
+        <btx:headerAmountType contextRef="c-1">gen:vdAmountTypeTaxTotal</btx:headerAmountType>
+      </btx:headerAmountStructure>
+      <btx:headerAmountStructure>
+        <btx:headerAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">11000</btx:headerAmount>
+        <btx:headerAmountType contextRef="c-1">gen:vdAmountTypeInvoiceTotal</btx:headerAmountType>
+      </btx:headerAmountStructure>
+      <btx:headerAmountStructure>
+        <btx:headerAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">1000</btx:headerAmount>
+        <btx:headerAmountType contextRef="c-1">gen:vdAmountTypePaidAmount</btx:headerAmountType>
+      </btx:headerAmountStructure>
+      <btx:headerAmountStructure>
+        <btx:headerAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">0</btx:headerAmount>
+        <btx:headerAmountType contextRef="c-1">gen:vdAmountTypeRoundingAmount</btx:headerAmountType>
+      </btx:headerAmountStructure>
+      <btx:headerAmountStructure>
+        <btx:headerAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">11000</btx:headerAmount>
+        <btx:headerAmountType contextRef="c-1">gen:vdAmountTypeAmountDue</btx:headerAmountType>
+      </btx:headerAmountStructure>
+      <btx:transactionDetail>
+        <btx:lineNumber contextRef="c-1">1</btx:lineNumber>
+        <bus:detailMeasurable>
+          <bus:secondaryMeasurableCode contextRef="c-1">ITEM-001</bus:secondaryMeasurableCode>
+          <bus:measurableQuantity contextRef="c-1" unitRef="u-xbrli-pure" decimals="INF">10</bus:measurableQuantity>
+          <bus:measurableUnitOfMeasure contextRef="c-1">EA</bus:measurableUnitOfMeasure>
+          <bus:measurableStartTime contextRef="c-1">2026-07-01T00:00:00</bus:measurableStartTime>
+          <bus:measurableEndTime contextRef="c-1">2026-07-31T00:00:00</bus:measurableEndTime>
+        </bus:detailMeasurable>
+        <btx:detailTax>
+          <btx:taxPercentageRate contextRef="c-1" unitRef="u-xbrli-pure" decimals="INF">0.1</btx:taxPercentageRate>
+          <btx:taxCategory contextRef="c-1">S</btx:taxCategory>
+          <btx:taxType contextRef="c-1">gen:vdTaxTypeVAT</btx:taxType>
+        </btx:detailTax>
+        <btx:detailRitchTextDetailDescription contextRef="c-1">OpenPeppol UBL Invoice PoC sample item.</btx:detailRitchTextDetailDescription>
+        <btx:detailAmountStructure>
+          <btx:amount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">10000</btx:amount>
+          <btx:amountType contextRef="c-1">gen:vdAmountTypeLineNetAmount</btx:amountType>
+        </btx:detailAmountStructure>
+        <btx:detailAdjustment>
+          <btx:adjustmentType contextRef="c-1">gen:vdAdjustmentTypeAllowance</btx:adjustmentType>
+          <btx:detailAdjustmentAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">300</btx:detailAdjustmentAmount>
+          <btx:detailAdjustmentBaseAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">10000</btx:detailAdjustmentBaseAmount>
+          <btx:detailAdjustmentReason contextRef="c-1">Line discount</btx:detailAdjustmentReason>
+          <btx:detailAdjustmentReasonCode contextRef="c-1">95</btx:detailAdjustmentReasonCode>
+        </btx:detailAdjustment>
+        <btx:detailAdjustment>
+          <btx:adjustmentType contextRef="c-1">gen:vdAdjustmentTypeCharge</btx:adjustmentType>
+          <btx:detailAdjustmentAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">100</btx:detailAdjustmentAmount>
+          <btx:detailAdjustmentBaseAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">10000</btx:detailAdjustmentBaseAmount>
+          <btx:detailAdjustmentReason contextRef="c-1">Handling charge</btx:detailAdjustmentReason>
+          <btx:detailAdjustmentReasonCode contextRef="c-1">HD</btx:detailAdjustmentReasonCode>
+        </btx:detailAdjustment>
+      </btx:transactionDetail>
+      <btx:businessProcessType contextRef="c-1">urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</btx:businessProcessType>
+      <btx:headerAdjustment>
+        <btx:adjustmentType contextRef="c-1">gen:vdAdjustmentTypeAllowance</btx:adjustmentType>
+        <btx:headerAdjustmentAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">500</btx:headerAdjustmentAmount>
+        <btx:headerAdjustmentBaseAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">10000</btx:headerAdjustmentBaseAmount>
+        <btx:headerAdjustmentReason contextRef="c-1">Document level discount</btx:headerAdjustmentReason>
+        <btx:headerAdjustmentReasonCode contextRef="c-1">95</btx:headerAdjustmentReasonCode>
+        <btx:headerAdjustmentTaxCategory contextRef="c-1">S</btx:headerAdjustmentTaxCategory>
+      </btx:headerAdjustment>
+      <btx:headerAdjustment>
+        <btx:adjustmentType contextRef="c-1">gen:vdAdjustmentTypeCharge</btx:adjustmentType>
+        <btx:headerAdjustmentAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">200</btx:headerAdjustmentAmount>
+        <btx:headerAdjustmentBaseAmount contextRef="c-1" unitRef="u-iso4217-EUR" decimals="INF">10000</btx:headerAdjustmentBaseAmount>
+        <btx:headerAdjustmentReason contextRef="c-1">Freight service</btx:headerAdjustmentReason>
+        <btx:headerAdjustmentReasonCode contextRef="c-1">FC</btx:headerAdjustmentReasonCode>
+        <btx:headerAdjustmentTaxCategory contextRef="c-1">S</btx:headerAdjustmentTaxCategory>
+      </btx:headerAdjustment>
+    </btx:transactionHeader>
+  </btx:businessTransactions>
+</xbrli:xbrl>

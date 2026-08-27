@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/cor" elementFormDefault="qualified" attributeFormDefault="unqualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:cor="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/cor"
+  xmlns:bus="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/bus"
+  xmlns:lnk="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/lnk"
+>
+  <annotation>
+    <documentation xml:lang="en">This is an experimental XBRL GL Next taxonomy published using a provisional
+namespace under the domain managed by XBRL Japan. It is not an XBRL
+International Recommendation or other final XBRL International specification.
+The namespace and taxonomy may be replaced when an official XBRL International
+namespace is assigned.</documentation>
+  </annotation>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <include schemaLocation="../../cor/cor-2026-12-31.xsd"/>
+  <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/bus" schemaLocation="bus-content-2026-12-31.xsd"/>
+  <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/lnk" schemaLocation="lnk-content-2026-12-31.xsd"/>
+  <!-- structural ComplexType supplied for the Palette module -->
+  <complexType name="documentInformationComplexType">
+    <sequence>
+      <element ref="cor:documentType"/>
+      <element ref="cor:auditNumber" minOccurs="0"/>
+      <element ref="cor:revisesAuditNumber" minOccurs="0"/>
+      <element ref="cor:actionToTakeWithPreviousData" minOccurs="0"/>
+      <element ref="cor:language" minOccurs="0"/>
+      <element ref="cor:creationDate" minOccurs="0"/>
+      <element ref="cor:creator" minOccurs="0"/>
+      <element ref="cor:documentComment" minOccurs="0"/>
+      <element ref="cor:periodCoveredStart" minOccurs="0"/>
+      <element ref="cor:periodCoveredEnd" minOccurs="0"/>
+      <element ref="cor:periodCount" minOccurs="0"/>
+      <element ref="cor:periodUnit" minOccurs="0"/>
+      <element ref="cor:periodUnitDescription" minOccurs="0"/>
+      <element ref="cor:sourceApplication" minOccurs="0"/>
+      <element ref="cor:targetApplication" minOccurs="0"/>
+      <element ref="cor:defaultCurrency" minOccurs="0"/>
+      <element ref="lnk:summaryReportingTaxonomies" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerIdentifierExternalAuthorityComplexType">
+    <sequence>
+      <element ref="cor:headerIdentifierExternalAuthorityCode" minOccurs="0"/>
+      <element ref="cor:headerIdentifierExternalAuthorityName" minOccurs="0"/>
+      <element ref="cor:headerIdentifierExternalAuthorityVerificationDate" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerIdentifierPhoneComplexType">
+    <sequence>
+      <element ref="cor:headerIdentifierPhoneNumber" minOccurs="0"/>
+      <element ref="cor:headerIdentifierPhoneNumberDescription" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerIdentifierFaxComplexType">
+    <sequence>
+      <element ref="cor:headerIdentifierFaxNumber" minOccurs="0"/>
+      <element ref="cor:headerIdentifierFaxNumberUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerIdentifierEmailComplexType">
+    <sequence>
+      <element ref="cor:headerIdentifierEmailAddress" minOccurs="0"/>
+      <element ref="cor:headerIdentifierEmailAddressUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerIdentifierAddressComplexType">
+    <sequence>
+      <element ref="cor:headerIdentifierAddressDescription" minOccurs="0"/>
+      <element ref="cor:headerIdentifierAddressPurpose" minOccurs="0"/>
+      <element ref="cor:headerIdentifierAddressDocationId" minOccurs="0"/>
+      <element ref="cor:headerIdentifierAddressDuildingNumber" minOccurs="0"/>
+      <element ref="cor:headerIdentifierAddressDtreet" minOccurs="0"/>
+      <element ref="cor:headerIdentifierAddressDddressDetail" minOccurs="0"/>
+      <element ref="cor:headerIdentifierAddressDity" minOccurs="0"/>
+      <element ref="cor:headerIdentifierAddressDtateOrProvince" minOccurs="0"/>
+      <element ref="cor:headerIdentifierAddressDountry" minOccurs="0"/>
+      <element ref="cor:headerIdentifierAddressDipOrPostalCode" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerIdentifierContactComplexType">
+    <sequence>
+      <element ref="cor:headerIdentifierContactPrefix" minOccurs="0"/>
+      <element ref="cor:headerIdentifierContactLastName" minOccurs="0"/>
+      <element ref="cor:headerIdentifierContactFirstName" minOccurs="0"/>
+      <element ref="cor:headerIdentifierContactSuffix" minOccurs="0"/>
+      <element ref="cor:headerIdentifierContactAttentionLine" minOccurs="0"/>
+      <element ref="cor:headerIdentifierContactPositionRole" minOccurs="0"/>
+      <element ref="cor:headerIdentifierContactContactType" minOccurs="0"/>
+      <element ref="cor:headerIdentifierContactLocationIdCrossReference" minOccurs="0"/>
+      <element ref="cor:headerIdentifierContactActive" minOccurs="0"/>
+      <element ref="bus:headerIdentifierContactPhone" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:headerIdentifierContactFax" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:headerIdentifierContactEmail" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailDeaderDocumentComplexType">
+    <sequence>
+      <element ref="cor:detailDeaderDocumentNumber" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailXbrlComplexType">
+    <sequence>
+      <element ref="cor:xbrlAllocation" minOccurs="0"/>
+      <element ref="cor:xbrlSummaryReportingElement" minOccurs="0"/>
+      <element ref="cor:xbrlDetailMatchingElement" minOccurs="0"/>
+      <element ref="cor:xbrlSummaryTuplePath" minOccurs="0"/>
+      <element ref="cor:xbrlDetailedContentFilter" minOccurs="0"/>
+      <element ref="cor:xbrlReportingDateSelector" minOccurs="0"/>
+      <element ref="cor:xbrlSummaryOperator" minOccurs="0"/>
+      <element ref="cor:xbrlSummaryUnitNumerator"/>
+      <element ref="cor:xbrlSummaryUnitDenominator" minOccurs="0"/>
+      <element ref="cor:xbrlSummaryReportingTaxonomyIdReference" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="externalAuthorityComplexType">
+    <sequence>
+      <element ref="cor:externalAuthorityCode" minOccurs="0"/>
+      <element ref="cor:externalAuthorityName" minOccurs="0"/>
+      <element ref="cor:externalAuthorityVerificationDate" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="identifierPhoneComplexType">
+    <sequence>
+      <element ref="cor:identifierPhoneNumber" minOccurs="0"/>
+      <element ref="cor:identifierPhoneNumberDescription" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="identifierFaxComplexType">
+    <sequence>
+      <element ref="cor:identifierFaxNumber" minOccurs="0"/>
+      <element ref="cor:identifierFaxNumberUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="identifierEmailComplexType">
+    <sequence>
+      <element ref="cor:identifierEmailAddress" minOccurs="0"/>
+      <element ref="cor:identifierEmailAddressUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="identifierAddressComplexType">
+    <sequence>
+      <element ref="cor:identifierAddressDescription" minOccurs="0"/>
+      <element ref="cor:identifierAddressPurpose" minOccurs="0"/>
+      <element ref="cor:identifierAddressLocationId" minOccurs="0"/>
+      <element ref="cor:identifierAddressBuildingNumber" minOccurs="0"/>
+      <element ref="cor:identifierAddressStreet" minOccurs="0"/>
+      <element ref="cor:identifierAddressDetail" minOccurs="0"/>
+      <element ref="cor:identifierAddressCity" minOccurs="0"/>
+      <element ref="cor:identifierAddressStateOrProvince" minOccurs="0"/>
+      <element ref="cor:identifierAddressCountry" minOccurs="0"/>
+      <element ref="cor:identifierAddressZipOrPostalCode" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="identifierContactComplexType">
+    <sequence>
+      <element ref="cor:identifierContactPrefix" minOccurs="0"/>
+      <element ref="cor:identifierContactLastName" minOccurs="0"/>
+      <element ref="cor:identifierContactFirstName" minOccurs="0"/>
+      <element ref="cor:identifierContactSuffix" minOccurs="0"/>
+      <element ref="cor:identifierContactAttentionLine" minOccurs="0"/>
+      <element ref="cor:identifierContactPositionRole" minOccurs="0"/>
+      <element ref="cor:identifierContactContactType" minOccurs="0"/>
+      <element ref="cor:identifierContactLocationIdCrossReference" minOccurs="0"/>
+      <element ref="cor:identifierContactActive" minOccurs="0"/>
+      <element ref="bus:contactPhone" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:contactFax" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:contactEmail" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+</schema>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<linkbase xmlns="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyExchangeRateDate" xlink:label="loc_muc_multicurrencyExchangeRateDate"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyExchangeRateDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算レート日付</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRateDate" xlink:to="lab_muc_multicurrencyExchangeRateDate"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyExchangeRateDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">（原取引の日付ではなく）、amountRestatedAmountまたはamountTriangulationAmountが示された換算レートの日付。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRateDate" xlink:to="doc_muc_multicurrencyExchangeRateDate"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyForeignCurrencyAmount" xlink:label="loc_muc_multicurrencyForeignCurrencyAmount"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyForeignCurrencyAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算額</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyForeignCurrencyAmount" xlink:to="lab_muc_multicurrencyForeignCurrencyAmount"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyForeignCurrencyAmount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">amountRestatedCurrencyで指定された外貨での、multicurrencyDetailExchangeRateDate時点の、換算額。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyForeignCurrencyAmount" xlink:to="doc_muc_multicurrencyForeignCurrencyAmount"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyForeignCurrency" xlink:label="loc_muc_multicurrencyForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算通貨</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyForeignCurrency" xlink:to="lab_muc_multicurrencyForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">amountRestatedAmountで使用される通貨。ISO4217コードを推奨。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyForeignCurrency" xlink:to="doc_muc_multicurrencyForeignCurrency"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyExchangeRate" xlink:label="loc_muc_multicurrencyExchangeRate"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyExchangeRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算レート</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRate" xlink:to="lab_muc_multicurrencyExchangeRate"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyExchangeRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">amountRestatedAmountの算出に用いられた、multicurrencyDetailExchangeRateDate時点の換算レート。（自国通貨を外貨通貨で割った値）</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRate" xlink:to="doc_muc_multicurrencyExchangeRate"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyExchangeRateSource" xlink:label="loc_muc_multicurrencyExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算レート情報源</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRateSource" xlink:to="lab_muc_multicurrencyExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外貨換算額の換算レートの情報源。たとえば、Reuters, Bloomberg。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRateSource" xlink:to="doc_muc_multicurrencyExchangeRateSource"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyExchangeRateType" xlink:label="loc_muc_multicurrencyExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算レート種別</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRateType" xlink:to="lab_muc_multicurrencyExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外貨換算額の換算レートの種別。たとえば、スポット・レート、先物など。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRateType" xlink:to="doc_muc_multicurrencyExchangeRateType"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyTriangulationCurrencyAmount" xlink:label="loc_muc_multicurrencyTriangulationCurrencyAmount"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyTriangulationCurrencyAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">トライアンギュレーション通貨換算額</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationCurrencyAmount" xlink:to="lab_muc_multicurrencyTriangulationCurrencyAmount"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyTriangulationCurrencyAmount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">amountTriangulationCurrencyで指定されたトライアンギュレーション通貨での、multicurrencyDetailExchangeRateDate時点の換算額。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationCurrencyAmount" xlink:to="doc_muc_multicurrencyTriangulationCurrencyAmount"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyTriangulationCurrency" xlink:label="loc_muc_multicurrencyTriangulationCurrency"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyTriangulationCurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">トライアンギュレーション通貨</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationCurrency" xlink:to="lab_muc_multicurrencyTriangulationCurrency"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyTriangulationCurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">amountRestatedCurrencyと自国通貨間のトライアンギュレーション取引で使用される通貨。ISO4217コードを推奨。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationCurrency" xlink:to="doc_muc_multicurrencyTriangulationCurrency"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyTriangulationExchangeRate" xlink:label="loc_muc_multicurrencyTriangulationExchangeRate"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyTriangulationExchangeRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">トライアンギュレーション通貨換算レート</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationExchangeRate" xlink:to="lab_muc_multicurrencyTriangulationExchangeRate"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyTriangulationExchangeRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">amountTriangulationAmountの算出に用いられた、multicurrencyDetailExchangeRateDate時点の換算レート。（自国通貨をトライアンギュレーション通貨で割った値）</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationExchangeRate" xlink:to="doc_muc_multicurrencyTriangulationExchangeRate"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyTriangulationExchangeRateSource" xlink:label="loc_muc_multicurrencyTriangulationExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyTriangulationExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">トライアンギュレーション通貨換算レート情報源</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationExchangeRateSource" xlink:to="lab_muc_multicurrencyTriangulationExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyTriangulationExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">トライアンギュレーション通貨換算額の換算レートの情報源。たとえば、Reuters, Bloomberg。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationExchangeRateSource" xlink:to="doc_muc_multicurrencyTriangulationExchangeRateSource"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyTriangulationExchangeRateType" xlink:label="loc_muc_multicurrencyTriangulationExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyTriangulationExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">トライアンギュレーション通貨換算レート種別</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationExchangeRateType" xlink:to="lab_muc_multicurrencyTriangulationExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyTriangulationExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">トライアンギュレーション通貨換算額の換算レートの種別。たとえば、スポット・レート、先物など。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyTriangulationExchangeRateType" xlink:to="doc_muc_multicurrencyTriangulationExchangeRateType"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyCrossTriangulationExchangeRate" xlink:label="loc_muc_multicurrencyCrossTriangulationExchangeRate"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyCrossTriangulationExchangeRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算通貨トライアンギュレーション通貨換算レート</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyCrossTriangulationExchangeRate" xlink:to="lab_muc_multicurrencyCrossTriangulationExchangeRate"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyCrossTriangulationExchangeRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">amountRestatedAmountからamountTriangulationAmountへの、multicurrencyDetailExchangeRateDate時点の換算レート。（外貨通貨をトライアンギュレーション通貨で割った値）</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyCrossTriangulationExchangeRate" xlink:to="doc_muc_multicurrencyCrossTriangulationExchangeRate"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyCrossTriangulationExchangeRateSource" xlink:label="loc_muc_multicurrencyCrossTriangulationExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyCrossTriangulationExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算通貨トライアンギュレーション通貨換算レート情報源</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyCrossTriangulationExchangeRateSource" xlink:to="lab_muc_multicurrencyCrossTriangulationExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyCrossTriangulationExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外貨通貨とトライアンギュレーション通貨の間の換算レートの情報源。たとえば、Reuters, Bloomberg。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyCrossTriangulationExchangeRateSource" xlink:to="doc_muc_multicurrencyCrossTriangulationExchangeRateSource"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyCrossTriangulationExchangeRateType" xlink:label="loc_muc_multicurrencyCrossTriangulationExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyCrossTriangulationExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算通貨トライアンギュレーション通貨換算レート種別</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyCrossTriangulationExchangeRateType" xlink:to="lab_muc_multicurrencyCrossTriangulationExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyCrossTriangulationExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外貨通貨とトライアンギュレーション通貨の間の換算レートの種別。たとえば、スポット・レート、先物など。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyCrossTriangulationExchangeRateType" xlink:to="doc_muc_multicurrencyCrossTriangulationExchangeRateType"/>
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyComment" xlink:label="loc_muc_multicurrencyComment"/>
+    <label xlink:type="resource" xlink:label="lab_muc_multicurrencyComment" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">多通貨明細コメント</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyComment" xlink:to="lab_muc_multicurrencyComment"/>
+    <label xlink:type="resource" xlink:label="doc_muc_multicurrencyComment" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">multicurrencyDetailの内容のコメント。原取引時以外の、追加の換算レートを記録する理由などを記述。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyComment" xlink:to="doc_muc_multicurrencyComment"/>
+  </labelLink>
+</linkbase>

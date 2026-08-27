@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/taf" elementFormDefault="qualified" attributeFormDefault="unqualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:taf="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/taf"
+>
+  <annotation>
+    <documentation xml:lang="en">This is an experimental XBRL GL Next taxonomy published using a provisional
+namespace under the domain managed by XBRL Japan. It is not an XBRL
+International Recommendation or other final XBRL International specification.
+The namespace and taxonomy may be replaced when an official XBRL International
+namespace is assigned.</documentation>
+  </annotation>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <include schemaLocation="../../taf/taf-2026-12-31.xsd"/>
+  <!-- structural ComplexType supplied for the Palette module -->
+  <complexType name="originatingDocumentComplexType">
+    <sequence>
+      <element ref="taf:originatingDocumentType" minOccurs="0"/>
+      <element ref="taf:originatingDocumentNumber" minOccurs="0"/>
+      <element ref="taf:originatingDocumentDate" minOccurs="0"/>
+      <element ref="taf:originatingDocumentIdentifierType" minOccurs="0"/>
+      <element ref="taf:originatingDocumentIdentifierCode" minOccurs="0"/>
+      <element ref="taf:originatingDocumentIdentifierTaxCode" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+</schema>

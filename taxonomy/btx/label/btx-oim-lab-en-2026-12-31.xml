@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<linkbase xmlns="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_businessTransactions" xlink:label="loc_p_btx_businessTransactions"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_businessTransactions" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Business Transactions</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_businessTransactions" xlink:to="lab_p_btx_businessTransactions"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_businessTransactions" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Economic event represented by one or more business documents and corresponding accounting entries, such as orders, shipments, invoices, and journal entries.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_businessTransactions" xlink:to="doc_p_btx_businessTransactions"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_entityParty" xlink:label="loc_p_btx_entityParty"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_entityParty" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Entity_ Party</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_entityParty" xlink:to="lab_p_btx_entityParty"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_entityParty" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Holder for entity information - information about the reporting organization.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_entityParty" xlink:to="doc_p_btx_entityParty"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_transactionHeader" xlink:label="loc_p_btx_transactionHeader"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_transactionHeader" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Transaction_ Header</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_transactionHeader" xlink:to="lab_p_btx_transactionHeader"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_transactionHeader" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Parent class grouping transaction document header records.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_transactionHeader" xlink:to="doc_p_btx_transactionHeader"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_partyName" xlink:label="loc_btx_partyName"/>
+    <label xlink:type="resource" xlink:label="lab_btx_partyName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Party Name</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_partyName" xlink:to="lab_btx_partyName"/>
+    <label xlink:type="resource" xlink:label="doc_btx_partyName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Name of the party</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_partyName" xlink:to="doc_btx_partyName"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_partyId" xlink:label="loc_btx_partyId"/>
+    <label xlink:type="resource" xlink:label="lab_btx_partyId" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Party ID</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_partyId" xlink:to="lab_btx_partyId"/>
+    <label xlink:type="resource" xlink:label="doc_btx_partyId" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">ID Number of the party</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_partyId" xlink:to="doc_btx_partyId"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_partyBusinessDescription" xlink:label="loc_btx_partyBusinessDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_partyBusinessDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Party Business Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_partyBusinessDescription" xlink:to="lab_btx_partyBusinessDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_partyBusinessDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Description of the nature of the business of the party.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_partyBusinessDescription" xlink:to="doc_btx_partyBusinessDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_defaultAccountingMethodPurpose" xlink:label="loc_btx_defaultAccountingMethodPurpose"/>
+    <label xlink:type="resource" xlink:label="lab_btx_defaultAccountingMethodPurpose" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Default Accounting Method Purpose</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_defaultAccountingMethodPurpose" xlink:to="lab_btx_defaultAccountingMethodPurpose"/>
+    <label xlink:type="resource" xlink:label="doc_btx_defaultAccountingMethodPurpose" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If not stated explicitly at the line level, the default reporting purpose - from book, tax, management, statutory, other</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_defaultAccountingMethodPurpose" xlink:to="doc_btx_defaultAccountingMethodPurpose"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_defaultAccountingMethodPurposeDescription" xlink:label="loc_btx_defaultAccountingMethodPurposeDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_defaultAccountingMethodPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Default Accounting Method Purpose Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_defaultAccountingMethodPurposeDescription" xlink:to="lab_btx_defaultAccountingMethodPurposeDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_defaultAccountingMethodPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the default accounting method purpose</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_defaultAccountingMethodPurposeDescription" xlink:to="doc_btx_defaultAccountingMethodPurposeDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_fiscalYearStart" xlink:label="loc_btx_fiscalYearStart"/>
+    <label xlink:type="resource" xlink:label="lab_btx_fiscalYearStart" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Fiscal Year Start</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_fiscalYearStart" xlink:to="lab_btx_fiscalYearStart"/>
+    <label xlink:type="resource" xlink:label="doc_btx_fiscalYearStart" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Start of fiscal year. Where appropriate, corporate year period representation permits non-365 or 366 day years (more appropriate for internal sharing than data from external sources), In Europe, some jurisdictions allow 2 year minus 1 day fiscal years.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_fiscalYearStart" xlink:to="doc_btx_fiscalYearStart"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_fiscalYearEnd" xlink:label="loc_btx_fiscalYearEnd"/>
+    <label xlink:type="resource" xlink:label="lab_btx_fiscalYearEnd" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Fiscal Year End</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_fiscalYearEnd" xlink:to="lab_btx_fiscalYearEnd"/>
+    <label xlink:type="resource" xlink:label="doc_btx_fiscalYearEnd" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">End of fiscal year. Where appropriate, corporate year period representation permits non-365 or 366 day years (more appropriate for internal sharing than data from external sources), In Europe, some jurisdictions allow 2 year minus 1 day fiscal years.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_fiscalYearEnd" xlink:to="doc_btx_fiscalYearEnd"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_entityPartyType" xlink:label="loc_btx_entityPartyType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_entityPartyType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Entity Party Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_entityPartyType" xlink:to="lab_btx_entityPartyType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_entityPartyType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Role discriminator that identifies the semantic role of an Entity Party occurrence.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_entityPartyType" xlink:to="doc_btx_entityPartyType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_datePosted" xlink:label="loc_btx_datePosted"/>
+    <label xlink:type="resource" xlink:label="lab_btx_datePosted" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Date Posted</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_datePosted" xlink:to="lab_btx_datePosted"/>
+    <label xlink:type="resource" xlink:label="doc_btx_datePosted" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date this entry was posted (validated) to the general ledger. May not represent the date of accounting significance which is represented by 'postingDate'.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_datePosted" xlink:to="doc_btx_datePosted"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_transactionCreator" xlink:label="loc_btx_transactionCreator"/>
+    <label xlink:type="resource" xlink:label="lab_btx_transactionCreator" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Creator</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_transactionCreator" xlink:to="lab_btx_transactionCreator"/>
+    <label xlink:type="resource" xlink:label="doc_btx_transactionCreator" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Initials/name of operator originally entering.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_transactionCreator" xlink:to="doc_btx_transactionCreator"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_lastModifier" xlink:label="loc_btx_lastModifier"/>
+    <label xlink:type="resource" xlink:label="lab_btx_lastModifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Last Modifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_lastModifier" xlink:to="lab_btx_lastModifier"/>
+    <label xlink:type="resource" xlink:label="doc_btx_lastModifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identification for the last person modifying this entry before posting.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_lastModifier" xlink:to="doc_btx_lastModifier"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_responsiblePerson" xlink:label="loc_btx_responsiblePerson"/>
+    <label xlink:type="resource" xlink:label="lab_btx_responsiblePerson" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Responsible Person</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_responsiblePerson" xlink:to="lab_btx_responsiblePerson"/>
+    <label xlink:type="resource" xlink:label="doc_btx_responsiblePerson" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifier of person who created or originated or is otherwise responsible for the entry.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_responsiblePerson" xlink:to="doc_btx_responsiblePerson"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_postingCode" xlink:label="loc_btx_postingCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_postingCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Posting Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_postingCode" xlink:to="lab_btx_postingCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_postingCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code for posting to period, e.g., period 1-13, based on codes in an accounting period file. We do not recommend that software vendors export here, but suggest providing period end numbers for the buckets. Possibilities W1 through W53, M1 through M13, Q1-Q4. Developers and others creating output files are encouraged to supply an actual end date.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_postingCode" xlink:to="doc_btx_postingCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_numberOfEntries" xlink:label="loc_btx_numberOfEntries"/>
+    <label xlink:type="resource" xlink:label="lab_btx_numberOfEntries" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Number of Entries</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_numberOfEntries" xlink:to="lab_btx_numberOfEntries"/>
+    <label xlink:type="resource" xlink:label="doc_btx_numberOfEntries" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">The total number of entries.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_numberOfEntries" xlink:to="doc_btx_numberOfEntries"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_comment" xlink:label="loc_btx_comment"/>
+    <label xlink:type="resource" xlink:label="lab_btx_comment" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_comment" xlink:to="lab_btx_comment"/>
+    <label xlink:type="resource" xlink:label="doc_btx_comment" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Comment of the entry</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_comment" xlink:to="doc_btx_comment"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerEntryDate" xlink:label="loc_btx_headerEntryDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerEntryDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header_ Entry Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerEntryDate" xlink:to="lab_btx_headerEntryDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerEntryDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Represents the actual date/time of entry into computer (automated from system date, often misrepresented by changing system clock). Posting dates are maintained separately.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerEntryDate" xlink:to="doc_btx_headerEntryDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTypeIdentifier" xlink:label="loc_btx_headerTypeIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTypeIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header_ Type Identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTypeIdentifier" xlink:to="lab_btx_headerTypeIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTypeIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">One of the following enumerated list: adjusting, budget, comparative, external-accountant, standard, passed-adjusting, eliminating, proposed, recurring, reclassifying, simulated, tax, other</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTypeIdentifier" xlink:to="doc_btx_headerTypeIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerEntryNumberCounter" xlink:label="loc_btx_headerEntryNumberCounter"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerEntryNumberCounter" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Entry Number Counter</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerEntryNumberCounter" xlink:to="lab_btx_headerEntryNumberCounter"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerEntryNumberCounter" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Unique reference for the entry - a numeric counter</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerEntryNumberCounter" xlink:to="doc_btx_headerEntryNumberCounter"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerDocumentType" xlink:label="loc_btx_headerDocumentType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerDocumentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Document Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerDocumentType" xlink:to="lab_btx_headerDocumentType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerDocumentType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An enumerated field describing the original source document, with invoice, voucher, check and other enumerated entries</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerDocumentType" xlink:to="doc_btx_headerDocumentType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerDocumentTypeDescription" xlink:label="loc_btx_headerDocumentTypeDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerDocumentTypeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Document Type Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerDocumentTypeDescription" xlink:to="lab_btx_headerDocumentTypeDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerDocumentTypeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the document type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerDocumentTypeDescription" xlink:to="doc_btx_headerDocumentTypeDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerInvoiceType" xlink:label="loc_btx_headerInvoiceType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerInvoiceType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Invoice Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerInvoiceType" xlink:to="lab_btx_headerInvoiceType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerInvoiceType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code specifying the functional type of an invoice or credit note according to the governed UNCL 1001 D.24A Invoice/Credit Note family subset.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerInvoiceType" xlink:to="doc_btx_headerInvoiceType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerDocumentNumber" xlink:label="loc_btx_headerDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Document Number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerDocumentNumber" xlink:to="lab_btx_headerDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Invoice, check, voucher, or other source document identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerDocumentNumber" xlink:to="doc_btx_headerDocumentNumber"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_referencedDocument" xlink:label="loc_p_btx_referencedDocument"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_referencedDocument" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Referenced Document</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_referencedDocument" xlink:to="lab_p_btx_referencedDocument"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_referencedDocument" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Reference for the document; number assigned to track the document</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_referencedDocument" xlink:to="doc_p_btx_referencedDocument"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerPaymentMethod" xlink:label="loc_btx_headerPaymentMethod"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerPaymentMethod" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Payment Method</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerPaymentMethod" xlink:to="lab_btx_headerPaymentMethod"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerPaymentMethod" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Method used or to be used to make the payment</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerPaymentMethod" xlink:to="doc_btx_headerPaymentMethod"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerPostingStatus" xlink:label="loc_btx_headerPostingStatus"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerPostingStatus" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Posting Status</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerPostingStatus" xlink:to="lab_btx_headerPostingStatus"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerPostingStatus" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">deferred: although entered, it cannot be posted until a later time\nposted: already posted\nproposed: a proposed item that must be approved\nsimulated: a simulated item, for what-if\ntax: a tax-specific entry\nunposted:entered but not yet posted or validated\ncancelled:entered and later cancelled\nother:other status - should be described in postingStatusDescription</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerPostingStatus" xlink:to="doc_btx_headerPostingStatus"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerPostingStatusDescription" xlink:label="loc_btx_headerPostingStatusDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerPostingStatusDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Posting Status Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerPostingStatusDescription" xlink:to="lab_btx_headerPostingStatusDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerPostingStatusDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the posting status</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerPostingStatusDescription" xlink:to="doc_btx_headerPostingStatusDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAcknowledgementDate" xlink:label="loc_btx_headerAcknowledgementDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAcknowledgementDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Acknowledgement Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAcknowledgementDate" xlink:to="lab_btx_headerAcknowledgementDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAcknowledgementDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date of acknowledgement of goods/services shipped/received.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAcknowledgementDate" xlink:to="doc_btx_headerAcknowledgementDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerConfirmationDate" xlink:label="loc_btx_headerConfirmationDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerConfirmationDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Confirmation Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerConfirmationDate" xlink:to="lab_btx_headerConfirmationDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerConfirmationDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date of confirmation of shipment/receipt.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerConfirmationDate" xlink:to="doc_btx_headerConfirmationDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerShipFrom" xlink:label="loc_btx_headerShipFrom"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerShipFrom" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Ship From</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerShipFrom" xlink:to="lab_btx_headerShipFrom"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerShipFrom" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">References Organization Address Location Identifier where used. Otherwise free form.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerShipFrom" xlink:to="doc_btx_headerShipFrom"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerDateShippedReceived" xlink:label="loc_btx_headerDateShippedReceived"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerDateShippedReceived" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Date Shipped/Received</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerDateShippedReceived" xlink:to="lab_btx_headerDateShippedReceived"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerDateShippedReceived" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date goods/services are shipped/received.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerDateShippedReceived" xlink:to="doc_btx_headerDateShippedReceived"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerMaturityDateOrDateDue" xlink:label="loc_btx_headerMaturityDateOrDateDue"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerMaturityDateOrDateDue" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Maturity Date or Date Due</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerMaturityDateOrDateDue" xlink:to="lab_btx_headerMaturityDateOrDateDue"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerMaturityDateOrDateDue" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Due date or other maturity date.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerMaturityDateOrDateDue" xlink:to="doc_btx_headerMaturityDateOrDateDue"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerPaymentTerms" xlink:label="loc_btx_headerPaymentTerms"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerPaymentTerms" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Payment Terms</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerPaymentTerms" xlink:to="lab_btx_headerPaymentTerms"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerPaymentTerms" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Discount/payment terms.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerPaymentTerms" xlink:to="doc_btx_headerPaymentTerms"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_headerIdentifierReference" xlink:label="loc_p_btx_headerIdentifierReference"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_headerIdentifierReference" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header_ Identifier Reference</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerIdentifierReference" xlink:to="lab_p_btx_headerIdentifierReference"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_headerIdentifierReference" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identification for customer, vendor, or employee.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerIdentifierReference" xlink:to="doc_p_btx_headerIdentifierReference"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_headerTax" xlink:label="loc_p_btx_headerTax"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_headerTax" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header_ Tax</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerTax" xlink:to="lab_p_btx_headerTax"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_headerTax" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Class for holding tax related information</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerTax" xlink:to="doc_p_btx_headerTax"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_headerAmountStructure" xlink:label="loc_p_btx_headerAmountStructure"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_headerAmountStructure" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header_ Amount Structure</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerAmountStructure" xlink:to="lab_p_btx_headerAmountStructure"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_headerAmountStructure" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Structure representing monetary amounts and currency information applicable to the document as a whole, such as document-level totals or aggregated tax amounts.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerAmountStructure" xlink:to="doc_p_btx_headerAmountStructure"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_transactionDetail" xlink:label="loc_p_btx_transactionDetail"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_transactionDetail" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Transaction_ Detail</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_transactionDetail" xlink:to="lab_p_btx_transactionDetail"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_transactionDetail" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Parent for document line</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_transactionDetail" xlink:to="doc_p_btx_transactionDetail"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_businessProcessType" xlink:label="loc_btx_businessProcessType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_businessProcessType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Business Process Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_businessProcessType" xlink:to="lab_btx_businessProcessType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_businessProcessType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Type or context of the business process to which the business transaction belongs; distinct from document type, invoice subtype, and transaction entry type.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_businessProcessType" xlink:to="doc_btx_businessProcessType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_headerRichTextComment" xlink:label="loc_p_btx_headerRichTextComment"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_headerRichTextComment" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header_ Rich Text Comment</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerRichTextComment" xlink:to="lab_p_btx_headerRichTextComment"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_headerRichTextComment" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Repeatable header note or comment occurrence.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerRichTextComment" xlink:to="doc_p_btx_headerRichTextComment"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_headerAdjustment" xlink:label="loc_p_btx_headerAdjustment"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_headerAdjustment" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header_ Adjustment</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerAdjustment" xlink:to="lab_p_btx_headerAdjustment"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_headerAdjustment" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document-level allowance or charge adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_headerAdjustment" xlink:to="doc_p_btx_headerAdjustment"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_transactionDocumentNumber" xlink:label="loc_btx_transactionDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="lab_btx_transactionDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_transactionDocumentNumber" xlink:to="lab_btx_transactionDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="doc_btx_transactionDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_transactionDocumentNumber" xlink:to="doc_btx_transactionDocumentNumber"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_referencedDocumentType" xlink:label="loc_btx_referencedDocumentType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_referencedDocumentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentType" xlink:to="lab_btx_referencedDocumentType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_referencedDocumentType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document type  check, debit-memo, credit-memo, finance-charge, invoice, order-customer, order-vendor, payment-other, reminder, tegata, voucher, shipment, receipt, manual-adjustment, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentType" xlink:to="doc_btx_referencedDocumentType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_referencedDocumentNumber" xlink:label="loc_btx_referencedDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="lab_btx_referencedDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentNumber" xlink:to="lab_btx_referencedDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="doc_btx_referencedDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentNumber" xlink:to="doc_btx_referencedDocumentNumber"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_referencedDocumentDate" xlink:label="loc_btx_referencedDocumentDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_referencedDocumentDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentDate" xlink:to="lab_btx_referencedDocumentDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_referencedDocumentDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentDate" xlink:to="doc_btx_referencedDocumentDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_referencedDocumentIdentifierType" xlink:label="loc_btx_referencedDocumentIdentifierType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_referencedDocumentIdentifierType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Identifier Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentIdentifierType" xlink:to="lab_btx_referencedDocumentIdentifierType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_referencedDocumentIdentifierType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document identifier type. Enumerated as: C, customer, E, employee, V, vendor, O, other, I, salesperson-internal, X, salesperson-external, N, contractor.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentIdentifierType" xlink:to="doc_btx_referencedDocumentIdentifierType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_referencedDocumentIdentifierCode" xlink:label="loc_btx_referencedDocumentIdentifierCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_referencedDocumentIdentifierCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Identifier Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentIdentifierCode" xlink:to="lab_btx_referencedDocumentIdentifierCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_referencedDocumentIdentifierCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document identifier code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentIdentifierCode" xlink:to="doc_btx_referencedDocumentIdentifierCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_referencedDocumentReceivedDate" xlink:label="loc_btx_referencedDocumentReceivedDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_referencedDocumentReceivedDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Received Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentReceivedDate" xlink:to="lab_btx_referencedDocumentReceivedDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_referencedDocumentReceivedDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date/time document was noted as received (if necessary). Represents actual date received. Posting dates are maintained separately.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentReceivedDate" xlink:to="doc_btx_referencedDocumentReceivedDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_referencedDocumentLocation" xlink:label="loc_btx_referencedDocumentLocation"/>
+    <label xlink:type="resource" xlink:label="lab_btx_referencedDocumentLocation" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Location</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentLocation" xlink:to="lab_btx_referencedDocumentLocation"/>
+    <label xlink:type="resource" xlink:label="doc_btx_referencedDocumentLocation" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document location as URI, file name or other reference. Alternatively, text of document can be placed here.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencedDocumentLocation" xlink:to="doc_btx_referencedDocumentLocation"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_referencePurpose" xlink:label="loc_btx_referencePurpose"/>
+    <label xlink:type="resource" xlink:label="lab_btx_referencePurpose" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Reference Purpose</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencePurpose" xlink:to="lab_btx_referencePurpose"/>
+    <label xlink:type="resource" xlink:label="doc_btx_referencePurpose" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Explicit taxonomy discriminator supplied by Value Domain v10 selector review</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_referencePurpose" xlink:to="doc_btx_referencePurpose"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_documentAttachment" xlink:label="loc_p_btx_documentAttachment"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_documentAttachment" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Attachment</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_documentAttachment" xlink:to="lab_p_btx_documentAttachment"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_documentAttachment" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Attachment or external document payload associated with this referenced document.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_documentAttachment" xlink:to="doc_p_btx_documentAttachment"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_binaryContent" xlink:label="loc_btx_binaryContent"/>
+    <label xlink:type="resource" xlink:label="lab_btx_binaryContent" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Binary Content</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_binaryContent" xlink:to="lab_btx_binaryContent"/>
+    <label xlink:type="resource" xlink:label="doc_btx_binaryContent" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Binary attachment content encoded as base64.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_binaryContent" xlink:to="doc_btx_binaryContent"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_mimeType" xlink:label="loc_btx_mimeType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_mimeType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">MIME Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_mimeType" xlink:to="lab_btx_mimeType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_mimeType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">MIME media type of the attached content.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_mimeType" xlink:to="doc_btx_mimeType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_fileName" xlink:label="loc_btx_fileName"/>
+    <label xlink:type="resource" xlink:label="lab_btx_fileName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">File Name</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_fileName" xlink:to="lab_btx_fileName"/>
+    <label xlink:type="resource" xlink:label="doc_btx_fileName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">File name associated with the attached content.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_fileName" xlink:to="doc_btx_fileName"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_externalUri" xlink:label="loc_btx_externalUri"/>
+    <label xlink:type="resource" xlink:label="lab_btx_externalUri" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">External URI</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_externalUri" xlink:to="lab_btx_externalUri"/>
+    <label xlink:type="resource" xlink:label="doc_btx_externalUri" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">External URI at which the referenced document or attachment can be obtained.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_externalUri" xlink:to="doc_btx_externalUri"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierCode" xlink:label="loc_btx_headerIdentifierCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierCode" xlink:to="lab_btx_headerIdentifierCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Unique ID Number associated with identifierReference</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierCode" xlink:to="doc_btx_headerIdentifierCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierPurpose" xlink:label="loc_btx_headerIdentifierPurpose"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierPurpose" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Purpose</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierPurpose" xlink:to="lab_btx_headerIdentifierPurpose"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierPurpose" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Freeform for codes like purchasing, billing, manufacturing at identifier level.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierPurpose" xlink:to="doc_btx_headerIdentifierPurpose"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierActive" xlink:label="loc_btx_headerIdentifierActive"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierActive" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Active</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierActive" xlink:to="lab_btx_headerIdentifierActive"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierActive" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Boolean to indicate whether the identifier is active (="true") or inactive (="false")</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierActive" xlink:to="doc_btx_headerIdentifierActive"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierOrganizationType" xlink:label="loc_btx_headerIdentifierOrganizationType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierOrganizationType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Organization Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierOrganizationType" xlink:to="lab_btx_headerIdentifierOrganizationType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierOrganizationType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifier Organization Type. Enumerated as: individual, organization, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierOrganizationType" xlink:to="doc_btx_headerIdentifierOrganizationType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierOrganizationTypeDescription" xlink:label="loc_btx_headerIdentifierOrganizationTypeDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierOrganizationTypeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Organization Type Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierOrganizationTypeDescription" xlink:to="lab_btx_headerIdentifierOrganizationTypeDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierOrganizationTypeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the identifier organization type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierOrganizationTypeDescription" xlink:to="doc_btx_headerIdentifierOrganizationTypeDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierDescription" xlink:label="loc_btx_headerIdentifierDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierDescription" xlink:to="lab_btx_headerIdentifierDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Textual description of identifierReference.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierDescription" xlink:to="doc_btx_headerIdentifierDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierType" xlink:label="loc_btx_headerIdentifierType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierType" xlink:to="lab_btx_headerIdentifierType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Entity type (enumerated): C, customer, E, employee, V, vendor, O, other, I, salesperson-internal, X, salesperson-external, N, contractor.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierType" xlink:to="doc_btx_headerIdentifierType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierCategory" xlink:label="loc_btx_headerIdentifierCategory"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierCategory" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Category</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierCategory" xlink:to="lab_btx_headerIdentifierCategory"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierCategory" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">For use as Customer, Vendor or Employee Class (such as Residential/Commercial/Institutional/Government or Retail/Wholesale or other classifications used by business).</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierCategory" xlink:to="doc_btx_headerIdentifierCategory"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_registeredIdentifier" xlink:label="loc_p_btx_registeredIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_registeredIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Registered Identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_registeredIdentifier" xlink:to="lab_p_btx_registeredIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_registeredIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">A structured identifier comprising an identifier value and the registration or identification scheme needed to interpret it.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_registeredIdentifier" xlink:to="doc_p_btx_registeredIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierRegisteredId" xlink:label="loc_btx_headerIdentifierRegisteredId"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierRegisteredId" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">ID</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierRegisteredId" xlink:to="lab_btx_headerIdentifierRegisteredId"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierRegisteredId" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">The registered identifier value assigned under the specified identification scheme.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierRegisteredId" xlink:to="doc_btx_headerIdentifierRegisteredId"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerIdentifierRegisteredIdIdentificationScheme" xlink:label="loc_btx_headerIdentifierRegisteredIdIdentificationScheme"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerIdentifierRegisteredIdIdentificationScheme" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identification Scheme</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierRegisteredIdIdentificationScheme" xlink:to="lab_btx_headerIdentifierRegisteredIdIdentificationScheme"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerIdentifierRegisteredIdIdentificationScheme" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">The registration or identification scheme under which the identifier is assigned and interpreted.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerIdentifierRegisteredIdIdentificationScheme" xlink:to="doc_btx_headerIdentifierRegisteredIdIdentificationScheme"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxAuthority" xlink:label="loc_btx_headerTaxAuthority"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxAuthority" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Authority</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxAuthority" xlink:to="lab_btx_headerTaxAuthority"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxAuthority" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Name of the relevant tax authority</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxAuthority" xlink:to="doc_btx_headerTaxAuthority"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxTableCode" xlink:label="loc_btx_headerTaxTableCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxTableCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Table Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxTableCode" xlink:to="lab_btx_headerTaxTableCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxTableCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tax table code used by the relevant tax authority</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxTableCode" xlink:to="doc_btx_headerTaxTableCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxDescription" xlink:label="loc_btx_headerTaxDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxDescription" xlink:to="lab_btx_headerTaxDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Description of tax authority</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxDescription" xlink:to="doc_btx_headerTaxDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAmountOfTaxes" xlink:label="loc_btx_headerAmountOfTaxes"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAmountOfTaxes" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Amount of Taxes</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAmountOfTaxes" xlink:to="lab_btx_headerAmountOfTaxes"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAmountOfTaxes" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Amount of taxes</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAmountOfTaxes" xlink:to="doc_btx_headerAmountOfTaxes"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerBasisForTaxation" xlink:label="loc_btx_headerBasisForTaxation"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerBasisForTaxation" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Basis for Taxation</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerBasisForTaxation" xlink:to="lab_btx_headerBasisForTaxation"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerBasisForTaxation" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Basis for taxation</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerBasisForTaxation" xlink:to="doc_btx_headerBasisForTaxation"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxPercentageRate" xlink:label="loc_btx_headerTaxPercentageRate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxPercentageRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Percentage Rate</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxPercentageRate" xlink:to="lab_btx_headerTaxPercentageRate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxPercentageRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Percent rate for VAT or other taxes normally a number between 0 and 1.0 - e.g. 50% is represented as 0.5</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxPercentageRate" xlink:to="doc_btx_headerTaxPercentageRate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxCategory" xlink:label="loc_btx_headerTaxCategory"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxCategory" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Category</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxCategory" xlink:to="lab_btx_headerTaxCategory"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxCategory" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">A class or category of taxes</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxCategory" xlink:to="doc_btx_headerTaxCategory"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxCommentExemptionReason" xlink:label="loc_btx_headerTaxCommentExemptionReason"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxCommentExemptionReason" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Comment/Exemption Reason</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxCommentExemptionReason" xlink:to="lab_btx_headerTaxCommentExemptionReason"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxCommentExemptionReason" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Additional text/code for exemption reasons or other comments.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxCommentExemptionReason" xlink:to="doc_btx_headerTaxCommentExemptionReason"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxAmountInForeignCurrency" xlink:label="loc_btx_headerTaxAmountInForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxAmountInForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Amount in Foreign Currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxAmountInForeignCurrency" xlink:to="lab_btx_headerTaxAmountInForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxAmountInForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, the amount of tax in that currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxAmountInForeignCurrency" xlink:to="doc_btx_headerTaxAmountInForeignCurrency"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxForeignCurrency" xlink:label="loc_btx_headerTaxForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Foreign Currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxForeignCurrency" xlink:to="lab_btx_headerTaxForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, that currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxForeignCurrency" xlink:to="doc_btx_headerTaxForeignCurrency"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxExchangeRateDate" xlink:label="loc_btx_headerTaxExchangeRateDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxExchangeRateDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRateDate" xlink:to="lab_btx_headerTaxExchangeRateDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxExchangeRateDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, the date or date and time of the exchange rate used</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRateDate" xlink:to="doc_btx_headerTaxExchangeRateDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxExchangeRate" xlink:label="loc_btx_headerTaxExchangeRate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxExchangeRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRate" xlink:to="lab_btx_headerTaxExchangeRate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxExchangeRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, the exchange rate used expressed as national currency divided by foreign currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRate" xlink:to="doc_btx_headerTaxExchangeRate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxExchangeRateSource" xlink:label="loc_btx_headerTaxExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate Source</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRateSource" xlink:to="lab_btx_headerTaxExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, source of exchange rate - for example, Reuters, Bloomberg</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRateSource" xlink:to="doc_btx_headerTaxExchangeRateSource"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxExchangeRateType" xlink:label="loc_btx_headerTaxExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRateType" xlink:to="lab_btx_headerTaxExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, type of exchange rate - for example, spot rate, forward contract etc.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRateType" xlink:to="doc_btx_headerTaxExchangeRateType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxExchangeRateComment" xlink:label="loc_btx_headerTaxExchangeRateComment"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxExchangeRateComment" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate Comment</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRateComment" xlink:to="lab_btx_headerTaxExchangeRateComment"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxExchangeRateComment" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, comment about exchange rate used</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExchangeRateComment" xlink:to="doc_btx_headerTaxExchangeRateComment"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxType" xlink:label="loc_btx_taxType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxType" xlink:to="lab_btx_taxType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Explicit taxonomy discriminator supplied by Value Domain v10 selector review</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxType" xlink:to="doc_btx_taxType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxExemptionReasonCode" xlink:label="loc_btx_headerTaxExemptionReasonCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxExemptionReasonCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exemption Reason Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExemptionReasonCode" xlink:to="lab_btx_headerTaxExemptionReasonCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxExemptionReasonCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code identifying the reason why the tax occurrence is exempt from tax.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExemptionReasonCode" xlink:to="doc_btx_headerTaxExemptionReasonCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerTaxExemptionReasonText" xlink:label="loc_btx_headerTaxExemptionReasonText"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerTaxExemptionReasonText" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exemption Reason Text</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExemptionReasonText" xlink:to="lab_btx_headerTaxExemptionReasonText"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerTaxExemptionReasonText" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Human-readable text describing the reason why the tax occurrence is exempt from tax.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerTaxExemptionReasonText" xlink:to="doc_btx_headerTaxExemptionReasonText"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAmount" xlink:label="loc_btx_headerAmount"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Amount</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAmount" xlink:to="lab_btx_headerAmount"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAmount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Numeric value of the monetary amount expressed in the specified currency.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAmount" xlink:to="doc_btx_headerAmount"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAmountStructureAmountType" xlink:label="loc_btx_headerAmountStructureAmountType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAmountStructureAmountType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Amount Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAmountStructureAmountType" xlink:to="lab_btx_headerAmountStructureAmountType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAmountStructureAmountType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code or text specifying the type or role of the amount, such as tax amount, tax base amount, allowance amount, or charge amount.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAmountStructureAmountType" xlink:to="doc_btx_headerAmountStructureAmountType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerCurrencyCode" xlink:label="loc_btx_headerCurrencyCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerCurrencyCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Currency Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerCurrencyCode" xlink:to="lab_btx_headerCurrencyCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerCurrencyCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code specifying the currency in which the amount is expressed, typically an ISO 4217 currency code.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerCurrencyCode" xlink:to="doc_btx_headerCurrencyCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerCurrencyCodeType" xlink:label="loc_btx_headerCurrencyCodeType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerCurrencyCodeType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Currency Code Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerCurrencyCodeType" xlink:to="lab_btx_headerCurrencyCodeType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerCurrencyCodeType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code specifying the role of the currency used for the amount, such as functional currency, local currency, reporting currency, or transaction currency.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerCurrencyCodeType" xlink:to="doc_btx_headerCurrencyCodeType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAmountType" xlink:label="loc_btx_headerAmountType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAmountType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header_ Amount Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAmountType" xlink:to="lab_btx_headerAmountType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAmountType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code or text specifying the type or role of the amount, such as tax amount, tax base amount, allowance amount, or charge amount.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAmountType" xlink:to="doc_btx_headerAmountType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_lineNumber" xlink:label="loc_btx_lineNumber"/>
+    <label xlink:type="resource" xlink:label="lab_btx_lineNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Line Number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_lineNumber" xlink:to="lab_btx_lineNumber"/>
+    <label xlink:type="resource" xlink:label="doc_btx_lineNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifier for a particular entry detail</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_lineNumber" xlink:to="doc_btx_lineNumber"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_lineNumberCounter" xlink:label="loc_btx_lineNumberCounter"/>
+    <label xlink:type="resource" xlink:label="lab_btx_lineNumberCounter" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Line Number Counter</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_lineNumberCounter" xlink:to="lab_btx_lineNumberCounter"/>
+    <label xlink:type="resource" xlink:label="doc_btx_lineNumberCounter" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Unique reference for the line - a numeric counter</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_lineNumberCounter" xlink:to="doc_btx_lineNumberCounter"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_postingDate" xlink:label="loc_btx_postingDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_postingDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Posting Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_postingDate" xlink:to="lab_btx_postingDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_postingDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">At the detail level, this represents the accounting significance date. No matter what date the document is received, entered, or posted, this signifies the accounting date of the entry. If you want to see the financial results for March 5, 2002 and this entry is given that date, the entry will be part of the results for March 5, 2002. This is different from the postedDate found at the entryHeader level. If you want the accounting significance to be a particular date, it goes here. A single entry could represent multiple dates, but would only be posted on one date.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_postingDate" xlink:to="doc_btx_postingDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_memoLine" xlink:label="loc_btx_memoLine"/>
+    <label xlink:type="resource" xlink:label="lab_btx_memoLine" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Memo Line</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_memoLine" xlink:to="lab_btx_memoLine"/>
+    <label xlink:type="resource" xlink:label="doc_btx_memoLine" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">A boolean like entry that indicates whether an entryDetail line has been provided solely to provide additional details and that tools should not consider the amount in postings.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_memoLine" xlink:to="doc_btx_memoLine"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailDeaderDocumentType" xlink:label="loc_btx_detailDeaderDocumentType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailDeaderDocumentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailDeaderDocumentType" xlink:to="lab_btx_detailDeaderDocumentType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailDeaderDocumentType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An enumerated field describing the original source document, with check, debit-memo, credit-memo, finance-charge, invoice, order-customer, order-vendor, payment-other, reminder, tegata, voucher, shipment, receipt, manual-adjustment, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailDeaderDocumentType" xlink:to="doc_btx_detailDeaderDocumentType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailDeaderDocumentTypeDescription" xlink:label="loc_btx_detailDeaderDocumentTypeDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailDeaderDocumentTypeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Type Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailDeaderDocumentTypeDescription" xlink:to="lab_btx_detailDeaderDocumentTypeDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailDeaderDocumentTypeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the document type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailDeaderDocumentTypeDescription" xlink:to="doc_btx_detailDeaderDocumentTypeDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailDeaderDocumentDate" xlink:label="loc_btx_detailDeaderDocumentDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailDeaderDocumentDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailDeaderDocumentDate" xlink:to="lab_btx_detailDeaderDocumentDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailDeaderDocumentDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date (and less likely in the paper world but possible in the e-world, time) on actual document (invoice, voucher, check date). Other dates control posting information.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailDeaderDocumentDate" xlink:to="doc_btx_detailDeaderDocumentDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_receivedDate" xlink:label="loc_btx_receivedDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_receivedDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Received Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_receivedDate" xlink:to="lab_btx_receivedDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_receivedDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date/time document was noted as received (if necessary). Represents actual date received. Posting dates are maintained separately.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_receivedDate" xlink:to="doc_btx_receivedDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_documentLocation" xlink:label="loc_btx_documentLocation"/>
+    <label xlink:type="resource" xlink:label="lab_btx_documentLocation" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Location</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_documentLocation" xlink:to="lab_btx_documentLocation"/>
+    <label xlink:type="resource" xlink:label="doc_btx_documentLocation" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document location as URI, file name or other reference. Alternatively, text of document can be placed here.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_documentLocation" xlink:to="doc_btx_documentLocation"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_postingStatus" xlink:label="loc_btx_postingStatus"/>
+    <label xlink:type="resource" xlink:label="lab_btx_postingStatus" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Posting Status</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_postingStatus" xlink:to="lab_btx_postingStatus"/>
+    <label xlink:type="resource" xlink:label="doc_btx_postingStatus" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">deferred: although entered, it cannot be posted until a later time
+posted: already posted
+proposed: a proposed item that must be approved
+simulated: a simulated item, for what-if
+tax: a tax-specific entry
+unposted:entered but not yet posted or validated
+cancelled:entered and later cancelled
+other:other status - should be described in postingStatusDescription</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_postingStatus" xlink:to="doc_btx_postingStatus"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_postingStatusDescription" xlink:label="loc_btx_postingStatusDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_postingStatusDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Posting Status Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_postingStatusDescription" xlink:to="lab_btx_postingStatusDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_postingStatusDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the posting status</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_postingStatusDescription" xlink:to="doc_btx_postingStatusDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailDescription" xlink:label="loc_btx_detailDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailDescription" xlink:to="lab_btx_detailDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Description of this line of detail only</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailDescription" xlink:to="doc_btx_detailDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_acknowledgementDate" xlink:label="loc_btx_acknowledgementDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_acknowledgementDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Acknowledgement Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_acknowledgementDate" xlink:to="lab_btx_acknowledgementDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_acknowledgementDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date of acknowledgement of goods/services shipped/received.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_acknowledgementDate" xlink:to="doc_btx_acknowledgementDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_confirmationDate" xlink:label="loc_btx_confirmationDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_confirmationDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Confirmation Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_confirmationDate" xlink:to="lab_btx_confirmationDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_confirmationDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date of confirmation of shipment/receipt.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_confirmationDate" xlink:to="doc_btx_confirmationDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_measurableClassDescription" xlink:label="loc_btx_measurableClassDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_measurableClassDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Class Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_measurableClassDescription" xlink:to="lab_btx_measurableClassDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_measurableClassDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description associated with gl-ehm:measurableClassID to provide specialization or clarification for the enumerated value of other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_measurableClassDescription" xlink:to="doc_btx_measurableClassDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_geospatialCoordinate" xlink:label="loc_btx_geospatialCoordinate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_geospatialCoordinate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Geospatial Coordinate</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_geospatialCoordinate" xlink:to="lab_btx_geospatialCoordinate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_geospatialCoordinate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Enter a relevant location for this item. Format can be either:
+- Degrees, minutes, and seconds (DMS): 41°24'12.2"N 2°10'26.5"E
+- Degrees and decimal minutes (DMM): 41 24.2028, 2 10.4418
+- Decimal degrees (DD): 41.40338, 2.17403</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_geospatialCoordinate" xlink:to="doc_btx_geospatialCoordinate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_detailIdentifierReference" xlink:label="loc_p_btx_detailIdentifierReference"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_detailIdentifierReference" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Detail_ Identifier Reference</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_detailIdentifierReference" xlink:to="lab_p_btx_detailIdentifierReference"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_detailIdentifierReference" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identification for customer, vendor, or employee.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_detailIdentifierReference" xlink:to="doc_p_btx_detailIdentifierReference"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_detailTax" xlink:label="loc_p_btx_detailTax"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_detailTax" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Detail_ Tax</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_detailTax" xlink:to="lab_p_btx_detailTax"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_detailTax" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Class for holding tax related information</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_detailTax" xlink:to="doc_p_btx_detailTax"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailRitchTextDetailDescription" xlink:label="loc_btx_detailRitchTextDetailDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailRitchTextDetailDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Detail_ Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailRitchTextDetailDescription" xlink:to="lab_btx_detailRitchTextDetailDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailRitchTextDetailDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Description of this line of detail only</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailRitchTextDetailDescription" xlink:to="doc_btx_detailRitchTextDetailDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailMeasurableClassIdentifier" xlink:label="loc_btx_detailMeasurableClassIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailMeasurableClassIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Detail_ Measurable Class Identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailMeasurableClassIdentifier" xlink:to="lab_btx_detailMeasurableClassIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailMeasurableClassIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An enumerated code to identify the inventory, fixed asset or other measurable class. Enumerated as: raw material, work-in-process, finished goods, assemblies, supplies, land, building, machinery, furniture, vehicles, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailMeasurableClassIdentifier" xlink:to="doc_btx_detailMeasurableClassIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_detailAmountStructure" xlink:label="loc_p_btx_detailAmountStructure"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_detailAmountStructure" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Detail_ Amount Structure</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_detailAmountStructure" xlink:to="lab_p_btx_detailAmountStructure"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_detailAmountStructure" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Structure representing monetary amounts and currency information applicable to an individual line, such as line-level net amounts, tax calculation bases, allowances, or charges.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_detailAmountStructure" xlink:to="doc_p_btx_detailAmountStructure"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_detailAdjustment" xlink:label="loc_p_btx_detailAdjustment"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_detailAdjustment" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Detail_ Adjustment</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_detailAdjustment" xlink:to="lab_p_btx_detailAdjustment"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_detailAdjustment" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Line-level allowance or charge adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_detailAdjustment" xlink:to="doc_p_btx_detailAdjustment"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierCode" xlink:label="loc_btx_identifierCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierCode" xlink:to="lab_btx_identifierCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Unique ID Number associated with identifierReference</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierCode" xlink:to="doc_btx_identifierCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierPurpose" xlink:label="loc_btx_identifierPurpose"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierPurpose" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Purpose</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierPurpose" xlink:to="lab_btx_identifierPurpose"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierPurpose" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Freeform for codes like purchasing, billing, manufacturing at identifier level.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierPurpose" xlink:to="doc_btx_identifierPurpose"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierActive" xlink:label="loc_btx_identifierActive"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierActive" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Active</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierActive" xlink:to="lab_btx_identifierActive"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierActive" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Boolean to indicate whether the identifier is active (="true") or inactive (="false")</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierActive" xlink:to="doc_btx_identifierActive"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierOrganizationType" xlink:label="loc_btx_identifierOrganizationType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierOrganizationType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Organization Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierOrganizationType" xlink:to="lab_btx_identifierOrganizationType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierOrganizationType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifier Organization Type. Enumerated as: individual, organization, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierOrganizationType" xlink:to="doc_btx_identifierOrganizationType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierOrganizationTypeDescription" xlink:label="loc_btx_identifierOrganizationTypeDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierOrganizationTypeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Organization Type Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierOrganizationTypeDescription" xlink:to="lab_btx_identifierOrganizationTypeDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierOrganizationTypeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the identifier organization type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierOrganizationTypeDescription" xlink:to="doc_btx_identifierOrganizationTypeDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierDescription" xlink:label="loc_btx_identifierDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierDescription" xlink:to="lab_btx_identifierDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Textual description of identifierReference.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierDescription" xlink:to="doc_btx_identifierDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierType" xlink:label="loc_btx_identifierType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierType" xlink:to="lab_btx_identifierType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Entity type (enumerated): C, customer, E, employee, V, vendor, O, other, I, salesperson-internal, X, salesperson-external, N, contractor.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierType" xlink:to="doc_btx_identifierType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierCategory" xlink:label="loc_btx_identifierCategory"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierCategory" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identifier Category</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierCategory" xlink:to="lab_btx_identifierCategory"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierCategory" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">For use as Customer, Vendor or Employee Class (such as Residential/Commercial/Institutional/Government or Retail/Wholesale or other classifications used by business).</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierCategory" xlink:to="doc_btx_identifierCategory"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#p_btx_identifierRegisteredIdentifier" xlink:label="loc_p_btx_identifierRegisteredIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_p_btx_identifierRegisteredIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Registered Identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_identifierRegisteredIdentifier" xlink:to="lab_p_btx_identifierRegisteredIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_p_btx_identifierRegisteredIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">A structured identifier comprising an identifier value and the registration or identification scheme needed to interpret it.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_btx_identifierRegisteredIdentifier" xlink:to="doc_p_btx_identifierRegisteredIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierRegisteredIdentifierId" xlink:label="loc_btx_identifierRegisteredIdentifierId"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierRegisteredIdentifierId" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">ID</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierRegisteredIdentifierId" xlink:to="lab_btx_identifierRegisteredIdentifierId"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierRegisteredIdentifierId" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">The registered identifier value assigned under the specified identification scheme.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierRegisteredIdentifierId" xlink:to="doc_btx_identifierRegisteredIdentifierId"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_identifierRegisteredIdentifierIdentificationScheme" xlink:label="loc_btx_identifierRegisteredIdentifierIdentificationScheme"/>
+    <label xlink:type="resource" xlink:label="lab_btx_identifierRegisteredIdentifierIdentificationScheme" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Identification Scheme</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierRegisteredIdentifierIdentificationScheme" xlink:to="lab_btx_identifierRegisteredIdentifierIdentificationScheme"/>
+    <label xlink:type="resource" xlink:label="doc_btx_identifierRegisteredIdentifierIdentificationScheme" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">The registration or identification scheme under which the identifier is assigned and interpreted.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_identifierRegisteredIdentifierIdentificationScheme" xlink:to="doc_btx_identifierRegisteredIdentifierIdentificationScheme"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxAuthority" xlink:label="loc_btx_taxAuthority"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxAuthority" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Authority</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxAuthority" xlink:to="lab_btx_taxAuthority"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxAuthority" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Name of the relevant tax authority</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxAuthority" xlink:to="doc_btx_taxAuthority"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxTableCode" xlink:label="loc_btx_taxTableCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxTableCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Table Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTableCode" xlink:to="lab_btx_taxTableCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxTableCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tax table code used by the relevant tax authority</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTableCode" xlink:to="doc_btx_taxTableCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxDescription" xlink:label="loc_btx_taxDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxDescription" xlink:to="lab_btx_taxDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Description of tax authority</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxDescription" xlink:to="doc_btx_taxDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_amountOfTaxes" xlink:label="loc_btx_amountOfTaxes"/>
+    <label xlink:type="resource" xlink:label="lab_btx_amountOfTaxes" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Amount of Taxes</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_amountOfTaxes" xlink:to="lab_btx_amountOfTaxes"/>
+    <label xlink:type="resource" xlink:label="doc_btx_amountOfTaxes" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Amount of taxes</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_amountOfTaxes" xlink:to="doc_btx_amountOfTaxes"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_basisForTaxation" xlink:label="loc_btx_basisForTaxation"/>
+    <label xlink:type="resource" xlink:label="lab_btx_basisForTaxation" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Basis for Taxation</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_basisForTaxation" xlink:to="lab_btx_basisForTaxation"/>
+    <label xlink:type="resource" xlink:label="doc_btx_basisForTaxation" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Basis for taxation</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_basisForTaxation" xlink:to="doc_btx_basisForTaxation"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxPercentageRate" xlink:label="loc_btx_taxPercentageRate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxPercentageRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Percentage Rate</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxPercentageRate" xlink:to="lab_btx_taxPercentageRate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxPercentageRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Percent rate for VAT or other taxes normally a number between 0 and 1.0 - e.g. 50% is represented as 0.5</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxPercentageRate" xlink:to="doc_btx_taxPercentageRate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxCategory" xlink:label="loc_btx_taxCategory"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxCategory" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Category</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxCategory" xlink:to="lab_btx_taxCategory"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxCategory" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">A class or category of taxes</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxCategory" xlink:to="doc_btx_taxCategory"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxCommentExemptionReason" xlink:label="loc_btx_taxCommentExemptionReason"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxCommentExemptionReason" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Comment/Exemption Reason</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxCommentExemptionReason" xlink:to="lab_btx_taxCommentExemptionReason"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxCommentExemptionReason" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Additional text/code for exemption reasons or other comments.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxCommentExemptionReason" xlink:to="doc_btx_taxCommentExemptionReason"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxAmountInForeignCurrency" xlink:label="loc_btx_taxAmountInForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxAmountInForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Amount in Foreign Currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxAmountInForeignCurrency" xlink:to="lab_btx_taxAmountInForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxAmountInForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, the amount of tax in that currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxAmountInForeignCurrency" xlink:to="doc_btx_taxAmountInForeignCurrency"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxForeignCurrency" xlink:label="loc_btx_taxForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Foreign Currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxForeignCurrency" xlink:to="lab_btx_taxForeignCurrency"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxForeignCurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, that currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxForeignCurrency" xlink:to="doc_btx_taxForeignCurrency"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxExchangeRateDate" xlink:label="loc_btx_taxExchangeRateDate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxExchangeRateDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRateDate" xlink:to="lab_btx_taxExchangeRateDate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxExchangeRateDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, the date or date and time of the exchange rate used</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRateDate" xlink:to="doc_btx_taxExchangeRateDate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxExchangeRate" xlink:label="loc_btx_taxExchangeRate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxExchangeRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRate" xlink:to="lab_btx_taxExchangeRate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxExchangeRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, the exchange rate used expressed as national currency divided by foreign currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRate" xlink:to="doc_btx_taxExchangeRate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxExchangeRateSource" xlink:label="loc_btx_taxExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate Source</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRateSource" xlink:to="lab_btx_taxExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, source of exchange rate - for example, Reuters, Bloomberg</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRateSource" xlink:to="doc_btx_taxExchangeRateSource"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxExchangeRateType" xlink:label="loc_btx_taxExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRateType" xlink:to="lab_btx_taxExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, type of exchange rate - for example, spot rate, forward contract etc.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRateType" xlink:to="doc_btx_taxExchangeRateType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxExchangeRateComment" xlink:label="loc_btx_taxExchangeRateComment"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxExchangeRateComment" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exchange Rate Comment</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRateComment" xlink:to="lab_btx_taxExchangeRateComment"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxExchangeRateComment" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency, comment about exchange rate used</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxExchangeRateComment" xlink:to="doc_btx_taxExchangeRateComment"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxAmountInTriangulationCurrency" xlink:label="loc_btx_taxAmountInTriangulationCurrency"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxAmountInTriangulationCurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Amount in Triangulation Currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxAmountInTriangulationCurrency" xlink:to="lab_btx_taxAmountInTriangulationCurrency"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxAmountInTriangulationCurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency and triangulation is used, the amount of that tax in the triangulation currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxAmountInTriangulationCurrency" xlink:to="doc_btx_taxAmountInTriangulationCurrency"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxTriangulationCurrency" xlink:label="loc_btx_taxTriangulationCurrency"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxTriangulationCurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Triangulation Currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTriangulationCurrency" xlink:to="lab_btx_taxTriangulationCurrency"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxTriangulationCurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency and triangulation is used, the triangulation currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTriangulationCurrency" xlink:to="doc_btx_taxTriangulationCurrency"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxTriangulationCurrencyExchangeRate" xlink:label="loc_btx_taxTriangulationCurrencyExchangeRate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxTriangulationCurrencyExchangeRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Triangulation Currency Exchange Rate</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTriangulationCurrencyExchangeRate" xlink:to="lab_btx_taxTriangulationCurrencyExchangeRate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxTriangulationCurrencyExchangeRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency and triangulation is used, the exchange rate used expressed as national currency divided by triangulation currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTriangulationCurrencyExchangeRate" xlink:to="doc_btx_taxTriangulationCurrencyExchangeRate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxTriangulationCurrencyExchangeRateSource" xlink:label="loc_btx_taxTriangulationCurrencyExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxTriangulationCurrencyExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Triangulation Currency Exchange Rate Source</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTriangulationCurrencyExchangeRateSource" xlink:to="lab_btx_taxTriangulationCurrencyExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxTriangulationCurrencyExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency and triangulation is used, source of exchange rate - for example, Reuters, Bloomberg</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTriangulationCurrencyExchangeRateSource" xlink:to="doc_btx_taxTriangulationCurrencyExchangeRateSource"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxTriangulationCurrencyExchangeRateType" xlink:label="loc_btx_taxTriangulationCurrencyExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxTriangulationCurrencyExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Triangulation Currency Exchange Rate Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTriangulationCurrencyExchangeRateType" xlink:to="lab_btx_taxTriangulationCurrencyExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxTriangulationCurrencyExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency and triangulation is used, type of exchange rate - for example, spot rate, forward contract etc.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxTriangulationCurrencyExchangeRateType" xlink:to="doc_btx_taxTriangulationCurrencyExchangeRateType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxForeignToTriangulationCurrencyExchangeRate" xlink:label="loc_btx_taxForeignToTriangulationCurrencyExchangeRate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxForeignToTriangulationCurrencyExchangeRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Foreign to Triangulation Currency Exchange Rate</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxForeignToTriangulationCurrencyExchangeRate" xlink:to="lab_btx_taxForeignToTriangulationCurrencyExchangeRate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxForeignToTriangulationCurrencyExchangeRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency and triangulation is used,  the exchange rate used expressed as foreign currency divided by triangulation currency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxForeignToTriangulationCurrencyExchangeRate" xlink:to="doc_btx_taxForeignToTriangulationCurrencyExchangeRate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxForeignToTriangulationCurrencyExchangeRateSource" xlink:label="loc_btx_taxForeignToTriangulationCurrencyExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxForeignToTriangulationCurrencyExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Foreign to Triangulation Currency Exchange Rate Source</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxForeignToTriangulationCurrencyExchangeRateSource" xlink:to="lab_btx_taxForeignToTriangulationCurrencyExchangeRateSource"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxForeignToTriangulationCurrencyExchangeRateSource" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency and triangulation is used, source of exchange rate - for example, Reuters, Bloomberg</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxForeignToTriangulationCurrencyExchangeRateSource" xlink:to="doc_btx_taxForeignToTriangulationCurrencyExchangeRateSource"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_taxForeignToTriangulationCurrencyExchangeRateType" xlink:label="loc_btx_taxForeignToTriangulationCurrencyExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_taxForeignToTriangulationCurrencyExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Foreign to Triangulation Currency Exchange Rate Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxForeignToTriangulationCurrencyExchangeRateType" xlink:to="lab_btx_taxForeignToTriangulationCurrencyExchangeRateType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_taxForeignToTriangulationCurrencyExchangeRateType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">If the tax is in a foreign currency and triangulation is used, type of exchange rate - for example, spot rate, forward contract etc.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_taxForeignToTriangulationCurrencyExchangeRateType" xlink:to="doc_btx_taxForeignToTriangulationCurrencyExchangeRateType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailTaxExemptionReasonCode" xlink:label="loc_btx_detailTaxExemptionReasonCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailTaxExemptionReasonCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exemption Reason Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailTaxExemptionReasonCode" xlink:to="lab_btx_detailTaxExemptionReasonCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailTaxExemptionReasonCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code identifying the exemption reason for this detail tax occurrence.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailTaxExemptionReasonCode" xlink:to="doc_btx_detailTaxExemptionReasonCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailTaxExemptionReasonText" xlink:label="loc_btx_detailTaxExemptionReasonText"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailTaxExemptionReasonText" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Exemption Reason Text</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailTaxExemptionReasonText" xlink:to="lab_btx_detailTaxExemptionReasonText"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailTaxExemptionReasonText" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Human-readable text describing the exemption reason for this detail tax occurrence.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailTaxExemptionReasonText" xlink:to="doc_btx_detailTaxExemptionReasonText"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_amount" xlink:label="loc_btx_amount"/>
+    <label xlink:type="resource" xlink:label="lab_btx_amount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Amount</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_amount" xlink:to="lab_btx_amount"/>
+    <label xlink:type="resource" xlink:label="doc_btx_amount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Numeric value of the monetary amount expressed in the specified currency.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_amount" xlink:to="doc_btx_amount"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailAmountStructureAmountType" xlink:label="loc_btx_detailAmountStructureAmountType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailAmountStructureAmountType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Amount Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAmountStructureAmountType" xlink:to="lab_btx_detailAmountStructureAmountType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailAmountStructureAmountType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code or text specifying the type or role of the amount, such as tax amount, tax base amount, allowance amount, or charge amount.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAmountStructureAmountType" xlink:to="doc_btx_detailAmountStructureAmountType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_currencyCode" xlink:label="loc_btx_currencyCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_currencyCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Currency Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_currencyCode" xlink:to="lab_btx_currencyCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_currencyCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code specifying the currency in which the amount is expressed, typically an ISO 4217 currency code.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_currencyCode" xlink:to="doc_btx_currencyCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_currencyCodeType" xlink:label="loc_btx_currencyCodeType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_currencyCodeType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Currency Code Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_currencyCodeType" xlink:to="lab_btx_currencyCodeType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_currencyCodeType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code specifying the role of the currency used for the amount, such as functional currency, local currency, reporting currency, or transaction currency.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_currencyCodeType" xlink:to="doc_btx_currencyCodeType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_amountType" xlink:label="loc_btx_amountType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_amountType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Detail_ Amount Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_amountType" xlink:to="lab_btx_amountType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_amountType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code or text specifying the type or role of the amount, such as tax amount, tax base amount, allowance amount, or charge amount.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_amountType" xlink:to="doc_btx_amountType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_adjustmentType" xlink:label="loc_btx_adjustmentType"/>
+    <label xlink:type="resource" xlink:label="lab_btx_adjustmentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Adjustment Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_adjustmentType" xlink:to="lab_btx_adjustmentType"/>
+    <label xlink:type="resource" xlink:label="doc_btx_adjustmentType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Explicit taxonomy discriminator supplied by Value Domain v10 selector review</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_adjustmentType" xlink:to="doc_btx_adjustmentType"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailAdjustmentAmount" xlink:label="loc_btx_detailAdjustmentAmount"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailAdjustmentAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Amount</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentAmount" xlink:to="lab_btx_detailAdjustmentAmount"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailAdjustmentAmount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Monetary amount of the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentAmount" xlink:to="doc_btx_detailAdjustmentAmount"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailAdjustmentBaseAmount" xlink:label="loc_btx_detailAdjustmentBaseAmount"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailAdjustmentBaseAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Base Amount</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentBaseAmount" xlink:to="lab_btx_detailAdjustmentBaseAmount"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailAdjustmentBaseAmount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Monetary base amount used to calculate the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentBaseAmount" xlink:to="doc_btx_detailAdjustmentBaseAmount"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailAdjustmentPercentage" xlink:label="loc_btx_detailAdjustmentPercentage"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailAdjustmentPercentage" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Percentage</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentPercentage" xlink:to="lab_btx_detailAdjustmentPercentage"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailAdjustmentPercentage" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Percentage rate used to calculate the adjustment, represented as a pure numeric value.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentPercentage" xlink:to="doc_btx_detailAdjustmentPercentage"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailAdjustmentReason" xlink:label="loc_btx_detailAdjustmentReason"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailAdjustmentReason" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Reason</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentReason" xlink:to="lab_btx_detailAdjustmentReason"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailAdjustmentReason" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Human-readable reason for the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentReason" xlink:to="doc_btx_detailAdjustmentReason"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailAdjustmentReasonCode" xlink:label="loc_btx_detailAdjustmentReasonCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailAdjustmentReasonCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Reason Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentReasonCode" xlink:to="lab_btx_detailAdjustmentReasonCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailAdjustmentReasonCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code identifying the reason for the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentReasonCode" xlink:to="doc_btx_detailAdjustmentReasonCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailAdjustmentTaxCategory" xlink:label="loc_btx_detailAdjustmentTaxCategory"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailAdjustmentTaxCategory" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Category</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentTaxCategory" xlink:to="lab_btx_detailAdjustmentTaxCategory"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailAdjustmentTaxCategory" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tax category applicable to the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentTaxCategory" xlink:to="doc_btx_detailAdjustmentTaxCategory"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_detailAdjustmentTaxRate" xlink:label="loc_btx_detailAdjustmentTaxRate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_detailAdjustmentTaxRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Rate</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentTaxRate" xlink:to="lab_btx_detailAdjustmentTaxRate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_detailAdjustmentTaxRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tax percentage rate applicable to the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_detailAdjustmentTaxRate" xlink:to="doc_btx_detailAdjustmentTaxRate"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_commentCode" xlink:label="loc_btx_commentCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_commentCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_commentCode" xlink:to="lab_btx_commentCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_commentCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An enumerated code that identifies the purpose of the rich text comment. Enumerated values: link_footnote, footnote, source_document, source_journal, batch, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_commentCode" xlink:to="doc_btx_commentCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_commentDescription" xlink:label="loc_btx_commentDescription"/>
+    <label xlink:type="resource" xlink:label="lab_btx_commentDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_commentDescription" xlink:to="lab_btx_commentDescription"/>
+    <label xlink:type="resource" xlink:label="doc_btx_commentDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the Rich text Comment Code.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_commentDescription" xlink:to="doc_btx_commentDescription"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_commentContent" xlink:label="loc_btx_commentContent"/>
+    <label xlink:type="resource" xlink:label="lab_btx_commentContent" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Content</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_commentContent" xlink:to="lab_btx_commentContent"/>
+    <label xlink:type="resource" xlink:label="doc_btx_commentContent" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Content of the Rich Text Comment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_commentContent" xlink:to="doc_btx_commentContent"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_commentLocator" xlink:label="loc_btx_commentLocator"/>
+    <label xlink:type="resource" xlink:label="lab_btx_commentLocator" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Locator</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_commentLocator" xlink:to="lab_btx_commentLocator"/>
+    <label xlink:type="resource" xlink:label="doc_btx_commentLocator" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An XPath expression that identifies the item that the comment relates to.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_commentLocator" xlink:to="doc_btx_commentLocator"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAdjustmentAmount" xlink:label="loc_btx_headerAdjustmentAmount"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAdjustmentAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Amount</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentAmount" xlink:to="lab_btx_headerAdjustmentAmount"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAdjustmentAmount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Monetary amount of the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentAmount" xlink:to="doc_btx_headerAdjustmentAmount"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAdjustmentBaseAmount" xlink:label="loc_btx_headerAdjustmentBaseAmount"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAdjustmentBaseAmount" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Base Amount</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentBaseAmount" xlink:to="lab_btx_headerAdjustmentBaseAmount"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAdjustmentBaseAmount" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Monetary base amount used to calculate the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentBaseAmount" xlink:to="doc_btx_headerAdjustmentBaseAmount"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAdjustmentPercentage" xlink:label="loc_btx_headerAdjustmentPercentage"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAdjustmentPercentage" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Percentage</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentPercentage" xlink:to="lab_btx_headerAdjustmentPercentage"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAdjustmentPercentage" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Percentage rate used to calculate the adjustment, represented as a pure numeric value.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentPercentage" xlink:to="doc_btx_headerAdjustmentPercentage"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAdjustmentReason" xlink:label="loc_btx_headerAdjustmentReason"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAdjustmentReason" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Reason</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentReason" xlink:to="lab_btx_headerAdjustmentReason"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAdjustmentReason" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Human-readable reason for the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentReason" xlink:to="doc_btx_headerAdjustmentReason"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAdjustmentReasonCode" xlink:label="loc_btx_headerAdjustmentReasonCode"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAdjustmentReasonCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Reason Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentReasonCode" xlink:to="lab_btx_headerAdjustmentReasonCode"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAdjustmentReasonCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code identifying the reason for the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentReasonCode" xlink:to="doc_btx_headerAdjustmentReasonCode"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAdjustmentTaxCategory" xlink:label="loc_btx_headerAdjustmentTaxCategory"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAdjustmentTaxCategory" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Category</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentTaxCategory" xlink:to="lab_btx_headerAdjustmentTaxCategory"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAdjustmentTaxCategory" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tax category applicable to the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentTaxCategory" xlink:to="doc_btx_headerAdjustmentTaxCategory"/>
+    <loc xlink:type="locator" xlink:href="../btx-oim-2026-12-31.xsd#btx_headerAdjustmentTaxRate" xlink:label="loc_btx_headerAdjustmentTaxRate"/>
+    <label xlink:type="resource" xlink:label="lab_btx_headerAdjustmentTaxRate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Tax Rate</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentTaxRate" xlink:to="lab_btx_headerAdjustmentTaxRate"/>
+    <label xlink:type="resource" xlink:label="doc_btx_headerAdjustmentTaxRate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Tax percentage rate applicable to the adjustment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_btx_headerAdjustmentTaxRate" xlink:to="doc_btx_headerAdjustmentTaxRate"/>
+  </labelLink>
+</linkbase>

@@ -1,0 +1,295 @@
+{
+  "documentInfo": {
+    "documentType": "https://xbrl.org/2021/xbrl-csv",
+    "namespaces": {
+      "btx": "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/btx",
+      "bus": "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/bus",
+      "cor": "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/cor",
+      "ehm": "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/ehm",
+      "lnk": "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/lnk",
+      "muc": "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/muc",
+      "taf": "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/taf",
+      "gen": "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/gen",
+      "plt": "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/plt",
+      "iso4217": "http://www.xbrl.org/2003/iso4217",
+      "xbrli": "http://www.xbrl.org/2003/instance",
+      "scheme": "http://www.example.com",
+      "xbrl": "https://xbrl.org/2021"
+    },
+    "taxonomy": [
+      "../../../taxonomy/oim/btx_businessTransactions/btx-all-oim-2026-12-31.xsd"
+    ]
+  },
+  "tables": {
+    "structured": {
+      "template": "structured",
+      "url": "gl_btx_current.csv"
+    }
+  },
+  "tableTemplates": {
+    "structured": {
+      "dimensions": {
+        "period": "2026-08-26T00:00:00",
+        "entity": "scheme:UADC-PoC",
+        "plt:d_btx_businessTransactions": "$dBusinessTransactions",
+        "plt:d_btx_entityParty": "$dEntityParty",
+        "plt:d_bus_partyAddress": "$dPartyAddress",
+        "plt:d_btx_transactionHeader": "$dTransactionHeader",
+        "plt:d_btx_headerIdentifierReference": "$dHeaderIdentifierReference",
+        "plt:d_btx_registeredIdentifier": "$dRegisteredIdentifier",
+        "plt:d_btx_headerTax": "$dHeaderTax",
+        "plt:d_btx_headerAmountStructure": "$dHeaderAmountStructure",
+        "plt:d_btx_transactionDetail": "$dTransactionDetail",
+        "plt:d_bus_detailMeasurable": "$dDetailMeasurable",
+        "plt:d_btx_detailTax": "$dDetailTax",
+        "plt:d_btx_detailAmountStructure": "$dDetailAmountStructure",
+        "plt:d_btx_detailAdjustment": "$dDetailAdjustment",
+        "plt:d_btx_headerAdjustment": "$dHeaderAdjustment"
+      },
+      "columns": {
+        "dBusinessTransactions": {},
+        "dEntityParty": {},
+        "dPartyAddress": {},
+        "dTransactionHeader": {},
+        "dHeaderIdentifierReference": {},
+        "dRegisteredIdentifier": {},
+        "dHeaderTax": {},
+        "dHeaderAmountStructure": {},
+        "dTransactionDetail": {},
+        "dDetailMeasurable": {},
+        "dDetailTax": {},
+        "dDetailAmountStructure": {},
+        "dDetailAdjustment": {},
+        "dHeaderAdjustment": {},
+        "headerDocumentNumber": {
+          "dimensions": {
+            "concept": "btx:headerDocumentNumber"
+          }
+        },
+        "headerInvoiceType": {
+          "dimensions": {
+            "concept": "btx:headerInvoiceType"
+          }
+        },
+        "headerMaturityDateOrDateDue": {
+          "dimensions": {
+            "concept": "btx:headerMaturityDateOrDateDue"
+          }
+        },
+        "headerPaymentTerms": {
+          "dimensions": {
+            "concept": "btx:headerPaymentTerms"
+          }
+        },
+        "businessProcessType": {
+          "dimensions": {
+            "concept": "btx:businessProcessType"
+          }
+        },
+        "partyName": {
+          "dimensions": {
+            "concept": "btx:partyName"
+          }
+        },
+        "entityPartyType": {
+          "dimensions": {
+            "concept": "btx:entityPartyType"
+          }
+        },
+        "headerIdentifierRegisteredId": {
+          "dimensions": {
+            "concept": "btx:headerIdentifierRegisteredId"
+          }
+        },
+        "headerIdentifierType": {
+          "dimensions": {
+            "concept": "btx:headerIdentifierType"
+          }
+        },
+        "headerIdentifierPurpose": {
+          "dimensions": {
+            "concept": "btx:headerIdentifierPurpose"
+          }
+        },
+        "entityAddressStreet": {
+          "dimensions": {
+            "concept": "bus:entityAddressStreet"
+          }
+        },
+        "entityAddressPurpose": {
+          "dimensions": {
+            "concept": "bus:entityAddressPurpose"
+          }
+        },
+        "entityAddressDescription": {
+          "dimensions": {
+            "concept": "bus:entityAddressDescription"
+          }
+        },
+        "entityAddressCity": {
+          "dimensions": {
+            "concept": "bus:entityAddressCity"
+          }
+        },
+        "entityAddressZipOrPostalCode": {
+          "dimensions": {
+            "concept": "bus:entityAddressZipOrPostalCode"
+          }
+        },
+        "entityAddressCountry": {
+          "dimensions": {
+            "concept": "bus:entityAddressCountry"
+          }
+        },
+        "headerAmount": {
+          "dimensions": {
+            "concept": "btx:headerAmount",
+            "unit": "iso4217:EUR"
+          }
+        },
+        "headerAmountType": {
+          "dimensions": {
+            "concept": "btx:headerAmountType"
+          }
+        },
+        "headerAdjustmentAmount": {
+          "dimensions": {
+            "concept": "btx:headerAdjustmentAmount",
+            "unit": "iso4217:EUR"
+          }
+        },
+        "adjustmentType": {
+          "dimensions": {
+            "concept": "btx:adjustmentType"
+          }
+        },
+        "headerAdjustmentBaseAmount": {
+          "dimensions": {
+            "concept": "btx:headerAdjustmentBaseAmount",
+            "unit": "iso4217:EUR"
+          }
+        },
+        "headerAdjustmentTaxCategory": {
+          "dimensions": {
+            "concept": "btx:headerAdjustmentTaxCategory"
+          }
+        },
+        "headerAdjustmentReason": {
+          "dimensions": {
+            "concept": "btx:headerAdjustmentReason"
+          }
+        },
+        "headerAdjustmentReasonCode": {
+          "dimensions": {
+            "concept": "btx:headerAdjustmentReasonCode"
+          }
+        },
+        "headerBasisForTaxation": {
+          "dimensions": {
+            "concept": "btx:headerBasisForTaxation",
+            "unit": "iso4217:EUR"
+          }
+        },
+        "taxType": {
+          "dimensions": {
+            "concept": "btx:taxType"
+          }
+        },
+        "headerAmountOfTaxes": {
+          "dimensions": {
+            "concept": "btx:headerAmountOfTaxes",
+            "unit": "iso4217:EUR"
+          }
+        },
+        "headerTaxCategory": {
+          "dimensions": {
+            "concept": "btx:headerTaxCategory"
+          }
+        },
+        "headerTaxPercentageRate": {
+          "dimensions": {
+            "concept": "btx:headerTaxPercentageRate"
+          }
+        },
+        "lineNumber": {
+          "dimensions": {
+            "concept": "btx:lineNumber"
+          }
+        },
+        "measurableQuantity": {
+          "dimensions": {
+            "concept": "bus:measurableQuantity"
+          }
+        },
+        "measurableUnitOfMeasure": {
+          "dimensions": {
+            "concept": "bus:measurableUnitOfMeasure"
+          }
+        },
+        "amount": {
+          "dimensions": {
+            "concept": "btx:amount",
+            "unit": "iso4217:EUR"
+          }
+        },
+        "amountType": {
+          "dimensions": {
+            "concept": "btx:amountType"
+          }
+        },
+        "measurableStartTime": {
+          "dimensions": {
+            "concept": "bus:measurableStartTime"
+          }
+        },
+        "measurableEndTime": {
+          "dimensions": {
+            "concept": "bus:measurableEndTime"
+          }
+        },
+        "taxCategory": {
+          "dimensions": {
+            "concept": "btx:taxCategory"
+          }
+        },
+        "taxPercentageRate": {
+          "dimensions": {
+            "concept": "btx:taxPercentageRate"
+          }
+        },
+        "detailRitchTextDetailDescription": {
+          "dimensions": {
+            "concept": "btx:detailRitchTextDetailDescription"
+          }
+        },
+        "secondaryMeasurableCode": {
+          "dimensions": {
+            "concept": "bus:secondaryMeasurableCode"
+          }
+        },
+        "detailAdjustmentAmount": {
+          "dimensions": {
+            "concept": "btx:detailAdjustmentAmount",
+            "unit": "iso4217:EUR"
+          }
+        },
+        "detailAdjustmentBaseAmount": {
+          "dimensions": {
+            "concept": "btx:detailAdjustmentBaseAmount",
+            "unit": "iso4217:EUR"
+          }
+        },
+        "detailAdjustmentReason": {
+          "dimensions": {
+            "concept": "btx:detailAdjustmentReason"
+          }
+        },
+        "detailAdjustmentReasonCode": {
+          "dimensions": {
+            "concept": "btx:detailAdjustmentReasonCode"
+          }
+        }
+      }
+    }
+  }
+}

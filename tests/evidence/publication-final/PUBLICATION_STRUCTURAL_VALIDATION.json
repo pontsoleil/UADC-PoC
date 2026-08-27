@@ -1,0 +1,54 @@
+{
+  "closure": {
+    "tuple": {
+      "files": 32,
+      "unresolved": 0
+    },
+    "oim": {
+      "files": 26,
+      "unresolved": 0
+    }
+  },
+  "notice": {
+    "xml_files": 70,
+    "with_notice": 70
+  },
+  "old_namespace_files": [],
+  "taxonomy_manifest": {
+    "rows": 70,
+    "mismatch": []
+  },
+  "xml_semantic_delta": {
+    "compared": 70,
+    "different_after_comment_removal": []
+  },
+  "binding_model_delta": {
+    "en_hmd": true,
+    "ubl": true,
+    "cii": true,
+    "semantic": true
+  },
+  "gl_hmd": {
+    "rows": 478,
+    "sha256": "4A77B50253842F175BE6CE2CC465E8B931156A1F61D096942FD5FCEFBFF95947",
+    "entity_party": [
+      "0..1"
+    ]
+  },
+  "uncl1001": {
+    "member_380_count": 1,
+    "member_qname": "gen:vdN1001InvoiceCreditNoteTypeN380",
+    "notice": true,
+    "relationship_unchanged": true
+  },
+  "required_records": {
+    "NOTICE_XBRL_GL.md": true,
+    "XBRL_JAPAN_EXPERIMENTAL_NAMESPACE_AUTHORIZATION.md": true
+  },
+  "status": "PASS",
+  "whitespace_normalization": {
+    "predecessor_findings": 59,
+    "successor_findings": 0,
+    "scope": "logical-line trailing space/tab, generated label/comment, test logs, and one extra final blank line"
+  }
+}

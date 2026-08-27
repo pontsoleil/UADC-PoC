@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<!-- (c) XBRL International.  See http://www.xbrl.org/legal -->
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/ehm" attributeFormDefault="unqualified" elementFormDefault="qualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:enum="http://xbrl.org/2014/extensible-enumerations"
+  xmlns:ehm="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/ehm"
+  xmlns:gen="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/gen">
+  <annotation>
+    <documentation xml:lang="en">This is an experimental XBRL GL Next taxonomy published using a provisional
+namespace under the domain managed by XBRL Japan. It is not an XBRL
+International Recommendation or other final XBRL International specification.
+The namespace and taxonomy may be replaced when an official XBRL International
+namespace is assigned.</documentation>
+  </annotation>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <import namespace="http://xbrl.org/2014/extensible-enumerations" schemaLocation="http://www.xbrl.org/2014/extensible-enumerations.xsd"/>
+  <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/gen" schemaLocation="../gen/gl-gen-2026-12-31.xsd"/>
+  <!-- reusable OIM Attribute item type -->
+  <complexType name="serialOrLotDescriptionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotNumberItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="nextSerialOrLotNumberItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotQuantityItemType">
+    <simpleContent>
+      <restriction base="xbrli:decimalItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotOriginalQuantityItemType">
+    <simpleContent>
+      <restriction base="xbrli:decimalItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotRemainingQuantityItemType">
+    <simpleContent>
+      <restriction base="xbrli:decimalItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotOriginationItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateTimeItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotExpirationItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateTimeItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotManufacturerItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotBatchDescriptionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotWarrantyStartDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateTimeItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotWarrantyEndDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateTimeItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotWarrantyPeriodItemType">
+    <simpleContent>
+      <restriction base="xbrli:decimalItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotWarrantPeriodUnitItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="warrantyVendorItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="warrantyContractItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="serialOrLotCommentItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <!-- reusable OIM Attribute item element -->
+  <element name="serialOrLotCode" id="ehm_serialOrLotCode" type="enum:enumerationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant" enum:domain="gen:vdSerialLotType" enum:linkrole="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdSerialLotType" enum:headUsable="false"/>
+  <element name="serialOrLotDescription" id="ehm_serialOrLotDescription" type="ehm:serialOrLotDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotNumber" id="ehm_serialOrLotNumber" type="ehm:serialOrLotNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="nextSerialOrLotNumber" id="ehm_nextSerialOrLotNumber" type="ehm:nextSerialOrLotNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotQuantity" id="ehm_serialOrLotQuantity" type="ehm:serialOrLotQuantityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotOriginalQuantity" id="ehm_serialOrLotOriginalQuantity" type="ehm:serialOrLotOriginalQuantityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotRemainingQuantity" id="ehm_serialOrLotRemainingQuantity" type="ehm:serialOrLotRemainingQuantityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotOrigination" id="ehm_serialOrLotOrigination" type="ehm:serialOrLotOriginationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotExpiration" id="ehm_serialOrLotExpiration" type="ehm:serialOrLotExpirationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotManufacturer" id="ehm_serialOrLotManufacturer" type="ehm:serialOrLotManufacturerItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotBatchDescription" id="ehm_serialOrLotBatchDescription" type="ehm:serialOrLotBatchDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotWarrantyStartDate" id="ehm_serialOrLotWarrantyStartDate" type="ehm:serialOrLotWarrantyStartDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotWarrantyEndDate" id="ehm_serialOrLotWarrantyEndDate" type="ehm:serialOrLotWarrantyEndDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotWarrantyPeriod" id="ehm_serialOrLotWarrantyPeriod" type="ehm:serialOrLotWarrantyPeriodItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotWarrantPeriodUnit" id="ehm_serialOrLotWarrantPeriodUnit" type="ehm:serialOrLotWarrantPeriodUnitItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="warrantyVendor" id="ehm_warrantyVendor" type="ehm:warrantyVendorItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="warrantyContract" id="ehm_warrantyContract" type="ehm:warrantyContractItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="serialOrLotComment" id="ehm_serialOrLotComment" type="ehm:serialOrLotCommentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <!-- reusable OIM Class primary-item anchor -->
+  <element name="p_ehm_detailSerialOrLot" id="p_ehm_detailSerialOrLot" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+</schema>
