@@ -22,3 +22,6 @@
 
 .gitignore text eol=lf
 .gitattributes text eol=lf
+
+# Preserve canonical CSV bytes; CSV encoding and structure are validated separately.
+*.csv -text
