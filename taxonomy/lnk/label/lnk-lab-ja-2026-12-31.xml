@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<linkbase xmlns="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_summaryReportingTaxonomyId" xlink:label="loc_lnk_summaryReportingTaxonomyId"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_summaryReportingTaxonomyId" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">集約報告タクソノミ識別子</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyId" xlink:to="lab_lnk_summaryReportingTaxonomyId"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_summaryReportingTaxonomyId" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">たとえばxbrlInfo内のsummaryReportingTaxonomyIDRefで参照できるように、報告タクソノミを識別する。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyId" xlink:to="doc_lnk_summaryReportingTaxonomyId"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:label="loc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">集約報告タクソノミスキーマ参照情報</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:to="lab_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">報告タクソノミ内の、schemaRef要素のhref属性の値。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:to="doc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_summaryReportingTaxonomyHeader" xlink:label="loc_lnk_summaryReportingTaxonomyHeader"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_summaryReportingTaxonomyHeader" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">集約報告タクソノミヘッダ</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyHeader" xlink:to="lab_lnk_summaryReportingTaxonomyHeader"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_summaryReportingTaxonomyHeader" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">必要なすべての情報が、複雑すぎて他の方法では定義できないときに、それらを記述する汎用的なデータ域。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyHeader" xlink:to="doc_lnk_summaryReportingTaxonomyHeader"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_summaryReportingTaxonomyDescription" xlink:label="loc_lnk_summaryReportingTaxonomyDescription"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_summaryReportingTaxonomyDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">集約報告タクソノミ説明</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyDescription" xlink:to="lab_lnk_summaryReportingTaxonomyDescription"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_summaryReportingTaxonomyDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">人が利用するための、タクソノミの説明文。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyDescription" xlink:to="doc_lnk_summaryReportingTaxonomyDescription"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_detailRitchTextCommentCode" xlink:label="loc_lnk_detailRitchTextCommentCode"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">リッチテキストコメントコード</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentCode" xlink:to="lab_lnk_detailRitchTextCommentCode"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">リッチテキストコメントの用途を識別する、列挙コード。_x000D_
+[設定値のリスト]_x000D_
+link_footnote：リンクフットノート、footnote：フットノート、source_document：元文書、source_journal：元仕訳帳、batch：仕訳の束、other：その他</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentCode" xlink:to="doc_lnk_detailRitchTextCommentCode"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_detailRitchTextCommentDescription" xlink:label="loc_lnk_detailRitchTextCommentDescription"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">リッチテキストコメント説明</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentDescription" xlink:to="lab_lnk_detailRitchTextCommentDescription"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">リッチテキストコメントコードの説明。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentDescription" xlink:to="doc_lnk_detailRitchTextCommentDescription"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_detailRitchTextCommentContent" xlink:label="loc_lnk_detailRitchTextCommentContent"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentContent" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">リッチテキストコメント内容</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentContent" xlink:to="lab_lnk_detailRitchTextCommentContent"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentContent" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">リッチテキストコメントの内容。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentContent" xlink:to="doc_lnk_detailRitchTextCommentContent"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_detailRitchTextCommentLocator" xlink:label="loc_lnk_detailRitchTextCommentLocator"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentLocator" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">リッチテキストコメントロケータ</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentLocator" xlink:to="lab_lnk_detailRitchTextCommentLocator"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentLocator" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">コメントが関係する項目を識別する、XPath表現。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentLocator" xlink:to="doc_lnk_detailRitchTextCommentLocator"/>
+  </labelLink>
+</linkbase>

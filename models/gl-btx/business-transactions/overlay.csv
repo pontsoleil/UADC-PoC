@@ -1,0 +1,6 @@
+value_domain_id,selector_field,module,local_name,name,datatype,multiplicity,parent_semantic_path,binding_scope,status,source
+Adjustment_Type,btx_AdjustmentType,btx,adjustmentType,Adjustment Type,Code,1..1,$.btx_BusinessTransactions.btx_TransactionHeader.btx_HeaderAdjustment,Tuple/OIM,APPROVED,Value Domain v10 selector review
+Adjustment_Type,btx_AdjustmentType,btx,adjustmentType,Adjustment Type,Code,1..1,$.btx_BusinessTransactions.btx_TransactionHeader.btx_TransactionDetail.btx_DetailAdjustment,Tuple/OIM,APPROVED,Value Domain v10 selector review
+Tax_Type,btx_TaxType,btx,taxType,Tax Type,Code,1..1,$.btx_BusinessTransactions.btx_TransactionHeader.btx_HeaderTax,Tuple/OIM,APPROVED,Value Domain v10 selector review
+Tax_Type,btx_TaxType,btx,taxType,Tax Type,Code,1..1,$.btx_BusinessTransactions.btx_TransactionHeader.btx_TransactionDetail.btx_DetailTax,Tuple/OIM,APPROVED,Value Domain v10 selector review
+Reference_Purpose,btx_ReferencePurpose,btx,referencePurpose,Reference Purpose,Code,0..1,$.btx_BusinessTransactions.btx_TransactionHeader.btx_ReferencedDocument,Tuple/OIM,APPROVED,Value Domain v10 selector review

@@ -1,0 +1,6 @@
+test,status,details
+arelle_oim,PASS,error 0 / warning 0
+arelle_tuple,PASS,error 0 / warning 0
+clean_clone_full_route,PASS,semantic/value/ordinal diff 0
+invoice_type_380,PASS,EE1 QName retained
+entity_party,PASS,seller 1 / buyer 2 ordinal retained

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/plt" elementFormDefault="qualified" attributeFormDefault="unqualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:link="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <annotation>
+    <documentation xml:lang="en">This is an experimental XBRL GL Next taxonomy published using a provisional
+namespace under the domain managed by XBRL Japan. It is not an XBRL
+International Recommendation or other final XBRL International specification.
+The namespace and taxonomy may be replaced when an official XBRL International
+namespace is assigned.</documentation>
+  </annotation>
+  <import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+  <annotation><appinfo>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../btx/label/btx-lab-en-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../btx/label/btx-lab-ja-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../bus/label/bus-lab-en-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../bus/label/bus-lab-ja-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../cor/label/cor-lab-en-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../cor/label/cor-lab-ja-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../ehm/label/ehm-lab-en-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../ehm/label/ehm-lab-ja-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../lnk/label/lnk-lab-en-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../lnk/label/lnk-lab-ja-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../muc/label/muc-lab-en-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../muc/label/muc-lab-ja-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../taf/label/taf-lab-en-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <link:linkbaseRef xlink:type="simple" xlink:href="../../taf/label/taf-lab-ja-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+      <link:linkbaseRef xlink:type="simple" xlink:href="../../btx/btx-pre-2026-12-31.xml" xlink:role="http://www.xbrl.org/2003/role/presentationLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+</appinfo></annotation>
+  <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/btx" schemaLocation="btx-content-2026-12-31.xsd"/>
+</schema>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<linkbase xmlns="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_summaryReportingTaxonomyId" xlink:label="loc_lnk_summaryReportingTaxonomyId"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_summaryReportingTaxonomyId" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Summary Reporting Taxonomy ID</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyId" xlink:to="lab_lnk_summaryReportingTaxonomyId"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_summaryReportingTaxonomyId" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifies a target reporting taxonomy so that, for example, it can be referenced in the [summaryReportingTaxonomyIDRef] data field at [xbrlInfo] level.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyId" xlink:to="doc_lnk_summaryReportingTaxonomyId"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:label="loc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Summary Reporting Taxonomy Schema Reference Href Attribute</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:to="lab_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Value of the href attribute of schemaRef in the target reporting taxonomy.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" xlink:to="doc_lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_summaryReportingTaxonomyHeader" xlink:label="loc_lnk_summaryReportingTaxonomyHeader"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_summaryReportingTaxonomyHeader" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Summary Reporting Taxonomy Header</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyHeader" xlink:to="lab_lnk_summaryReportingTaxonomyHeader"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_summaryReportingTaxonomyHeader" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An all-purpose data field where all the information necessary when it is too complex to be defined otherwise.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyHeader" xlink:to="doc_lnk_summaryReportingTaxonomyHeader"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_summaryReportingTaxonomyDescription" xlink:label="loc_lnk_summaryReportingTaxonomyDescription"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_summaryReportingTaxonomyDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Summary Reporting Taxonomy Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyDescription" xlink:to="lab_lnk_summaryReportingTaxonomyDescription"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_summaryReportingTaxonomyDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">A description of the taxonomy for human use.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_summaryReportingTaxonomyDescription" xlink:to="doc_lnk_summaryReportingTaxonomyDescription"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_detailRitchTextCommentCode" xlink:label="loc_lnk_detailRitchTextCommentCode"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentCode" xlink:to="lab_lnk_detailRitchTextCommentCode"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An enumerated code that identifies the purpose of the rich text comment. Enumerated values: link_footnote, footnote, source_document, source_journal, batch, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentCode" xlink:to="doc_lnk_detailRitchTextCommentCode"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_detailRitchTextCommentDescription" xlink:label="loc_lnk_detailRitchTextCommentDescription"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentDescription" xlink:to="lab_lnk_detailRitchTextCommentDescription"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the Rich text Comment Code.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentDescription" xlink:to="doc_lnk_detailRitchTextCommentDescription"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_detailRitchTextCommentContent" xlink:label="loc_lnk_detailRitchTextCommentContent"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentContent" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Content</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentContent" xlink:to="lab_lnk_detailRitchTextCommentContent"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentContent" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Content of the Rich Text Comment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentContent" xlink:to="doc_lnk_detailRitchTextCommentContent"/>
+    <loc xlink:type="locator" xlink:href="../lnk-2026-12-31.xsd#lnk_detailRitchTextCommentLocator" xlink:label="loc_lnk_detailRitchTextCommentLocator"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentLocator" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Locator</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentLocator" xlink:to="lab_lnk_detailRitchTextCommentLocator"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentLocator" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An XPath expression that identifies the item that the comment relates to.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentLocator" xlink:to="doc_lnk_detailRitchTextCommentLocator"/>
+  </labelLink>
+</linkbase>

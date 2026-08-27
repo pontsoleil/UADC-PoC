@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<linkbase xmlns="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocumentType" xlink:label="loc_taf_originatingDocumentType"/>
+    <label xlink:type="resource" xlink:label="lab_taf_originatingDocumentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">発生元文書種別</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentType" xlink:to="lab_taf_originatingDocumentType"/>
+    <label xlink:type="resource" xlink:label="doc_taf_originatingDocumentType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">発生元文書の種別。小切手(check)、借方メモ(debit-memo)、貸方メモ(credit-memo)、財務費用(finance-charge)、顧客への請求書(invoice)、顧客オーダ(order-customer)、仕入先オーダ(order-vendor)、その他支払い(payment-other)、督促状(reminder)、手形(tegata)、ベンダからの請求書(voucher)、出荷票(shipment)、受領票(receipt)、手修正(manual-adjustment)、その他(other)</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentType" xlink:to="doc_taf_originatingDocumentType"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocumentNumber" xlink:label="loc_taf_originatingDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="lab_taf_originatingDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">発生元文書番号</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentNumber" xlink:to="lab_taf_originatingDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="doc_taf_originatingDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">発生元文書の番号。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentNumber" xlink:to="doc_taf_originatingDocumentNumber"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocumentDate" xlink:label="loc_taf_originatingDocumentDate"/>
+    <label xlink:type="resource" xlink:label="lab_taf_originatingDocumentDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">発生元文書日付</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentDate" xlink:to="lab_taf_originatingDocumentDate"/>
+    <label xlink:type="resource" xlink:label="doc_taf_originatingDocumentDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">発生元文書の日付。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentDate" xlink:to="doc_taf_originatingDocumentDate"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocumentIdentifierType" xlink:label="loc_taf_originatingDocumentIdentifierType"/>
+    <label xlink:type="resource" xlink:label="lab_taf_originatingDocumentIdentifierType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">発生元文書対象CVE種別</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentIdentifierType" xlink:to="lab_taf_originatingDocumentIdentifierType"/>
+    <label xlink:type="resource" xlink:label="doc_taf_originatingDocumentIdentifierType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">発生元文書の対象となるCVEの種別。_x000D_ [設定値のリスト]_x000D_ (C)、(customer：顧客)、(E)、(employee：従業員)、(V)、(vendor：仕入先)、(O)、(other：その他)、(I)、(salesperson-internal：店舗内販売員)、(X)、(salesperson-external：外交販売員)、(N)、(contractor：請負者)</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentIdentifierType" xlink:to="doc_taf_originatingDocumentIdentifierType"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocumentIdentifierCode" xlink:label="loc_taf_originatingDocumentIdentifierCode"/>
+    <label xlink:type="resource" xlink:label="lab_taf_originatingDocumentIdentifierCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">発生元文書対象CVEコード</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentIdentifierCode" xlink:to="lab_taf_originatingDocumentIdentifierCode"/>
+    <label xlink:type="resource" xlink:label="doc_taf_originatingDocumentIdentifierCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">発生元文書の対象となるCVEのコード。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentIdentifierCode" xlink:to="doc_taf_originatingDocumentIdentifierCode"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocumentIdentifierTaxCode" xlink:label="loc_taf_originatingDocumentIdentifierTaxCode"/>
+    <label xlink:type="resource" xlink:label="lab_taf_originatingDocumentIdentifierTaxCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">発生元文書対象CVE納税者コード</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentIdentifierTaxCode" xlink:to="lab_taf_originatingDocumentIdentifierTaxCode"/>
+    <label xlink:type="resource" xlink:label="doc_taf_originatingDocumentIdentifierTaxCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">発生元文書の対象となるCVEの納税者コード。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentIdentifierTaxCode" xlink:to="doc_taf_originatingDocumentIdentifierTaxCode"/>
+  </labelLink>
+</linkbase>

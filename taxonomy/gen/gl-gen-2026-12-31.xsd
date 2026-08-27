@@ -1,6 +1,34 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
 <!-- (c) XBRL International.  See http://www.xbrl.org/legal -->
-<schema elementFormDefault="qualified" xmlns:xbrll="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.xbrl.org/int/gl/gen/2026-12-31" attributeFormDefault="unqualified" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:gl-gen="http://www.xbrl.org/int/gl/gen/2026-12-31">
+<schema elementFormDefault="qualified" xmlns:xbrll="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/gen" attributeFormDefault="unqualified" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:gl-gen="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/gen">
+  <annotation>
+    <documentation xml:lang="en">This is an experimental XBRL GL Next taxonomy published using a provisional
+namespace under the domain managed by XBRL Japan. It is not an XBRL
+International Recommendation or other final XBRL International specification.
+The namespace and taxonomy may be replaced when an official XBRL International
+namespace is assigned.</documentation>
+    <documentation xml:lang="en">This XBRL Extensible Enumerations 1.0 value domain implements an identified
+subset of a UN/CEFACT code list for validation and interoperability purposes.
+
+The code identifiers, names and descriptions are derived from the identified
+UNECE/UN/CEFACT release. This taxonomy is not an official United Nations
+publication, and no endorsement by the United Nations or UN/CEFACT is implied.
+
+Any XBRL GL Next extension member is identified separately from the
+UN/CEFACT-derived members.</documentation>
+    <documentation xml:lang="en">Source code list: UN/CEFACT UNCL 1001
+Source release: D.24A
+Value-domain type: XBRL Extensible Enumerations 1.0
+Profile: XBRL GL Next invoice and credit-note subset
+Required member: 380 — Commercial invoice</documentation>
+  </annotation>
 	<import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
 	<complexType name="accountPurposeCodeItemType">
 		<simpleContent>
@@ -291,4 +319,358 @@
 			</restriction>
 		</simpleContent>
 	</complexType>
+  <!-- shared Extensible Enumerations 1.0 Value Domains -->
+  <annotation><appinfo>
+    <xbrll:linkbaseRef xlink:type="simple" xlink:href="gl-gen-vd-2026-12-31.xml" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+    <xbrll:roleType id="role_vdAccountantEngagementType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountantEngagementType">
+      <xbrll:definition>Accountant_Engagement_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdAccountingDataType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountingDataType">
+      <xbrll:definition>Accounting_Data_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdAccountingMethod" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountingMethod">
+      <xbrll:definition>Accounting_Method</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdAccountingPurpose" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountingPurpose">
+      <xbrll:definition>Accounting_Purpose</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdAddressPurpose" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAddressPurpose">
+      <xbrll:definition>Address_Purpose</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdAdjustmentType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAdjustmentType">
+      <xbrll:definition>Adjustment_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdAmountType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAmountType">
+      <xbrll:definition>Amount_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdCommentType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdCommentType">
+      <xbrll:definition>Comment_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdDepreciationJurisdiction" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdDepreciationJurisdiction">
+      <xbrll:definition>Depreciation_Jurisdiction</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdDocumentType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdDocumentType">
+      <xbrll:definition>Document_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdEntryType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdEntryType">
+      <xbrll:definition>Entry_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdIdentifierPurpose" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdIdentifierPurpose">
+      <xbrll:definition>Identifier_Purpose</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdIdentifierType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdIdentifierType">
+      <xbrll:definition>Identifier_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdMeasurableClass" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdMeasurableClass">
+      <xbrll:definition>Measurable_Class</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdMeasurableCode" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdMeasurableCode">
+      <xbrll:definition>Measurable_Code</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdOrganizationType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdOrganizationType">
+      <xbrll:definition>Organization_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdPartyType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPartyType">
+      <xbrll:definition>Party_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdPeriodUnit" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPeriodUnit">
+      <xbrll:definition>Period_Unit</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdPhoneNumberType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPhoneNumberType">
+      <xbrll:definition>Phone_Number_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdPostingStatus" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPostingStatus">
+      <xbrll:definition>Posting_Status</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdReferencePurpose" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdReferencePurpose">
+      <xbrll:definition>Reference_Purpose</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdReportingCalendarStatus" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdReportingCalendarStatus">
+      <xbrll:definition>Reporting_Calendar_Status</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdReportingPeriodType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdReportingPeriodType">
+      <xbrll:definition>Reporting_Period_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdRevisionAction" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdRevisionAction">
+      <xbrll:definition>Revision_Action</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdSerialLotType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdSerialLotType">
+      <xbrll:definition>Serial_Lot_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdTaxType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdTaxType">
+      <xbrll:definition>Tax_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdN1001InvoiceCreditNoteType" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdN1001InvoiceCreditNoteType">
+      <xbrll:definition>UNCL1001_Invoice_CreditNote_Type</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+    <xbrll:roleType id="role_vdAllocation" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAllocation">
+      <xbrll:definition>XBRL_Allocation</xbrll:definition>
+      <xbrll:usedOn>xbrll:definitionLink</xbrll:usedOn>
+    </xbrll:roleType>
+  </appinfo></annotation>
+  <element name="vdAccountantEngagementType" id="vdAccountantEngagementType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountantEngagementTypeAudit" id="vdAccountantEngagementTypeAudit" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountantEngagementTypeCompilation" id="vdAccountantEngagementTypeCompilation" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountantEngagementTypeOther" id="vdAccountantEngagementTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountantEngagementTypeReview" id="vdAccountantEngagementTypeReview" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountantEngagementTypeTax" id="vdAccountantEngagementTypeTax" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataType" id="vdAccountingDataType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeMapping" id="vdAccountingDataTypeMapping" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeAccount" id="vdAccountingDataTypeAccount" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeAssets" id="vdAccountingDataTypeAssets" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeBalance" id="vdAccountingDataTypeBalance" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeEntries" id="vdAccountingDataTypeEntries" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeJournal" id="vdAccountingDataTypeJournal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeLedger" id="vdAccountingDataTypeLedger" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeMasterFile" id="vdAccountingDataTypeMasterFile" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeOther" id="vdAccountingDataTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeProfileCompliant" id="vdAccountingDataTypeProfileCompliant" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeTaxtables" id="vdAccountingDataTypeTaxtables" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeTradeDocuments" id="vdAccountingDataTypeTradeDocuments" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeTrialbalance" id="vdAccountingDataTypeTrialbalance" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingDataTypeVersioning" id="vdAccountingDataTypeVersioning" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingMethod" id="vdAccountingMethod" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingMethodAccrual" id="vdAccountingMethodAccrual" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingMethodCash" id="vdAccountingMethodCash" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingMethodEncumbrance" id="vdAccountingMethodEncumbrance" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingMethodHybridMethods" id="vdAccountingMethodHybridMethods" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingMethodModifiedAccrual" id="vdAccountingMethodModifiedAccrual" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingMethodModifiedCash" id="vdAccountingMethodModifiedCash" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingMethodOther" id="vdAccountingMethodOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingMethodSpecialMethods" id="vdAccountingMethodSpecialMethods" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingPurpose" id="vdAccountingPurpose" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingPurposeBook" id="vdAccountingPurposeBook" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingPurposeManagement" id="vdAccountingPurposeManagement" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingPurposeOther" id="vdAccountingPurposeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingPurposeStatutory" id="vdAccountingPurposeStatutory" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAccountingPurposeTax" id="vdAccountingPurposeTax" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAddressPurpose" id="vdAddressPurpose" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAddressPurposeDelivery" id="vdAddressPurposeDelivery" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAddressPurposePostal" id="vdAddressPurposePostal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAdjustmentType" id="vdAdjustmentType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAdjustmentTypeAllowance" id="vdAdjustmentTypeAllowance" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAdjustmentTypeCharge" id="vdAdjustmentTypeCharge" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountType" id="vdAmountType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeAllowanceTotal" id="vdAmountTypeAllowanceTotal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeAmountDue" id="vdAmountTypeAmountDue" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeChargeTotal" id="vdAmountTypeChargeTotal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeInvoiceTotal" id="vdAmountTypeInvoiceTotal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeLineNetAmount" id="vdAmountTypeLineNetAmount" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeLineNetTotal" id="vdAmountTypeLineNetTotal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypePaidAmount" id="vdAmountTypePaidAmount" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeRoundingAmount" id="vdAmountTypeRoundingAmount" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeTaxExclusiveTotal" id="vdAmountTypeTaxExclusiveTotal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeTaxTotal" id="vdAmountTypeTaxTotal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAmountTypeTaxTotalAccountingCurrency" id="vdAmountTypeTaxTotalAccountingCurrency" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdCommentType" id="vdCommentType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdCommentTypeBatch" id="vdCommentTypeBatch" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdCommentTypeFootnote" id="vdCommentTypeFootnote" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdCommentTypeLinkFootnote" id="vdCommentTypeLinkFootnote" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdCommentTypeOther" id="vdCommentTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdCommentTypeSourceDocument" id="vdCommentTypeSourceDocument" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdCommentTypeSourceJournal" id="vdCommentTypeSourceJournal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDepreciationJurisdiction" id="vdDepreciationJurisdiction" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDepreciationJurisdictionFederal" id="vdDepreciationJurisdictionFederal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDepreciationJurisdictionLocal" id="vdDepreciationJurisdictionLocal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDepreciationJurisdictionOther" id="vdDepreciationJurisdictionOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDepreciationJurisdictionState" id="vdDepreciationJurisdictionState" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentType" id="vdDocumentType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeCheck" id="vdDocumentTypeCheck" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeCreditMemo" id="vdDocumentTypeCreditMemo" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeDebitMemo" id="vdDocumentTypeDebitMemo" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeFinanceCharge" id="vdDocumentTypeFinanceCharge" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeInvoice" id="vdDocumentTypeInvoice" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeManualAdjustment" id="vdDocumentTypeManualAdjustment" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeOrderCustomer" id="vdDocumentTypeOrderCustomer" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeOrderVendor" id="vdDocumentTypeOrderVendor" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeOther" id="vdDocumentTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypePaymentOther" id="vdDocumentTypePaymentOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeReceipt" id="vdDocumentTypeReceipt" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeReminder" id="vdDocumentTypeReminder" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeShipment" id="vdDocumentTypeShipment" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeTegata" id="vdDocumentTypeTegata" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdDocumentTypeVoucher" id="vdDocumentTypeVoucher" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryType" id="vdEntryType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeAdjusting" id="vdEntryTypeAdjusting" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeBudget" id="vdEntryTypeBudget" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeComparative" id="vdEntryTypeComparative" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeEliminating" id="vdEntryTypeEliminating" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeExternalAccountant" id="vdEntryTypeExternalAccountant" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeOther" id="vdEntryTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypePassedAdjusting" id="vdEntryTypePassedAdjusting" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeProposed" id="vdEntryTypeProposed" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeReclassifying" id="vdEntryTypeReclassifying" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeRecurring" id="vdEntryTypeRecurring" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeSimulated" id="vdEntryTypeSimulated" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeStandard" id="vdEntryTypeStandard" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdEntryTypeTax" id="vdEntryTypeTax" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierPurpose" id="vdIdentifierPurpose" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierPurposeVAT" id="vdIdentifierPurposeVAT" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierPurposeElectronicAddress" id="vdIdentifierPurposeElectronicAddress" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierPurposeLegalRegistration" id="vdIdentifierPurposeLegalRegistration" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierPurposeLocation" id="vdIdentifierPurposeLocation" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierPurposeTaxRegistration" id="vdIdentifierPurposeTaxRegistration" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierType" id="vdIdentifierType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypeContractor" id="vdIdentifierTypeContractor" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypeCustomer" id="vdIdentifierTypeCustomer" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypeDeliverTo" id="vdIdentifierTypeDeliverTo" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypeEmployee" id="vdIdentifierTypeEmployee" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypeOther" id="vdIdentifierTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypePayee" id="vdIdentifierTypePayee" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypeSalespersonExternal" id="vdIdentifierTypeSalespersonExternal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypeSalespersonInternal" id="vdIdentifierTypeSalespersonInternal" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypeTaxRepresentative" id="vdIdentifierTypeTaxRepresentative" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdIdentifierTypeVendor" id="vdIdentifierTypeVendor" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClass" id="vdMeasurableClass" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassAssemblies" id="vdMeasurableClassAssemblies" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassBuilding" id="vdMeasurableClassBuilding" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassFinishedGoods" id="vdMeasurableClassFinishedGoods" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassFurniture" id="vdMeasurableClassFurniture" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassLand" id="vdMeasurableClassLand" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassMachinery" id="vdMeasurableClassMachinery" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassOther" id="vdMeasurableClassOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassRawMaterial" id="vdMeasurableClassRawMaterial" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassSupplies" id="vdMeasurableClassSupplies" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassVehicles" id="vdMeasurableClassVehicles" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableClassWorkInProcess" id="vdMeasurableClassWorkInProcess" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCode" id="vdMeasurableCode" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCodeBP" id="vdMeasurableCodeBP" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCodeFA" id="vdMeasurableCodeFA" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCodeIN" id="vdMeasurableCodeIN" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCodeKPI" id="vdMeasurableCodeKPI" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCodeNT" id="vdMeasurableCodeNT" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCodeOT" id="vdMeasurableCodeOT" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCodeSP" id="vdMeasurableCodeSP" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCodeM" id="vdMeasurableCodeM" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdMeasurableCodeP" id="vdMeasurableCodeP" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdOrganizationType" id="vdOrganizationType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdOrganizationTypeIndividual" id="vdOrganizationTypeIndividual" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdOrganizationTypeOrganization" id="vdOrganizationTypeOrganization" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdOrganizationTypeOther" id="vdOrganizationTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPartyType" id="vdPartyType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPartyTypeBuyer" id="vdPartyTypeBuyer" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPartyTypeDeliverTo" id="vdPartyTypeDeliverTo" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPartyTypePayee" id="vdPartyTypePayee" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPartyTypeSeller" id="vdPartyTypeSeller" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPartyTypeTaxRepresentative" id="vdPartyTypeTaxRepresentative" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnit" id="vdPeriodUnit" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitAdHoc" id="vdPeriodUnitAdHoc" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitAnnual" id="vdPeriodUnitAnnual" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitBiWeekly" id="vdPeriodUnitBiWeekly" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitCurrentPeriodOnly" id="vdPeriodUnitCurrentPeriodOnly" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitDaily" id="vdPeriodUnitDaily" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitMonthly" id="vdPeriodUnitMonthly" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitOther" id="vdPeriodUnitOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitQuarterly" id="vdPeriodUnitQuarterly" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitSemiMonthly" id="vdPeriodUnitSemiMonthly" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitSemiannual" id="vdPeriodUnitSemiannual" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitThirdly" id="vdPeriodUnitThirdly" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPeriodUnitWeekly" id="vdPeriodUnitWeekly" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPhoneNumberType" id="vdPhoneNumberType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPhoneNumberTypeBookkeeper" id="vdPhoneNumberTypeBookkeeper" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPhoneNumberTypeController" id="vdPhoneNumberTypeController" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPhoneNumberTypeDirect" id="vdPhoneNumberTypeDirect" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPhoneNumberTypeFax" id="vdPhoneNumberTypeFax" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPhoneNumberTypeInvestorRelations" id="vdPhoneNumberTypeInvestorRelations" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPhoneNumberTypeMain" id="vdPhoneNumberTypeMain" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPhoneNumberTypeOther" id="vdPhoneNumberTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPhoneNumberTypeSwitchboard" id="vdPhoneNumberTypeSwitchboard" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPostingStatus" id="vdPostingStatus" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPostingStatusCancelled" id="vdPostingStatusCancelled" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPostingStatusDeferred" id="vdPostingStatusDeferred" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPostingStatusOther" id="vdPostingStatusOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPostingStatusPosted" id="vdPostingStatusPosted" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPostingStatusProposed" id="vdPostingStatusProposed" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPostingStatusSimulated" id="vdPostingStatusSimulated" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPostingStatusTax" id="vdPostingStatusTax" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdPostingStatusUnposted" id="vdPostingStatusUnposted" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReferencePurpose" id="vdReferencePurpose" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReferencePurposeContract" id="vdReferencePurposeContract" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReferencePurposeProject" id="vdReferencePurposeProject" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReferencePurposeTenderOrLot" id="vdReferencePurposeTenderOrLot" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingCalendarStatus" id="vdReportingCalendarStatus" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingCalendarStatusClosed" id="vdReportingCalendarStatusClosed" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingCalendarStatusOpen" id="vdReportingCalendarStatusOpen" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingCalendarStatusPending" id="vdReportingCalendarStatusPending" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingPeriodType" id="vdReportingPeriodType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingPeriodTypeN454" id="vdReportingPeriodTypeN454" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingPeriodTypeAdHoc" id="vdReportingPeriodTypeAdHoc" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingPeriodTypeMonthly" id="vdReportingPeriodTypeMonthly" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingPeriodTypeOther" id="vdReportingPeriodTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingPeriodTypeQuarterly" id="vdReportingPeriodTypeQuarterly" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdReportingPeriodTypeSemiAnnually" id="vdReportingPeriodTypeSemiAnnually" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdRevisionAction" id="vdRevisionAction" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdRevisionActionSupersede" id="vdRevisionActionSupersede" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdRevisionActionSupplement" id="vdRevisionActionSupplement" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdSerialLotType" id="vdSerialLotType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdSerialLotTypeLot" id="vdSerialLotTypeLot" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdSerialLotTypeNeither" id="vdSerialLotTypeNeither" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdSerialLotTypeOther" id="vdSerialLotTypeOther" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdSerialLotTypeSerial" id="vdSerialLotTypeSerial" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdTaxType" id="vdTaxType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdTaxTypeVAT" id="vdTaxTypeVAT" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteType" id="vdN1001InvoiceCreditNoteType" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN102" id="vdN1001InvoiceCreditNoteTypeN102" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN218" id="vdN1001InvoiceCreditNoteTypeN218" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN219" id="vdN1001InvoiceCreditNoteTypeN219" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN326" id="vdN1001InvoiceCreditNoteTypeN326" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN331" id="vdN1001InvoiceCreditNoteTypeN331" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN380" id="vdN1001InvoiceCreditNoteTypeN380" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN381" id="vdN1001InvoiceCreditNoteTypeN381" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN382" id="vdN1001InvoiceCreditNoteTypeN382" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN383" id="vdN1001InvoiceCreditNoteTypeN383" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN384" id="vdN1001InvoiceCreditNoteTypeN384" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN386" id="vdN1001InvoiceCreditNoteTypeN386" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN388" id="vdN1001InvoiceCreditNoteTypeN388" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN389" id="vdN1001InvoiceCreditNoteTypeN389" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN393" id="vdN1001InvoiceCreditNoteTypeN393" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN395" id="vdN1001InvoiceCreditNoteTypeN395" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN396" id="vdN1001InvoiceCreditNoteTypeN396" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN532" id="vdN1001InvoiceCreditNoteTypeN532" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN553" id="vdN1001InvoiceCreditNoteTypeN553" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN575" id="vdN1001InvoiceCreditNoteTypeN575" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN623" id="vdN1001InvoiceCreditNoteTypeN623" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN71" id="vdN1001InvoiceCreditNoteTypeN71" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN780" id="vdN1001InvoiceCreditNoteTypeN780" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN80" id="vdN1001InvoiceCreditNoteTypeN80" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN81" id="vdN1001InvoiceCreditNoteTypeN81" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN817" id="vdN1001InvoiceCreditNoteTypeN817" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN82" id="vdN1001InvoiceCreditNoteTypeN82" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN83" id="vdN1001InvoiceCreditNoteTypeN83" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN84" id="vdN1001InvoiceCreditNoteTypeN84" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN870" id="vdN1001InvoiceCreditNoteTypeN870" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN875" id="vdN1001InvoiceCreditNoteTypeN875" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN876" id="vdN1001InvoiceCreditNoteTypeN876" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdN1001InvoiceCreditNoteTypeN877" id="vdN1001InvoiceCreditNoteTypeN877" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAllocation" id="vdAllocation" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="true" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAllocationBeginningBalance" id="vdAllocationBeginningBalance" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAllocationEndingBalance" id="vdAllocationEndingBalance" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
+  <element name="vdAllocationPeriodChange" id="vdAllocationPeriodChange" type="xbrli:stringItemType" substitutionGroup="xbrli:item" abstract="false" nillable="true" xbrli:periodType="instant"/>
 </schema>
