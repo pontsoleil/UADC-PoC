@@ -1,6 +1,6 @@
 # UADC_PoC Decisions
 
-更新日: 2026-08-26 (JST)
+更新日: 2026-08-29 (JST)
 
 ## 採用済み設計指針
 
@@ -38,6 +38,14 @@
 - required empty container、predicate、alias-relative path、named transformation、XSD child orderはBinding／schemaから汎用的に処理し、CII項目別分岐をruntimeへ追加しない。
 - 正式baselineは237行Binding SHA-256 `B529F2585CA2A5FBFDAF673A6F96B98135CE274B8B022C1B791FF9863C23BD23`、runtime SHA-256 `7CA92B9DB1724D1A5A3AE9C0FDD9A081ED73F34D1125A8626C880BE2AE5B11A9`とする。
 - 購入済み規格PDFとtask-local抽出物はFormal repositoryへ格納しない。
+
+### D-007 public Gitではauthoritative sourceと再利用可能fixtureを優先する
+
+- numbered public documentationとREADMEはMarkdownをauthoritative editable sourceとし、承認済みgenerated duplicate PDF 13件は追跡しない。
+- `out/`全体を一律削除せず、current tests/docsが参照するpublished fixture/output familyは保持する。
+- downloaded cache、render QA、analysis extraction、one-time validation evidence、local-path-bearing runtime log、およびexact duplicateはpublic Gitで追跡しない。
+- internal evidenceをpublic Gitから除く場合も、削除前SHA-256付きtask-local backupをWORKに保持する。
+- authority、reference、licence、privacyが確定しないitemは削除せず`HOLD_*`とする。
 
 ## 保留事項
 

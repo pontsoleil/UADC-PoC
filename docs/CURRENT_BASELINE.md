@@ -1,6 +1,18 @@
 # UADC_PoC Current Baseline
 
-記録日: 2026-08-26 (JST)
+記録日: 2026-08-29 (JST)
+
+## 2026-08-29 public repository cleanup baseline
+
+- cleanup predecessor: `19982b517e83b40845476d7a9bba49af336e31c4`
+- cleanup後のtracked file数: 655
+- public Gitから、generated 179件、private one-time evidence 16件、duplicate 5件の合計200件を削除した。
+- 削除前200件は、Canonical WORKを変更せず、task-local backupへ元の相対pathとSHA-256を保持して退避した。
+- Markdown原文を保持する承認済みgenerated duplicate PDF 13件を削除し、同じexact pathを`.gitignore`へ追加した。
+- current program source、Specifications 5件、public tests、public/synthetic fixtures、およびcurrent tests/docsが参照するpublished output familyは保持した。
+- `XBRL-GL-PWD-2016-12-01/`はcurrent code/documentationから参照されるexternal historical sourceであるため保持した。exact path `XBRL GL 2017/`は存在しない。
+- `specs/ads/source/ADS_Definition_Tables.xlsx`はcurrent mapping sourceとして保持するが、redistribution licence evidenceは`HOLD_LICENCE`である。
+- cleanup commitは本文書を含むため自己参照SHAを固定せず、`git rev-parse HEAD`で確認する。
 
 ## 2026-08-26 CII D16B formal baseline
 

@@ -24,6 +24,21 @@ backups/
 *.before
 ~$*
 
+# Generated documentation duplicates (Markdown is authoritative)
+/README.pdf
+/docs/README.pdf
+/docs/01_ENVIRONMENT_TESTS_TUTORIAL.pdf
+/docs/02_STRUCTURED_CSV_LHM_BINDINGS.pdf
+/docs/03_PHASE1_UBL_SYNTAX_BINDING.pdf
+/docs/04_PHASE2_ADS_PSV_SEMANTIC_BINDING.pdf
+/docs/05_PHASE2_ADS_XBRL_GL_SYNTAX_BINDING.pdf
+/docs/ja/README.pdf
+/docs/ja/01_ENVIRONMENT_TESTS_TUTORIAL.pdf
+/docs/ja/02_STRUCTURED_CSV_LHM_BINDINGS.pdf
+/docs/ja/03_PHASE1_UBL_SYNTAX_BINDING.pdf
+/docs/ja/04_PHASE2_ADS_PSV_SEMANTIC_BINDING.pdf
+/docs/ja/05_PHASE2_ADS_XBRL_GL_SYNTAX_BINDING.pdf
+
 # Private accounting inputs, outputs, mappings, and master data
 /private/
 /research/private/

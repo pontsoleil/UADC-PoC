@@ -1,6 +1,19 @@
 # UADC_PoC Handoff
 
-更新日: 2026-08-26 (JST)
+更新日: 2026-08-29 (JST)
+
+## Public repository cleanup (2026-08-29)
+
+- predecessor `19982b517e83b40845476d7a9bba49af336e31c4`のtracked 855件を全件分類し、200件をpublic Gitから削除した。
+- 削除内訳はgenerated 179件、private one-time evidence 16件、duplicate 5件である。WORKの既存fileは削除していない。
+- 削除対象200件はtask-local backupへ退避し、source/backup SHA-256の200/200一致を確認した。
+- Markdownを正本とするgenerated PDF 13件、`out/cache/`、unreferenced analysis/render/extraction/smoke output、machine-local pathを含むArelle log、およびunreferenced `tests/evidence/`を削除した。
+- current tests/docsが参照するPhase 1/2 output、taxonomy output、round-trip fixtureは保持した。
+- text reference scanとSpecifications 5件のOOXML scanでは、削除対象へのunresolved active referenceは0件である。
+- high-confidence credential/private-key signatureは0件、private IP findingは0件である。
+- `docs/01_ENVIRONMENT_TESTS_TUTORIAL.md`と日本語版には各1件のmachine-specific user pathが残る。cleanupでは本文を改訂せず、別documentation changeとしてrepository-relative/generalized exampleへ変更する必要がある。
+- `specs/ads/source/ADS_Definition_Tables.xlsx`は`HOLD_LICENCE`のまま保持した。redistribution evidenceの確認が必要である。
+- program、Binding Table、入出力fixtureの内容は変更していないため、変換・round-trip testは再実行していない。
 
 ## CII D16B formal promotion (2026-08-26)
 
