@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<link:linkbase xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <link:arcroleRef arcroleURI="http://xbrl.org/int/dim/arcrole/domain-member" xlink:type="simple" xlink:href="http://www.xbrl.org/2005/xbrldt-2005.xsd#domain-member"/>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountantEngagementType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdAccountantEngagementType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountantEngagementType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountantEngagementType" xlink:label="vdAccountantEngagementType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountantEngagementTypeAudit" xlink:label="vdAccountantEngagementTypeAudit"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountantEngagementType" xlink:to="vdAccountantEngagementTypeAudit" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountantEngagementTypeCompilation" xlink:label="vdAccountantEngagementTypeCompilation"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountantEngagementType" xlink:to="vdAccountantEngagementTypeCompilation" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountantEngagementTypeOther" xlink:label="vdAccountantEngagementTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountantEngagementType" xlink:to="vdAccountantEngagementTypeOther" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountantEngagementTypeReview" xlink:label="vdAccountantEngagementTypeReview"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountantEngagementType" xlink:to="vdAccountantEngagementTypeReview" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountantEngagementTypeTax" xlink:label="vdAccountantEngagementTypeTax"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountantEngagementType" xlink:to="vdAccountantEngagementTypeTax" order="5"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountingDataType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdAccountingDataType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountingDataType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataType" xlink:label="vdAccountingDataType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeMapping" xlink:label="vdAccountingDataTypeMapping"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeMapping" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeAccount" xlink:label="vdAccountingDataTypeAccount"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeAccount" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeAssets" xlink:label="vdAccountingDataTypeAssets"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeAssets" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeBalance" xlink:label="vdAccountingDataTypeBalance"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeBalance" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeEntries" xlink:label="vdAccountingDataTypeEntries"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeEntries" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeJournal" xlink:label="vdAccountingDataTypeJournal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeJournal" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeLedger" xlink:label="vdAccountingDataTypeLedger"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeLedger" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeMasterFile" xlink:label="vdAccountingDataTypeMasterFile"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeMasterFile" order="8"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeOther" xlink:label="vdAccountingDataTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeOther" order="9"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeProfileCompliant" xlink:label="vdAccountingDataTypeProfileCompliant"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeProfileCompliant" order="10"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeTaxtables" xlink:label="vdAccountingDataTypeTaxtables"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeTaxtables" order="11"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeTradeDocuments" xlink:label="vdAccountingDataTypeTradeDocuments"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeTradeDocuments" order="12"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeTrialbalance" xlink:label="vdAccountingDataTypeTrialbalance"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeTrialbalance" order="13"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingDataTypeVersioning" xlink:label="vdAccountingDataTypeVersioning"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingDataType" xlink:to="vdAccountingDataTypeVersioning" order="14"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountingMethod" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdAccountingMethod"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountingMethod">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingMethod" xlink:label="vdAccountingMethod"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingMethodAccrual" xlink:label="vdAccountingMethodAccrual"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingMethod" xlink:to="vdAccountingMethodAccrual" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingMethodCash" xlink:label="vdAccountingMethodCash"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingMethod" xlink:to="vdAccountingMethodCash" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingMethodEncumbrance" xlink:label="vdAccountingMethodEncumbrance"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingMethod" xlink:to="vdAccountingMethodEncumbrance" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingMethodHybridMethods" xlink:label="vdAccountingMethodHybridMethods"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingMethod" xlink:to="vdAccountingMethodHybridMethods" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingMethodModifiedAccrual" xlink:label="vdAccountingMethodModifiedAccrual"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingMethod" xlink:to="vdAccountingMethodModifiedAccrual" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingMethodModifiedCash" xlink:label="vdAccountingMethodModifiedCash"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingMethod" xlink:to="vdAccountingMethodModifiedCash" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingMethodOther" xlink:label="vdAccountingMethodOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingMethod" xlink:to="vdAccountingMethodOther" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingMethodSpecialMethods" xlink:label="vdAccountingMethodSpecialMethods"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingMethod" xlink:to="vdAccountingMethodSpecialMethods" order="8"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountingPurpose" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdAccountingPurpose"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAccountingPurpose">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingPurpose" xlink:label="vdAccountingPurpose"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingPurposeBook" xlink:label="vdAccountingPurposeBook"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingPurpose" xlink:to="vdAccountingPurposeBook" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingPurposeManagement" xlink:label="vdAccountingPurposeManagement"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingPurpose" xlink:to="vdAccountingPurposeManagement" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingPurposeOther" xlink:label="vdAccountingPurposeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingPurpose" xlink:to="vdAccountingPurposeOther" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingPurposeStatutory" xlink:label="vdAccountingPurposeStatutory"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingPurpose" xlink:to="vdAccountingPurposeStatutory" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAccountingPurposeTax" xlink:label="vdAccountingPurposeTax"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAccountingPurpose" xlink:to="vdAccountingPurposeTax" order="5"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAddressPurpose" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdAddressPurpose"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAddressPurpose">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAddressPurpose" xlink:label="vdAddressPurpose"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAddressPurposeDelivery" xlink:label="vdAddressPurposeDelivery"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAddressPurpose" xlink:to="vdAddressPurposeDelivery" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAddressPurposePostal" xlink:label="vdAddressPurposePostal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAddressPurpose" xlink:to="vdAddressPurposePostal" order="2"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAdjustmentType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdAdjustmentType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAdjustmentType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAdjustmentType" xlink:label="vdAdjustmentType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAdjustmentTypeAllowance" xlink:label="vdAdjustmentTypeAllowance"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAdjustmentType" xlink:to="vdAdjustmentTypeAllowance" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAdjustmentTypeCharge" xlink:label="vdAdjustmentTypeCharge"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAdjustmentType" xlink:to="vdAdjustmentTypeCharge" order="2"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAmountType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdAmountType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAmountType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountType" xlink:label="vdAmountType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeAllowanceTotal" xlink:label="vdAmountTypeAllowanceTotal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeAllowanceTotal" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeAmountDue" xlink:label="vdAmountTypeAmountDue"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeAmountDue" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeChargeTotal" xlink:label="vdAmountTypeChargeTotal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeChargeTotal" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeInvoiceTotal" xlink:label="vdAmountTypeInvoiceTotal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeInvoiceTotal" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeLineNetAmount" xlink:label="vdAmountTypeLineNetAmount"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeLineNetAmount" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeLineNetTotal" xlink:label="vdAmountTypeLineNetTotal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeLineNetTotal" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypePaidAmount" xlink:label="vdAmountTypePaidAmount"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypePaidAmount" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeRoundingAmount" xlink:label="vdAmountTypeRoundingAmount"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeRoundingAmount" order="8"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeTaxExclusiveTotal" xlink:label="vdAmountTypeTaxExclusiveTotal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeTaxExclusiveTotal" order="9"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeTaxTotal" xlink:label="vdAmountTypeTaxTotal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeTaxTotal" order="10"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAmountTypeTaxTotalAccountingCurrency" xlink:label="vdAmountTypeTaxTotalAccountingCurrency"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAmountType" xlink:to="vdAmountTypeTaxTotalAccountingCurrency" order="11"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdCommentType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdCommentType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdCommentType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdCommentType" xlink:label="vdCommentType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdCommentTypeBatch" xlink:label="vdCommentTypeBatch"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdCommentType" xlink:to="vdCommentTypeBatch" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdCommentTypeFootnote" xlink:label="vdCommentTypeFootnote"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdCommentType" xlink:to="vdCommentTypeFootnote" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdCommentTypeLinkFootnote" xlink:label="vdCommentTypeLinkFootnote"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdCommentType" xlink:to="vdCommentTypeLinkFootnote" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdCommentTypeOther" xlink:label="vdCommentTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdCommentType" xlink:to="vdCommentTypeOther" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdCommentTypeSourceDocument" xlink:label="vdCommentTypeSourceDocument"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdCommentType" xlink:to="vdCommentTypeSourceDocument" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdCommentTypeSourceJournal" xlink:label="vdCommentTypeSourceJournal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdCommentType" xlink:to="vdCommentTypeSourceJournal" order="6"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdDepreciationJurisdiction" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdDepreciationJurisdiction"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdDepreciationJurisdiction">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDepreciationJurisdiction" xlink:label="vdDepreciationJurisdiction"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDepreciationJurisdictionFederal" xlink:label="vdDepreciationJurisdictionFederal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDepreciationJurisdiction" xlink:to="vdDepreciationJurisdictionFederal" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDepreciationJurisdictionLocal" xlink:label="vdDepreciationJurisdictionLocal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDepreciationJurisdiction" xlink:to="vdDepreciationJurisdictionLocal" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDepreciationJurisdictionOther" xlink:label="vdDepreciationJurisdictionOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDepreciationJurisdiction" xlink:to="vdDepreciationJurisdictionOther" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDepreciationJurisdictionState" xlink:label="vdDepreciationJurisdictionState"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDepreciationJurisdiction" xlink:to="vdDepreciationJurisdictionState" order="4"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdDocumentType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdDocumentType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdDocumentType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentType" xlink:label="vdDocumentType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeCheck" xlink:label="vdDocumentTypeCheck"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeCheck" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeCreditMemo" xlink:label="vdDocumentTypeCreditMemo"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeCreditMemo" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeDebitMemo" xlink:label="vdDocumentTypeDebitMemo"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeDebitMemo" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeFinanceCharge" xlink:label="vdDocumentTypeFinanceCharge"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeFinanceCharge" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeInvoice" xlink:label="vdDocumentTypeInvoice"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeInvoice" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeManualAdjustment" xlink:label="vdDocumentTypeManualAdjustment"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeManualAdjustment" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeOrderCustomer" xlink:label="vdDocumentTypeOrderCustomer"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeOrderCustomer" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeOrderVendor" xlink:label="vdDocumentTypeOrderVendor"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeOrderVendor" order="8"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeOther" xlink:label="vdDocumentTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeOther" order="9"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypePaymentOther" xlink:label="vdDocumentTypePaymentOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypePaymentOther" order="10"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeReceipt" xlink:label="vdDocumentTypeReceipt"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeReceipt" order="11"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeReminder" xlink:label="vdDocumentTypeReminder"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeReminder" order="12"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeShipment" xlink:label="vdDocumentTypeShipment"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeShipment" order="13"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeTegata" xlink:label="vdDocumentTypeTegata"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeTegata" order="14"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdDocumentTypeVoucher" xlink:label="vdDocumentTypeVoucher"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdDocumentType" xlink:to="vdDocumentTypeVoucher" order="15"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdEntryType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdEntryType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdEntryType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryType" xlink:label="vdEntryType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeAdjusting" xlink:label="vdEntryTypeAdjusting"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeAdjusting" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeBudget" xlink:label="vdEntryTypeBudget"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeBudget" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeComparative" xlink:label="vdEntryTypeComparative"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeComparative" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeEliminating" xlink:label="vdEntryTypeEliminating"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeEliminating" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeExternalAccountant" xlink:label="vdEntryTypeExternalAccountant"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeExternalAccountant" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeOther" xlink:label="vdEntryTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeOther" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypePassedAdjusting" xlink:label="vdEntryTypePassedAdjusting"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypePassedAdjusting" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeProposed" xlink:label="vdEntryTypeProposed"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeProposed" order="8"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeReclassifying" xlink:label="vdEntryTypeReclassifying"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeReclassifying" order="9"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeRecurring" xlink:label="vdEntryTypeRecurring"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeRecurring" order="10"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeSimulated" xlink:label="vdEntryTypeSimulated"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeSimulated" order="11"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeStandard" xlink:label="vdEntryTypeStandard"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeStandard" order="12"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdEntryTypeTax" xlink:label="vdEntryTypeTax"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdEntryType" xlink:to="vdEntryTypeTax" order="13"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdIdentifierPurpose" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdIdentifierPurpose"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdIdentifierPurpose">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierPurpose" xlink:label="vdIdentifierPurpose"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierPurposeVAT" xlink:label="vdIdentifierPurposeVAT"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierPurpose" xlink:to="vdIdentifierPurposeVAT" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierPurposeElectronicAddress" xlink:label="vdIdentifierPurposeElectronicAddress"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierPurpose" xlink:to="vdIdentifierPurposeElectronicAddress" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierPurposeLegalRegistration" xlink:label="vdIdentifierPurposeLegalRegistration"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierPurpose" xlink:to="vdIdentifierPurposeLegalRegistration" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierPurposeLocation" xlink:label="vdIdentifierPurposeLocation"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierPurpose" xlink:to="vdIdentifierPurposeLocation" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierPurposeTaxRegistration" xlink:label="vdIdentifierPurposeTaxRegistration"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierPurpose" xlink:to="vdIdentifierPurposeTaxRegistration" order="5"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdIdentifierType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdIdentifierType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdIdentifierType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierType" xlink:label="vdIdentifierType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypeContractor" xlink:label="vdIdentifierTypeContractor"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypeContractor" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypeCustomer" xlink:label="vdIdentifierTypeCustomer"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypeCustomer" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypeDeliverTo" xlink:label="vdIdentifierTypeDeliverTo"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypeDeliverTo" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypeEmployee" xlink:label="vdIdentifierTypeEmployee"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypeEmployee" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypeOther" xlink:label="vdIdentifierTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypeOther" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypePayee" xlink:label="vdIdentifierTypePayee"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypePayee" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypeSalespersonExternal" xlink:label="vdIdentifierTypeSalespersonExternal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypeSalespersonExternal" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypeSalespersonInternal" xlink:label="vdIdentifierTypeSalespersonInternal"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypeSalespersonInternal" order="8"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypeTaxRepresentative" xlink:label="vdIdentifierTypeTaxRepresentative"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypeTaxRepresentative" order="9"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdIdentifierTypeVendor" xlink:label="vdIdentifierTypeVendor"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdIdentifierType" xlink:to="vdIdentifierTypeVendor" order="10"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdMeasurableClass" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdMeasurableClass"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdMeasurableClass">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClass" xlink:label="vdMeasurableClass"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassAssemblies" xlink:label="vdMeasurableClassAssemblies"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassAssemblies" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassBuilding" xlink:label="vdMeasurableClassBuilding"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassBuilding" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassFinishedGoods" xlink:label="vdMeasurableClassFinishedGoods"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassFinishedGoods" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassFurniture" xlink:label="vdMeasurableClassFurniture"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassFurniture" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassLand" xlink:label="vdMeasurableClassLand"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassLand" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassMachinery" xlink:label="vdMeasurableClassMachinery"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassMachinery" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassOther" xlink:label="vdMeasurableClassOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassOther" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassRawMaterial" xlink:label="vdMeasurableClassRawMaterial"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassRawMaterial" order="8"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassSupplies" xlink:label="vdMeasurableClassSupplies"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassSupplies" order="9"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassVehicles" xlink:label="vdMeasurableClassVehicles"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassVehicles" order="10"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableClassWorkInProcess" xlink:label="vdMeasurableClassWorkInProcess"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableClass" xlink:to="vdMeasurableClassWorkInProcess" order="11"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdMeasurableCode" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdMeasurableCode"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdMeasurableCode">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCode" xlink:label="vdMeasurableCode"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCodeBP" xlink:label="vdMeasurableCodeBP"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableCode" xlink:to="vdMeasurableCodeBP" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCodeFA" xlink:label="vdMeasurableCodeFA"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableCode" xlink:to="vdMeasurableCodeFA" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCodeIN" xlink:label="vdMeasurableCodeIN"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableCode" xlink:to="vdMeasurableCodeIN" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCodeKPI" xlink:label="vdMeasurableCodeKPI"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableCode" xlink:to="vdMeasurableCodeKPI" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCodeNT" xlink:label="vdMeasurableCodeNT"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableCode" xlink:to="vdMeasurableCodeNT" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCodeOT" xlink:label="vdMeasurableCodeOT"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableCode" xlink:to="vdMeasurableCodeOT" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCodeSP" xlink:label="vdMeasurableCodeSP"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableCode" xlink:to="vdMeasurableCodeSP" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCodeM" xlink:label="vdMeasurableCodeM"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableCode" xlink:to="vdMeasurableCodeM" order="8"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdMeasurableCodeP" xlink:label="vdMeasurableCodeP"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdMeasurableCode" xlink:to="vdMeasurableCodeP" order="9"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdOrganizationType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdOrganizationType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdOrganizationType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdOrganizationType" xlink:label="vdOrganizationType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdOrganizationTypeIndividual" xlink:label="vdOrganizationTypeIndividual"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdOrganizationType" xlink:to="vdOrganizationTypeIndividual" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdOrganizationTypeOrganization" xlink:label="vdOrganizationTypeOrganization"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdOrganizationType" xlink:to="vdOrganizationTypeOrganization" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdOrganizationTypeOther" xlink:label="vdOrganizationTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdOrganizationType" xlink:to="vdOrganizationTypeOther" order="3"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPartyType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdPartyType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPartyType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPartyType" xlink:label="vdPartyType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPartyTypeBuyer" xlink:label="vdPartyTypeBuyer"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPartyType" xlink:to="vdPartyTypeBuyer" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPartyTypeDeliverTo" xlink:label="vdPartyTypeDeliverTo"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPartyType" xlink:to="vdPartyTypeDeliverTo" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPartyTypePayee" xlink:label="vdPartyTypePayee"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPartyType" xlink:to="vdPartyTypePayee" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPartyTypeSeller" xlink:label="vdPartyTypeSeller"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPartyType" xlink:to="vdPartyTypeSeller" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPartyTypeTaxRepresentative" xlink:label="vdPartyTypeTaxRepresentative"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPartyType" xlink:to="vdPartyTypeTaxRepresentative" order="5"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPeriodUnit" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdPeriodUnit"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPeriodUnit">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnit" xlink:label="vdPeriodUnit"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitAdHoc" xlink:label="vdPeriodUnitAdHoc"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitAdHoc" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitAnnual" xlink:label="vdPeriodUnitAnnual"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitAnnual" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitBiWeekly" xlink:label="vdPeriodUnitBiWeekly"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitBiWeekly" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitCurrentPeriodOnly" xlink:label="vdPeriodUnitCurrentPeriodOnly"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitCurrentPeriodOnly" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitDaily" xlink:label="vdPeriodUnitDaily"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitDaily" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitMonthly" xlink:label="vdPeriodUnitMonthly"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitMonthly" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitOther" xlink:label="vdPeriodUnitOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitOther" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitQuarterly" xlink:label="vdPeriodUnitQuarterly"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitQuarterly" order="8"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitSemiMonthly" xlink:label="vdPeriodUnitSemiMonthly"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitSemiMonthly" order="9"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitSemiannual" xlink:label="vdPeriodUnitSemiannual"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitSemiannual" order="10"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitThirdly" xlink:label="vdPeriodUnitThirdly"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitThirdly" order="11"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPeriodUnitWeekly" xlink:label="vdPeriodUnitWeekly"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPeriodUnit" xlink:to="vdPeriodUnitWeekly" order="12"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPhoneNumberType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdPhoneNumberType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPhoneNumberType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPhoneNumberType" xlink:label="vdPhoneNumberType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPhoneNumberTypeBookkeeper" xlink:label="vdPhoneNumberTypeBookkeeper"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPhoneNumberType" xlink:to="vdPhoneNumberTypeBookkeeper" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPhoneNumberTypeController" xlink:label="vdPhoneNumberTypeController"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPhoneNumberType" xlink:to="vdPhoneNumberTypeController" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPhoneNumberTypeDirect" xlink:label="vdPhoneNumberTypeDirect"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPhoneNumberType" xlink:to="vdPhoneNumberTypeDirect" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPhoneNumberTypeFax" xlink:label="vdPhoneNumberTypeFax"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPhoneNumberType" xlink:to="vdPhoneNumberTypeFax" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPhoneNumberTypeInvestorRelations" xlink:label="vdPhoneNumberTypeInvestorRelations"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPhoneNumberType" xlink:to="vdPhoneNumberTypeInvestorRelations" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPhoneNumberTypeMain" xlink:label="vdPhoneNumberTypeMain"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPhoneNumberType" xlink:to="vdPhoneNumberTypeMain" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPhoneNumberTypeOther" xlink:label="vdPhoneNumberTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPhoneNumberType" xlink:to="vdPhoneNumberTypeOther" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPhoneNumberTypeSwitchboard" xlink:label="vdPhoneNumberTypeSwitchboard"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPhoneNumberType" xlink:to="vdPhoneNumberTypeSwitchboard" order="8"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPostingStatus" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdPostingStatus"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdPostingStatus">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPostingStatus" xlink:label="vdPostingStatus"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPostingStatusCancelled" xlink:label="vdPostingStatusCancelled"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPostingStatus" xlink:to="vdPostingStatusCancelled" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPostingStatusDeferred" xlink:label="vdPostingStatusDeferred"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPostingStatus" xlink:to="vdPostingStatusDeferred" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPostingStatusOther" xlink:label="vdPostingStatusOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPostingStatus" xlink:to="vdPostingStatusOther" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPostingStatusPosted" xlink:label="vdPostingStatusPosted"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPostingStatus" xlink:to="vdPostingStatusPosted" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPostingStatusProposed" xlink:label="vdPostingStatusProposed"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPostingStatus" xlink:to="vdPostingStatusProposed" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPostingStatusSimulated" xlink:label="vdPostingStatusSimulated"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPostingStatus" xlink:to="vdPostingStatusSimulated" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPostingStatusTax" xlink:label="vdPostingStatusTax"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPostingStatus" xlink:to="vdPostingStatusTax" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdPostingStatusUnposted" xlink:label="vdPostingStatusUnposted"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdPostingStatus" xlink:to="vdPostingStatusUnposted" order="8"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdReferencePurpose" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdReferencePurpose"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdReferencePurpose">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReferencePurpose" xlink:label="vdReferencePurpose"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReferencePurposeContract" xlink:label="vdReferencePurposeContract"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReferencePurpose" xlink:to="vdReferencePurposeContract" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReferencePurposeProject" xlink:label="vdReferencePurposeProject"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReferencePurpose" xlink:to="vdReferencePurposeProject" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReferencePurposeTenderOrLot" xlink:label="vdReferencePurposeTenderOrLot"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReferencePurpose" xlink:to="vdReferencePurposeTenderOrLot" order="3"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdReportingCalendarStatus" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdReportingCalendarStatus"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdReportingCalendarStatus">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingCalendarStatus" xlink:label="vdReportingCalendarStatus"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingCalendarStatusClosed" xlink:label="vdReportingCalendarStatusClosed"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReportingCalendarStatus" xlink:to="vdReportingCalendarStatusClosed" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingCalendarStatusOpen" xlink:label="vdReportingCalendarStatusOpen"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReportingCalendarStatus" xlink:to="vdReportingCalendarStatusOpen" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingCalendarStatusPending" xlink:label="vdReportingCalendarStatusPending"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReportingCalendarStatus" xlink:to="vdReportingCalendarStatusPending" order="3"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdReportingPeriodType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdReportingPeriodType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdReportingPeriodType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingPeriodType" xlink:label="vdReportingPeriodType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingPeriodTypeN454" xlink:label="vdReportingPeriodTypeN454"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReportingPeriodType" xlink:to="vdReportingPeriodTypeN454" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingPeriodTypeAdHoc" xlink:label="vdReportingPeriodTypeAdHoc"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReportingPeriodType" xlink:to="vdReportingPeriodTypeAdHoc" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingPeriodTypeMonthly" xlink:label="vdReportingPeriodTypeMonthly"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReportingPeriodType" xlink:to="vdReportingPeriodTypeMonthly" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingPeriodTypeOther" xlink:label="vdReportingPeriodTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReportingPeriodType" xlink:to="vdReportingPeriodTypeOther" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingPeriodTypeQuarterly" xlink:label="vdReportingPeriodTypeQuarterly"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReportingPeriodType" xlink:to="vdReportingPeriodTypeQuarterly" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdReportingPeriodTypeSemiAnnually" xlink:label="vdReportingPeriodTypeSemiAnnually"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdReportingPeriodType" xlink:to="vdReportingPeriodTypeSemiAnnually" order="6"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdRevisionAction" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdRevisionAction"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdRevisionAction">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdRevisionAction" xlink:label="vdRevisionAction"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdRevisionActionSupersede" xlink:label="vdRevisionActionSupersede"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdRevisionAction" xlink:to="vdRevisionActionSupersede" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdRevisionActionSupplement" xlink:label="vdRevisionActionSupplement"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdRevisionAction" xlink:to="vdRevisionActionSupplement" order="2"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdSerialLotType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdSerialLotType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdSerialLotType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdSerialLotType" xlink:label="vdSerialLotType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdSerialLotTypeLot" xlink:label="vdSerialLotTypeLot"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdSerialLotType" xlink:to="vdSerialLotTypeLot" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdSerialLotTypeNeither" xlink:label="vdSerialLotTypeNeither"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdSerialLotType" xlink:to="vdSerialLotTypeNeither" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdSerialLotTypeOther" xlink:label="vdSerialLotTypeOther"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdSerialLotType" xlink:to="vdSerialLotTypeOther" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdSerialLotTypeSerial" xlink:label="vdSerialLotTypeSerial"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdSerialLotType" xlink:to="vdSerialLotTypeSerial" order="4"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdTaxType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdTaxType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdTaxType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdTaxType" xlink:label="vdTaxType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdTaxTypeVAT" xlink:label="vdTaxTypeVAT"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdTaxType" xlink:to="vdTaxTypeVAT" order="1"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdN1001InvoiceCreditNoteType" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdN1001InvoiceCreditNoteType"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdN1001InvoiceCreditNoteType">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteType" xlink:label="vdN1001InvoiceCreditNoteType"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN102" xlink:label="vdN1001InvoiceCreditNoteTypeN102"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN102" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN218" xlink:label="vdN1001InvoiceCreditNoteTypeN218"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN218" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN219" xlink:label="vdN1001InvoiceCreditNoteTypeN219"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN219" order="3"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN326" xlink:label="vdN1001InvoiceCreditNoteTypeN326"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN326" order="4"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN331" xlink:label="vdN1001InvoiceCreditNoteTypeN331"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN331" order="5"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN380" xlink:label="vdN1001InvoiceCreditNoteTypeN380"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN380" order="6"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN381" xlink:label="vdN1001InvoiceCreditNoteTypeN381"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN381" order="7"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN382" xlink:label="vdN1001InvoiceCreditNoteTypeN382"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN382" order="8"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN383" xlink:label="vdN1001InvoiceCreditNoteTypeN383"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN383" order="9"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN384" xlink:label="vdN1001InvoiceCreditNoteTypeN384"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN384" order="10"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN386" xlink:label="vdN1001InvoiceCreditNoteTypeN386"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN386" order="11"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN388" xlink:label="vdN1001InvoiceCreditNoteTypeN388"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN388" order="12"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN389" xlink:label="vdN1001InvoiceCreditNoteTypeN389"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN389" order="13"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN393" xlink:label="vdN1001InvoiceCreditNoteTypeN393"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN393" order="14"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN395" xlink:label="vdN1001InvoiceCreditNoteTypeN395"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN395" order="15"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN396" xlink:label="vdN1001InvoiceCreditNoteTypeN396"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN396" order="16"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN532" xlink:label="vdN1001InvoiceCreditNoteTypeN532"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN532" order="17"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN553" xlink:label="vdN1001InvoiceCreditNoteTypeN553"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN553" order="18"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN575" xlink:label="vdN1001InvoiceCreditNoteTypeN575"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN575" order="19"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN623" xlink:label="vdN1001InvoiceCreditNoteTypeN623"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN623" order="20"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN71" xlink:label="vdN1001InvoiceCreditNoteTypeN71"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN71" order="21"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN780" xlink:label="vdN1001InvoiceCreditNoteTypeN780"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN780" order="22"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN80" xlink:label="vdN1001InvoiceCreditNoteTypeN80"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN80" order="23"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN81" xlink:label="vdN1001InvoiceCreditNoteTypeN81"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN81" order="24"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN817" xlink:label="vdN1001InvoiceCreditNoteTypeN817"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN817" order="25"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN82" xlink:label="vdN1001InvoiceCreditNoteTypeN82"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN82" order="26"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN83" xlink:label="vdN1001InvoiceCreditNoteTypeN83"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN83" order="27"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN84" xlink:label="vdN1001InvoiceCreditNoteTypeN84"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN84" order="28"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN870" xlink:label="vdN1001InvoiceCreditNoteTypeN870"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN870" order="29"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN875" xlink:label="vdN1001InvoiceCreditNoteTypeN875"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN875" order="30"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN876" xlink:label="vdN1001InvoiceCreditNoteTypeN876"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN876" order="31"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdN1001InvoiceCreditNoteTypeN877" xlink:label="vdN1001InvoiceCreditNoteTypeN877"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdN1001InvoiceCreditNoteType" xlink:to="vdN1001InvoiceCreditNoteTypeN877" order="32"/>
+  </link:definitionLink>
+  <link:roleRef roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAllocation" xlink:type="simple" xlink:href="gl-gen-2026-12-31.xsd#role_vdAllocation"/>
+  <link:definitionLink xlink:type="extended" xlink:role="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdAllocation">
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAllocation" xlink:label="vdAllocation"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAllocationBeginningBalance" xlink:label="vdAllocationBeginningBalance"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAllocation" xlink:to="vdAllocationBeginningBalance" order="1"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAllocationEndingBalance" xlink:label="vdAllocationEndingBalance"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAllocation" xlink:to="vdAllocationEndingBalance" order="2"/>
+    <link:loc xlink:type="locator" xlink:href="gl-gen-2026-12-31.xsd#vdAllocationPeriodChange" xlink:label="vdAllocationPeriodChange"/>
+    <link:definitionArc xlink:type="arc" xlink:arcrole="http://xbrl.org/int/dim/arcrole/domain-member" xlink:from="vdAllocation" xlink:to="vdAllocationPeriodChange" order="3"/>
+  </link:definitionLink>
+</link:linkbase>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/muc" elementFormDefault="qualified" attributeFormDefault="unqualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:muc="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/muc"
+>
+  <annotation>
+    <documentation xml:lang="en">This is an experimental XBRL GL Next taxonomy published using a provisional
+namespace under the domain managed by XBRL Japan. It is not an XBRL
+International Recommendation or other final XBRL International specification.
+The namespace and taxonomy may be replaced when an official XBRL International
+namespace is assigned.</documentation>
+  </annotation>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <include schemaLocation="../../muc/muc-2026-12-31.xsd"/>
+  <!-- structural ComplexType supplied for the Palette module -->
+  <complexType name="detailMulticurrencyComplexType">
+    <sequence>
+      <element ref="muc:multicurrencyExchangeRateDate" minOccurs="0"/>
+      <element ref="muc:multicurrencyForeignCurrencyAmount" minOccurs="0"/>
+      <element ref="muc:multicurrencyForeignCurrency" minOccurs="0"/>
+      <element ref="muc:multicurrencyExchangeRate" minOccurs="0"/>
+      <element ref="muc:multicurrencyExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:multicurrencyExchangeRateType" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationCurrencyAmount" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationCurrency" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationExchangeRate" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationExchangeRateType" minOccurs="0"/>
+      <element ref="muc:multicurrencyCrossTriangulationExchangeRate" minOccurs="0"/>
+      <element ref="muc:multicurrencyCrossTriangulationExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:multicurrencyCrossTriangulationExchangeRateType" minOccurs="0"/>
+      <element ref="muc:multicurrencyComment" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+</schema>

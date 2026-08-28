@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+This file is part of an independent experimental derivative taxonomy that
+assists implementation of XBRL GL 2017. It is not the official XBRL GL
+taxonomy and is not endorsed or recommended by XBRL International.
+See NOTICE_XBRL_GL.md in this taxonomy package and https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html
+-->
+<!-- (c) XBRL International.  See http://www.xbrl.org/legal -->
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/lnk" attributeFormDefault="unqualified" elementFormDefault="qualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:link="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+  xmlns:enum="http://xbrl.org/2014/extensible-enumerations"
+  xmlns:gen="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/gen"
+  xmlns:lnk="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/lnk"
+>
+  <annotation>
+    <documentation xml:lang="en">This is an experimental XBRL GL Next taxonomy published using a provisional
+namespace under the domain managed by XBRL Japan. It is not an XBRL
+International Recommendation or other final XBRL International specification.
+The namespace and taxonomy may be replaced when an official XBRL International
+namespace is assigned.</documentation>
+  </annotation>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+  <import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
+  <import namespace="http://xbrl.org/2014/extensible-enumerations" schemaLocation="http://www.xbrl.org/2014/extensible-enumerations.xsd"/>
+  <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/gen" schemaLocation="../gen/gl-gen-2026-12-31.xsd"/>
+  <!-- reusable item type -->
+  <complexType name="summaryReportingTaxonomyIdItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="summaryReportingTaxonomySchemaReferenceHrefAttributeItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="summaryReportingTaxonomyHeaderItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="summaryReportingTaxonomyDescriptionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailRitchTextCommentDescriptionItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailRitchTextCommentContentItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailRitchTextCommentLocatorItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <!-- reusable global element declaration -->
+  <element name="summaryReportingTaxonomies" id="lnk_summaryReportingTaxonomies" type="lnk:summaryReportingTaxonomiesComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="summaryReportingTaxonomyId" id="lnk_summaryReportingTaxonomyId" type="lnk:summaryReportingTaxonomyIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomySchemaReferenceHrefAttribute" id="lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" type="lnk:summaryReportingTaxonomySchemaReferenceHrefAttributeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomyHeader" id="lnk_summaryReportingTaxonomyHeader" type="lnk:summaryReportingTaxonomyHeaderItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomyDescription" id="lnk_summaryReportingTaxonomyDescription" type="lnk:summaryReportingTaxonomyDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailRichTextComment" id="lnk_detailRichTextComment" type="lnk:detailRichTextCommentComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="detailRitchTextCommentCode" id="lnk_detailRitchTextCommentCode" type="enum:enumerationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant" enum:domain="gen:vdCommentType" enum:linkrole="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31/role/value-domain/vdCommentType" enum:headUsable="false"/>
+  <element name="detailRitchTextCommentDescription" id="lnk_detailRitchTextCommentDescription" type="lnk:detailRitchTextCommentDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailRitchTextCommentContent" id="lnk_detailRitchTextCommentContent" type="lnk:detailRitchTextCommentContentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailRitchTextCommentLocator" id="lnk_detailRitchTextCommentLocator" type="lnk:detailRitchTextCommentLocatorItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+</schema>
