@@ -1,20 +1,20 @@
-# チュートリアルツールの実装
+[English](../README.md) | **日本語**
 
-このディレクトリには、学習、プロトタイピング、バインディングテーブルの実験のための小型、自己完結型コンバータの実装が含まれています。
+# tutorial
 
-- **syntax_binding_sample.py**はXML-to-flat-CSV抽出物をXML-to-flat-CSVで示します
-コンパクト構文バインディングと限られたXPath評価器。
-- **semantic_binding_sample.py**は行列の投影を a から実証します
-Structured CSV は、レガシーバインディング列の互換性のある CSV に。
+## 目的
 
-これらのプログラムは、運用中の UADC コンバーターではありません。 生産 Phase 1 および Phase 2 処理用途:
+tutorial wrapper は UADC 経路を説明するためのもので、規定 runtime 正本にはなりません。
 
-```
-src/syntax_binding.py
-src/syntax_binding_ads_xbrl_gl.py
-src/semantic_binding.py
-```
+## Program
 
-別々の**src/tutorial/**ディレクトリには、操作上のコンバータを呼び出す初心者ワークフローラッパーが含まれています。 この**tools/tutorial/**ディレクトリには、単純化されたコンバーターの実装が含まれている。
+- `semantic_binding_sample.py`
+- `syntax_binding_sample.py`
 
-詳細な動作、引数、関数、制限及び検証方法は、[**構造化CSV、LHM及び結合**](../../../docs/ja/02_STRUCTURED_CSV_LHM_BINDINGS.md)に記載しています。運用手順は、[**環境、テスト及びチュートリアル**](../../../docs/ja/01_ENVIRONMENT_TESTS_TUTORIAL.md)に記載しています。
+## 実行と安全
+
+command は repository root から実行します。実行前に input path、output path、上書き動作を確認し、実験では task-local 又は明示承認された output location を使用します。
+
+## Test
+
+materially changed な code 又は条件に関係する test だけを実行します。入力、code、設定、依存 version、成果物、validation scope が materially 同一なら accepted PASS 証跡を再利用します。

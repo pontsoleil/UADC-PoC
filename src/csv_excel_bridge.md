@@ -1,14 +1,17 @@
-**English** | [日本語](ja/README.md)
+**English** | [日本語](ja/csv_excel_bridge.md)
 
-# tools
+# csv_excel_bridge
 
 ## Purpose
 
-Optional user-facing evaluation, synchronization, and tutorial programs.
+`src/csv_excel_bridge.py` provides controlled CSV ⇄ Excel interchange and comparison without changing the canonical CSV meaning.
 
-## Rule
+## CLI examples
 
-`src/**` contains normative programs and required runtime libraries. `tools/**` contains optional evaluation, tutorial, validation, or synchronization tools. `tests/**` contains verification programs. Code under `src/**` must not import `tools/**`.
+```text
+py src/csv_excel_bridge.py csv-to-xlsx <input.csv> -o <output.xlsx>
+py src/csv_excel_bridge.py xlsx-to-csv <input.xlsx> -o <output.csv> --baseline <baseline.csv>
+```
 
 ## Execution and safety
 

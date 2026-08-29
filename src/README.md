@@ -1,21 +1,37 @@
-# Operational Conversion Scripts
+**English** | [日本語](ja/README.md)
 
-This directory contains the production PoC converters.
+# src
 
-- **syntax_binding.py** performs Phase 1 UBL XML to Structured CSV conversion,
-  xBRL-CSV metadata generation, and Structured CSV to UBL XML reverse conversion.
-- **semantic_binding.py** performs Phase 2 Structured CSV to ADS PSV or ISO
-  21378 ADC delimiter-separated conversion.
-- **syntax_binding_ads_xbrl_gl.py** performs Phase 2 Structured CSV to ADS XBRL
-  GL instance conversion.
-- **tutorial/** contains short wrappers that call these operational programs.
+## Purpose
 
-Documentation:
+This directory contains the normative UADC conversion programs and required runtime libraries.
 
-- [**Phase 1 UBL syntax binding**](../docs/03_PHASE1_UBL_SYNTAX_BINDING.md)
-- [**Phase 2 ADS PSV semantic binding**](../docs/04_PHASE2_ADS_PSV_SEMANTIC_BINDING.md)
-- [**Phase 2 ADS XBRL GL syntax binding**](../docs/05_PHASE2_ADS_XBRL_GL_SYNTAX_BINDING.md)
-- [**Environment, tests, and tutorial**](../docs/01_ENVIRONMENT_TESTS_TUTORIAL.md)
+## Programs
 
-Programs under **tools/tutorial/** are simplified teaching implementations and
-must not be confused with the operational converters in this directory.
+- `syntax_binding.py` — XML ⇄ Structured CSV Syntax Binding.
+- `tuple_binding.py` — Tuple XBRL ⇄ Structured CSV syntax conversion.
+- `semantic_binding.py` — Structured CSV ⇄ Structured CSV Semantic Binding.
+- `selector_multiplicity.py` — selector-effective multiplicity support used by current binding processing.
+- `csv_excel_bridge.py` — controlled CSV/Excel review interchange.
+- `syntax_binding_ads_xbrl_gl.py` — ADS/XBRL GL-specific current syntax conversion support.
+- `tutorial/` — current tutorial programs.
+
+No standalone `oim_metadata.py` exists in the current Formal GIT. OIM metadata
+processing remains within the existing runtime implementation.
+
+The Flat CSV runtime is not currently registered under Formal GIT `src/`. The
+validated WORK implementation is documented by
+`Specifications/UADC_Flat_CSV_Program_Specification.docx` and the current
+transformation route status report.
+
+## Responsibility boundary
+
+`src/**` contains normative programs and required runtime libraries. `tools/**` contains optional evaluation, tutorial, validation, or synchronization tools. `tests/**` contains verification programs. Code under `src/**` must not import `tools/**`.
+
+## Execution and safety
+
+Run commands from the repository root. Confirm input paths, output paths, and overwrite behavior before execution. Use task-local or explicitly approved output locations for experiments.
+
+## Tests
+
+Run only tests relevant to materially changed code or conditions. Reuse accepted PASS evidence when inputs, code, settings, dependency versions, outputs, and validation scope are materially identical.

@@ -1,14 +1,17 @@
-[English](../README.md) | **日本語**
+[English](../csv_excel_bridge.md) | **日本語**
 
-# tools
+# csv_excel_bridge
 
 ## 目的
 
-利用者向けの任意の評価・同期・tutorial program を保持します。
+`src/csv_excel_bridge.py` は canonical CSV の意味を変更せず、管理された CSV ⇄ Excel 変換と比較を提供します。
 
-## 規則
+## CLI 例
 
-`src/**` は規定 program と通常実行に必須の library を保持します。`tools/**` は任意の評価・tutorial・validation・同期用 tool、`tests/**` は検証 program です。`src/**` から `tools/**` を import してはいけません。
+```text
+py src/csv_excel_bridge.py csv-to-xlsx <input.csv> -o <output.xlsx>
+py src/csv_excel_bridge.py xlsx-to-csv <input.xlsx> -o <output.csv> --baseline <baseline.csv>
+```
 
 ## 実行と安全
 

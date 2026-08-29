@@ -1,14 +1,14 @@
-[English](../README.md) | **日本語**
+[English](../selector_multiplicity.md) | **日本語**
 
-# tools
+# selector_multiplicity
 
 ## 目的
 
-利用者向けの任意の評価・同期・tutorial program を保持します。
+この semantic-layer 必須 library は selector variant を考慮した effective multiplicity を計算します。
 
 ## 規則
 
-`src/**` は規定 program と通常実行に必須の library を保持します。`tools/**` は任意の評価・tutorial・validation・同期用 tool、`tests/**` は検証 program です。`src/**` から `tools/**` を import してはいけません。
+selector は1つの canonical occurrence の variant を区別します。Class を plural にするためだけに accepted HMD を手作業で書き換える根拠にはなりません。
 
 ## 実行と安全
 

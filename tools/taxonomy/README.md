@@ -1,14 +1,23 @@
-# Taxonomy Generator
+**English** | [日本語](ja/README.md)
 
-This directory contains the local UADC-compatible taxonomy generator and the GL
-generic schema template used by it.
+# taxonomy
 
-- **xBRLGL_TaxonomyGenerator.py** reads the LHM CSV and generates module schemas,
-  the EN 16931 OIM entry point, presentation and definition linkbases, metadata,
-  and a CSV skeleton.
-- **gen/** contains the generic datatype schema template.
+## Purpose
 
-The current OIM entry point is **en16931-oim-2026-07-05.xsd** and the dimensional
-definition linkbase is **en16931-def-2026-07-05.xml**. See
-[**Structured CSV, LHM, and Bindings**](../../docs/02_STRUCTURED_CSV_LHM_BINDINGS.md)
-for the taxonomy model and generator internals.
+The Generator in this directory is a synchronized UADC evaluation copy, not a second authority.
+
+## Authority
+
+- Authority: `XBRL_GL_Next/tools/taxonomy/xBRLGL_TaxonomyGenerator.py`
+- UADC synchronized copy: `tools/taxonomy/xBRLGL_TaxonomyGenerator.py`
+- Synchronized SHA-256: `9890946AEF8DD06C5B363605E6E951C27007C6932B4D0B3FB3C70807391BE651`
+
+UADC changes must come from an approved XBRL GL Next release and record source commit, source path, and SHA-256.
+
+## Execution and safety
+
+Run commands from the repository root. Confirm input paths, output paths, and overwrite behavior before execution. Use task-local or explicitly approved output locations for experiments.
+
+## Tests
+
+Run only tests relevant to materially changed code or conditions. Reuse accepted PASS evidence when inputs, code, settings, dependency versions, outputs, and validation scope are materially identical.

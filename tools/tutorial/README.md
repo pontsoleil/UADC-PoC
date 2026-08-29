@@ -1,28 +1,20 @@
-# Tutorial Tool Implementations
+**English** | [日本語](ja/README.md)
 
-This directory contains small, self-contained converter implementations for
-learning, prototyping, and binding-table experiments.
+# tutorial
 
-- **syntax_binding_sample.py** demonstrates XML-to-flat-CSV extraction with a
-  compact syntax binding and a limited XPath evaluator.
-- **semantic_binding_sample.py** demonstrates row-for-row projection from a
-  Structured CSV to a flat CSV with legacy binding-column compatibility.
+## Purpose
 
-These programs are not the operational UADC converters. Production Phase 1 and
-Phase 2 processing uses:
+Tutorial wrappers demonstrate the UADC routes without becoming normative runtime authorities.
 
-```
-src/syntax_binding.py
-src/syntax_binding_ads_xbrl_gl.py
-src/semantic_binding.py
-```
+## Programs
 
-The separate **src/tutorial/** directory contains beginner workflow wrappers
-that call the operational converters. This **tools/tutorial/** directory instead
-contains the simplified converter implementations themselves.
+- `semantic_binding_sample.py`
+- `syntax_binding_sample.py`
 
-Detailed behavior, arguments, functions, limitations, and validation guidance
-are documented in
-[**Structured CSV, LHM, and Bindings**](../../docs/02_STRUCTURED_CSV_LHM_BINDINGS.md).
-The operational walkthrough is in
-[**Environment, Tests, and Tutorial**](../../docs/01_ENVIRONMENT_TESTS_TUTORIAL.md).
+## Execution and safety
+
+Run commands from the repository root. Confirm input paths, output paths, and overwrite behavior before execution. Use task-local or explicitly approved output locations for experiments.
+
+## Tests
+
+Run only tests relevant to materially changed code or conditions. Reuse accepted PASS evidence when inputs, code, settings, dependency versions, outputs, and validation scope are materially identical.

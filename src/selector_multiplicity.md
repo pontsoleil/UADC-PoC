@@ -1,14 +1,14 @@
-**English** | [日本語](ja/README.md)
+**English** | [日本語](ja/selector_multiplicity.md)
 
-# tools
+# selector_multiplicity
 
 ## Purpose
 
-Optional user-facing evaluation, synchronization, and tutorial programs.
+This required semantic-layer library computes multiplicity after selector variants are considered.
 
 ## Rule
 
-`src/**` contains normative programs and required runtime libraries. `tools/**` contains optional evaluation, tutorial, validation, or synchronization tools. `tests/**` contains verification programs. Code under `src/**` must not import `tools/**`.
+Selectors distinguish variants of one canonical occurrence. They do not justify manually rewriting the accepted HMD merely to make a Class plural.
 
 ## Execution and safety
 
