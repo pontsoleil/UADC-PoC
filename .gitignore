@@ -16,6 +16,9 @@ venv/
 /docs/ChatGPT/
 /docs/Codex/
 
+# Internal validation area (not published)
+/tests/
+
 # Local documentation backups
 docs_a/
 docs_codex/

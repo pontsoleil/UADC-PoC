@@ -12,7 +12,6 @@ UADC (Universal Adapter for Data Conversion) uses HMD-aligned Structured CSV as 
 src/            current normative/runtime programs in the existing flat layout
 src/tutorial/   current tutorial programs
 tools/          optional evaluation, build, validation, migration and tutorial utilities
-tests/          current verification programs and fixtures
 bindings/       Syntax Binding and Semantic Binding Tables
 models/         semantic/model inputs
 definitions/    canonical definitions and taxonomy-generation inputs
@@ -27,6 +26,8 @@ The previously proposed `src/syntax/`, `src/semantic/`, `src/common/`, and
 `src/flat_csv/` Python package layout has not been implemented.
 
 The repository-root README remains at the repository root. The `src/README.md` file is additional documentation for the runtime tree; it does not replace the root README.
+
+`tests/**` is an internal validation area and is not published to the public GitHub repository. Public-approved samples belong under `instances/**` only after public-data safety review.
 
 ## Execution and safety
 
