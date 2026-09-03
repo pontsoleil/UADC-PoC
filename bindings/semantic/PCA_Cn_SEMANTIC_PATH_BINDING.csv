@@ -1,0 +1,120 @@
+sequence,level,type,name,datatype,multiplicity,column,semantic_path,occurrence_mode,group_key,row_role,max_occurs,default_value,transformation,required,note
+9101,1,P,伝票日付,,,C1,,,,header,,,,,PCA physical interface header declaration
+9102,1,P,伝票番号,,,C2,,,,header,,,,,PCA physical interface header declaration
+9103,1,P,仕訳区分,,,C3,,,,header,,,,,PCA physical interface header declaration
+9104,1,P,管理仕訳区分,,,C4,,,,header,,,,,PCA physical interface header declaration
+9105,1,P,借方税計算モード,,,C5,,,,header,,,,,PCA physical interface header declaration
+9106,1,P,借方部門コード,,,C6,,,,header,,,,,PCA physical interface header declaration
+9107,1,P,借方部門名,,,C7,,,,header,,,,,PCA physical interface header declaration
+9108,1,P,借方科目コード,,,C8,,,,header,,,,,PCA physical interface header declaration
+9109,1,P,借方科目名,,,C9,,,,header,,,,,PCA physical interface header declaration
+9110,1,P,借方補助科目コード,,,C10,,,,header,,,,,PCA physical interface header declaration
+9111,1,P,借方補助科目名,,,C11,,,,header,,,,,PCA physical interface header declaration
+9112,1,P,借方税区分コード,,,C12,,,,header,,,,,PCA physical interface header declaration
+9113,1,P,借方税区分名,,,C13,,,,header,,,,,PCA physical interface header declaration
+9114,1,P,借方金額,,,C14,,,,header,,,,,PCA physical interface header declaration
+9115,1,P,借方消費税額,,,C15,,,,header,,,,,PCA physical interface header declaration
+9116,1,P,貸方税計算モード,,,C16,,,,header,,,,,PCA physical interface header declaration
+9117,1,P,貸方部門コード,,,C17,,,,header,,,,,PCA physical interface header declaration
+9118,1,P,貸方部門名,,,C18,,,,header,,,,,PCA physical interface header declaration
+9119,1,P,貸方科目コード,,,C19,,,,header,,,,,PCA physical interface header declaration
+9120,1,P,貸方科目名,,,C20,,,,header,,,,,PCA physical interface header declaration
+9121,1,P,貸方補助科目コード,,,C21,,,,header,,,,,PCA physical interface header declaration
+9122,1,P,貸方補助科目名,,,C22,,,,header,,,,,PCA physical interface header declaration
+9123,1,P,貸方税区分コード,,,C23,,,,header,,,,,PCA physical interface header declaration
+9124,1,P,貸方税区分名,,,C24,,,,header,,,,,PCA physical interface header declaration
+9125,1,P,貸方金額,,,C25,,,,header,,,,,PCA physical interface header declaration
+9126,1,P,貸方消費税額,,,C26,,,,header,,,,,PCA physical interface header declaration
+9127,1,P,摘要文,,,C27,,,,header,,,,,PCA physical interface header declaration
+9128,1,P,数字１,,,C28,,,,header,,,,,PCA physical interface header declaration
+9129,1,P,数字２,,,C29,,,,header,,,,,PCA physical interface header declaration
+9130,1,P,入力プログラム区分,,,C30,,,,header,,,,,PCA physical interface header declaration
+9131,1,P,配賦元税計算,,,C31,,,,header,,,,,PCA physical interface header declaration
+9132,1,P,配賦元集計方法,,,C32,,,,header,,,,,PCA physical interface header declaration
+9133,1,P,配賦元集計開始日付,,,C33,,,,header,,,,,PCA physical interface header declaration
+9134,1,P,配賦元集計終了日付,,,C34,,,,header,,,,,PCA physical interface header declaration
+9135,1,P,配賦元管理仕訳区分,,,C35,,,,header,,,,,PCA physical interface header declaration
+9136,1,P,配賦元部門コード,,,C36,,,,header,,,,,PCA physical interface header declaration
+9137,1,P,配賦元部門名,,,C37,,,,header,,,,,PCA physical interface header declaration
+9138,1,P,配賦元科目コード,,,C38,,,,header,,,,,PCA physical interface header declaration
+9139,1,P,配賦元科目名,,,C39,,,,header,,,,,PCA physical interface header declaration
+9140,1,P,配賦元補助コード,,,C40,,,,header,,,,,PCA physical interface header declaration
+9141,1,P,配賦元補助名,,,C41,,,,header,,,,,PCA physical interface header declaration
+9142,1,P,配賦元金額,,,C42,,,,header,,,,,PCA physical interface header declaration
+9143,1,P,数字３,,,C43,,,,header,,,,,PCA physical interface header declaration
+9144,1,P,数字４,,,C44,,,,header,,,,,PCA physical interface header declaration
+9145,1,P,数字５,,,C45,,,,header,,,,,PCA physical interface header declaration
+9146,1,P,金額１,,,C46,,,,header,,,,,PCA physical interface header declaration
+9147,1,P,金額２,,,C47,,,,header,,,,,PCA physical interface header declaration
+9148,1,P,金額３,,,C48,,,,header,,,,,PCA physical interface header declaration
+9149,1,P,金額４,,,C49,,,,header,,,,,PCA physical interface header declaration
+9150,1,P,金額５,,,C50,,,,header,,,,,PCA physical interface header declaration
+9151,1,P,文字列１,,,C51,,,,header,,,,,PCA physical interface header declaration
+9152,1,P,文字列２,,,C52,,,,header,,,,,PCA physical interface header declaration
+9153,1,P,文字列３,,,C53,,,,header,,,,,PCA physical interface header declaration
+9154,1,P,文字列４,,,C54,,,,header,,,,,PCA physical interface header declaration
+9155,1,P,文字列５,,,C55,,,,header,,,,,PCA physical interface header declaration
+9156,1,P,入力日付時間,,,C56,,,,header,,,,,PCA physical interface header declaration
+9157,1,P,借方取引先コード,,,C57,,,,header,,,,,PCA physical interface header declaration
+9158,1,P,借方取引先名,,,C58,,,,header,,,,,PCA physical interface header declaration
+9159,1,P,借方セグメント１コード,,,C59,,,,header,,,,,PCA physical interface header declaration
+9160,1,P,借方セグメント１名,,,C60,,,,header,,,,,PCA physical interface header declaration
+9161,1,P,借方セグメント２コード,,,C61,,,,header,,,,,PCA physical interface header declaration
+9162,1,P,借方セグメント２名,,,C62,,,,header,,,,,PCA physical interface header declaration
+9163,1,P,借方セグメント３コード,,,C63,,,,header,,,,,PCA physical interface header declaration
+9164,1,P,借方セグメント３名,,,C64,,,,header,,,,,PCA physical interface header declaration
+9165,1,P,貸方取引先コード,,,C65,,,,header,,,,,PCA physical interface header declaration
+9166,1,P,貸方取引先名,,,C66,,,,header,,,,,PCA physical interface header declaration
+9167,1,P,貸方セグメント１コード,,,C67,,,,header,,,,,PCA physical interface header declaration
+9168,1,P,貸方セグメント１名,,,C68,,,,header,,,,,PCA physical interface header declaration
+9169,1,P,貸方セグメント２コード,,,C69,,,,header,,,,,PCA physical interface header declaration
+9170,1,P,貸方セグメント２名,,,C70,,,,header,,,,,PCA physical interface header declaration
+9171,1,P,貸方セグメント３コード,,,C71,,,,header,,,,,PCA physical interface header declaration
+9172,1,P,貸方セグメント３名,,,C72,,,,header,,,,,PCA physical interface header declaration
+9173,1,P,配賦選択,,,C73,,,,header,,,,,PCA physical interface header declaration
+9174,1,P,配賦元取引先コード,,,C74,,,,header,,,,,PCA physical interface header declaration
+9175,1,P,配賦元取引先名,,,C75,,,,header,,,,,PCA physical interface header declaration
+9176,1,P,配賦元セグメント１コード,,,C76,,,,header,,,,,PCA physical interface header declaration
+9177,1,P,配賦元セグメント１名,,,C77,,,,header,,,,,PCA physical interface header declaration
+9178,1,P,配賦元セグメント２コード,,,C78,,,,header,,,,,PCA physical interface header declaration
+9179,1,P,配賦元セグメント２名,,,C79,,,,header,,,,,PCA physical interface header declaration
+9180,1,P,配賦元セグメント３コード,,,C80,,,,header,,,,,PCA physical interface header declaration
+9181,1,P,配賦元セグメント３名,,,C81,,,,header,,,,,PCA physical interface header declaration
+0001,1,C,accountingEntries,,1..*,,$.cor_AccountingEntries,single,,group,,,,,XBRL GL Next会計仕訳ルート。
+0137,2,C,entryHeader,,0..*,,$.cor_AccountingEntries.cor_EntryHeader,keyed_rows,"[""C1"",""C2""]",group,,,,true,PCA EntryHeader identity uses physical date plus voucher number.
+0138,3,A,entryDatePosted,Date Time,0..1,C1,$.cor_AccountingEntries.cor_EntryHeader.cor_DatePosted,,,,,,iso_date_to_yyyymmdd,true,PCA physical YYYYMMDD to semantic ISO date
+0150,3,A,entryId,String,0..1,C2,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryID,,,,,,,true,仕訳group_keyの値でもある。 物理列=Column2、ordinal=2。
+0176,3,C,entryDetail,,0..*,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail,source_rows,,driver,,,,true,元CSVにEntryDetail列はない。各PCA入力行につき共通テンプレートを1件作り、selector付きの側別子行からD/CのEntryDetail occurrenceを生成する。
+0385,4,A,debitCreditIndicator,Token,0..1,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DebitCreditIndicator,,,,,D,,true,Flat CSVに対応列がないため定数Dを設定する。Detail selectorと同じ値。
+0360,4,C,detailAccountIdentifier,,0..*,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier,single,,group,,,,,最新版Accounting Entries HMD（398行）に解決済み。条件predicateはBinding情報でありHMD照合時に除去する。
+0375,5,C,subaccount,,0..*,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='department'],single,,group,,,,,最新版HMDのSubaccount枝に解決済み。Type='department'で部門occurrenceを識別する。
+0378,6,A,type,Token,0..1,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='department'].cor_Type,,,,,department,,true,部門を識別するプロファイル値departmentをdefault_valueから生成する。predicateはBinding情報でありHMD照合時に除去する。
+0377,6,A,subaccountId,String,0..1,C6,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='department'].cor_SubaccountID,,,,,,,,最新版HMDのSubaccount枝に解決済み。Type='department'で部門occurrenceを識別する。 物理列=Column6、ordinal=6。
+0376,6,A,subaccountDescription,String,0..1,C7,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='department'].cor_SubaccountDescription,,,,,,,,最新版HMDのSubaccount枝に解決済み。Type='department'で部門occurrenceを識別する。 物理列=Column7、ordinal=7。
+0361,5,A,accountNumber,String,0..1,C8,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_AccountNumber,,,,,,,,最新版Accounting Entries HMD（398行）に解決済み。条件predicateはBinding情報でありHMD照合時に除去する。 物理列=Column8、ordinal=8。
+0362,5,A,accountDescription,String,0..1,C9,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_AccountDescription,,,,,,,,最新版Accounting Entries HMD（398行）に解決済み。条件predicateはBinding情報でありHMD照合時に除去する。 物理列=Column9、ordinal=9。
+0375,5,C,subaccount,,0..*,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='auxiliary-account'],single,,group,,,,,最新版HMDのSubaccount枝に解決済み。Type='auxiliary-account'で補助科目occurrenceを識別する。
+0378,6,A,type,Token,0..1,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='auxiliary-account'].cor_Type,,,,,auxiliary-account,,true,補助科目を識別するプロファイル値auxiliary-accountをdefault_valueから生成する。predicateはBinding情報でありHMD照合時に除去する。
+0377,6,A,subaccountId,String,0..1,C10,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='auxiliary-account'].cor_SubaccountID,,,,,,,,最新版HMDのSubaccount枝に解決済み。Type='auxiliary-account'で補助科目occurrenceを識別する。 物理列=Column10、ordinal=10。
+0376,6,A,subaccountDescription,String,0..1,C11,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='auxiliary-account'].cor_SubaccountDescription,,,,,,,,最新版HMDのSubaccount枝に解決済み。Type='auxiliary-account'で補助科目occurrenceを識別する。 物理列=Column11、ordinal=11。
+0331,4,C,detailTax,,0..*,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailTax,single,,group,,,,,最新版HMDのDetail Tax枝に解決済み。本Flatプロファイルでは各D/C Detailにつき税occurrenceを最大1件として扱う。
+0338,5,A,taxCategory,String,0..1,C12,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailTax.cor_TaxCategory,,,,,,,,税区分コードだけをTax Categoryへ結合する。税区分名はTax Descriptionへ結合せず、税区分マスターによる後段enrichmentとする。 物理列=Column12、ordinal=12。
+0335,5,A,amountOfTaxes,Monetary,0..1,C15,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_DetailTax.cor_AmountofTaxes,,,,,,,,PCA借方消費税額。借方税区分と同じDetailTax occurrenceへ所属させる。 物理列=Column15、ordinal=15。
+0382,4,A,monetaryAmount,Monetary,0..1,C14,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='D'].cor_MonetaryAmount,,,,,,,,PCA借方金額。借方側の物理列に基づき、生成する借方EntryDetailへ所属させる。 物理列=Column14、ordinal=14。
+0385,4,A,debitCreditIndicator,Token,0..1,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DebitCreditIndicator,,,,,C,,true,Flat CSVに対応列がないため定数Cを設定する。Detail selectorと同じ値。
+0360,4,C,detailAccountIdentifier,,0..*,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier,single,,group,,,,,最新版Accounting Entries HMD（398行）に解決済み。条件predicateはBinding情報でありHMD照合時に除去する。
+0375,5,C,subaccount,,0..*,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='department'],single,,group,,,,,最新版HMDのSubaccount枝に解決済み。Type='department'で部門occurrenceを識別する。
+0378,6,A,type,Token,0..1,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='department'].cor_Type,,,,,department,,true,部門を識別するプロファイル値departmentをdefault_valueから生成する。predicateはBinding情報でありHMD照合時に除去する。
+0377,6,A,subaccountId,String,0..1,C17,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='department'].cor_SubaccountID,,,,,,,,最新版HMDのSubaccount枝に解決済み。Type='department'で部門occurrenceを識別する。 物理列=Column17、ordinal=17。
+0376,6,A,subaccountDescription,String,0..1,C18,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='department'].cor_SubaccountDescription,,,,,,,,最新版HMDのSubaccount枝に解決済み。Type='department'で部門occurrenceを識別する。 物理列=Column18、ordinal=18。
+0361,5,A,accountNumber,String,0..1,C19,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_AccountNumber,,,,,,,,最新版Accounting Entries HMD（398行）に解決済み。条件predicateはBinding情報でありHMD照合時に除去する。 物理列=Column19、ordinal=19。
+0362,5,A,accountDescription,String,0..1,C20,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_AccountDescription,,,,,,,,最新版Accounting Entries HMD（398行）に解決済み。条件predicateはBinding情報でありHMD照合時に除去する。 物理列=Column20、ordinal=20。
+0375,5,C,subaccount,,0..*,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='auxiliary-account'],single,,group,,,,,最新版HMDのSubaccount枝に解決済み。Type='auxiliary-account'で補助科目occurrenceを識別する。
+0378,6,A,type,Token,0..1,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='auxiliary-account'].cor_Type,,,,,auxiliary-account,,true,補助科目を識別するプロファイル値auxiliary-accountをdefault_valueから生成する。predicateはBinding情報でありHMD照合時に除去する。
+0377,6,A,subaccountId,String,0..1,C21,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='auxiliary-account'].cor_SubaccountID,,,,,,,,最新版HMDのSubaccount枝に解決済み。Type='auxiliary-account'で補助科目occurrenceを識別する。 物理列=Column21、ordinal=21。
+0376,6,A,subaccountDescription,String,0..1,C22,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailAccountIdentifier.cor_Subaccount[cor_Type='auxiliary-account'].cor_SubaccountDescription,,,,,,,,最新版HMDのSubaccount枝に解決済み。Type='auxiliary-account'で補助科目occurrenceを識別する。 物理列=Column22、ordinal=22。
+0331,4,C,detailTax,,0..*,,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailTax,single,,group,,,,,最新版HMDのDetail Tax枝に解決済み。本Flatプロファイルでは各D/C Detailにつき税occurrenceを最大1件として扱う。
+0338,5,A,taxCategory,String,0..1,C23,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailTax.cor_TaxCategory,,,,,,,,税区分コードだけをTax Categoryへ結合する。税区分名はTax Descriptionへ結合せず、税区分マスターによる後段enrichmentとする。 物理列=Column23、ordinal=23。
+0335,5,A,amountOfTaxes,Monetary,0..1,C26,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_DetailTax.cor_AmountofTaxes,,,,,,,,PCA貸方消費税額。貸方税区分と同じDetailTax occurrenceへ所属させる。 物理列=Column26、ordinal=26。
+0382,4,A,monetaryAmount,Monetary,0..1,C25,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator='C'].cor_MonetaryAmount,,,,,,,,PCA貸方金額。貸方側の物理列に基づき、生成する貸方EntryDetailへ所属させる。 物理列=Column25、ordinal=25。
+0381,4,A,detailDescription,String,0..1,C27,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail.cor_DetailDescription,,,,,,,,PCA共通摘要Column27は共通テンプレートに一度だけ定義し、forwardでは生成されたD/C EntryDetailへ継承する。reverseで複数の非空値がある場合は後処理値で上書きし、エラーにせず終了時ログへ対象columnと件数だけを集計する。 物理列=Column27、ordinal=27。
