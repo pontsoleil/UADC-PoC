@@ -1,0 +1,30 @@
+{
+  "dataset_id": "pca-synthetic-fy2021-v1",
+  "period": {
+    "start": "2021-04-01",
+    "end": "2022-03-31"
+  },
+  "opening_balance_as_of": "2021-04-01 before April activity",
+  "annual_input_sha256": {
+    "pca": "874909A8AE812DFE7B26A73AAD34C1B9381C3403506071566BEDCAB5B4A463A0",
+    "structured": "FD9C87A7F0CB8B5B436E6DB80527697438E8A1D1857EF77B8E1767D53F480769",
+    "metadata": "4F0BFA9B971E9A586947862769B3B71EE1E92F79A0487987099B5747A44A7701",
+    "accounts": "AF8F30AC0E87B9BDC8F4336683A6D82E8F62360FCD1FA2E848CB40994C5D0715",
+    "opening": "FD9F8802C9D92469D24F7B6CC68000F1C7CFDA828C2611E38EEDC186E55F9E49"
+  },
+  "monthly_fact_counts": {
+    "2021-04": 2337,
+    "2021-05": 2242,
+    "2021-06": 2104,
+    "2021-07": 2190,
+    "2021-08": 2173,
+    "2021-09": 2155,
+    "2021-10": 2195,
+    "2021-11": 2183,
+    "2021-12": 2312,
+    "2022-01": 2177,
+    "2022-02": 2175,
+    "2022-03": 2096
+  },
+  "epson_status": "HOLD_UNRESOLVED_INTERFACE"
+}
