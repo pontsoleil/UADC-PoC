@@ -1,0 +1,78 @@
+sequence,level,type,name,datatype,multiplicity,column,semantic_path,occurrence_mode,group_key,row_role,max_occurs,default_value,transformation,required,note
+9001,1,P,account,,,C1,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9002,1,P,account_name,,,C2,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9003,1,P,normal_balance,,,C3,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9004,1,P,opening_balance,,,C4,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9005,1,P,source_type,,,C5,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9006,1,P,source_reference,,,C6,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9007,1,P,derived_from_pre_period,,,C7,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9008,1,P,ending_202104,,,C8,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9009,1,P,ending_202105,,,C9,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9010,1,P,ending_202106,,,C10,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9011,1,P,ending_202107,,,C11,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9012,1,P,ending_202108,,,C12,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9013,1,P,ending_202109,,,C13,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9014,1,P,ending_202110,,,C14,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9015,1,P,ending_202111,,,C15,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9016,1,P,ending_202112,,,C16,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9017,1,P,ending_202201,,,C17,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9018,1,P,ending_202202,,,C18,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+9019,1,P,ending_202203,,,C19,,,,header,,,,,PCA synthetic opening-balance physical header declaration
+1,1,C,glAccountsPeriodBalances,,1..1,,$.adc_GLAccountsPeriodBalances,single,,group,,,,,ISO 21378 Table 58 inspired balance dataset root
+2,2,C,accountBalance,,0..*,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance,keyed_rows,"[""C1""]",group,,,,true,One source row per account
+3,3,A,glAccountNumber,String,1..1,C1,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_GLAccountNumber,,,,,,,true,ISO 21378 Table 58 field 1
+4,3,A,accountName,String,0..1,C2,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.uadc_AccountName,,,,,,,true,UADC context from the referenced chart of accounts
+5,3,A,normalBalanceIndicator,String,0..1,C3,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.uadc_NormalBalanceIndicator,,,,,,,true,UADC extension; not substituted for Table 58 fields 17 or 18
+6,3,A,sourceType,String,0..1,C5,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.uadc_SourceType,,,,,,,,UADC synthetic-data provenance extension
+7,3,A,sourceReference,String,0..1,C6,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.uadc_SourceReference,,,,,,,,UADC synthetic-data provenance extension
+8,3,A,derivedFromPrePeriod,Boolean,0..1,C7,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.uadc_DerivedFromPrePeriod,,,,,,,,UADC synthetic-data provenance extension
+9,3,C,periodBalance,,0..*,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance,source_rows,,driver,,,,true,Each wide source row expands into 12 fiscal-period variants
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M01'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2021-04
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M01'].adc_AccountingPeriod,,,,,M01,,true,Fiscal period M01 corresponds to 2021-04
+22,4,A,endingBalance,Decimal,0..1,C8,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M01'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202104
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M01'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+21,4,A,beginningBalance,Decimal,0..1,C4,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M01'].adc_BeginningBalance,,,,,,,true,Consolidated ISO Table 58 fields 19-22; fiscal-year opening balance
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M02'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2021-05
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M02'].adc_AccountingPeriod,,,,,M02,,true,Fiscal period M02 corresponds to 2021-05
+22,4,A,endingBalance,Decimal,0..1,C9,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M02'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202105
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M02'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M03'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2021-06
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M03'].adc_AccountingPeriod,,,,,M03,,true,Fiscal period M03 corresponds to 2021-06
+22,4,A,endingBalance,Decimal,0..1,C10,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M03'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202106
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M03'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M04'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2021-07
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M04'].adc_AccountingPeriod,,,,,M04,,true,Fiscal period M04 corresponds to 2021-07
+22,4,A,endingBalance,Decimal,0..1,C11,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M04'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202107
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M04'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M05'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2021-08
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M05'].adc_AccountingPeriod,,,,,M05,,true,Fiscal period M05 corresponds to 2021-08
+22,4,A,endingBalance,Decimal,0..1,C12,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M05'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202108
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M05'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M06'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2021-09
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M06'].adc_AccountingPeriod,,,,,M06,,true,Fiscal period M06 corresponds to 2021-09
+22,4,A,endingBalance,Decimal,0..1,C13,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M06'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202109
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M06'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M07'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2021-10
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M07'].adc_AccountingPeriod,,,,,M07,,true,Fiscal period M07 corresponds to 2021-10
+22,4,A,endingBalance,Decimal,0..1,C14,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M07'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202110
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M07'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M08'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2021-11
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M08'].adc_AccountingPeriod,,,,,M08,,true,Fiscal period M08 corresponds to 2021-11
+22,4,A,endingBalance,Decimal,0..1,C15,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M08'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202111
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M08'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M09'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2021-12
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M09'].adc_AccountingPeriod,,,,,M09,,true,Fiscal period M09 corresponds to 2021-12
+22,4,A,endingBalance,Decimal,0..1,C16,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M09'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202112
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M09'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M10'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2022-01
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M10'].adc_AccountingPeriod,,,,,M10,,true,Fiscal period M10 corresponds to 2022-01
+22,4,A,endingBalance,Decimal,0..1,C17,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M10'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202201
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M10'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M11'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2022-02
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M11'].adc_AccountingPeriod,,,,,M11,,true,Fiscal period M11 corresponds to 2022-02
+22,4,A,endingBalance,Decimal,0..1,C18,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M11'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202202
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M11'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
+10,4,A,fiscalYear,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M12'].adc_FiscalYear,,,,,2021,,true,Fiscal year identified by its 2021 start year; 2022-03
+11,4,A,accountingPeriod,String,1..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M12'].adc_AccountingPeriod,,,,,M12,,true,Fiscal period M12 corresponds to 2022-03
+22,4,A,endingBalance,Decimal,0..1,C19,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M12'].adc_EndingBalance,,,,,,,true,Consolidated ISO Table 58 fields 23-26; source ending_202203
+23,4,A,currencyCode,String,0..1,,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance[adc_AccountingPeriod='M12'].adc_CurrencyCode,,,,,JPY,,true,Synthetic scenario currency
