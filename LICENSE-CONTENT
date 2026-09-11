@@ -1,0 +1,30 @@
+UADC-PoC First-Party Content License
+
+Except where a file, directory, or accompanying notice identifies different
+terms, the original first-party meaning-bearing content of UADC-PoC is licensed
+under the Creative Commons Attribution-ShareAlike 4.0 International License
+(CC BY-SA 4.0):
+
+https://creativecommons.org/licenses/by-sa/4.0/
+
+The licensed content includes the project's original LHM definitions, syntax
+and semantic bindings, join and relationship tables, field mappings,
+transformation rules, semantic definitions, Structured CSV schemas, labels,
+translation dictionaries, original public samples, documentation, diagrams,
+tables, and explanations. This applies when such content is expressed in data
+files or embedded in Python constants, dictionaries, lists, tables, comments,
+or docstrings. Executable program logic surrounding embedded content remains
+licensed under the MIT License in LICENSE-CODE.
+
+Attribution should identify "UADC-PoC, Sambuichi Professional Engineers
+Office" and, where practicable, link to the project repository and this
+license. Adaptations of covered content must be distributed under CC BY-SA 4.0
+or a license permitted by that license.
+
+This license does not apply to third-party material or private/non-public data.
+ISO standards text, reproduced EN 16931 material, AICPA ADS material, XBRL,
+UBL, Peppol and other third-party specifications or samples, and third-party
+code lists remain governed by their respective rightsholders' terms. Publishing
+an original UADC-PoC reference identifier or mapping under CC BY-SA 4.0 does
+not relicense the referenced standard, definition, code list, schema, or sample.
+See LICENSE-SCOPE.md and THIRD_PARTY_NOTICES.md.
