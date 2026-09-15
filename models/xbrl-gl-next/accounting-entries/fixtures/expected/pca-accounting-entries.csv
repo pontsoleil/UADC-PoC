@@ -1,0 +1,54 @@
+concept,unit,value,d_cor_accountingEntries,d_cor_detailAccountIdentifier,d_cor_detailTax,d_cor_entryDetail,d_cor_entryHeader,d_cor_subaccount
+cor:entryId,,SYNTHETIC-ENTRY-001,1,,,,"[""SYNTHETIC-ENTRY-001""]",
+cor:amountOfTaxes,iso4217:JPY,100,1,,1,1-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:taxCategory,,D-TAX,1,,1,1-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:accountNumber,,D-ACCOUNT-1,1,1,,1-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:accountDescription,,Debit account 1,1,1,,1-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:subaccountDescription,,Debit department 1,1,1,,1-D,"[""SYNTHETIC-ENTRY-001""]",department
+cor:subaccountDescription,,Debit auxiliary 1,1,1,,1-D,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:subaccountId,,D-DEPT-1,1,1,,1-D,"[""SYNTHETIC-ENTRY-001""]",department
+cor:subaccountId,,D-AUX-1,1,1,,1-D,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:type,,department,1,1,,1-D,"[""SYNTHETIC-ENTRY-001""]",department
+cor:type,,auxiliary-account,1,1,,1-D,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:detailDescription,,Synthetic description 1,1,,,1-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:monetaryAmount,iso4217:JPY,1000,1,,,1-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:debitCreditIndicator,,D,1,,,1-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:amountOfTaxes,iso4217:JPY,100,1,,1,1-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:taxCategory,,C-TAX,1,,1,1-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:accountNumber,,C-ACCOUNT-1,1,1,,1-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:accountDescription,,Credit account 1,1,1,,1-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:subaccountDescription,,Credit department 1,1,1,,1-C,"[""SYNTHETIC-ENTRY-001""]",department
+cor:subaccountDescription,,Credit auxiliary 1,1,1,,1-C,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:subaccountId,,C-DEPT-1,1,1,,1-C,"[""SYNTHETIC-ENTRY-001""]",department
+cor:subaccountId,,C-AUX-1,1,1,,1-C,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:type,,department,1,1,,1-C,"[""SYNTHETIC-ENTRY-001""]",department
+cor:type,,auxiliary-account,1,1,,1-C,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:detailDescription,,Synthetic description 1,1,,,1-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:monetaryAmount,iso4217:JPY,1000,1,,,1-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:debitCreditIndicator,,C,1,,,1-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:amountOfTaxes,iso4217:JPY,200,1,,1,2-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:taxCategory,,D-TAX,1,,1,2-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:accountNumber,,D-ACCOUNT-2,1,1,,2-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:accountDescription,,Debit account 2,1,1,,2-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:subaccountDescription,,Debit department 2,1,1,,2-D,"[""SYNTHETIC-ENTRY-001""]",department
+cor:subaccountDescription,,Debit auxiliary 2,1,1,,2-D,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:subaccountId,,D-DEPT-2,1,1,,2-D,"[""SYNTHETIC-ENTRY-001""]",department
+cor:subaccountId,,D-AUX-2,1,1,,2-D,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:type,,department,1,1,,2-D,"[""SYNTHETIC-ENTRY-001""]",department
+cor:type,,auxiliary-account,1,1,,2-D,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:detailDescription,,Synthetic description 2,1,,,2-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:monetaryAmount,iso4217:JPY,2000,1,,,2-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:debitCreditIndicator,,D,1,,,2-D,"[""SYNTHETIC-ENTRY-001""]",
+cor:amountOfTaxes,iso4217:JPY,200,1,,1,2-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:taxCategory,,C-TAX,1,,1,2-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:accountNumber,,C-ACCOUNT-2,1,1,,2-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:accountDescription,,Credit account 2,1,1,,2-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:subaccountDescription,,Credit department 2,1,1,,2-C,"[""SYNTHETIC-ENTRY-001""]",department
+cor:subaccountDescription,,Credit auxiliary 2,1,1,,2-C,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:subaccountId,,C-DEPT-2,1,1,,2-C,"[""SYNTHETIC-ENTRY-001""]",department
+cor:subaccountId,,C-AUX-2,1,1,,2-C,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:type,,department,1,1,,2-C,"[""SYNTHETIC-ENTRY-001""]",department
+cor:type,,auxiliary-account,1,1,,2-C,"[""SYNTHETIC-ENTRY-001""]",auxiliary-account
+cor:detailDescription,,Synthetic description 2,1,,,2-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:monetaryAmount,iso4217:JPY,2000,1,,,2-C,"[""SYNTHETIC-ENTRY-001""]",
+cor:debitCreditIndicator,,C,1,,,2-C,"[""SYNTHETIC-ENTRY-001""]",

@@ -1,23 +1,12 @@
-**English** | [日本語](ja/README.md)
+# XBRL GL Next taxonomy generator dependent copy
 
-# taxonomy
+`xBRLGL_TaxonomyGenerator.py` is synchronized from the canonical generator at
+`C:\Users\nobuy\GitHub\WORK\XBRL-GL-Next\tools\taxonomy\xBRLGL_TaxonomyGenerator.py`.
+The generation namespace anchor is
+`https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/plt`; sibling module namespaces
+are exactly `https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/{module}`.
 
-## Purpose
-
-The Generator in this directory is a synchronized UADC evaluation copy, not a second authority.
-
-## Authority
-
-- Authority: `XBRL_GL_Next/tools/taxonomy/xBRLGL_TaxonomyGenerator.py`
-- UADC synchronized copy: `tools/taxonomy/xBRLGL_TaxonomyGenerator.py`
-- Synchronized SHA-256: `9890946AEF8DD06C5B363605E6E951C27007C6932B4D0B3FB3C70807391BE651`
-
-UADC changes must come from an approved XBRL GL Next release and record source commit, source path, and SHA-256.
-
-## Execution and safety
-
-Run commands from the repository root. Confirm input paths, output paths, and overwrite behavior before execution. Use task-local or explicitly approved output locations for experiments.
-
-## Tests
-
-Run only tests relevant to materially changed code or conditions. Reuse accepted PASS evidence when inputs, code, settings, dependency versions, outputs, and validation scope are materially identical.
+The `--version 2026-12-31` option controls generated file names and does not add
+a date to namespace URIs. UADC taxonomy files are dependent copies; XBRL-GL-Next
+is the generated source authority. This is an internal WORK decision and does
+not imply external approval or publication.

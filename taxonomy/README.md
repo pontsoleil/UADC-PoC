@@ -1,31 +1,9 @@
-# Experimental XBRL GL Next taxonomy
+# UADC dependent XBRL GL Next taxonomy copy
 
-This is an experimental XBRL GL Next taxonomy published using a provisional
-namespace under the domain managed by XBRL Japan. It is not an XBRL
-International Recommendation or other final XBRL International specification.
-The namespace and taxonomy may be replaced when an official XBRL International
-namespace is assigned.
+This tree is a scoped dependent OIM copy of the canonical source in `C:\Users\nobuy\GitHub\WORK\XBRL-GL-Next\taxonomy\accounting-entries`. Project module namespaces exactly match `https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/{module}`. The version date remains in file names only.
 
-## UN/CEFACT-derived value domains
+Source paths, versions, and SHA-256 values are recorded in `DEPENDENT_COPY_MANIFEST.csv`. The current project publication and namespace decision is recorded in `PROJECT_PUBLICATION_AND_NAMESPACE_DECISION.md`; it does not claim a separate board resolution, domain-administrator delegation, official taxonomy designation, or external endorsement.
 
-This XBRL Extensible Enumerations 1.0 value domain implements an identified
-subset of a UN/CEFACT code list for validation and interoperability purposes.
+The upstream AE and BT taxonomies are generated independently from different root HMDs. The tracked 14 declaration differences are accepted root-HMD-specific structural differences. UADC must select the entry taxonomy matching its AE or BT use and must not overwrite or unconditionally mix same-named files. Single-DTS combined use is outside scope.
 
-The code identifiers, names and descriptions are derived from the identified
-UNECE/UN/CEFACT release. This taxonomy is not an official United Nations
-publication, and no endorsement by the United Nations or UN/CEFACT is implied.
-
-Any XBRL GL Next extension member is identified separately from the
-UN/CEFACT-derived members.
-
-## UNCL 1001 profile
-
-Source code list: UN/CEFACT UNCL 1001
-Source release: D.24A
-Value-domain type: XBRL Extensible Enumerations 1.0
-Profile: XBRL GL Next invoice and credit-note subset
-Required member: 380 — Commercial invoice
-
-## Rights and namespace records
-
-See `NOTICE_XBRL_GL.md` and `XBRL_JAPAN_EXPERIMENTAL_NAMESPACE_AUTHORIZATION.md`. UNCL-derived EE1 domains are non-official interoperability subsets published with attribution and notice; project extensions are separately identified.
+The XBRL GL source, copyright, licence conditions, attribution, and non-endorsement statement are recorded in `NOTICE_XBRL_GL.md`. Other third-party material retains its own terms.
