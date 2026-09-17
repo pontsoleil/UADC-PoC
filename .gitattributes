@@ -22,3 +22,10 @@
 
 .gitignore text eol=lf
 .gitattributes text eol=lf
+instances/roundtrip/EPSON/original_basis/structured.csv -text
+instances/roundtrip/PCA/original_basis/PCA.csv -text
+models/en-cius/invoice/EN16931_CIUS_Invoice_HMD.csv -text
+models/en-cius/invoice/bindings/syntax/EN16931_CII_D16B_Invoice_Syntax_Binding.csv -text
+models/en-cius/invoice/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv -text
+models/en-cius/invoice/hmd/EN16931_CIUS_Invoice_Canonical_HMD.csv -text
+taxonomy/DEPENDENT_COPY_MANIFEST.csv -text
