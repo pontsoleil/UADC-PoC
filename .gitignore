@@ -16,8 +16,12 @@ venv/
 /docs/ChatGPT/
 /docs/Codex/
 
-# Internal validation area (not published)
-/tests/
+# Internal validation area; publish only the approved reproducible subset
+/tests/*
+!/tests/runtime/
+!/tests/runtime/**
+!/tests/test_aggregate_pairing.py
+!/tests/test_tax_combination.py
 
 # Local documentation backups
 docs_a/

@@ -1,0 +1,9 @@
+profile_version,application_tax_code,application_tax_name,transaction_classification,return_flag,uncl5153_tax_type,tax_type_placement_status,uncl5305_tax_category,tax_rate_ratio,reverse_priority,mapping_status,source_status,note
+pca-v17-tax-profile-v1,00,対象外,,,VAT,ADOPTED_ACCOUNTING_ENTRIES,O,,1,ACCEPTED_EXPLICIT_OUT_OF_SCOPE,OBSERVED,明示コード00を対象外とする。欠損とは区別
+pca-v17-tax-profile-v1,B5,売上10%,Sales,false,VAT,ADOPTED_ACCOUNTING_ENTRIES,S,0.10,1,ACCEPTED,OBSERVED,売上標準税率
+pca-v17-tax-profile-v1,C5,売返10%,Sales,true,VAT,ADOPTED_ACCOUNTING_ENTRIES,S,0.10,1,ACCEPTED,OBSERVED,売上返品。借貸区分から返品を推測しない
+pca-v17-tax-profile-v1,P0,非仕入,Purchase,false,VAT,ADOPTED_ACCOUNTING_ENTRIES,E,,1,ACCEPTED,OBSERVED,仕入非課税。根拠はevidence/P0_SEMANTIC_RULE.csv
+pca-v17-tax-profile-v1,Q5,仕入10%,Purchase,false,VAT,ADOPTED_ACCOUNTING_ENTRIES,S,0.10,1,ACCEPTED,OBSERVED,仕入標準税率
+pca-v17-tax-profile-v1,Q6,仕入8%軽,Purchase,false,VAT,ADOPTED_ACCOUNTING_ENTRIES,AA,0.08,1,ACCEPTED,OBSERVED,仕入軽減税率
+pca-v17-tax-profile-v1,R5,仕返10%,Purchase,true,VAT,ADOPTED_ACCOUNTING_ENTRIES,S,0.10,1,ACCEPTED,OBSERVED,仕入返品。借貸区分から返品を推測しない
+pca-v17-tax-profile-v1,A0,非売上,Sales,false,VAT,ADOPTED_ACCOUNTING_ENTRIES,E,,1,ACCEPTED,OFFICIAL_REPRESENTABLE_NOT_OBSERVED,既存候補の公式PCA資料確認済み行

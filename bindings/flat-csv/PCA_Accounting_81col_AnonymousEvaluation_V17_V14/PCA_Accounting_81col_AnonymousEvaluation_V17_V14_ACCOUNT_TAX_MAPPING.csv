@@ -1,0 +1,2 @@
+﻿source_account_code,source_account_name,application_tax_code,tax_type,tax_category,note
+951,法人税、住民税及び事業税（概算）,00,OTH,JP_CORPORATE_TAXES_COMBINED,合算科目のまま保持する。内訳を推測しない。独自カテゴリーでありUNCL5305ではない。

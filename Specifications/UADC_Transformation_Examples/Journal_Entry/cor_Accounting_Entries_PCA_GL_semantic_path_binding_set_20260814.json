@@ -1,0 +1,152 @@
+{
+  "profile": "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_20260814",
+  "xbrl_gl_next_module": {
+    "prefix": "cor",
+    "element": "accountingEntries",
+    "label": "Accounting Entries"
+  },
+  "framework": "XBRL GL Next Taxonomy Framework Part 1 — semantic_path naming",
+  "canonical_semantic_path_pattern": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator=\"D\"].cor_MonetaryAmount",
+  "hmd": {
+    "file": "cor_Accounting_Entries_Journal_Entry_HMD_semantic_path_20260814.csv",
+    "semantic_path_column": "semantic_path",
+    "compatibility_columns": [
+      "legacy_semantic_path",
+      "abbreviation_path"
+    ]
+  },
+  "binding": {
+    "file": "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding_20260814.csv",
+    "type": "flat_csv_semantic_path",
+    "semantic_path_column": "semantic_path"
+  },
+  "sources": [
+    {
+      "source_key": "pca_gl",
+      "role": "journal",
+      "file_pattern": "*.csv",
+      "encoding": "Shift_JIS/CP932",
+      "delimiter": ",",
+      "header_rows": 0,
+      "record_selector": "source.Column2 = \"*\"",
+      "description": "PCA会計 仕訳CSV",
+      "enabled": true
+    }
+  ],
+  "hierarchy": [
+    {
+      "sequence": 1,
+      "source_key": "pca_gl",
+      "group_column": "dColumn2",
+      "name": "伝票",
+      "multiplicity": "",
+      "id": "JP07a",
+      "semantic_path": "$.cor_AccountingEntries.cor_EntryHeader",
+      "occurrence_mode": "keyed_rows",
+      "group_key": "[\"Column2\"]",
+      "row_role": "context",
+      "parent_semantic_path": "",
+      "enabled": true,
+      "migration_note": "Migrated to the module-qualified XBRL GL Next semantic path; any predicate is encoded directly in semantic_path."
+    },
+    {
+      "sequence": 2,
+      "source_key": "pca_gl",
+      "group_column": "dColumn27",
+      "name": "明細行",
+      "multiplicity": "1..*",
+      "id": "JP08a",
+      "semantic_path": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail",
+      "occurrence_mode": "keyed_rows",
+      "group_key": "[\"Column2\",\"__source_row__\"]",
+      "row_role": "driver",
+      "parent_semantic_path": "$.cor_AccountingEntries.cor_EntryHeader",
+      "enabled": true,
+      "migration_note": "Migrated to the module-qualified XBRL GL Next semantic path; any predicate is encoded directly in semantic_path."
+    },
+    {
+      "sequence": 3,
+      "source_key": "pca_gl",
+      "group_column": "dColumn6",
+      "name": "借方部門",
+      "multiplicity": "0..*",
+      "id": "BS04fb",
+      "semantic_path": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator=\"D\"]",
+      "occurrence_mode": "single",
+      "group_key": "",
+      "row_role": "context",
+      "parent_semantic_path": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail",
+      "enabled": true,
+      "migration_note": "Migrated to the module-qualified XBRL GL Next semantic path; any predicate is encoded directly in semantic_path."
+    },
+    {
+      "sequence": 4,
+      "source_key": "pca_gl",
+      "group_column": "dColumn10",
+      "name": "借方補助科目",
+      "multiplicity": "0..*",
+      "id": "JP05a",
+      "semantic_path": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator=\"D\"]",
+      "occurrence_mode": "single",
+      "group_key": "",
+      "row_role": "context",
+      "parent_semantic_path": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail",
+      "enabled": true,
+      "migration_note": "Migrated to the module-qualified XBRL GL Next semantic path; any predicate is encoded directly in semantic_path."
+    },
+    {
+      "sequence": 5,
+      "source_key": "pca_gl",
+      "group_column": "dColumn17",
+      "name": "貸方部門",
+      "multiplicity": "0..*",
+      "id": "BS04fc",
+      "semantic_path": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator=\"C\"]",
+      "occurrence_mode": "single",
+      "group_key": "",
+      "row_role": "context",
+      "parent_semantic_path": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail",
+      "enabled": true,
+      "migration_note": "Migrated to the module-qualified XBRL GL Next semantic path; any predicate is encoded directly in semantic_path."
+    },
+    {
+      "sequence": 6,
+      "source_key": "pca_gl",
+      "group_column": "dColumn21",
+      "name": "貸方補助科目",
+      "multiplicity": "0..*",
+      "id": "JP05b",
+      "semantic_path": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator=\"C\"]",
+      "occurrence_mode": "single",
+      "group_key": "",
+      "row_role": "context",
+      "parent_semantic_path": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail",
+      "enabled": true,
+      "migration_note": "Migrated to the module-qualified XBRL GL Next semantic path; any predicate is encoded directly in semantic_path."
+    }
+  ],
+  "joins": [
+    {
+      "join_key": "future_document_detail",
+      "parent_source_key": "document",
+      "child_source_key": "detail",
+      "parent_key_expression": "",
+      "child_key_expression": "",
+      "cardinality": "1:N",
+      "output_semantic_path": "",
+      "enabled": false,
+      "note": "将来課題: 文書表と明細表の2ファイルを1つの構造化CSVへ結合"
+    }
+  ],
+  "migration": {
+    "source_profile": "legacy",
+    "legacy_crosswalk": "cor_Accounting_Entries_PCA_GL_legacy_semantic_path_crosswalk_20260814.csv",
+    "deprecated_keys": [
+      "semPath",
+      "semanticPath",
+      "abbreviation_path"
+    ],
+    "note": "Deprecated path forms are retained only for cross-reference. New processing shall bind on semantic_path."
+  },
+  "privacy": "No source instance, master, generated accounting output, or example-value column is included."
+}

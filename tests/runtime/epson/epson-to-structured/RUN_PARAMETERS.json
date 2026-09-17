@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "case_id": "epson-to-structured",
+  "status": "PASS",
+  "runtime": {
+    "program": "tools/uadc/flat_csv.py",
+    "sha256": "7754AC0938CDD9945DF0A83C4FAA55494D4CDFF1DBA2B9640534014B20F811CF"
+  },
+  "direction": "EPSON-to-Structured",
+  "source_format": "EPSON Zaimu Kaikei R4 CSV",
+  "target_format": "UADC Structured CSV",
+  "profile": "EPSON_ZaimuKaikeiR4_43col_NTA_Fallback",
+  "hmd": "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+  "binding": "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_BINDING.csv",
+  "input": "instances/derived/EPSON/original_basis/EPSON.csv",
+  "outputs": {
+    "structured": "instances/roundtrip/EPSON/original_basis/structured.csv",
+    "tax_trace": "instances/roundtrip/EPSON/original_basis/tax_trace.csv"
+  },
+  "runtime_arguments": [
+    "to-structured",
+    "instances/derived/EPSON/original_basis/EPSON.csv",
+    "-o",
+    "instances/roundtrip/EPSON/original_basis/structured.csv",
+    "-m",
+    "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+    "--profile-dir",
+    "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback",
+    "--columns-file",
+    "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_COLUMNS.csv",
+    "--standard-tax-mapping",
+    "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_STANDARD_TAX_MAPPING.csv",
+    "--account-tax-mapping",
+    "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_ACCOUNT_TAX_MAPPING.csv",
+    "--data-start-row",
+    "1",
+    "--tax-trace-output",
+    "instances/roundtrip/EPSON/original_basis/tax_trace.csv"
+  ],
+  "working_directory": ".",
+  "encoding": "utf-8-sig",
+  "options": {
+    "account_mapping_lookup_contract": "account_code",
+    "tax_mapping_lookup_contract": "source_tax_representation",
+    "tax_facts": [
+      "TaxTransactionClassification",
+      "TaxType",
+      "TaxCategory",
+      "TaxPercentageRate"
+    ],
+    "account_semantic_usage": "transaction_direction_only"
+  },
+  "checksums": {
+    "hmd": "9E3A47B4335C15B0EDCD7299962BC15878BE8288116927C2A7691A5B0C2CE362",
+    "binding": "8FE3CAC2220B37E76B6045F631F66EC309D7218C9CAF8222E0577F36AC108A5B",
+    "input": "323DEC64553BF7CB158F8B13122DFDE479C589167B4C2751F33370E74C8E0A56",
+    "dependencies": {
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_ACCOUNT_MAPPING.csv": "904C51801887959B682CD97754C2650CE49A637DC3521C069F0101594C90649F",
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_ACCOUNT_TAX_MAPPING.csv": "CBC3C2BB6648E2A497142E33D4029D3505B9D7009E8B03F74EC6F8D705EC7501",
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_STANDARD_TAX_MAPPING.csv": "5265D7CD026B52FF6A61D208ECBEBB0BD900A243FB29360436B79984E2E62414",
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_COLUMNS.csv": "77B91270975006070C2DE4263736653B54534C8E35A2E2AC3DE1C8260A52DD3E",
+      "tools/uadc/aggregate_pairing.py": "FF60A3F18E9EC0F3459019D224D3C1D72FE8EE40445694A21EF1CEFAE7DF7D11"
+    },
+    "outputs": {
+      "structured": "12D2400AE9D65F9FB4F4379A81FE6894CFFECD2B1520DCAF85EB0F43DD17C7C9",
+      "tax_trace": "3F9243B444F4EB35396BEA597918F5CEAAB9E2554B6C5BA481ADA65A4BA06A1E"
+    }
+  },
+  "evidence": {
+    "source": "docs/Codex/2026/202609/20260917/20260917_082405/test-environment-canonicalization-stage3/outputs",
+    "accepted_result": "PASS_REUSED_BY_SHA256_IDENTITY",
+    "accepted_date": "2026-09-17",
+    "execution_script": "docs/Codex/2026/202609/20260917/20260917_082405/test-environment-canonicalization-stage3/outputs/selective_retest.py"
+  }
+}

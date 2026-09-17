@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "case_id": "opening-v14",
+  "status": "PASS",
+  "runtime": {
+    "program": "tools/uadc/regenerate_opening.py",
+    "sha256": "023D30E77EC5F1DE6741B605DB674320ECBF3D1C9C437326274D62ED9337D1D9"
+  },
+  "direction": "PCA-opening-to-AccountsPeriodBalances",
+  "source_format": "PCA Opening Balance 7-column CSV",
+  "target_format": "UADC Structured CSV",
+  "profile": "PCA_OpeningBalance_7col",
+  "hmd": "models/xbrl-gl-next/accounts-period-balances/hmd/ISO21378_GL_ACCOUNTS_PERIOD_BALANCE_HMD.csv",
+  "binding": "bindings/flat-csv/PCA_OpeningBalance_7col/PCA_OpeningBalance_7col_BINDING.csv",
+  "input": "instances/original/PCA/opening_v14/V14.csv",
+  "outputs": {
+    "structured": "instances/derived/PCA/opening_v14/opening.csv",
+    "contract": "instances/derived/PCA/opening_v14/opening.contract.json"
+  },
+  "runtime_arguments": [],
+  "working_directory": ".",
+  "encoding": "utf-8-sig",
+  "options": {
+    "effective_date": "2021-04-01",
+    "fiscal_year": 2021,
+    "accounting_period": "M01"
+  },
+  "checksums": {
+    "hmd": "69628A0A6A3B5B0193B62023ECB32C53F8D50AAF40C543E27BCB157757F59C64",
+    "binding": "DEA95D5810B60C16D96E4E67667ED99030A0EB1396604E609ED363A85F6E8AF3",
+    "input": "CF228A41AD68673433E351D9875559C2BB6200DBF6D0641F3567596F8E579B76",
+    "dependencies": {
+      "bindings/flat-csv/PCA_OpeningBalance_7col/PCA_OpeningBalance_7col_ACCOUNT_MAPPING.csv": "193FEDB2CAD7780DCAAAB12515BF06B5C29519C9DC4385FD051923CE53DAAC38",
+      "bindings/structured-csv/XBRL_GL_Next_AccountsPeriodBalances_C13/XBRL_GL_Next_AccountsPeriodBalances_C13_BINDING.csv": "A80B3DA6FB14BAFFAA7206CF1DDFBDB99525C8ADE2D56057359D2B16FD5AF946",
+      "docs/recalculation/opening_v14/previous.csv": "63BA2B55AAE2BC1C1EF985B852071EEBADCD977237E45314B33EE4739084541A"
+    },
+    "outputs": {
+      "structured": "63BA2B55AAE2BC1C1EF985B852071EEBADCD977237E45314B33EE4739084541A",
+      "contract": "2EA9D69EC9FA2E55EDC566AA662DFD084B1D516ECF34BB48BDCE521871A8831C"
+    }
+  },
+  "evidence": {
+    "source": "docs/ChatGPT/2026/202609/20260914/20260914_1250",
+    "accepted_result": "PASS_REUSED_BY_SHA256_IDENTITY",
+    "accepted_date": "2026-09-17",
+    "execution_script": "tools/uadc/regenerate_opening.py"
+  }
+}

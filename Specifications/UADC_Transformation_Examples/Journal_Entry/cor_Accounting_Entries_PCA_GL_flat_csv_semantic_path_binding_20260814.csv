@@ -1,0 +1,82 @@
+column,source_ordinal,source_column_letter,name,multiplicity,datatype,semantic_sort,id,path,semantic_path,structured_csv_column,fixed_value,mapping_status,migration_note
+Column1,1,A,伝票日付,0..1,Date,5913,JP07a_GL03_03,/JP07a/JP07a_GL03_03,$.cor_AccountingEntries.cor_EntryHeader.cor_DatePosted,cor_DatePosted,,mapped,旧無名列の短縮semantic pathをsemanticPathおよび構造化CSV列名として採用
+Column2,2,B,伝票番号,1..1,Identifier,5911,JP07a_GL03_01,/JP07a/JP07a_GL03_01,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryID,cor_EntryID,,mapped,旧無名列の短縮semantic pathをsemanticPathおよび構造化CSV列名として採用
+Column3,3,C,仕訳区分,1..1,Identifier,5921,GE23c_01,/JP07a/GE23c_01,$.cor_AccountingEntries.cor_EntryHeader.cor_TypeCode,cor_TypeCode,,mapped,旧無名列の短縮semantic pathをsemanticPathおよび構造化CSV列名として採用
+Column4,4,D,管理仕訳区分,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column5,5,E,借方税計算モード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column6,6,F,借方部門コード,1..1,Identifier,6076,BS04fb_01,/JP07a/JP08a/BS04fb/BS04fb_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column7,7,G,借方部門名,0..1,Name,6077,BS04fb_02,/JP07a/JP08a/BS04fb/BS04fb_02,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column8,8,H,借方科目コード,1..1,Identifier,5976,JP06e_GE24_01,/JP07a/JP08a/JP06e_GE24_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column9,9,I,借方科目名,0..1,Name,5977,JP06e_GE24_02,/JP07a/JP08a/JP06e_GE24_02,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column10,10,J,借方補助科目コード,0..1,Char,5984,JP05a_01,/JP07a/JP08a/JP05a/JP05a_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column11,11,K,借方補助科目名,0..1,Name,5985,JP05a_02,/JP07a/JP08a/JP05a/JP05a_02,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column12,12,L,借方税区分コード,1..1,Identifier,6017,JP02j_BS09_01,/JP07a/JP08a/JP02j_BS09_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column13,13,M,借方税区分名,0..1,Name,6018,JP02j_BS09_02,/JP07a/JP08a/JP02j_BS09_02,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column14,14,N,借方金額,0..1,Decimal,5994,GE05ku_01,/JP07a/JP08a/GE05ku_01,"$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator=""D""].cor_MonetaryAmount",cor_MonetaryAmount,,mapped,旧無名列の短縮semantic pathをsemanticPathおよび構造化CSV列名として採用
+Column15,15,O,借方消費税額,0..1,Decimal,6007,GE05kw_01,/JP07a/JP08a/GE05kw_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column16,16,P,貸方税計算モード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column17,17,Q,貸方部門コード,1..1,Identifier,6081,BS04fc_01,/JP07a/JP08a/BS04fc/BS04fc_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column18,18,R,貸方部門名,0..1,Name,6082,BS04fc_02,/JP07a/JP08a/BS04fc/BS04fc_02,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column19,19,S,貸方科目コード,1..1,Identifier,6026,JP06f_GE24_01,/JP07a/JP08a/JP06f_GE24_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column20,20,T,貸方科目名,0..1,Name,6027,JP06f_GE24_02,/JP07a/JP08a/JP06f_GE24_02,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column21,21,U,貸方補助科目コード,0..1,Char,6034,JP05b_01,/JP07a/JP08a/JP05b/JP05b_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column22,22,V,貸方補助科目名,0..1,Name,6035,JP05b_02,/JP07a/JP08a/JP05b/JP05b_02,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column23,23,W,貸方税区分コード,1..1,Identifier,6067,JP02k_BS09_01,/JP07a/JP08a/JP02k_BS09_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column24,24,X,貸方税区分名,0..1,Name,6068,JP02k_BS09_02,/JP07a/JP08a/JP02k_BS09_02,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column25,25,Y,貸方金額,0..1,Decimal,6044,GE05kz_01,/JP07a/JP08a/GE05kz_01,"$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator=""C""].cor_MonetaryAmount",cor_MonetaryAmount,,mapped,旧無名列の短縮semantic pathをsemanticPathおよび構造化CSV列名として採用
+Column26,26,Z,貸方消費税額,0..1,Decimal,6057,GE05kB_01,/JP07a/JP08a/GE05kB_01,,,,extension_required,No corresponding element was confirmed in the current XBRL GL Next Accounting Entries HMD; define a JP extension or revise the mapping.
+Column27,27,AA,摘要文,0..1,Text,5946,JP08a_GL04_03,/JP07a/JP08a/JP08a_GL04_03,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail.cor_DetailDescription,cor_DetailDescription,,mapped,旧無名列の短縮semantic pathをsemanticPathおよび構造化CSV列名として採用
+Column28,28,AB,数字１,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column29,29,AC,数字２,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column30,30,AD,入力プログラム区分,1..1,Identifier,5919,GL05c_01,/JP07a/GL05c_01,$.cor_AccountingEntries.cor_EntryHeader.cor_EntryOrigin,cor_EntryOrigin,,mapped,旧無名列の短縮semantic pathをsemanticPathおよび構造化CSV列名として採用
+Column31,31,AE,配賦元税計算,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column32,32,AF,配賦元集計方法,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column33,33,AG,配賦元集計開始日付,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column34,34,AH,配賦元集計終了日付,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column35,35,AI,配賦元管理仕訳区分,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column36,36,AJ,配賦元部門コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column37,37,AK,配賦元部門名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column38,38,AL,配賦元科目コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column39,39,AM,配賦元科目名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column40,40,AN,配賦元補助コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column41,41,AO,配賦元補助名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column42,42,AP,配賦元金額,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column43,43,AQ,数字３,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column44,44,AR,数字４,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column45,45,AS,数字５,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column46,46,AT,金額１,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column47,47,AU,金額２,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column48,48,AV,金額３,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column49,49,AW,金額４,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column50,50,AX,金額５,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column51,51,AY,文字列１,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column52,52,AZ,文字列２,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column53,53,BA,文字列３,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column54,54,BB,文字列４,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column55,55,BC,文字列５,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column56,56,BD,入力日付時間,0..1,Date,5929,GE09eR_01,/JP07a/GE09eR_01,$.cor_AccountingEntries.cor_EntryHeader.cor_HeaderEntryDate,cor_HeaderEntryDate,,mapped,旧無名列の短縮semantic pathをsemanticPathおよび構造化CSV列名として採用
+Column57,57,BE,借方取引先コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column58,58,BF,借方取引先名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column59,59,BG,借方セグメント１コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column60,60,BH,借方セグメント１名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column61,61,BI,借方セグメント２コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column62,62,BJ,借方セグメント２名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column63,63,BK,借方セグメント３コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column64,64,BL,借方セグメント３名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column65,65,BM,貸方取引先コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column66,66,BN,貸方取引先名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column67,67,BO,貸方セグメント１コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column68,68,BP,貸方セグメント１名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column69,69,BQ,貸方セグメント２コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column70,70,BR,貸方セグメント２名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column71,71,BS,貸方セグメント３コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column72,72,BT,貸方セグメント３名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column73,73,BU,配賦選択,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column74,74,BV,配賦元取引先コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column75,75,BW,配賦元取引先名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column76,76,BX,配賦元セグメント１コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column77,77,BY,配賦元セグメント１名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column78,78,BZ,配賦元セグメント２コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column79,79,CA,配賦元セグメント２名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column80,80,CB,配賦元セグメント３コード,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要
+Column81,81,CC,配賦元セグメント３名,,,,,,,,,unmapped,semantic path未定義。標準LHM要素への対応付けが必要

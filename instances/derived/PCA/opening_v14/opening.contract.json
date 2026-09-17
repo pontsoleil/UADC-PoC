@@ -1,0 +1,24 @@
+{
+  "metadataType": "UADC Structured Tidy contract metadata",
+  "notFormalXbrlCsvMetadata": true,
+  "table": "opening.csv",
+  "source": "../../../original/PCA/opening_v14/V14.csv",
+  "effectiveDate": "2021-04-01",
+  "fiscalYear": 2021,
+  "accountingPeriod": "M01",
+  "columns": {
+    "C1": "$.adc_GLAccountsPeriodBalances[C1]",
+    "C2": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2]",
+    "C3": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3]",
+    "C4": "",
+    "C5": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_GLAccountNumber",
+    "C6": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].uadc_AccountName",
+    "C7": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].uadc_NormalBalanceIndicator",
+    "C8": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_FiscalYear",
+    "C9": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_AccountingPeriod",
+    "C10": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_BEGBalanceIndicator",
+    "C11": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_BeginningBalance",
+    "C12": "$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_CurrencyCode",
+    "C13": "profile:openingBalanceEffectiveDate"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "case_id": "pca-evaluation-v17-to-structured",
+  "status": "PASS",
+  "runtime": {
+    "program": "tools/uadc/flat_csv.py",
+    "sha256": "7754AC0938CDD9945DF0A83C4FAA55494D4CDFF1DBA2B9640534014B20F811CF"
+  },
+  "direction": "PCA-to-Structured",
+  "source_format": "PCA Accounting 81-column CSV",
+  "target_format": "UADC Structured CSV",
+  "profile": "PCA_Accounting_81col_AnonymousEvaluation_V17_V14",
+  "hmd": "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+  "binding": "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_BINDING.csv",
+  "input": "instances/original/PCA/evaluation_v17_basis/PCA.csv",
+  "outputs": {
+    "structured": "instances/derived/PCA/evaluation_v17_basis/structured.csv",
+    "tax_trace": "instances/derived/PCA/evaluation_v17_basis/tax_trace.csv"
+  },
+  "runtime_arguments": [
+    "to-structured",
+    "instances/original/PCA/evaluation_v17_basis/PCA.csv",
+    "-o",
+    "instances/derived/PCA/evaluation_v17_basis/structured.csv",
+    "-m",
+    "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+    "--profile-dir",
+    "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14",
+    "--columns-file",
+    "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_COLUMNS.csv",
+    "--standard-tax-mapping",
+    "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_STANDARD_TAX_MAPPING.csv",
+    "--account-tax-mapping",
+    "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_ACCOUNT_TAX_MAPPING.csv",
+    "--data-start-row",
+    "2",
+    "--tax-trace-output",
+    "instances/derived/PCA/evaluation_v17_basis/tax_trace.csv"
+  ],
+  "working_directory": ".",
+  "encoding": "utf-8-sig",
+  "options": {
+    "account_mapping_lookup_contract": "account_code",
+    "tax_mapping_lookup_contract": "source_tax_representation",
+    "tax_facts": [
+      "TaxTransactionClassification",
+      "TaxType",
+      "TaxCategory",
+      "TaxPercentageRate"
+    ],
+    "account_semantic_usage": "transaction_direction_only"
+  },
+  "checksums": {
+    "hmd": "9E3A47B4335C15B0EDCD7299962BC15878BE8288116927C2A7691A5B0C2CE362",
+    "binding": "947AA74B116A0CB433E77EB18C70A6285B622652000719461BF8F7D717A0B475",
+    "input": "C0A58025A6293011227F5E688ECCC89007925F96AF41E69E14BC5508D6DDE603",
+    "dependencies": {
+      "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_ACCOUNT_MAPPING.csv": "2F04A3CA8711237B7EB169C6607D0857BAE38ECC04B32F250C734B71CA6BF85D",
+      "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_ACCOUNT_TAX_MAPPING.csv": "F264C3D945C7BA69ED94A17D7849922AB3204357501D68BC6122144B95300544",
+      "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_STANDARD_TAX_MAPPING.csv": "46739098546240D1EFA757B760D0EC94962DE4D3E55988DB05D8937439EF7D4A",
+      "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_COLUMNS.csv": "26F2E9216373DE015F4B98698A5FBCA86B1C31ACCF2B94ECF4CFA2C2D70198B2"
+    },
+    "outputs": {
+      "structured": "D9F0F1B28F620BBEAD2A6D62E7D00AD2418A73193CAA9B70977CA69DD6CED88B",
+      "tax_trace": "F477481226220A0D5F8A22D6D7661A746A62CD179DC3091F0AD6DAA49940627B"
+    }
+  },
+  "evidence": {
+    "source": "docs/Codex/2026/202609/20260917/20260917_110237/tax-mapping-lookup-remediation-stage7/outputs",
+    "accepted_result": "PASS_REUSED_BY_SHA256_IDENTITY",
+    "accepted_date": "2026-09-17"
+  }
+}
