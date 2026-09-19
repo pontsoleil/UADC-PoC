@@ -12,7 +12,7 @@ The previous label-style path and abbreviated path are compatibility references 
 
 ## Included files
 
-See `cor_Accounting_Entries_Journal_Entry_manifest_20260814.csv`. The two principal review tables are `cor_Accounting_Entries_Journal_Entry_HMD_semantic_path_Part1_revised_20260814.xlsx` and `cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding_Part1_revised_20260814.xlsx`; CSV companions support machine processing.
+See `cor_Accounting_Entries_Journal_Entry_manifest.csv`. The two principal review tables are `cor_Accounting_Entries_Journal_Entry_HMD_semantic_path_Part1_revised.xlsx` and `cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding_Part1_revised.xlsx`; CSV companions support machine processing.
 
 ## Data boundary
 

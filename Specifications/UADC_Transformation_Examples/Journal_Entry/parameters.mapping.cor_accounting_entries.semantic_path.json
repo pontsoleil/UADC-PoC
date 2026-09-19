@@ -83,9 +83,9 @@
   "lang": "ja",
   "DEBUG": 0,
   "TRACE": 1,
-  "HMD_path": "cor_Accounting_Entries_Journal_Entry_HMD_semantic_path_20260814.csv",
+  "HMD_path": "cor_Accounting_Entries_Journal_Entry_HMD_semantic_path.csv",
   "semantic_path_column": "semantic_path",
-  "semantic_binding_path": "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding_20260814.csv",
-  "binding_set_path": "cor_Accounting_Entries_PCA_GL_semantic_path_binding_set_20260814.json",
+  "semantic_binding_path": "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding.csv",
+  "binding_set_path": "cor_Accounting_Entries_PCA_GL_semantic_path_binding_set.json",
   "profile_note": "Review copy: runtime data/master paths still point to private workspace locations and are not included in this package."
 }

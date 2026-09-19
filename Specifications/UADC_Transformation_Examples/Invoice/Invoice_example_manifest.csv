@@ -1,0 +1,4 @@
+file,role,source,example_type
+btx_Business_Transactions_Invoice_OpenPeppol_UBL_input.xml,Syntax input example (third-party-derived sample; original conditions apply),samples/input/openpeppol_ubl_invoice_minimal.xml,Invoice
+btx_Business_Transactions_Invoice_HMD_semantic_path.csv,Invoice HMD/LHM with Business Transactions semantic_path root,specs/lhm/EN16931_CIUS_Invoice_LHM.csv,Invoice
+btx_Business_Transactions_Invoice_UBL_Syntax_Binding_semantic_path.csv,UBL syntax-path to Business Transactions semantic_path binding,specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv,Invoice

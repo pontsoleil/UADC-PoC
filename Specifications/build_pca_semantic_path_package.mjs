@@ -19,16 +19,16 @@ const mappingParametersPath = `${root}/private/legacy_sources/accounting/ledger_
 const explorerParametersPath = `${root}/private/legacy_sources/accounting/ledger_explorer/config/parameters.ledger_explorer.work.json`;
 
 const names = {
-  hmdCsv: "cor_Accounting_Entries_Journal_Entry_HMD_semantic_path_20260814.csv",
-  hmdXlsx: "cor_Accounting_Entries_Journal_Entry_HMD_semantic_path_Part1_revised_20260814.xlsx",
-  bindingCsv: "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding_20260814.csv",
-  bindingXlsx: "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding_Part1_revised_20260814.xlsx",
-  legacyCsv: "cor_Accounting_Entries_PCA_GL_legacy_semantic_path_crosswalk_20260814.csv",
-  bindingSet: "cor_Accounting_Entries_PCA_GL_semantic_path_binding_set_20260814.json",
-  mappingParams: "parameters.mapping.cor_accounting_entries.semantic_path.20260814.json",
-  explorerParams: "parameters.ledger_explorer.cor_accounting_entries.semantic_path.20260814.json",
-  manifest: "cor_Accounting_Entries_Journal_Entry_manifest_20260814.csv",
-  readme: "README_cor_Accounting_Entries_Journal_Entry_20260814.md",
+  hmdCsv: "cor_Accounting_Entries_Journal_Entry_HMD_semantic_path.csv",
+  hmdXlsx: "cor_Accounting_Entries_Journal_Entry_HMD_semantic_path_Part1_revised.xlsx",
+  bindingCsv: "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding.csv",
+  bindingXlsx: "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding_Part1_revised.xlsx",
+  legacyCsv: "cor_Accounting_Entries_PCA_GL_legacy_semantic_path_crosswalk.csv",
+  bindingSet: "cor_Accounting_Entries_PCA_GL_semantic_path_binding_set.json",
+  mappingParams: "parameters.mapping.cor_accounting_entries.semantic_path.json",
+  explorerParams: "parameters.ledger_explorer.cor_accounting_entries.semantic_path.json",
+  manifest: "cor_Accounting_Entries_Journal_Entry_manifest.csv",
+  readme: "README_cor_Accounting_Entries_Journal_Entry.md",
 };
 
 const canonicalSegmentOverrides = new Map([
@@ -603,8 +603,8 @@ await fs.writeFile(`${outputDir}/${names.readme}`, readme, "utf8");
 await fs.mkdir(invoiceDir, { recursive: true });
 const invoiceFiles = [
   ["btx_Business_Transactions_Invoice_OpenPeppol_UBL_input.xml", `${root}/samples/input/openpeppol_ubl_invoice_minimal.xml`, "Syntax input example (third-party-derived sample; original conditions apply)", "copy"],
-  ["btx_Business_Transactions_Invoice_HMD_semantic_path_20260814.csv", `${root}/specs/lhm/EN16931_CIUS_Invoice_LHM.csv`, "Invoice HMD/LHM with Business Transactions semantic_path root", "semantic_path"],
-  ["btx_Business_Transactions_Invoice_UBL_Syntax_Binding_semantic_path_20260814.csv", `${root}/specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv`, "UBL syntax-path to Business Transactions semantic_path binding", "semantic_path"],
+  ["btx_Business_Transactions_Invoice_HMD_semantic_path.csv", `${root}/specs/lhm/EN16931_CIUS_Invoice_LHM.csv`, "Invoice HMD/LHM with Business Transactions semantic_path root", "semantic_path"],
+  ["btx_Business_Transactions_Invoice_UBL_Syntax_Binding_semantic_path.csv", `${root}/specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv`, "UBL syntax-path to Business Transactions semantic_path binding", "semantic_path"],
 ];
 for (const [file, source, , mode] of invoiceFiles) {
   if (mode === "semantic_path") {
@@ -620,15 +620,15 @@ const invoiceManifest = invoiceFiles.map(([file, source, role]) => ({
   source: path.relative(root, source).replaceAll("\\", "/"),
   example_type: "Invoice",
 }));
-await fs.writeFile(`${invoiceDir}/Invoice_example_manifest_20260814.csv`, "\ufeff" + toCsv(["file", "role", "source", "example_type"], invoiceManifest), "utf8");
-await fs.writeFile(`${invoiceDir}/README_Invoice_example_20260814.md`, `# UADC transformation example: Invoice
+await fs.writeFile(`${invoiceDir}/Invoice_example_manifest.csv`, "\ufeff" + toCsv(["file", "role", "source", "example_type"], invoiceManifest), "utf8");
+await fs.writeFile(`${invoiceDir}/README_Invoice_example.md`, `# UADC transformation example: Invoice
 
 The Invoice example starts from the existing OpenPeppol UBL invoice and uses the EN 16931 HMD plus UBL syntax binding. In this example-set classification it corresponds to XBRL GL Next \`btx\` / \`Business Transactions\`; the module-qualified profile root is \`$.btx_BusinessTransactions.btx_Invoice\`.
 
-Included files are listed in \`Invoice_example_manifest_20260814.csv\`. Third-party standards, schemas, terminology, and sample material retain their original rights and are not relicensed by this package.
+Included files are listed in \`Invoice_example_manifest.csv\`. Third-party standards, schemas, terminology, and sample material retain their original rights and are not relicensed by this package.
 `, "utf8");
 
-await fs.writeFile(`${baseOutputDir}/README_UADC_Transformation_Examples_20260814.md`, `# UADC transformation examples
+await fs.writeFile(`${baseOutputDir}/README_UADC_Transformation_Examples.md`, `# UADC transformation examples
 
 The examples are organized by business document semantics:
 

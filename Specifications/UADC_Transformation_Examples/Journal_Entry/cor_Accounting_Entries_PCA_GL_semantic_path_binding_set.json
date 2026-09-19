@@ -8,7 +8,7 @@
   "framework": "XBRL GL Next Taxonomy Framework Part 1 — semantic_path naming",
   "canonical_semantic_path_pattern": "$.cor_AccountingEntries.cor_EntryHeader.cor_EntryDetail[cor_DebitCreditIndicator=\"D\"].cor_MonetaryAmount",
   "hmd": {
-    "file": "cor_Accounting_Entries_Journal_Entry_HMD_semantic_path_20260814.csv",
+    "file": "cor_Accounting_Entries_Journal_Entry_HMD_semantic_path.csv",
     "semantic_path_column": "semantic_path",
     "compatibility_columns": [
       "legacy_semantic_path",
@@ -16,7 +16,7 @@
     ]
   },
   "binding": {
-    "file": "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding_20260814.csv",
+    "file": "cor_Accounting_Entries_PCA_GL_flat_csv_semantic_path_binding.csv",
     "type": "flat_csv_semantic_path",
     "semantic_path_column": "semantic_path"
   },
@@ -140,7 +140,7 @@
   ],
   "migration": {
     "source_profile": "legacy",
-    "legacy_crosswalk": "cor_Accounting_Entries_PCA_GL_legacy_semantic_path_crosswalk_20260814.csv",
+    "legacy_crosswalk": "cor_Accounting_Entries_PCA_GL_legacy_semantic_path_crosswalk.csv",
     "deprecated_keys": [
       "semPath",
       "semanticPath",
