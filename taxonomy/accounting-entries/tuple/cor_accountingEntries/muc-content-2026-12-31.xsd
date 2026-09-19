@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/muc" elementFormDefault="qualified" attributeFormDefault="unqualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:muc="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/muc"
+>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <include schemaLocation="../../muc/muc-2026-12-31.xsd"/>
+  <!-- structural ComplexType supplied for the Palette module -->
+  <complexType name="detailMulticurrencyComplexType">
+    <sequence>
+      <element ref="muc:multicurrencyExchangeRateDate" minOccurs="0"/>
+      <element ref="muc:multicurrencyForeignCurrencyAmount" minOccurs="0"/>
+      <element ref="muc:multicurrencyForeignCurrency" minOccurs="0"/>
+      <element ref="muc:multicurrencyExchangeRate" minOccurs="0"/>
+      <element ref="muc:multicurrencyExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:multicurrencyExchangeRateType" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationCurrencyAmount" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationCurrency" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationExchangeRate" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:multicurrencyTriangulationExchangeRateType" minOccurs="0"/>
+      <element ref="muc:multicurrencyCrossTriangulationExchangeRate" minOccurs="0"/>
+      <element ref="muc:multicurrencyCrossTriangulationExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:multicurrencyCrossTriangulationExchangeRateType" minOccurs="0"/>
+      <element ref="muc:multicurrencyComment" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+</schema>

@@ -29,3 +29,15 @@ models/en-cius/invoice/bindings/syntax/EN16931_CII_D16B_Invoice_Syntax_Binding.c
 models/en-cius/invoice/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv -text
 models/en-cius/invoice/hmd/EN16931_CIUS_Invoice_Canonical_HMD.csv -text
 taxonomy/DEPENDENT_COPY_MANIFEST.csv -text
+instances/derived/samples/openpeppol_ubl_invoice_structured.csv -text
+Specifications/technical/ads/source/EN16931_UBL_Invoice.csv -text
+Specifications/technical/bindings/syntax/ADS_Customer_Master_XBRL_GL_Binding.csv -text
+Specifications/technical/bindings/syntax/ADS_Invoices_Generated_Lines_XBRL_GL_Binding.csv -text
+Specifications/technical/bindings/syntax/ADS_Invoices_Generated_XBRL_GL_Binding.csv -text
+Specifications/technical/bindings/syntax/ADS_Invoices_Received_Lines_XBRL_GL_Binding.csv -text
+Specifications/technical/bindings/syntax/ADS_Invoices_Received_XBRL_GL_Binding.csv -text
+Specifications/technical/bindings/syntax/ADS_Supplier_Listing_XBRL_GL_Binding.csv -text
+Specifications/technical/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv -text
+Specifications/technical/lhm/EN16931_CIUS_Invoice_LHM.csv -text
+Specifications/technical/lhm/source/EN16931_CIUS_Invoice_LHM_Source.csv -text
+Specifications/technical/XBRL-GL/xbrl-gl.csv -text

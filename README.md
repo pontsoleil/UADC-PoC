@@ -1,19 +1,25 @@
-﻿# UADC PoC Collaboration Workspace
+# UADC PoC Collaboration Workspace
 
 This workspace is for the xBRL-GL Next / UADC proof of concept. It implements the UADC processing model for "A Hierarchical Tidy Data Universal Audit Data Converter for Invoice Reuse".
 
+UADC-PoC and the bundled XBRL GL Next taxonomy are prototype project
+artefacts, not official specifications. The accepted taxonomy families use
+XBRL Japan namespace URIs, but that use does not imply approval, endorsement,
+or official publication by XBRL Japan or XBRL International. See the
+[XBRL GL source notice](taxonomy/NOTICE_XBRL_GL.md),
+[licence scope](LICENSE-SCOPE.md), [third-party notices](THIRD_PARTY_NOTICES.md),
+and the [publication and namespace decision](docs/decisions/ADR-XBRL-GL-NEXT-PROTOTYPE-TAXONOMY-PUBLICATION.md).
+
 ## Project Entry Points
 
-- [UADC overview and foundations](docs/00_POC_FOUNDATIONS.md)
-- [Project plan](docs/PROJECT_PLAN.md)
 - [Current baseline](docs/CURRENT_BASELINE.md)
 - [Handoff and next work](docs/HANDOFF.md)
-- [Program-type research catalog](research/programs/README.md)
-- [Shared masters and taxonomy catalog](research/shared-resources/README.md)
-- [Pre-public validation candidates](research/pre-public-validation/README.md)
-- [Future publication area](public/README.md)
-
-All existing files are classified as research material until they are reviewed individually. The `public/` tree is initially an empty publication framework containing only directories and explanatory README files.
+- [License scope](LICENSE-SCOPE.md)
+- [Third-party notices](THIRD_PARTY_NOTICES.md)
+- [XBRL GL source notice](taxonomy/NOTICE_XBRL_GL.md)
+- [Runtime programs](tools/binding/README.md)
+- [Taxonomy generator](tools/taxonomy/README.md)
+- [Registered runtime cases](tests/runtime/README.md)
 
 ## Validated pre-reorganization baseline (2026-08-22)
 
@@ -21,7 +27,11 @@ Three binding methods have independent public-safe WORK validation evidence. Syn
 
 Each route uses its applicable HMD. The OIM taxonomy is generated or identity-verified and validated before conversion. An XBRL-CSV Structured CSV is a same-directory, same-basename `.csv`/`.json` pair, and metadata uses a package-relative taxonomy URI. Arelle validation and reverse semantic/normalized comparison passed for all three accepted scopes. Private accounting data and PINT JP official fixtures were not used or promoted.
 
-The validated runtime scripts are `src/syntax_binding.py`, `pre-public-validation/programs/flat-csv/scripts/flat_csv.py`, and the WORK candidate `src/semantic_table.py`. Directory paths remain pre-reorganization paths in this section; the next step is HMD-centric repository reorganization.
+The current runtime programs are under `tools/binding/`, including
+`syntax_binding.py`, `semantic_binding.py`, and `flat_csv.py`.  Registered
+PCA/EPSON execution contracts are under `tests/runtime/`.  Accepted XBRL GL
+Next taxonomy families are under `taxonomy/business-transactions/` and
+`taxonomy/accounting-entries/`.
 
 ## Project Charter
 
@@ -87,13 +97,10 @@ The first PoC checkpoint is the EN 16931-1 invoice semantic model represented as
 
 OpenPeppol BIS Billing is handled as the next layer: a CIUS/profile overlay on top of EN 16931-1, with additional constraints, defaults, and syntax-specific rules.
 
-The CII development test set adds UN/CEFACT CrossIndustryInvoice 100.D16B
-SCRDM Subset schemas and three public EN 16931 CII examples. Schema files are
-stored under **out/cache/CII-D16B-SCRDM-Subset/** with their original relative
-import structure, and unchanged XML sources are under
-**samples/input/cii-d16b-examples/**. The actual download source, fixed GitHub
-commit, retrieval date, licences, and SHA-256 values are recorded in
-**samples/input/cii-d16b-examples/README.md** and the schema cache README.
+The CII development route remains declared HOLD until its accepted input,
+reverse output, and complete execution manifest can be reconstructed from
+preserved evidence. No CII fixture is inferred or regenerated for this
+canonical baseline.
 
 ## Clone And Setup Overview
 
@@ -130,7 +137,7 @@ Then prepare generated local files and test artifacts:
 Windows PowerShell:
 
 ```
-& $python -m py_compile .\src\syntax_binding.py .\tools\build_roundtrip_test_artifacts.py .\tools\taxonomy\xBRLGL_TaxonomyGenerator.py
+& $python -m py_compile .\tools\binding\syntax_binding.py .\tools\binding\semantic_binding.py .\tools\binding\flat_csv.py .\tools\taxonomy\xBRLGL_TaxonomyGenerator.py
 & $python .\tests\test_xbrlgl_generator_uadc_lhm.py
 & $python .\tools\build_roundtrip_test_artifacts.py
 & $python .\tests\test_roundtrip_artifacts.py
@@ -139,13 +146,15 @@ Windows PowerShell:
 macOS / Linux shell:
 
 ```
-$PYTHON -m py_compile ./src/syntax_binding.py ./tools/build_roundtrip_test_artifacts.py ./tools/taxonomy/xBRLGL_TaxonomyGenerator.py
+$PYTHON -m py_compile ./tools/binding/syntax_binding.py ./tools/binding/semantic_binding.py ./tools/binding/flat_csv.py ./tools/taxonomy/xBRLGL_TaxonomyGenerator.py
 $PYTHON ./tests/test_xbrlgl_generator_uadc_lhm.py
 $PYTHON ./tools/build_roundtrip_test_artifacts.py
 $PYTHON ./tests/test_roundtrip_artifacts.py
 ```
 
-This creates the local xBRL-CSV taxonomy under **out/taxonomy/** and refreshes reviewable round-trip artifacts under **tests/roundtrip/**.
+Accepted taxonomy bytes are registered under **taxonomy/**. Runtime cases and
+their accepted fixtures are described by **tests/runtime/** manifests; generated
+scratch output is not part of the canonical publication tree.
 
 For environment setup, tests, and the end-to-end learning flow, see
 **docs/01_ENVIRONMENT_TESTS_TUTORIAL.md**. The Structured CSV and LHM contract
@@ -166,7 +175,7 @@ The phases below describe the UADC processing model, not project management mile
 | --- | --- | --- | --- |
 | Phase 1 | Create a generic Structured CSV from source invoice syntaxes. | Input starts with Peppol UBL Invoice XML. The source syntax binding maps invoice facts into the common EN 16931 / UADC hierarchical Structured CSV. The same phase writes xBRL-CSV metadata JSON and validates the generic representation against the generated xBRL-CSV taxonomy. | **Complete for the PoC baseline.** Peppol UBL input, Structured CSV generation, metadata JSON generation, taxonomy and metadata validation, and UBL round-trip schema checks are functioning. |
 | Phase 2 | Convert the generic Structured CSV into purpose-specific common formats. | The current targets are six ADS XBRL GL views, six ADS PSV views, and ISO 21378:2019 ADC Tables 38, 39, 53, and 54 CSV views. | **Complete for the planned PoC scope.** Target bindings, generation, regression tests, and documented ISO mapping gaps are in place. |
-| Phase 3 | Expand supported input syntaxes and interoperability tests. | Add UN/CEFACT Invoice and XBRL GL invoice examples as additional source inputs, alongside Peppol UBL. Add corresponding output conversions to Peppol Invoice, UN/CEFACT Invoice, and XBRL GL invoice. | **CII forward conversion development draft added.** Three public CII D16B instances now pass XSD validation and convert through a 34-row HMD-resolved Syntax Binding Table. CII reverse conversion and EN 16931 Schematron validation remain future work. |
+| Phase 3 | Expand supported input syntaxes and interoperability tests. | Add UN/CEFACT Invoice and XBRL GL invoice examples as additional source inputs, alongside Peppol UBL. Add corresponding output conversions to Peppol Invoice, UN/CEFACT Invoice, and XBRL GL invoice. | **HOLD for the canonical publication baseline.** CII development evidence exists, but forward/reverse publication acceptance requires a complete preserved execution set; CII reverse conversion and EN 16931 Schematron validation remain future work. |
 
 Phase 1 intentionally focuses on the neutral intermediate representation: a generic, hierarchical Structured CSV that can be validated and round-tripped. Phase 2 uses that common representation as the source for multiple downstream formats. This separation is the core UADC idea: source syntax conversion is kept separate from target-format projection.
 
@@ -204,28 +213,24 @@ Later interoperability tests
 
 ## Directory Layout
 
-- **docs/** - Human-readable project documentation. Start with **docs/README.md**.
-  The canonical guides are the numbered documents 01 through 05 covering the
-  environment and tutorial, Structured CSV and LHM, Phase 1 UBL syntax binding,
-  Phase 2 ADS PSV semantic binding, and Phase 2 ADS XBRL GL syntax binding.
-- **references/** - External source notes and links used to interpret standards, source specifications, and implementation references. Keep large licensed source documents outside the repository and record only reproducible notes or pointers here.
-- **specs/lhm/** - LHM/HMD semantic model definitions for the EN 16931 invoice PoC. The generated/current CSV is stored here, while **specs/lhm/source/** keeps the editable source CSV used to regenerate or adjust the LHM. Local reviewer workbooks are ignored by Git.
-- **specs/bindings/** - Binding definitions. The active UBL Invoice syntax binding is **specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv**; it maps LHM semantic paths to UBL XPath expressions and selector predicates used by forward and reverse conversion. Phase 2 ADS XBRL GL binding CSV files are under **specs/bindings/syntax/**. The review workbook is **specs/bindings/ADS_XBRL_GL_Bindings.xlsx**. ADS PSV and ISO 21378 ADC CSV bindings are under **specs/bindings/semantic/**.
-- **samples/input/** - Small sample input files committed for baseline checks, including the minimal UBL Invoice sample and selected BIS Billing example invoices.
-- **samples/expected/** - Checked expected output for lightweight regression checks where a stable expected artifact is useful.
-- **src/** - Operational conversion scripts and beginner tutorial wrappers. See
-  **src/README.md** and **src/tutorial/README.md**.
-- **tests/** - Regression checks and generated round-trip review artifacts. See
-  **tests/README.md**.
-- **tools/** - Initial setup, supporting generation, environment-maintenance,
-  and development helper tools. See **tools/README.md**,
-  **tools/taxonomy/README.md**, and **tools/tutorial/README.md**. All 15 tools
-  are specified in **docs/02_STRUCTURED_CSV_LHM_BINDINGS.md**.
-- **out/** - Generated PoC evidence and target output tracked by Git. This includes taxonomy output, Structured CSV output, reverse-conversion output, Phase 2 target views, and selected rendered document QA artifacts. Regenerate these files from their source definitions rather than editing them directly.
+- **bindings/** - Syntax, semantic, structured-CSV, PCA, and EPSON binding and mapping definitions.
+- **models/** - EN CIUS invoice, GL business-transactions, GL accounting-entries, and related HMD/model inputs.
+- **instances/** - Accepted `original/`, `derived/`, and `roundtrip/` fixtures and outputs.
+- **tests/** - Registered runtime cases, successor `RUN_PARAMETERS.json` files, and focused regression programs.
+- **tools/binding/** - Syntax, semantic, flat-CSV, Tuple, and supporting conversion programs.
+- **tools/taxonomy/** - Taxonomy generation programs, templates, datatype bindings, and generator documentation.
+- **taxonomy/** - Accepted XBRL Japan namespace taxonomy families for Business Transactions and Accounting Entries.
+- **definitions/** - Shared definitions used by model and taxonomy tooling.
+- **Specifications/** - Maintained public specifications plus `technical/` implementation definitions.
+- **docs/** - Maintained implementation and governance documentation. Start with **docs/README.md**.
+- **references/** - Reproducible reference notes, provenance, and project figures; large licensed source material is not copied here.
 - [**XBRL_GL_Next_UADC_PoC.pdf**](XBRL_GL_Next_UADC_PoC.pdf) - Project overview document for the UADC PoC
   and its relationship to XBRL GL Next.
 
-The taxonomy generator is included at **tools/taxonomy/xBRLGL_TaxonomyGenerator.py**. The generated xBRL-CSV taxonomy entry point is **out/taxonomy/plt/en16931-oim-2026-07-05.xsd** and its dimensional definition linkbase is **out/taxonomy/plt/en16931-def-2026-07-05.xml**. The entry point also discovers the EN 16931 presentation linkbase so Arelle displays the LHM hierarchy. Tuple/content taxonomy schemas such as **plt-all-<version>.xsd** and **en16931-content-<version>.xsd** are not generated for this PoC.
+The taxonomy generator is included at **tools/taxonomy/xBRLGL_TaxonomyGenerator.py**.
+Published XBRL GL Next entry points are registered as accepted exact bytes below
+**taxonomy/business-transactions/** and **taxonomy/accounting-entries/**; this
+canonical reconstruction does not regenerate those families.
 
 ## Current Scope
 
@@ -272,7 +277,7 @@ The resulting artifacts are therefore checked at two levels: xBRL-CSV reports an
 & $python .\tests\test_ads_customer_master_xbrl_gl.py
 ```
 
-The sample UBL Invoice XML and BIS Billing examples are converted using **specs/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv**. OpenPeppol CIUS checks are added after the EN 16931 conversion baseline is stable.
+The sample UBL Invoice XML and BIS Billing examples are converted using **bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv**. OpenPeppol CIUS checks are added after the EN 16931 conversion baseline is stable.
 
 Semantic path elements are generated from Business Terms using **lowerCamelCaseConcatenated**, for example:
 

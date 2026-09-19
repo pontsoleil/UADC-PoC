@@ -1,0 +1,14 @@
+structured_column,ordinal,role,name_en,semantic_path,binding_path
+C1,1,occurrence-coordinate,GL Accounts Period Balances,$.adc_GLAccountsPeriodBalances,$.adc_GLAccountsPeriodBalances[C1]
+C2,2,occurrence-coordinate,Account Balance,$.adc_GLAccountsPeriodBalances.adc_AccountBalance,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2]
+C3,3,occurrence-coordinate,Period Balance,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3]
+C4,4,row-class,Row Class,,
+C5,5,value-property,GL Account Number,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_GLAccountNumber,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_GLAccountNumber
+C6,6,value-property,Account Name,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.uadc_AccountName,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].uadc_AccountName
+C7,7,value-property,Normal Balance Indicator,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.uadc_NormalBalanceIndicator,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].uadc_NormalBalanceIndicator
+C8,8,value-property,Fiscal Year,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance.adc_FiscalYear,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_FiscalYear
+C9,9,value-property,Accounting Period,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance.adc_AccountingPeriod,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_AccountingPeriod
+C10,10,value-property,Beg Balance Indicator,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance.adc_BEGBalanceIndicator,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_BEGBalanceIndicator
+C11,11,value-property,Beginning Balance,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance.adc_BeginningBalance,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_BeginningBalance
+C12,12,value-property,Currency Code,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance.adc_CurrencyCode,$.adc_GLAccountsPeriodBalances[C1].adc_AccountBalance[C2].adc_PeriodBalance[C3].adc_CurrencyCode
+C13,13,profile-context,Opening Balance Effective Date,,profile:openingBalanceEffectiveDate

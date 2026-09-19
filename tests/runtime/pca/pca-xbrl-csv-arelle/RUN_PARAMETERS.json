@@ -3,14 +3,14 @@
   "case_id": "pca-xbrl-csv-arelle",
   "status": "PASS",
   "runtime": {
-    "program": "tools/uadc/flat_csv.py",
+    "program": "tools/binding/flat_csv.py",
     "sha256": "7754AC0938CDD9945DF0A83C4FAA55494D4CDFF1DBA2B9640534014B20F811CF"
   },
   "direction": "PCA-to-xBRL-CSV",
   "source_format": "PCA Accounting CSV",
   "target_format": "xBRL-CSV",
   "profile": "PCA_Accounting_81col_AnonymousEvaluation_V17_V14",
-  "hmd": "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+  "hmd": "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
   "binding": "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_BINDING.csv",
   "input": "instances/original/PCA/original_basis/PCA.csv",
   "outputs": {
@@ -24,7 +24,7 @@
     "-o",
     "instances/derived/PCA/xbrl-csv/original_basis/accounting_entries.csv",
     "-m",
-    "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+    "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
     "--profile-dir",
     "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14",
     "--columns-file",
@@ -38,7 +38,7 @@
     "--tax-trace-output",
     "instances/derived/PCA/xbrl-csv/original_basis/tax_trace.csv",
     "--taxonomy-entrypoint",
-    "taxonomy/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd",
+    "taxonomy/accounting-entries/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd",
     "--metadata-output",
     "instances/derived/PCA/xbrl-csv/original_basis/accounting_entries.json",
     "--entity",
@@ -68,11 +68,11 @@
       "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_ACCOUNT_TAX_MAPPING.csv": "F264C3D945C7BA69ED94A17D7849922AB3204357501D68BC6122144B95300544",
       "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_STANDARD_TAX_MAPPING.csv": "46739098546240D1EFA757B760D0EC94962DE4D3E55988DB05D8937439EF7D4A",
       "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_COLUMNS.csv": "26F2E9216373DE015F4B98698A5FBCA86B1C31ACCF2B94ECF4CFA2C2D70198B2",
-      "taxonomy/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd": "297F7285BEE0AFD2393F77250B5862679CBB7B3952B5245613FAD2BEFE2D4F61"
+      "taxonomy/accounting-entries/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd": "297F7285BEE0AFD2393F77250B5862679CBB7B3952B5245613FAD2BEFE2D4F61"
     },
     "outputs": {
       "data": "5758A69C20CEC9F2794121BEC2181E88A1B9C7AA141AC896EDEF952FDF05202F",
-      "metadata": "6221121C0743B93F0516AF2B018D4F7D8FEFF42F29E893499C3D53E72EFC3788",
+      "metadata": "38E54E1938871066BFFC217132B848CC9F729A6B840909EEE37EC3F57CBA4576",
       "tax_trace": "4B00C1EC8BD31C95411DBE3CFA9FB6757CE14086A237C9BE1DE91D85E9335374"
     }
   },

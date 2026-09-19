@@ -3,14 +3,14 @@
   "case_id": "epson-to-structured",
   "status": "PASS",
   "runtime": {
-    "program": "tools/uadc/flat_csv.py",
+    "program": "tools/binding/flat_csv.py",
     "sha256": "7754AC0938CDD9945DF0A83C4FAA55494D4CDFF1DBA2B9640534014B20F811CF"
   },
   "direction": "EPSON-to-Structured",
   "source_format": "EPSON Zaimu Kaikei R4 CSV",
   "target_format": "UADC Structured CSV",
   "profile": "EPSON_ZaimuKaikeiR4_43col_NTA_Fallback",
-  "hmd": "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+  "hmd": "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
   "binding": "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_BINDING.csv",
   "input": "instances/derived/EPSON/original_basis/EPSON.csv",
   "outputs": {
@@ -23,7 +23,7 @@
     "-o",
     "instances/roundtrip/EPSON/original_basis/structured.csv",
     "-m",
-    "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+    "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
     "--profile-dir",
     "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback",
     "--columns-file",
@@ -59,7 +59,7 @@
       "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_ACCOUNT_TAX_MAPPING.csv": "CBC3C2BB6648E2A497142E33D4029D3505B9D7009E8B03F74EC6F8D705EC7501",
       "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_STANDARD_TAX_MAPPING.csv": "5265D7CD026B52FF6A61D208ECBEBB0BD900A243FB29360436B79984E2E62414",
       "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_COLUMNS.csv": "77B91270975006070C2DE4263736653B54534C8E35A2E2AC3DE1C8260A52DD3E",
-      "tools/uadc/aggregate_pairing.py": "FF60A3F18E9EC0F3459019D224D3C1D72FE8EE40445694A21EF1CEFAE7DF7D11"
+      "tools/binding/aggregate_pairing.py": "FF60A3F18E9EC0F3459019D224D3C1D72FE8EE40445694A21EF1CEFAE7DF7D11"
     },
     "outputs": {
       "structured": "12D2400AE9D65F9FB4F4379A81FE6894CFFECD2B1520DCAF85EB0F43DD17C7C9",

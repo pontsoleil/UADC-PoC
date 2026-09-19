@@ -3,14 +3,14 @@
   "case_id": "epson-xbrl-csv-arelle",
   "status": "PASS",
   "runtime": {
-    "program": "tools/uadc/flat_csv.py",
+    "program": "tools/binding/flat_csv.py",
     "sha256": "7754AC0938CDD9945DF0A83C4FAA55494D4CDFF1DBA2B9640534014B20F811CF"
   },
   "direction": "EPSON-to-xBRL-CSV",
   "source_format": "EPSON Accounting CSV",
   "target_format": "xBRL-CSV",
   "profile": "EPSON_ZaimuKaikeiR4_43col_NTA_Fallback",
-  "hmd": "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+  "hmd": "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
   "binding": "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_BINDING.csv",
   "input": "instances/derived/EPSON/original_basis/EPSON.csv",
   "outputs": {
@@ -24,7 +24,7 @@
     "-o",
     "instances/derived/EPSON/original_basis/xbrl-csv/accounting_entries.csv",
     "-m",
-    "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+    "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
     "--profile-dir",
     "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback",
     "--columns-file",
@@ -38,7 +38,7 @@
     "--tax-trace-output",
     "instances/derived/EPSON/original_basis/xbrl-csv/tax_trace.csv",
     "--taxonomy-entrypoint",
-    "taxonomy/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd",
+    "taxonomy/accounting-entries/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd",
     "--metadata-output",
     "instances/derived/EPSON/original_basis/xbrl-csv/accounting_entries.json",
     "--entity",
@@ -68,12 +68,12 @@
       "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_ACCOUNT_TAX_MAPPING.csv": "CBC3C2BB6648E2A497142E33D4029D3505B9D7009E8B03F74EC6F8D705EC7501",
       "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_STANDARD_TAX_MAPPING.csv": "5265D7CD026B52FF6A61D208ECBEBB0BD900A243FB29360436B79984E2E62414",
       "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_COLUMNS.csv": "77B91270975006070C2DE4263736653B54534C8E35A2E2AC3DE1C8260A52DD3E",
-      "tools/uadc/aggregate_pairing.py": "FF60A3F18E9EC0F3459019D224D3C1D72FE8EE40445694A21EF1CEFAE7DF7D11",
-      "taxonomy/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd": "297F7285BEE0AFD2393F77250B5862679CBB7B3952B5245613FAD2BEFE2D4F61"
+      "tools/binding/aggregate_pairing.py": "FF60A3F18E9EC0F3459019D224D3C1D72FE8EE40445694A21EF1CEFAE7DF7D11",
+      "taxonomy/accounting-entries/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd": "297F7285BEE0AFD2393F77250B5862679CBB7B3952B5245613FAD2BEFE2D4F61"
     },
     "outputs": {
       "data": "9E741D7C167FE3832AEA7C959EB123464671A7FF91711119D5F09532352B68FB",
-      "metadata": "6221121C0743B93F0516AF2B018D4F7D8FEFF42F29E893499C3D53E72EFC3788",
+      "metadata": "38E54E1938871066BFFC217132B848CC9F729A6B840909EEE37EC3F57CBA4576",
       "tax_trace": "3F9243B444F4EB35396BEA597918F5CEAAB9E2554B6C5BA481ADA65A4BA06A1E"
     }
   },

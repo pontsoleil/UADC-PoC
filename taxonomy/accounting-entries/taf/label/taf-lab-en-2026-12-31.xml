@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<linkbase xmlns="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_detailOriginatingDocumentType" xlink:label="loc_taf_detailOriginatingDocumentType"/>
+    <label xlink:type="resource" xlink:label="lab_taf_detailOriginatingDocumentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentType" xlink:to="lab_taf_detailOriginatingDocumentType"/>
+    <label xlink:type="resource" xlink:label="doc_taf_detailOriginatingDocumentType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document type  check, debit-memo, credit-memo, finance-charge, invoice, order-customer, order-vendor, payment-other, reminder, tegata, voucher, shipment, receipt, manual-adjustment, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentType" xlink:to="doc_taf_detailOriginatingDocumentType"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_detailOriginatingDocumentNumber" xlink:label="loc_taf_detailOriginatingDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="lab_taf_detailOriginatingDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentNumber" xlink:to="lab_taf_detailOriginatingDocumentNumber"/>
+    <label xlink:type="resource" xlink:label="doc_taf_detailOriginatingDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentNumber" xlink:to="doc_taf_detailOriginatingDocumentNumber"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_detailOriginatingDocumentDate" xlink:label="loc_taf_detailOriginatingDocumentDate"/>
+    <label xlink:type="resource" xlink:label="lab_taf_detailOriginatingDocumentDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentDate" xlink:to="lab_taf_detailOriginatingDocumentDate"/>
+    <label xlink:type="resource" xlink:label="doc_taf_detailOriginatingDocumentDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentDate" xlink:to="doc_taf_detailOriginatingDocumentDate"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_detailOriginatingDocumentIdentifierType" xlink:label="loc_taf_detailOriginatingDocumentIdentifierType"/>
+    <label xlink:type="resource" xlink:label="lab_taf_detailOriginatingDocumentIdentifierType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Identifier Type</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentIdentifierType" xlink:to="lab_taf_detailOriginatingDocumentIdentifierType"/>
+    <label xlink:type="resource" xlink:label="doc_taf_detailOriginatingDocumentIdentifierType" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document identifier type. Enumerated as: C, customer, E, employee, V, vendor, O, other, I, salesperson-internal, X, salesperson-external, N, contractor.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentIdentifierType" xlink:to="doc_taf_detailOriginatingDocumentIdentifierType"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_detailOriginatingDocumentIdentifierCode" xlink:label="loc_taf_detailOriginatingDocumentIdentifierCode"/>
+    <label xlink:type="resource" xlink:label="lab_taf_detailOriginatingDocumentIdentifierCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Identifier Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentIdentifierCode" xlink:to="lab_taf_detailOriginatingDocumentIdentifierCode"/>
+    <label xlink:type="resource" xlink:label="doc_taf_detailOriginatingDocumentIdentifierCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Document identifier code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentIdentifierCode" xlink:to="doc_taf_detailOriginatingDocumentIdentifierCode"/>
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_detailOriginatingDocumentIdentifierTaxCode" xlink:label="loc_taf_detailOriginatingDocumentIdentifierTaxCode"/>
+    <label xlink:type="resource" xlink:label="lab_taf_detailOriginatingDocumentIdentifierTaxCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Identifier Tax Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentIdentifierTaxCode" xlink:to="lab_taf_detailOriginatingDocumentIdentifierTaxCode"/>
+    <label xlink:type="resource" xlink:label="doc_taf_detailOriginatingDocumentIdentifierTaxCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Originating document identifier tax code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_detailOriginatingDocumentIdentifierTaxCode" xlink:to="doc_taf_detailOriginatingDocumentIdentifierTaxCode"/>
+  </labelLink>
+</linkbase>

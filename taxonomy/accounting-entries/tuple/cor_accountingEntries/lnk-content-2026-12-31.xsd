@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/lnk" elementFormDefault="qualified" attributeFormDefault="unqualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:lnk="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/lnk"
+>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <include schemaLocation="../../lnk/lnk-2026-12-31.xsd"/>
+  <!-- structural ComplexType supplied for the Palette module -->
+  <complexType name="documentSummaryReportingTaxonomiesComplexType">
+    <sequence>
+      <element ref="lnk:documentSummaryReportingTaxonomyId" minOccurs="0"/>
+      <element ref="lnk:documentSummaryReportingTaxonomySchemaReferenceHrefAttribute" minOccurs="0"/>
+      <element ref="lnk:documentSummaryReportingTaxonomyHeader" minOccurs="0"/>
+      <element ref="lnk:documentSummaryReportingTaxonomyDescription" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailRichTextCommentComplexType">
+    <sequence>
+      <element ref="lnk:commentCode" minOccurs="0"/>
+      <element ref="lnk:commentDescription" minOccurs="0"/>
+      <element ref="lnk:commentContent" minOccurs="0"/>
+      <element ref="lnk:commentLocator" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+</schema>

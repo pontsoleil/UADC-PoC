@@ -39,6 +39,44 @@ specifications or taxonomy material, OASIS UBL specifications or schemas,
 OpenPeppol specifications or samples, and third-party code lists. Notices
 shipped with third-party files remain controlling for those files.
 
+### XBRL GL and XBRL GL Next prototype taxonomy
+
+The accepted files under `taxonomy/business-transactions/`,
+`taxonomy/accounting-entries/`, and the Business Transactions taxonomy root
+HMD at
+`models/gl-bus/business-transactions/XBRL_GL_Next_HMD_BusinessTransactions_for_taxonomy.csv`
+are exact-byte copies from the accepted XBRL_GL_Next prototype family. They
+are not relicensed as ordinary UADC-PoC CC BY-SA 4.0 content.
+
+- Upstream XBRL GL-derived material remains subject to the XBRL International
+  copyright, licence, attribution, trademark, and disclaimer conditions linked
+  from [taxonomy/NOTICE_XBRL_GL.md](taxonomy/NOTICE_XBRL_GL.md).
+- Identified XBRL_GL_Next project-authored documentation and artefact additions
+  are licensed under
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). This grant does
+  not extend to upstream XBRL GL material or other third-party content.
+- These taxonomy and HMD files are published as prototype project artefacts,
+  not as official XBRL International or XBRL Japan specifications.
+- The XBRL Japan namespace URIs identify the accepted project namespace
+  family; they do not imply organizational approval or endorsement.
+
+The operative source and status notice is
+[taxonomy/NOTICE_XBRL_GL.md](taxonomy/NOTICE_XBRL_GL.md), and the publication
+decision is recorded in
+[docs/decisions/ADR-XBRL-GL-NEXT-PROTOTYPE-TAXONOMY-PUBLICATION.md](docs/decisions/ADR-XBRL-GL-NEXT-PROTOTYPE-TAXONOMY-PUBLICATION.md).
+
+## Classification by artefact type
+
+| Artefact type | Applicable scope |
+|---|---|
+| First-party executable code | MIT under `LICENSE-CODE` |
+| First-party documentation | CC BY-SA 4.0 under `LICENSE-CONTENT`, unless a file states different terms |
+| First-party semantic definition CSV and bindings | CC BY-SA 4.0 under `LICENSE-CONTENT`, subject to third-party components and notices |
+| HMD | Source-sensitive: UADC-authored HMD content follows `LICENSE-CONTENT`; the identified XBRL_GL_Next Business Transactions root HMD follows the XBRL GL/XBRL_GL_Next notice above |
+| Generated or derived taxonomy | Inherits source rights; the accepted XBRL_GL_Next families follow `taxonomy/NOTICE_XBRL_GL.md` and are not wholly relicensed by UADC-PoC |
+| Upstream XBRL GL material | XBRL International source terms, notice, attribution, trademark, and disclaimer conditions |
+| Identified XBRL_GL_Next original additions | CC BY 4.0, without extending that licence to upstream or other third-party material |
+
 Original UADC-PoC identifiers, annotations, cross-references, and mappings may
 be CC BY-SA 4.0 even when they point to third-party material. That license covers
 only the original selection, arrangement, annotation, or mapping; it does not

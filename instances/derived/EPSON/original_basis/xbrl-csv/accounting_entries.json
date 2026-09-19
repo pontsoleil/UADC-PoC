@@ -9,7 +9,7 @@
       "xbrl": "https://xbrl.org/2021"
     },
     "taxonomy": [
-      "../../../../../taxonomy/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd"
+      "../../../../../taxonomy/accounting-entries/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd"
     ]
   },
   "tables": {

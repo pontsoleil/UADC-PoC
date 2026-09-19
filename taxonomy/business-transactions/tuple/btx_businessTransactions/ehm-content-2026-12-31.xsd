@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ehm" elementFormDefault="qualified" attributeFormDefault="unqualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:ehm="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ehm"
+>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <include schemaLocation="../../ehm/ehm-2026-12-31.xsd"/>
+  <!-- structural ComplexType supplied for the Palette module -->
+  <complexType name="detailSerialOrLotComplexType">
+    <sequence>
+      <element ref="ehm:serialOrLotCode" minOccurs="0"/>
+      <element ref="ehm:serialOrLotDescription" minOccurs="0"/>
+      <element ref="ehm:serialOrLotNumber" minOccurs="0"/>
+      <element ref="ehm:nextSerialOrLotNumber" minOccurs="0"/>
+      <element ref="ehm:serialOrLotQuantity" minOccurs="0"/>
+      <element ref="ehm:serialOrLotOriginalQuantity" minOccurs="0"/>
+      <element ref="ehm:serialOrLotRemainingQuantity" minOccurs="0"/>
+      <element ref="ehm:serialOrLotOrigination" minOccurs="0"/>
+      <element ref="ehm:serialOrLotExpiration" minOccurs="0"/>
+      <element ref="ehm:serialOrLotManufacturer" minOccurs="0"/>
+      <element ref="ehm:serialOrLotBatchDescription" minOccurs="0"/>
+      <element ref="ehm:serialOrLotWarrantyStartDate" minOccurs="0"/>
+      <element ref="ehm:serialOrLotWarrantyEndDate" minOccurs="0"/>
+      <element ref="ehm:serialOrLotWarrantyPeriod" minOccurs="0"/>
+      <element ref="ehm:serialOrLotWarrantPeriodUnit" minOccurs="0"/>
+      <element ref="ehm:warrantyVendor" minOccurs="0"/>
+      <element ref="ehm:warrantyContract" minOccurs="0"/>
+      <element ref="ehm:serialOrLotComment" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+</schema>

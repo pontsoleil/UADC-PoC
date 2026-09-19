@@ -17,6 +17,40 @@ lists, samples, or excerpts.
 | Third-party code lists | Currency and other controlled values used or referenced by bindings and validation | Each code list remains subject to its publisher's applicable conditions. Original project cross-references do not relicense the list. |
 | W3C and other schema dependencies | XML, XML Schema, XML Signature, namespaces, or bundled dependencies referenced by UBL/XBRL artifacts | The corresponding specifications, schemas, and software licenses continue to apply. Preserve notices included with the material. |
 
+## XBRL GL and XBRL_GL_Next prototype family
+
+UADC-PoC includes accepted exact-byte copies of the XBRL_GL_Next prototype
+Business Transactions and Accounting Entries taxonomy families, together with
+the accepted Business Transactions taxonomy root HMD. XBRL_GL_Next is an
+independently developed prototype project and is not the official XBRL GL
+taxonomy or an official specification of XBRL International or XBRL Japan.
+Use of XBRL Japan namespace URIs does not imply approval, endorsement,
+recommendation, or official publication by either organization.
+
+Upstream source and controlling notice:
+
+- XBRL GL 2017 Public Working Draft:
+  <https://www.xbrl.org/int/gl/2016-12-01/gl-framework-2017-PWD-2016-12-01.html>
+- Local source and status notice:
+  [taxonomy/NOTICE_XBRL_GL.md](taxonomy/NOTICE_XBRL_GL.md)
+- Prototype source project:
+  <https://github.com/pontsoleil/XBRL_GL_Next>
+
+Copyright (c) 2016 XBRL International, Inc. All Rights Reserved.
+
+The XBRL GL source notice and controlling terms require preservation of the
+applicable copyright/licence paragraph and a link to the original taxonomy for
+qualifying derivative works that comment on, explain, or assist implementation.
+The official specification and taxonomy may not themselves be modified, and
+the XBRL International name and trademarks may not be used in advertising or
+publicity without prior written permission. The source is provided without
+warranties and under the disclaimers in the controlling notice.
+
+Identified XBRL_GL_Next project-authored documentation and artefact additions
+are licensed under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). This statement does
+not relicense upstream XBRL GL or other third-party material.
+
 ## Repository handling
 
 - Keep third-party copyright and license notices with the relevant material.

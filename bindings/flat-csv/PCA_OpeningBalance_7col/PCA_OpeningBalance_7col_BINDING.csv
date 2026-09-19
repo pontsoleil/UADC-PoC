@@ -1,0 +1,8 @@
+source_column,role,datatype,semantic_path,transformation,note
+code,source,String,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_GLAccountNumber,map-account-code,adopted
+name,source,String,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.uadc_AccountName,map-account-name,adopted
+original_debit,private-trace-only,Decimal,,preserve-outside-distribution,not a balance fact
+original_credit,private-trace-only,Decimal,,preserve-outside-distribution,not a balance fact
+debit,source,Decimal,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance.adc_BeginningBalance,when debit>0; indicator D,adopted
+credit,source,Decimal,$.adc_GLAccountsPeriodBalances.adc_AccountBalance.adc_PeriodBalance.adc_BeginningBalance,when credit>0; indicator C,adopted
+basis,private-trace-only,String,,preserve-outside-distribution,"revision basis, not an HMD balance fact"

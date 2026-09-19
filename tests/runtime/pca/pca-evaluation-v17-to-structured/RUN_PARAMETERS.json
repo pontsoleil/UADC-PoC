@@ -3,14 +3,14 @@
   "case_id": "pca-evaluation-v17-to-structured",
   "status": "PASS",
   "runtime": {
-    "program": "tools/uadc/flat_csv.py",
+    "program": "tools/binding/flat_csv.py",
     "sha256": "7754AC0938CDD9945DF0A83C4FAA55494D4CDFF1DBA2B9640534014B20F811CF"
   },
   "direction": "PCA-to-Structured",
   "source_format": "PCA Accounting 81-column CSV",
   "target_format": "UADC Structured CSV",
   "profile": "PCA_Accounting_81col_AnonymousEvaluation_V17_V14",
-  "hmd": "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+  "hmd": "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
   "binding": "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_BINDING.csv",
   "input": "instances/original/PCA/evaluation_v17_basis/PCA.csv",
   "outputs": {
@@ -23,7 +23,7 @@
     "-o",
     "instances/derived/PCA/evaluation_v17_basis/structured.csv",
     "-m",
-    "models/xbrl-gl-next/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+    "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
     "--profile-dir",
     "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14",
     "--columns-file",
