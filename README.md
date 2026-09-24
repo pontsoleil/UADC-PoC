@@ -1,3 +1,5 @@
+**Language:** English | [日本語](README_ja.md)
+
 # UADC PoC Collaboration Workspace
 
 This repository is the collaboration and implementation workspace for the **UADC (Universal Adapter for Data Conversion)** proof of concept and its relationship with **XBRL GL Next**.
@@ -21,88 +23,47 @@ UADC-PoC and the bundled XBRL GL Next taxonomy are prototype project artefacts, 
 
 ## Two Application Themes
 
-The UADC architecture is being validated through two major application themes. They share the same semantic and Binding principles but address different operational needs.
+The UADC architecture is being validated through two major application themes. These are **not regional tracks**: both themes are relevant in Europe, Japan, and other jurisdictions. Europe and Japan currently provide different concrete drivers and reference cases, but the underlying UADC architecture is shared.
 
-### Theme 1 — Europe: XBRL GL Next and the Invoice PoC
+### Theme 1 — Heterogeneous EDI and Invoice Interoperability
 
 The **Invoice PoC remains a central UADC use case**.
 
-For European XBRL GL Next discussions, an important application area is the reuse of standardized invoice and accounting information for government and tax-authority data collection, digital reporting, audit, and interoperability. The PoC is therefore relevant to discussions around electronic invoicing and digital reporting, including ViDA-related environments.
+In Europe, an important background is the move toward electronic invoicing and digital reporting, including ViDA-related environments. This makes the reuse of standardized invoice and accounting information for government and tax-authority data collection, audit, and interoperability particularly significant.
 
 This does **not** imply that UADC or XBRL GL Next is an official ViDA specification or implementation profile.
 
+The same theme is also important in Japan. Invoice exchange is a representative case of heterogeneous EDI: multiple syntaxes, profiles, legacy interfaces, and application-specific formats may coexist even when the underlying business meaning is substantially the same. UADC therefore treats invoice conversion as a general interoperability problem rather than as a Europe-only use case.
+
 The Invoice PoC demonstrates how source invoice syntaxes can be mapped through a common semantic layer into reusable Structured CSV and XBRL representations.
 
-```text
-Invoice source syntax
-  Peppol / UBL Invoice
-  future or held: UN/CEFACT CII and other invoice syntaxes
-        |
-        v
-syntax binding
-        |
-        v
-EN 16931 / UADC semantic structure
-        |
-        +--> Structured CSV
-        +--> xBRL-CSV metadata and taxonomy validation
-        +--> round-trip reconstruction where supported
-        |
-        v
-semantic / target binding
-        |
-        +--> XBRL GL Next views
-        +--> ISO 21378 ADC views
-        +--> AICPA ADS views
-        +--> other government, tax, audit, or reporting uses
-```
+### Theme 1 Architecture
 
-The goal is not merely invoice-format conversion. The PoC demonstrates how meaning, hierarchy, provenance, and validation can remain stable while source and target syntaxes change.
+![Theme 1 — Heterogeneous EDI and Invoice Interoperability](references/figures/uadc_theme1_edi_invoice_interoperability_en.png)
 
-### Theme 2 — Japan: Accounting DX with UADC and LedgerExplorer
+The goal is not merely invoice-format conversion. The PoC demonstrates how meaning, hierarchy, provenance, and validation can remain stable while source and target syntaxes change. This principle is applicable wherever heterogeneous EDI formats must be reconciled without forcing all participating systems to adopt one physical syntax.
 
-For Japan, UADC is also being developed as an accounting-DX foundation for tax accountants, accounting practices, and organizations that need to work across multiple accounting-system formats.
+### Theme 2 — Standardized Data Collection and Downstream Use
 
-The current reference path uses accounting data from systems such as PCA and EPSON, converts it into a common semantic Structured CSV representation, and makes that standardized data available to downstream applications.
+The second theme is broader than accounting DX in one country. UADC is intended to provide an adapter layer between existing application data and standardized XBRL GL Next / Structured CSV representations that can be reused for accounting, tax, audit, statistical, analytical, and other data-collection purposes.
 
-**LedgerExplorer** is the principal reference downstream application for this second theme.
+In Japan, a concrete reference case is accounting DX for tax accountants, accounting practices, and organizations using systems such as PCA and EPSON. Their data can be converted into a common semantic representation and supplied to downstream applications such as **LedgerExplorer**.
 
-```text
-PCA / EPSON / other accounting-system data
-        |
-        v
-UADC
-  Flat CSV Binding
-  account / tax mapping
-  semantic normalization
-        |
-        v
-XBRL GL Next Accounting Entries
-Structured CSV
-        |
-        +--> validation and traceability
-        +--> round-trip / interoperability testing
-        +--> other standardized exports
-        |
-        v
-LedgerExplorer
-        |
-        +--> journal and ledger exploration
-        +--> accounting-data visualization
-        +--> transaction and document tracing
-        +--> review and analysis
-        +--> downstream AI-assisted accounting workflows
-```
+In Europe, the same architectural pattern is relevant not only to accounting data but also to the collection of statistical and other administrative or business data where XBRL GL Next semantics can be applied. A practical advantage of the UADC approach is that a data collector does not necessarily have to require every source-application vendor to implement XBRL GL Next natively. Where an explicit Binding and mapping can be defined, UADC can normalize existing exports or interfaces into the shared semantic layer.
 
-LedgerExplorer begins at the Structured CSV layer. Reconstructing Structured CSV from proprietary accounting-system exports is the responsibility of UADC or another upstream adapter. This boundary keeps visualization and analysis independent of the original accounting product.
+### Theme 2 Architecture
 
-The combination therefore separates responsibilities:
+![Theme 2 — Standardized Data Collection and Downstream Use](references/figures/uadc_theme2_standardized_data_collection_en.png)
 
-- **UADC** converts heterogeneous source-system formats into standardized semantic data.
+This approach separates responsibilities:
+
+- **Source applications** can continue to expose their existing interfaces unless a native standard interface is desirable.
+- **UADC** converts heterogeneous source-system formats into standardized semantic data through explicit Bindings and mappings.
 - **Structured CSV / XBRL GL Next** provides the common interchange and preservation layer.
-- **LedgerExplorer** provides downstream exploration, tracing, visualization, review, and export.
+- **Data-collection and analytical systems** can consume the standardized layer without requiring every source vendor to implement the same target interface.
+- **LedgerExplorer** is the principal reference downstream application for the current accounting-data use case, not the boundary of the theme itself.
 
-The current canonical provenance registers `anonymous_v17` as a PCA → Structured CSV route with LedgerExplorer and EPSON as downstream uses. Registration of that provenance does not by itself assert that every LedgerExplorer screen or input integration has completed independent acceptance testing.
+The current canonical provenance registers `anonymous_v17` as a PCA → Structured CSV route with LedgerExplorer and EPSON as downstream uses. That fixture validates the current accounting-oriented reference route. Broader statistical or administrative collection scenarios are architectural application areas and are not claimed as accepted runtime implementations unless separately registered and validated.
 
 ## Current Canonical Baseline
 
@@ -204,25 +165,36 @@ The phases below describe the Invoice PoC processing model, not project-manageme
 
 Phase 1 focuses on the neutral intermediate representation. Phase 2 reuses that representation for multiple downstream formats. This separation is a core UADC principle.
 
-## UADC Processing Steps — Japan Accounting DX Theme
+## UADC Processing Steps — Standardized Data Collection Theme
 
-The Japan accounting-DX theme applies the same architectural separation to accounting-system interfaces.
+This theme applies the same architectural separation to application and operational data collection. The currently registered implementation examples focus on accounting data, while the architecture is intended to support other collection domains where suitable XBRL GL Next semantics and Bindings are defined.
 
 | Step | Processing Step | Current Role |
 | --- | --- | --- |
-| 1 | Read application-specific accounting CSV using a registered profile and Binding. | PCA and EPSON are the current principal interfaces. |
-| 2 | Normalize application-specific account, tax, dimension, and transaction representations. | Mapping definitions remain separate from the semantic model. |
-| 3 | Materialize XBRL GL Next Accounting Entries as Structured CSV. | This is the common semantic and preservation layer. |
-| 4 | Validate accepted round-trip and interoperability conditions. | Only declared PASS scopes are treated as accepted. |
-| 5 | Supply Structured CSV to LedgerExplorer and other downstream consumers. | Visualization, tracing, review, export, and analysis remain downstream responsibilities. |
+| 1 | Read application-specific data using a registered profile and Binding. | PCA and EPSON are the current principal implemented accounting interfaces; other application and collection interfaces can follow the same pattern. |
+| 2 | Normalize application-specific codes, dimensions, classifications, and transaction representations. | Mapping definitions remain separate from the semantic model. |
+| 3 | Materialize the applicable XBRL GL Next semantic structure as Structured CSV. | Accounting Entries is the current principal implemented reference route; other collection structures require their own accepted models and evidence. |
+| 4 | Validate accepted round-trip, provenance, and interoperability conditions. | Only declared PASS scopes are treated as accepted. |
+| 5 | Supply standardized data to downstream consumers. | Current examples include LedgerExplorer; other consumers may include government, tax, audit, statistical, and analytical collection processes. |
 
-This second theme does not replace the Invoice PoC. Both themes validate the same underlying UADC principle against different source systems and different downstream needs.
+A key advantage is that standardization can occur at the adapter or collection boundary. Native XBRL GL Next support can still be desirable, but it does not have to be a prerequisite for every source application before standardized collection can begin.
 
-## Figure 1
+## Figure 1 — UADC Invoice PoC Processing Flow
 
-![Figure 1 - UADC PoC processing flow](references/figures/uadc_poc_processing_flow_figure1.png)
+![Figure 1 — UADC Invoice PoC Processing Flow](references/figures/uadc_poc_processing_flow_figure1.png)
 
-Figure 1 documents the original Invoice PoC flow. It remains relevant to Theme 1. Theme 2 applies the same separation of syntax binding, semantic structure, and downstream use to accounting-system data and LedgerExplorer.
+Figure 1 shows the original invoice-centred UADC processing flow. The figure itself uses the labels **UADC Stage 1** and **UADC Stage 2**. In this README, these correspond to **Phase 1** and **Phase 2** below. **Phase 3 is an extension beyond the original figure and is therefore not drawn in Figure 1.**
+
+- **Phase 1 / UADC Stage 1 — Source-to-semantic conversion.**
+  A source invoice syntax, currently represented by OpenPeppol / UBL Invoice XML, is read through a Syntax Binding and converted into the common EN 16931 / UADC hierarchical semantic representation and Structured CSV. In the accepted PoC scope, this phase also covers xBRL-CSV metadata, taxonomy/metadata validation, and supported round-trip reconstruction back to the source syntax.
+
+- **Phase 2 / UADC Stage 2 — Semantic-to-target conversion.**
+  The common Structured CSV / semantic layer is reused as the source for different target views. Semantic or Syntax Bindings project the same underlying data into ISO 21378 ADC and AICPA ADS representations, including XBRL GL and PSV-oriented outputs. This demonstrates that the source conversion can remain independent of the downstream reporting or audit format.
+
+- **Phase 3 — Syntax expansion and interoperability validation.**
+  Additional source and target syntaxes are introduced around the same semantic layer, for example UN/CEFACT CII and other XBRL GL or EDI representations. This phase also adds corresponding reverse routes and interoperability tests. Phase 3 is not shown in the original Figure 1, and routes remain **HOLD** where complete accepted execution evidence has not yet been registered.
+
+The essential architecture is therefore **source syntax → common semantics → target use**. Figure 1 illustrates this with invoice data, but the same separation also supports the broader UADC application described in Theme 2: collecting accounting, statistical, administrative, or other operational data without requiring every source application to implement the final standard format natively.
 
 ## Directory Layout
 
@@ -244,7 +216,7 @@ LedgerExplorer is maintained as a separate repository because it is a downstream
 
 ## Current Scope
 
-### A. Europe / Invoice PoC
+### A. Invoice / EDI Interoperability
 
 1. Define and audit the EN 16931 invoice semantic/LHM structure used by the generic Structured CSV.
 2. Convert Peppol UBL Invoice XML into the generic UADC Structured CSV.
@@ -253,24 +225,28 @@ LedgerExplorer is maintained as a separate repository because it is a downstream
 5. Generate declared ADS and ISO 21378 target views.
 6. Maintain OpenPeppol BIS Billing as a profile layer on the EN 16931 baseline.
 7. Extend toward additional source syntaxes only where complete evidence supports acceptance.
+8. Use the Invoice PoC as a reference pattern for heterogeneous EDI interoperability in Europe, Japan, and other jurisdictions.
 
-### B. Japan / Accounting DX
+### B. Standardized Data Collection / Accounting and Statistical Use
 
-1. Convert PCA and other registered accounting-system formats through the Flat CSV Binding.
-2. Maintain system-specific account, tax, and interface mappings separately from canonical semantics.
-3. Represent accounting entries using the accepted XBRL GL Next Accounting Entries semantic model and Structured CSV.
-4. Validate round-trip and interoperability behaviour within explicitly accepted scopes.
-5. Use `anonymous_v17` as the current PCA/EPSON interoperability fixture.
-6. Supply standardized Structured CSV to LedgerExplorer as the reference downstream visualization and tracing route.
-7. Keep unresolved EPSON reverse conversion, explicit-tax preservation, and real-application import as declared HOLD items.
+1. Convert registered accounting-system and other application formats through explicit Bindings.
+2. Maintain system-specific accounts, tax codes, classifications, dimensions, and interface mappings separately from canonical semantics.
+3. Represent current accounting routes using the accepted XBRL GL Next Accounting Entries semantic model and Structured CSV.
+4. Enable collector-side normalization so that standardized collection does not require native XBRL GL Next support from every source-application vendor, where suitable Bindings and mappings are available.
+5. Validate round-trip and interoperability behaviour only within explicitly accepted scopes.
+6. Use `anonymous_v17` as the current PCA/EPSON accounting interoperability fixture.
+7. Supply standardized Structured CSV to LedgerExplorer as the reference downstream visualization and tracing route for the current accounting use case.
+8. Extend the same architecture toward government, tax, audit, statistical, and analytical collection uses when corresponding semantic models, Bindings, and acceptance evidence are defined.
+9. Keep unresolved EPSON reverse conversion, explicit-tax preservation, and real-application import as declared HOLD items.
 
 ### C. Shared Architecture
 
 1. Keep semantic definitions independent of individual source and target syntaxes.
 2. Keep Binding and mapping rules explicit and reviewable.
-3. Keep Structured CSV, formal xBRL-CSV metadata, and LedgerExplorer input responsibilities distinct.
+3. Keep Structured CSV, formal xBRL-CSV metadata, collection interfaces, and LedgerExplorer input responsibilities distinct.
 4. Preserve provenance and accepted exact-byte baselines where required.
 5. Separate canonical authoring, validation, and publication controls.
+6. Allow native standard support and adapter-based conversion to coexist rather than making either one mandatory for every source system.
 
 ## Clone and Setup Overview
 
