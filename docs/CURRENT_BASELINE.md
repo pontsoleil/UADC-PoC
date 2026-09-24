@@ -35,3 +35,25 @@ build evidence `CANONICAL_FILE_MANIFEST.csv`.
 
 These holds are not represented as PASS and do not change the accepted
 PCA/EPSON or taxonomy baselines.
+## Current anonymous_v17 fixture (2026-09-24)
+
+The current PCA/EPSON interoperability fixture is `anonymous_v17`:
+
+- PCA: `instances/original/PCA/anonymous_v17/PCA.csv`, SHA-256
+  `03240CD380F5B23E7234B300D9523386466BD750AD48E8445CF68A8B3EEEC844`.
+- Structured CSV: `instances/derived/PCA/anonymous_v17/structured.csv`, SHA-256
+  `6F5ECB4C1320D38ECEABE3C3CD6896339C045551AE84EA2140D024C172432D1B`.
+- EPSON: `instances/derived/EPSON/anonymous_v17/EPSON.csv`, SHA-256
+  `B7DE6A083F0B258B276BFFE6FFCB6EEB8796471E586DDF36C1157F283C9A348A`.
+
+The accepted provenance is:
+
+```text
+PCA anonymous_v17
+  -> Structured CSV anonymous_v17
+     +-> LedgerExplorer
+     +-> EPSON anonymous_v17
+```
+
+`original_basis` and `evaluation_v17_basis` remain separate historical fixture
+identities. They are not renamed, replaced, or deleted by this registration.
