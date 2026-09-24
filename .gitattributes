@@ -22,6 +22,7 @@
 
 .gitignore text eol=lf
 .gitattributes text eol=lf
+instances/**/anonymous_v17/**/*.csv -text
 instances/roundtrip/EPSON/original_basis/structured.csv -text
 instances/roundtrip/PCA/original_basis/PCA.csv -text
 models/en-cius/invoice/EN16931_CIUS_Invoice_HMD.csv -text
