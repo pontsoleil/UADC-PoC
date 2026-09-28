@@ -4,13 +4,13 @@
 
 ## 目的
 
-`src/csv_excel_bridge.py` は canonical CSV の意味を変更せず、管理された CSV ⇄ Excel 変換と比較を提供します。
+`tools/maintenance/csv_excel_bridge.py` は canonical CSV の意味を変更せず、管理された CSV ⇄ Excel 変換と比較を提供します。
 
 ## CLI 例
 
 ```text
-py src/csv_excel_bridge.py csv-to-xlsx <input.csv> -o <output.xlsx>
-py src/csv_excel_bridge.py xlsx-to-csv <input.xlsx> -o <output.csv> --baseline <baseline.csv>
+py tools/maintenance/csv_excel_bridge.py csv-to-xlsx <input.csv> -o <output.xlsx>
+py tools/maintenance/csv_excel_bridge.py xlsx-to-csv <input.xlsx> -o <output.csv> --baseline <baseline.csv>
 ```
 
 ## 実行と安全

@@ -2,6 +2,11 @@
 <linkbase xmlns="http://www.xbrl.org/2003/linkbase"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocument" xlink:label="loc_taf_originatingDocument"/>
+    <label xlink:type="resource" xlink:label="lab_taf_originatingDocument" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【発生元文書情報】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocument" xlink:to="lab_taf_originatingDocument"/>
+    <label xlink:type="resource" xlink:label="doc_taf_originatingDocument" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">業務プロセス上の、関連文書の流れを捕捉するためのもの。特にVAT監査では、エンドユーザの要求として、取引に関係する文書の履歴が必要とされる。関連文書情報の構造の繰り返しを含む。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocument" xlink:to="doc_taf_originatingDocument"/>
     <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocumentType" xlink:label="loc_taf_originatingDocumentType"/>
     <label xlink:type="resource" xlink:label="lab_taf_originatingDocumentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">発生元文書種別</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentType" xlink:to="lab_taf_originatingDocumentType"/>

@@ -94,9 +94,10 @@ PCA anonymous_v17
 
 The registered canonical locations are:
 
-- PCA source: `instances/original/PCA/anonymous_v17/PCA.csv`
-- Structured CSV: `instances/derived/PCA/anonymous_v17/structured.csv`
-- EPSON derivative: `instances/derived/EPSON/anonymous_v17/EPSON.csv`
+- PCA source: `instances/original/PCA/anonymous_v17/PCA_anonymous_v17.csv`
+- Structured CSV pair: `instances/structured-csv/PCA/anonymous_v17/PCA_anonymous_v17.csv` and `instances/structured-csv/PCA/anonymous_v17/PCA_anonymous_v17.json`
+- EPSON 45-column normalised derivative: `instances/derived/EPSON/anonymous_v17/45col/PCA_anonymous_v17_EPSON_45col.normalized.csv`
+- EPSON 45-column application derivative: `instances/derived/EPSON/anonymous_v17/45col/PCA_anonymous_v17_EPSON_45col.application.csv`
 
 `original_basis` and `evaluation_v17_basis` remain separate historical fixture identities and are not replaced by this registration.
 

@@ -33,36 +33,6 @@
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="entityPartyComplexType">
-    <sequence>
-      <element ref="cor:partyName" minOccurs="0"/>
-      <element ref="cor:partyId" minOccurs="0"/>
-      <element ref="cor:partyBusinessDescription" minOccurs="0"/>
-      <element ref="bus:partyPhone" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="bus:partyFax" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="bus:partyEmail" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="bus:registeredOrganizationIdentifier" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="bus:partyAddress" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="bus:partyWebSite" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="bus:partyContact" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="cor:defaultAccountingMethodPurpose" minOccurs="0"/>
-      <element ref="cor:defaultAccountingMethodPurposeDescription" minOccurs="0"/>
-      <element ref="cor:fiscalYearStart" minOccurs="0"/>
-      <element ref="cor:fiscalYearEnd" minOccurs="0"/>
-      <element ref="bus:specifiedAccountingMethodStructure" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="bus:assignedAccountant" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="bus:specifiedReportingCalendar" minOccurs="0" maxOccurs="unbounded"/>
-    </sequence>
-    <attribute name="id" type="ID"/>
-  </complexType>
-  <complexType name="headerIdentifierExternalAuthorityComplexType">
-    <sequence>
-      <element ref="cor:headerIdentifierExternalAuthorityCode" minOccurs="0"/>
-      <element ref="cor:headerIdentifierExternalAuthorityName" minOccurs="0"/>
-      <element ref="cor:headerIdentifierExternalAuthorityVerificationDate" minOccurs="0"/>
-    </sequence>
-    <attribute name="id" type="ID"/>
-  </complexType>
   <complexType name="headerIdentifierPhoneComplexType">
     <sequence>
       <element ref="cor:headerIdentifierPhoneNumber" minOccurs="0"/>
@@ -116,6 +86,14 @@
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
+  <complexType name="headerIdentifierRegisteredExternalAuthorityComplexType">
+    <sequence>
+      <element ref="cor:headerIdentifierRegisteredExternalAuthorityCode" minOccurs="0"/>
+      <element ref="cor:headerIdentifierRegisteredExternalAuthorityName" minOccurs="0"/>
+      <element ref="cor:headerIdentifierRegisteredExternalAuthorityVerificationDate" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
   <complexType name="detailDeaderDocumentComplexType">
     <sequence>
       <element ref="cor:detailDeaderDocumentNumber" minOccurs="0"/>
@@ -134,14 +112,6 @@
       <element ref="cor:xbrlSummaryUnitNumerator"/>
       <element ref="cor:xbrlSummaryUnitDenominator" minOccurs="0"/>
       <element ref="cor:xbrlSummaryReportingTaxonomyIdReference" minOccurs="0"/>
-    </sequence>
-    <attribute name="id" type="ID"/>
-  </complexType>
-  <complexType name="externalAuthorityComplexType">
-    <sequence>
-      <element ref="cor:externalAuthorityCode" minOccurs="0"/>
-      <element ref="cor:externalAuthorityName" minOccurs="0"/>
-      <element ref="cor:externalAuthorityVerificationDate" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
@@ -195,6 +165,14 @@
       <element ref="bus:contactPhone" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="bus:contactFax" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="bus:contactEmail" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="identifierRegisteredExternalAuthorityComplexType">
+    <sequence>
+      <element ref="cor:identifierRegisteredExternalAuthorityCode" minOccurs="0"/>
+      <element ref="cor:identifierRegisteredExternalAuthorityName" minOccurs="0"/>
+      <element ref="cor:identifierRegisteredExternalAuthorityVerificationDate" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>

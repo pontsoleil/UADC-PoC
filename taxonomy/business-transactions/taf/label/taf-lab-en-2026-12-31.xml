@@ -2,6 +2,11 @@
 <linkbase xmlns="http://www.xbrl.org/2003/linkbase"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocument" xlink:label="loc_taf_originatingDocument"/>
+    <label xlink:type="resource" xlink:label="lab_taf_originatingDocument" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Originating Document</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocument" xlink:to="lab_taf_originatingDocument"/>
+    <label xlink:type="resource" xlink:label="doc_taf_originatingDocument" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">A tool to capture the flow of related documents in the business process. Some needs of end users require a greater history of the documents that are associated with a transaction, especially in the VAT audit area. Contains a repetitive class of related documents.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocument" xlink:to="doc_taf_originatingDocument"/>
     <loc xlink:type="locator" xlink:href="../taf-2026-12-31.xsd#taf_originatingDocumentType" xlink:label="loc_taf_originatingDocumentType"/>
     <label xlink:type="resource" xlink:label="lab_taf_originatingDocumentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Document Type</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_taf_originatingDocumentType" xlink:to="lab_taf_originatingDocumentType"/>

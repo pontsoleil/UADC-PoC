@@ -2,6 +2,11 @@
 <linkbase xmlns="http://www.xbrl.org/2003/linkbase"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../ehm-2026-12-31.xsd#ehm_detailSerialOrLot" xlink:label="loc_ehm_detailSerialOrLot"/>
+    <label xlink:type="resource" xlink:label="lab_ehm_detailSerialOrLot" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【シリアル番号・ロット情報】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ehm_detailSerialOrLot" xlink:to="lab_ehm_detailSerialOrLot"/>
+    <label xlink:type="resource" xlink:label="doc_ehm_detailSerialOrLot" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">シリアル番号やロット（バッチ）に関する情報を保持するタプル。単一の構造内に複数のシリアル番号やロット情報を保持可能。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ehm_detailSerialOrLot" xlink:to="doc_ehm_detailSerialOrLot"/>
     <loc xlink:type="locator" xlink:href="../ehm-2026-12-31.xsd#ehm_serialOrLotCode" xlink:label="loc_ehm_serialOrLotCode"/>
     <label xlink:type="resource" xlink:label="lab_ehm_serialOrLotCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">シリアル・ロット識別コード</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ehm_serialOrLotCode" xlink:to="lab_ehm_serialOrLotCode"/>

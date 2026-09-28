@@ -160,6 +160,39 @@ def read_selector_paths(paths: list[str | Path], encoding: str = "utf-8-sig") ->
     return evidence
 
 
+def selector_evidence_from_rows(rows: list[dict[str, str]], origin: str = "<rows>") -> list[dict[str, str]]:
+    """Collect selector-qualified semantic paths from supplied rows only.
+
+    This is used by runtimes that intentionally restrict multiplicity evidence
+    to executable Binding rows. It preserves the same duplicate and syntax
+    checks as :func:`read_selector_paths` without re-reading non-executable
+    rows from the source Binding file.
+    """
+    if not rows:
+        return []
+    semantic_columns = [name for name in rows[0] if name.endswith("semantic_path")]
+    if not semantic_columns:
+        raise _error("SELECTOR_EVIDENCE_SEMANTIC_PATH_MISSING", origin)
+    evidence = []
+    counts: Counter[tuple[str, str]] = Counter()
+    origins: dict[tuple[str, str], str] = {}
+    for line, row in enumerate(rows, 2):
+        for column in semantic_columns:
+            value = (row.get(column) or "").strip()
+            if "[" not in value:
+                continue
+            parse_semantic_path(value)
+            key = (column, value)
+            counts[key] += 1
+            origins.setdefault(key, f"{origin}:{line}")
+            evidence.append({"file": origin, "line": str(line), "column": column, "path": value})
+    duplicates = [(column, value) for (column, value), count in counts.items() if count > 1]
+    if duplicates:
+        column, value = sorted(duplicates)[0]
+        raise _error("DUPLICATE_SELECTOR_QUALIFIED_PATH", f"{origins[(column, value)]}:{column}:{value}")
+    return evidence
+
+
 def effective_multiplicity(source: str) -> str:
     mapping = {"0..1": "0..*", "1": "1..*", "1..1": "1..*", "0..*": "0..*", "1..*": "1..*"}
     if source not in mapping:
@@ -167,13 +200,13 @@ def effective_multiplicity(source: str) -> str:
     return mapping[source]
 
 
-def derive(records: list[dict[str, str]], evidence_paths: list[str | Path], dts_root: str,
-           encoding: str = "utf-8-sig") -> list[dict[str, str]]:
+def _derive_from_evidence(records: list[dict[str, str]], evidence: list[dict[str, str]],
+                          dts_root: str) -> list[dict[str, str]]:
     by_path = {record["semantic_path"]: record for record in records}
     class_paths = [record["semantic_path"] for record in records if record["type"] == "C"]
     root_path = min(class_paths, key=lambda path: (path.count("."), len(path)))
     groups: OrderedDict[tuple[str, str, str, str], dict[str, object]] = OrderedDict()
-    for item in read_selector_paths(evidence_paths, encoding):
+    for item in evidence:
         _base, selected_segments = parse_semantic_path(item["path"])
         for selected_base, selectors in selected_segments:
             selected_record = by_path.get(selected_base)
@@ -220,6 +253,18 @@ def derive(records: list[dict[str, str]], evidence_paths: list[str | Path], dts_
             "dimension": f"d_{owner['element_id']}",
         })
     return diagnostics
+
+
+def derive(records: list[dict[str, str]], evidence_paths: list[str | Path], dts_root: str,
+           encoding: str = "utf-8-sig") -> list[dict[str, str]]:
+    """Derive multiplicity from every selector path in the supplied evidence files."""
+    return _derive_from_evidence(records, read_selector_paths(evidence_paths, encoding), dts_root)
+
+
+def derive_from_rows(records: list[dict[str, str]], evidence_rows: list[dict[str, str]],
+                     dts_root: str, origin: str = "<rows>") -> list[dict[str, str]]:
+    """Derive multiplicity from selector paths in the supplied rows only."""
+    return _derive_from_evidence(records, selector_evidence_from_rows(evidence_rows, origin), dts_root)
 
 
 def validate_generated_dimensions(package_root: str | Path, rows: list[dict[str, str]]) -> None:

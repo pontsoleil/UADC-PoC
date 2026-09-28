@@ -4,13 +4,13 @@
 
 ## Purpose
 
-`src/csv_excel_bridge.py` provides controlled CSV ⇄ Excel interchange and comparison without changing the canonical CSV meaning.
+`tools/maintenance/csv_excel_bridge.py` provides controlled CSV ⇄ Excel interchange and comparison without changing the canonical CSV meaning.
 
 ## CLI examples
 
 ```text
-py src/csv_excel_bridge.py csv-to-xlsx <input.csv> -o <output.xlsx>
-py src/csv_excel_bridge.py xlsx-to-csv <input.xlsx> -o <output.csv> --baseline <baseline.csv>
+py tools/maintenance/csv_excel_bridge.py csv-to-xlsx <input.csv> -o <output.xlsx>
+py tools/maintenance/csv_excel_bridge.py xlsx-to-csv <input.xlsx> -o <output.csv> --baseline <baseline.csv>
 ```
 
 ## Execution and safety

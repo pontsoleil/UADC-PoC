@@ -2,6 +2,11 @@
 <linkbase xmlns="http://www.xbrl.org/2003/linkbase"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_documentInformation" xlink:label="loc_cor_documentInformation"/>
+    <label xlink:type="resource" xlink:label="lab_cor_documentInformation" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【文書情報】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_documentInformation" xlink:to="lab_cor_documentInformation"/>
+    <label xlink:type="resource" xlink:label="doc_cor_documentInformation" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">この取引文書に関する情報の親タグ。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_documentInformation" xlink:to="doc_cor_documentInformation"/>
     <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_documentType" xlink:label="loc_cor_documentType"/>
     <label xlink:type="resource" xlink:label="lab_cor_documentType" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">文書種別</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_documentType" xlink:to="lab_cor_documentType"/>
@@ -87,54 +92,31 @@
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_defaultCurrency" xlink:to="lab_cor_defaultCurrency"/>
     <label xlink:type="resource" xlink:label="doc_cor_defaultCurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">XBRLインスタンス内に指定する方法のかわりに、金額の既定の通貨を指定可能。多通貨環境で特に重要。ISO4217コード体系を推奨。</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_defaultCurrency" xlink:to="doc_cor_defaultCurrency"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_partyName" xlink:label="loc_cor_partyName"/>
-    <label xlink:type="resource" xlink:label="lab_cor_partyName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">Party Name</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_partyName" xlink:to="lab_cor_partyName"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_partyId" xlink:label="loc_cor_partyId"/>
-    <label xlink:type="resource" xlink:label="lab_cor_partyId" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">Party ID</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_partyId" xlink:to="lab_cor_partyId"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_partyBusinessDescription" xlink:label="loc_cor_partyBusinessDescription"/>
-    <label xlink:type="resource" xlink:label="lab_cor_partyBusinessDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">業種説明</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_partyBusinessDescription" xlink:to="lab_cor_partyBusinessDescription"/>
-    <label xlink:type="resource" xlink:label="doc_cor_partyBusinessDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">事業体の事業の種類についての説明。</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_partyBusinessDescription" xlink:to="doc_cor_partyBusinessDescription"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_defaultAccountingMethodPurpose" xlink:label="loc_cor_defaultAccountingMethodPurpose"/>
-    <label xlink:type="resource" xlink:label="lab_cor_defaultAccountingMethodPurpose" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">既定会計処理方法目的</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_defaultAccountingMethodPurpose" xlink:to="lab_cor_defaultAccountingMethodPurpose"/>
-    <label xlink:type="resource" xlink:label="doc_cor_defaultAccountingMethodPurpose" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">明細レベルで明確に指定しない場合の、既定の報告目的を表す。帳簿、税、管理、スタチュトリ、その他から選択する。_x000D_
-[設定値のリスト]_x000D_
-(book：帳簿)、(tax：税)、(management：管理)、(statutory：スタチュトリ)、(other：その他)</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_defaultAccountingMethodPurpose" xlink:to="doc_cor_defaultAccountingMethodPurpose"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_defaultAccountingMethodPurposeDescription" xlink:label="loc_cor_defaultAccountingMethodPurposeDescription"/>
-    <label xlink:type="resource" xlink:label="lab_cor_defaultAccountingMethodPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">既定会計処理方法目的説明</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_defaultAccountingMethodPurposeDescription" xlink:to="lab_cor_defaultAccountingMethodPurposeDescription"/>
-    <label xlink:type="resource" xlink:label="doc_cor_defaultAccountingMethodPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">既定の会計処理方法目的の説明。</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_defaultAccountingMethodPurposeDescription" xlink:to="doc_cor_defaultAccountingMethodPurposeDescription"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_fiscalYearStart" xlink:label="loc_cor_fiscalYearStart"/>
-    <label xlink:type="resource" xlink:label="lab_cor_fiscalYearStart" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">会計年度開始日付</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_fiscalYearStart" xlink:to="lab_cor_fiscalYearStart"/>
-    <label xlink:type="resource" xlink:label="doc_cor_fiscalYearStart" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">会計年度の開始日。妥当であれば、企業の会計年度表示において、366日や365日でない年も許可する（外部ソースからのデータより内部共有のための方が適している）。ヨーロッパでは、2年マイナス1日の会計年度を許可するところもある。</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_fiscalYearStart" xlink:to="doc_cor_fiscalYearStart"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_fiscalYearEnd" xlink:label="loc_cor_fiscalYearEnd"/>
-    <label xlink:type="resource" xlink:label="lab_cor_fiscalYearEnd" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">会計年度終了日付</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_fiscalYearEnd" xlink:to="lab_cor_fiscalYearEnd"/>
-    <label xlink:type="resource" xlink:label="doc_cor_fiscalYearEnd" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">会計年度の終了日。妥当であれば、企業の会計年度表示において、366日や365日でない年も許可する（外部ソースからのデータより内部共有のための方が適している）。ヨーロッパでは、2年マイナス1日の会計年度を許可するところもある。</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_fiscalYearEnd" xlink:to="doc_cor_fiscalYearEnd"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierExternalAuthorityCode" xlink:label="loc_cor_headerIdentifierExternalAuthorityCode"/>
-    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierExternalAuthorityCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関付与識別番号</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierExternalAuthorityCode" xlink:to="lab_cor_headerIdentifierExternalAuthorityCode"/>
-    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierExternalAuthorityCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">identifierReferenceと関係付けられる、外部機関（たとえば、税務署）によるID番号。</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierExternalAuthorityCode" xlink:to="doc_cor_headerIdentifierExternalAuthorityCode"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierExternalAuthorityName" xlink:label="loc_cor_headerIdentifierExternalAuthorityName"/>
-    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierExternalAuthorityName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関名</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierExternalAuthorityName" xlink:to="lab_cor_headerIdentifierExternalAuthorityName"/>
-    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierExternalAuthorityName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外部機関の名前（たとえば、税務署）</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierExternalAuthorityName" xlink:to="doc_cor_headerIdentifierExternalAuthorityName"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierExternalAuthorityVerificationDate" xlink:label="loc_cor_headerIdentifierExternalAuthorityVerificationDate"/>
-    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierExternalAuthorityVerificationDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関認証日付</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierExternalAuthorityVerificationDate" xlink:to="lab_cor_headerIdentifierExternalAuthorityVerificationDate"/>
-    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierExternalAuthorityVerificationDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外部機関が最後に認証した日付。</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierExternalAuthorityVerificationDate" xlink:to="doc_cor_headerIdentifierExternalAuthorityVerificationDate"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierPhone" xlink:label="loc_cor_headerIdentifierPhone"/>
+    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierPhone" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【電話番号】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierPhone" xlink:to="lab_cor_headerIdentifierPhone"/>
+    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierPhone" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">CVE識別子の電話番号。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierPhone" xlink:to="doc_cor_headerIdentifierPhone"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierFax" xlink:label="loc_cor_headerIdentifierFax"/>
+    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierFax" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【FAX番号】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierFax" xlink:to="lab_cor_headerIdentifierFax"/>
+    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierFax" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">CVE識別子のFAX番号の構造体。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierFax" xlink:to="doc_cor_headerIdentifierFax"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierEmail" xlink:label="loc_cor_headerIdentifierEmail"/>
+    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierEmail" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【CVEEメールアドレス】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierEmail" xlink:to="lab_cor_headerIdentifierEmail"/>
+    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierEmail" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">CVE識別子のEメールアドレス。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierEmail" xlink:to="doc_cor_headerIdentifierEmail"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierAddress" xlink:label="loc_cor_headerIdentifierAddress"/>
+    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierAddress" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【CVE住所】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierAddress" xlink:to="lab_cor_headerIdentifierAddress"/>
+    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierAddress" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">統合目的やVATのための、顧客、仕入先、従業員の住所(ブロック)。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierAddress" xlink:to="doc_cor_headerIdentifierAddress"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierContact" xlink:label="loc_cor_headerIdentifierContact"/>
+    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierContact" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【CVE担当者情報】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierContact" xlink:to="lab_cor_headerIdentifierContact"/>
+    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierContact" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">CVE識別子の担当者情報の構造体。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierContact" xlink:to="doc_cor_headerIdentifierContact"/>
     <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierPhoneNumber" xlink:label="loc_cor_headerIdentifierPhoneNumber"/>
     <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierPhoneNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">電話番号</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierPhoneNumber" xlink:to="lab_cor_headerIdentifierPhoneNumber"/>
@@ -262,26 +244,66 @@
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierContactActive" xlink:to="lab_cor_headerIdentifierContactActive"/>
     <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierContactActive" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">担当者が有効か無効かを示すブール値。</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierContactActive" xlink:to="doc_cor_headerIdentifierContactActive"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierRegisteredExternalAuthority" xlink:label="loc_cor_headerIdentifierRegisteredExternalAuthority"/>
+    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierRegisteredExternalAuthority" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【外部機関】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierRegisteredExternalAuthority" xlink:to="lab_cor_headerIdentifierRegisteredExternalAuthority"/>
+    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierRegisteredExternalAuthority" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">識別子と関係付けられる外部機関への参照情報を含む構造体。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierRegisteredExternalAuthority" xlink:to="doc_cor_headerIdentifierRegisteredExternalAuthority"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierRegisteredExternalAuthorityCode" xlink:label="loc_cor_headerIdentifierRegisteredExternalAuthorityCode"/>
+    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierRegisteredExternalAuthorityCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関付与識別番号</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierRegisteredExternalAuthorityCode" xlink:to="lab_cor_headerIdentifierRegisteredExternalAuthorityCode"/>
+    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierRegisteredExternalAuthorityCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">identifierReferenceと関係付けられる、外部機関（たとえば、税務署）によるID番号。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierRegisteredExternalAuthorityCode" xlink:to="doc_cor_headerIdentifierRegisteredExternalAuthorityCode"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierRegisteredExternalAuthorityName" xlink:label="loc_cor_headerIdentifierRegisteredExternalAuthorityName"/>
+    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierRegisteredExternalAuthorityName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関名</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierRegisteredExternalAuthorityName" xlink:to="lab_cor_headerIdentifierRegisteredExternalAuthorityName"/>
+    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierRegisteredExternalAuthorityName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外部機関の名前（たとえば、税務署）</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierRegisteredExternalAuthorityName" xlink:to="doc_cor_headerIdentifierRegisteredExternalAuthorityName"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_headerIdentifierRegisteredExternalAuthorityVerificationDate" xlink:label="loc_cor_headerIdentifierRegisteredExternalAuthorityVerificationDate"/>
+    <label xlink:type="resource" xlink:label="lab_cor_headerIdentifierRegisteredExternalAuthorityVerificationDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関認証日付</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierRegisteredExternalAuthorityVerificationDate" xlink:to="lab_cor_headerIdentifierRegisteredExternalAuthorityVerificationDate"/>
+    <label xlink:type="resource" xlink:label="doc_cor_headerIdentifierRegisteredExternalAuthorityVerificationDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外部機関が最後に認証した日付。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_headerIdentifierRegisteredExternalAuthorityVerificationDate" xlink:to="doc_cor_headerIdentifierRegisteredExternalAuthorityVerificationDate"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_detailDeaderDocument" xlink:label="loc_cor_detailDeaderDocument"/>
+    <label xlink:type="resource" xlink:label="lab_cor_detailDeaderDocument" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">元文書番号</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_detailDeaderDocument" xlink:to="lab_cor_detailDeaderDocument"/>
+    <label xlink:type="resource" xlink:label="doc_cor_detailDeaderDocument" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">請求書、小切手、証憑、その他の元文書の識別子。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_detailDeaderDocument" xlink:to="doc_cor_detailDeaderDocument"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_detailXbrl" xlink:label="loc_cor_detailXbrl"/>
+    <label xlink:type="resource" xlink:label="lab_cor_detailXbrl" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【XBRL情報】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_detailXbrl" xlink:to="lab_cor_detailXbrl"/>
+    <label xlink:type="resource" xlink:label="doc_cor_detailXbrl" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">XBRLレポート情報へのロールアップ情報。親タグであり、同じ項目が複数のタクソノミを通じて報告されうるように繰り返し可能。同一の勘定科目を異なるXBRL要素に転記した場合にどうなるか、注意深く考慮すべきである。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_detailXbrl" xlink:to="doc_cor_detailXbrl"/>
     <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_detailDeaderDocumentNumber" xlink:label="loc_cor_detailDeaderDocumentNumber"/>
     <label xlink:type="resource" xlink:label="lab_cor_detailDeaderDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">発生元文書番号</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_detailDeaderDocumentNumber" xlink:to="lab_cor_detailDeaderDocumentNumber"/>
     <label xlink:type="resource" xlink:label="doc_cor_detailDeaderDocumentNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">発生元文書の番号。</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_detailDeaderDocumentNumber" xlink:to="doc_cor_detailDeaderDocumentNumber"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_externalAuthorityCode" xlink:label="loc_cor_externalAuthorityCode"/>
-    <label xlink:type="resource" xlink:label="lab_cor_externalAuthorityCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関付与識別番号</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_externalAuthorityCode" xlink:to="lab_cor_externalAuthorityCode"/>
-    <label xlink:type="resource" xlink:label="doc_cor_externalAuthorityCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">identifierReferenceと関係付けられる、外部機関（たとえば、税務署）によるID番号。</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_externalAuthorityCode" xlink:to="doc_cor_externalAuthorityCode"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_externalAuthorityName" xlink:label="loc_cor_externalAuthorityName"/>
-    <label xlink:type="resource" xlink:label="lab_cor_externalAuthorityName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関名</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_externalAuthorityName" xlink:to="lab_cor_externalAuthorityName"/>
-    <label xlink:type="resource" xlink:label="doc_cor_externalAuthorityName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外部機関の名前（たとえば、税務署）</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_externalAuthorityName" xlink:to="doc_cor_externalAuthorityName"/>
-    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_externalAuthorityVerificationDate" xlink:label="loc_cor_externalAuthorityVerificationDate"/>
-    <label xlink:type="resource" xlink:label="lab_cor_externalAuthorityVerificationDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関認証日付</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_externalAuthorityVerificationDate" xlink:to="lab_cor_externalAuthorityVerificationDate"/>
-    <label xlink:type="resource" xlink:label="doc_cor_externalAuthorityVerificationDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外部機関が最後に認証した日付。</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_externalAuthorityVerificationDate" xlink:to="doc_cor_externalAuthorityVerificationDate"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierPhone" xlink:label="loc_cor_identifierPhone"/>
+    <label xlink:type="resource" xlink:label="lab_cor_identifierPhone" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【電話番号】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierPhone" xlink:to="lab_cor_identifierPhone"/>
+    <label xlink:type="resource" xlink:label="doc_cor_identifierPhone" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">CVE識別子の電話番号。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierPhone" xlink:to="doc_cor_identifierPhone"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierFax" xlink:label="loc_cor_identifierFax"/>
+    <label xlink:type="resource" xlink:label="lab_cor_identifierFax" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【FAX番号】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierFax" xlink:to="lab_cor_identifierFax"/>
+    <label xlink:type="resource" xlink:label="doc_cor_identifierFax" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">CVE識別子のFAX番号の構造体。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierFax" xlink:to="doc_cor_identifierFax"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierEmail" xlink:label="loc_cor_identifierEmail"/>
+    <label xlink:type="resource" xlink:label="lab_cor_identifierEmail" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【CVEEメールアドレス】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierEmail" xlink:to="lab_cor_identifierEmail"/>
+    <label xlink:type="resource" xlink:label="doc_cor_identifierEmail" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">CVE識別子のEメールアドレス。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierEmail" xlink:to="doc_cor_identifierEmail"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierAddress" xlink:label="loc_cor_identifierAddress"/>
+    <label xlink:type="resource" xlink:label="lab_cor_identifierAddress" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【CVE住所】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierAddress" xlink:to="lab_cor_identifierAddress"/>
+    <label xlink:type="resource" xlink:label="doc_cor_identifierAddress" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">統合目的やVATのための、顧客、仕入先、従業員の住所(ブロック)。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierAddress" xlink:to="doc_cor_identifierAddress"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierContact" xlink:label="loc_cor_identifierContact"/>
+    <label xlink:type="resource" xlink:label="lab_cor_identifierContact" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【CVE担当者情報】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierContact" xlink:to="lab_cor_identifierContact"/>
+    <label xlink:type="resource" xlink:label="doc_cor_identifierContact" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">CVE識別子の担当者情報の構造体。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierContact" xlink:to="doc_cor_identifierContact"/>
     <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierPhoneNumber" xlink:label="loc_cor_identifierPhoneNumber"/>
     <label xlink:type="resource" xlink:label="lab_cor_identifierPhoneNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">電話番号</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierPhoneNumber" xlink:to="lab_cor_identifierPhoneNumber"/>
@@ -409,6 +431,26 @@
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierContactActive" xlink:to="lab_cor_identifierContactActive"/>
     <label xlink:type="resource" xlink:label="doc_cor_identifierContactActive" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">担当者が有効か無効かを示すブール値。</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierContactActive" xlink:to="doc_cor_identifierContactActive"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierRegisteredExternalAuthority" xlink:label="loc_cor_identifierRegisteredExternalAuthority"/>
+    <label xlink:type="resource" xlink:label="lab_cor_identifierRegisteredExternalAuthority" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【外部機関】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierRegisteredExternalAuthority" xlink:to="lab_cor_identifierRegisteredExternalAuthority"/>
+    <label xlink:type="resource" xlink:label="doc_cor_identifierRegisteredExternalAuthority" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">識別子と関係付けられる外部機関への参照情報を含む構造体。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierRegisteredExternalAuthority" xlink:to="doc_cor_identifierRegisteredExternalAuthority"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierRegisteredExternalAuthorityCode" xlink:label="loc_cor_identifierRegisteredExternalAuthorityCode"/>
+    <label xlink:type="resource" xlink:label="lab_cor_identifierRegisteredExternalAuthorityCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関付与識別番号</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierRegisteredExternalAuthorityCode" xlink:to="lab_cor_identifierRegisteredExternalAuthorityCode"/>
+    <label xlink:type="resource" xlink:label="doc_cor_identifierRegisteredExternalAuthorityCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">identifierReferenceと関係付けられる、外部機関（たとえば、税務署）によるID番号。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierRegisteredExternalAuthorityCode" xlink:to="doc_cor_identifierRegisteredExternalAuthorityCode"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierRegisteredExternalAuthorityName" xlink:label="loc_cor_identifierRegisteredExternalAuthorityName"/>
+    <label xlink:type="resource" xlink:label="lab_cor_identifierRegisteredExternalAuthorityName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関名</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierRegisteredExternalAuthorityName" xlink:to="lab_cor_identifierRegisteredExternalAuthorityName"/>
+    <label xlink:type="resource" xlink:label="doc_cor_identifierRegisteredExternalAuthorityName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外部機関の名前（たとえば、税務署）</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierRegisteredExternalAuthorityName" xlink:to="doc_cor_identifierRegisteredExternalAuthorityName"/>
+    <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_identifierRegisteredExternalAuthorityVerificationDate" xlink:label="loc_cor_identifierRegisteredExternalAuthorityVerificationDate"/>
+    <label xlink:type="resource" xlink:label="lab_cor_identifierRegisteredExternalAuthorityVerificationDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">外部機関認証日付</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierRegisteredExternalAuthorityVerificationDate" xlink:to="lab_cor_identifierRegisteredExternalAuthorityVerificationDate"/>
+    <label xlink:type="resource" xlink:label="doc_cor_identifierRegisteredExternalAuthorityVerificationDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">外部機関が最後に認証した日付。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_identifierRegisteredExternalAuthorityVerificationDate" xlink:to="doc_cor_identifierRegisteredExternalAuthorityVerificationDate"/>
     <loc xlink:type="locator" xlink:href="../cor-2026-12-31.xsd#cor_xbrlAllocation" xlink:label="loc_cor_xbrlAllocation"/>
     <label xlink:type="resource" xlink:label="lab_cor_xbrlAllocation" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">XBRL割当</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_cor_xbrlAllocation" xlink:to="lab_cor_xbrlAllocation"/>

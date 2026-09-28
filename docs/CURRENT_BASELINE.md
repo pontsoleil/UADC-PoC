@@ -35,16 +35,20 @@ build evidence `CANONICAL_FILE_MANIFEST.csv`.
 
 These holds are not represented as PASS and do not change the accepted
 PCA/EPSON or taxonomy baselines.
-## Current anonymous_v17 fixture (2026-09-24)
+## Current anonymous_v17 fixture (2026-09-28)
 
 The current PCA/EPSON interoperability fixture is `anonymous_v17`:
 
-- PCA: `instances/original/PCA/anonymous_v17/PCA.csv`, SHA-256
+- PCA: `instances/original/PCA/anonymous_v17/PCA_anonymous_v17.csv`, SHA-256
   `03240CD380F5B23E7234B300D9523386466BD750AD48E8445CF68A8B3EEEC844`.
-- Structured CSV: `instances/derived/PCA/anonymous_v17/structured.csv`, SHA-256
-  `6F5ECB4C1320D38ECEABE3C3CD6896339C045551AE84EA2140D024C172432D1B`.
-- EPSON: `instances/derived/EPSON/anonymous_v17/EPSON.csv`, SHA-256
-  `B7DE6A083F0B258B276BFFE6FFCB6EEB8796471E586DDF36C1157F283C9A348A`.
+- Structured CSV: `instances/structured-csv/PCA/anonymous_v17/PCA_anonymous_v17.csv`, SHA-256
+  `7114A070D9862003801932DDC440FE9285ECC896E7950334A0C6B9A5FEC80295`.
+- xBRL-CSV metadata: `instances/structured-csv/PCA/anonymous_v17/PCA_anonymous_v17.json`, SHA-256
+  `25A94236D9191E38A79D9EBB6464B3F6074BF774AA1AB6D864B3815421A12A61`.
+- EPSON 45-column normalised CSV: `instances/derived/EPSON/anonymous_v17/45col/PCA_anonymous_v17_EPSON_45col.normalized.csv`, SHA-256
+  `38F3EF6C3553C7DE6CAC24D6C0110C03A5871E60F8246764069706BEAB883794`.
+- EPSON 45-column application CSV: `instances/derived/EPSON/anonymous_v17/45col/PCA_anonymous_v17_EPSON_45col.application.csv`, SHA-256
+  `AD2A593CBDC4AFEF857C1093916B65FB2E6BD37ABBB67D05487773C03774D1C4`.
 
 The accepted provenance is:
 

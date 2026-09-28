@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/uadc/csv_physical_format_profile.schema.json",
+  "title": "UADC CSV Physical Format Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile_name",
+    "width",
+    "header_rows",
+    "application_input",
+    "application_output",
+    "uadc"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "profile_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "header_rows": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reject_blank_records": {
+      "type": "boolean",
+      "default": true
+    },
+    "expected_header_rows": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "uadc": {
+      "$ref": "#/$defs/side"
+    },
+    "date_transforms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "column",
+          "application_format",
+          "uadc_format"
+        ],
+        "properties": {
+          "column": {
+            "type": "string",
+            "pattern": "^C[1-9][0-9]*$"
+          },
+          "application_format": {
+            "$ref": "#/$defs/dateFormat"
+          },
+          "uadc_format": {
+            "const": "YYYY-MM-DD"
+          }
+        }
+      }
+    },
+    "application_input": {
+      "$ref": "#/$defs/side"
+    },
+    "application_output": {
+      "$ref": "#/$defs/side"
+    },
+    "numeric_transforms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "column",
+          "application_input_grouping",
+          "uadc_grouping",
+          "application_output_grouping"
+        ],
+        "properties": {
+          "column": {
+            "type": "string",
+            "pattern": "^C[1-9][0-9]*$"
+          },
+          "application_input_grouping": {
+            "enum": [
+              "",
+              ","
+            ]
+          },
+          "uadc_grouping": {
+            "enum": [
+              "",
+              ","
+            ]
+          },
+          "application_output_grouping": {
+            "enum": [
+              "",
+              ","
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "side": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "encoding",
+        "bom",
+        "newline",
+        "final_newline",
+        "delimiter",
+        "quote_policy"
+      ],
+      "properties": {
+        "encoding": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bom": {
+          "enum": [
+            "forbidden",
+            "optional",
+            "required"
+          ]
+        },
+        "newline": {
+          "enum": [
+            "LF",
+            "CRLF",
+            "CR"
+          ]
+        },
+        "final_newline": {
+          "type": "boolean"
+        },
+        "delimiter": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1
+        },
+        "quote_policy": {
+          "enum": [
+            "none",
+            "minimal",
+            "all"
+          ]
+        }
+      }
+    },
+    "dateFormat": {
+      "enum": [
+        "YYYY/M/D",
+        "YYYY/MM/DD",
+        "YYYY-MM-DD",
+        "YYYYMMDD"
+      ]
+    }
+  }
+}

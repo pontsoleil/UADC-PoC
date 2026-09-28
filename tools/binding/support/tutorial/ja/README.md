@@ -8,8 +8,8 @@ tutorial wrapper は UADC 経路を説明するためのもので、規定 runti
 
 ## Program
 
-- `semantic_binding_sample.py`
-- `syntax_binding_sample.py`
+- `tests/tutorial/semantic_binding_sample.py`
+- `tests/tutorial/syntax_binding_sample.py`
 
 ## 実行と安全
 

@@ -5,7 +5,9 @@
 The runtime implements the approved 27-column semantic Binding contract,
 selector equality/presence/absence, repeatable-ancestor occurrence identity,
 source-scoped ordinal reconstruction, EE1 lexical/QName conversion, percentage
-conversion and OIM metadata unit handling.  It contains no model-family branch
+conversion and OIM metadata unit handling. Forward conversion is resilient at
+the active-fact level: unsupported in-scope source facts are skipped and
+reported without aborting unrelated facts. Selector multiplicity is derived only from executable Binding rows, so non-executable review rows cannot block initialization. It contains no model-family branch
 and has no task-history loader chain.
 """
 
@@ -16,6 +18,7 @@ import csv
 import json
 import os
 import re
+import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -38,6 +41,12 @@ V10_FIELDS = {
 }
 SELECTOR = re.compile(r'\[(?:not\(([^)]+)\)|([^=\]]+)="([^"]*)"|([^=\]]+))\]')
 PREDICATE = SELECTOR
+EXECUTABLE_STATUSES = {"EXACT", "TRANSFORM", "STRUCTURAL"}
+REPORTABLE_NONEXECUTABLE_STATUSES = {"REVIEW_REQUIRED", "NO_TARGET"}
+UNSUPPORTED_REPORT_FIELDS = [
+    "source_sequence", "source_name", "source_semantic_path", "source_occurrence",
+    "source_value", "reason", "mapping_status", "target_semantic_path", "detail",
+]
 
 def read(path: Path) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8-sig", newline="") as handle:
@@ -119,6 +128,28 @@ def transform(value: str, operation: str, inverse: bool = False) -> str:
         return decimal_text(number * Decimal(100) if inverse else number / Decimal(100))
     raise BindingError(f"unsupported explicit transformation: {operation}")
 
+def unsupported_reason_for_binding_row(row: dict[str, str]) -> str:
+    """Classify a non-executable Binding row for active-fact reporting."""
+    if row.get("mapping_status") == "NO_TARGET":
+        return "UNMAPPED_CONVERSION_SOURCE_FACT"
+    codes = {item.strip() for item in (row.get("reason_codes") or "").split("|") if item.strip()}
+    if "R_CURRENT_HMD_TARGET_PATH_UNRESOLVED" in codes:
+        return "TARGET_PATH_NOT_IN_CURRENT_HMD"
+    if {"R_CURRENT_QNAME_AUTHORITY_UNRESOLVED", "R_ACTIVE_SELECTOR_AUTHORITY_UNRESOLVED"} & codes:
+        return "UNRESOLVED_QNAME_FOR_SOURCE_VALUE"
+    return "OTHER_ACTIVE_SOURCE_MAPPING_ERROR"
+
+def unsupported_reason_for_error(exc: BindingError) -> str:
+    """Classify a fact-local forward error without inventing a mapping."""
+    message = str(exc)
+    if message.startswith("EE1 member QName missing:"):
+        return "UNRESOLVED_QNAME_FOR_SOURCE_VALUE"
+    if message.startswith("selector Attribute not found:"):
+        return "OTHER_ACTIVE_SOURCE_MAPPING_ERROR"
+    if message.startswith("current target path missing:"):
+        return "TARGET_PATH_NOT_IN_CURRENT_HMD"
+    return "OTHER_ACTIVE_SOURCE_MAPPING_ERROR"
+
 class _BaseContract:
     def __init__(self, args: argparse.Namespace):
         self.source_hmd = read(args.source_hmd)
@@ -147,6 +178,26 @@ class _BaseContract:
             if row["mapping_status"] in {"EXACT", "TRANSFORM"}
             or (row["mapping_status"] == "STRUCTURAL" and row["target_semantic_path"])
         ]
+        self.report_rules = []
+        for row in raw:
+            if row.get("source_type") != "A" or row.get("mapping_status") not in REPORTABLE_NONEXECUTABLE_STATUSES:
+                continue
+            source_path, source_selectors = parse_path(row.get("source_semantic_path", ""))
+            source = self.source_by_seq.get(row.get("source_sequence", ""))
+            if source is None or source.get("semantic_path") != source_path:
+                raise BindingError(f"source sequence/path mismatch: {row.get('source_sequence', '')}")
+            for class_path, key, operation, _lexical in source_selectors:
+                selected = self.source_by_path.get(class_path + "." + key)
+                if selected is None or selected.get("type") != "A":
+                    raise BindingError(f"source predicate Attribute missing: {class_path}.{key}")
+                if operation not in {"equals", "present", "absent"}:
+                    raise BindingError(f"unsupported source predicate: {operation}")
+            self.report_rules.append({
+                **row,
+                "source_binding_semantic_path": row["source_semantic_path"],
+                "source_semantic_path": source_path,
+                "source_selectors": sorted(source_selectors),
+            })
         self.structural = {}
         for row in self.rows:
             if row["mapping_status"] == "STRUCTURAL":
@@ -315,14 +366,114 @@ def dimensions_through(contract, rule, dimensions: dict[str, str], class_path: s
             result[logical_dimension(contract, logical_path)] = dimensions[logical_dimension(contract, logical_path)]
     return result
 
+def _local_schema_locations(schema: Path) -> list[Path]:
+    """Return local XSD import/include/redefine targets for one schema."""
+    try:
+        root = ET.parse(schema).getroot()
+    except (ET.ParseError, OSError) as exc:
+        raise BindingError(f"taxonomy schema parse failed: {schema}: {exc}") from exc
+    xsd = "{http://www.w3.org/2001/XMLSchema}"
+    result = []
+    for tag in ("import", "include", "redefine"):
+        for node in root.findall(f"{xsd}{tag}"):
+            location = (node.get("schemaLocation") or "").strip()
+            if not location or re.match(r"^[A-Za-z][A-Za-z0-9+.-]*://", location):
+                continue
+            candidate = (schema.parent / location).resolve()
+            if candidate.is_file():
+                result.append(candidate)
+    return result
+
+
+def _schema_target_namespace(schema: Path) -> str:
+    try:
+        root = ET.parse(schema).getroot()
+    except (ET.ParseError, OSError) as exc:
+        raise BindingError(f"taxonomy schema parse failed: {schema}: {exc}") from exc
+    return (root.get("targetNamespace") or "").strip()
+
+
+def taxonomy_namespace_map(entrypoint: Path, required_modules: set[str]) -> dict[str, str]:
+    """Resolve GL module namespaces from the supplied current taxonomy files.
+
+    Resolution first follows local XSD imports/includes from the entry point. If
+    that entry point is module-local and does not expose every module required by
+    the generated OIM metadata, the surrounding taxonomy family directory is
+    scanned. A module is accepted only when all discovered candidates agree on
+    one targetNamespace.
+    """
+    entrypoint = entrypoint.resolve()
+    if not entrypoint.is_file():
+        raise BindingError(f"taxonomy entry point not found: {entrypoint}")
+
+    visited: set[Path] = set()
+    stack = [entrypoint]
+    schemas: list[Path] = []
+    while stack:
+        schema = stack.pop()
+        if schema in visited or not schema.is_file():
+            continue
+        visited.add(schema)
+        schemas.append(schema)
+        stack.extend(_local_schema_locations(schema))
+
+    def collect(paths: list[Path]) -> dict[str, set[str]]:
+        by_tail: dict[str, set[str]] = defaultdict(set)
+        by_filename: dict[str, set[str]] = defaultdict(set)
+        for schema in paths:
+            namespace = _schema_target_namespace(schema)
+            if not namespace:
+                continue
+            tail = namespace.rstrip("/").rsplit("/", 1)[-1]
+            stem_prefix = schema.stem.split("-", 1)[0]
+            for module in required_modules:
+                if tail == module:
+                    by_tail[module].add(namespace)
+                elif stem_prefix == module:
+                    by_filename[module].add(namespace)
+        # Namespace-tail identity is authoritative. Filename inference is only a
+        # fallback for a module with no tail-identifying schema.
+        return {
+            module: (by_tail.get(module) or by_filename.get(module) or set())
+            for module in required_modules
+        }
+
+    found = collect(schemas)
+    missing = {module for module in required_modules if not found.get(module)}
+    if missing:
+        # A module-local OIM entry point may import only itself and gen. Search
+        # the surrounding taxonomy family, but still require unique namespace
+        # agreement before accepting a module.
+        family_root = entrypoint.parent.parent if entrypoint.parent.parent.exists() else entrypoint.parent
+        family_schemas = sorted(family_root.rglob("*.xsd"))
+        expanded = collect(family_schemas)
+        for module, values in expanded.items():
+            found[module].update(values)
+
+    result = {}
+    for module in sorted(required_modules):
+        values = found.get(module, set())
+        if not values:
+            raise BindingError(
+                f"taxonomy namespace not found for module {module}: entrypoint={entrypoint}"
+            )
+        if len(values) != 1:
+            raise BindingError(
+                f"taxonomy namespace conflict for module {module}: {sorted(values)}"
+            )
+        result[module] = next(iter(values))
+    return result
+
+
 def metadata(args, contract, used_classes, logical_dimensions: list[str], concept_columns) -> None:
     path = args.output.with_suffix(".json")
-    modules = sorted({row["module"] for row in contract.target_hmd if row.get("module")})
-    namespace_base = "https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/experimental/2026-12-31"
-    namespaces = {module: f"{namespace_base}/{module}" for module in modules}
+    required_modules = {
+        row["module"] for row in used_classes if row.get("module")
+    } | {
+        row["module"] for row in concept_columns.values() if row.get("module")
+    } | {"gen", "plt"}
+    namespaces = taxonomy_namespace_map(args.taxonomy, required_modules)
     namespaces.update({
-        "gen": f"{namespace_base}/gen",
-        "plt": f"{namespace_base}/plt",
         "iso4217": "http://www.xbrl.org/2003/iso4217",
         "xbrli": "http://www.xbrl.org/2003/instance",
         "scheme": "http://www.example.com",
@@ -386,21 +537,44 @@ class Contract(_BaseContract):
         raw = read(args.binding)
         if not raw or set(raw[0]) != V10_FIELDS:
             raise BindingError("binding must use the exact 27-column semantic Binding contract")
-        for hmd in (self.source_hmd, self.target_hmd):
-            roots = [row for row in hmd if row.get("type") == "C" and row.get("level") == "1"]
-            if len(roots) != 1:
-                raise BindingError("selector effective multiplicity requires one HMD root")
-            for row in hmd:
-                row.setdefault("element_id", f"{row.get('module', '')}_{row.get('local_name', '')}")
-            selector_multiplicity.derive(
-                hmd, [args.binding], roots[0].get("local_name", "root")
-            )
         self.master_rows = raw
         self.rows = [
             row for row in raw
             if row["mapping_status"] in {"EXACT", "TRANSFORM"}
             or (row["mapping_status"] == "STRUCTURAL" and row["target_semantic_path"])
         ]
+        # Effective selector multiplicity is an execution concern. Non-executable
+        # rows such as REVIEW_REQUIRED and NO_TARGET must not block runtime
+        # initialization or alter multiplicity for the active execution contract.
+        for hmd in (self.source_hmd, self.target_hmd):
+            roots = [row for row in hmd if row.get("type") == "C" and row.get("level") == "1"]
+            if len(roots) != 1:
+                raise BindingError("selector effective multiplicity requires one HMD root")
+            for row in hmd:
+                row.setdefault("element_id", f"{row.get('module', '')}_{row.get('local_name', '')}")
+            selector_multiplicity.derive_from_rows(
+                hmd, self.rows, roots[0].get("local_name", "root"), origin=str(args.binding)
+            )
+        self.report_rules = []
+        for row in raw:
+            if row.get("source_type") != "A" or row.get("mapping_status") not in REPORTABLE_NONEXECUTABLE_STATUSES:
+                continue
+            source_path, source_selectors = parse_path(row.get("source_semantic_path", ""))
+            source = self.source_by_seq.get(row.get("source_sequence", ""))
+            if source is None or source.get("semantic_path") != source_path:
+                raise BindingError(f"source sequence/path mismatch: {row.get('source_sequence', '')}")
+            for class_path, key, operation, _lexical in source_selectors:
+                selected = self.source_by_path.get(class_path + "." + key)
+                if selected is None or selected.get("type") != "A":
+                    raise BindingError(f"source predicate Attribute missing: {class_path}.{key}")
+                if operation not in {"equals", "present", "absent"}:
+                    raise BindingError(f"unsupported source predicate: {operation}")
+            self.report_rules.append({
+                **row,
+                "source_binding_semantic_path": row["source_semantic_path"],
+                "source_semantic_path": source_path,
+                "source_selectors": sorted(source_selectors),
+            })
         self.structural = {}
         for row in self.rows:
             if row["mapping_status"] == "STRUCTURAL":
@@ -427,10 +601,25 @@ class Contract(_BaseContract):
                     raise BindingError(f"unsupported source predicate: {operation}")
             target_path, selectors = parse_path(row["target_semantic_path"])
             target = self.target_by_path.get(target_path)
-            if target is None or target["sequence"] != row["target_sequence"]:
-                raise BindingError(f"current target sequence/path mismatch: {row['source_sequence']}")
-            if row["source_type"] != source["type"] or row["target_type"] != target["type"]:
-                raise BindingError(f"binding/HMD type mismatch: {row['source_sequence']}")
+            target_contract_error = ""
+            effective_target_sequence = row["target_sequence"]
+            target_sequence_rebound = False
+            if target is None:
+                if row["source_type"] == "A":
+                    target_contract_error = f"current target path missing: {target_path}"
+                else:
+                    raise BindingError(f"current target path missing: {row['source_sequence']}: {target_path}")
+            else:
+                if target["sequence"] != row["target_sequence"]:
+                    # semantic_path is the model identity; sequence is ordering metadata
+                    # and is rebound to the current target HMD for active Attribute facts.
+                    effective_target_sequence = target["sequence"]
+                    target_sequence_rebound = True
+                if row["source_type"] != source["type"] or row["target_type"] != target["type"]:
+                    if row["source_type"] == "A":
+                        target_contract_error = f"binding/HMD type mismatch: {row['source_sequence']}"
+                    else:
+                        raise BindingError(f"binding/HMD type mismatch: {row['source_sequence']}")
             if row["source_type"] == "A" and row["mapping_status"] == "EXACT" and row["transformation"] != "identity":
                 raise BindingError(f"EXACT must use identity: {row['source_sequence']}")
             self.rules.append({
@@ -440,6 +629,10 @@ class Contract(_BaseContract):
                 "source_selectors": source_selectors,
                 "target_clean_path": target_path,
                 "selectors": selectors,
+                "binding_target_sequence": row["target_sequence"],
+                "target_sequence": effective_target_sequence,
+                "target_sequence_rebound": target_sequence_rebound,
+                "target_contract_error": target_contract_error,
             })
         self.attr_rules = [row for row in self.rules if row["source_type"] == "A"]
         source_identities = [
@@ -511,12 +704,232 @@ def occurrence_descriptor_sort_key(
     )
 
 
-def select_forward_executions(contract: Contract, source_rows: list[dict[str, str]]) -> list[dict[str, object]]:
-    """Select executable facts before allocating any target occurrence."""
+def source_occurrence_identity(contract: Contract, source_path: str, source_row: dict[str, str]) -> str:
+    """Return stable JSON for repeatable source occurrence dimensions only."""
+    identity = {}
+    for row in source_repeats(contract, source_path):
+        name = dim(row)
+        value = (source_row.get(name) or "").strip()
+        if value:
+            identity[name] = value
+    return json.dumps(identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def unsupported_fact(contract: Contract, rule: dict[str, object], source_row: dict[str, str], value: str, reason: str, detail: str) -> dict[str, str]:
+    return {
+        "source_sequence": str(rule.get("source_sequence", "")),
+        "source_name": str(rule.get("source_name", "")),
+        "source_semantic_path": str(rule.get("source_semantic_path", "")),
+        "source_occurrence": source_occurrence_identity(contract, str(rule.get("source_semantic_path", "")), source_row),
+        "source_value": value,
+        "reason": reason,
+        "mapping_status": str(rule.get("mapping_status", "")),
+        "target_semantic_path": str(rule.get("target_semantic_path", "")),
+        "detail": detail,
+    }
+
+
+def dedupe_unsupported(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    seen = set()
+    result = []
+    for row in rows:
+        key = tuple(row.get(field, "") for field in UNSUPPORTED_REPORT_FIELDS)
+        if key not in seen:
+            seen.add(key)
+            result.append(row)
+    return result
+
+
+def write_unsupported(path: Path, rows: list[dict[str, str]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=UNSUPPORTED_REPORT_FIELDS, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _occurrence_tuple(contract: Contract, source_path: str, source_row: dict[str, str]) -> tuple[tuple[str, str], ...]:
+    return tuple(sorted(
+        (dim(row), (source_row.get(dim(row)) or "").strip())
+        for row in source_repeats(contract, source_path)
+        if (source_row.get(dim(row)) or "").strip()
+    ))
+
+
+def _parse_scope_occurrence(value: str) -> tuple[tuple[str, str], ...] | None:
+    value = (value or "").strip()
+    if not value:
+        return None
+    try:
+        parsed = json.loads(value)
+    except json.JSONDecodeError as exc:
+        raise BindingError(f"invalid scope source_occurrence JSON: {value}") from exc
+    if isinstance(parsed, dict):
+        return tuple(sorted((str(k), str(v)) for k, v in parsed.items() if str(v)))
+    if isinstance(parsed, list):
+        pairs = []
+        for item in parsed:
+            if not isinstance(item, (list, tuple)) or len(item) != 2:
+                raise BindingError(f"invalid scope source_occurrence pair: {item}")
+            if str(item[1]):
+                pairs.append((str(item[0]), str(item[1])))
+        return tuple(sorted(pairs))
+    raise BindingError(f"invalid scope source_occurrence JSON type: {type(parsed).__name__}")
+
+
+class ConversionScope:
+    """Explicit forward conversion scope by semantic path and optional occurrence."""
+
+    PATH_FIELDS = ("source_semantic_path", "Source_Semantic_Path")
+    OCCURRENCE_FIELDS = ("source_occurrence", "Source_Occurrence")
+    ENABLE_FIELDS = ("in_conversion_scope", "In_Conversion_Scope")
+
+    def __init__(self, path: Path | None, contract: Contract):
+        self.enabled = path is not None
+        self.entries: dict[str, set[tuple[tuple[str, str], ...] | None]] = defaultdict(set)
+        if path is None:
+            return
+        with path.open("r", encoding="utf-8-sig", newline="") as handle:
+            reader = csv.DictReader(handle)
+            fields = reader.fieldnames or []
+            path_field = next((name for name in self.PATH_FIELDS if name in fields), None)
+            occurrence_field = next((name for name in self.OCCURRENCE_FIELDS if name in fields), None)
+            enable_field = next((name for name in self.ENABLE_FIELDS if name in fields), None)
+            if path_field is None:
+                raise BindingError(
+                    "scope file must contain source_semantic_path or Source_Semantic_Path"
+                )
+            for row in reader:
+                if enable_field and (row.get(enable_field) or "").strip().upper() in {"NO", "FALSE", "0"}:
+                    continue
+                source_path = clean_path((row.get(path_field) or "").strip())
+                if not source_path:
+                    continue
+                if source_path not in contract.source_by_path:
+                    raise BindingError(f"scope source path not found in source HMD: {source_path}")
+                occurrence = _parse_scope_occurrence(row.get(occurrence_field, "")) if occurrence_field else None
+                self.entries[source_path].add(occurrence)
+        if not self.entries:
+            raise BindingError(f"scope file contains no enabled source facts: {path}")
+
+    def matches(self, contract: Contract, source_path: str, source_row: dict[str, str]) -> bool:
+        if not self.enabled:
+            return True
+        entries = self.entries.get(source_path)
+        if not entries:
+            return False
+        if None in entries:
+            return True
+        return _occurrence_tuple(contract, source_path, source_row) in entries
+
+    def active_fact_keys(self, contract: Contract, source_rows: list[dict[str, str]]) -> set[tuple[str, str, str]]:
+        """Return value-present facts explicitly selected by this scope."""
+        result = set()
+        if not self.enabled:
+            return result
+        for source_path in self.entries:
+            source = contract.source_by_path[source_path]
+            for source_row in source_rows:
+                if not self.matches(contract, source_path, source_row):
+                    continue
+                value = (source_row.get(source["local_name"]) or "").strip()
+                if not value:
+                    continue
+                result.add((
+                    source_path,
+                    source_occurrence_identity(contract, source_path, source_row),
+                    value,
+                ))
+        return result
+
+
+def _execution_fact_key(contract: Contract, execution: dict[str, object]) -> tuple[str, str, str]:
+    rule = execution["rule"]
+    source_row = execution["source_row"]
+    return (
+        str(rule["source_semantic_path"]),
+        source_occurrence_identity(contract, str(rule["source_semantic_path"]), source_row),
+        str(execution["value"]),
+    )
+
+
+def _unsupported_fact_key(row: dict[str, str]) -> tuple[str, str, str]:
+    return (
+        row.get("source_semantic_path", ""),
+        row.get("source_occurrence", ""),
+        row.get("source_value", ""),
+    )
+
+
+def collect_scope_unmapped(
+    contract: Contract,
+    source_rows: list[dict[str, str]],
+    scope: ConversionScope,
+    handled_keys: set[tuple[str, str, str]],
+) -> list[dict[str, str]]:
+    """Report explicitly scoped, value-present facts with no applicable Binding rule."""
+    if not scope.enabled:
+        return []
+    issues = []
+    for source_path in scope.entries:
+        source = contract.source_by_path[source_path]
+        for source_row in source_rows:
+            if not scope.matches(contract, source_path, source_row):
+                continue
+            value = (source_row.get(source["local_name"]) or "").strip()
+            if not value:
+                continue
+            key = (source_path, source_occurrence_identity(contract, source_path, source_row), value)
+            if key in handled_keys:
+                continue
+            pseudo_rule = {
+                "source_sequence": source.get("sequence", ""),
+                "source_name": source.get("name", "") or source.get("local_name", ""),
+                "source_semantic_path": source_path,
+                "mapping_status": "",
+                "target_semantic_path": "",
+            }
+            issues.append(unsupported_fact(
+                contract,
+                pseudo_rule,
+                source_row,
+                value,
+                "UNMAPPED_CONVERSION_SOURCE_FACT",
+                "explicitly scoped source fact has no applicable executable or declared non-executable Binding rule",
+            ))
+    return issues
+
+
+def collect_declared_unsupported(contract: Contract, source_rows: list[dict[str, str]], scope: ConversionScope) -> list[dict[str, str]]:
+    """Report only declared-scope source facts that actually carry a value."""
+    groups = defaultdict(list)
+    for rule in contract.report_rules:
+        groups[rule["source_semantic_path"]].append(rule)
+    issues = []
+    for source_row in source_rows:
+        for source_path, rules in groups.items():
+            source = contract.source_by_path[source_path]
+            value = (source_row.get(source["local_name"]) or "").strip()
+            if not value or not scope.matches(contract, source_path, source_row):
+                continue
+            for rule in rules:
+                if rule["source_selectors"] and not source_matches(contract, rule, source_row):
+                    continue
+                reason = unsupported_reason_for_binding_row(rule)
+                issues.append(unsupported_fact(
+                    contract, rule, source_row, value, reason,
+                    "active source fact is declared by the Binding but is not executable in the current mapping",
+                ))
+    return issues
+
+
+def select_forward_executions(contract: Contract, source_rows: list[dict[str, str]], scope: ConversionScope) -> tuple[list[dict[str, object]], list[dict[str, str]]]:
+    """Select executable active facts; ambiguous active variants are skipped and reported."""
     groups = defaultdict(list)
     for rule in contract.attr_rules:
         groups[rule["source_semantic_path"]].append(rule)
     executions = []
+    issues = []
     source_dimensions = sorted(
         (row for row in contract.source_hmd if repeatable(row)),
         key=lambda row: int(row["sequence"]),
@@ -536,17 +949,61 @@ def select_forward_executions(contract: Contract, source_rows: list[dict[str, st
         for source_path, rules in groups.items():
             source = contract.source_by_path[source_path]
             value = (source_row.get(source["local_name"]) or "").strip()
-            if not value:
+            if not value or not scope.matches(contract, source_path, source_row):
                 continue
             matches = [rule for rule in rules if source_matches(contract, rule, source_row)]
             variant_driven = any(rule["source_selectors"] for rule in rules)
-            if variant_driven and len(matches) != 1:
-                raise BindingError(
-                    f"AMBIGUOUS_VARIANT: {source_path} matched {len(matches)} predicate variants"
-                )
+            if variant_driven and len(matches) > 1:
+                issues.append(unsupported_fact(
+                    contract, matches[0], source_row, value, "OTHER_ACTIVE_SOURCE_MAPPING_ERROR",
+                    f"AMBIGUOUS_VARIANT: {source_path} matched {len(matches)} predicate variants",
+                ))
+                continue
+            if variant_driven and not matches:
+                # No Binding predicate selected this value/occurrence, so it is outside
+                # the executable variant scope and is not user-facing unsupported data.
+                continue
             for rule in matches if variant_driven else rules:
                 executions.append({"rule": rule, "source_row": source_row, "value": value})
-    return executions
+    return executions, issues
+
+
+def prepare_forward_executions(contract: Contract, executions: list[dict[str, object]]) -> tuple[list[dict[str, object]], list[dict[str, str]]]:
+    """Resolve transforms/QNames per active fact so one unsupported fact cannot abort others."""
+    prepared = []
+    issues = []
+    for execution in executions:
+        rule = execution["rule"]
+        source_row = execution["source_row"]
+        value = str(execution["value"])
+        try:
+            if rule.get("target_contract_error"):
+                raise BindingError(str(rule["target_contract_error"]))
+            target = contract.target_by_path[rule["target_clean_path"]]
+            serialized_value = contract.serialize_value(
+                target, transform(value, rule["transformation"])
+            )
+            serialized_selectors = []
+            for class_path, key, operation, lexical in rule["selectors"]:
+                if operation == "absent":
+                    continue
+                if operation != "equals":
+                    raise BindingError(
+                        f"present selector serialization requires an explicit value: {class_path}.{key}"
+                    )
+                selected = contract.selector_row(class_path, key)
+                serialized = contract.selector_serialized_value(class_path, key, lexical)
+                serialized_selectors.append((class_path, key, selected, serialized))
+            prepared.append({
+                **execution,
+                "serialized_value": serialized_value,
+                "serialized_selectors": serialized_selectors,
+            })
+        except BindingError as exc:
+            issues.append(unsupported_fact(
+                contract, rule, source_row, value, unsupported_reason_for_error(exc), str(exc)
+            ))
+    return prepared, issues
 
 
 def plan_forward_occurrences(contract: Contract, executions: list[dict[str, object]]) -> tuple[dict[str, dict[tuple, str]], dict[str, dict[str, str]], set[str]]:
@@ -628,9 +1085,20 @@ def plan_forward_occurrences(contract: Contract, executions: list[dict[str, obje
 def forward(args) -> None:
     contract = Contract(args)
     source_rows = read(args.input)
+    scope = ConversionScope(args.scope_file, contract)
     output = {}
     concept_columns = {}
-    executions = select_forward_executions(contract, source_rows)
+
+    selected_executions, selection_issues = select_forward_executions(contract, source_rows, scope)
+    declared_issues = collect_declared_unsupported(contract, source_rows, scope)
+    handled_keys = {_execution_fact_key(contract, execution) for execution in selected_executions}
+    handled_keys.update(_unsupported_fact_key(row) for row in selection_issues + declared_issues)
+    scope_unmapped_issues = collect_scope_unmapped(contract, source_rows, scope, handled_keys)
+    executions, preparation_issues = prepare_forward_executions(contract, selected_executions)
+    unsupported = dedupe_unsupported(
+        selection_issues + declared_issues + scope_unmapped_issues + preparation_issues
+    )
+
     contexts, used_classes, used_logical_classes = plan_forward_occurrences(
         contract, executions
     )
@@ -657,16 +1125,8 @@ def forward(args) -> None:
         concept_columns[column] = target
         if destination.get(column):
             raise BindingError(f"duplicate selector-qualified target fact: {column}, {row_key}")
-        destination[column] = contract.serialize_value(
-            target, transform(str(execution["value"]), rule["transformation"])
-        )
-        for class_path, key, operation, lexical in rule["selectors"]:
-            if operation == "absent":
-                continue
-            if operation != "equals":
-                raise BindingError(f"present selector serialization requires an explicit value: {class_path}.{key}")
-            selected = contract.selector_row(class_path, key)
-            serialized = contract.selector_serialized_value(class_path, key, lexical)
+        destination[column] = str(execution["serialized_value"])
+        for class_path, key, selected, serialized in execution["serialized_selectors"]:
             column = selected["local_name"]
             concept_columns[column] = selected
             selector_dimensions = dimensions_through(
@@ -697,6 +1157,16 @@ def forward(args) -> None:
     ordered = sorted(output.values(), key=lambda row: tuple(int(row.get(field, "0") or 0) for field in dimension_fields))
     write(args.output, ordered, fields)
     metadata(args, contract, dimension_rows, logical_fields, concept_columns)
+
+    report_path = args.unsupported_report or args.output.with_suffix(".unsupported.csv")
+    if report_path.resolve() == args.output.resolve():
+        raise BindingError("unsupported report path must differ from output path")
+    write_unsupported(report_path, unsupported)
+    if unsupported:
+        print(
+            f"SEMANTIC_BINDING_UNSUPPORTED: {len(unsupported)} active in-scope source fact(s) "
+            f"skipped; report={report_path}"
+        )
 
 def reverse(args) -> None:
     contract = Contract(args)
@@ -821,6 +1291,17 @@ def parser() -> argparse.ArgumentParser:
             command.add_argument("--taxonomy", type=Path, required=True)
             command.add_argument("--entity", default="scheme:UADC-PoC")
             command.add_argument("--period", default="2026-08-25T00:00:00")
+            command.add_argument(
+                "--unsupported-report", type=Path,
+                help="CSV report for active in-scope source facts skipped as unsupported; "
+                     "defaults to <output>.unsupported.csv",
+            )
+            command.add_argument(
+                "--scope-file", type=Path,
+                help="Optional CSV defining the explicit forward conversion scope. "
+                     "Requires source_semantic_path (or Source_Semantic_Path); "
+                     "source_occurrence/Source_Occurrence may restrict an occurrence.",
+            )
     return result
 
 def main() -> int:

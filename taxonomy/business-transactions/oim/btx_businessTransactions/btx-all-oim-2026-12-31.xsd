@@ -14,6 +14,7 @@
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/bus" schemaLocation="../../bus/bus-oim-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/cor" schemaLocation="../../cor/cor-oim-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ehm" schemaLocation="../../ehm/ehm-oim-2026-12-31.xsd"/>
+  <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ivc" schemaLocation="../../ivc/ivc-oim-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/lnk" schemaLocation="../../lnk/lnk-oim-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/muc" schemaLocation="../../muc/muc-oim-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/taf" schemaLocation="../../taf/taf-oim-2026-12-31.xsd"/>
@@ -27,6 +28,8 @@
       <link:linkbaseRef xlink:type="simple" xlink:href="../../lnk/label/lnk-oim-lab-ja-2026-12-31.xml" xlink:title="Label Links, ja" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
       <link:linkbaseRef xlink:type="simple" xlink:href="../../bus/label/bus-oim-lab-en-2026-12-31.xml" xlink:title="Label Links, all" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
       <link:linkbaseRef xlink:type="simple" xlink:href="../../bus/label/bus-oim-lab-ja-2026-12-31.xml" xlink:title="Label Links, ja" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+      <link:linkbaseRef xlink:type="simple" xlink:href="../../ivc/label/ivc-oim-lab-en-2026-12-31.xml" xlink:title="Label Links, all" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
+      <link:linkbaseRef xlink:type="simple" xlink:href="../../ivc/label/ivc-oim-lab-ja-2026-12-31.xml" xlink:title="Label Links, ja" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
       <link:linkbaseRef xlink:type="simple" xlink:href="../../taf/label/taf-oim-lab-en-2026-12-31.xml" xlink:title="Label Links, all" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
       <link:linkbaseRef xlink:type="simple" xlink:href="../../taf/label/taf-oim-lab-ja-2026-12-31.xml" xlink:title="Label Links, ja" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
       <link:linkbaseRef xlink:type="simple" xlink:href="../../muc/label/muc-oim-lab-en-2026-12-31.xml" xlink:title="Label Links, all" xlink:role="http://www.xbrl.org/2003/role/labelLinkbaseRef" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase"/>
@@ -51,64 +54,37 @@
       <link:roleType id="link_lnk_summaryReportingTaxonomies" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_lnk_summaryReportingTaxonomies">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_cor_entityParty" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_cor_entityParty">
+      <link:roleType id="link_btx_entityParty" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_entityParty">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_partyPhone" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_partyPhone">
+      <link:roleType id="link_bus_entityPartyPhone" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyPhone">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_partyFax" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_partyFax">
+      <link:roleType id="link_bus_entityPartyFax" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyFax">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_partyEmail" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_partyEmail">
+      <link:roleType id="link_bus_entityPartyEmail" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyEmail">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_registeredOrganizationIdentifier" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_registeredOrganizationIdentifier">
+      <link:roleType id="link_bus_entityPartyRegisteredOrganizationIdentifier" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyRegisteredOrganizationIdentifier">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_partyAddress" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_partyAddress">
+      <link:roleType id="link_bus_entityPartyAddress" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyAddress">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_partyWebSite" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_partyWebSite">
+      <link:roleType id="link_bus_entityPartyWebSite" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyWebSite">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_partyContact" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_partyContact">
+      <link:roleType id="link_bus_entityPartyContact" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyContact">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_entityContactPhone" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityContactPhone">
+      <link:roleType id="link_bus_entityPartyContactPhone" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyContactPhone">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_entityContactFax" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityContactFax">
+      <link:roleType id="link_bus_entityPartyContactFax" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyContactFax">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_entityContactEmail" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityContactEmail">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_bus_specifiedAccountingMethodStructure" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_specifiedAccountingMethodStructure">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_bus_assignedAccountant" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_assignedAccountant">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_bus_accountantAddress" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_accountantAddress">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_bus_accountantContact" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_accountantContact">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_bus_entityAccountantContactPhone" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityAccountantContactPhone">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_bus_entityAccountantContactFax" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityAccountantContactFax">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_bus_entityAccountantContactEmail" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityAccountantContactEmail">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_bus_specifiedReportingCalendar" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_specifiedReportingCalendar">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_bus_reportingCalendarPeriod" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_reportingCalendarPeriod">
+      <link:roleType id="link_bus_entityPartyContactEmail" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_entityPartyContactEmail">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
       <link:roleType id="link_btx_transactionHeader" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_transactionHeader">
@@ -121,9 +97,6 @@
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
       <link:roleType id="link_btx_headerIdentifierReference" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_headerIdentifierReference">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_cor_headerIdentifierExternalAuthority" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_cor_headerIdentifierExternalAuthority">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
       <link:roleType id="link_cor_headerIdentifierPhone" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_cor_headerIdentifierPhone">
@@ -153,6 +126,9 @@
       <link:roleType id="link_btx_registeredIdentifier" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_registeredIdentifier">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
+      <link:roleType id="link_cor_headerIdentifierRegisteredExternalAuthority" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_cor_headerIdentifierRegisteredExternalAuthority">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
       <link:roleType id="link_btx_headerTax" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_headerTax">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
@@ -169,9 +145,6 @@
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
       <link:roleType id="link_btx_detailIdentifierReference" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_detailIdentifierReference">
-        <link:usedOn>link:definitionLink</link:usedOn>
-      </link:roleType>
-      <link:roleType id="link_cor_externalAuthority" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_cor_externalAuthority">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
       <link:roleType id="link_cor_identifierPhone" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_cor_identifierPhone">
@@ -201,10 +174,19 @@
       <link:roleType id="link_btx_identifierRegisteredIdentifier" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_identifierRegisteredIdentifier">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
+      <link:roleType id="link_cor_identifierRegisteredExternalAuthority" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_cor_identifierRegisteredExternalAuthority">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_btx_detailReferencedDocument" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_detailReferencedDocument">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
+      <link:roleType id="link_btx_detailReferencedDocumentAttachment" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_detailReferencedDocumentAttachment">
+        <link:usedOn>link:definitionLink</link:usedOn>
+      </link:roleType>
       <link:roleType id="link_cor_detailXbrl" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_cor_detailXbrl">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
-      <link:roleType id="link_bus_detailMeasurable" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_detailMeasurable">
+      <link:roleType id="link_btx_detailMeasurable" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_btx_detailMeasurable">
         <link:usedOn>link:definitionLink</link:usedOn>
       </link:roleType>
       <link:roleType id="link_bus_detailJob" roleURI="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/role/link_bus_detailJob">
@@ -247,31 +229,21 @@
   <element name="h_btx_businessTransactions" id="h_btx_businessTransactions" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_cor_documentInformation" id="h_cor_documentInformation" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_lnk_summaryReportingTaxonomies" id="h_lnk_summaryReportingTaxonomies" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_cor_entityParty" id="h_cor_entityParty" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_partyPhone" id="h_bus_partyPhone" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_partyFax" id="h_bus_partyFax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_partyEmail" id="h_bus_partyEmail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_registeredOrganizationIdentifier" id="h_bus_registeredOrganizationIdentifier" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_partyAddress" id="h_bus_partyAddress" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_partyWebSite" id="h_bus_partyWebSite" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_partyContact" id="h_bus_partyContact" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_entityContactPhone" id="h_bus_entityContactPhone" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_entityContactFax" id="h_bus_entityContactFax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_entityContactEmail" id="h_bus_entityContactEmail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_specifiedAccountingMethodStructure" id="h_bus_specifiedAccountingMethodStructure" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_assignedAccountant" id="h_bus_assignedAccountant" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_accountantAddress" id="h_bus_accountantAddress" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_accountantContact" id="h_bus_accountantContact" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_entityAccountantContactPhone" id="h_bus_entityAccountantContactPhone" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_entityAccountantContactFax" id="h_bus_entityAccountantContactFax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_entityAccountantContactEmail" id="h_bus_entityAccountantContactEmail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_specifiedReportingCalendar" id="h_bus_specifiedReportingCalendar" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_reportingCalendarPeriod" id="h_bus_reportingCalendarPeriod" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_btx_entityParty" id="h_btx_entityParty" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyPhone" id="h_bus_entityPartyPhone" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyFax" id="h_bus_entityPartyFax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyEmail" id="h_bus_entityPartyEmail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyRegisteredOrganizationIdentifier" id="h_bus_entityPartyRegisteredOrganizationIdentifier" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyAddress" id="h_bus_entityPartyAddress" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyWebSite" id="h_bus_entityPartyWebSite" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyContact" id="h_bus_entityPartyContact" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyContactPhone" id="h_bus_entityPartyContactPhone" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyContactFax" id="h_bus_entityPartyContactFax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_bus_entityPartyContactEmail" id="h_bus_entityPartyContactEmail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_transactionHeader" id="h_btx_transactionHeader" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_referencedDocument" id="h_btx_referencedDocument" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_documentAttachment" id="h_btx_documentAttachment" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_headerIdentifierReference" id="h_btx_headerIdentifierReference" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_cor_headerIdentifierExternalAuthority" id="h_cor_headerIdentifierExternalAuthority" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_cor_headerIdentifierPhone" id="h_cor_headerIdentifierPhone" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_cor_headerIdentifierFax" id="h_cor_headerIdentifierFax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_cor_headerIdentifierEmail" id="h_cor_headerIdentifierEmail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
@@ -281,13 +253,13 @@
   <element name="h_bus_headerIdentifierContactFax" id="h_bus_headerIdentifierContactFax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_bus_headerIdentifierContactEmail" id="h_bus_headerIdentifierContactEmail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_registeredIdentifier" id="h_btx_registeredIdentifier" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_cor_headerIdentifierRegisteredExternalAuthority" id="h_cor_headerIdentifierRegisteredExternalAuthority" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_headerTax" id="h_btx_headerTax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_headerAmountStructure" id="h_btx_headerAmountStructure" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_transactionDetail" id="h_btx_transactionDetail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_taf_originatingDocument" id="h_taf_originatingDocument" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_muc_detailMulticurrency" id="h_muc_detailMulticurrency" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_detailIdentifierReference" id="h_btx_detailIdentifierReference" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_cor_externalAuthority" id="h_cor_externalAuthority" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_cor_identifierPhone" id="h_cor_identifierPhone" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_cor_identifierFax" id="h_cor_identifierFax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_cor_identifierEmail" id="h_cor_identifierEmail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
@@ -297,8 +269,11 @@
   <element name="h_bus_contactFax" id="h_bus_contactFax" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_bus_contactEmail" id="h_bus_contactEmail" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_btx_identifierRegisteredIdentifier" id="h_btx_identifierRegisteredIdentifier" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_cor_identifierRegisteredExternalAuthority" id="h_cor_identifierRegisteredExternalAuthority" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_btx_detailReferencedDocument" id="h_btx_detailReferencedDocument" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_btx_detailReferencedDocumentAttachment" id="h_btx_detailReferencedDocumentAttachment" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_cor_detailXbrl" id="h_cor_detailXbrl" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
-  <element name="h_bus_detailMeasurable" id="h_bus_detailMeasurable" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
+  <element name="h_btx_detailMeasurable" id="h_btx_detailMeasurable" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_bus_detailJob" id="h_bus_detailJob" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_bus_detailDepreciationMortgage" id="h_bus_detailDepreciationMortgage" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
   <element name="h_ehm_detailSerialOrLot" id="h_ehm_detailSerialOrLot" substitutionGroup="xbrldt:hypercubeItem" type="xbrli:stringItemType" nillable="true" abstract="true" xbrli:periodType="instant"/>
@@ -311,30 +286,20 @@
   <!-- Dimension -->
   <element name="d_btx_businessTransactions" id="d_btx_businessTransactions" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_lnk_summaryReportingTaxonomies" id="d_lnk_summaryReportingTaxonomies" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_partyPhone" id="d_bus_partyPhone" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_partyFax" id="d_bus_partyFax" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_partyEmail" id="d_bus_partyEmail" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_registeredOrganizationIdentifier" id="d_bus_registeredOrganizationIdentifier" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_partyAddress" id="d_bus_partyAddress" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_partyWebSite" id="d_bus_partyWebSite" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_partyContact" id="d_bus_partyContact" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_entityContactPhone" id="d_bus_entityContactPhone" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_entityContactFax" id="d_bus_entityContactFax" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_entityContactEmail" id="d_bus_entityContactEmail" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_specifiedAccountingMethodStructure" id="d_bus_specifiedAccountingMethodStructure" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_assignedAccountant" id="d_bus_assignedAccountant" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_accountantAddress" id="d_bus_accountantAddress" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_accountantContact" id="d_bus_accountantContact" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_entityAccountantContactPhone" id="d_bus_entityAccountantContactPhone" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_entityAccountantContactFax" id="d_bus_entityAccountantContactFax" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_entityAccountantContactEmail" id="d_bus_entityAccountantContactEmail" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_specifiedReportingCalendar" id="d_bus_specifiedReportingCalendar" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_reportingCalendarPeriod" id="d_bus_reportingCalendarPeriod" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyPhone" id="d_bus_entityPartyPhone" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyFax" id="d_bus_entityPartyFax" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyEmail" id="d_bus_entityPartyEmail" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyRegisteredOrganizationIdentifier" id="d_bus_entityPartyRegisteredOrganizationIdentifier" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyAddress" id="d_bus_entityPartyAddress" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyWebSite" id="d_bus_entityPartyWebSite" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyContact" id="d_bus_entityPartyContact" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyContactPhone" id="d_bus_entityPartyContactPhone" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyContactFax" id="d_bus_entityPartyContactFax" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_bus_entityPartyContactEmail" id="d_bus_entityPartyContactEmail" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_btx_transactionHeader" id="d_btx_transactionHeader" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_btx_referencedDocument" id="d_btx_referencedDocument" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_btx_documentAttachment" id="d_btx_documentAttachment" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_btx_headerIdentifierReference" id="d_btx_headerIdentifierReference" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_cor_headerIdentifierExternalAuthority" id="d_cor_headerIdentifierExternalAuthority" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_cor_headerIdentifierPhone" id="d_cor_headerIdentifierPhone" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_cor_headerIdentifierFax" id="d_cor_headerIdentifierFax" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_cor_headerIdentifierEmail" id="d_cor_headerIdentifierEmail" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
@@ -350,7 +315,6 @@
   <element name="d_taf_originatingDocument" id="d_taf_originatingDocument" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_muc_detailMulticurrency" id="d_muc_detailMulticurrency" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_btx_detailIdentifierReference" id="d_btx_detailIdentifierReference" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_cor_externalAuthority" id="d_cor_externalAuthority" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_cor_identifierPhone" id="d_cor_identifierPhone" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_cor_identifierFax" id="d_cor_identifierFax" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_cor_identifierEmail" id="d_cor_identifierEmail" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
@@ -360,8 +324,10 @@
   <element name="d_bus_contactFax" id="d_bus_contactFax" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_bus_contactEmail" id="d_bus_contactEmail" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_btx_identifierRegisteredIdentifier" id="d_btx_identifierRegisteredIdentifier" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_btx_detailReferencedDocument" id="d_btx_detailReferencedDocument" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_btx_detailReferencedDocumentAttachment" id="d_btx_detailReferencedDocumentAttachment" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_cor_detailXbrl" id="d_cor_detailXbrl" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
-  <element name="d_bus_detailMeasurable" id="d_bus_detailMeasurable" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
+  <element name="d_btx_detailMeasurable" id="d_btx_detailMeasurable" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_bus_detailJob" id="d_bus_detailJob" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_bus_detailDepreciationMortgage" id="d_bus_detailDepreciationMortgage" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>
   <element name="d_ehm_detailSerialOrLot" id="d_ehm_detailSerialOrLot" substitutionGroup="xbrldt:dimensionItem" type="xbrli:stringItemType" abstract="true" xbrli:periodType="instant" xbrldt:typedDomainRef="#_v"/>

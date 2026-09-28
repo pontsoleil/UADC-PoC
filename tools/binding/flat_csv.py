@@ -21,6 +21,7 @@ import hashlib
 import json
 import re
 import sys
+import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import date
@@ -94,6 +95,14 @@ ACCOUNT_MAPPING_FIELDS = (
     "eTax_Account_Code",
     "eTax_Account_Name",
     "eTax_Category",
+)
+ACCOUNT_TAX_MAPPING_FIELDS = (
+    "source_account_code",
+    "source_account_name",
+    "application_tax_code",
+    "tax_type",
+    "tax_category",
+    "note",
 )
 UNBOUND_REPORT_FIELDS = (
     "Profile",
@@ -287,6 +296,15 @@ class Definition:
 class AccountMapping:
     by_source: Mapping[tuple[str, str], Mapping[str, str]]
     by_target: Mapping[tuple[str, str], Mapping[str, str]]
+
+
+@dataclass(frozen=True)
+class AccountTaxRule:
+    source_account_code: str
+    source_account_name: str
+    application_tax_code: str
+    tax_type: str
+    tax_category: str
 
 
 @dataclass(frozen=True)
@@ -817,6 +835,65 @@ def load_account_mapping(path: Path, encoding: str = "utf-8-sig") -> AccountMapp
         raise ConversionError("ACCOUNT_MAPPING_ROW_INVALID", "Account Mapping must contain data rows")
     return AccountMapping(by_source=by_source, by_target=by_target)
 
+
+def load_account_tax_mapping(
+    path: Path, encoding: str = "utf-8-sig"
+) -> Mapping[tuple[str, str, str, str], AccountTaxRule]:
+    rules: dict[tuple[str, str, str, str], AccountTaxRule] = {}
+    try:
+        with path.open(newline="", encoding=encoding) as stream:
+            reader = csv.DictReader(stream)
+            if tuple(reader.fieldnames or ()) != ACCOUNT_TAX_MAPPING_FIELDS:
+                raise ConversionError(
+                    "ACCOUNT_TAX_MAPPING_HEADER_INVALID",
+                    "Account Tax Mapping header must exactly match the canonical six columns",
+                )
+            for source in reader:
+                row = {
+                    field: (source.get(field) or "").strip()
+                    for field in ACCOUNT_TAX_MAPPING_FIELDS
+                }
+                required = ACCOUNT_TAX_MAPPING_FIELDS[:-1]
+                if any(not row[field] for field in required):
+                    raise ConversionError(
+                        "ACCOUNT_TAX_MAPPING_ROW_INVALID",
+                        "Account Tax Mapping key and output values must not be empty",
+                    )
+                if row["tax_type"] not in {"VAT", "OTH"}:
+                    raise ConversionError(
+                        "ACCOUNT_TAX_MAPPING_ROW_INVALID",
+                        "Account Tax Mapping tax type is not supported",
+                    )
+                key = (
+                    row["source_account_code"],
+                    row["source_account_name"],
+                    row["tax_type"],
+                    row["tax_category"],
+                )
+                if key in rules:
+                    raise ConversionError(
+                        "ACCOUNT_TAX_MAPPING_DUPLICATE",
+                        "Account Tax Mapping contains a duplicate reverse policy",
+                    )
+                rules[key] = AccountTaxRule(
+                    source_account_code=row["source_account_code"],
+                    source_account_name=row["source_account_name"],
+                    application_tax_code=row["application_tax_code"],
+                    tax_type=row["tax_type"],
+                    tax_category=row["tax_category"],
+                )
+    except ConversionError:
+        raise
+    except (OSError, UnicodeError, csv.Error) as exc:
+        raise ConversionError(
+            "DEFINITION_IO_ERROR", "Account Tax Mapping could not be read"
+        ) from exc
+    if not rules:
+        raise ConversionError(
+            "ACCOUNT_TAX_MAPPING_ROW_INVALID", "Account Tax Mapping must contain data rows"
+        )
+    return rules
+
 def _resolved_width(definition: Definition, requested: int | None) -> int:
     if requested is not None and requested <= 0:
         raise ConversionError("PROFILE_WIDTH_INVALID", "profile-width must be a positive integer")
@@ -1006,10 +1083,6 @@ def group_source_rows(
                 number = _column_number(column)
                 assert number is not None
                 value = source[number - 1]
-                if not value:
-                    raise ConversionError(
-                        "GROUP_KEY_EMPTY", f"group key {column} is empty at source row {source_index}"
-                    )
                 key_values.append(value)
             key = json.dumps(key_values, ensure_ascii=False, separators=(",", ":"))
             grouped.setdefault(key, []).append((source_index, source))
@@ -1134,6 +1207,84 @@ def _relative_uri(target: Path, metadata: Path) -> str:
     return Path(os.path.relpath(target.resolve(), metadata.resolve().parent)).as_posix()
 
 
+XSD_SCHEMA = "{http://www.w3.org/2001/XMLSchema}schema"
+XSD_IMPORT = "{http://www.w3.org/2001/XMLSchema}import"
+
+
+def _oim_module_identifiers(schema_path: Path, target_namespace: str) -> set[str]:
+    identifiers: set[str] = set()
+    namespace_parts = [part for part in target_namespace.rstrip("/").split("/") if part]
+    if namespace_parts:
+        tail = namespace_parts[-1]
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}", tail) and len(namespace_parts) > 1:
+            identifiers.add(namespace_parts[-2])
+        else:
+            identifiers.add(tail)
+    filename_match = re.match(r"(.+?)-oim(?:-|$)", schema_path.stem)
+    if filename_match:
+        identifiers.add(filename_match.group(1))
+    return {identifier for identifier in identifiers if identifier}
+
+
+def _read_oim_schema(schema_path: Path) -> tuple[ET.Element, str]:
+    try:
+        root = ET.parse(schema_path).getroot()
+    except (OSError, ET.ParseError) as exc:
+        raise ConversionError(
+            "OIM_TAXONOMY_INVALID", "an OIM taxonomy schema could not be parsed"
+        ) from exc
+    if root.tag != XSD_SCHEMA:
+        raise ConversionError("OIM_TAXONOMY_INVALID", "the OIM taxonomy root is not xs:schema")
+    target_namespace = (root.get("targetNamespace") or "").strip()
+    if not target_namespace:
+        raise ConversionError("OIM_TAXONOMY_INVALID", "an OIM taxonomy schema has no targetNamespace")
+    return root, target_namespace
+
+
+def _resolve_oim_taxonomy_namespaces(
+    taxonomy_entrypoint: Path, required_modules: Iterable[str]
+) -> dict[str, str]:
+    entrypoint = taxonomy_entrypoint.resolve()
+    entry_root, entry_namespace = _read_oim_schema(entrypoint)
+    resolved: dict[str, tuple[str, Path]] = {"plt": (entry_namespace, entrypoint)}
+    pending: list[tuple[Path, ET.Element]] = [(entrypoint, entry_root)]
+    visited: set[Path] = set()
+    while pending:
+        schema_path, root = pending.pop()
+        if schema_path in visited:
+            continue
+        visited.add(schema_path)
+        for import_node in root.findall(XSD_IMPORT):
+            location = (import_node.get("schemaLocation") or "").strip()
+            declared_namespace = (import_node.get("namespace") or "").strip()
+            if not location or re.match(r"^[A-Za-z][A-Za-z0-9+.-]*://", location):
+                continue
+            imported_path = (schema_path.parent / Path(location)).resolve()
+            imported_root, imported_namespace = _read_oim_schema(imported_path)
+            if declared_namespace and declared_namespace != imported_namespace:
+                raise ConversionError(
+                    "OIM_TAXONOMY_INVALID",
+                    "xs:import namespace does not match imported schema targetNamespace",
+                )
+            for module in _oim_module_identifiers(imported_path, imported_namespace):
+                previous = resolved.get(module)
+                if previous is not None and previous[0] != imported_namespace:
+                    raise ConversionError(
+                        "OIM_NAMESPACE_AMBIGUOUS",
+                        "multiple taxonomy namespaces resolve to the same module identifier",
+                    )
+                resolved[module] = (imported_namespace, imported_path)
+            pending.append((imported_path, imported_root))
+    required = {module.strip() for module in required_modules if module.strip()}
+    missing = sorted(required.difference(resolved))
+    if missing:
+        raise ConversionError(
+            "OIM_NAMESPACE_UNRESOLVED",
+            "a required HMD module prefix is absent from the selected taxonomy DTS",
+        )
+    return {module: resolved[module][0] for module in sorted(required | {"plt"})}
+
+
 def _selector_value(binding_path: str, class_path: str) -> str:
     _, selectors = _path_selectors(binding_path)
     values = [value for (owner, _), value in selectors.items() if owner == class_path]
@@ -1158,7 +1309,7 @@ def _occurrence_value(record: Mapping[str, str], class_path: str) -> str:
 
 def _oim_records(
     records: Sequence[Mapping[str, str]], definition: Definition, currency: str
-) -> tuple[list[dict[str, str]], list[str], dict[str, str]]:
+) -> tuple[list[dict[str, str]], list[str], set[str]]:
     repeated_classes = [
         (path, row)
         for path, row in definition.hmd_rows.items()
@@ -1166,7 +1317,7 @@ def _oim_records(
     ]
     repeated_classes.sort(key=lambda item: (item[0].count("."), item[0]))
     output: list[dict[str, str]] = []
-    namespaces: dict[str, str] = {}
+    modules: set[str] = set()
     dimension_columns: set[str] = set()
     for source in records:
         if (source.get("type") or "").upper() != "A":
@@ -1188,10 +1339,7 @@ def _oim_records(
                      else ""),
             "value": source.get("value") or "",
         }
-        namespaces[module] = (
-            f"https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/"
-            f"experimental/{module}/2026-12-31"
-        )
+        modules.add(module)
         for class_path, class_row in repeated_classes:
             if semantic_path == class_path or not semantic_path.startswith(class_path + "."):
                 continue
@@ -1203,7 +1351,7 @@ def _oim_records(
             target[column] = _occurrence_value(source, class_path)
             dimension_columns.add(column)
         output.append(target)
-    return output, sorted(dimension_columns), namespaces
+    return output, sorted(dimension_columns), modules
 
 
 def _write_oim_metadata(
@@ -1211,18 +1359,13 @@ def _write_oim_metadata(
     csv_path: Path,
     taxonomy_entrypoint: Path,
     dimension_columns: Sequence[str],
-    namespaces: Mapping[str, str],
+    modules: Iterable[str],
     entity: str,
     period: str,
 ) -> None:
-    version_match = re.search(r"(\d{4}-\d{2}-\d{2})", taxonomy_entrypoint.name)
-    version = version_match.group(1) if version_match else "2026-12-31"
+    taxonomy_namespaces = _resolve_oim_taxonomy_namespaces(taxonomy_entrypoint, modules)
     namespace_map = {
-        **dict(sorted(namespaces.items())),
-        "plt": (
-            f"https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/"
-            f"experimental/plt/{version}"
-        ),
+        **taxonomy_namespaces,
         "iso4217": "http://www.xbrl.org/2003/iso4217",
         "scheme": "http://www.example.com",
         "xbrl": "https://xbrl.org/2021",
@@ -1262,6 +1405,24 @@ def _account_record_groups(
         key = (row.get("entry_key", ""), row.get("source_row", ""), occurrence)
         grouped.setdefault(key, []).append(row)
     return list(grouped.values())
+
+
+def _account_context(
+    records: Sequence[dict[str, str]],
+) -> dict[tuple[str, str, str], tuple[str, str]]:
+    context: dict[tuple[str, str, str], tuple[str, str]] = {}
+    for rows in _account_record_groups(records):
+        number = _unique_named_record(rows, "accountNumber")
+        description = _unique_named_record(rows, "accountDescription")
+        if number is None or description is None:
+            continue
+        key = (
+            number.get("entry_key", ""),
+            number.get("source_row", ""),
+            number.get("occurrence", ""),
+        )
+        context[key] = (number.get("value", ""), description.get("value", ""))
+    return context
 
 
 def _unique_named_record(
@@ -1633,6 +1794,8 @@ def _apply_standard_tax_forward(
     rules: Sequence[StandardTaxRule],
     definition: Definition,
     profile_name: str,
+    account_tax_rules: Mapping[tuple[str, str, str, str], AccountTaxRule] | None = None,
+    source_accounts: Mapping[tuple[str, str, str], tuple[str, str]] | None = None,
 ) -> tuple[list[dict[str, str]], list[dict[str, str]], int, int]:
     mapped = [dict(row) for row in records]
     additions: list[dict[str, str]] = []
@@ -1650,18 +1813,55 @@ def _apply_standard_tax_forward(
         side = _tax_side(rows)
         source_code = category["value"]
         source_rate = rate.get("value", "") if rate else ""
-        rule = _match_forward_tax_rule(rules, source_code, side, source_rate)
-        tax_type, tax_category = rule.tax_type, rule.tax_category
+        occurrence_key = (
+            category.get("entry_key", ""),
+            category.get("source_row", ""),
+            category.get("occurrence", ""),
+        )
+        account = (source_accounts or {}).get(occurrence_key)
+        account_candidates = []
+        if account is not None and account_tax_rules is not None:
+            account_candidates = [
+                candidate
+                for candidate in account_tax_rules.values()
+                if candidate.source_account_code == account[0]
+                and candidate.source_account_name == account[1]
+                and candidate.application_tax_code == source_code
+            ]
+        if len(account_candidates) > 1:
+            raise ConversionError(
+                "ACCOUNT_TAX_MAPPING_AMBIGUOUS",
+                "account and application tax code match multiple policies",
+            )
+        account_rule = account_candidates[0] if account_candidates else None
+        if account_rule is not None:
+            if source_rate:
+                raise ConversionError(
+                    "ACCOUNT_TAX_POLICY_CONFLICT",
+                    "account-specific tax policy conflicts with a source tax rate",
+                )
+            tax_type, tax_category = account_rule.tax_type, account_rule.tax_category
+            rate_ratio = ""
+            transaction_classification = ""
+            tax_inclusion_mode = ""
+            rule_id = f"ACCOUNT:{account_rule.source_account_code}:{source_code}"
+        else:
+            rule = _match_forward_tax_rule(rules, source_code, side, source_rate)
+            tax_type, tax_category = rule.tax_type, rule.tax_category
+            rate_ratio = rule.tax_rate_ratio
+            transaction_classification = rule.transaction_classification
+            tax_inclusion_mode = rule.tax_inclusion_mode
+            rule_id = rule.rule_id
         category["value"] = tax_category
         additions.append(_tax_record_from_category(definition, category, TAX_TYPE_SUFFIX, tax_type))
-        if rule.transaction_classification:
-            additions.append(_tax_record_from_category(definition, category, TAX_TRANSACTION_CLASSIFICATION_SUFFIX, rule.transaction_classification))
-        if rule.tax_rate_ratio:
+        if transaction_classification:
+            additions.append(_tax_record_from_category(definition, category, TAX_TRANSACTION_CLASSIFICATION_SUFFIX, transaction_classification))
+        if rate_ratio:
             if rate is None:
-                rate = _rate_record_from_category(definition, category, rule.tax_rate_ratio)
+                rate = _rate_record_from_category(definition, category, rate_ratio)
                 additions.append(rate)
             else:
-                rate["value"] = rule.tax_rate_ratio
+                rate["value"] = rate_ratio
         elif rate is not None and rate.get("value", ""):
             raise ConversionError("TAX_RATE_CONFLICT", "a non-rate mapping received a source tax rate")
         trace = {
@@ -1671,12 +1871,12 @@ def _apply_standard_tax_forward(
             "source_occurrence_side": side,
             "source_tax_code": source_code,
             "source_tax_rate_lexical": source_rate,
-            "source_tax_inclusion_mode": rule.tax_inclusion_mode,
-            "mapping_rule_id": rule.rule_id,
+            "source_tax_inclusion_mode": tax_inclusion_mode,
+            "mapping_rule_id": rule_id,
             "output_tax_type": tax_type,
             "output_tax_category": tax_category,
-            "output_tax_rate_ratio": rule.tax_rate_ratio,
-            "output_transaction_classification": rule.transaction_classification,
+            "output_tax_rate_ratio": rate_ratio,
+            "output_transaction_classification": transaction_classification,
             "restoration_status": "STANDARDIZED",
             "trace_sha256": "",
         }
@@ -1698,8 +1898,10 @@ def _apply_standard_tax_reverse(
     traces: Sequence[dict[str, str]],
     definition: Definition,
     policy_classification: str = "",
+    account_tax_rules: Mapping[tuple[str, str, str, str], AccountTaxRule] | None = None,
 ) -> tuple[list[dict[str, str]], int, int]:
     mapped = [dict(row) for row in records]
+    account_by_occurrence = _account_context(mapped)
     trace_by_key = {_trace_key(row): row for row in traces}
     if len(trace_by_key) != len(traces):
         raise ConversionError("TAX_TRACE_AMBIGUOUS", "tax trace contains duplicate occurrence keys")
@@ -1743,6 +1945,28 @@ def _apply_standard_tax_reverse(
             if classification and policy_classification and classification != policy_classification:
                 raise ConversionError("TAX_POLICY_CONFLICT", "explicit policy conflicts with the detail transaction classification")
             classification = classification or policy_classification
+            occurrence_key = (
+                category.get("entry_key", ""),
+                category.get("source_row", ""),
+                category.get("occurrence", ""),
+            )
+            account = account_by_occurrence.get(occurrence_key)
+            account_rule = None
+            if account is not None and account_tax_rules is not None:
+                account_rule = account_tax_rules.get(
+                    (account[0], account[1], tax_type["value"], category["value"])
+                )
+            if account_rule is not None:
+                if classification or ratio:
+                    raise ConversionError(
+                        "ACCOUNT_TAX_POLICY_CONFLICT",
+                        "account-specific tax policy conflicts with canonical classification or rate",
+                    )
+                category["value"] = account_rule.application_tax_code
+                if rate is not None:
+                    remove_ids.add(id(rate))
+                regenerated += 1
+                continue
             candidates = [
                 rule
                 for rule in rules
@@ -1836,6 +2060,11 @@ def convert_to_structured(options: ConversionOptions) -> ConversionSummary:
         if options.account_mapping_path is not None
         else None
     )
+    account_tax_rules = (
+        load_account_tax_mapping(options.account_tax_mapping_path, options.definition_encoding)
+        if options.account_tax_mapping_path is not None
+        else None
+    )
     width = _resolved_width(definition, options.profile_width)
     expected_header = _physical_header(definition, width) if options.input_header_rows else None
     source_rows = _read_flat_rows(
@@ -1908,6 +2137,7 @@ def convert_to_structured(options: ConversionOptions) -> ConversionSummary:
                         _structured_record(row, entry_key, str(source_index), variant, value)
                     )
 
+    source_accounts = _account_context(records)
     mapped_account_occurrences = 0
     extended_account_occurrences = 0
     if account_mapping is not None:
@@ -1923,7 +2153,12 @@ def convert_to_structured(options: ConversionOptions) -> ConversionSummary:
         )
         records, trace_rows, standardized_tax_occurrences, missing_tax_information = (
             _apply_standard_tax_forward(
-                records, tax_rules, definition, options.profile_name
+                records,
+                tax_rules,
+                definition,
+                options.profile_name,
+                account_tax_rules,
+                source_accounts,
             )
         )
         if options.tax_trace_output is None:
@@ -1939,13 +2174,13 @@ def convert_to_structured(options: ConversionOptions) -> ConversionSummary:
             raise ConversionError(
                 "OIM_PAIR_INVALID", "Structured CSV and JSON metadata must share directory and basename"
             )
-        records, dimension_columns, namespaces = _oim_records(records, definition, options.currency)
+        records, dimension_columns, modules = _oim_records(records, definition, options.currency)
         _write_oim_metadata(
             metadata_output,
             options.output_path,
             options.taxonomy_entrypoint,
             dimension_columns,
-            namespaces,
+            modules,
             options.entity,
             options.period,
         )
@@ -2172,7 +2407,7 @@ def _write_flat(
 ) -> None:
     try:
         with path.open("w", newline="", encoding=encoding) as stream:
-            writer = csv.writer(stream)
+            writer = csv.writer(stream, lineterminator="\n")
             if header is not None:
                 writer.writerow(header)
             writer.writerows(rows)
@@ -2415,6 +2650,11 @@ def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
         structured_rows, mapped_account_occurrences, ambiguous_reverse_mappings = (
             _apply_account_mapping_reverse(structured_rows, account_mapping)
         )
+    account_tax_rules = (
+        load_account_tax_mapping(options.account_tax_mapping_path, options.definition_encoding)
+        if options.account_tax_mapping_path is not None
+        else None
+    )
     source_restored_tax_occurrences = 0
     policy_regenerated_tax_occurrences = 0
     if options.standard_tax_mapping_path is not None:
@@ -2439,6 +2679,7 @@ def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
                 trace_rows,
                 definition,
                 options.tax_policy_classification,
+                account_tax_rules,
             )
         )
     headers, details = _validated_structured_rows(structured_rows, definition)
@@ -2703,6 +2944,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(str(exc), file=sys.stderr)
         return 2
     except Exception:
+        if getattr(args, "debug", False):
+            raise
         print("INTERNAL_ERROR: conversion failed without value disclosure", file=sys.stderr)
         return 3
     return 0

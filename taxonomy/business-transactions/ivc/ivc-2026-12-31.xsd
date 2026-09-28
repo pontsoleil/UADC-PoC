@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- (c) XBRL International.  See http://www.xbrl.org/legal -->
+<schema targetNamespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ivc" attributeFormDefault="unqualified" elementFormDefault="qualified"
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:link="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xbrli="http://www.xbrl.org/2003/instance"
+  xmlns:xbrldt="http://xbrl.org/2005/xbrldt"
+  xmlns:gen="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/gen"
+  xmlns:ivc="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ivc"
+>
+  <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
+  <import namespace="http://www.xbrl.org/2003/linkbase" schemaLocation="http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd"/>
+  <import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
+  <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/gen" schemaLocation="../gen/gl-gen-2026-12-31.xsd"/>
+  <!-- reusable item type -->
+  <complexType name="headerPaymentTermsItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="invoicingPeriodStartDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="invoicingPeriodEndDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="paymentMeansTypeCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="paymentMeansTextItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="paymentRemittanceInformationItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="paymentAccountIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="paymentAccountNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="paymentServiceProviderIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="paymentCardPrimaryAccountNumberItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="paymentCardHolderNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="mandateReferenceIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="bankAssignedCreditorIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="debitedAccountIdentifierItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <!-- reusable global element declaration -->
+  <element name="headerPaymentTerms" id="ivc_headerPaymentTerms" type="ivc:headerPaymentTermsItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="invoicingPeriodStartDate" id="ivc_invoicingPeriodStartDate" type="ivc:invoicingPeriodStartDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="invoicingPeriodEndDate" id="ivc_invoicingPeriodEndDate" type="ivc:invoicingPeriodEndDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="paymentMeansTypeCode" id="ivc_paymentMeansTypeCode" type="ivc:paymentMeansTypeCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="paymentMeansText" id="ivc_paymentMeansText" type="ivc:paymentMeansTextItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="paymentRemittanceInformation" id="ivc_paymentRemittanceInformation" type="ivc:paymentRemittanceInformationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="paymentAccountIdentifier" id="ivc_paymentAccountIdentifier" type="ivc:paymentAccountIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="paymentAccountName" id="ivc_paymentAccountName" type="ivc:paymentAccountNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="paymentServiceProviderIdentifier" id="ivc_paymentServiceProviderIdentifier" type="ivc:paymentServiceProviderIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="paymentCardPrimaryAccountNumber" id="ivc_paymentCardPrimaryAccountNumber" type="ivc:paymentCardPrimaryAccountNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="paymentCardHolderName" id="ivc_paymentCardHolderName" type="ivc:paymentCardHolderNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="mandateReferenceIdentifier" id="ivc_mandateReferenceIdentifier" type="ivc:mandateReferenceIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="bankAssignedCreditorIdentifier" id="ivc_bankAssignedCreditorIdentifier" type="ivc:bankAssignedCreditorIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="debitedAccountIdentifier" id="ivc_debitedAccountIdentifier" type="ivc:debitedAccountIdentifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+</schema>

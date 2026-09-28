@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<linkbase xmlns="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_headerPaymentTerms" xlink:label="loc_ivc_headerPaymentTerms"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_headerPaymentTerms" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">支払条件</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_headerPaymentTerms" xlink:to="lab_ivc_headerPaymentTerms"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_headerPaymentTerms" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">割引/支払い条件。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_headerPaymentTerms" xlink:to="doc_ivc_headerPaymentTerms"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_invoicingPeriodStartDate" xlink:label="loc_ivc_invoicingPeriodStartDate"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_invoicingPeriodStartDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">請求対象期間開始日</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_invoicingPeriodStartDate" xlink:to="lab_ivc_invoicingPeriodStartDate"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_invoicingPeriodStartDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">請求対象期間が開始する日。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_invoicingPeriodStartDate" xlink:to="doc_ivc_invoicingPeriodStartDate"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_invoicingPeriodEndDate" xlink:label="loc_ivc_invoicingPeriodEndDate"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_invoicingPeriodEndDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">請求対象期間終了日</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_invoicingPeriodEndDate" xlink:to="lab_ivc_invoicingPeriodEndDate"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_invoicingPeriodEndDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">請求対象期間が終了する日。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_invoicingPeriodEndDate" xlink:to="doc_ivc_invoicingPeriodEndDate"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentMeansTypeCode" xlink:label="loc_ivc_paymentMeansTypeCode"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentMeansTypeCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">支払手段種別コード</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentMeansTypeCode" xlink:to="lab_ivc_paymentMeansTypeCode"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentMeansTypeCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払に使用する手段または方法を識別するコード。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentMeansTypeCode" xlink:to="doc_ivc_paymentMeansTypeCode"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentMeansText" xlink:label="loc_ivc_paymentMeansText"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentMeansText" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">支払手段説明</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentMeansText" xlink:to="lab_ivc_paymentMeansText"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentMeansText" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払に使用する手段または方法を記述するテキスト。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentMeansText" xlink:to="doc_ivc_paymentMeansText"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentRemittanceInformation" xlink:label="loc_ivc_paymentRemittanceInformation"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentRemittanceInformation" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">支払照合情報</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentRemittanceInformation" xlink:to="lab_ivc_paymentRemittanceInformation"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentRemittanceInformation" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払を識別し、関連する取引文書と照合できるようにするため、支払時に付加する情報。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentRemittanceInformation" xlink:to="doc_ivc_paymentRemittanceInformation"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentAccountIdentifier" xlink:label="loc_ivc_paymentAccountIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentAccountIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">支払先口座識別子</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentAccountIdentifier" xlink:to="lab_ivc_paymentAccountIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentAccountIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払を行う先の口座を識別する識別子。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentAccountIdentifier" xlink:to="doc_ivc_paymentAccountIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentAccountName" xlink:label="loc_ivc_paymentAccountName"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentAccountName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">支払先口座名義</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentAccountName" xlink:to="lab_ivc_paymentAccountName"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentAccountName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払を行う先の口座に関連付けられた名称。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentAccountName" xlink:to="doc_ivc_paymentAccountName"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentServiceProviderIdentifier" xlink:label="loc_ivc_paymentServiceProviderIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentServiceProviderIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">決済サービス提供者識別子</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentServiceProviderIdentifier" xlink:to="lab_ivc_paymentServiceProviderIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentServiceProviderIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払口座を管理または決済サービスを提供する事業者を識別する識別子。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentServiceProviderIdentifier" xlink:to="doc_ivc_paymentServiceProviderIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentCardPrimaryAccountNumber" xlink:label="loc_ivc_paymentCardPrimaryAccountNumber"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentCardPrimaryAccountNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">支払カード主口座番号</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentCardPrimaryAccountNumber" xlink:to="lab_ivc_paymentCardPrimaryAccountNumber"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentCardPrimaryAccountNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払に使用するカード口座を識別する主口座番号。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentCardPrimaryAccountNumber" xlink:to="doc_ivc_paymentCardPrimaryAccountNumber"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentCardHolderName" xlink:label="loc_ivc_paymentCardHolderName"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentCardHolderName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">支払カード名義人名</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentCardHolderName" xlink:to="lab_ivc_paymentCardHolderName"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentCardHolderName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払に使用するカードの名義人の名称。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentCardHolderName" xlink:to="doc_ivc_paymentCardHolderName"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_mandateReferenceIdentifier" xlink:label="loc_ivc_mandateReferenceIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_mandateReferenceIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">支払委任参照識別子</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_mandateReferenceIdentifier" xlink:to="lab_ivc_mandateReferenceIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_mandateReferenceIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">口座振替など、支払の引落しを承認する委任を参照する識別子。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_mandateReferenceIdentifier" xlink:to="doc_ivc_mandateReferenceIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_bankAssignedCreditorIdentifier" xlink:label="loc_ivc_bankAssignedCreditorIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_bankAssignedCreditorIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">銀行付与債権者識別子</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_bankAssignedCreditorIdentifier" xlink:to="lab_ivc_bankAssignedCreditorIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_bankAssignedCreditorIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払の回収に使用するため、銀行その他の決済サービス提供者が債権者に付与する識別子。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_bankAssignedCreditorIdentifier" xlink:to="doc_ivc_bankAssignedCreditorIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_debitedAccountIdentifier" xlink:label="loc_ivc_debitedAccountIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_debitedAccountIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">引落口座識別子</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_debitedAccountIdentifier" xlink:to="lab_ivc_debitedAccountIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_debitedAccountIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">支払金額が引き落とされる口座を識別する識別子。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_debitedAccountIdentifier" xlink:to="doc_ivc_debitedAccountIdentifier"/>
+  </labelLink>
+</linkbase>

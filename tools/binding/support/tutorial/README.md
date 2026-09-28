@@ -8,8 +8,8 @@ Tutorial wrappers demonstrate the UADC routes without becoming normative runtime
 
 ## Programs
 
-- `semantic_binding_sample.py`
-- `syntax_binding_sample.py`
+- `tests/tutorial/semantic_binding_sample.py`
+- `tests/tutorial/syntax_binding_sample.py`
 
 ## Execution and safety
 

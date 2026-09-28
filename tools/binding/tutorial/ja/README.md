@@ -1,12 +1,3 @@
-# 運用ワークフロー チュートリアル Wrappers
+# 廃止した運用ワークフロー・チュートリアルラッパー
 
-これらの数値化されたスクリプトは、**src/**. の運用コンバーターを呼び出しながら、短いエンドツーエンドの学習シーケンスを提供します。
-
-|スクリプト | 結果 |
-|---|---|
-|**00_check_environment.py**| 必要なスクリプト、定義、サンプル、およびタクソノミのステータスを確認します。 |
-|**01_convert_sample_to_structured_csv.py**| チュートリアルStructured CSVとメタデータJSONを作成します。 |
-|**02_roundtrip_structured_csv_to_xml.py**| チュートリアルCSVからUBL Invoiceを再生 |
-|**03_generate_ads_xbrl_gl.py**| XBRL GL 受信したADS インボイス を作成 |
-
-リポジトリのルートから実行します。[**環境、テスト及びチュートリアル**](../../../docs/ja/01_ENVIRONMENT_TESTS_TUTORIAL.md)に記載したコマンド、想定ファイル、内部処理及び検証ポイントを参照してください。
+旧番号付きチュートリアルラッパーは現行Canonicalの処理経路ではありません。実行しないでください。現行の変換入口は[Binding runtime](../../README.md)を確認してください。

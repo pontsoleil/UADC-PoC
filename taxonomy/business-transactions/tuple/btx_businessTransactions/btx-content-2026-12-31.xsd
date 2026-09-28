@@ -6,6 +6,7 @@
   xmlns:bus="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/bus"
   xmlns:cor="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/cor"
   xmlns:ehm="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ehm"
+  xmlns:ivc="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ivc"
   xmlns:lnk="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/lnk"
   xmlns:muc="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/muc"
   xmlns:taf="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/taf"
@@ -15,6 +16,7 @@
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/bus" schemaLocation="bus-content-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/cor" schemaLocation="cor-content-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ehm" schemaLocation="ehm-content-2026-12-31.xsd"/>
+  <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/ivc" schemaLocation="ivc-content-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/lnk" schemaLocation="lnk-content-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/muc" schemaLocation="muc-content-2026-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/taf" schemaLocation="taf-content-2026-12-31.xsd"/>
@@ -22,8 +24,23 @@
   <complexType name="businessTransactionsComplexType">
     <sequence>
       <element ref="cor:documentInformation"/>
-      <element ref="cor:entityParty" minOccurs="0"/>
+      <element ref="btx:entityParty" minOccurs="0"/>
       <element ref="btx:transactionHeader" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="entityPartyComplexType">
+    <sequence>
+      <element ref="btx:entityPartyName" minOccurs="0"/>
+      <element ref="btx:entityPartyId" minOccurs="0"/>
+      <element ref="btx:entityPartyBusinessDescription" minOccurs="0"/>
+      <element ref="bus:entityPartyPhone" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:entityPartyFax" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:entityPartyEmail" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:entityPartyRegisteredOrganizationIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:entityPartyAddress" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:entityPartyWebSite" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:entityPartyContact" minOccurs="0" maxOccurs="unbounded"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
@@ -42,9 +59,9 @@
       <element ref="btx:headerDocumentType" minOccurs="0"/>
       <element ref="btx:headerDocumentTypeDescription" minOccurs="0"/>
       <element ref="btx:headerInvoiceType" minOccurs="0"/>
+      <element ref="btx:documentCurrency" minOccurs="0"/>
+      <element ref="btx:taxReportingCurrency" minOccurs="0"/>
       <element ref="btx:headerDocumentNumber" minOccurs="0"/>
-      <element ref="btx:appliedInvoiceReferencedDocument" minOccurs="0"/>
-      <element ref="btx:referencedDocument" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="btx:headerPaymentMethod" minOccurs="0"/>
       <element ref="btx:headerPostingStatus" minOccurs="0"/>
       <element ref="btx:headerPostingStatusDescription" minOccurs="0"/>
@@ -53,12 +70,28 @@
       <element ref="btx:headerShipFrom" minOccurs="0"/>
       <element ref="btx:headerDateShippedReceived" minOccurs="0"/>
       <element ref="btx:headerMaturityDateOrDateDue" minOccurs="0"/>
-      <element ref="btx:headerPaymentTerms" minOccurs="0"/>
+      <element ref="ivc:headerPaymentTerms" minOccurs="0"/>
+      <element ref="btx:businessProcessType" minOccurs="0"/>
+      <element ref="btx:specificationIdentifier" minOccurs="0"/>
+      <element ref="ivc:invoicingPeriodStartDate" minOccurs="0"/>
+      <element ref="ivc:invoicingPeriodEndDate" minOccurs="0"/>
+      <element ref="ivc:paymentMeansTypeCode" minOccurs="0"/>
+      <element ref="ivc:paymentMeansText" minOccurs="0"/>
+      <element ref="ivc:paymentRemittanceInformation" minOccurs="0"/>
+      <element ref="ivc:paymentAccountIdentifier" minOccurs="0"/>
+      <element ref="ivc:paymentAccountName" minOccurs="0"/>
+      <element ref="ivc:paymentServiceProviderIdentifier" minOccurs="0"/>
+      <element ref="ivc:paymentCardPrimaryAccountNumber" minOccurs="0"/>
+      <element ref="ivc:paymentCardHolderName" minOccurs="0"/>
+      <element ref="ivc:mandateReferenceIdentifier" minOccurs="0"/>
+      <element ref="ivc:bankAssignedCreditorIdentifier" minOccurs="0"/>
+      <element ref="ivc:debitedAccountIdentifier" minOccurs="0"/>
+      <element ref="btx:appliedInvoiceReferencedDocument" minOccurs="0"/>
+      <element ref="btx:referencedDocument" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="btx:headerIdentifierReference" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="btx:headerTax" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="btx:headerAmountStructure" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="btx:transactionDetail" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="btx:businessProcessType" minOccurs="0"/>
       <element ref="btx:headerRichTextComment" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="btx:headerAdjustment" minOccurs="0" maxOccurs="unbounded"/>
     </sequence>
@@ -94,12 +127,12 @@
       <element ref="btx:headerIdentifierDescription" minOccurs="0"/>
       <element ref="btx:headerIdentifierType" minOccurs="0"/>
       <element ref="btx:headerIdentifierCategory" minOccurs="0"/>
-      <element ref="cor:headerIdentifierExternalAuthority" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:headerIdentifierPhone" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:headerIdentifierFax" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:headerIdentifierEmail" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:headerIdentifierAddress" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:headerIdentifierContact" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="btx:headerIdentifierTradingName" minOccurs="0"/>
       <element ref="btx:registeredIdentifier" minOccurs="0" maxOccurs="unbounded"/>
     </sequence>
     <attribute name="id" type="ID"/>
@@ -145,7 +178,6 @@
       <element ref="btx:memoLine" minOccurs="0"/>
       <element ref="btx:detailDeaderDocumentType" minOccurs="0"/>
       <element ref="btx:detailDeaderDocumentTypeDescription" minOccurs="0"/>
-      <element ref="cor:detailDeaderDocument" minOccurs="0"/>
       <element ref="btx:detailDeaderDocumentDate" minOccurs="0"/>
       <element ref="btx:receivedDate" minOccurs="0"/>
       <element ref="btx:documentLocation" minOccurs="0"/>
@@ -156,18 +188,20 @@
       <element ref="btx:confirmationDate" minOccurs="0"/>
       <element ref="btx:measurableClassDescription" minOccurs="0"/>
       <element ref="btx:geospatialCoordinate" minOccurs="0"/>
+      <element ref="cor:detailDeaderDocument" minOccurs="0"/>
       <element ref="taf:originatingDocument" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="btx:detailRitchTextDetailDescription" minOccurs="0"/>
+      <element ref="btx:detailMeasurableClassIdentifier" minOccurs="0"/>
       <element ref="muc:detailMulticurrency" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="btx:detailIdentifierReference" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="btx:detailReferencedDocument" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:detailXbrl" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="bus:detailMeasurable" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="btx:detailMeasurable" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="bus:detailJob" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="bus:detailDepreciationMortgage" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="ehm:detailSerialOrLot" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="btx:detailTax" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="lnk:detailRichTextComment" minOccurs="0" maxOccurs="unbounded"/>
-      <element ref="btx:detailRitchTextDetailDescription" minOccurs="0"/>
-      <element ref="btx:detailMeasurableClassIdentifier" minOccurs="0"/>
       <element ref="btx:detailAmountStructure" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="btx:detailAdjustment" minOccurs="0" maxOccurs="unbounded"/>
     </sequence>
@@ -206,8 +240,9 @@
   </complexType>
   <complexType name="registeredIdentifierComplexType">
     <sequence>
-      <element ref="btx:headerIdentifierRegisteredId"/>
-      <element ref="btx:headerIdentifierRegisteredIdIdentificationScheme"/>
+      <element ref="btx:headerIdentifierRegisteredOrganizationIdentifierCode" minOccurs="0"/>
+      <element ref="btx:headerIdentifierRegisteredOrganizationIdentifierDescription" minOccurs="0"/>
+      <element ref="cor:headerIdentifierRegisteredExternalAuthority" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
@@ -221,13 +256,51 @@
       <element ref="btx:identifierDescription" minOccurs="0"/>
       <element ref="btx:identifierType" minOccurs="0"/>
       <element ref="btx:identifierCategory" minOccurs="0"/>
-      <element ref="cor:externalAuthority" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:identifierPhone" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:identifierFax" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:identifierEmail" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:identifierAddress" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="cor:identifierContact" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="btx:identifierTradingName" minOccurs="0"/>
       <element ref="btx:identifierRegisteredIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailReferencedDocumentComplexType">
+    <sequence>
+      <element ref="btx:detailReferencedDocumentType" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentNumber" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentDate" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentIdentifierType" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentIdentifierCode" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentReceivedDate" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentLocation" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentReferencePurpose" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentAttachment" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailMeasurableComplexType">
+    <sequence>
+      <element ref="btx:measurableCode" minOccurs="0"/>
+      <element ref="btx:measurableCodeDescription" minOccurs="0"/>
+      <element ref="btx:measurableCategory" minOccurs="0"/>
+      <element ref="btx:measurableIdentification" minOccurs="0"/>
+      <element ref="btx:schemaForMeasurableIdentification" minOccurs="0"/>
+      <element ref="btx:secondaryMeasurableCode" minOccurs="0"/>
+      <element ref="btx:schemaForSecondaryMeasurableIdentification" minOccurs="0"/>
+      <element ref="btx:measurableDescription" minOccurs="0"/>
+      <element ref="btx:measurableQuantity" minOccurs="0"/>
+      <element ref="btx:measurableQualifier" minOccurs="0"/>
+      <element ref="btx:measurableUnitOfMeasure" minOccurs="0"/>
+      <element ref="btx:measurableStartTime" minOccurs="0"/>
+      <element ref="btx:measurableEndTime" minOccurs="0"/>
+      <element ref="btx:measurableActive" minOccurs="0"/>
+      <element ref="btx:measurablePerUnitPrice" minOccurs="0"/>
+      <element ref="btx:measurableNetPrice" minOccurs="0"/>
+      <element ref="btx:measurablePriceDiscount" minOccurs="0"/>
+      <element ref="btx:measurableGrossPrice" minOccurs="0"/>
+      <element ref="btx:measurableName" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
@@ -287,8 +360,18 @@
   </complexType>
   <complexType name="identifierRegisteredIdentifierComplexType">
     <sequence>
-      <element ref="btx:identifierRegisteredIdentifierId"/>
-      <element ref="btx:identifierRegisteredIdentifierIdentificationScheme"/>
+      <element ref="btx:identifierRegisteredOrganizationIdentifierCode" minOccurs="0"/>
+      <element ref="btx:identifierRegisteredOrganizationIdentifierDescription" minOccurs="0"/>
+      <element ref="cor:identifierRegisteredExternalAuthority" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailReferencedDocumentAttachmentComplexType">
+    <sequence>
+      <element ref="btx:detailReferencedDocumentAttachmentBinaryContent" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentAttachmentMimeType" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentAttachmentFileName" minOccurs="0"/>
+      <element ref="btx:detailReferencedDocumentAttachmentExternalUri" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>

@@ -2,6 +2,12 @@
 <linkbase xmlns="http://www.xbrl.org/2003/linkbase"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_detailMulticurrency" xlink:label="loc_muc_detailMulticurrency"/>
+    <label xlink:type="resource" xlink:label="lab_muc_detailMulticurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">【多通貨明細】</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_detailMulticurrency" xlink:to="lab_muc_detailMulticurrency"/>
+    <label xlink:type="resource" xlink:label="doc_muc_detailMulticurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="ja">原取引時の通貨と異なる、自国通貨と換算レートに関する追加情報のセクション。－現在および原取引時の、換算レートおよび金額の記録に使用される。_x000D_
+トライアンギュレーション通貨としての第三通貨の換算レートを記録できる。EURの場合が多いがそれに限らない。この構造は、同日または異なる日の外貨での金額を記録する必要がある限り、繰り返し指定可能。</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_detailMulticurrency" xlink:to="doc_muc_detailMulticurrency"/>
     <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyExchangeRateDate" xlink:label="loc_muc_multicurrencyExchangeRateDate"/>
     <label xlink:type="resource" xlink:label="lab_muc_multicurrencyExchangeRateDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="ja">換算レート日付</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRateDate" xlink:to="lab_muc_multicurrencyExchangeRateDate"/>

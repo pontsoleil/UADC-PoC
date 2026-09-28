@@ -3,7 +3,7 @@
   "case_id": "opening-v14",
   "status": "PASS",
   "runtime": {
-    "program": "tools/binding/regenerate_opening.py",
+    "program": "tests/tools/regenerate_opening.py",
     "sha256": "5A60C9B8DDF71B436E8028DF3100CFC82CCF0741CBE172ED11AA745CD8686017"
   },
   "direction": "PCA-opening-to-AccountsPeriodBalances",
@@ -43,6 +43,6 @@
     "source": "docs/ChatGPT/2026/202609/20260914/20260914_1250",
     "accepted_result": "PASS_REUSED_BY_SHA256_IDENTITY",
     "accepted_date": "2026-09-17",
-    "execution_script": "tools/binding/regenerate_opening.py"
+    "execution_script": "tests/tools/regenerate_opening.py"
   }
 }

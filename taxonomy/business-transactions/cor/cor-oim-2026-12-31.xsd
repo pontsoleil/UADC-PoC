@@ -88,56 +88,6 @@
       <restriction base="xbrli:QNameItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="partyNameItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="partyIdItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="partyBusinessDescriptionItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="defaultAccountingMethodPurposeItemType">
-    <simpleContent>
-      <restriction base="xbrli:tokenItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="defaultAccountingMethodPurposeDescriptionItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="fiscalYearStartItemType">
-    <simpleContent>
-      <restriction base="xbrli:dateItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="fiscalYearEndItemType">
-    <simpleContent>
-      <restriction base="xbrli:dateItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="headerIdentifierExternalAuthorityCodeItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="headerIdentifierExternalAuthorityNameItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="headerIdentifierExternalAuthorityVerificationDateItemType">
-    <simpleContent>
-      <restriction base="xbrli:dateTimeItemType"/>
-    </simpleContent>
-  </complexType>
   <complexType name="headerIdentifierPhoneNumberItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
@@ -263,24 +213,24 @@
       <restriction base="xbrli:booleanItemType"/>
     </simpleContent>
   </complexType>
+  <complexType name="headerIdentifierRegisteredExternalAuthorityCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="headerIdentifierRegisteredExternalAuthorityNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="headerIdentifierRegisteredExternalAuthorityVerificationDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateTimeItemType"/>
+    </simpleContent>
+  </complexType>
   <complexType name="detailDeaderDocumentNumberItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="externalAuthorityCodeItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="externalAuthorityNameItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="externalAuthorityVerificationDateItemType">
-    <simpleContent>
-      <restriction base="xbrli:dateTimeItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="identifierPhoneNumberItemType">
@@ -408,6 +358,21 @@
       <restriction base="xbrli:booleanItemType"/>
     </simpleContent>
   </complexType>
+  <complexType name="identifierRegisteredExternalAuthorityCodeItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="identifierRegisteredExternalAuthorityNameItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="identifierRegisteredExternalAuthorityVerificationDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateTimeItemType"/>
+    </simpleContent>
+  </complexType>
   <complexType name="xbrlAllocationItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
@@ -475,16 +440,6 @@
   <element name="sourceApplication" id="cor_sourceApplication" type="cor:sourceApplicationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="targetApplication" id="cor_targetApplication" type="cor:targetApplicationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="defaultCurrency" id="cor_defaultCurrency" type="cor:defaultCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="partyName" id="cor_partyName" type="cor:partyNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="partyId" id="cor_partyId" type="cor:partyIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="partyBusinessDescription" id="cor_partyBusinessDescription" type="cor:partyBusinessDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="defaultAccountingMethodPurpose" id="cor_defaultAccountingMethodPurpose" type="cor:defaultAccountingMethodPurposeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="defaultAccountingMethodPurposeDescription" id="cor_defaultAccountingMethodPurposeDescription" type="cor:defaultAccountingMethodPurposeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="fiscalYearStart" id="cor_fiscalYearStart" type="cor:fiscalYearStartItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="fiscalYearEnd" id="cor_fiscalYearEnd" type="cor:fiscalYearEndItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="headerIdentifierExternalAuthorityCode" id="cor_headerIdentifierExternalAuthorityCode" type="cor:headerIdentifierExternalAuthorityCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="headerIdentifierExternalAuthorityName" id="cor_headerIdentifierExternalAuthorityName" type="cor:headerIdentifierExternalAuthorityNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="headerIdentifierExternalAuthorityVerificationDate" id="cor_headerIdentifierExternalAuthorityVerificationDate" type="cor:headerIdentifierExternalAuthorityVerificationDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="headerIdentifierPhoneNumber" id="cor_headerIdentifierPhoneNumber" type="cor:headerIdentifierPhoneNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="headerIdentifierPhoneNumberDescription" id="cor_headerIdentifierPhoneNumberDescription" type="cor:headerIdentifierPhoneNumberDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="headerIdentifierFaxNumber" id="cor_headerIdentifierFaxNumber" type="cor:headerIdentifierFaxNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -510,10 +465,10 @@
   <element name="headerIdentifierContactContactType" id="cor_headerIdentifierContactContactType" type="cor:headerIdentifierContactContactTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="headerIdentifierContactLocationIdCrossReference" id="cor_headerIdentifierContactLocationIdCrossReference" type="cor:headerIdentifierContactLocationIdCrossReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="headerIdentifierContactActive" id="cor_headerIdentifierContactActive" type="cor:headerIdentifierContactActiveItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerIdentifierRegisteredExternalAuthorityCode" id="cor_headerIdentifierRegisteredExternalAuthorityCode" type="cor:headerIdentifierRegisteredExternalAuthorityCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerIdentifierRegisteredExternalAuthorityName" id="cor_headerIdentifierRegisteredExternalAuthorityName" type="cor:headerIdentifierRegisteredExternalAuthorityNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerIdentifierRegisteredExternalAuthorityVerificationDate" id="cor_headerIdentifierRegisteredExternalAuthorityVerificationDate" type="cor:headerIdentifierRegisteredExternalAuthorityVerificationDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="detailDeaderDocumentNumber" id="cor_detailDeaderDocumentNumber" type="cor:detailDeaderDocumentNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="externalAuthorityCode" id="cor_externalAuthorityCode" type="cor:externalAuthorityCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="externalAuthorityName" id="cor_externalAuthorityName" type="cor:externalAuthorityNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="externalAuthorityVerificationDate" id="cor_externalAuthorityVerificationDate" type="cor:externalAuthorityVerificationDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="identifierPhoneNumber" id="cor_identifierPhoneNumber" type="cor:identifierPhoneNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="identifierPhoneNumberDescription" id="cor_identifierPhoneNumberDescription" type="cor:identifierPhoneNumberDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="identifierFaxNumber" id="cor_identifierFaxNumber" type="cor:identifierFaxNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -539,6 +494,9 @@
   <element name="identifierContactContactType" id="cor_identifierContactContactType" type="cor:identifierContactContactTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="identifierContactLocationIdCrossReference" id="cor_identifierContactLocationIdCrossReference" type="cor:identifierContactLocationIdCrossReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="identifierContactActive" id="cor_identifierContactActive" type="cor:identifierContactActiveItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="identifierRegisteredExternalAuthorityCode" id="cor_identifierRegisteredExternalAuthorityCode" type="cor:identifierRegisteredExternalAuthorityCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="identifierRegisteredExternalAuthorityName" id="cor_identifierRegisteredExternalAuthorityName" type="cor:identifierRegisteredExternalAuthorityNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="identifierRegisteredExternalAuthorityVerificationDate" id="cor_identifierRegisteredExternalAuthorityVerificationDate" type="cor:identifierRegisteredExternalAuthorityVerificationDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="xbrlAllocation" id="cor_xbrlAllocation" type="cor:xbrlAllocationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="xbrlSummaryReportingElement" id="cor_xbrlSummaryReportingElement" type="cor:xbrlSummaryReportingElementItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="xbrlDetailMatchingElement" id="cor_xbrlDetailMatchingElement" type="cor:xbrlDetailMatchingElementItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -551,18 +509,17 @@
   <element name="xbrlSummaryReportingTaxonomyIdReference" id="cor_xbrlSummaryReportingTaxonomyIdReference" type="cor:xbrlSummaryReportingTaxonomyIdReferenceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <!-- reusable OIM Class primary-item anchor -->
   <element name="p_cor_documentInformation" id="p_cor_documentInformation" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
-  <element name="p_cor_entityParty" id="p_cor_entityParty" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
-  <element name="p_cor_headerIdentifierExternalAuthority" id="p_cor_headerIdentifierExternalAuthority" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_headerIdentifierPhone" id="p_cor_headerIdentifierPhone" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_headerIdentifierFax" id="p_cor_headerIdentifierFax" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_headerIdentifierEmail" id="p_cor_headerIdentifierEmail" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_headerIdentifierAddress" id="p_cor_headerIdentifierAddress" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_headerIdentifierContact" id="p_cor_headerIdentifierContact" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_cor_headerIdentifierRegisteredExternalAuthority" id="p_cor_headerIdentifierRegisteredExternalAuthority" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_detailXbrl" id="p_cor_detailXbrl" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
-  <element name="p_cor_externalAuthority" id="p_cor_externalAuthority" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_identifierPhone" id="p_cor_identifierPhone" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_identifierFax" id="p_cor_identifierFax" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_identifierEmail" id="p_cor_identifierEmail" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_identifierAddress" id="p_cor_identifierAddress" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_cor_identifierContact" id="p_cor_identifierContact" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_cor_identifierRegisteredExternalAuthority" id="p_cor_identifierRegisteredExternalAuthority" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
 </schema>

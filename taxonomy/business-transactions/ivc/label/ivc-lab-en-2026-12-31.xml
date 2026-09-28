@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<linkbase xmlns="http://www.xbrl.org/2003/linkbase"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_headerPaymentTerms" xlink:label="loc_ivc_headerPaymentTerms"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_headerPaymentTerms" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Header Payment Terms</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_headerPaymentTerms" xlink:to="lab_ivc_headerPaymentTerms"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_headerPaymentTerms" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Discount/payment terms.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_headerPaymentTerms" xlink:to="doc_ivc_headerPaymentTerms"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_invoicingPeriodStartDate" xlink:label="loc_ivc_invoicingPeriodStartDate"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_invoicingPeriodStartDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Invoicing Period Start Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_invoicingPeriodStartDate" xlink:to="lab_ivc_invoicingPeriodStartDate"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_invoicingPeriodStartDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date on which the invoicing period begins.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_invoicingPeriodStartDate" xlink:to="doc_ivc_invoicingPeriodStartDate"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_invoicingPeriodEndDate" xlink:label="loc_ivc_invoicingPeriodEndDate"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_invoicingPeriodEndDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Invoicing Period End Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_invoicingPeriodEndDate" xlink:to="lab_ivc_invoicingPeriodEndDate"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_invoicingPeriodEndDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Date on which the invoicing period ends.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_invoicingPeriodEndDate" xlink:to="doc_ivc_invoicingPeriodEndDate"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentMeansTypeCode" xlink:label="loc_ivc_paymentMeansTypeCode"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentMeansTypeCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Payment means type code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentMeansTypeCode" xlink:to="lab_ivc_paymentMeansTypeCode"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentMeansTypeCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code identifying the means or method by which payment is to be made.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentMeansTypeCode" xlink:to="doc_ivc_paymentMeansTypeCode"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentMeansText" xlink:label="loc_ivc_paymentMeansText"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentMeansText" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Payment means text</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentMeansText" xlink:to="lab_ivc_paymentMeansText"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentMeansText" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Textual description of the means or method by which payment is to be made.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentMeansText" xlink:to="doc_ivc_paymentMeansText"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentRemittanceInformation" xlink:label="loc_ivc_paymentRemittanceInformation"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentRemittanceInformation" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Payment remittance information</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentRemittanceInformation" xlink:to="lab_ivc_paymentRemittanceInformation"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentRemittanceInformation" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Information to be included with the payment to enable the payment to be identified and matched to the related transaction document.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentRemittanceInformation" xlink:to="doc_ivc_paymentRemittanceInformation"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentAccountIdentifier" xlink:label="loc_ivc_paymentAccountIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentAccountIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Payment account identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentAccountIdentifier" xlink:to="lab_ivc_paymentAccountIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentAccountIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifier of the account to which the payment is to be made.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentAccountIdentifier" xlink:to="doc_ivc_paymentAccountIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentAccountName" xlink:label="loc_ivc_paymentAccountName"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentAccountName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Payment account name</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentAccountName" xlink:to="lab_ivc_paymentAccountName"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentAccountName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Name associated with the account to which the payment is to be made.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentAccountName" xlink:to="doc_ivc_paymentAccountName"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentServiceProviderIdentifier" xlink:label="loc_ivc_paymentServiceProviderIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentServiceProviderIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Payment service provider identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentServiceProviderIdentifier" xlink:to="lab_ivc_paymentServiceProviderIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentServiceProviderIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifier of the payment service provider maintaining or servicing the payment account.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentServiceProviderIdentifier" xlink:to="doc_ivc_paymentServiceProviderIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentCardPrimaryAccountNumber" xlink:label="loc_ivc_paymentCardPrimaryAccountNumber"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentCardPrimaryAccountNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Payment card primary account number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentCardPrimaryAccountNumber" xlink:to="lab_ivc_paymentCardPrimaryAccountNumber"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentCardPrimaryAccountNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Primary account number identifying the payment card account used for the payment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentCardPrimaryAccountNumber" xlink:to="doc_ivc_paymentCardPrimaryAccountNumber"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_paymentCardHolderName" xlink:label="loc_ivc_paymentCardHolderName"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_paymentCardHolderName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Payment card holder name</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentCardHolderName" xlink:to="lab_ivc_paymentCardHolderName"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_paymentCardHolderName" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Name of the holder of the payment card used for the payment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_paymentCardHolderName" xlink:to="doc_ivc_paymentCardHolderName"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_mandateReferenceIdentifier" xlink:label="loc_ivc_mandateReferenceIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_mandateReferenceIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Mandate reference identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_mandateReferenceIdentifier" xlink:to="lab_ivc_mandateReferenceIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_mandateReferenceIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifier referencing the mandate authorising the collection of the payment, such as a direct debit mandate.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_mandateReferenceIdentifier" xlink:to="doc_ivc_mandateReferenceIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_bankAssignedCreditorIdentifier" xlink:label="loc_ivc_bankAssignedCreditorIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_bankAssignedCreditorIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Bank assigned creditor identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_bankAssignedCreditorIdentifier" xlink:to="lab_ivc_bankAssignedCreditorIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_bankAssignedCreditorIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifier assigned by a bank or other payment service provider to the creditor for payment collection purposes.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_bankAssignedCreditorIdentifier" xlink:to="doc_ivc_bankAssignedCreditorIdentifier"/>
+    <loc xlink:type="locator" xlink:href="../ivc-2026-12-31.xsd#ivc_debitedAccountIdentifier" xlink:label="loc_ivc_debitedAccountIdentifier"/>
+    <label xlink:type="resource" xlink:label="lab_ivc_debitedAccountIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Debited account identifier</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_debitedAccountIdentifier" xlink:to="lab_ivc_debitedAccountIdentifier"/>
+    <label xlink:type="resource" xlink:label="doc_ivc_debitedAccountIdentifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Identifier of the account from which the payment is to be debited.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_ivc_debitedAccountIdentifier" xlink:to="doc_ivc_debitedAccountIdentifier"/>
+  </labelLink>
+</linkbase>
