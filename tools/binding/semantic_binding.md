@@ -4,7 +4,7 @@
 
 ## Purpose
 
-`src/semantic_binding.py` is the normative reversible Semantic Binding runtime. It performs Structured CSV ⇄ Structured CSV mapping using an explicit Semantic Binding Table.
+`tools/binding/semantic_binding.py` is the normative reversible Semantic Binding runtime. It performs Structured CSV ⇄ Structured CSV mapping using an explicit Semantic Binding Table.
 
 The absent `semantic_table.py` contract is not the normative program.
 
@@ -19,7 +19,7 @@ The absent `semantic_table.py` contract is not the normative program.
 ## CLI
 
 ```text
-py src/semantic_binding.py <input.csv> --binding <binding.csv> --source-hmd <source.csv> --target-hmd <target.csv> --overlay <overlay.csv> --qname-map <qname-map.csv> --output <output.csv> --taxonomy <entrypoint.xsd>
+py tools/binding/semantic_binding.py <input.csv> --binding <binding.csv> --source-hmd <source.csv> --target-hmd <target.csv> --overlay <overlay.csv> --qname-map <qname-map.csv> --output <output.csv> --taxonomy <entrypoint.xsd>
 ```
 
 ## Rules

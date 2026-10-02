@@ -10,7 +10,7 @@
   "source_format": "EPSON Zaimu Kaikei R4 CSV",
   "target_format": "EPSON Zaimu Kaikei R4 CSV",
   "profile": "EPSON_ZaimuKaikeiR4_43col_NTA_Fallback",
-  "hmd": "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+  "hmd": "bindings/hmd/gl-cor/accounting-entries/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
   "binding": "bindings/flat-csv/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback/EPSON_ZaimuKaikeiR4_43col_NTA_Fallback_BINDING.csv",
   "input": "instances/derived/EPSON/original_basis/EPSON.csv",
   "outputs": {},
@@ -30,7 +30,7 @@
     "known_limitation": "Actual EPSON application import has not been performed."
   },
   "checksums": {
-    "hmd": "9E3A47B4335C15B0EDCD7299962BC15878BE8288116927C2A7691A5B0C2CE362",
+    "hmd": "6DB8C6AAD8C2FBAEC710DDF104405D22CC13BAD0BA52038DF471F7FE5850AD81",
     "binding": "8FE3CAC2220B37E76B6045F631F66EC309D7218C9CAF8222E0577F36AC108A5B",
     "input": "323DEC64553BF7CB158F8B13122DFDE479C589167B4C2751F33370E74C8E0A56",
     "dependencies": {

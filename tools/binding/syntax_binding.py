@@ -36,7 +36,7 @@ Results:
     success or 1 on failure.
 
 Creation Date: 2026-07-05
-Last Modified: 2026-07-13
+Last Modified: 2026-09-30
 
 Copyright 2026 Sambuichi Professional Engineers Office
 Designed by SAMBUICHI, Nobuyuki
@@ -2233,29 +2233,29 @@ def find_child_by_local_name(element: ET.Element, local_name: str) -> Optional[E
 
 
 def ensure_tax_scheme_defaults(root: ET.Element, namespaces: Dict[str, str]) -> None:
-    """
-    Add required TaxScheme ID defaults when missing.
+    """Compatibility hook retained without business-value defaults.
+
+    Syntax-only required values are Binding authority.  The runtime must not
+    invent VAT, ChargeIndicator, TaxScheme, or other business/syntax literals
+    that are absent from the selected Binding.  Existing Binding default rows
+    are applied by ``apply_default_to_existing_contexts`` before this hook.
 
     Args:
-        root: Input value used by ensure_tax_scheme_defaults.
-        namespaces: Input value used by ensure_tax_scheme_defaults.
+        root: XML root (retained for call compatibility).
+        namespaces: Namespace map (retained for call compatibility).
 
     Returns:
-        None. Missing default XML children are added in place.
+        None. No values or elements are created.
     """
-    for element in root.iter():
-        local = element_local_name(element.tag)
-        if local == "AllowanceCharge" and find_child_by_local_name(element, "ChargeIndicator") is None:
-            charge_indicator = ET.Element(qname("cbc:ChargeIndicator", namespaces))
-            charge_indicator.text = "false"
-            element.insert(0, charge_indicator)
-        if local not in {"PartyTaxScheme", "TaxCategory", "ClassifiedTaxCategory"}:
-            continue
-        if find_child_by_local_name(element, "TaxScheme") is not None:
-            continue
-        tax_scheme = ET.SubElement(element, qname("cac:TaxScheme", namespaces))
-        tax_id = ET.SubElement(tax_scheme, qname("cbc:ID", namespaces))
-        tax_id.text = "VAT"
+    _ = root, namespaces
+    # Reserved compatibility hook.
+    # Explicit Binding rows own syntax-only defaults.
+    # No TaxScheme node is created here.
+    # No VAT identifier is created here.
+    # No ChargeIndicator value is created here.
+    # No profile-specific business literal is created here.
+    # Keep this hook until callers are migrated away from it.
+    return None
 
 
 def indent_xml(element: ET.Element, level: int = 0) -> None:

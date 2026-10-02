@@ -9,7 +9,7 @@
   <!-- structural ComplexType supplied for the Palette module -->
   <complexType name="detailSerialOrLotComplexType">
     <sequence>
-      <element ref="ehm:serialOrLotCode" minOccurs="0"/>
+      <element ref="ehm:serialOrLotCode"/>
       <element ref="ehm:serialOrLotDescription" minOccurs="0"/>
       <element ref="ehm:serialOrLotNumber" minOccurs="0"/>
       <element ref="ehm:nextSerialOrLotNumber" minOccurs="0"/>

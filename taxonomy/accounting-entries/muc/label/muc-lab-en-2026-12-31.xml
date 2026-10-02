@@ -2,6 +2,11 @@
 <linkbase xmlns="http://www.xbrl.org/2003/linkbase"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
+    <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_detailMulticurrency" xlink:label="loc_muc_detailMulticurrency"/>
+    <label xlink:type="resource" xlink:label="lab_muc_detailMulticurrency" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Detail_ Multicurrency</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_detailMulticurrency" xlink:to="lab_muc_detailMulticurrency"/>
+    <label xlink:type="resource" xlink:label="doc_muc_detailMulticurrency" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Class to provide additional information related to home currencies that differ from original currencies and related exchange rates - typically this will be used to record exchange rates and amounts in currencies and/or on dates other than those of the original transaction. This class allows recording of exchange rates using a third currency as a triangulation currency. This is often EUR but is not restricted to being so. This class may be repeated as many times as necessary to record amounts in foreign currencies on the same or different dates.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_detailMulticurrency" xlink:to="doc_muc_detailMulticurrency"/>
     <loc xlink:type="locator" xlink:href="../muc-2026-12-31.xsd#muc_multicurrencyExchangeRateDate" xlink:label="loc_muc_multicurrencyExchangeRateDate"/>
     <label xlink:type="resource" xlink:label="lab_muc_multicurrencyExchangeRateDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Multicurrency Exchange Rate Date</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_muc_multicurrencyExchangeRateDate" xlink:to="lab_muc_multicurrencyExchangeRateDate"/>

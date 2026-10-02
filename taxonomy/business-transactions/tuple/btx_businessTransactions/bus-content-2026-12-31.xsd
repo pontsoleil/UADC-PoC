@@ -9,29 +9,31 @@
   <!-- structural ComplexType supplied for the Palette module -->
   <complexType name="entityPartyPhoneComplexType">
     <sequence>
-      <element ref="bus:entityPartyPhonePhoneNumber" minOccurs="0"/>
-      <element ref="bus:entityPartyPhonePhoneNumberDescription" minOccurs="0"/>
+      <element ref="bus:entityPartyPhoneNumber"/>
+      <element ref="bus:entityPartyPhoneNumberDescription" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
   <complexType name="entityPartyFaxComplexType">
     <sequence>
-      <element ref="bus:entityPartyFaxFaxNumber" minOccurs="0"/>
-      <element ref="bus:entityPartyFaxFaxNumberUsage" minOccurs="0"/>
+      <element ref="bus:entityPartyFaxNumber"/>
+      <element ref="bus:entityPartyFaxNumberUsage" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
   <complexType name="entityPartyEmailComplexType">
     <sequence>
-      <element ref="bus:entityPartyEmailEmailAddress" minOccurs="0"/>
-      <element ref="bus:entityPartyEmailEmailAddressUsage" minOccurs="0"/>
+      <element ref="bus:entityPartyEmailAddress"/>
+      <element ref="bus:entityPartyEmailAddressUsage" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="entityPartyRegisteredOrganizationIdentifierComplexType">
+  <complexType name="organizationIdentifierComplexType">
     <sequence>
-      <element ref="bus:entityPartyRegisteredOrganizationIdentifierOrganizationIdentifierCode" minOccurs="0"/>
-      <element ref="bus:entityPartyRegisteredOrganizationIdentifierOrganizationIdentifierDescription" minOccurs="0"/>
+      <element ref="bus:organizationIdentifierCode"/>
+      <element ref="bus:organizationIdentifierPurpose" minOccurs="0"/>
+      <element ref="bus:organizationIdentifierIssuingAgency" minOccurs="0"/>
+      <element ref="bus:organizationIdentifierDescription" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
@@ -43,7 +45,7 @@
       <element ref="bus:entityPartyAddressLocationId" minOccurs="0"/>
       <element ref="bus:entityPartyAddressBuildingNumber" minOccurs="0"/>
       <element ref="bus:entityPartyAddressStreet" minOccurs="0"/>
-      <element ref="bus:entityPartyAddressAddressDetail" minOccurs="0"/>
+      <element ref="bus:entityPartyAddressDetail" minOccurs="0"/>
       <element ref="bus:entityPartyAddressCity" minOccurs="0"/>
       <element ref="bus:entityPartyAddressStateOrProvince" minOccurs="0"/>
       <element ref="bus:entityPartyAddressCountry" minOccurs="0"/>
@@ -54,73 +56,255 @@
   </complexType>
   <complexType name="entityPartyWebSiteComplexType">
     <sequence>
-      <element ref="bus:entityPartyWebSiteWebSiteUrl" minOccurs="0"/>
-      <element ref="bus:entityPartyWebSiteWebSiteDescription" minOccurs="0"/>
+      <element ref="bus:entityPartyWebSiteUrl"/>
+      <element ref="bus:entityPartyWebSiteDescription" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
   <complexType name="entityPartyContactComplexType">
     <sequence>
-      <element ref="bus:entityPartyContactContactPrefix" minOccurs="0"/>
-      <element ref="bus:entityPartyContactContactLastName" minOccurs="0"/>
-      <element ref="bus:entityPartyContactContactFirstName" minOccurs="0"/>
-      <element ref="bus:entityPartyContactContactSuffix" minOccurs="0"/>
-      <element ref="bus:entityPartyContactContactAttentionLine" minOccurs="0"/>
-      <element ref="bus:entityPartyContactContactPositionRole" minOccurs="0"/>
-      <element ref="bus:entityPartyContactContactContactType" minOccurs="0"/>
-      <element ref="bus:entityPartyContactContactLocationIdCrossReference" minOccurs="0"/>
-      <element ref="bus:entityPartyContactContactActive" minOccurs="0"/>
+      <element ref="bus:entityPartyContactPrefix" minOccurs="0"/>
+      <element ref="bus:entityPartyContactLastName" minOccurs="0"/>
+      <element ref="bus:entityPartyContactFirstName" minOccurs="0"/>
+      <element ref="bus:entityPartyContactSuffix" minOccurs="0"/>
+      <element ref="bus:entityPartyContactAttentionLine" minOccurs="0"/>
+      <element ref="bus:entityPartyContactPositionRole" minOccurs="0"/>
+      <element ref="bus:entityPartyContactContactType" minOccurs="0"/>
+      <element ref="bus:entityPartyContactLocationIdCrossReference" minOccurs="0"/>
+      <element ref="bus:entityPartyContactActive" minOccurs="0"/>
       <element ref="bus:entityPartyContactPhone" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="bus:entityPartyContactFax" minOccurs="0" maxOccurs="unbounded"/>
       <element ref="bus:entityPartyContactEmail" minOccurs="0" maxOccurs="unbounded"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
+  <complexType name="specifiedAccountingMethodStructureComplexType">
+    <sequence>
+      <element ref="bus:accountingMethod" minOccurs="0"/>
+      <element ref="bus:accountingMethodDescription" minOccurs="0"/>
+      <element ref="bus:accountingMethodPurpose" minOccurs="0"/>
+      <element ref="bus:accountingMethodPurposeDescription" minOccurs="0"/>
+      <element ref="bus:accountingMethodStartDate" minOccurs="0"/>
+      <element ref="bus:accountingMethodEndDate" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="assignedAccountantComplexType">
+    <sequence>
+      <element ref="bus:accountantName" minOccurs="0"/>
+      <element ref="bus:accountantTypeOfEngagement" minOccurs="0"/>
+      <element ref="bus:accountantTypeOfEngagementDescription" minOccurs="0"/>
+      <element ref="bus:accountantAddress" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:accountantContact" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="specifiedReportingCalendarComplexType">
+    <sequence>
+      <element ref="bus:reportingCalendarCode"/>
+      <element ref="bus:reportingCalendarDescription" minOccurs="0"/>
+      <element ref="bus:reportingCalendarTitle" minOccurs="0"/>
+      <element ref="bus:reportingCalendarPeriodType" minOccurs="0"/>
+      <element ref="bus:reportingCalendarPeriodTypeDescription" minOccurs="0"/>
+      <element ref="bus:reportingCalendarClosedStatus" minOccurs="0"/>
+      <element ref="bus:reportingCalendarPurpose" minOccurs="0"/>
+      <element ref="bus:reportingCalendarPurposeDescription" minOccurs="0"/>
+      <element ref="bus:reportingCalendarPeriod" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
   <complexType name="entityPartyContactPhoneComplexType">
     <sequence>
-      <element ref="bus:entityPartyContactPhonePhoneNumber" minOccurs="0"/>
-      <element ref="bus:entityPartyContactPhonePhoneNumberDescription" minOccurs="0"/>
+      <element ref="bus:entityPartyContactPhoneNumber"/>
+      <element ref="bus:entityPartyContactPhoneNumberDescription" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
   <complexType name="entityPartyContactFaxComplexType">
     <sequence>
-      <element ref="bus:entityPartyContactFaxFaxNumber" minOccurs="0"/>
-      <element ref="bus:entityPartyContactFaxFaxNumberUsage" minOccurs="0"/>
+      <element ref="bus:entityPartyContactFaxNumber"/>
+      <element ref="bus:entityPartyContactFaxNumberUsage" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
   <complexType name="entityPartyContactEmailComplexType">
     <sequence>
-      <element ref="bus:entityPartyContactEmailEmailAddress" minOccurs="0"/>
-      <element ref="bus:entityPartyContactEmailEmailAddressUsage" minOccurs="0"/>
+      <element ref="bus:entityPartyContactEmailAddress"/>
+      <element ref="bus:entityPartyContactEmailAddressUsage" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="headerIdentifierContactPhoneComplexType">
+  <complexType name="accountantAddressComplexType">
     <sequence>
-      <element ref="bus:headerIdentifierContactPhoneNumber" minOccurs="0"/>
-      <element ref="bus:headerIdentifierContactPhoneNumberDescription" minOccurs="0"/>
+      <element ref="bus:accountantAddressName" minOccurs="0"/>
+      <element ref="bus:accountantAddressDescription" minOccurs="0"/>
+      <element ref="bus:accountantAddressPurpose" minOccurs="0"/>
+      <element ref="bus:accountantAddressLocationId" minOccurs="0"/>
+      <element ref="bus:accountantAddressBuildingNumber" minOccurs="0"/>
+      <element ref="bus:accountantAddressStreet" minOccurs="0"/>
+      <element ref="bus:accountantAddressDetail" minOccurs="0"/>
+      <element ref="bus:accountantAddressCity" minOccurs="0"/>
+      <element ref="bus:accountantAddressStateOrProvince" minOccurs="0"/>
+      <element ref="bus:accountantAddressCountry" minOccurs="0"/>
+      <element ref="bus:accountantAddressZipOrPostalCode" minOccurs="0"/>
+      <element ref="bus:accountantAddressActiveIndicator" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="headerIdentifierContactFaxComplexType">
+  <complexType name="accountantContactComplexType">
     <sequence>
-      <element ref="bus:headerIdentifierContactFaxNumber" minOccurs="0"/>
-      <element ref="bus:headerIdentifierContactFaxNumberUsage" minOccurs="0"/>
+      <element ref="bus:accountantContactPrefix" minOccurs="0"/>
+      <element ref="bus:accountantContactLastName" minOccurs="0"/>
+      <element ref="bus:accountantContactFirstName" minOccurs="0"/>
+      <element ref="bus:accountantContactSuffix" minOccurs="0"/>
+      <element ref="bus:accountantContactAttentionLine" minOccurs="0"/>
+      <element ref="bus:accountantContactPositionRole" minOccurs="0"/>
+      <element ref="bus:accountantContactContactType" minOccurs="0"/>
+      <element ref="bus:accountantContactLocationIdCrossReference" minOccurs="0"/>
+      <element ref="bus:accountantContactActive" minOccurs="0"/>
+      <element ref="bus:accountantContactPhone" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:accountantContactFax" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:accountantContactEmail" minOccurs="0" maxOccurs="unbounded"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="headerIdentifierContactEmailComplexType">
+  <complexType name="accountantContactPhoneComplexType">
     <sequence>
-      <element ref="bus:headerIdentifierContactEmailAddress" minOccurs="0"/>
-      <element ref="bus:headerIdentifierContactEmailAddressUsage" minOccurs="0"/>
+      <element ref="bus:accountantContactPhoneNumber"/>
+      <element ref="bus:accountantContactPhoneNumberDescription" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="accountantContactFaxComplexType">
+    <sequence>
+      <element ref="bus:accountantContactFaxNumber"/>
+      <element ref="bus:accountantContactFaxNumberUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="accountantContactEmailComplexType">
+    <sequence>
+      <element ref="bus:accountantContactEmailAddress"/>
+      <element ref="bus:accountantContactEmailAddressUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="reportingCalendarPeriodComplexType">
+    <sequence>
+      <element ref="bus:periodId"/>
+      <element ref="bus:periodDescription" minOccurs="0"/>
+      <element ref="bus:periodStartDate" minOccurs="0"/>
+      <element ref="bus:periodEndDate" minOccurs="0"/>
+      <element ref="bus:reportingCalendarPeriodClosedDate" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerPartyPhoneComplexType">
+    <sequence>
+      <element ref="bus:headerPartyPhoneNumber"/>
+      <element ref="bus:headerPartyPhoneNumberDescription" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerPartyFaxComplexType">
+    <sequence>
+      <element ref="bus:headerPartyFaxNumber"/>
+      <element ref="bus:headerPartyFaxNumberUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerPartyEmailComplexType">
+    <sequence>
+      <element ref="bus:headerPartyEmailAddress"/>
+      <element ref="bus:headerPartyEmailAddressUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerPartyAddressComplexType">
+    <sequence>
+      <element ref="bus:headerPartyAddressName" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressDescription" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressPurpose" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressLocationId" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressBuildingNumber" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressStreet" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressDetail" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressCity" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressStateOrProvince" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressCountry" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressZipOrPostalCode" minOccurs="0"/>
+      <element ref="bus:headerPartyAddressActiveIndicator" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerPartyWebSiteComplexType">
+    <sequence>
+      <element ref="bus:headerPartyWebSiteUrl"/>
+      <element ref="bus:headerPartyWebSiteDescription" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerPartyContactComplexType">
+    <sequence>
+      <element ref="bus:headerPartyContactPrefix" minOccurs="0"/>
+      <element ref="bus:headerPartyContactLastName" minOccurs="0"/>
+      <element ref="bus:headerPartyContactFirstName" minOccurs="0"/>
+      <element ref="bus:headerPartyContactSuffix" minOccurs="0"/>
+      <element ref="bus:headerPartyContactAttentionLine" minOccurs="0"/>
+      <element ref="bus:headerPartyContactPositionRole" minOccurs="0"/>
+      <element ref="bus:headerPartyContactContactType" minOccurs="0"/>
+      <element ref="bus:headerPartyContactLocationIdCrossReference" minOccurs="0"/>
+      <element ref="bus:headerPartyContactActive" minOccurs="0"/>
+      <element ref="bus:headerPartyContactPhone" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:headerPartyContactFax" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:headerPartyContactEmail" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerPartyContactPhoneComplexType">
+    <sequence>
+      <element ref="bus:headerPartyContactPhoneNumber"/>
+      <element ref="bus:headerPartyContactPhoneNumberDescription" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerPartyContactFaxComplexType">
+    <sequence>
+      <element ref="bus:headerPartyContactFaxNumber"/>
+      <element ref="bus:headerPartyContactFaxNumberUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="headerPartyContactEmailComplexType">
+    <sequence>
+      <element ref="bus:headerPartyContactEmailAddress"/>
+      <element ref="bus:headerPartyContactEmailAddressUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailMeasurableComplexType">
+    <sequence>
+      <element ref="bus:measurableCode"/>
+      <element ref="bus:measurableCodeDescription" minOccurs="0"/>
+      <element ref="bus:measurableCategory" minOccurs="0"/>
+      <element ref="bus:measurableIdentification" minOccurs="0"/>
+      <element ref="bus:schemaForMeasurableIdentification" minOccurs="0"/>
+      <element ref="bus:secondaryMeasurableCode" minOccurs="0"/>
+      <element ref="bus:schemaForSecondaryMeasurableIdentification" minOccurs="0"/>
+      <element ref="bus:measurableDescription" minOccurs="0"/>
+      <element ref="bus:measurableQuantity" minOccurs="0"/>
+      <element ref="bus:measurableQualifier" minOccurs="0"/>
+      <element ref="bus:measurableUnitOfMeasure" minOccurs="0"/>
+      <element ref="bus:measurablePerUnitCostPrice" minOccurs="0"/>
+      <element ref="bus:measurableStartTime" minOccurs="0"/>
+      <element ref="bus:measurableEndTime" minOccurs="0"/>
+      <element ref="bus:measurableActive" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
   <complexType name="detailJobComplexType">
     <sequence>
-      <element ref="bus:jobId" minOccurs="0"/>
+      <element ref="bus:jobId"/>
       <element ref="bus:jobDescription" minOccurs="0"/>
       <element ref="bus:jobPhase" minOccurs="0"/>
       <element ref="bus:jobPhaseDescription" minOccurs="0"/>
@@ -140,24 +324,86 @@
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="contactPhoneComplexType">
+  <complexType name="detailPartyPhoneComplexType">
     <sequence>
-      <element ref="bus:identifierContactPhoneNumber" minOccurs="0"/>
-      <element ref="bus:identifierContactPhoneNumberDescription" minOccurs="0"/>
+      <element ref="bus:detailPartyPhoneNumber"/>
+      <element ref="bus:detailPartyPhoneNumberDescription" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="contactFaxComplexType">
+  <complexType name="detailPartyFaxComplexType">
     <sequence>
-      <element ref="bus:identifierContactFaxNumber" minOccurs="0"/>
-      <element ref="bus:identifierContactFaxNumberUsage" minOccurs="0"/>
+      <element ref="bus:detailPartyFaxNumber"/>
+      <element ref="bus:detailPartyFaxNumberUsage" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="contactEmailComplexType">
+  <complexType name="detailPartyEmailComplexType">
     <sequence>
-      <element ref="bus:identifierContactEmailAddress" minOccurs="0"/>
-      <element ref="bus:identifierContactEmailAddressUsage" minOccurs="0"/>
+      <element ref="bus:detailPartyEmailAddress"/>
+      <element ref="bus:detailPartyEmailAddressUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailPartyAddressComplexType">
+    <sequence>
+      <element ref="bus:detailPartyAddressName" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressDescription" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressPurpose" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressLocationId" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressBuildingNumber" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressStreet" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressDetail" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressCity" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressStateOrProvince" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressCountry" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressZipOrPostalCode" minOccurs="0"/>
+      <element ref="bus:detailPartyAddressActiveIndicator" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailPartyWebSiteComplexType">
+    <sequence>
+      <element ref="bus:detailPartyWebSiteUrl"/>
+      <element ref="bus:detailPartyWebSiteDescription" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailPartyContactComplexType">
+    <sequence>
+      <element ref="bus:detailPartyContactPrefix" minOccurs="0"/>
+      <element ref="bus:detailPartyContactLastName" minOccurs="0"/>
+      <element ref="bus:detailPartyContactFirstName" minOccurs="0"/>
+      <element ref="bus:detailPartyContactSuffix" minOccurs="0"/>
+      <element ref="bus:detailPartyContactAttentionLine" minOccurs="0"/>
+      <element ref="bus:detailPartyContactPositionRole" minOccurs="0"/>
+      <element ref="bus:detailPartyContactContactType" minOccurs="0"/>
+      <element ref="bus:detailPartyContactLocationIdCrossReference" minOccurs="0"/>
+      <element ref="bus:detailPartyContactActive" minOccurs="0"/>
+      <element ref="bus:detailPartyContactPhone" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:detailPartyContactFax" minOccurs="0" maxOccurs="unbounded"/>
+      <element ref="bus:detailPartyContactEmail" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailPartyContactPhoneComplexType">
+    <sequence>
+      <element ref="bus:detailPartyContactPhoneNumber"/>
+      <element ref="bus:detailPartyContactPhoneNumberDescription" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailPartyContactFaxComplexType">
+    <sequence>
+      <element ref="bus:detailPartyContactFaxNumber"/>
+      <element ref="bus:detailPartyContactFaxNumberUsage" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
+  <complexType name="detailPartyContactEmailComplexType">
+    <sequence>
+      <element ref="bus:detailPartyContactEmailAddress"/>
+      <element ref="bus:detailPartyContactEmailAddressUsage" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>

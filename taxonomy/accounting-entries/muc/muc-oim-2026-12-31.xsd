@@ -35,7 +35,7 @@
   </complexType>
   <complexType name="multicurrencyExchangeRateTypeItemType">
     <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
+      <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="multicurrencyTriangulationCurrencyAmountItemType">
@@ -60,7 +60,7 @@
   </complexType>
   <complexType name="multicurrencyTriangulationExchangeRateTypeItemType">
     <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
+      <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="multicurrencyCrossTriangulationExchangeRateItemType">
@@ -75,7 +75,7 @@
   </complexType>
   <complexType name="multicurrencyCrossTriangulationExchangeRateTypeItemType">
     <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
+      <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="multicurrencyCommentItemType">

@@ -10,7 +10,7 @@
   "source_format": "PCA Accounting CSV",
   "target_format": "xBRL-CSV",
   "profile": "PCA_Accounting_81col_AnonymousEvaluation_V17_V14",
-  "hmd": "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+  "hmd": "bindings/hmd/gl-cor/accounting-entries/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
   "binding": "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_BINDING.csv",
   "input": "instances/original/PCA/original_basis/PCA.csv",
   "outputs": {
@@ -24,7 +24,7 @@
     "-o",
     "instances/derived/PCA/xbrl-csv/original_basis/accounting_entries.csv",
     "-m",
-    "models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+    "bindings/hmd/gl-cor/accounting-entries/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
     "--profile-dir",
     "bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14",
     "--columns-file",
@@ -39,8 +39,6 @@
     "instances/derived/PCA/xbrl-csv/original_basis/tax_trace.csv",
     "--taxonomy-entrypoint",
     "taxonomy/accounting-entries/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd",
-    "--metadata-output",
-    "instances/derived/PCA/xbrl-csv/original_basis/accounting_entries.json",
     "--entity",
     "scheme:ABC-SHOTEN",
     "--period",
@@ -60,7 +58,7 @@
     "account_semantic_usage": "transaction_direction_only"
   },
   "checksums": {
-    "hmd": "9E3A47B4335C15B0EDCD7299962BC15878BE8288116927C2A7691A5B0C2CE362",
+    "hmd": "6DB8C6AAD8C2FBAEC710DDF104405D22CC13BAD0BA52038DF471F7FE5850AD81",
     "binding": "947AA74B116A0CB433E77EB18C70A6285B622652000719461BF8F7D717A0B475",
     "input": "35B554CFBC94A7A11BB0452682B1F911BCFA2B9154D44386FE01ADB713806B57",
     "dependencies": {

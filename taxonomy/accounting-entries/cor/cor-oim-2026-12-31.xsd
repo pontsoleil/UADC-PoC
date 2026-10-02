@@ -8,7 +8,7 @@
   <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/gen" schemaLocation="../gen/gl-gen-2026-12-31.xsd"/>
   <!-- reusable OIM Attribute item type -->
-  <complexType name="documentTypeItemType">
+  <complexType name="documentInformationDocumentTypeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
@@ -38,7 +38,7 @@
       <restriction base="xbrli:dateTimeItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="creatorItemType">
+  <complexType name="documentInformationCreatorItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
@@ -98,37 +98,42 @@
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
+  <complexType name="partyRoleItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
   <complexType name="partyBusinessDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="entityDefaultAccountingMethodPurposeItemType">
+  <complexType name="defaultAccountingMethodPurposeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="entityDefaultAccountingMethodPurposeDescriptionItemType">
+  <complexType name="defaultAccountingMethodPurposeDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="entityFiscalYearStartItemType">
+  <complexType name="fiscalYearStartItemType">
     <simpleContent>
       <restriction base="xbrli:dateItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="entityFiscalYearEndItemType">
+  <complexType name="fiscalYearEndItemType">
     <simpleContent>
       <restriction base="xbrli:dateItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="entryDatePostedItemType">
+  <complexType name="datePostedItemType">
     <simpleContent>
       <restriction base="xbrli:dateTimeItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="entryCreatorItemType">
+  <complexType name="entryHeaderCreatorItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
@@ -333,7 +338,7 @@
       <restriction base="xbrli:booleanItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="detailDocumentTypeItemType">
+  <complexType name="entryDetailDocumentTypeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
@@ -368,11 +373,6 @@
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="descriptionItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
   <complexType name="acknowledgementDateItemType">
     <simpleContent>
       <restriction base="xbrli:dateTimeItemType"/>
@@ -394,6 +394,11 @@
     </simpleContent>
   </complexType>
   <complexType name="geospatialCoordinateItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="entryDetailDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
@@ -488,7 +493,7 @@
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="detailDocumentNumberItemType">
+  <complexType name="documentNumberItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
@@ -515,7 +520,7 @@
   </complexType>
   <complexType name="identifierOrganizationTypeDescriptionItemType">
     <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
+      <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="identifierDescriptionItemType">
@@ -548,32 +553,32 @@
       <restriction base="xbrli:dateTimeItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="identifierPhoneNumberItemType">
+  <complexType name="phoneNumberItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="identifierPhoneNumberDescriptionItemType">
+  <complexType name="phoneNumberDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="identifierFaxNumberItemType">
+  <complexType name="faxNumberItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="identifierFaxNumberUsageItemType">
+  <complexType name="faxNumberUsageItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="identifierEmailAddressItemType">
+  <complexType name="emailAddressItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="identifierEmailAddressUsageItemType">
+  <complexType name="emailAddressUsageItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
@@ -660,7 +665,7 @@
   </complexType>
   <complexType name="contactContactTypeItemType">
     <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
+      <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="contactLocationIdCrossReferenceItemType">
@@ -758,11 +763,6 @@
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="taxTypeItemType">
-    <simpleContent>
-      <restriction base="xbrli:tokenItemType"/>
-    </simpleContent>
-  </complexType>
   <complexType name="taxCommentExemptionReasonItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
@@ -795,7 +795,7 @@
   </complexType>
   <complexType name="taxExchangeRateTypeItemType">
     <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
+      <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="taxExchangeRateCommentItemType">
@@ -825,7 +825,7 @@
   </complexType>
   <complexType name="taxTriangulationCurrencyExchangeRateTypeItemType">
     <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
+      <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="taxForeignToTriangulationCurrencyExchangeRateItemType">
@@ -840,12 +840,7 @@
   </complexType>
   <complexType name="taxForeignToTriangulationCurrencyExchangeRateTypeItemType">
     <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
-    </simpleContent>
-  </complexType>
-  <complexType name="taxTransactionClassificationItemType">
-    <simpleContent>
-      <restriction base="xbrli:stringItemType"/>
+      <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="accountNumberItemType">
@@ -939,13 +934,13 @@
     </simpleContent>
   </complexType>
   <!-- reusable OIM Attribute item element -->
-  <element name="documentType" id="cor_documentType" type="cor:documentTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="documentInformationDocumentType" id="cor_documentInformationDocumentType" type="cor:documentInformationDocumentTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="auditNumber" id="cor_auditNumber" type="cor:auditNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="revisesAuditNumber" id="cor_revisesAuditNumber" type="cor:revisesAuditNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="actionToTakeWithPreviousData" id="cor_actionToTakeWithPreviousData" type="cor:actionToTakeWithPreviousDataItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="language" id="cor_language" type="cor:languageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="creationDate" id="cor_creationDate" type="cor:creationDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="creator" id="cor_creator" type="cor:creatorItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="documentInformationCreator" id="cor_documentInformationCreator" type="cor:documentInformationCreatorItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="documentComment" id="cor_documentComment" type="cor:documentCommentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="periodCoveredStart" id="cor_periodCoveredStart" type="cor:periodCoveredStartItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="periodCoveredEnd" id="cor_periodCoveredEnd" type="cor:periodCoveredEndItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -957,13 +952,14 @@
   <element name="defaultCurrency" id="cor_defaultCurrency" type="cor:defaultCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="partyName" id="cor_partyName" type="cor:partyNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="partyId" id="cor_partyId" type="cor:partyIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="partyRole" id="cor_partyRole" type="cor:partyRoleItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="partyBusinessDescription" id="cor_partyBusinessDescription" type="cor:partyBusinessDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="entityDefaultAccountingMethodPurpose" id="cor_entityDefaultAccountingMethodPurpose" type="cor:entityDefaultAccountingMethodPurposeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="entityDefaultAccountingMethodPurposeDescription" id="cor_entityDefaultAccountingMethodPurposeDescription" type="cor:entityDefaultAccountingMethodPurposeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="entityFiscalYearStart" id="cor_entityFiscalYearStart" type="cor:entityFiscalYearStartItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="entityFiscalYearEnd" id="cor_entityFiscalYearEnd" type="cor:entityFiscalYearEndItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="entryDatePosted" id="cor_entryDatePosted" type="cor:entryDatePostedItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="entryCreator" id="cor_entryCreator" type="cor:entryCreatorItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="defaultAccountingMethodPurpose" id="cor_defaultAccountingMethodPurpose" type="cor:defaultAccountingMethodPurposeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="defaultAccountingMethodPurposeDescription" id="cor_defaultAccountingMethodPurposeDescription" type="cor:defaultAccountingMethodPurposeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="fiscalYearStart" id="cor_fiscalYearStart" type="cor:fiscalYearStartItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="fiscalYearEnd" id="cor_fiscalYearEnd" type="cor:fiscalYearEndItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="datePosted" id="cor_datePosted" type="cor:datePostedItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="entryHeaderCreator" id="cor_entryHeaderCreator" type="cor:entryHeaderCreatorItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="lastModifier" id="cor_lastModifier" type="cor:lastModifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="responsiblePerson" id="cor_responsiblePerson" type="cor:responsiblePersonItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="typeCode" id="cor_typeCode" type="cor:typeCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -1004,19 +1000,19 @@
   <element name="lineNumberCounter" id="cor_lineNumberCounter" type="cor:lineNumberCounterItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="postingDate" id="cor_postingDate" type="cor:postingDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="memoLine" id="cor_memoLine" type="cor:memoLineItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="detailDocumentType" id="cor_detailDocumentType" type="cor:detailDocumentTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="entryDetailDocumentType" id="cor_entryDetailDocumentType" type="cor:entryDetailDocumentTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="documentTypeDescription" id="cor_documentTypeDescription" type="cor:documentTypeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="documentDate" id="cor_documentDate" type="cor:documentDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="receivedDate" id="cor_receivedDate" type="cor:receivedDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="documentLocation" id="cor_documentLocation" type="cor:documentLocationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="postingStatus" id="cor_postingStatus" type="cor:postingStatusItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="postingStatusDescription" id="cor_postingStatusDescription" type="cor:postingStatusDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="description" id="cor_description" type="cor:descriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="acknowledgementDate" id="cor_acknowledgementDate" type="cor:acknowledgementDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="confirmationDate" id="cor_confirmationDate" type="cor:confirmationDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurableClassId" id="cor_measurableClassId" type="cor:measurableClassIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurableClassDescription" id="cor_measurableClassDescription" type="cor:measurableClassDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="geospatialCoordinate" id="cor_geospatialCoordinate" type="cor:geospatialCoordinateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="entryDetailDescription" id="cor_entryDetailDescription" type="cor:entryDetailDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="detailDescription" id="cor_detailDescription" type="cor:detailDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="monetaryAmount" id="cor_monetaryAmount" type="cor:monetaryAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="currency" id="cor_currency" type="cor:currencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -1035,7 +1031,7 @@
   <element name="tickingField" id="cor_tickingField" type="cor:tickingFieldItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="documentRemainingBalance" id="cor_documentRemainingBalance" type="cor:documentRemainingBalanceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="ucr" id="cor_ucr" type="cor:ucrItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="detailDocumentNumber" id="cor_detailDocumentNumber" type="cor:detailDocumentNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="documentNumber" id="cor_documentNumber" type="cor:documentNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="identifierCode" id="cor_identifierCode" type="cor:identifierCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="identifierPurpose" id="cor_identifierPurpose" type="cor:identifierPurposeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="identifierActive" id="cor_identifierActive" type="cor:identifierActiveItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -1047,12 +1043,12 @@
   <element name="externalAuthorityCode" id="cor_externalAuthorityCode" type="cor:externalAuthorityCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="externalAuthorityName" id="cor_externalAuthorityName" type="cor:externalAuthorityNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="externalAuthorityVerificationDate" id="cor_externalAuthorityVerificationDate" type="cor:externalAuthorityVerificationDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="identifierPhoneNumber" id="cor_identifierPhoneNumber" type="cor:identifierPhoneNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="identifierPhoneNumberDescription" id="cor_identifierPhoneNumberDescription" type="cor:identifierPhoneNumberDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="identifierFaxNumber" id="cor_identifierFaxNumber" type="cor:identifierFaxNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="identifierFaxNumberUsage" id="cor_identifierFaxNumberUsage" type="cor:identifierFaxNumberUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="identifierEmailAddress" id="cor_identifierEmailAddress" type="cor:identifierEmailAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="identifierEmailAddressUsage" id="cor_identifierEmailAddressUsage" type="cor:identifierEmailAddressUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="phoneNumber" id="cor_phoneNumber" type="cor:phoneNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="phoneNumberDescription" id="cor_phoneNumberDescription" type="cor:phoneNumberDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="faxNumber" id="cor_faxNumber" type="cor:faxNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="faxNumberUsage" id="cor_faxNumberUsage" type="cor:faxNumberUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="emailAddress" id="cor_emailAddress" type="cor:emailAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="emailAddressUsage" id="cor_emailAddressUsage" type="cor:emailAddressUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="identifierAddressDescription" id="cor_identifierAddressDescription" type="cor:identifierAddressDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="purpose" id="cor_purpose" type="cor:purposeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="locationId" id="cor_locationId" type="cor:locationIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -1089,7 +1085,6 @@
   <element name="basisForTaxation" id="cor_basisForTaxation" type="cor:basisForTaxationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="taxPercentageRate" id="cor_taxPercentageRate" type="cor:taxPercentageRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="taxCategory" id="cor_taxCategory" type="cor:taxCategoryItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="taxType" id="cor_taxType" type="cor:taxTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="taxCommentExemptionReason" id="cor_taxCommentExemptionReason" type="cor:taxCommentExemptionReasonItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="taxAmountInForeignCurrency" id="cor_taxAmountInForeignCurrency" type="cor:taxAmountInForeignCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="taxForeignCurrency" id="cor_taxForeignCurrency" type="cor:taxForeignCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -1106,7 +1101,6 @@
   <element name="taxForeignToTriangulationCurrencyExchangeRate" id="cor_taxForeignToTriangulationCurrencyExchangeRate" type="cor:taxForeignToTriangulationCurrencyExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="taxForeignToTriangulationCurrencyExchangeRateSource" id="cor_taxForeignToTriangulationCurrencyExchangeRateSource" type="cor:taxForeignToTriangulationCurrencyExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="taxForeignToTriangulationCurrencyExchangeRateType" id="cor_taxForeignToTriangulationCurrencyExchangeRateType" type="cor:taxForeignToTriangulationCurrencyExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="taxTransactionClassification" id="cor_taxTransactionClassification" type="cor:taxTransactionClassificationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="accountNumber" id="cor_accountNumber" type="cor:accountNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="accountDescription" id="cor_accountDescription" type="cor:accountDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="accountClassification" id="cor_accountClassification" type="cor:accountClassificationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>

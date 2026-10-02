@@ -7,12 +7,12 @@
   <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
   <include schemaLocation="../../lnk/lnk-2026-12-31.xsd"/>
   <!-- structural ComplexType supplied for the Palette module -->
-  <complexType name="documentSummaryReportingTaxonomiesComplexType">
+  <complexType name="summaryReportingTaxonomiesComplexType">
     <sequence>
-      <element ref="lnk:documentSummaryReportingTaxonomyId" minOccurs="0"/>
-      <element ref="lnk:documentSummaryReportingTaxonomySchemaReferenceHrefAttribute" minOccurs="0"/>
-      <element ref="lnk:documentSummaryReportingTaxonomyHeader" minOccurs="0"/>
-      <element ref="lnk:documentSummaryReportingTaxonomyDescription" minOccurs="0"/>
+      <element ref="lnk:summaryReportingTaxonomyId" minOccurs="0"/>
+      <element ref="lnk:summaryReportingTaxonomySchemaReferenceHrefAttribute" minOccurs="0"/>
+      <element ref="lnk:summaryReportingTaxonomyHeader" minOccurs="0"/>
+      <element ref="lnk:summaryReportingTaxonomyDescription" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>

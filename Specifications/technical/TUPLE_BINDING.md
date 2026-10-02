@@ -14,8 +14,10 @@ All dependencies are explicit CLI arguments. The program imports no task-history
 ## CLI
 
 ```text
-python tuple_binding.py serialize INPUT.csv --metadata INPUT.json --hmd HMD.csv --overlay OVERLAY.csv --qname-map QNAME.csv --taxonomy ENTRY.xsd --output INSTANCE.xml
-python tuple_binding.py deserialize INSTANCE.xml --metadata INPUT.json --hmd HMD.csv --overlay OVERLAY.csv --qname-map QNAME.csv --taxonomy ENTRY.xsd --output RECOVERED.csv
+python tools/binding/tuple_binding.py serialize INPUT.csv --metadata INPUT.json --hmd HMD.csv --overlay OVERLAY.csv --qname-map QNAME.csv --taxonomy ENTRY.xsd --output INSTANCE.xml
+python tools/binding/tuple_binding.py deserialize INSTANCE.xml --metadata INPUT.json --hmd HMD.csv --overlay OVERLAY.csv --qname-map QNAME.csv --taxonomy ENTRY.xsd --output RECOVERED.csv
 ```
 
 Tuple occurrence identity is physical serialization state. Semantic ordinal allocation and reverse reconstruction are owned by `semantic_binding.py`; `tuple_binding.py` does not renumber or repair semantic ordinals.
+
+The serialize/deserialize commands are implemented. Dedicated Tuple/OIM execution manifests are not registered in the current Canonical baseline, so publication acceptance remains HOLD; implementation availability is not an accepted round-trip result.

@@ -14,22 +14,22 @@
   <import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/gen" schemaLocation="../gen/gl-gen-2026-12-31.xsd"/>
   <!-- reusable item type -->
-  <complexType name="documentSummaryReportingTaxonomyIdItemType">
+  <complexType name="summaryReportingTaxonomyIdItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="documentSummaryReportingTaxonomySchemaReferenceHrefAttributeItemType">
+  <complexType name="summaryReportingTaxonomySchemaReferenceHrefAttributeItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="documentSummaryReportingTaxonomyHeaderItemType">
+  <complexType name="summaryReportingTaxonomyHeaderItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="documentSummaryReportingTaxonomyDescriptionItemType">
+  <complexType name="summaryReportingTaxonomyDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
@@ -55,11 +55,11 @@
     </simpleContent>
   </complexType>
   <!-- reusable global element declaration -->
-  <element name="documentSummaryReportingTaxonomies" id="lnk_documentSummaryReportingTaxonomies" type="lnk:documentSummaryReportingTaxonomiesComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
-  <element name="documentSummaryReportingTaxonomyId" id="lnk_documentSummaryReportingTaxonomyId" type="lnk:documentSummaryReportingTaxonomyIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="documentSummaryReportingTaxonomySchemaReferenceHrefAttribute" id="lnk_documentSummaryReportingTaxonomySchemaReferenceHrefAttribute" type="lnk:documentSummaryReportingTaxonomySchemaReferenceHrefAttributeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="documentSummaryReportingTaxonomyHeader" id="lnk_documentSummaryReportingTaxonomyHeader" type="lnk:documentSummaryReportingTaxonomyHeaderItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="documentSummaryReportingTaxonomyDescription" id="lnk_documentSummaryReportingTaxonomyDescription" type="lnk:documentSummaryReportingTaxonomyDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomies" id="lnk_summaryReportingTaxonomies" type="lnk:summaryReportingTaxonomiesComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="summaryReportingTaxonomyId" id="lnk_summaryReportingTaxonomyId" type="lnk:summaryReportingTaxonomyIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomySchemaReferenceHrefAttribute" id="lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" type="lnk:summaryReportingTaxonomySchemaReferenceHrefAttributeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomyHeader" id="lnk_summaryReportingTaxonomyHeader" type="lnk:summaryReportingTaxonomyHeaderItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomyDescription" id="lnk_summaryReportingTaxonomyDescription" type="lnk:summaryReportingTaxonomyDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="detailRichTextComment" id="lnk_detailRichTextComment" type="lnk:detailRichTextCommentComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
   <element name="commentCode" id="lnk_commentCode" type="lnk:commentCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="commentDescription" id="lnk_commentDescription" type="lnk:commentDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>

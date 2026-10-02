@@ -7,14 +7,14 @@
   <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
   <include schemaLocation="../../taf/taf-2026-12-31.xsd"/>
   <!-- structural ComplexType supplied for the Palette module -->
-  <complexType name="detailOriginatingDriginatingDocumentComplexType">
+  <complexType name="originatingDocumentComplexType">
     <sequence>
-      <element ref="taf:detailOriginatingDocumentType" minOccurs="0"/>
-      <element ref="taf:detailOriginatingDocumentNumber" minOccurs="0"/>
-      <element ref="taf:detailOriginatingDocumentDate" minOccurs="0"/>
-      <element ref="taf:detailOriginatingDocumentIdentifierType" minOccurs="0"/>
-      <element ref="taf:detailOriginatingDocumentIdentifierCode" minOccurs="0"/>
-      <element ref="taf:detailOriginatingDocumentIdentifierTaxCode" minOccurs="0"/>
+      <element ref="taf:documentType" minOccurs="0"/>
+      <element ref="taf:documentNumber"/>
+      <element ref="taf:documentDate" minOccurs="0"/>
+      <element ref="taf:documentIdentifierType" minOccurs="0"/>
+      <element ref="taf:documentIdentifierCode" minOccurs="0"/>
+      <element ref="taf:documentIdentifierTaxCode" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>

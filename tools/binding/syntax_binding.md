@@ -4,7 +4,7 @@
 
 ## Purpose
 
-`src/syntax_binding.py` applies a Syntax Binding CSV to XML ⇄ Structured CSV conversion for one semantic model.
+`tools/binding/syntax_binding.py` applies a Syntax Binding CSV to XML ⇄ Structured CSV conversion for one semantic model.
 
 ## Inputs
 
@@ -19,7 +19,7 @@
 ## CLI
 
 ```text
-py src/syntax_binding.py <input> -b <binding.csv> -o <output> [--hmd-file <hmd.csv>] [--metadata-output <metadata.json>] [--taxonomy-base <dir>] [--reverse]
+py tools/binding/syntax_binding.py <input> -b <binding.csv> -o <output> [--hmd-file <hmd.csv>] [--metadata-output <metadata.json>] [--taxonomy-base <dir>] [--reverse]
 ```
 
 ## OIM metadata
@@ -33,3 +33,7 @@ Run commands from the repository root. Confirm input paths, output paths, and ov
 ## Tests
 
 Run only tests relevant to materially changed code or conditions. Reuse accepted PASS evidence when inputs, code, settings, dependency versions, outputs, and validation scope are materially identical.
+
+## Binding-declared defaults
+
+Syntax-only required literals are defined by the selected Syntax Binding. The runtime does not invent VAT, TaxScheme, ChargeIndicator, or similar business/syntax values. Existing-context defaults are applied only from explicit Binding rows.

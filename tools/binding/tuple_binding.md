@@ -4,7 +4,7 @@
 
 ## Purpose
 
-`src/tuple_binding.py` converts Tuple XBRL ⇄ Structured CSV for the same HMD semantic model. It is not a semantic-model mapper.
+`tools/binding/tuple_binding.py` converts Tuple XBRL ⇄ Structured CSV for the same HMD semantic model. It is not a semantic-model mapper.
 
 ## Preservation requirements
 
@@ -16,7 +16,7 @@
 ## CLI
 
 ```text
-py src/tuple_binding.py <input> --metadata <metadata.json> --hmd <hmd.csv> --qname-map <qname-map.csv> --taxonomy <entrypoint.xsd> --output <output> [--overlay <overlay.csv>] [--nil-manifest <file>]
+py tools/binding/tuple_binding.py <input> --metadata <metadata.json> --hmd <hmd.csv> --qname-map <qname-map.csv> --taxonomy <entrypoint.xsd> --output <output> [--overlay <overlay.csv>] [--nil-manifest <file>]
 ```
 
 ## Execution and safety

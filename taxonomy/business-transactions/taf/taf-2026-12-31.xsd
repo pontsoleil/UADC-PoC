@@ -14,42 +14,42 @@
   <import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/gen" schemaLocation="../gen/gl-gen-2026-12-31.xsd"/>
   <!-- reusable item type -->
-  <complexType name="originatingDocumentTypeItemType">
+  <complexType name="documentTypeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="originatingDocumentNumberItemType">
+  <complexType name="documentNumberItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="originatingDocumentDateItemType">
+  <complexType name="documentDateItemType">
     <simpleContent>
       <restriction base="xbrli:dateItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="originatingDocumentIdentifierTypeItemType">
+  <complexType name="documentIdentifierTypeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="originatingDocumentIdentifierCodeItemType">
+  <complexType name="documentIdentifierCodeItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="originatingDocumentIdentifierTaxCodeItemType">
+  <complexType name="documentIdentifierTaxCodeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <!-- reusable global element declaration -->
   <element name="originatingDocument" id="taf_originatingDocument" type="taf:originatingDocumentComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
-  <element name="originatingDocumentType" id="taf_originatingDocumentType" type="taf:originatingDocumentTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="originatingDocumentNumber" id="taf_originatingDocumentNumber" type="taf:originatingDocumentNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="originatingDocumentDate" id="taf_originatingDocumentDate" type="taf:originatingDocumentDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="originatingDocumentIdentifierType" id="taf_originatingDocumentIdentifierType" type="taf:originatingDocumentIdentifierTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="originatingDocumentIdentifierCode" id="taf_originatingDocumentIdentifierCode" type="taf:originatingDocumentIdentifierCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="originatingDocumentIdentifierTaxCode" id="taf_originatingDocumentIdentifierTaxCode" type="taf:originatingDocumentIdentifierTaxCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="documentType" id="taf_documentType" type="taf:documentTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="documentNumber" id="taf_documentNumber" type="taf:documentNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="documentDate" id="taf_documentDate" type="taf:documentDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="documentIdentifierType" id="taf_documentIdentifierType" type="taf:documentIdentifierTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="documentIdentifierCode" id="taf_documentIdentifierCode" type="taf:documentIdentifierCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="documentIdentifierTaxCode" id="taf_documentIdentifierTaxCode" type="taf:documentIdentifierTaxCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
 </schema>

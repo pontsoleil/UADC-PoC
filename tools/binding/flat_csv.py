@@ -6,8 +6,9 @@ module.  Physical accounting values are never included in diagnostics or
 summary output.
 
 PCA/EPSON use the fixed-order 16-column Binding contract. Legacy 17-column
-input is normalized at the boundary; its id is discarded. HMD matching uses
-semantic_path only, with selectors scoped to their owning path segment.
+input is normalized at the boundary; its id is discarded. Fact identity and
+physical mapping use the selector-qualified semantic_path unchanged. Selectors
+are interpreted only when resolving the corresponding HMD definition row.
 The legacy Structured CSV id field is retained as an empty compatibility field.
 Physical column names and interface width can be supplied separately with
 --columns-file (column,name CSV); new Bindings contain semantic rows only.
@@ -28,6 +29,8 @@ from datetime import date
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Iterable, Mapping, Sequence
+
+import selector_multiplicity
 
 
 CANONICAL_FIELDS = (
@@ -100,6 +103,14 @@ ACCOUNT_TAX_MAPPING_FIELDS = (
     "source_account_code",
     "source_account_name",
     "application_tax_code",
+    "tax_table_code",
+    "tax_category",
+    "note",
+)
+LEGACY_ACCOUNT_TAX_MAPPING_FIELDS = (
+    "source_account_code",
+    "source_account_name",
+    "application_tax_code",
     "tax_type",
     "tax_category",
     "note",
@@ -115,9 +126,9 @@ UNBOUND_REPORT_FIELDS = (
 ACCOUNT_SUBACCOUNT_SELECTOR = "[cor_Type='account-subaccount']"
 TAX_CATEGORY_SUFFIX = ".cor_DetailTax.cor_TaxCategory"
 TAX_RATE_SUFFIX = ".cor_DetailTax.cor_TaxPercentageRate"
-TAX_TYPE_SUFFIX = ".cor_DetailTax.cor_TaxType"
-TAX_TRANSACTION_CLASSIFICATION_SUFFIX = ".cor_DetailTax.cor_TaxTransactionClassification"
 TAX_DETAIL_SUFFIX = ".cor_DetailTax"
+TAX_AUTHORITY_SUFFIX = ".cor_DetailTax.cor_TaxAuthority"
+TAX_TABLE_CODE_SUFFIX = ".cor_DetailTax.cor_TaxTableCode"
 TAX_TRACE_FIELDS = (
     "source_application",
     "source_record_key",
@@ -127,7 +138,7 @@ TAX_TRACE_FIELDS = (
     "source_tax_rate_lexical",
     "source_tax_inclusion_mode",
     "mapping_rule_id",
-    "output_tax_type",
+    "binding_selector_signature",
     "output_tax_category",
     "output_tax_rate_ratio",
     "output_transaction_classification",
@@ -167,10 +178,6 @@ class BindingRow:
         return self.values["semantic_path"]
 
     @property
-    def neutral_path(self) -> str:
-        return _path_selectors(self.path)[0]
-
-    @property
     def max_occurs(self) -> int | None:
         raw = self.values["max_occurs"]
         return int(raw) if raw else None
@@ -206,7 +213,6 @@ class ConversionOptions:
     profile_width: int | None = None
     summary_log: Path | None = None
     unbound_report: Path | None = None
-    metadata_output: Path | None = None
     taxonomy_entrypoint: Path | None = None
     entity: str = "scheme:UADC-PoC"
     period: str = "2026-12-31T00:00:00"
@@ -303,7 +309,7 @@ class AccountTaxRule:
     source_account_code: str
     source_account_name: str
     application_tax_code: str
-    tax_type: str
+    tax_table_code: str
     tax_category: str
 
 
@@ -321,7 +327,6 @@ class StandardTaxRule:
     occurrence_side: str
     rate_pattern: str
     rate_output: str
-    tax_type: str
     tax_category: str
     tax_rate_ratio: str
     tax_inclusion_mode: str
@@ -373,31 +378,50 @@ def _legacy_group_key_to_cn(value: str) -> str:
     return json.dumps(config, ensure_ascii=False)
 
 
-def _path_selectors(path: str) -> tuple[str, dict[tuple[str, str], str]]:
-    """Parse the supported equality selectors without losing their class scope."""
-    if not path.startswith("$."):
-        raise ConversionError("DEFINITION_INVALID", "semantic_path must start with $.")
-    neutral = "$"
-    selectors: dict[tuple[str, str], str] = {}
-    position = 1
-    segment = re.compile(r"\.([A-Za-z_][A-Za-z0-9_-]*)")
-    predicate = re.compile(r"\[\s*([A-Za-z_][A-Za-z0-9_-]*)\s*=\s*(['\"])(.*?)\2\s*\]")
-    while position < len(path):
-        match = segment.match(path, position)
-        if match is None:
-            raise ConversionError("DEFINITION_INVALID", "semantic_path or selector syntax is invalid")
-        neutral += "." + match.group(1)
-        position = match.end()
-        while position < len(path) and path[position] == "[":
-            match = predicate.match(path, position)
-            if match is None:
-                raise ConversionError("DEFINITION_INVALID", "an equality selector is invalid")
-            key = (neutral, match.group(1))
-            if key in selectors:
-                raise ConversionError("DEFINITION_INVALID", "a selector property is repeated at one path")
-            selectors[key] = match.group(3)
-            position = match.end()
-    return neutral, selectors
+def _path_predicates(path: str) -> tuple[str, list[tuple[str, tuple]]]:
+    """Parse selector predicates while preserving the owning Class scope."""
+    try:
+        return selector_multiplicity.parse_binding_path(path)
+    except selector_multiplicity.SelectorMultiplicityError as exc:
+        raise ConversionError("DEFINITION_INVALID", str(exc)) from exc
+
+
+def _hmd_lookup_path(semantic_path: str) -> str:
+    """Resolve one selector-qualified semantic_path to its HMD definition path.
+
+    This conversion is permitted only for HMD definition lookup.  The returned
+    path is never a fact identity and must not be used for physical mapping, fact
+    de-duplication, or Structured CSV selection.
+    """
+    hmd_path, _ = _path_predicates(semantic_path)
+    return hmd_path
+
+
+
+def _predicates_for_owner(path: str, class_path: str) -> list[tuple]:
+    return [predicate for owner, predicate in _path_predicates(path)[1] if owner == class_path]
+
+
+def _predicate_signature(path: str, class_path: str | None = None) -> str:
+    predicates = _path_predicates(path)[1]
+    rendered = []
+    for owner, predicate in predicates:
+        if class_path is not None and owner != class_path:
+            continue
+        rendered.append(f"{owner}[{selector_multiplicity.render_predicate(predicate)}]")
+    return " && ".join(rendered)
+
+
+def _selector_fact_paths(path: str) -> list[tuple[str, str, str]]:
+    """Return (owner, property, value) facts implied by positive equality ANDs."""
+    result: list[tuple[str, str, str]] = []
+    for owner, predicate in _path_predicates(path)[1]:
+        implied = selector_multiplicity.implied_equalities(predicate)
+        if implied is None:
+            continue
+        for key, value in sorted(implied.items()):
+            result.append((owner, key, value))
+    return result
 
 
 def _parse_positive_int(raw: str, field: str) -> int:
@@ -552,7 +576,7 @@ def validate_definition(
     physical_columns: list[str] = []
     semantic_rows: list[BindingRow] = []
     physical_headers: dict[int, str] = {}
-    semantic_identities: set[tuple[str, tuple]] = set()
+    semantic_identities: set[str] = set()
     for row in rows:
         for field in ("sequence", "level"):
             _parse_positive_int(row.values[field], field)
@@ -581,11 +605,9 @@ def validate_definition(
         semantic_rows.append(row)
         if not row.path:
             raise ConversionError("DEFINITION_INVALID", "semantic_path must not be empty")
-        neutral, selectors = _path_selectors(row.path)
-        identity = (neutral, tuple(sorted(selectors.items())))
-        if identity in semantic_identities:
-            raise ConversionError("BINDING_PATH_DUPLICATE", "a semantic_path and selector combination is repeated")
-        semantic_identities.add(identity)
+        if row.path in semantic_identities:
+            raise ConversionError("BINDING_PATH_DUPLICATE", "a selector-qualified semantic_path is repeated")
+        semantic_identities.add(row.path)
         if row.values["occurrence_mode"] not in SUPPORTED_MODES:
             raise ConversionError("DEFINITION_INVALID", "occurrence_mode is unsupported")
         if row.values["row_role"] not in SUPPORTED_ROLES:
@@ -607,7 +629,7 @@ def validate_definition(
                     "PHYSICAL_COLUMN_INVALID", "physical columns must use positive Cn names"
                 )
             physical_columns.append(column)
-        hmd_sequence = hmd_sequences.get(row.neutral_path)
+        hmd_sequence = hmd_sequences.get(_hmd_lookup_path(row.path))
         if hmd_sequence is None:
             raise ConversionError("HMD_PATH_UNRESOLVED", "a Binding semantic_path is absent from HMD")
         if hmd_sequence != row.sequence:
@@ -843,31 +865,38 @@ def load_account_tax_mapping(
     try:
         with path.open(newline="", encoding=encoding) as stream:
             reader = csv.DictReader(stream)
-            if tuple(reader.fieldnames or ()) != ACCOUNT_TAX_MAPPING_FIELDS:
+            header = tuple(reader.fieldnames or ())
+            if header == ACCOUNT_TAX_MAPPING_FIELDS:
+                source_fields = ACCOUNT_TAX_MAPPING_FIELDS
+                legacy_tax_type = False
+            elif header == LEGACY_ACCOUNT_TAX_MAPPING_FIELDS:
+                source_fields = LEGACY_ACCOUNT_TAX_MAPPING_FIELDS
+                legacy_tax_type = True
+            else:
                 raise ConversionError(
                     "ACCOUNT_TAX_MAPPING_HEADER_INVALID",
-                    "Account Tax Mapping header must exactly match the canonical six columns",
+                    "Account Tax Mapping header must match the canonical tax_table_code contract or the legacy tax_type form",
                 )
             for source in reader:
-                row = {
-                    field: (source.get(field) or "").strip()
-                    for field in ACCOUNT_TAX_MAPPING_FIELDS
-                }
+                row = {field: (source.get(field) or "").strip() for field in source_fields}
+                if legacy_tax_type:
+                    row["tax_table_code"] = row.pop("tax_type")
                 required = ACCOUNT_TAX_MAPPING_FIELDS[:-1]
                 if any(not row[field] for field in required):
                     raise ConversionError(
                         "ACCOUNT_TAX_MAPPING_ROW_INVALID",
                         "Account Tax Mapping key and output values must not be empty",
                     )
-                if row["tax_type"] not in {"VAT", "OTH"}:
+                tax_table_code = row["tax_table_code"]
+                if not tax_table_code:
                     raise ConversionError(
                         "ACCOUNT_TAX_MAPPING_ROW_INVALID",
-                        "Account Tax Mapping tax type is not supported",
+                        "Account Tax Mapping requires a tax table code (legacy tax_type is accepted)",
                     )
                 key = (
                     row["source_account_code"],
                     row["source_account_name"],
-                    row["tax_type"],
+                    tax_table_code,
                     row["tax_category"],
                 )
                 if key in rules:
@@ -879,7 +908,7 @@ def load_account_tax_mapping(
                     source_account_code=row["source_account_code"],
                     source_account_name=row["source_account_name"],
                     application_tax_code=row["application_tax_code"],
-                    tax_type=row["tax_type"],
+                    tax_table_code=tax_table_code,
                     tax_category=row["tax_category"],
                 )
     except ConversionError:
@@ -1177,28 +1206,40 @@ def _structured_record(
         "type": row.values["type"],
         "id": "",
         "name": row.values["name"],
-        "semantic_path": row.neutral_path,
+        "semantic_path": row.path,
         "binding_path": row.path,
         "value": value,
     }
 
 
-def _write_structured(path: Path, rows: Iterable[Mapping[str, str]], encoding: str) -> None:
-    row_list = list(rows)
-    keys = {key for row in row_list for key in row}
+def _structured_fieldnames(rows: Sequence[Mapping[str, str]]) -> list[str]:
+    keys = {key for row in rows for key in row}
     if set(STRUCTURED_FIELDS).issubset(keys):
         fieldnames = list(STRUCTURED_FIELDS)
         fieldnames.extend(sorted(keys - set(STRUCTURED_FIELDS)))
-    else:
-        fieldnames = [field for field in ("concept", "unit", "value") if field in keys]
-        fieldnames.extend(sorted(keys - set(fieldnames)))
+        return fieldnames
+    fieldnames = [field for field in ("concept", "unit", "value") if field in keys]
+    fieldnames.extend(sorted(keys - set(fieldnames)))
+    return fieldnames
+
+
+def _write_structured(
+    path: Path,
+    rows: Iterable[Mapping[str, str]],
+    encoding: str,
+    fieldnames: Sequence[str] | None = None,
+) -> list[str]:
+    row_list = list(rows)
+    resolved_fields = list(fieldnames) if fieldnames is not None else _structured_fieldnames(row_list)
     try:
+        path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("w", newline="", encoding=encoding) as stream:
-            writer = csv.DictWriter(stream, fieldnames=fieldnames)
+            writer = csv.DictWriter(stream, fieldnames=resolved_fields)
             writer.writeheader()
             writer.writerows(row_list)
     except (OSError, UnicodeError, csv.Error) as exc:
         raise ConversionError("OUTPUT_IO_ERROR", "Structured CSV output could not be written") from exc
+    return resolved_fields
 
 
 def _relative_uri(target: Path, metadata: Path) -> str:
@@ -1285,12 +1326,27 @@ def _resolve_oim_taxonomy_namespaces(
     return {module: resolved[module][0] for module in sorted(required | {"plt"})}
 
 
-def _selector_value(binding_path: str, class_path: str) -> str:
-    _, selectors = _path_selectors(binding_path)
-    values = [value for (owner, _), value in selectors.items() if owner == class_path]
-    if len(values) > 1:
-        raise ConversionError("DEFINITION_INVALID", "an occurrence class has multiple selectors")
-    return values[0] if values else ""
+def _selector_value(semantic_path: str, class_path: str) -> str:
+    """Return a stable occurrence token for predicates on one Class segment.
+
+    A single implied equality returns its lexical value (preserving existing D/C
+    occurrence tokens). More complex conditions return their normalized predicate
+    expression rather than collapsing them to a hard-coded business value.
+    """
+    predicates = _predicates_for_owner(semantic_path, class_path)
+    if not predicates:
+        return ""
+    implied: dict[str, str] = {}
+    deterministic = True
+    for predicate in predicates:
+        part = selector_multiplicity.implied_equalities(predicate)
+        if part is None:
+            deterministic = False
+            break
+        implied.update(part)
+    if deterministic and len(implied) == 1:
+        return next(iter(implied.values()))
+    return " && ".join(selector_multiplicity.render_predicate(predicate) for predicate in predicates)
 
 
 def _occurrence_value(record: Mapping[str, str], class_path: str) -> str:
@@ -1303,7 +1359,7 @@ def _occurrence_value(record: Mapping[str, str], class_path: str) -> str:
         source_row = (record.get("source_row") or "1").strip()
         occurrence = (record.get("occurrence") or "1").strip()
         return f"{source_row}-{occurrence}"
-    selector = _selector_value(record.get("binding_path") or "", class_path)
+    selector = _selector_value(record.get("semantic_path") or "", class_path)
     return selector or "1"
 
 
@@ -1325,9 +1381,10 @@ def _oim_records(
         if not (source.get("value") or ""):
             continue
         semantic_path = (source.get("semantic_path") or "").strip()
-        hmd = definition.hmd_rows.get(semantic_path)
+        hmd_path = _hmd_lookup_path(semantic_path)
+        hmd = definition.hmd_rows.get(hmd_path)
         if hmd is None:
-            raise ConversionError("HMD_PATH_UNRESOLVED", "Structured semantic_path is absent from HMD")
+            raise ConversionError("HMD_PATH_UNRESOLVED", "Structured semantic_path cannot resolve an HMD definition")
         module = hmd.get("module") or hmd.get("associated_module") or ""
         local_name = hmd.get("local_name") or ""
         if not module or not local_name:
@@ -1341,7 +1398,7 @@ def _oim_records(
         }
         modules.add(module)
         for class_path, class_row in repeated_classes:
-            if semantic_path == class_path or not semantic_path.startswith(class_path + "."):
+            if hmd_path == class_path or not hmd_path.startswith(class_path + "."):
                 continue
             class_module = class_row.get("module") or class_row.get("associated_module") or ""
             class_local = class_row.get("local_name") or ""
@@ -1358,11 +1415,18 @@ def _write_oim_metadata(
     metadata_path: Path,
     csv_path: Path,
     taxonomy_entrypoint: Path,
+    csv_columns: Sequence[str],
     dimension_columns: Sequence[str],
     modules: Iterable[str],
     entity: str,
     period: str,
 ) -> None:
+    """Write metadata only for columns that actually exist in the paired CSV.
+
+    HMD rows that produced no CSV column are intentionally absent from the JSON
+    metadata.  The JSON is therefore specific to this one generated CSV and is
+    not reusable for another CSV with a different column set.
+    """
     taxonomy_namespaces = _resolve_oim_taxonomy_namespaces(taxonomy_entrypoint, modules)
     namespace_map = {
         **taxonomy_namespaces,
@@ -1370,17 +1434,28 @@ def _write_oim_metadata(
         "scheme": "http://www.example.com",
         "xbrl": "https://xbrl.org/2021",
     }
+    csv_column_set = set(csv_columns)
+    required = {"concept", "value"}
+    if not required.issubset(csv_column_set):
+        raise ConversionError(
+            "OIM_PAIR_INVALID",
+            "Formal OIM CSV must contain concept and value columns",
+        )
+    actual_dimensions = [column for column in dimension_columns if column in csv_column_set]
     dimensions = {
         "period": period,
         "entity": entity,
-        **{f"plt:{column}": f"${column}" for column in dimension_columns},
+        **{f"plt:{column}": f"${column}" for column in actual_dimensions},
     }
-    columns: dict[str, object] = {
-        "concept": {},
-        "unit": {},
-        "value": {"dimensions": {"concept": "$concept", "unit": "$unit"}},
-    }
-    columns.update({column: {} for column in dimension_columns})
+    columns: dict[str, object] = {}
+    for column in csv_columns:
+        if column == "value":
+            value_dimensions: dict[str, str] = {"concept": "$concept"}
+            if "unit" in csv_column_set:
+                value_dimensions["unit"] = "$unit"
+            columns[column] = {"dimensions": value_dimensions}
+        else:
+            columns[column] = {}
     metadata = {
         "documentInfo": {
             "documentType": "https://xbrl.org/2021/xbrl-csv",
@@ -1392,6 +1467,57 @@ def _write_oim_metadata(
     }
     metadata_path.parent.mkdir(parents=True, exist_ok=True)
     metadata_path.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _write_oim_pair(
+    csv_path: Path,
+    records: Sequence[Mapping[str, str]],
+    taxonomy_entrypoint: Path,
+    dimension_columns: Sequence[str],
+    modules: Iterable[str],
+    entity: str,
+    period: str,
+    encoding: str,
+) -> Path:
+    """Write the Formal OIM CSV and its dedicated JSON metadata as one pair."""
+    if csv_path.suffix.lower() != ".csv":
+        raise ConversionError("OIM_PAIR_INVALID", "Formal OIM output path must end in .csv")
+    metadata_path = csv_path.with_suffix(".json")
+    csv_columns = _structured_fieldnames(records)
+    if not csv_columns:
+        raise ConversionError("OIM_PAIR_INVALID", "Formal OIM CSV has no generated columns")
+
+    csv_tmp = csv_path.with_name(csv_path.name + ".tmp")
+    json_tmp = metadata_path.with_name(metadata_path.name + ".tmp")
+    for temporary in (csv_tmp, json_tmp):
+        try:
+            temporary.unlink()
+        except FileNotFoundError:
+            pass
+
+    try:
+        _write_structured(csv_tmp, records, encoding, csv_columns)
+        _write_oim_metadata(
+            json_tmp,
+            csv_path,
+            taxonomy_entrypoint,
+            csv_columns,
+            dimension_columns,
+            modules,
+            entity,
+            period,
+        )
+        csv_path.parent.mkdir(parents=True, exist_ok=True)
+        csv_tmp.replace(csv_path)
+        json_tmp.replace(metadata_path)
+    except Exception:
+        for temporary in (csv_tmp, json_tmp):
+            try:
+                temporary.unlink()
+            except FileNotFoundError:
+                pass
+        raise
+    return metadata_path
 
 
 def _account_record_groups(
@@ -1439,14 +1565,13 @@ def _unique_named_record(
 def _hmd_structured_record(
     definition: Definition,
     semantic_path: str,
-    binding_path: str,
     source: Mapping[str, str],
     value: str,
 ) -> dict[str, str]:
-    hmd = definition.hmd_rows.get(semantic_path)
+    hmd = definition.hmd_rows.get(_hmd_lookup_path(semantic_path))
     if hmd is None:
         raise ConversionError(
-            "HMD_PATH_UNRESOLVED", "an Account Mapping extension semantic path is absent from HMD"
+            "HMD_PATH_UNRESOLVED", "a generated semantic_path cannot resolve an HMD definition"
         )
     return {
         "entry_key": source.get("entry_key", ""),
@@ -1458,9 +1583,93 @@ def _hmd_structured_record(
         "id": "",
         "name": hmd.get("local_name", ""),
         "semantic_path": semantic_path,
-        "binding_path": binding_path,
+        "binding_path": semantic_path,
         "value": value,
     }
+
+
+def _qualified_owner_prefix(semantic_path: str, owner_path: str) -> str:
+    """Return the selector-qualified path prefix for one HMD owner Class."""
+    parts = selector_multiplicity.split_segments(semantic_path)
+    raw_parts: list[str] = []
+    owner_parts: list[str] = []
+    for raw in parts:
+        name = raw.split("[", 1)[0]
+        raw_parts.append(raw)
+        owner_parts.append(name)
+        if ".".join(owner_parts) == owner_path:
+            return ".".join(raw_parts)
+    raise ConversionError("DEFINITION_INVALID", "selector owner is not an ancestor of its semantic_path")
+
+
+
+def _materialize_selector_facts(
+    records: Sequence[dict[str, str]], definition: Definition
+) -> list[dict[str, str]]:
+    """Materialise selector facts while preserving semantic_path identity.
+
+    Positive equality predicates joined only by AND imply discriminator facts. OR,
+    NOT and presence predicates are selection-only and do not imply a value. Fact
+    identity is the selector-qualified semantic_path itself; no secondary scope or
+    selector-stripped identity is introduced.
+    """
+    output = [dict(row) for row in records]
+    existing: dict[tuple[str, str, str, str], dict[str, str]] = {}
+    for row in output:
+        semantic_path = (row.get("semantic_path") or "").strip()
+        if not semantic_path or not row.get("value", ""):
+            continue
+        key = (
+            row.get("entry_key", ""),
+            row.get("source_row", ""),
+            row.get("occurrence", ""),
+            semantic_path,
+        )
+        previous = existing.get(key)
+        if previous is not None and previous.get("value") != row.get("value"):
+            raise ConversionError(
+                "DUPLICATE_FACT_CONFLICT",
+                "one selector-qualified semantic_path receives conflicting fact values",
+            )
+        existing[key] = row
+
+    additions: list[dict[str, str]] = []
+    for source in list(output):
+        source_path = (source.get("semantic_path") or "").strip()
+        if not source_path:
+            continue
+        for owner, prop, value in _selector_fact_paths(source_path):
+            qualified_owner = _qualified_owner_prefix(source_path, owner)
+            generated_semantic_path = f"{qualified_owner}.{prop}"
+            hmd_path = _hmd_lookup_path(generated_semantic_path)
+            if hmd_path not in definition.hmd_rows:
+                raise ConversionError(
+                    "HMD_PATH_UNRESOLVED",
+                    "a selector predicate semantic_path cannot resolve an HMD definition",
+                )
+            key = (
+                source.get("entry_key", ""),
+                source.get("source_row", ""),
+                source.get("occurrence", ""),
+                generated_semantic_path,
+            )
+            previous = existing.get(key)
+            if previous is not None:
+                if previous.get("value", "") != value:
+                    raise ConversionError(
+                        "DUPLICATE_FACT_CONFLICT",
+                        "a selector predicate conflicts with an explicit fact at the same semantic_path",
+                    )
+                continue
+            generated = _hmd_structured_record(
+                definition,
+                generated_semantic_path,
+                source,
+                value,
+            )
+            additions.append(generated)
+            existing[key] = generated
+    return [*output, *additions]
 
 
 def _source_account_mapping_match(
@@ -1505,30 +1714,25 @@ def _apply_account_mapping_forward(
         extended_count += 1
         suffix = suffix_match.group(2)
         semantic_base = number["semantic_path"].removesuffix(".cor_AccountNumber")
-        binding_base = number["binding_path"].removesuffix(".cor_AccountNumber")
-        sub_semantic = f"{semantic_base}.cor_Subaccount"
-        sub_binding = f"{binding_base}.cor_Subaccount{ACCOUNT_SUBACCOUNT_SELECTOR}"
+        sub_semantic = f"{semantic_base}.cor_Subaccount{ACCOUNT_SUBACCOUNT_SELECTOR}"
         additions.extend(
             (
-                _hmd_structured_record(definition, sub_semantic, sub_binding, number, ""),
+                _hmd_structured_record(definition, sub_semantic, number, ""),
                 _hmd_structured_record(
                     definition,
                     f"{sub_semantic}.cor_Type",
-                    f"{sub_binding}.cor_Type",
                     number,
                     "account-subaccount",
                 ),
                 _hmd_structured_record(
                     definition,
                     f"{sub_semantic}.cor_SubaccountID",
-                    f"{sub_binding}.cor_SubaccountID",
                     number,
                     suffix,
                 ),
                 _hmd_structured_record(
                     definition,
                     f"{sub_semantic}.cor_SubaccountDescription",
-                    f"{sub_binding}.cor_SubaccountDescription",
                     number,
                     match["Account_Name"],
                 ),
@@ -1552,11 +1756,14 @@ def _apply_account_mapping_reverse(
                 "ACCOUNT_MAPPING_REVERSE_UNRESOLVED",
                 "an account occurrence lacks its reverse mapping key facts",
             )
+        account_base = number["semantic_path"].removesuffix(".cor_AccountNumber")
+        subaccount_id_path = (
+            f"{account_base}.cor_Subaccount{ACCOUNT_SUBACCOUNT_SELECTOR}.cor_SubaccountID"
+        )
         suffix_rows = [
             row
             for row in rows
-            if ACCOUNT_SUBACCOUNT_SELECTOR in row.get("binding_path", "")
-            and row.get("semantic_path", "").endswith(".cor_Subaccount.cor_SubaccountID")
+            if row.get("semantic_path", "") == subaccount_id_path
         ]
         if len(suffix_rows) > 1:
             raise ConversionError(
@@ -1577,7 +1784,7 @@ def _apply_account_mapping_reverse(
         description["value"] = match["Account_Name"]
         mapped_count += 1
     retained = [
-        row for row in mapped if ACCOUNT_SUBACCOUNT_SELECTOR not in row.get("binding_path", "")
+        row for row in mapped if ACCOUNT_SUBACCOUNT_SELECTOR not in row.get("semantic_path", "")
     ]
     return retained, mapped_count, 0
 
@@ -1587,8 +1794,6 @@ def load_standard_tax_mapping(
 ) -> list[StandardTaxRule]:
     required = {
         "application_tax_code",
-        "uncl5153_tax_type",
-        "uncl5305_tax_category",
         "tax_rate_ratio",
         "reverse_priority",
         "mapping_status",
@@ -1605,15 +1810,12 @@ def load_standard_tax_mapping(
                 )
             for line_number, source in enumerate(reader, 2):
                 row = {key: (value or "").strip() for key, value in source.items()}
-                tax_type = row["uncl5153_tax_type"]
-                if tax_type not in {"VAT", "OTH"}:
-                    raise ConversionError("TAX_MAPPING_ROW_INVALID", "this profile accepts reviewed UNCL 5153 types VAT and OTH")
                 classification = row.get("transaction_classification", "")
                 if classification not in {"", "Sales", "Purchase"}:
                     raise ConversionError("TAX_MAPPING_ROW_INVALID", "transaction classification is invalid")
-                category = row["uncl5305_tax_category"]
-                if category not in {"S", "AA", "E", "O"}:
-                    raise ConversionError("TAX_MAPPING_ROW_INVALID", "UNCL 5305 category is invalid")
+                category = row.get("tax_category", "") or row.get("uncl5305_tax_category", "")
+                if category not in {"S", "AA", "E", "O", "G"}:
+                    raise ConversionError("TAX_MAPPING_ROW_INVALID", "tax category must be a governed S, AA, E, O, or G code")
                 if not row["application_tax_code"]:
                     raise ConversionError("TAX_MAPPING_ROW_INVALID", "tax code is required")
                 if row["mapping_status"] not in {
@@ -1639,7 +1841,7 @@ def load_standard_tax_mapping(
                     row["application_tax_code"],
                     row.get("rate_pattern", ""),
                 )
-                meaning = (tax_type, category, ratio, classification,
+                meaning = (category, ratio, classification,
                            row.get("return_flag", ""), row.get("rate_output", ""),
                            row.get("tax_inclusion_mode", ""), str(priority), row["mapping_status"])
                 if signature in seen_signatures:
@@ -1654,7 +1856,6 @@ def load_standard_tax_mapping(
                         occurrence_side=row.get("occurrence_side", ""),
                         rate_pattern=row.get("rate_pattern", ""),
                         rate_output=row.get("rate_output", ""),
-                        tax_type=tax_type,
                         tax_category=category,
                         tax_rate_ratio=ratio,
                         tax_inclusion_mode=row.get("tax_inclusion_mode", ""),
@@ -1673,11 +1874,12 @@ def load_standard_tax_mapping(
 
 
 def _tax_side(rows: Sequence[Mapping[str, str]]) -> str:
-    sides = {
-        match.group(1)
-        for row in rows
-        if (match := re.search(r"cor_DebitCreditIndicator='([DC])'", row.get("binding_path", "")))
-    }
+    sides: set[str] = set()
+    for row in rows:
+        semantic_path = row.get("semantic_path", "")
+        for _owner, key, value in _selector_fact_paths(semantic_path):
+            if key.lower().endswith("debitcreditindicator") and value in {"D", "C"}:
+                sides.add(value)
     occurrences = {row.get("occurrence", "") for row in rows if row.get("occurrence", "") in {"D", "C"}}
     sides.update(occurrences)
     if len(sides) != 1:
@@ -1685,12 +1887,24 @@ def _tax_side(rows: Sequence[Mapping[str, str]]) -> str:
     return next(iter(sides))
 
 
+def _detail_tax_selector_signature(semantic_path: str) -> str:
+    for owner, _predicate in _path_predicates(semantic_path)[1]:
+        if owner.endswith(".cor_DetailTax"):
+            return _predicate_signature(semantic_path, owner)
+    return ""
+
+
 def _tax_groups(records: Sequence[dict[str, str]]) -> list[list[dict[str, str]]]:
-    grouped: dict[tuple[str, str, str], list[dict[str, str]]] = {}
+    grouped: dict[tuple[str, str, str, str], list[dict[str, str]]] = {}
     for row in records:
         if TAX_DETAIL_SUFFIX not in row.get("semantic_path", ""):
             continue
-        key = (row.get("entry_key", ""), row.get("source_row", ""), row.get("occurrence", ""))
+        key = (
+            row.get("entry_key", ""),
+            row.get("source_row", ""),
+            row.get("occurrence", ""),
+            _detail_tax_selector_signature(row.get("semantic_path", "")),
+        )
         grouped.setdefault(key, []).append(row)
     return [grouped[key] for key in sorted(grouped)]
 
@@ -1776,8 +1990,7 @@ def _rate_record_from_category(
     definition: Definition, category: Mapping[str, str], value: str
 ) -> dict[str, str]:
     semantic_path = category["semantic_path"].removesuffix(".cor_TaxCategory") + ".cor_TaxPercentageRate"
-    binding_path = category["binding_path"].removesuffix(".cor_TaxCategory") + ".cor_TaxPercentageRate"
-    return _hmd_structured_record(definition, semantic_path, binding_path, category, value)
+    return _hmd_structured_record(definition, semantic_path, category, value)
 
 
 def _tax_record_from_category(
@@ -1785,8 +1998,23 @@ def _tax_record_from_category(
 ) -> dict[str, str]:
     leaf = suffix.removeprefix(TAX_DETAIL_SUFFIX)
     semantic_path = category["semantic_path"].removesuffix(".cor_TaxCategory") + leaf
-    binding_path = category["binding_path"].removesuffix(".cor_TaxCategory") + leaf
-    return _hmd_structured_record(definition, semantic_path, binding_path, category, value)
+    return _hmd_structured_record(definition, semantic_path, category, value)
+
+
+def _tax_selector_semantic_value(rows: Sequence[Mapping[str, str]], suffix: str) -> str:
+    values = {
+        (row.get("value") or "").strip()
+        for row in rows
+        if row.get("semantic_path", "").endswith(suffix) and (row.get("value") or "").strip()
+    }
+    property_name = suffix.rsplit(".", 1)[-1]
+    for row in rows:
+        for _owner, key, value in _selector_fact_paths(row.get("semantic_path", "")):
+            if key == property_name:
+                values.add(value)
+    if len(values) > 1:
+        raise ConversionError("TAX_FACT_AMBIGUOUS", "a tax occurrence contains conflicting selector facts")
+    return next(iter(values)) if values else ""
 
 
 def _apply_standard_tax_forward(
@@ -1797,6 +2025,12 @@ def _apply_standard_tax_forward(
     account_tax_rules: Mapping[tuple[str, str, str, str], AccountTaxRule] | None = None,
     source_accounts: Mapping[tuple[str, str, str], tuple[str, str]] | None = None,
 ) -> tuple[list[dict[str, str]], list[dict[str, str]], int, int]:
+    """Normalize application tax code/category/rate without inventing tax identity.
+
+    Tax authority/table identity belongs to Binding semantic_path predicates. This
+    routine therefore never appends TaxType, TaxAuthority, TaxTableCode, or
+    TaxTransactionClassification semantic facts from hard-coded business values.
+    """
     mapped = [dict(row) for row in records]
     additions: list[dict[str, str]] = []
     traces: list[dict[str, str]] = []
@@ -1840,22 +2074,29 @@ def _apply_standard_tax_forward(
                     "ACCOUNT_TAX_POLICY_CONFLICT",
                     "account-specific tax policy conflicts with a source tax rate",
                 )
-            tax_type, tax_category = account_rule.tax_type, account_rule.tax_category
+            tax_category = account_rule.tax_category
             rate_ratio = ""
             transaction_classification = ""
             tax_inclusion_mode = ""
             rule_id = f"ACCOUNT:{account_rule.source_account_code}:{source_code}"
+            selector_table_code = next(
+                (value for owner, key, value in _selector_fact_paths(category.get("semantic_path", ""))
+                 if key.lower() == "cor_taxtablecode".lower()),
+                "",
+            )
+            if selector_table_code and selector_table_code != account_rule.tax_table_code:
+                raise ConversionError(
+                    "ACCOUNT_TAX_POLICY_CONFLICT",
+                    "Account Tax Mapping tax table code conflicts with the Binding semantic_path",
+                )
         else:
             rule = _match_forward_tax_rule(rules, source_code, side, source_rate)
-            tax_type, tax_category = rule.tax_type, rule.tax_category
+            tax_category = rule.tax_category
             rate_ratio = rule.tax_rate_ratio
             transaction_classification = rule.transaction_classification
             tax_inclusion_mode = rule.tax_inclusion_mode
             rule_id = rule.rule_id
         category["value"] = tax_category
-        additions.append(_tax_record_from_category(definition, category, TAX_TYPE_SUFFIX, tax_type))
-        if transaction_classification:
-            additions.append(_tax_record_from_category(definition, category, TAX_TRANSACTION_CLASSIFICATION_SUFFIX, transaction_classification))
         if rate_ratio:
             if rate is None:
                 rate = _rate_record_from_category(definition, category, rate_ratio)
@@ -1873,7 +2114,7 @@ def _apply_standard_tax_forward(
             "source_tax_rate_lexical": source_rate,
             "source_tax_inclusion_mode": tax_inclusion_mode,
             "mapping_rule_id": rule_id,
-            "output_tax_type": tax_type,
+            "binding_selector_signature": _predicate_signature(category.get("semantic_path", "")),
             "output_tax_category": tax_category,
             "output_tax_rate_ratio": rate_ratio,
             "output_transaction_classification": transaction_classification,
@@ -1915,15 +2156,12 @@ def _apply_standard_tax_reverse(
             continue
         if category is None or not category.get("value", ""):
             raise ConversionError("MISSING_TAX_INFORMATION", "a canonical rate exists without TaxCategory")
-        tax_type = _only_tax_fact(rows, TAX_TYPE_SUFFIX)
-        if tax_type is None or not tax_type.get("value", ""):
-            raise ConversionError("MISSING_TAX_INFORMATION", "canonical TaxCategory requires TaxType")
-        classification_fact = _only_tax_fact(rows, TAX_TRANSACTION_CLASSIFICATION_SUFFIX)
-        classification = classification_fact.get("value", "") if classification_fact else ""
         side = _tax_side(rows)
         ratio = rate.get("value", "") if rate else ""
         if ratio:
             ratio = _canonical_ratio(_decimal_lexical(ratio, "TAX_RATE_RATIO_INVALID"))
+        selector_signature = _predicate_signature(category.get("semantic_path", ""))
+        tax_table_code = _tax_selector_semantic_value(rows, TAX_TABLE_CODE_SUFFIX)
         if mode == "source_restored":
             key = (category.get("entry_key", ""), category.get("source_row", ""), side)
             trace = trace_by_key.get(key)
@@ -1931,9 +2169,8 @@ def _apply_standard_tax_reverse(
                 raise ConversionError("TAX_TRACE_MISSING", "a matching source trace is required for restoration")
             if (trace["output_tax_category"] != category["value"]
                 or trace["output_tax_rate_ratio"] != ratio
-                or trace["output_tax_type"] != tax_type["value"]
-                or trace["output_transaction_classification"] != classification):
-                raise ConversionError("TAX_TRACE_OUTPUT_MISMATCH", "trace does not match canonical tax facts")
+                or trace["binding_selector_signature"] != selector_signature):
+                raise ConversionError("TAX_TRACE_OUTPUT_MISMATCH", "trace does not match canonical tax facts/selectors")
             category["value"] = trace["source_tax_code"]
             if rate is not None:
                 if trace["source_tax_rate_lexical"]:
@@ -1942,9 +2179,7 @@ def _apply_standard_tax_reverse(
                     remove_ids.add(id(rate))
             restored += 1
         else:
-            if classification and policy_classification and classification != policy_classification:
-                raise ConversionError("TAX_POLICY_CONFLICT", "explicit policy conflicts with the detail transaction classification")
-            classification = classification or policy_classification
+            classification = policy_classification
             occurrence_key = (
                 category.get("entry_key", ""),
                 category.get("source_row", ""),
@@ -1952,9 +2187,9 @@ def _apply_standard_tax_reverse(
             )
             account = account_by_occurrence.get(occurrence_key)
             account_rule = None
-            if account is not None and account_tax_rules is not None:
+            if account is not None and account_tax_rules is not None and tax_table_code:
                 account_rule = account_tax_rules.get(
-                    (account[0], account[1], tax_type["value"], category["value"])
+                    (account[0], account[1], tax_table_code, category["value"])
                 )
             if account_rule is not None:
                 if classification or ratio:
@@ -1971,11 +2206,8 @@ def _apply_standard_tax_reverse(
                 rule
                 for rule in rules
                 if rule.tax_category == category["value"]
-                and rule.tax_type == tax_type["value"]
                 and rule.tax_rate_ratio == ratio
-                and (
-                    rule.transaction_classification == classification
-                )
+                and rule.transaction_classification == classification
             ]
             if not candidates:
                 raise ConversionError("TAX_POLICY_UNRESOLVED", "canonical tax facts lack a reverse policy")
@@ -1992,17 +2224,13 @@ def _apply_standard_tax_reverse(
                 else:
                     remove_ids.add(id(rate))
             regenerated += 1
-    retained = [
-        row for row in mapped
-        if id(row) not in remove_ids
-        and not row.get("semantic_path", "").endswith((TAX_TYPE_SUFFIX, TAX_TRANSACTION_CLASSIFICATION_SUFFIX))
-    ]
+    retained = [row for row in mapped if id(row) not in remove_ids]
     binding_paths = {row.path for row in definition.rows}
     retained = [
         row
         for row in retained
         if not row.get("semantic_path", "").endswith(TAX_RATE_SUFFIX)
-        or row.get("binding_path", "") in binding_paths
+        or row.get("semantic_path", "") in binding_paths
     ]
     return retained, restored, regenerated
 
@@ -2137,6 +2365,10 @@ def convert_to_structured(options: ConversionOptions) -> ConversionSummary:
                         _structured_record(row, entry_key, str(source_index), variant, value)
                     )
 
+    # Binding semantic_path predicates are the authority for discriminator facts.
+    # Materialise deterministic positive equality selectors before profile mappings.
+    records = _materialize_selector_facts(records, definition)
+
     source_accounts = _account_context(records)
     mapped_account_occurrences = 0
     extended_account_occurrences = 0
@@ -2168,25 +2400,22 @@ def convert_to_structured(options: ConversionOptions) -> ConversionSummary:
             )
         _write_tax_trace(options.tax_trace_output, trace_rows)
 
-    if options.taxonomy_entrypoint is not None:
-        metadata_output = options.metadata_output or options.output_path.with_suffix(".json")
-        if metadata_output.stem != options.output_path.stem or metadata_output.parent.resolve() != options.output_path.parent.resolve():
-            raise ConversionError(
-                "OIM_PAIR_INVALID", "Structured CSV and JSON metadata must share directory and basename"
-            )
-        records, dimension_columns, modules = _oim_records(records, definition, options.currency)
-        _write_oim_metadata(
-            metadata_output,
-            options.output_path,
-            options.taxonomy_entrypoint,
-            dimension_columns,
-            modules,
-            options.entity,
-            options.period,
+    if options.taxonomy_entrypoint is None:
+        raise ConversionError(
+            "OIM_TAXONOMY_REQUIRED",
+            "to-structured always emits a Formal OIM CSV+JSON pair and requires a taxonomy entrypoint",
         )
-    elif options.metadata_output is not None:
-        raise ConversionError("OIM_TAXONOMY_REQUIRED", "--metadata-output requires --taxonomy-entrypoint")
-    _write_structured(options.output_path, records, options.output_encoding)
+    records, dimension_columns, modules = _oim_records(records, definition, options.currency)
+    _write_oim_pair(
+        options.output_path,
+        records,
+        options.taxonomy_entrypoint,
+        dimension_columns,
+        modules,
+        options.entity,
+        options.period,
+        options.output_encoding,
+    )
     summary = ConversionSummary(
         source_rows=len(source_rows),
         profile_width=width,
@@ -2206,6 +2435,12 @@ def convert_to_structured(options: ConversionOptions) -> ConversionSummary:
 def _records_from_oim(
     rows: Sequence[dict[str, str]], definition: Definition
 ) -> list[dict[str, str]]:
+    """Reconstruct Binding-addressed Structured rows from an OIM table.
+
+    Selector discriminator facts are resolved from the semantic_path predicates
+    themselves. A discriminator fact need not have a physical Binding column; it
+    may exist solely so another Binding path can select an occurrence.
+    """
     concept_paths: dict[str, str] = {}
     for semantic_path, hmd in definition.hmd_rows.items():
         if (hmd.get("type") or "").upper() != "A":
@@ -2222,51 +2457,88 @@ def _records_from_oim(
         for path, row in definition.hmd_rows.items()
         if (row.get("type") or "").upper() == "C" and _repeats(row.get("multiplicity") or "")
     ]
-    reconstructed: list[dict[str, str]] = []
+    repeated_classes.sort(key=lambda item: (item[0].count("."), item[0]))
+
+    def dimension_name(class_row: Mapping[str, str]) -> str:
+        module = class_row.get("module") or class_row.get("associated_module") or ""
+        local_name = class_row.get("local_name") or ""
+        return f"d_{module}_{local_name}"
+
+    def scope_key(source: Mapping[str, str], owner_path: str) -> tuple[tuple[str, str], ...]:
+        result = []
+        for class_path, class_row in repeated_classes:
+            if owner_path == class_path or owner_path.startswith(class_path + "."):
+                dimension = dimension_name(class_row)
+                value = (source.get(dimension) or "").strip()
+                if value:
+                    result.append((dimension, value))
+        return tuple(result)
+
+    selector_attributes: set[str] = set()
+    for binding in definition.rows:
+        for owner, predicate in _path_predicates(binding.path)[1]:
+            for prop in selector_multiplicity.predicate_properties(predicate):
+                selector_attributes.add(f"{owner}.{prop}")
+
+    # Resolve each OIM concept to its HMD semantic path once.
+    resolved_rows: list[tuple[dict[str, str], str]] = []
     for source in rows:
         semantic_path = concept_paths.get((source.get("concept") or "").strip())
         if not semantic_path:
             raise ConversionError("STRUCTURED_BINDING_MISMATCH", "OIM concept is absent from HMD")
+        resolved_rows.append((source, semantic_path))
+
+    selector_index: dict[tuple[str, tuple[tuple[str, str], ...]], list[str]] = defaultdict(list)
+    for source, semantic_path in resolved_rows:
+        if semantic_path not in selector_attributes:
+            continue
+        owner = semantic_path.rsplit(".", 1)[0]
+        value = (source.get("value") or "").strip()
+        if value:
+            selector_index[(semantic_path, scope_key(source, owner))].append(value)
+
+    def candidate_matches(candidate: BindingRow, source: Mapping[str, str]) -> bool:
+        for owner, predicate in _path_predicates(candidate.path)[1]:
+            values: dict[str, str | None] = {}
+            for prop in selector_multiplicity.predicate_properties(predicate):
+                semantic_path = f"{owner}.{prop}"
+                found = list(dict.fromkeys(selector_index.get((semantic_path, scope_key(source, owner)), [])))
+                if len(found) > 1:
+                    raise ConversionError(
+                        "STRUCTURED_BINDING_AMBIGUOUS",
+                        "selector property has more than one value in one occurrence scope",
+                    )
+                values[prop] = found[0] if found else None
+            if selector_multiplicity.evaluate_predicate(predicate, values) is not True:
+                return False
+        return True
+
+    reconstructed: list[dict[str, str]] = []
+    for source, semantic_path in resolved_rows:
         detail_value = ""
         entry_value = ""
         for class_path, class_row in repeated_classes:
-            module = class_row.get("module") or class_row.get("associated_module") or ""
             local_name = class_row.get("local_name") or ""
-            dimension = f"d_{module}_{local_name}"
+            value = (source.get(dimension_name(class_row)) or "").strip()
             if local_name == "entryHeader":
-                entry_value = (source.get(dimension) or "").strip()
+                entry_value = value
             elif local_name == "entryDetail":
-                detail_value = (source.get(dimension) or "").strip()
+                detail_value = value
         source_row, occurrence = (detail_value.rsplit("-", 1) + [""])[:2] if "-" in detail_value else ("", "")
 
-        candidates = [row for row in definition.rows if row.neutral_path == semantic_path and row.values["type"].upper() == "A"]
-        selected: list[BindingRow] = []
-        for candidate in candidates:
-            variant = _variant_for(candidate, definition.driver.path)
-            if variant and variant != occurrence:
-                continue
-            matches = True
-            for class_path, class_row in repeated_classes:
-                selector = _selector_value(candidate.path, class_path)
-                if not selector:
-                    continue
-                module = class_row.get("module") or class_row.get("associated_module") or ""
-                local_name = class_row.get("local_name") or ""
-                dimension_value = (source.get(f"d_{module}_{local_name}") or "").strip()
-                # The Entry Detail occurrence is encoded as ``<source-row>-<variant>``
-                # so that facts from different Flat CSV rows remain distinct.  The
-                # Binding selector identifies only the variant (for example D or C),
-                # while other repeated-class selectors are compared to their complete
-                # occurrence-key dimension value.
-                comparable_value = occurrence if class_path == definition.driver.path else dimension_value
-                if comparable_value != selector:
-                    matches = False
-                    break
-            if matches:
-                selected.append(candidate)
+        candidates = [
+            row for row in definition.rows
+            if _hmd_lookup_path(row.path) == semantic_path and row.values["type"].upper() == "A"
+        ]
+        selected = [candidate for candidate in candidates if candidate_matches(candidate, source)]
+
+        if not candidates and semantic_path in selector_attributes:
+            # Predicate-only discriminator fact: it is semantic evidence for
+            # selecting another physical Binding and has no physical column itself.
+            continue
         if len(selected) != 1:
             raise ConversionError(
-                "STRUCTURED_BINDING_MISMATCH",
+                "STRUCTURED_BINDING_MISMATCH" if not selected else "STRUCTURED_BINDING_AMBIGUOUS",
                 f"OIM concept {(source.get('concept') or '').strip()} resolves to {len(selected)} Binding rows",
             )
         binding = selected[0]
@@ -2280,7 +2552,7 @@ def _records_from_oim(
                 "type": binding.values["type"],
                 "id": "",
                 "name": binding.values["name"],
-                "semantic_path": binding.neutral_path,
+                "semantic_path": binding.path,
                 "binding_path": binding.path,
                 "value": source.get("value") or "",
             }
@@ -2312,46 +2584,32 @@ def _validated_structured_rows(
     rows: Sequence[dict[str, str]], definition: Definition
 ) -> tuple[dict[str, list[dict[str, str]]], dict[tuple[str, int], list[dict[str, str]]]]:
     by_path = {row.path: row for row in definition.rows}
+    selector_fact_paths = {
+        f"{_qualified_owner_prefix(row.path, owner)}.{prop}"
+        for row in definition.rows
+        for owner, prop, _value in _selector_fact_paths(row.path)
+    }
     variant_set = set(definition.variants)
     headers: dict[str, list[dict[str, str]]] = defaultdict(list)
     details: dict[tuple[str, int], list[dict[str, str]]] = defaultdict(list)
     for source_row in rows:
-        source_path, source_selectors = _path_selectors(source_row["binding_path"])
-        if source_path != source_row["semantic_path"]:
-            raise ConversionError("STRUCTURED_BINDING_MISMATCH", "Structured binding_path and semantic_path disagree")
-        binding_row = by_path.get(source_row["binding_path"])
-        if binding_row is None:
-            candidates = [
-                candidate
-                for candidate in definition.rows
-                if candidate.neutral_path == source_row["semantic_path"]
-                and (
-                    not _variant_for(candidate, definition.driver.path)
-                    or _variant_for(candidate, definition.driver.path) == source_row["occurrence"]
-                )
-            ]
-            selector_matches = [
-                candidate
-                for candidate in candidates
-                if all(source_selectors.get(key) == value
-                       for key, value in _path_selectors(candidate.path)[1].items())
-            ]
-            if len(selector_matches) == 1:
-                binding_row = selector_matches[0]
-            elif not candidates:
-                continue
-            elif not selector_matches:
-                raise ConversionError(
-                    "STRUCTURED_BINDING_MISMATCH", "Structured selectors do not match target Binding",
-                )
-            else:
-                raise ConversionError(
-                    "STRUCTURED_BINDING_AMBIGUOUS",
-                    "Structured semantic_path resolves to more than one target Binding row",
-                )
-        if source_row["semantic_path"] != binding_row.neutral_path:
+        semantic_path = (source_row.get("semantic_path") or "").strip()
+        if not semantic_path:
+            raise ConversionError("STRUCTURED_ROW_INVALID", "Structured semantic_path is empty")
+        compatibility_path = (source_row.get("binding_path") or "").strip()
+        if compatibility_path and compatibility_path != semantic_path:
             raise ConversionError(
-                "STRUCTURED_BINDING_MISMATCH", "Structured semantic_path does not match Binding"
+                "STRUCTURED_BINDING_MISMATCH",
+                "Structured binding_path compatibility field differs from semantic_path",
+            )
+        binding_row = by_path.get(semantic_path)
+        if binding_row is None:
+            if semantic_path in selector_fact_paths:
+                # Selector discriminator fact has semantic identity but no physical Binding column.
+                continue
+            raise ConversionError(
+                "STRUCTURED_BINDING_MISMATCH",
+                "Structured selector-qualified semantic_path does not match a Binding row",
             )
         variant = _variant_for(binding_row, definition.driver.path)
         if variant and source_row["occurrence"] != variant:
@@ -2359,6 +2617,7 @@ def _validated_structured_rows(
         row = dict(source_row)
         row.update(
             {
+                "semantic_path": binding_row.path,
                 "binding_path": binding_row.path,
                 "sequence": f"{binding_row.sequence:04d}",
                 "level": binding_row.values["level"],
@@ -2382,16 +2641,16 @@ def _validated_structured_rows(
             headers[row["entry_key"]].append(row)
         elif occurrence in variant_set:
             try:
-                source_row = int(row["source_row"])
+                source_index = int(row["source_row"])
             except ValueError as exc:
                 raise ConversionError(
                     "STRUCTURED_ROW_INVALID", "Structured source_row is not a positive integer"
                 ) from exc
-            if source_row <= 0:
+            if source_index <= 0:
                 raise ConversionError(
                     "STRUCTURED_ROW_INVALID", "Structured source_row is not a positive integer"
                 )
-            details[(row["entry_key"], source_row)].append(row)
+            details[(row["entry_key"], source_index)].append(row)
         elif occurrence != "ROOT":
             raise ConversionError("STRUCTURED_ROW_INVALID", "Structured occurrence is unknown")
     if rows and not details:
@@ -2422,7 +2681,7 @@ def _compound_semantics(definition: Definition) -> tuple[str, str, str, str]:
         variant = _variant_for(row, definition.driver.path)
         if not variant or row.values["type"] != "A":
             continue
-        hmd = definition.hmd_rows.get(row.neutral_path, {})
+        hmd = definition.hmd_rows.get(_hmd_lookup_path(row.path), {})
         local_name = (hmd.get("local_name") or "").lower()
         if local_name == "debitcreditindicator":
             indicator = row.values["default_value"].strip().upper()
@@ -2450,8 +2709,8 @@ def _compound_semantics(definition: Definition) -> tuple[str, str, str, str]:
     return debit_variant, credit_variant, amount_paths[debit_variant], amount_paths[credit_variant]
 
 
-def _decimal_amount(rows: Sequence[dict[str, str]], binding_path: str) -> tuple[Decimal, str]:
-    values = [row["value"].strip() for row in rows if row["binding_path"] == binding_path]
+def _decimal_amount(rows: Sequence[dict[str, str]], semantic_path: str) -> tuple[Decimal, str]:
+    values = [row["value"].strip() for row in rows if row["semantic_path"] == semantic_path]
     if len(values) != 1 or not values[0]:
         raise ConversionError(
             "COMPOUND_AMOUNT_INVALID",
@@ -2466,12 +2725,12 @@ def _decimal_amount(rows: Sequence[dict[str, str]], binding_path: str) -> tuple[
 
 
 def _copy_with_amount(
-    rows: Sequence[dict[str, str]], binding_path: str, amount: str
+    rows: Sequence[dict[str, str]], semantic_path: str, amount: str
 ) -> list[dict[str, str]]:
     copied = [dict(row) for row in rows]
     replaced = 0
     for row in copied:
-        if row["binding_path"] == binding_path:
+        if row["semantic_path"] == semantic_path:
             row["value"] = amount
             replaced += 1
     if replaced != 1:
@@ -2517,7 +2776,7 @@ def _materialized_detail_groups(
             ):
                 variant_rows = [row for row in rows if row["occurrence"] == variant]
                 amount_is_present = any(
-                    row["binding_path"] == amount_path and row["value"].strip()
+                    row["semantic_path"] == amount_path and row["value"].strip()
                     for row in variant_rows
                 )
                 if amount_is_present:
@@ -2700,12 +2959,12 @@ def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
                 key=lambda row: (
                     variant_rank[row["occurrence"]],
                     int(row["sequence"]),
-                    row["binding_path"],
+                    row["semantic_path"],
                 ),
             )
         )
         for structured in ordered:
-            binding_row = by_path[structured["binding_path"]]
+            binding_row = by_path[structured["semantic_path"]]
             column = binding_row.values["column"]
             value = _transform_reverse(
                 binding_row.values["transformation"], structured["value"], definition.code_maps
@@ -2840,9 +3099,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     header_group.add_argument("--data-start-row", type=_positive_width)
     header_group.add_argument("--input-header", dest="input_header_rows", action="store_const", const=1)
     header_group.add_argument("--input-header-rows", type=_positive_width)
-    forward.add_argument("--metadata-output", type=Path)
     forward.add_argument("--account-tax-mapping", type=Path)
-    forward.add_argument("--taxonomy-entrypoint", type=Path)
+    forward.add_argument("--taxonomy-entrypoint", type=Path, required=True)
     forward.add_argument("--entity", default="scheme:UADC-PoC")
     forward.add_argument("--period", default="2026-12-31T00:00:00")
     forward.add_argument("--currency", default="iso4217:JPY")
@@ -2912,7 +3170,6 @@ def _options_from_args(args: argparse.Namespace) -> ConversionOptions:
         columns_path=args.columns_file,
         summary_log=args.summary_log,
         unbound_report=getattr(args, "unbound_report", None),
-        metadata_output=getattr(args, "metadata_output", None),
         taxonomy_entrypoint=getattr(args, "taxonomy_entrypoint", None),
         entity=getattr(args, "entity", "scheme:UADC-PoC"),
         period=getattr(args, "period", "2026-12-31T00:00:00"),

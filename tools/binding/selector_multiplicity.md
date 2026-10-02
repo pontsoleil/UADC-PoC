@@ -4,7 +4,13 @@
 
 ## Purpose
 
-This required semantic-layer library computes multiplicity after selector variants are considered.
+This required semantic-layer library parses the limited selector grammar embedded in Binding `semantic_path` values and computes effective multiplicity after selector variants are considered.
+
+## Semantic Path predicate subset
+
+Supported selector expressions are equality (`property='value'`), presence (`property`), `and`, `or`, `not`, and parentheses. Conditions are scoped to the Class segment on which they are written. Different hierarchy levels may carry independent predicates. Unsupported comparison operators, arithmetic, functions, axes, and cross-occurrence expressions fail closed.
+
+Only a pure conjunction of positive equality predicates implies selector facts that may be materialised. `or`, `not`, and presence predicates are selection-only.
 
 ## Rule
 

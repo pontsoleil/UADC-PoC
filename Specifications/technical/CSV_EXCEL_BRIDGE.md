@@ -12,14 +12,14 @@ business semantics are preserved.
 Export a Canonical CSV for review:
 
 ```text
-python src/csv_excel_bridge.py export input.csv --output review.xlsx
+python tools/maintenance/csv_excel_bridge.py export input.csv --output review.xlsx
 ```
 
 Import reviewed XLSX while preserving the baseline record delimiter where
 possible:
 
 ```text
-python src/csv_excel_bridge.py import review.xlsx --baseline input.csv \
+python tools/maintenance/csv_excel_bridge.py import review.xlsx --baseline input.csv \
   --output rebuilt.csv --eol preserve
 ```
 

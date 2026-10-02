@@ -12,7 +12,9 @@ UADC-PoC および同梱される XBRL GL Next taxonomy は、いずれもプロ
 
 - [Current baseline](docs/CURRENT_BASELINE.md)
 - [Handoff and next work](docs/HANDOFF.md)
+- [Decisions](docs/DECISIONS.md)
 - [Specifications](Specifications/README.md)
+- [HMD and Binding definitions](bindings/)
 - [Runtime programs](tools/binding/README.md)
 - [Taxonomy generator](tools/taxonomy/README.md)
 - [Registered runtime cases](tests/runtime/README.md)
@@ -69,15 +71,19 @@ Invoice PoC は、ソース側のインボイス構文を共通 semantic layer �
 
 canonical publication tree は **2026-09-19** に再構築されました。公開 branch では、repository root 自体が canonical publication tree であり、入れ子の `canonical/`、`transformations/`、`legacy/` directory は存在しません。
 
-現在の canonical 構成には次が含まれます。
+現在のcanonical構成はrole-basedです。
 
-- runtime program: `tools/binding/`
-- Binding および mapping 定義: `bindings/`
-- XBRL GL Next semantic model: `models/`
-- 採用済み Business Transactions / Accounting Entries taxonomy family: `taxonomy/`
-- 採用済み fixture: `instances/`
-- 登録済み runtime case: `tests/runtime/`
-- 保守対象 specification: `Specifications/`
+```text
+bindings/
+  hmd/
+  flat-csv/
+  semantic/
+  syntax/
+taxonomy/
+tools/
+instances/
+tests/
+```
 
 canonical Flat CSV Binding は、採用済みの **16-column contract** を使用します。17列ファイルは legacy-compatible input としてのみ受理され、runtime では16列 contract へ正規化されます。selector は必要に応じて `semantic_path` または `syntax_path` に保持し、canonical HMD の `semantic_path` 自体は occurrence-neutral とします。
 
@@ -199,15 +205,17 @@ Figure 1 は、もともとの **invoice-centred UADC processing flow** を示�
 
 ## Directory Layout
 
-- **bindings/** — syntax、semantic、Structured CSV、PCA、EPSON、account、tax の Binding/mapping 定義。
-- **models/** — EN CIUS invoice、XBRL GL Business Transactions、XBRL GL Accounting Entries、および関連 HMD/model input。
-- **instances/** — accepted `original/`、`derived/`、`roundtrip/` fixture / output。
-- **tests/** — 登録済み runtime case および focused validation material。
-- **tests/runtime/** — accepted または明示的に HOLD とした runtime case の reproducibility manifest。
-- **tools/binding/** — syntax、semantic、Flat CSV、Tuple、および supporting conversion program。
-- **tools/taxonomy/** — taxonomy generation program、template、datatype binding、generator documentation。
-- **taxonomy/** — Business Transactions / Accounting Entries 用の accepted XBRL Japan namespace taxonomy family。
-- **definitions/** — model / taxonomy tooling で利用する shared definition。
+- **bindings/hmd/** — UADCが使用するHMD file。
+- **bindings/flat-csv/** — Flat CSV profile、column definition、account mapping、tax mappingおよびFlat CSV Binding。
+- **bindings/semantic/** — Structured CSV semantic model間のSemantic Binding。
+- **bindings/syntax/** — XMLその他の物理構文に対するSyntax Binding。
+- **taxonomy/** — accepted taxonomy familyおよびdependency closure。
+- **tools/binding/** — syntax、semantic、Flat CSV、Tuple、CSV physical adapterおよびsupporting conversion program。
+- **tools/taxonomy/** — taxonomy generation program、template、datatype bindingおよびgenerator documentation。
+- **instances/** — accepted `original/`、`structured-csv/`、`derived/`その他の登録済みinstance material。
+- **tests/** — 登録済みruntime case、regression testおよびvalidation material。
+- **tests/runtime/** — acceptedまたは明示的にHOLDとしたruntime caseのreproducibility manifest。
+- **definitions/** — role-based authorityが使用するshared schemaおよびdefinition。
 - **Specifications/** — maintained public specification と `technical/` implementation definition。
 - **docs/** — maintained implementation、baseline、handoff、governance documentation。
 - **references/** — reproducible reference note、provenance、project figure。

@@ -32,25 +32,25 @@
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_lnk_detailRichTextComment" xlink:to="lab_p_lnk_detailRichTextComment"/>
     <label xlink:type="resource" xlink:label="doc_p_lnk_detailRichTextComment" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Accepts text in rich text format, including XHTML. It can be used for different purposes, such as to create footnotes in XBRL instances or to create a comment for a document or an entry.</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_p_lnk_detailRichTextComment" xlink:to="doc_p_lnk_detailRichTextComment"/>
-    <loc xlink:type="locator" xlink:href="../lnk-oim-2026-12-31.xsd#lnk_detailRitchTextCommentCode" xlink:label="loc_lnk_detailRitchTextCommentCode"/>
-    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Code</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentCode" xlink:to="lab_lnk_detailRitchTextCommentCode"/>
-    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An enumerated code that identifies the purpose of the rich text comment. Enumerated values: link_footnote, footnote, source_document, source_journal, batch, other.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentCode" xlink:to="doc_lnk_detailRitchTextCommentCode"/>
-    <loc xlink:type="locator" xlink:href="../lnk-oim-2026-12-31.xsd#lnk_detailRitchTextCommentDescription" xlink:label="loc_lnk_detailRitchTextCommentDescription"/>
-    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Description</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentDescription" xlink:to="lab_lnk_detailRitchTextCommentDescription"/>
-    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the Rich text Comment Code.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentDescription" xlink:to="doc_lnk_detailRitchTextCommentDescription"/>
-    <loc xlink:type="locator" xlink:href="../lnk-oim-2026-12-31.xsd#lnk_detailRitchTextCommentContent" xlink:label="loc_lnk_detailRitchTextCommentContent"/>
-    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentContent" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Content</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentContent" xlink:to="lab_lnk_detailRitchTextCommentContent"/>
-    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentContent" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Content of the Rich Text Comment.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentContent" xlink:to="doc_lnk_detailRitchTextCommentContent"/>
-    <loc xlink:type="locator" xlink:href="../lnk-oim-2026-12-31.xsd#lnk_detailRitchTextCommentLocator" xlink:label="loc_lnk_detailRitchTextCommentLocator"/>
-    <label xlink:type="resource" xlink:label="lab_lnk_detailRitchTextCommentLocator" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Locator</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentLocator" xlink:to="lab_lnk_detailRitchTextCommentLocator"/>
-    <label xlink:type="resource" xlink:label="doc_lnk_detailRitchTextCommentLocator" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An XPath expression that identifies the item that the comment relates to.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_detailRitchTextCommentLocator" xlink:to="doc_lnk_detailRitchTextCommentLocator"/>
+    <loc xlink:type="locator" xlink:href="../lnk-oim-2026-12-31.xsd#lnk_commentCode" xlink:label="loc_lnk_commentCode"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_commentCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Code</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_commentCode" xlink:to="lab_lnk_commentCode"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_commentCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An enumerated code that identifies the purpose of the rich text comment. Enumerated values: link_footnote, footnote, source_document, source_journal, batch, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_commentCode" xlink:to="doc_lnk_commentCode"/>
+    <loc xlink:type="locator" xlink:href="../lnk-oim-2026-12-31.xsd#lnk_commentDescription" xlink:label="loc_lnk_commentDescription"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_commentDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_commentDescription" xlink:to="lab_lnk_commentDescription"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_commentDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the Rich text Comment Code.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_commentDescription" xlink:to="doc_lnk_commentDescription"/>
+    <loc xlink:type="locator" xlink:href="../lnk-oim-2026-12-31.xsd#lnk_commentContent" xlink:label="loc_lnk_commentContent"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_commentContent" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Content</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_commentContent" xlink:to="lab_lnk_commentContent"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_commentContent" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Content of the Rich Text Comment.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_commentContent" xlink:to="doc_lnk_commentContent"/>
+    <loc xlink:type="locator" xlink:href="../lnk-oim-2026-12-31.xsd#lnk_commentLocator" xlink:label="loc_lnk_commentLocator"/>
+    <label xlink:type="resource" xlink:label="lab_lnk_commentLocator" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Comment Locator</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_commentLocator" xlink:to="lab_lnk_commentLocator"/>
+    <label xlink:type="resource" xlink:label="doc_lnk_commentLocator" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An XPath expression that identifies the item that the comment relates to.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_lnk_commentLocator" xlink:to="doc_lnk_commentLocator"/>
   </labelLink>
 </linkbase>

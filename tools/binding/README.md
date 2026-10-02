@@ -16,7 +16,7 @@ These programs implement the binding stages around the HMD and Structured CSV se
 
 ## Additional and supporting implementation
 
-- [`selector_multiplicity.py`](selector_multiplicity.py) — selector-aware effective multiplicity support imported by the Semantic Binding runtime.
+- [`selector_multiplicity.py`](selector_multiplicity.py) — shared limited Semantic Path predicate parsing plus selector-aware effective multiplicity support. It supports scoped equality, presence, `and`, `or`, `not`, and parentheses; complex XPath-style expressions remain outside the current contract.
 - [`aggregate_pairing.py`](aggregate_pairing.py) — aggregate pairing support used by applicable Flat CSV conversion routes while retaining source-slot and occurrence ownership.
 - [`tuple_binding.py`](tuple_binding.py) — XBRL 2.1 Tuple ⇄ Structured CSV conversion for the same HMD semantic model. Dedicated Tuple/OIM execution-manifest acceptance remains HOLD.
 - [`syntax_binding_ads_xbrl_gl.py`](syntax_binding_ads_xbrl_gl.py) — ADS/XBRL GL-specific syntax conversion support used by applicable routes.
@@ -36,7 +36,8 @@ No standalone `oim_metadata.py` exists in the current canonical tree. OIM metada
 - [`tests/**`](../../tests/) — validation and regression material.
 - [`tests/runtime/**`](../../tests/runtime/) — registered runtime and reproducibility manifests.
 - [`bindings/**`](../../bindings/) — Binding, profile, account-mapping, tax-mapping, and related definitions consumed by applicable runtime routes.
-- [`models/**`](../../models/) — semantic and HMD model inputs used by applicable processing routes.
+- [`bindings/hmd/**`](../../bindings/hmd/) — recovered HMD semantic authorities used by applicable processing routes.
+- [`taxonomy/**`](../../taxonomy/) — corresponding taxonomy authorities and generated taxonomy resources where applicable.
 
 ## Execution and safety
 

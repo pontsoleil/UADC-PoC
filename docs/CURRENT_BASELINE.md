@@ -10,15 +10,15 @@ This document identifies the authoring and validation baseline reconstructed on
   originate from GitHub-synchronized Official GIT commit
   `702f168ad2b9e3b82a1967a27f2596330554d2d3`, except where noted below.
 - Business Transactions HMD authority is
-  `models/gl-bus/business-transactions/XBRL_GL_Next_HMD_BusinessTransactions_for_taxonomy.csv`
+  `bindings/hmd/gl-bus/business-transactions/XBRL_GL_Next_HMD_BusinessTransactions_for_taxonomy.csv`
   with SHA-256
-  `6B8A5C971C569326614C96CF82FA4DE1B37CE89A500E05F8ECDE7A12F2B7F744`.
+  `14EC10D441FC98F17F17866394504281006A6D441D554389B16D3ADCA74A6974`.
 - Accounting Entries HMD authority is
-  `models/gl-cor/accounting-entries/hmd/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv`
+  `bindings/hmd/gl-cor/accounting-entries/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv`
   with SHA-256
-  `9E3A47B4335C15B0EDCD7299962BC15878BE8288116927C2A7691A5B0C2CE362`.
-- `taxonomy/business-transactions/` is the accepted 67-file XBRL GL Next family.
-- `taxonomy/accounting-entries/` is the accepted 58-file XBRL GL Next family.
+  `6DB8C6AAD8C2FBAEC710DDF104405D22CC13BAD0BA52038DF471F7FE5850AD81`.
+- `taxonomy/accounting-entries/` contains the accepted 58-file XBRL GL Next family.
+- `taxonomy/business-transactions/` contains the accepted 58-file XBRL GL Next family; its relative-path set and all file SHA-256 values exactly match upstream commit `3a3ba3506833c56ffea3a9318b71d8160da43146`.
 - Registered runtime cases use canonical-tree successor `RUN_PARAMETERS.json`
   files under `tests/runtime/`.
 
@@ -61,3 +61,14 @@ PCA anonymous_v17
 
 `original_basis` and `evaluation_v17_basis` remain separate historical fixture
 identities. They are not renamed, replaced, or deleted by this registration.
+
+## COR/BTX authority recovery status (2026-09-30)
+
+- The accepted upstream source is XBRL GL Next Official GIT commit `3a3ba3506833c56ffea3a9318b71d8160da43146`.
+- The governed COR HMD copy is `bindings/hmd/gl-cor/accounting-entries/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv`, 401 rows × 18 columns, SHA-256 `6DB8C6AAD8C2FBAEC710DDF104405D22CC13BAD0BA52038DF471F7FE5850AD81`.
+- The governed BTX HMD copy is `bindings/hmd/gl-bus/business-transactions/XBRL_GL_Next_HMD_BusinessTransactions_for_taxonomy.csv`, 439 rows × 18 columns, SHA-256 `14EC10D441FC98F17F17866394504281006A6D441D554389B16D3ADCA74A6974`.
+- The 58 accepted COR taxonomy files and the 58 accepted BTX taxonomy files are byte-exact copies of that upstream commit.
+- The 18 upstream-absent legacy MUC/IVC files were removed under explicit approval. `taxonomy/business-transactions/` is now an exact 58-file mirror with MUC and IVC paths/references at 0/0.
+- The current accepted PCA V17/V14 Binding authority is `bindings/flat-csv/PCA_Accounting_81col_AnonymousEvaluation_V17_V14/PCA_Accounting_81col_AnonymousEvaluation_V17_V14_BINDING.csv`, SHA-256 `E8DA1565AEC40D3212BF89FEFF31C34EC09C620635B07559F01292DE36ABBD1E`. Its sequence and multiplicity metadata are synchronised with the current COR HMD; it is not a task-local candidate.
+- This PCA authority reconciliation does not change the EPSON Binding or any separately recorded Account Mapping or runtime hold.
+- EN CIUS → BTX remains under semantic review because 79 target paths do not resolve in the latest BTX HMD. No successor mapping was inferred.

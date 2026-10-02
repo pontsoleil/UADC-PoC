@@ -9,12 +9,12 @@
   <!-- structural ComplexType supplied for the Palette module -->
   <complexType name="originatingDocumentComplexType">
     <sequence>
-      <element ref="taf:originatingDocumentType" minOccurs="0"/>
-      <element ref="taf:originatingDocumentNumber" minOccurs="0"/>
-      <element ref="taf:originatingDocumentDate" minOccurs="0"/>
-      <element ref="taf:originatingDocumentIdentifierType" minOccurs="0"/>
-      <element ref="taf:originatingDocumentIdentifierCode" minOccurs="0"/>
-      <element ref="taf:originatingDocumentIdentifierTaxCode" minOccurs="0"/>
+      <element ref="taf:documentType" minOccurs="0"/>
+      <element ref="taf:documentNumber"/>
+      <element ref="taf:documentDate" minOccurs="0"/>
+      <element ref="taf:documentIdentifierType" minOccurs="0"/>
+      <element ref="taf:documentIdentifierCode" minOccurs="0"/>
+      <element ref="taf:documentIdentifierTaxCode" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>

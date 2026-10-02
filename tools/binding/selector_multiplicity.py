@@ -7,6 +7,7 @@ import csv
 import json
 from collections import Counter, OrderedDict
 from pathlib import Path
+from typing import Mapping
 
 
 class SelectorMultiplicityError(ValueError):
@@ -15,6 +16,310 @@ class SelectorMultiplicityError(ValueError):
 
 def _error(code: str, detail: str) -> SelectorMultiplicityError:
     return SelectorMultiplicityError(f"{code}: {detail}")
+
+
+
+
+# ---------------------------------------------------------------------------
+# Limited Semantic Path predicate grammar shared by current Binding runtimes.
+#
+# Grammar (intentionally small):
+#   expr  := or_expr
+#   or_expr := and_expr ("or" and_expr)*
+#   and_expr := unary_expr ("and" unary_expr)*
+#   unary_expr := "not" unary_expr | "(" expr ")" | atom
+#   atom := property | property "=" quoted_literal
+#
+# Comparison operators other than equality, functions, arithmetic, axes and
+# cross-occurrence references are outside the current contract.
+# ---------------------------------------------------------------------------
+
+PredicateAst = tuple
+
+
+def _predicate_tokens(expression: str) -> list[tuple[str, str]]:
+    tokens: list[tuple[str, str]] = []
+    i = 0
+    n = len(expression)
+    while i < n:
+        ch = expression[i]
+        if ch.isspace():
+            i += 1
+            continue
+        if ch in "()=":
+            tokens.append((ch, ch))
+            i += 1
+            continue
+        if ch in {"'", '"'}:
+            quote = ch
+            i += 1
+            value = []
+            escaped = False
+            while i < n:
+                c = expression[i]
+                if escaped:
+                    value.append(c)
+                    escaped = False
+                    i += 1
+                    continue
+                if c == "\\":
+                    escaped = True
+                    i += 1
+                    continue
+                if c == quote:
+                    i += 1
+                    break
+                value.append(c)
+                i += 1
+            else:
+                raise _error("INVALID_SEMANTIC_PATH_SELECTOR", expression)
+            tokens.append(("STRING", "".join(value)))
+            continue
+        if ch.isalpha() or ch == "_":
+            start = i
+            i += 1
+            while i < n and (expression[i].isalnum() or expression[i] in "_-"):
+                i += 1
+            word = expression[start:i]
+            lower = word.lower()
+            if lower in {"and", "or", "not"}:
+                tokens.append((lower.upper(), lower))
+            else:
+                tokens.append(("NAME", word))
+            continue
+        raise _error("INVALID_SEMANTIC_PATH_SELECTOR", expression)
+    tokens.append(("EOF", ""))
+    return tokens
+
+
+class _PredicateParser:
+    def __init__(self, expression: str):
+        self.expression = expression
+        self.tokens = _predicate_tokens(expression)
+        self.index = 0
+
+    def peek(self, kind: str) -> bool:
+        return self.tokens[self.index][0] == kind
+
+    def take(self, kind: str) -> tuple[str, str]:
+        token = self.tokens[self.index]
+        if token[0] != kind:
+            raise _error("INVALID_SEMANTIC_PATH_SELECTOR", self.expression)
+        self.index += 1
+        return token
+
+    def parse(self) -> PredicateAst:
+        node = self.parse_or()
+        if not self.peek("EOF"):
+            raise _error("INVALID_SEMANTIC_PATH_SELECTOR", self.expression)
+        return node
+
+    def parse_or(self) -> PredicateAst:
+        nodes = [self.parse_and()]
+        while self.peek("OR"):
+            self.take("OR")
+            nodes.append(self.parse_and())
+        return nodes[0] if len(nodes) == 1 else ("or", tuple(nodes))
+
+    def parse_and(self) -> PredicateAst:
+        nodes = [self.parse_unary()]
+        while self.peek("AND"):
+            self.take("AND")
+            nodes.append(self.parse_unary())
+        return nodes[0] if len(nodes) == 1 else ("and", tuple(nodes))
+
+    def parse_unary(self) -> PredicateAst:
+        if self.peek("NOT"):
+            self.take("NOT")
+            return ("not", self.parse_unary())
+        if self.peek("("):
+            self.take("(")
+            node = self.parse_or()
+            self.take(")")
+            return node
+        return self.parse_atom()
+
+    def parse_atom(self) -> PredicateAst:
+        name = self.take("NAME")[1]
+        if self.peek("="):
+            self.take("=")
+            value = self.take("STRING")[1]
+            return ("eq", name, value)
+        return ("present", name)
+
+
+def parse_predicate(expression: str) -> PredicateAst:
+    expression = (expression or "").strip()
+    if not expression:
+        raise _error("INVALID_SEMANTIC_PATH_SELECTOR", expression)
+    return _PredicateParser(expression).parse()
+
+
+def render_predicate(node: PredicateAst) -> str:
+    kind = node[0]
+    if kind == "eq":
+        value = str(node[2]).replace("\\", "\\\\").replace("'", "\\'")
+        return f"{node[1]}='{value}'"
+    if kind == "present":
+        return str(node[1])
+    if kind == "not":
+        child = render_predicate(node[1])
+        return f"not ({child})"
+    if kind in {"and", "or"}:
+        joiner = f" {kind} "
+        parts = []
+        for child in node[1]:
+            rendered = render_predicate(child)
+            if child[0] in {"and", "or"} and child[0] != kind:
+                rendered = f"({rendered})"
+            parts.append(rendered)
+        # AND/OR are commutative in the supported Boolean subset. Canonicalise
+        # order so syntactic reordering does not create a false new selector.
+        return joiner.join(sorted(parts))
+    raise _error("INVALID_SEMANTIC_PATH_SELECTOR", repr(node))
+
+
+def predicate_properties(node: PredicateAst) -> set[str]:
+    kind = node[0]
+    if kind in {"eq", "present"}:
+        return {str(node[1])}
+    if kind == "not":
+        return predicate_properties(node[1])
+    if kind in {"and", "or"}:
+        result: set[str] = set()
+        for child in node[1]:
+            result.update(predicate_properties(child))
+        return result
+    raise _error("INVALID_SEMANTIC_PATH_SELECTOR", repr(node))
+
+
+def implied_equalities(node: PredicateAst) -> dict[str, str] | None:
+    """Return deterministic equality facts only for pure equality/AND predicates.
+
+    OR, NOT and presence predicates are selection-only and therefore do not imply
+    one value that may be materialised as a discriminator fact.
+    """
+    kind = node[0]
+    if kind == "eq":
+        return {str(node[1]): str(node[2])}
+    if kind == "and":
+        result: dict[str, str] = {}
+        for child in node[1]:
+            part = implied_equalities(child)
+            if part is None:
+                return None
+            for key, value in part.items():
+                if key in result and result[key] != value:
+                    raise _error("CONTRADICTORY_SEMANTIC_PATH_SELECTOR", f"{key}: {result[key]} != {value}")
+                result[key] = value
+        return result
+    return None
+
+
+def evaluate_predicate(node: PredicateAst, values: Mapping[str, str | None]) -> bool | None:
+    """Evaluate with a conservative three-valued rule.
+
+    Missing equality operands evaluate UNKNOWN rather than false so that
+    `not(property='x')` does not accidentally select an occurrence that has no
+    property at all. Explicit `not property` remains the way to select absence.
+    A Binding matches only when the final result is True.
+    """
+    kind = node[0]
+    if kind == "eq":
+        value = values.get(str(node[1]))
+        return None if value is None else value == str(node[2])
+    if kind == "present":
+        return bool(values.get(str(node[1])))
+    if kind == "not":
+        child = evaluate_predicate(node[1], values)
+        return None if child is None else not child
+    if kind == "and":
+        unknown = False
+        for child in node[1]:
+            value = evaluate_predicate(child, values)
+            if value is False:
+                return False
+            if value is None:
+                unknown = True
+        return None if unknown else True
+    if kind == "or":
+        unknown = False
+        for child in node[1]:
+            value = evaluate_predicate(child, values)
+            if value is True:
+                return True
+            if value is None:
+                unknown = True
+        return None if unknown else False
+    raise _error("INVALID_SEMANTIC_PATH_SELECTOR", repr(node))
+
+
+def parse_binding_path(path: str) -> tuple[str, list[tuple[str, PredicateAst]]]:
+    """Return selector-neutral path and predicates scoped to their Class segment."""
+    selected: list[tuple[str, PredicateAst]] = []
+    base_segments: list[str] = []
+    for raw_segment in split_segments(path):
+        name, expressions = _parse_segment_expressions(raw_segment, path)
+        base_segments.append(name)
+        owner = ".".join(base_segments)
+        for expression in expressions:
+            if expression.isdigit():
+                # [n] remains an occurrence-index selector; predicate evaluation is separate.
+                continue
+            selected.append((owner, parse_predicate(expression)))
+    return ".".join(base_segments), selected
+
+
+def _parse_segment_expressions(segment: str, full_path: str) -> tuple[str, tuple[str, ...]]:
+    name, expressions, index = [], [], 0
+    while index < len(segment) and segment[index] != "[":
+        name.append(segment[index])
+        index += 1
+    if not name:
+        raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
+    while index < len(segment):
+        if segment[index] != "[":
+            raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
+        start = index + 1
+        index += 1
+        depth, quote, escaped = 1, None, False
+        while index < len(segment) and depth:
+            char = segment[index]
+            if escaped:
+                escaped = False
+            elif char == "\\" and quote:
+                escaped = True
+            elif quote:
+                if char == quote:
+                    quote = None
+            elif char in {'"', "'"}:
+                quote = char
+            elif char == "[":
+                depth += 1
+            elif char == "]":
+                depth -= 1
+            index += 1
+        if depth or quote:
+            raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
+        expression = segment[start:index - 1].strip()
+        if not expression:
+            raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
+        expressions.append(expression)
+    return "".join(name), tuple(expressions)
+
+
+def normalize_semantic_path(path: str) -> str:
+    parts: list[str] = []
+    for raw_segment in split_segments(path):
+        name, expressions = _parse_segment_expressions(raw_segment, path)
+        rendered = []
+        for expression in expressions:
+            if expression.isdigit():
+                rendered.append(f"[{int(expression)}]")
+            else:
+                rendered.append(f"[{render_predicate(parse_predicate(expression))}]")
+        parts.append(name + "".join(rendered))
+    return ".".join(parts)
 
 
 def split_segments(path: str) -> list[str]:
@@ -73,53 +378,14 @@ def split_segments(path: str) -> list[str]:
 
 
 def parse_segment(segment: str, full_path: str) -> tuple[str, tuple[str, ...]]:
-    name, selectors, index = [], [], 0
-    while index < len(segment) and segment[index] != "[":
-        name.append(segment[index])
-        index += 1
-    if not name:
-        raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
-    while index < len(segment):
-        if segment[index] != "[":
-            raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
-        start = index + 1
-        index += 1
-        depth, quote, escaped = 1, None, False
-        while index < len(segment) and depth:
-            char = segment[index]
-            if escaped:
-                escaped = False
-            elif char == "\\" and quote:
-                escaped = True
-            elif quote:
-                if char == quote:
-                    quote = None
-            elif char in {'"', "'"}:
-                quote = char
-            elif char == "[":
-                depth += 1
-            elif char == "]":
-                depth -= 1
-            index += 1
-        if depth or quote:
-            raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
-        expression = segment[start:index - 1].strip()
-        if not expression:
-            raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
-        if expression.startswith("not("):
-            if not expression.endswith(")") or not expression[4:-1].strip():
-                raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
-            normalized = f"not({expression[4:-1].strip()})"
-        elif "=" in expression:
-            key, value = expression.split("=", 1)
-            key, value = key.strip(), value.strip()
-            if not key or len(value) < 2 or value[0] not in {'"', "'"} or value[-1] != value[0]:
-                raise _error("INVALID_SEMANTIC_PATH_SELECTOR", full_path)
-            normalized = f"{key}={value}"
+    name, expressions = _parse_segment_expressions(segment, full_path)
+    normalized: list[str] = []
+    for expression in expressions:
+        if expression.isdigit():
+            normalized.append(str(int(expression)))
         else:
-            normalized = expression
-        selectors.append(normalized)
-    return "".join(name), tuple(sorted(selectors))
+            normalized.append(render_predicate(parse_predicate(expression)))
+    return name, tuple(sorted(normalized))
 
 
 def parse_semantic_path(path: str) -> tuple[str, list[tuple[str, tuple[str, ...]]]]:
@@ -149,10 +415,11 @@ def read_selector_paths(paths: list[str | Path], encoding: str = "utf-8-sig") ->
                     if "[" not in value:
                         continue
                     parse_semantic_path(value)
-                    key = (column, value)
+                    normalized_value = normalize_semantic_path(value)
+                    key = (column, normalized_value)
                     counts[key] += 1
                     origins.setdefault(key, f"{path}:{line}")
-                    evidence.append({"file": str(path), "line": str(line), "column": column, "path": value})
+                    evidence.append({"file": str(path), "line": str(line), "column": column, "path": normalized_value})
     duplicates = [(column, value) for (column, value), count in counts.items() if count > 1]
     if duplicates:
         column, value = sorted(duplicates)[0]
@@ -182,10 +449,11 @@ def selector_evidence_from_rows(rows: list[dict[str, str]], origin: str = "<rows
             if "[" not in value:
                 continue
             parse_semantic_path(value)
-            key = (column, value)
+            normalized_value = normalize_semantic_path(value)
+            key = (column, normalized_value)
             counts[key] += 1
             origins.setdefault(key, f"{origin}:{line}")
-            evidence.append({"file": origin, "line": str(line), "column": column, "path": value})
+            evidence.append({"file": origin, "line": str(line), "column": column, "path": normalized_value})
     duplicates = [(column, value) for (column, value), count in counts.items() if count > 1]
     if duplicates:
         column, value = sorted(duplicates)[0]

@@ -8,22 +8,22 @@
   <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/gen" schemaLocation="../gen/gl-gen-2026-12-31.xsd"/>
   <!-- reusable OIM Attribute item type -->
-  <complexType name="documentSummaryReportingTaxonomyIdItemType">
+  <complexType name="summaryReportingTaxonomyIdItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="documentSummaryReportingTaxonomySchemaReferenceHrefAttributeItemType">
+  <complexType name="summaryReportingTaxonomySchemaReferenceHrefAttributeItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="documentSummaryReportingTaxonomyHeaderItemType">
+  <complexType name="summaryReportingTaxonomyHeaderItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="documentSummaryReportingTaxonomyDescriptionItemType">
+  <complexType name="summaryReportingTaxonomyDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
@@ -49,15 +49,15 @@
     </simpleContent>
   </complexType>
   <!-- reusable OIM Attribute item element -->
-  <element name="documentSummaryReportingTaxonomyId" id="lnk_documentSummaryReportingTaxonomyId" type="lnk:documentSummaryReportingTaxonomyIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="documentSummaryReportingTaxonomySchemaReferenceHrefAttribute" id="lnk_documentSummaryReportingTaxonomySchemaReferenceHrefAttribute" type="lnk:documentSummaryReportingTaxonomySchemaReferenceHrefAttributeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="documentSummaryReportingTaxonomyHeader" id="lnk_documentSummaryReportingTaxonomyHeader" type="lnk:documentSummaryReportingTaxonomyHeaderItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="documentSummaryReportingTaxonomyDescription" id="lnk_documentSummaryReportingTaxonomyDescription" type="lnk:documentSummaryReportingTaxonomyDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomyId" id="lnk_summaryReportingTaxonomyId" type="lnk:summaryReportingTaxonomyIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomySchemaReferenceHrefAttribute" id="lnk_summaryReportingTaxonomySchemaReferenceHrefAttribute" type="lnk:summaryReportingTaxonomySchemaReferenceHrefAttributeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomyHeader" id="lnk_summaryReportingTaxonomyHeader" type="lnk:summaryReportingTaxonomyHeaderItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="summaryReportingTaxonomyDescription" id="lnk_summaryReportingTaxonomyDescription" type="lnk:summaryReportingTaxonomyDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="commentCode" id="lnk_commentCode" type="lnk:commentCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="commentDescription" id="lnk_commentDescription" type="lnk:commentDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="commentContent" id="lnk_commentContent" type="lnk:commentContentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="commentLocator" id="lnk_commentLocator" type="lnk:commentLocatorItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <!-- reusable OIM Class primary-item anchor -->
-  <element name="p_lnk_documentSummaryReportingTaxonomies" id="p_lnk_documentSummaryReportingTaxonomies" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
+  <element name="p_lnk_summaryReportingTaxonomies" id="p_lnk_summaryReportingTaxonomies" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_lnk_detailRichTextComment" id="p_lnk_detailRichTextComment" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
 </schema>

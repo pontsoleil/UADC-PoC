@@ -12,7 +12,9 @@ UADC-PoC and the bundled XBRL GL Next taxonomy are prototype project artefacts, 
 
 - [Current baseline](docs/CURRENT_BASELINE.md)
 - [Handoff and next work](docs/HANDOFF.md)
+- [Decisions](docs/DECISIONS.md)
 - [Specifications](Specifications/README.md)
+- [HMD and Binding definitions](bindings/)
 - [Runtime programs](tools/binding/README.md)
 - [Taxonomy generator](tools/taxonomy/README.md)
 - [Registered runtime cases](tests/runtime/README.md)
@@ -69,15 +71,19 @@ The current canonical provenance registers `anonymous_v17` as a PCA → Structur
 
 The canonical publication tree was reconstructed on **2026-09-19**. The repository root is the canonical publication tree; there is no nested `canonical/`, `transformations/`, or `legacy/` directory in the published branch.
 
-The current canonical structure includes:
+The current canonical structure is role-based:
 
-- runtime programs under `tools/binding/`;
-- Binding and mapping definitions under `bindings/`;
-- XBRL GL Next semantic models under `models/`;
-- accepted Business Transactions and Accounting Entries taxonomy families under `taxonomy/`;
-- accepted fixtures under `instances/`;
-- registered runtime cases under `tests/runtime/`;
-- maintained specifications under `Specifications/`.
+```text
+bindings/
+  hmd/
+  flat-csv/
+  semantic/
+  syntax/
+taxonomy/
+tools/
+instances/
+tests/
+```
 
 The canonical Flat CSV Binding uses the accepted **16-column contract**. A 17-column file is accepted only as legacy-compatible input and is normalized to the 16-column runtime contract. Selectors are carried in `semantic_path` or `syntax_path` as applicable, while the canonical HMD `semantic_path` remains occurrence-neutral.
 
@@ -199,15 +205,17 @@ The essential architecture is therefore **source syntax → common semantics →
 
 ## Directory Layout
 
-- **bindings/** — Syntax, semantic, Structured CSV, PCA, EPSON, account, and tax Binding/mapping definitions.
-- **models/** — EN CIUS invoice, XBRL GL Business Transactions, XBRL GL Accounting Entries, and related HMD/model inputs.
-- **instances/** — Accepted `original/`, `derived/`, and `roundtrip/` fixtures and outputs.
-- **tests/** — Registered runtime cases and focused validation material.
-- **tests/runtime/** — Reproducibility manifests for accepted or explicitly held runtime cases.
-- **tools/binding/** — Syntax, semantic, Flat CSV, Tuple, and supporting conversion programs.
+- **bindings/hmd/** — HMD files used by UADC.
+- **bindings/flat-csv/** — Flat CSV profiles, column definitions, account mappings, tax mappings, and Flat CSV Bindings.
+- **bindings/semantic/** — Semantic Bindings between Structured CSV semantic models.
+- **bindings/syntax/** — Syntax Bindings for XML and other physical syntaxes.
+- **taxonomy/** — Accepted taxonomy families and their dependency closure.
+- **tools/binding/** — Syntax, semantic, Flat CSV, Tuple, CSV physical-adapter, and supporting conversion programs.
 - **tools/taxonomy/** — Taxonomy generation programs, templates, datatype bindings, and generator documentation.
-- **taxonomy/** — Accepted XBRL Japan namespace taxonomy families for Business Transactions and Accounting Entries.
-- **definitions/** — Shared definitions used by model and taxonomy tooling.
+- **instances/** — Accepted `original/`, `structured-csv/`, `derived/`, and other registered instance material.
+- **tests/** — Registered runtime cases, regression tests, and validation material.
+- **tests/runtime/** — Reproducibility manifests for accepted or explicitly held runtime cases.
+- **definitions/** — Shared schemas and definitions used by the role-based authorities.
 - **Specifications/** — Maintained public specifications plus `technical/` implementation definitions.
 - **docs/** — Maintained implementation, baseline, handoff, and governance documentation.
 - **references/** — Reproducible reference notes, provenance, and project figures.
