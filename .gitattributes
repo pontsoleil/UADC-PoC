@@ -42,3 +42,8 @@ Specifications/technical/bindings/syntax/EN16931_UBL_Invoice_Syntax_Binding.csv 
 Specifications/technical/lhm/EN16931_CIUS_Invoice_LHM.csv -text
 Specifications/technical/lhm/source/EN16931_CIUS_Invoice_LHM_Source.csv -text
 Specifications/technical/XBRL-GL/xbrl-gl.csv -text
+
+# Preserve physical CSV byte representation
+instances/derived/EPSON/original_basis/EPSON.csv -text
+instances/original/PCA/opening_v14/V14.csv -text
+instances/roundtrip/EPSON/original_basis/EPSON.csv -text
