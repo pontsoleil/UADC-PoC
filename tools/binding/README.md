@@ -48,3 +48,23 @@ Run commands from the repository root. Confirm input paths, output paths, and ov
 Run only tests relevant to materially changed code or conditions. Reuse accepted PASS evidence when inputs, code, settings, dependency versions, outputs, and validation scope are materially identical.
 
 Registered runtime and reproducibility cases are documented under [`tests/runtime/`](../../tests/runtime/). Each registered case uses its `RUN_PARAMETERS.json` as the execution-parameter authority.
+
+## Formal OIM reverse conversion and negative-amount result reports
+
+flat_csv.py to-flat consumes the JSON metadata of one dedicated Formal OIM CSV/JSON pair. It reconstructs selector-qualified semantic facts before reverse account or tax mapping and physical projection. Standalone legacy/Internal Structured CSV is not a substitute.
+
+Negative monetaryAmount facts require MANUAL_REVIEW_REQUIRED; the report identifies the input pair, journal/detail coordinates, selector-qualified semantic path, available account information and amount. Values, accounts, sides and materialisation rules are not automatically corrected.
+
+On a later ConversionError, the existing --summary-log saves the detected input facts, actual error and output_generated=false. The original exception and CLI exit code 2 are retained. Output record identifiers and negative-cell counts are null when no CSV has been generated; the report does not claim successful output preservation.
+
+Successful reverse conversion writes the existing normalised CSV and an automatic <normalised CSV>.conversion-report.json sidecar containing its SHA-256 and negative-cell provenance. The normal csv_physical_adapter.py from-uadc route consumes this sidecar when present, verifies the normalised SHA and resolves final application CSV records, physical line ranges, sides, columns, accounts and amounts. It adds negative_amount_report to the existing --report result and writes <application CSV>.conversion-report.json.
+
+Input negative-fact counts are distinct from split output-cell counts. Final cells link to input fact IDs. Embedded line breaks use physical line ranges. Existing adapter fields and exit status are retained. No conversion option, automatic sign reversal, absolute-value conversion, account replacement or test-only finalisation is introduced. Without a conversion sidecar, the adapter retains its existing behaviour.
+
+These reports contain targeted accounting values and must remain within authorised private output locations. They are not publication artefacts. Reporting adoption does not resolve missing tax classification in Formal OIM. The EPSON45 route retains the adopted 6DB HMD, sequence-aligned Binding, existing tax mappings and physical format.
+
+## Published synthetic EPSON45 reporting regression
+
+The dedicated manifest is tests/runtime/epson/epson45-negative-report/RUN_PARAMETERS.json; the Formal CSV/JSON pair is instances/fixtures/epson45-negative-report/. It registers both normal CLI stages, relative paths, dependency SHA-256 and expected results: three negative input facts, four split output cells, final application physical rows and input provenance. Generated outputs/ files are private execution results, not publication artefacts; only the output destination may be redirected for a run.
+
+Support is limited to the synthetic reporting regression. The historical pca-to-epson, epson-roundtrip and pca-roundtrip cases remain HOLD under the current runtime. Real EPSON45 conversion remains HOLD with TAX_POLICY_UNRESOLVED due to missing classification. Actual EPSON application import has not been accepted. Legacy migration and tax-contract changes are separate work.

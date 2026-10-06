@@ -338,3 +338,7 @@ Third-party material is not relicensed. ISO standards text, reproduced EN 16931 
 Generated files under `out/`, PDFs, CSV files, XML/XBRL, and other rendered artifacts inherit the rights and restrictions of their inputs. Original public samples must be distinguished from third-party samples and mechanically regenerated outputs. Real data, secrets, personal data, machine-specific configuration, and purchased standards text are outside the public license scope and must not be published.
 
 See [LICENSE-SCOPE.md](LICENSE-SCOPE.md) for the boundary rules and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party sources and rights.
+
+## Synthetic Formal OIM / EPSON45 reporting acceptance
+
+See [the dedicated two-stage manifest](tests/runtime/epson/epson45-negative-report/RUN_PARAMETERS.json) and [public synthetic pair](instances/fixtures/epson45-negative-report/negative-formal.json). The normal conversion and physical adapter preserve the application CSV bytes and report three negative input facts as four split output cells. This is fixture reporting acceptance only. Historical pca-to-epson, epson-roundtrip and pca-roundtrip remain HOLD with the current runtime; real EPSON45 conversion remains TAX_POLICY_UNRESOLVED HOLD; actual EPSON application import has not been accepted. Neither historical-route migration nor additional tax classification is included.

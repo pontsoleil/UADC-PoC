@@ -47,3 +47,19 @@ command は repository root から実行します。実行前に input path、ou
 materially changed な code 又は条件に関係する test だけを実行します。入力、code、設定、依存 version、成果物、validation scope が materially 同一なら accepted PASS 証跡を再利用します。
 
 登録済み runtime／reproducibility case は [`tests/runtime/`](../../../tests/runtime/) に記録されています。各登録済み case では、その `RUN_PARAMETERS.json` を execution parameter authority とします。
+
+## Formal OIM逆変換と負数の結果レポート
+
+flat_csv.py to-flatは同一basenameのCSVを参照するFormal JSON metadataを入口とし、selector付き意味モデル再構成直後に負数monetaryAmountを検出します。入力ペア、仕訳・明細、selector semantic_path、側、取得科目、金額、MANUAL_REVIEW_REQUIREDを記録します。自動反転・絶対値化・科目変更はしません。
+
+後続ConversionErrorでは既存--summary-logへ検出済み入力・実エラー・output_generated=falseを保存し、元例外/終了2を維持します。未生成出力の行番号・負数cell件数はnull、出力成功表示は付けません。
+
+正常時はnormalized CSVの値・分割を保持し、SHAとsource対応を<normalized CSV>.conversion-report.jsonへ保存します。通常csv_physical_adapter.py from-uadcが自動sidecarを照合し、最終application CSVの行・物理行範囲・側・列・科目・金額・input fact IDを既存--reportと<application CSV>.conversion-report.jsonへ記録します。入力fact件数と分割後cell件数は別計数し、quoted multilineは物理行範囲で表します。試験専用finalizeなし。sidecarがないadapterは既存動作を維持します。
+
+対象会計値を含むため非公開出力先で保持します。6DB HMDと税Mapping・物理形式は維持します。報告機能の採用と、税分類不足が残る実入力EPSON変換HOLDを区別します。
+
+## EPSON45 公開用合成回帰ケース
+
+専用登録: tests/runtime/epson/epson45-negative-report/RUN_PARAMETERS.json。Formal CSV/JSON fixture: instances/fixtures/epson45-negative-report/。両段階の通常CLIと相対パス・依存SHA・期待結果をmanifestへ登録。負数3 factから分割後4セル、最終application CSVの物理行と入力識別対応を検証。生成先outputs/は公開成果物ではなく、必要なら出力先だけ変更して実行する。
+
+対応範囲は合成fixtureの報告回帰。旧pca-to-epson/epson-roundtrip/pca-roundtripは過去受入再現記録の現行HOLDで、現行成功経路とは扱わない。実入力EPSON45は税分類不足TAX_POLICY_UNRESOLVEDのHOLD。実EPSONアプリ取込は未受入。旧経路移行・税分類補完は別変更。

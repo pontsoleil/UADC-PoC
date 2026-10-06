@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "case_id": "epson45-negative-report",
+  "status": "PASS",
+  "runtime": {
+    "program": "tools/binding/flat_csv.py",
+    "sha256": "973EB15AA3063620763CC0B70E447CF224714911D8BDAD099A0F6F1BD81EAE50"
+  },
+  "direction": "Formal-OIM-to-EPSON45-application",
+  "source_format": "Synthetic Formal OIM CSV + JSON",
+  "target_format": "EPSON45 CP932 application CSV",
+  "profile": "EPSON_ZaimuKaikeiR4_45col",
+  "hmd": "bindings/hmd/gl-cor/accounting-entries/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+  "binding": "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_BINDING.csv",
+  "input": "instances/fixtures/epson45-negative-report/negative-formal.json",
+  "outputs": {
+    "normalized": "outputs/epson45-negative-report/EPSON.normalized.csv",
+    "application": "outputs/epson45-negative-report/EPSON.application.csv",
+    "summary": "outputs/epson45-negative-report/EPSON.summary.json",
+    "report": "outputs/epson45-negative-report/EPSON.physical-report.json"
+  },
+  "runtime_arguments": [
+    "to-flat",
+    "instances/fixtures/epson45-negative-report/negative-formal.json",
+    "-o",
+    "outputs/epson45-negative-report/EPSON.normalized.csv",
+    "-m",
+    "bindings/hmd/gl-cor/accounting-entries/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+    "--profile-dir",
+    "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col",
+    "--columns-file",
+    "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_COLUMNS.csv",
+    "--output-header",
+    "--standard-tax-mapping",
+    "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_STANDARD_TAX_MAPPING.csv",
+    "--account-tax-mapping",
+    "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_ACCOUNT_TAX_MAPPING.csv",
+    "--materialization-mode",
+    "ordered_cumulative_pairing",
+    "--summary-log",
+    "outputs/epson45-negative-report/EPSON.summary.json"
+  ],
+  "working_directory": ".",
+  "encoding": "utf-8-sig",
+  "options": {
+    "materialization_mode": "ordered_cumulative_pairing",
+    "tax_reverse_mode": "policy_regeneration (default); fixture has no tax facts",
+    "python_tested": "3.10.2",
+    "scope": "synthetic reporting regression; does not establish real-data tax conversion or application import",
+    "dependency_sha_representation": "Git blob bytes; an existing CRLF checkout may differ only by EOL. Verify Git blob SHA or normalised-content equivalence; WORK evidence records raw checkout hashes."
+  },
+  "checksums": {
+    "input": "42A93CA5005558C891D2E21A8D480BF06B0AEF2F358811C8E43ADD91B1C8B5B8",
+    "input_pair": {
+      "csv": "E8C5D3599A32E752E245581CA27D2CB03BE779F4E23C7F2027733C1B4CC4798B",
+      "json": "42A93CA5005558C891D2E21A8D480BF06B0AEF2F358811C8E43ADD91B1C8B5B8"
+    },
+    "hmd": "6DB8C6AAD8C2FBAEC710DDF104405D22CC13BAD0BA52038DF471F7FE5850AD81",
+    "binding": "58BF46D2E0C501FBC608290841F410412388B26A6A5A6D93B565FCEB708602A0",
+    "dependencies": {
+      "instances/fixtures/epson45-negative-report/negative-formal.csv": "E8C5D3599A32E752E245581CA27D2CB03BE779F4E23C7F2027733C1B4CC4798B",
+      "instances/fixtures/epson45-negative-report/negative-formal.json": "DB769FF886D3AF1AF833831996F274CBD480BA6CC302E18099A4578F3A0D04A2",
+      "bindings/hmd/gl-cor/accounting-entries/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv": "6DB8C6AAD8C2FBAEC710DDF104405D22CC13BAD0BA52038DF471F7FE5850AD81",
+      "taxonomy/accounting-entries/oim/cor_accountingEntries/cor-all-oim-2026-12-31.xsd": "A5D90C27C743D206F75EB4A0D8221E842A0313D7EB14697A39A241111EE13066",
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_ACCOUNT_MAPPING.csv": "8ACCFEF12BA0006871D21D7EEE8F562732688BFD6D27F38181C6BB961261B614",
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_ACCOUNT_TAX_MAPPING.csv": "4A9DE4B5D92C2030BA51B38328BCCFBDCAE19FCDEAA363FF14F119FA68DE0FA0",
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_BINDING.csv": "58BF46D2E0C501FBC608290841F410412388B26A6A5A6D93B565FCEB708602A0",
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_COLUMNS.csv": "F90508B220D3947BE00BD8042701F09ED97053B2B310D909F625174460B6A8BC",
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_CSV_FORMAT.json": "6324F94994A3457CC7D1C8B1037F88E3869D963BCC5F9EECDA467A1D1D435E75",
+      "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_STANDARD_TAX_MAPPING.csv": "97D261C38AE1B0F2696C9EA3EB732A1434B786FBBC25619EFDDA4C3974250B1A",
+      "tools/binding/flat_csv.py": "973EB15AA3063620763CC0B70E447CF224714911D8BDAD099A0F6F1BD81EAE50",
+      "tools/binding/csv_physical_adapter.py": "FDDB94D6EECE2B8FC893F1FD607B0BC52E6380A1E93D4C318F78DE8F8D3B1FD8",
+      "tools/binding/selector_multiplicity.py": "120A78D4A486A52BB6737F38D19CD873039C40118240107F378668AAC531188A",
+      "tools/binding/aggregate_pairing.py": "FF60A3F18E9EC0F3459019D224D3C1D72FE8EE40445694A21EF1CEFAE7DF7D11"
+    },
+    "outputs": {
+      "application": "17AB3FDF9DD7FB93C165318FD022EBFA240EDA040C7552C70CB4A12A0C41CD3A",
+      "normalized": "4ECF13356D1FDA5FB67DE16F567E4C2E443DA62344BF83F508E2CC4A197B074D"
+    }
+  },
+  "stages": [
+    {
+      "id": "flat",
+      "program": "tools/binding/flat_csv.py",
+      "runtime_arguments": [
+        "to-flat",
+        "instances/fixtures/epson45-negative-report/negative-formal.json",
+        "-o",
+        "outputs/epson45-negative-report/EPSON.normalized.csv",
+        "-m",
+        "bindings/hmd/gl-cor/accounting-entries/XBRL_GL_Next_HMD_AccountingEntries_for_taxonomy.csv",
+        "--profile-dir",
+        "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col",
+        "--columns-file",
+        "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_COLUMNS.csv",
+        "--output-header",
+        "--standard-tax-mapping",
+        "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_STANDARD_TAX_MAPPING.csv",
+        "--account-tax-mapping",
+        "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_ACCOUNT_TAX_MAPPING.csv",
+        "--materialization-mode",
+        "ordered_cumulative_pairing",
+        "--summary-log",
+        "outputs/epson45-negative-report/EPSON.summary.json"
+      ]
+    },
+    {
+      "id": "physical",
+      "program": "tools/binding/csv_physical_adapter.py",
+      "runtime_arguments": [
+        "from-uadc",
+        "outputs/epson45-negative-report/EPSON.normalized.csv",
+        "-o",
+        "outputs/epson45-negative-report/EPSON.application.csv",
+        "--profile",
+        "bindings/flat-csv/EPSON_ZaimuKaikeiR4_45col/EPSON_ZaimuKaikeiR4_45col_CSV_FORMAT.json",
+        "--report",
+        "outputs/epson45-negative-report/EPSON.physical-report.json"
+      ],
+      "sha256": "FDDB94D6EECE2B8FC893F1FD607B0BC52E6380A1E93D4C318F78DE8F8D3B1FD8"
+    }
+  ],
+  "expected_results": {
+    "exit_codes": [
+      0,
+      0
+    ],
+    "application_sha256": "17AB3FDF9DD7FB93C165318FD022EBFA240EDA040C7552C70CB4A12A0C41CD3A",
+    "input_negative_fact_count": 3,
+    "output_negative_cell_count": 4,
+    "physical_line_ranges": "actual application CSV; includes embedded newline",
+    "values_accounts_splits_unchanged": true
+  },
+  "evidence": {
+    "source": "tests/runtime/epson/epson45-negative-report",
+    "accepted_result": "PASS_REGISTERED_NORMAL_CLI_AND_PHYSICAL_ADAPTER; C01_APPLICATION_BYTES_IDENTICAL; NEGATIVE_3_FACTS_4_CELLS",
+    "accepted_date": "2026-10-06"
+  }
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Canonical 16-column Flat CSV converter.
+"""Canonical 16-column Flat CSV converter with negative reports.
 
 The Binding Table and HMD are the only structural definitions used by this
 module.  Physical accounting values are never included in diagnostics or
@@ -256,9 +256,10 @@ class ConversionSummary:
     missing_tax_information: int = 0
     source_restored_tax_occurrences: int = 0
     policy_regenerated_tax_occurrences: int = 0
+    negative_amount_report: Mapping[str, object] | None = None
 
     def as_dict(self) -> dict[str, object]:
-        return {
+        result = {
             "source_rows": self.source_rows,
             "profile_width": self.profile_width,
             "structured_rows": self.structured_rows,
@@ -282,6 +283,9 @@ class ConversionSummary:
             "source_restored_tax_occurrences": self.source_restored_tax_occurrences,
             "policy_regenerated_tax_occurrences": self.policy_regenerated_tax_occurrences,
         }
+        if self.negative_amount_report is not None:
+            result["negative_amount_report"] = dict(self.negative_amount_report)
+        return result
 
 
 @dataclass(frozen=True)
@@ -2435,11 +2439,22 @@ def convert_to_structured(options: ConversionOptions) -> ConversionSummary:
 def _records_from_oim(
     rows: Sequence[dict[str, str]], definition: Definition
 ) -> list[dict[str, str]]:
-    """Reconstruct Binding-addressed Structured rows from an OIM table.
+    """Reconstruct the semantic model represented by one Formal OIM table.
 
-    Selector discriminator facts are resolved from the semantic_path predicates
-    themselves. A discriminator fact need not have a physical Binding column; it
-    may exist solely so another Binding path can select an occurrence.
+    Reverse conversion is model-first.  OIM facts and occurrence dimensions are
+    first positioned in the HMD-defined semantic model.  Selector facts in that
+    model are then used to qualify the semantic_path of each fact.  Physical
+    Flat-CSV Binding is intentionally *not* consulted to decide whether an OIM
+    fact exists or where it belongs; Binding is applied later when the resolved
+    semantic values are projected into the output row/list.
+
+    This preserves the proven tidy2csv processing order:
+
+        semantic model -> selector-qualified semantic_path -> output projection
+
+    It also permits semantic facts that are needed only as occurrence
+    discriminators or by a governed reverse transformation (for example the
+    account-subaccount suffix) to exist without a direct physical CSV column.
     """
     concept_paths: dict[str, str] = {}
     for semantic_path, hmd in definition.hmd_rows.items():
@@ -2449,13 +2464,16 @@ def _records_from_oim(
         local_name = hmd.get("local_name") or ""
         concept = f"{module}:{local_name}"
         if concept in concept_paths and concept_paths[concept] != semantic_path:
-            raise ConversionError("HMD_ROW_INVALID", "HMD concept QNames must be unique for OIM reverse")
+            raise ConversionError(
+                "HMD_ROW_INVALID", "HMD concept QNames must be unique for OIM reverse"
+            )
         concept_paths[concept] = semantic_path
 
     repeated_classes = [
         (path, row)
         for path, row in definition.hmd_rows.items()
-        if (row.get("type") or "").upper() == "C" and _repeats(row.get("multiplicity") or "")
+        if (row.get("type") or "").upper() == "C"
+        and _repeats(row.get("multiplicity") or "")
     ]
     repeated_classes.sort(key=lambda item: (item[0].count("."), item[0]))
 
@@ -2464,8 +2482,11 @@ def _records_from_oim(
         local_name = class_row.get("local_name") or ""
         return f"d_{module}_{local_name}"
 
-    def scope_key(source: Mapping[str, str], owner_path: str) -> tuple[tuple[str, str], ...]:
-        result = []
+    def scope_key(
+        source: Mapping[str, str], owner_path: str
+    ) -> tuple[tuple[str, str], ...]:
+        """Return the repeated-occurrence coordinate that owns one selector fact."""
+        result: list[tuple[str, str]] = []
         for class_path, class_row in repeated_classes:
             if owner_path == class_path or owner_path.startswith(class_path + "."):
                 dimension = dimension_name(class_row)
@@ -2474,115 +2495,344 @@ def _records_from_oim(
                     result.append((dimension, value))
         return tuple(result)
 
-    selector_attributes: set[str] = set()
+    # Selector predicates define how semantic paths address repeated occurrences,
+    # but they do not define the existence of a fact.  Record the predicates by
+    # their owning Class so they can be evaluated against the semantic model.
+    owner_predicates: dict[str, dict[str, tuple]] = defaultdict(dict)
+    owner_properties: dict[str, set[str]] = defaultdict(set)
     for binding in definition.rows:
         for owner, predicate in _path_predicates(binding.path)[1]:
-            for prop in selector_multiplicity.predicate_properties(predicate):
-                selector_attributes.add(f"{owner}.{prop}")
+            rendered = selector_multiplicity.render_predicate(predicate)
+            owner_predicates[owner].setdefault(rendered, predicate)
+            owner_properties[owner].update(
+                selector_multiplicity.predicate_properties(predicate)
+            )
 
-    # Resolve each OIM concept to its HMD semantic path once.
+    # Phase 1 — resolve every OIM concept to the HMD semantic model.  No Binding
+    # candidate search is performed here.
     resolved_rows: list[tuple[dict[str, str], str]] = []
     for source in rows:
-        semantic_path = concept_paths.get((source.get("concept") or "").strip())
+        concept = (source.get("concept") or "").strip()
+        semantic_path = concept_paths.get(concept)
         if not semantic_path:
-            raise ConversionError("STRUCTURED_BINDING_MISMATCH", "OIM concept is absent from HMD")
+            raise ConversionError(
+                "STRUCTURED_BINDING_MISMATCH", "OIM concept is absent from HMD"
+            )
         resolved_rows.append((source, semantic_path))
 
-    selector_index: dict[tuple[str, tuple[tuple[str, str], ...]], list[str]] = defaultdict(list)
+    # Phase 2 — index model facts by neutral HMD path and occurrence scope.  This
+    # is the data model to which selector-qualified semantic paths are applied.
+    fact_index: dict[
+        tuple[str, tuple[tuple[str, str], ...]], list[str]
+    ] = defaultdict(list)
     for source, semantic_path in resolved_rows:
-        if semantic_path not in selector_attributes:
-            continue
         owner = semantic_path.rsplit(".", 1)[0]
         value = (source.get("value") or "").strip()
         if value:
-            selector_index[(semantic_path, scope_key(source, owner))].append(value)
+            fact_index[(semantic_path, scope_key(source, owner))].append(value)
 
-    def candidate_matches(candidate: BindingRow, source: Mapping[str, str]) -> bool:
-        for owner, predicate in _path_predicates(candidate.path)[1]:
-            values: dict[str, str | None] = {}
-            for prop in selector_multiplicity.predicate_properties(predicate):
-                semantic_path = f"{owner}.{prop}"
-                found = list(dict.fromkeys(selector_index.get((semantic_path, scope_key(source, owner)), [])))
-                if len(found) > 1:
-                    raise ConversionError(
-                        "STRUCTURED_BINDING_AMBIGUOUS",
-                        "selector property has more than one value in one occurrence scope",
-                    )
-                values[prop] = found[0] if found else None
-            if selector_multiplicity.evaluate_predicate(predicate, values) is not True:
-                return False
-        return True
+    def fact_value(
+        source: Mapping[str, str], owner_path: str, property_name: str
+    ) -> str | None:
+        semantic_path = f"{owner_path}.{property_name}"
+        found = list(
+            dict.fromkeys(
+                fact_index.get((semantic_path, scope_key(source, owner_path)), [])
+            )
+        )
+        if len(found) > 1:
+            raise ConversionError(
+                "STRUCTURED_BINDING_AMBIGUOUS",
+                "selector property has more than one value in one occurrence scope",
+            )
+        return found[0] if found else None
 
+    def selector_for_owner(source: Mapping[str, str], owner_path: str) -> str:
+        """Resolve the selector that identifies one Class occurrence.
+
+        First reuse an existing Binding predicate when exactly one predicate is
+        true for the model occurrence.  If the occurrence carries a selector
+        property value not represented by a physical Binding variant (for
+        example cor_Type='account-subaccount'), construct the equality selector
+        from the model fact itself.  This is semantic positioning, not a new
+        physical Binding.
+        """
+        properties = owner_properties.get(owner_path, set())
+        if not properties:
+            return ""
+        values = {
+            prop: fact_value(source, owner_path, prop)
+            for prop in sorted(properties)
+        }
+
+        matched: list[str] = []
+        for rendered, predicate in owner_predicates.get(owner_path, {}).items():
+            if selector_multiplicity.evaluate_predicate(predicate, values) is True:
+                matched.append(rendered)
+        matched = list(dict.fromkeys(matched))
+        if len(matched) > 1:
+            raise ConversionError(
+                "STRUCTURED_BINDING_AMBIGUOUS",
+                "more than one selector predicate matches one occurrence in the semantic model",
+            )
+        if matched:
+            return matched[0]
+
+        actual = {prop: value for prop, value in values.items() if value is not None}
+        if not actual:
+            return ""
+        predicates = [
+            selector_multiplicity.render_predicate(("eq", prop, value))
+            for prop, value in sorted(actual.items())
+        ]
+        return " and ".join(predicates)
+
+    def qualified_semantic_path(
+        source: Mapping[str, str], semantic_path: str
+    ) -> str:
+        """Apply occurrence selectors from the semantic model to one HMD path."""
+        segments = selector_multiplicity.split_segments(semantic_path)
+        qualified: list[str] = []
+        owner_parts: list[str] = []
+        for raw in segments:
+            name = raw.split("[", 1)[0]
+            owner_parts.append(name)
+            owner_path = ".".join(owner_parts)
+            selector = selector_for_owner(source, owner_path)
+            qualified.append(f"{name}[{selector}]" if selector else name)
+        return ".".join(qualified)
+
+    # Phase 3 — project the resolved semantic model into the common Structured
+    # row shape.  These are semantic rows, not yet physical Binding rows.
     reconstructed: list[dict[str, str]] = []
-    for source, semantic_path in resolved_rows:
+    for source, hmd_path in resolved_rows:
+        hmd = definition.hmd_rows[hmd_path]
+        semantic_path = qualified_semantic_path(source, hmd_path)
+
         detail_value = ""
         entry_value = ""
-        for class_path, class_row in repeated_classes:
+        for _class_path, class_row in repeated_classes:
             local_name = class_row.get("local_name") or ""
             value = (source.get(dimension_name(class_row)) or "").strip()
             if local_name == "entryHeader":
                 entry_value = value
             elif local_name == "entryDetail":
                 detail_value = value
-        source_row, occurrence = (detail_value.rsplit("-", 1) + [""])[:2] if "-" in detail_value else ("", "")
 
-        candidates = [
-            row for row in definition.rows
-            if _hmd_lookup_path(row.path) == semantic_path and row.values["type"].upper() == "A"
-        ]
-        selected = [candidate for candidate in candidates if candidate_matches(candidate, source)]
+        source_row = ""
+        occurrence = "ROOT"
+        if detail_value:
+            if "-" not in detail_value:
+                raise ConversionError(
+                    "STRUCTURED_ROW_INVALID",
+                    "OIM entryDetail occurrence key does not contain source-row and occurrence",
+                )
+            source_row, occurrence = detail_value.rsplit("-", 1)
+            if not source_row or not occurrence:
+                raise ConversionError(
+                    "STRUCTURED_ROW_INVALID",
+                    "OIM entryDetail occurrence key is incomplete",
+                )
+        elif entry_value:
+            occurrence = "HEADER"
 
-        if not candidates and semantic_path in selector_attributes:
-            # Predicate-only discriminator fact: it is semantic evidence for
-            # selecting another physical Binding and has no physical column itself.
-            continue
-        if len(selected) != 1:
-            raise ConversionError(
-                "STRUCTURED_BINDING_MISMATCH" if not selected else "STRUCTURED_BINDING_AMBIGUOUS",
-                f"OIM concept {(source.get('concept') or '').strip()} resolves to {len(selected)} Binding rows",
-            )
-        binding = selected[0]
         reconstructed.append(
             {
                 "entry_key": entry_value,
                 "source_row": source_row,
-                "occurrence": occurrence or "HEADER",
-                "sequence": f"{binding.sequence:04d}",
-                "level": binding.values["level"],
-                "type": binding.values["type"],
+                "occurrence": occurrence,
+                "sequence": f"{int(hmd['sequence']):04d}",
+                "level": hmd.get("level", ""),
+                "type": hmd.get("type", ""),
                 "id": "",
-                "name": binding.values["name"],
-                "semantic_path": binding.path,
-                "binding_path": binding.path,
+                "name": hmd.get("local_name", ""),
+                "semantic_path": semantic_path,
+                "binding_path": semantic_path,
                 "value": source.get("value") or "",
             }
         )
     return reconstructed
 
+def _resolve_oim_pair_path(metadata_path: Path, uri: str, kind: str) -> Path:
+    """Resolve one local OIM pair reference relative to its JSON metadata.
 
-def _read_structured(path: Path, encoding: str, definition: Definition) -> list[dict[str, str]]:
+    Current UADC Formal OIM authorities are repository-local CSV + JSON pairs.
+    Remote/absolute URI references are not accepted by the reverse runtime because
+    they cannot establish the dedicated local pair identity required by this
+    project contract.
+    """
+    value = (uri or "").strip()
+    if not value or re.match(r"^[A-Za-z][A-Za-z0-9+.-]*://", value):
+        raise ConversionError(
+            "OIM_PAIR_INVALID",
+            f"Formal OIM {kind} reference must be a non-empty local relative path",
+        )
+    referenced = Path(value)
+    if referenced.is_absolute():
+        raise ConversionError(
+            "OIM_PAIR_INVALID",
+            f"Formal OIM {kind} reference must be relative to its JSON metadata",
+        )
+    return (metadata_path.parent / referenced).resolve()
+
+
+def _read_oim_pair(
+    metadata_path: Path, encoding: str, definition: Definition
+) -> list[dict[str, str]]:
+    """Read one dedicated Formal OIM JSON + CSV pair for reverse conversion.
+
+    The JSON metadata is the reverse input authority.  It identifies exactly one
+    paired CSV; standalone Internal Structured CSV and standalone Formal OIM CSV
+    are not accepted by the current reverse contract.
+    """
+    if metadata_path.suffix.lower() != ".json":
+        raise ConversionError(
+            "OIM_PAIR_REQUIRED",
+            "to-flat input must be the JSON metadata of a Formal OIM CSV + JSON pair",
+        )
     try:
-        with path.open(newline="", encoding=encoding) as stream:
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8-sig"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise ConversionError(
+            "OIM_PAIR_INVALID", "Formal OIM JSON metadata could not be read"
+        ) from exc
+    if not isinstance(metadata, dict):
+        raise ConversionError("OIM_PAIR_INVALID", "Formal OIM metadata must be a JSON object")
+
+    document_info = metadata.get("documentInfo")
+    if not isinstance(document_info, dict) or document_info.get("documentType") != "https://xbrl.org/2021/xbrl-csv":
+        raise ConversionError(
+            "OIM_PAIR_INVALID", "Formal OIM JSON has an invalid documentType"
+        )
+
+    tables = metadata.get("tables")
+    if not isinstance(tables, dict) or len(tables) != 1:
+        raise ConversionError(
+            "OIM_PAIR_INVALID", "Formal OIM JSON must identify exactly one paired CSV table"
+        )
+    _table_name, table = next(iter(tables.items()))
+    if not isinstance(table, dict):
+        raise ConversionError("OIM_PAIR_INVALID", "Formal OIM table definition is invalid")
+    template_name = (table.get("template") or "").strip()
+    csv_path = _resolve_oim_pair_path(metadata_path, str(table.get("url") or ""), "CSV")
+    if csv_path.suffix.lower() != ".csv" or csv_path.stem != metadata_path.stem:
+        raise ConversionError(
+            "OIM_PAIR_INVALID",
+            "Formal OIM JSON and CSV must share one basename and use .json/.csv extensions",
+        )
+    if not csv_path.is_file():
+        raise ConversionError("OIM_PAIR_INVALID", "Formal OIM paired CSV does not exist")
+
+    templates = metadata.get("tableTemplates")
+    template = templates.get(template_name) if isinstance(templates, dict) else None
+    if not template_name or not isinstance(template, dict):
+        raise ConversionError("OIM_PAIR_INVALID", "Formal OIM table template is unresolved")
+    metadata_columns = template.get("columns")
+    if not isinstance(metadata_columns, dict) or not metadata_columns:
+        raise ConversionError("OIM_PAIR_INVALID", "Formal OIM table template has no columns")
+
+    taxonomy = document_info.get("taxonomy")
+    if not isinstance(taxonomy, list) or not taxonomy:
+        raise ConversionError("OIM_PAIR_INVALID", "Formal OIM JSON has no taxonomy reference")
+    for reference in taxonomy:
+        taxonomy_path = _resolve_oim_pair_path(metadata_path, str(reference), "taxonomy")
+        if not taxonomy_path.is_file():
+            raise ConversionError("OIM_PAIR_INVALID", "Formal OIM taxonomy reference does not resolve")
+
+    try:
+        with csv_path.open(newline="", encoding=encoding) as stream:
             reader = csv.DictReader(stream)
             fields = tuple(reader.fieldnames or ())
-            if set(STRUCTURED_FIELDS).issubset(fields):
-                rows = [dict(row) for row in reader]
-            elif {"concept", "value"}.issubset(fields):
-                rows = _records_from_oim([dict(row) for row in reader], definition)
-            else:
+            if not fields or len(fields) != len(set(fields)):
+                raise ConversionError("OIM_PAIR_INVALID", "Formal OIM CSV header is missing or duplicated")
+            if set(fields) != set(metadata_columns):
                 raise ConversionError(
-                    "STRUCTURED_HEADER_INVALID", "Structured CSV header lacks a required field"
+                    "OIM_PAIR_INVALID",
+                    "Formal OIM CSV columns do not exactly match its JSON metadata columns",
                 )
+            if not {"concept", "value"}.issubset(fields):
+                raise ConversionError(
+                    "OIM_PAIR_INVALID", "Formal OIM CSV must contain concept and value columns"
+                )
+            rows = [dict(row) for row in reader]
     except ConversionError:
         raise
     except (OSError, UnicodeError, csv.Error) as exc:
-        raise ConversionError("INPUT_IO_ERROR", "Structured CSV input could not be read") from exc
-    return rows
+        raise ConversionError("INPUT_IO_ERROR", "Formal OIM paired CSV could not be read") from exc
+
+    namespaces = document_info.get("namespaces")
+    if not isinstance(namespaces, dict):
+        raise ConversionError("OIM_PAIR_INVALID", "Formal OIM JSON has no namespace map")
+    for row in rows:
+        concept = (row.get("concept") or "").strip()
+        if not concept or ":" not in concept or concept.split(":", 1)[0] not in namespaces:
+            raise ConversionError(
+                "OIM_PAIR_INVALID", "Formal OIM CSV concept prefix is absent from JSON namespaces"
+            )
+
+    return _records_from_oim(rows, definition)
+
+
+def _common_template_projection(
+    semantic_path: str, definition: Definition
+) -> BindingRow | None:
+    """Resolve a D/C-qualified semantic fact to one shared horizontal CSV field.
+
+    The retained ``tidy2csv.py`` reverse flow first classified debit, credit and
+    unclassified/common semantic occurrences, aligned them into one physical
+    journal row, and only then replaced semantic paths with proprietary CSV
+    columns.  Japanese horizontal journals therefore legitimately map two
+    semantic EntryDetail occurrences (D and C) to one shared physical field,
+    such as the line description.
+
+    This helper is intentionally narrower than a general selector-neutral
+    fallback.  A shared projection is allowed only when:
+
+    * the source fact is selector-qualified;
+    * every selector belongs to the driver occurrence (EntryDetail for the
+      accounting profiles); and
+    * exactly one selector-free Attribute Binding exists for the same HMD fact
+      and has a physical output column.
+
+    The selector-qualified ``semantic_path`` remains the semantic identity.
+    The returned Binding row is only the physical projection target used after
+    D/C occurrence materialisation.
+    """
+    hmd_path, predicates = _path_predicates(semantic_path)
+    if not predicates:
+        return None
+    driver_path = _hmd_lookup_path(definition.driver.path)
+    if any(owner != driver_path for owner, _predicate in predicates):
+        return None
+
+    candidates = [
+        row
+        for row in definition.rows
+        if row.values["type"].upper() == "A"
+        and row.values["column"]
+        and row.path == hmd_path
+        and not _path_predicates(row.path)[1]
+    ]
+    if len(candidates) > 1:
+        raise ConversionError(
+            "STRUCTURED_BINDING_AMBIGUOUS",
+            "a selector-qualified fact resolves to more than one common-template Binding row",
+        )
+    return candidates[0] if candidates else None
 
 
 def _validated_structured_rows(
     rows: Sequence[dict[str, str]], definition: Definition
 ) -> tuple[dict[str, list[dict[str, str]]], dict[tuple[str, int], list[dict[str, str]]]]:
+    """Validate semantic rows without collapsing their D/C occurrence identity.
+
+    Exact selector-qualified Bindings remain exact.  Selector discriminator
+    facts with no physical column are retained only as semantic-model evidence
+    and are not projected.  A D/C-qualified common fact may reference one
+    selector-free common-template Binding solely as its later physical output
+    target; its own selector-qualified semantic identity and occurrence are kept
+    unchanged until physical row materialisation.
+    """
     by_path = {row.path: row for row in definition.rows}
     selector_fact_paths = {
         f"{_qualified_owner_prefix(row.path, owner)}.{prop}"
@@ -2602,28 +2852,34 @@ def _validated_structured_rows(
                 "STRUCTURED_BINDING_MISMATCH",
                 "Structured binding_path compatibility field differs from semantic_path",
             )
+
         binding_row = by_path.get(semantic_path)
         if binding_row is None:
             if semantic_path in selector_fact_paths:
                 # Selector discriminator fact has semantic identity but no physical Binding column.
                 continue
-            raise ConversionError(
-                "STRUCTURED_BINDING_MISMATCH",
-                "Structured selector-qualified semantic_path does not match a Binding row",
-            )
+            binding_row = _common_template_projection(semantic_path, definition)
+            if binding_row is None:
+                raise ConversionError(
+                    "STRUCTURED_BINDING_MISMATCH",
+                    "Structured selector-qualified semantic_path does not match a Binding row",
+                )
+
         variant = _variant_for(binding_row, definition.driver.path)
         if variant and source_row["occurrence"] != variant:
             raise ConversionError("STRUCTURED_BINDING_MISMATCH", "Structured occurrence contradicts its selector")
+
         row = dict(source_row)
+        # Keep semantic_path/binding_path selector-qualified.  _projection_path is
+        # an internal physical-output pointer and is deliberately not a fact identity.
         row.update(
             {
-                "semantic_path": binding_row.path,
-                "binding_path": binding_row.path,
                 "sequence": f"{binding_row.sequence:04d}",
                 "level": binding_row.values["level"],
                 "type": binding_row.values["type"],
                 "id": "",
                 "name": binding_row.values["name"],
+                "_projection_path": binding_row.path,
             }
         )
         try:
@@ -2894,7 +3150,136 @@ def _materialized_detail_groups(
     return materialized, counts
 
 
-def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
+
+def _input_negative_report(options, definition, records):
+    metadata = json.loads(options.input_path.read_text(encoding="utf-8-sig"))
+    csv_path = (options.input_path.parent / next(iter(metadata["tables"].values()))["url"]).resolve()
+    coordinates = defaultdict(list)
+    with csv_path.open(encoding=options.input_encoding, newline="") as stream:
+        reader = csv.DictReader(stream)
+        reader.fieldnames  # Account for the OIM header physical line.
+        previous_line = reader.line_num
+        for number, row in enumerate(reader, 2):
+            start = previous_line + 1
+            previous_line = reader.line_num
+            if row.get("concept", "").endswith(":monetaryAmount"):
+                key = (row.get("d_cor_entryHeader", ""), row.get("d_cor_entryDetail", ""), row.get("value", ""))
+                coordinates[key].append({"oim_record_number": number, "physical_line_start": start,
+                                         "physical_line_end": previous_line})
+    contexts = defaultdict(lambda: defaultdict(list))
+    for row in records:
+        term = definition.hmd_rows.get(_hmd_lookup_path(row["semantic_path"]), {}).get("local_name", "").lower()
+        if term in {"accountnumber", "accountdescription", "entryid"}:
+            key = (row.get("entry_key", ""), row.get("source_row", ""), row.get("occurrence", ""))
+            contexts[key][term].append(row.get("value", ""))
+    detections = []
+    for row in records:
+        term = definition.hmd_rows.get(_hmd_lookup_path(row["semantic_path"]), {}).get("local_name", "").lower()
+        if term != "monetaryamount":
+            continue
+        try:
+            value = Decimal(row.get("value", "").strip())
+        except (InvalidOperation, ValueError):
+            continue
+        if not value.is_finite() or value >= 0:
+            continue
+        key = (row.get("entry_key", ""), row.get("source_row", ""), row.get("occurrence", ""))
+        context = contexts[key]
+        def one(name):
+            found = list(dict.fromkeys(context.get(name, [])))
+            return found[0] if len(found) == 1 else None
+        side = "Debit" if row["occurrence"] == "D" else "Credit" if row["occurrence"] == "C" else None
+        detections.append({"input_fact_id": len(detections) + 1,
+            "review_status": "MANUAL_REVIEW_REQUIRED", "journal_key": key[0],
+            "source_row": key[1], "occurrence": key[2], "side": side,
+            "journal_id": next(iter(contexts[(key[0], "", "HEADER")].get("entryid", [])), None),
+            "semantic_path": row["semantic_path"], "amount": row["value"],
+            "account_code": one("accountnumber"), "account_name": one("accountdescription"),
+            "account_representation": "INPUT_SEMANTIC_MODEL",
+            "oim_records": coordinates.get((key[0], key[1] + "-" + key[2], row["value"]), []),
+            "output_record_number": None})
+    return {"input_file": str(csv_path), "input_metadata": str(options.input_path.resolve()),
+        "input_negative_fact_count": len(detections), "input_detections": detections,
+        "review_status": "MANUAL_REVIEW_REQUIRED" if detections else "NO_NEGATIVE_AMOUNT",
+        "output_generated": False, "output_negative_cell_count": None, "output_detections": [],
+        "conversion_status": "INPUT_RECONSTRUCTED"}
+
+def _negative_output_report(definition, options, state, output_records, projections, header):
+    report = state["negative_amount_report"]
+    local = {row.path: definition.hmd_rows.get(_hmd_lookup_path(row.path), {}).get("local_name", "").lower()
+             for row in definition.rows}
+    fields = defaultdict(dict)
+    sides = {}
+    for row in definition.rows:
+        variant = _variant_for(row, definition.driver.path)
+        number = _column_number(row.values["column"])
+        if number is not None:
+            fields[variant][local[row.path]] = number
+        if local[row.path] == "debitcreditindicator":
+            indicator = row.values["default_value"].upper()
+            if indicator in {"D", "C"}:
+                sides[variant] = "Debit" if indicator == "D" else "Credit"
+    amount_columns = {}
+    detections = []
+    for variant, columns in fields.items():
+        if "monetaryamount" in columns:
+            amount_columns[str(columns["monetaryamount"])] = {
+                "side": sides.get(variant), "account_code_column": columns.get("accountnumber"),
+                "account_name_column": columns.get("accountdescription")}
+    for index, ((entry, group, target), projection) in enumerate(zip(output_records, projections), 1):
+        for column, facts in projection.items():
+            sources = [fact for fact in facts if
+                       definition.hmd_rows.get(_hmd_lookup_path(fact["semantic_path"]), {}).get("local_name", "").lower() == "monetaryamount"]
+            if not sources:
+                continue
+            try:
+                amount = Decimal(target[column - 1].strip())
+            except (InvalidOperation, ValueError):
+                continue
+            if not amount.is_finite() or amount >= 0:
+                continue
+            info = amount_columns[str(column)]
+            refs = sorted({d["input_fact_id"] for d in report["input_detections"] for fact in sources
+                           if (d["journal_key"], d["source_row"], d["occurrence"]) ==
+                           (fact.get("entry_key", ""), fact.get("source_row", ""), fact.get("occurrence", ""))})
+            def cell(key):
+                number = info.get(key)
+                return target[number - 1] if number else None
+            detections.append({"review_status": "MANUAL_REVIEW_REQUIRED",
+                "output_file": str(options.output_path.resolve()), "output_record_number": index + int(header is not None),
+                "output_data_record_number": index, "output_column_position": column,
+                "output_column": header[column - 1] if header else "C" + str(column),
+                "side": info["side"], "account_code": cell("account_code_column"),
+                "account_name": cell("account_name_column"), "amount": target[column - 1],
+                "journal_key": entry, "input_fact_ids": refs,
+                "source_reference": [{"source_row": fact.get("source_row"), "occurrence": fact.get("occurrence"),
+                                      "semantic_path": fact["semantic_path"]} for fact in sources]})
+    report.update({"conversion_status": "NORMALIZED_OUTPUT_GENERATED", "output_generated": True,
+        "output_representation": "NORMALIZED_CSV", "output_file": str(options.output_path.resolve()),
+        "output_negative_cell_count": len(detections), "output_detections": detections,
+        "amount_columns": amount_columns})
+
+def convert_to_flat(options):
+    state = {}
+    try:
+        summary = _convert_to_flat(options, state)
+    except ConversionError as exc:
+        if options.summary_log is not None and "negative_amount_report" in state:
+            report = state["negative_amount_report"]
+            report.update({"conversion_status": "FAILED", "output_generated": False,
+                           "output_negative_cell_count": None, "output_detections": []})
+            payload = {"status": "FAILED", "conversion_error": str(exc),
+                       "output_generated": False, "negative_amount_report": report}
+            try:
+                write_summary(options.summary_log, payload)
+            except ConversionError as report_error:
+                # Keep the original conversion exception and exit code.
+                print(str(report_error), file=sys.stderr)
+        raise
+    return summary
+
+
+def _convert_to_flat(options: ConversionOptions, state) -> ConversionSummary:
     definition = _definition(options)
     account_mapping = (
         load_account_mapping(options.account_mapping_path, options.definition_encoding)
@@ -2902,7 +3287,8 @@ def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
         else None
     )
     width = _resolved_width(definition, options.profile_width)
-    structured_rows = _read_structured(options.input_path, options.input_encoding, definition)
+    structured_rows = _read_oim_pair(options.input_path, options.input_encoding, definition)
+    state["negative_amount_report"] = _input_negative_report(options, definition, structured_rows)
     mapped_account_occurrences = 0
     ambiguous_reverse_mappings = 0
     if account_mapping is not None:
@@ -2947,11 +3333,13 @@ def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
 
     overwrite_counts: Counter[str] = Counter()
     output_records: list[tuple[str, int, list[str]]] = []
+    output_projections = []
     ordered_detail_groups, materialization_counts = _materialized_detail_groups(
         details, definition, options.materialization_mode
     )
     for (entry_key, source_row), rows in ordered_detail_groups:
         target = [""] * width
+        projection = defaultdict(list)
         ordered = [*headers.get(entry_key, [])]
         ordered.extend(
             sorted(
@@ -2964,7 +3352,8 @@ def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
             )
         )
         for structured in ordered:
-            binding_row = by_path[structured["semantic_path"]]
+            projection_path = structured.get("_projection_path") or structured["semantic_path"]
+            binding_row = by_path[projection_path]
             column = binding_row.values["column"]
             value = _transform_reverse(
                 binding_row.values["transformation"], structured["value"], definition.code_maps
@@ -2979,7 +3368,9 @@ def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
                     raise ConversionError("MATERIALIZATION_SEMANTIC_CONFLICT", "paired facts conflict in a shared target column")
                 overwrite_counts[column] += 1
             target[number - 1] = value
+            projection[number].append(dict(structured))
         output_records.append((entry_key, source_row, target))
+        output_projections.append(dict(projection))
 
     required_columns = {
         _column_number(row.values["column"])
@@ -3020,6 +3411,7 @@ def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
     output_rows = [target for _, _, target in output_records]
     output_header = _physical_header(definition, width) if options.output_header else None
     _write_flat(options.output_path, output_rows, options.output_encoding, output_header)
+    _negative_output_report(definition, options, state, output_records, output_projections, output_header)
     summary = ConversionSummary(
         source_rows=len(output_rows),
         profile_width=width,
@@ -3038,16 +3430,20 @@ def convert_to_flat(options: ConversionOptions) -> ConversionSummary:
         ambiguous_reverse_mappings=ambiguous_reverse_mappings,
         source_restored_tax_occurrences=source_restored_tax_occurrences,
         policy_regenerated_tax_occurrences=policy_regenerated_tax_occurrences,
+        negative_amount_report=state["negative_amount_report"],
     )
     if options.summary_log is not None:
         write_summary(options.summary_log, summary)
+    sidecar = {"normalized_sha256": hashlib.sha256(options.output_path.read_bytes()).hexdigest(),
+               "summary": summary.as_dict()}
+    write_summary(Path(str(options.output_path) + ".conversion-report.json"), sidecar)
     return summary
 
 
 def write_summary(path: Path, summary: ConversionSummary) -> None:
     try:
         with path.open("w", encoding="utf-8", newline="\n") as stream:
-            json.dump(summary.as_dict(), stream, ensure_ascii=False, indent=2, sort_keys=True)
+            json.dump(summary if isinstance(summary, dict) else summary.as_dict(), stream, ensure_ascii=False, indent=2, sort_keys=True)
             stream.write("\n")
     except (OSError, UnicodeError) as exc:
         raise ConversionError("SUMMARY_IO_ERROR", "summary output could not be written") from exc
@@ -3111,7 +3507,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     )
     forward.add_argument("--tax-trace-output", type=Path)
 
-    reverse = subparsers.add_parser("to-flat", help="convert Structured CSV to Flat CSV")
+    reverse = subparsers.add_parser("to-flat", help="convert a Formal OIM JSON + CSV pair to Flat CSV")
     add_common(reverse)
     reverse.add_argument("--account-tax-mapping", type=Path)
     reverse.add_argument("--output-encoding", default="utf-8")

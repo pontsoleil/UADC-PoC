@@ -1,3 +1,4 @@
+# Canonical normal-route negative report integration.
 #!/usr/bin/env python3
 """UADC CSV physical-format adapter.
 
@@ -9,6 +10,7 @@ business meaning.
 from __future__ import annotations
 
 import argparse
+from decimal import Decimal, InvalidOperation
 import csv
 import hashlib
 import io
@@ -598,7 +600,7 @@ def inspect_file(input_path: Path, profile: Profile, side: str) -> dict[str, Any
     }
 
 
-def convert(input_path: Path, output_path: Path, profile: Profile, direction: str) -> dict[str, Any]:
+def _convert(input_path: Path, output_path: Path, profile: Profile, direction: str) -> dict[str, Any]:
     if direction == "to-uadc":
         source, target = profile.application_input, profile.uadc
     elif direction == "from-uadc":
@@ -652,6 +654,61 @@ def convert(input_path: Path, output_path: Path, profile: Profile, direction: st
         "target_quoted_data_fields": target_quote_stats["quoted_data_fields"],
         "status": "PASS",
     }
+
+
+
+def convert(input_path, output_path, profile, direction):
+    result = _convert(input_path, output_path, profile, direction)
+    sidecar = Path(str(input_path) + ".conversion-report.json")
+    if direction != "from-uadc" or not sidecar.exists():
+        return result
+    payload = json.loads(sidecar.read_text(encoding="utf-8"))
+    if payload["normalized_sha256"].lower() != result["input_sha256"].lower():
+        raise AdapterError("REPORT_INPUT_MISMATCH", "conversion report does not identify this normalized CSV")
+    report = payload["summary"]["negative_amount_report"]
+    original = {(d["output_record_number"], d["output_column_position"]): d
+                for d in report["output_detections"]}
+    detections = []
+    with output_path.open(encoding=profile.application_output.encoding, newline="") as stream:
+        reader = csv.reader(stream)
+        previous = 0
+        for record_number, row in enumerate(reader, 1):
+            start = previous + 1
+            previous = reader.line_num
+            if record_number <= profile.header_rows:
+                continue
+            for column, info in report["amount_columns"].items():
+                number = int(column)
+                lexical = row[number - 1]
+                try:
+                    value = Decimal(lexical.strip())
+                except (InvalidOperation, ValueError):
+                    continue
+                if not value.is_finite() or value >= 0:
+                    continue
+                source = original.get((record_number, number))
+                if source is None:
+                    raise AdapterError("REPORT_OUTPUT_MISMATCH", "negative final cell has no conversion provenance")
+                detection = dict(source)
+                detection.update({"output_file": str(output_path.resolve()), "amount": lexical,
+                    "physical_line_start": start, "physical_line_end": previous,
+                    "physical_line_number": start if start == previous else None,
+                    "action": "ORIGINAL_NEGATIVE_AMOUNT_PRESERVED_IN_OUTPUT"})
+                for name in ("account_code", "account_name"):
+                    position = info.get(name + "_column")
+                    detection[name] = row[position - 1] if position else None
+                detections.append(detection)
+    if len(detections) != len(original):
+        raise AdapterError("REPORT_OUTPUT_MISMATCH", "reported and final negative cell sets differ")
+    report.update({"output_representation": "APPLICATION_CSV", "output_file": str(output_path.resolve()),
+                   "conversion_status": "APPLICATION_OUTPUT_GENERATED", "output_generated": True,
+                   "output_negative_cell_count": len(detections), "output_detections": detections})
+    result["negative_amount_report"] = report
+    final_summary = dict(payload["summary"])
+    final_summary["negative_amount_report"] = report
+    final_payload = {"application_sha256": result["output_sha256"], "summary": final_summary}
+    _write_report(Path(str(output_path) + ".conversion-report.json"), final_payload)
+    return result
 
 
 def _build_parser() -> argparse.ArgumentParser:
