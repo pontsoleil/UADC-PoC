@@ -61,10 +61,14 @@ Successful reverse conversion writes the existing normalised CSV and an automati
 
 Input negative-fact counts are distinct from split output-cell counts. Final cells link to input fact IDs. Embedded line breaks use physical line ranges. Existing adapter fields and exit status are retained. No conversion option, automatic sign reversal, absolute-value conversion, account replacement or test-only finalisation is introduced. Without a conversion sidecar, the adapter retains its existing behaviour.
 
-These reports contain targeted accounting values and must remain within authorised private output locations. They are not publication artefacts. Reporting adoption does not resolve missing tax classification in Formal OIM. The EPSON45 route retains the adopted 6DB HMD, sequence-aligned Binding, existing tax mappings and physical format.
+These reports contain targeted accounting values and must remain within authorised private output locations. They are not publication artefacts. The current registered independent Forward and Reverse definitions identify their adopted HMD, Binding, mappings and physical profile; historical reporting cases do not define that current conversion scope.
 
-## Published synthetic EPSON45 reporting regression
+## Independent registered conversion definitions
 
-The dedicated manifest is tests/runtime/epson/epson45-negative-report/RUN_PARAMETERS.json; the Formal CSV/JSON pair is instances/fixtures/epson45-negative-report/. It registers both normal CLI stages, relative paths, dependency SHA-256 and expected results: three negative input facts, four split output cells, final application physical rows and input provenance. Generated outputs/ files are private execution results, not publication artefacts; only the output destination may be redirected for a run.
-
-Support is limited to the synthetic reporting regression. The historical pca-to-epson, epson-roundtrip and pca-roundtrip cases remain HOLD under the current runtime. Real EPSON45 conversion remains HOLD with TAX_POLICY_UNRESOLVED due to missing classification. Actual EPSON application import has not been accepted. Legacy migration and tax-contract changes are separate work.
+[Forward](../../tests/runtime/pca/pca-xbrl-csv-arelle/RUN_PARAMETERS.json) creates
+the Formal OIM pair from PCA anonymous V17. [Reverse](../../tests/runtime/cross-format/pca-to-epson/RUN_PARAMETERS.json)
+starts from the registered pair and includes the physical adapter; Forward is
+not a prerequisite execution step. The retired synthetic reporting case and
+round trips remain historical WORK records. Generated `outputs/` diagnostics
+remain private; only their output destination may be redirected for a run.
+Actual EPSON application import is outside the accepted scope.

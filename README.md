@@ -105,7 +105,7 @@ The registered canonical locations are:
 - EPSON 45-column normalised derivative: `instances/derived/EPSON/anonymous_v17/45col/PCA_anonymous_v17_EPSON_45col.normalized.csv`
 - EPSON 45-column application derivative: `instances/derived/EPSON/anonymous_v17/45col/PCA_anonymous_v17_EPSON_45col.application.csv`
 
-`original_basis` and `evaluation_v17_basis` remain separate historical fixture identities and are not replaced by this registration.
+The retired `original_basis` and `evaluation_v17_basis` conversion-test histories are preserved in WORK; the current formal conversion definitions are the independent Forward and Reverse cases under `tests/runtime/`.
 
 ### Declared HOLD items
 
@@ -339,6 +339,10 @@ Generated files under `out/`, PDFs, CSV files, XML/XBRL, and other rendered arti
 
 See [LICENSE-SCOPE.md](LICENSE-SCOPE.md) for the boundary rules and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party sources and rights.
 
-## Synthetic Formal OIM / EPSON45 reporting acceptance
+## Independent PCA / EPSON45 conversion definitions
 
-See [the dedicated two-stage manifest](tests/runtime/epson/epson45-negative-report/RUN_PARAMETERS.json) and [public synthetic pair](instances/fixtures/epson45-negative-report/negative-formal.json). The normal conversion and physical adapter preserve the application CSV bytes and report three negative input facts as four split output cells. This is fixture reporting acceptance only. Historical pca-to-epson, epson-roundtrip and pca-roundtrip remain HOLD with the current runtime; real EPSON45 conversion remains TAX_POLICY_UNRESOLVED HOLD; actual EPSON application import has not been accepted. Neither historical-route migration nor additional tax classification is included.
+[Stage A](tests/runtime/pca/pca-xbrl-csv-arelle/RUN_PARAMETERS.json) converts PCA
+anonymous V17 to a Formal OIM CSV/JSON pair. [Stage B](tests/runtime/cross-format/pca-to-epson/RUN_PARAMETERS.json)
+uses the registered pair independently for Reverse and physical EPSON45 output;
+it does not rerun Forward. Retired conversion and synthetic-only test histories
+remain in WORK. Actual EPSON application import is outside the accepted scope.

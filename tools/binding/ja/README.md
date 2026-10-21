@@ -56,10 +56,10 @@ flat_csv.py to-flatは同一basenameのCSVを参照するFormal JSON metadataを
 
 正常時はnormalized CSVの値・分割を保持し、SHAとsource対応を<normalized CSV>.conversion-report.jsonへ保存します。通常csv_physical_adapter.py from-uadcが自動sidecarを照合し、最終application CSVの行・物理行範囲・側・列・科目・金額・input fact IDを既存--reportと<application CSV>.conversion-report.jsonへ記録します。入力fact件数と分割後cell件数は別計数し、quoted multilineは物理行範囲で表します。試験専用finalizeなし。sidecarがないadapterは既存動作を維持します。
 
-対象会計値を含むため非公開出力先で保持します。6DB HMDと税Mapping・物理形式は維持します。報告機能の採用と、税分類不足が残る実入力EPSON変換HOLDを区別します。
+対象会計値を含むため非公開出力先で保持します。現行の独立Forward／Reverse定義が採用HMD、Binding、Mapping、物理profileを示します。旧報告用caseの受入範囲を現行変換系列へ流用しません。
 
-## EPSON45 公開用合成回帰ケース
+## 独立した正式変換定義
 
-専用登録: tests/runtime/epson/epson45-negative-report/RUN_PARAMETERS.json。Formal CSV/JSON fixture: instances/fixtures/epson45-negative-report/。両段階の通常CLIと相対パス・依存SHA・期待結果をmanifestへ登録。負数3 factから分割後4セル、最終application CSVの物理行と入力識別対応を検証。生成先outputs/は公開成果物ではなく、必要なら出力先だけ変更して実行する。
-
-対応範囲は合成fixtureの報告回帰。旧pca-to-epson/epson-roundtrip/pca-roundtripは過去受入再現記録の現行HOLDで、現行成功経路とは扱わない。実入力EPSON45は税分類不足TAX_POLICY_UNRESOLVEDのHOLD。実EPSONアプリ取込は未受入。旧経路移行・税分類補完は別変更。
+[工程A](../../../tests/runtime/pca/pca-xbrl-csv-arelle/RUN_PARAMETERS.json)はPCA匿名V17からFormal OIMペアを生成します。
+[工程B](../../../tests/runtime/cross-format/pca-to-epson/RUN_PARAMETERS.json)は登録済みペアを入力にReverseと物理Adapterを実行し、Forward再実行を前提としません。
+旧合成報告case・往復変換の履歴はWORKに保全します。`outputs/`の診断結果は非公開のWORK出力とし、実行時の出力先だけ変更できます。EPSONアプリ実機取込は受入範囲外です。
