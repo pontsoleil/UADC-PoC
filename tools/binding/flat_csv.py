@@ -99,6 +99,8 @@ ACCOUNT_MAPPING_FIELDS = (
     "eTax_Account_Name",
     "eTax_Category",
 )
+ACCOUNT_CLASSIFICATION_FIELD = "TaxTransactionClassification"
+ACCOUNT_MAPPING_FIELDS_EXTENDED = (*ACCOUNT_MAPPING_FIELDS, ACCOUNT_CLASSIFICATION_FIELD)
 ACCOUNT_TAX_MAPPING_FIELDS = (
     "source_account_code",
     "source_account_name",
@@ -230,6 +232,7 @@ class ConversionOptions:
     tax_reverse_mode: str = "policy_regeneration"
     tax_policy_classification: str = ""
     columns_path: Path | None = None
+    tax_inclusion: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -304,7 +307,7 @@ class Definition:
 
 @dataclass(frozen=True)
 class AccountMapping:
-    by_source: Mapping[tuple[str, str], Mapping[str, str]]
+    by_source: Mapping[tuple[str, str, str], Mapping[str, str]]
     by_target: Mapping[tuple[str, str], Mapping[str, str]]
 
 
@@ -810,20 +813,24 @@ def load_profile_pair(profile_dir: Path) -> ProfilePair:
 
 
 def load_account_mapping(path: Path, encoding: str = "utf-8-sig") -> AccountMapping:
-    by_source: dict[tuple[str, str], dict[str, str]] = {}
+    by_source: dict[tuple[str, str, str], dict[str, str]] = {}
     by_target: dict[tuple[str, str], dict[str, str]] = {}
     source_codes: set[str] = set()
     target_codes: set[str] = set()
     try:
         with path.open(newline="", encoding=encoding) as stream:
             reader = csv.DictReader(stream)
-            if tuple(reader.fieldnames or ()) != ACCOUNT_MAPPING_FIELDS:
+            fields = tuple(reader.fieldnames or ())
+            if fields not in {ACCOUNT_MAPPING_FIELDS, ACCOUNT_MAPPING_FIELDS_EXTENDED}:
                 raise ConversionError(
                     "ACCOUNT_MAPPING_HEADER_INVALID",
                     "Account Mapping header must exactly match the canonical six columns",
                 )
             for source in reader:
-                row = {field: (source.get(field) or "").strip() for field in ACCOUNT_MAPPING_FIELDS}
+                row = {field: (source.get(field) or "").strip() for field in fields}
+                classification = row.get(ACCOUNT_CLASSIFICATION_FIELD, "")
+                if classification not in {"", "Sales", "Purchase"}:
+                    raise ConversionError("ACCOUNT_CLASSIFICATION_INVALID", "account classification must be Sales, Purchase or blank")
                 if any(not row[field] for field in ACCOUNT_MAPPING_FIELDS):
                     raise ConversionError(
                         "ACCOUNT_MAPPING_ROW_INVALID", "Account Mapping values must not be empty"
@@ -834,12 +841,11 @@ def load_account_mapping(path: Path, encoding: str = "utf-8-sig") -> AccountMapp
                         "ACCOUNT_MAPPING_EXTENSION_INVALID",
                         "an eTax account extension must be a positive integer suffix",
                     )
-                source_key = (row["Account_Code"], row["Account_Name"])
+                source_key = (row["Account_Code"], row["Account_Name"], target_code)
                 target_key = (target_code, row["eTax_Account_Name"])
-                if row["Account_Code"] in source_codes:
-                    raise ConversionError(
-                        "ACCOUNT_MAPPING_DUPLICATE", "DUPLICATE ACCOUNT CODE CONFLICT"
-                    )
+                # An EPSON application code can be shared by multiple NTA codes.
+                # Reverse lookup NTA -> EPSON is uniquely keyed by target_code;
+                # EPSON -> NTA is checked for ambiguity at its point of use.
                 if (
                     target_code in target_codes
                     or source_key in by_source
@@ -847,7 +853,7 @@ def load_account_mapping(path: Path, encoding: str = "utf-8-sig") -> AccountMapp
                 ):
                     raise ConversionError(
                         "ACCOUNT_MAPPING_DUPLICATE",
-                        "Account Mapping source and target account codes must each be unique",
+                        "Account Mapping NTA code and exact mapping keys must be unique",
                     )
                 source_codes.add(row["Account_Code"])
                 target_codes.add(target_code)
@@ -1679,7 +1685,7 @@ def _materialize_selector_facts(
 def _source_account_mapping_match(
     mapping: AccountMapping, account_code: str
 ) -> Mapping[str, str] | None:
-    candidates = [row for (code, _), row in mapping.by_source.items() if code == account_code]
+    candidates = [row for (code, _, _), row in mapping.by_source.items() if code == account_code]
     if len(candidates) > 1:
         raise ConversionError("ACCOUNT_MAPPING_DUPLICATE", "DUPLICATE ACCOUNT CODE CONFLICT")
     return candidates[0] if candidates else None
@@ -1750,6 +1756,7 @@ def _apply_account_mapping_reverse(
 ) -> tuple[list[dict[str, str]], int, int]:
     mapped = [dict(row) for row in records]
     mapped_count = 0
+    classifications: dict[tuple[str, str, str], str] = {}
     for rows in _account_record_groups(mapped):
         number = _unique_named_record(rows, "accountNumber")
         description = _unique_named_record(rows, "accountDescription")
@@ -1784,13 +1791,18 @@ def _apply_account_mapping_reverse(
                 "ACCOUNT_MAPPING_REVERSE_UNRESOLVED",
                 "an account occurrence is absent from the reverse Account Mapping",
             )
+        # The input account is an NTA/eTax identity. Carry the classification
+        # from this exact governed target-side mapping row before rewriting the
+        # account to its application-specific EPSON identity.
+        occurrence_key = (number.get("entry_key", ""), number.get("source_row", ""), number.get("occurrence", ""))
+        classifications[occurrence_key] = (match.get(ACCOUNT_CLASSIFICATION_FIELD) or "").strip()
         number["value"] = match["Account_Code"]
         description["value"] = match["Account_Name"]
         mapped_count += 1
     retained = [
         row for row in mapped if ACCOUNT_SUBACCOUNT_SELECTOR not in row.get("semantic_path", "")
     ]
-    return retained, mapped_count, 0
+    return retained, mapped_count, 0, classifications
 
 
 def load_standard_tax_mapping(
@@ -2143,7 +2155,10 @@ def _apply_standard_tax_reverse(
     traces: Sequence[dict[str, str]],
     definition: Definition,
     policy_classification: str = "",
+    tax_inclusion_mode: str = "tax-exclusive",
+    account_classifications: Mapping[tuple[str, str, str], str] | None = None,
     account_tax_rules: Mapping[tuple[str, str, str, str], AccountTaxRule] | None = None,
+    debug_capture: dict | None = None,
 ) -> tuple[list[dict[str, str]], int, int]:
     mapped = [dict(row) for row in records]
     account_by_occurrence = _account_context(mapped)
@@ -2190,11 +2205,37 @@ def _apply_standard_tax_reverse(
                 category.get("occurrence", ""),
             )
             account = account_by_occurrence.get(occurrence_key)
+            # Classification was obtained from the exact NTA-to-EPSON
+            # Account Mapping match before the account values were replaced.
+            # Never treat a coincidentally equal NTA and EPSON code as the
+            # same code system, and never infer classification from D/C.
+            by_account = (account_classifications or {}).get(occurrence_key, "")
+            if by_account and classification and by_account != classification:
+                raise ConversionError("TAX_CLASSIFICATION_CONFLICT", "account classification conflicts with explicit policy")
+            if by_account:
+                classification = by_account
             account_rule = None
-            if account is not None and account_tax_rules is not None and tax_table_code:
-                account_rule = account_tax_rules.get(
-                    (account[0], account[1], tax_table_code, category["value"])
-                )
+            if account is not None and account_tax_rules is not None:
+                # Governed non-VAT exceptions live in ACCOUNT_TAX_MAPPING.
+                # The current EPSON Binding does not carry TaxTableCode as a
+                # separate fact. Match the approved account + category keys;
+                # validate TaxTableCode when a selector/fact does provide it.
+                # Never infer a tax type or choose between competing exceptions.
+                matching_account_rules = [
+                    candidate
+                    for candidate in account_tax_rules.values()
+                    if candidate.source_account_code == account[0]
+                    and candidate.source_account_name == account[1]
+                    and candidate.tax_category == category["value"]
+                    and (not tax_table_code or candidate.tax_table_code == tax_table_code)
+                ]
+                if len(matching_account_rules) > 1:
+                    raise ConversionError(
+                        "ACCOUNT_TAX_MAPPING_AMBIGUOUS",
+                        "multiple governed account-specific tax policies match one occurrence",
+                    )
+                if matching_account_rules:
+                    account_rule = matching_account_rules[0]
             if account_rule is not None:
                 if classification or ratio:
                     raise ConversionError(
@@ -2206,14 +2247,82 @@ def _apply_standard_tax_reverse(
                     remove_ids.add(id(rate))
                 regenerated += 1
                 continue
+            if category["value"] in {"S", "AA", "E"} and not classification:
+                raise ConversionError("TAX_CLASSIFICATION_UNRESOLVED", "S/AA/E occurrence lacks an approved Sales/Purchase account mapping")
             candidates = [
                 rule
                 for rule in rules
-                if rule.tax_category == category["value"]
+                if (
+                    rule.mapping_status == "ACCEPTED"
+                    or (
+                        category["value"] == "O"
+                        and rule.mapping_status == "ACCEPTED_EXPLICIT_OUT_OF_SCOPE"
+                        and rule.application_tax_code == "00"
+                        and rule.tax_category == "O"
+                        and rule.tax_inclusion_mode == "out-of-scope"
+                    )
+                )
+                and rule.tax_category == category["value"]
                 and rule.tax_rate_ratio == ratio
-                and rule.transaction_classification == classification
+                and (
+                    rule.transaction_classification == classification
+                    or (
+                        category["value"] == "O"
+                        and rule.application_tax_code == "00"
+                        and rule.tax_category == "O"
+                        and rule.mapping_status == "ACCEPTED_EXPLICIT_OUT_OF_SCOPE"
+                        and rule.transaction_classification == ""
+                    )
+                )
+                and rule.tax_inclusion_mode in {tax_inclusion_mode, "non-taxable", "out-of-scope"}
             ]
             if not candidates:
+                if debug_capture is not None:
+                    # Diagnostic only: do not modify the rule selection or source facts.
+                    debug_capture["tax_policy_debug"] = {
+                        "error": "TAX_POLICY_UNRESOLVED",
+                        "entry_key": category.get("entry_key", ""),
+                        "source_row": category.get("source_row", ""),
+                        "occurrence": category.get("occurrence", ""),
+                        "semantic_path": category.get("semantic_path", ""),
+                        "account_code": account[0] if account is not None else "",
+                        "account_name": account[1] if account is not None else "",
+                        "tax_type": _tax_selector_semantic_value(rows, TAX_TYPE_SUFFIX) if "TAX_TYPE_SUFFIX" in globals() else "",
+                        "tax_category": category["value"],
+                        "tax_rate_ratio": ratio,
+                        "tax_inclusion_mode": tax_inclusion_mode,
+                        "transaction_classification": classification,
+                        "tax_table_code": tax_table_code,
+                        "candidate_checks": [
+                            {
+                                "mapping_line": rule.line_number,
+                                "application_tax_code": rule.application_tax_code,
+                                "mapping_status": rule.mapping_status,
+                                "category_match": rule.tax_category == category["value"],
+                                "rate_match": rule.tax_rate_ratio == ratio,
+                                "classification_match": (
+                                    rule.transaction_classification == classification
+                                    or (category["value"] == "O"
+                                        and rule.application_tax_code == "00"
+                                        and rule.tax_category == "O"
+                                        and rule.mapping_status == "ACCEPTED_EXPLICIT_OUT_OF_SCOPE"
+                                        and rule.transaction_classification == "")
+                                ),
+                                "inclusion_match": rule.tax_inclusion_mode in {
+                                    tax_inclusion_mode, "non-taxable", "out-of-scope"
+                                },
+                                "status_eligible": (
+                                    rule.mapping_status == "ACCEPTED"
+                                    or (category["value"] == "O"
+                                        and rule.mapping_status == "ACCEPTED_EXPLICIT_OUT_OF_SCOPE"
+                                        and rule.application_tax_code == "00"
+                                        and rule.tax_category == "O"
+                                        and rule.tax_inclusion_mode == "out-of-scope")
+                                ),
+                            }
+                            for rule in rules
+                        ],
+                    }
                 raise ConversionError("TAX_POLICY_UNRESOLVED", "canonical tax facts lack a reverse policy")
             selected = sorted(candidates, key=lambda rule: (rule.reverse_priority, rule.line_number))[0]
             best = [rule for rule in candidates if rule.reverse_priority == selected.reverse_priority]
@@ -2409,6 +2518,18 @@ def convert_to_structured(options: ConversionOptions) -> ConversionSummary:
             "OIM_TAXONOMY_REQUIRED",
             "to-structured always emits a Formal OIM CSV+JSON pair and requires a taxonomy entrypoint",
         )
+    if options.tax_inclusion is not None:
+        document_path = "$.cor_AccountingEntries.cor_DocumentInformation.cor_TaxInclusion"
+        document_def = definition.hmd_rows.get(document_path)
+        if (document_def is None or (document_def.get("datatype") or "").lower() != "boolean"
+            or (document_def.get("type") or "").upper() != "A"):
+            raise ConversionError("TAX_INCLUSION_HMD_INVALID", "DocumentInformation TaxInclusion must be a Boolean HMD Attribute")
+        records.append(_hmd_structured_record(
+            definition, document_path,
+            {"entry_key": "", "source_row": "", "occurrence": "ROOT"},
+            "true" if options.tax_inclusion else "false",
+        ))
+
     records, dimension_columns, modules = _oim_records(records, definition, options.currency)
     _write_oim_pair(
         options.output_path,
@@ -2822,7 +2943,8 @@ def _common_template_projection(
 
 
 def _validated_structured_rows(
-    rows: Sequence[dict[str, str]], definition: Definition
+    rows: Sequence[dict[str, str]], definition: Definition,
+    debug_capture: dict | None = None,
 ) -> tuple[dict[str, list[dict[str, str]]], dict[tuple[str, int], list[dict[str, str]]]]:
     """Validate semantic rows without collapsing their D/C occurrence identity.
 
@@ -2860,10 +2982,13 @@ def _validated_structured_rows(
                 continue
             binding_row = _common_template_projection(semantic_path, definition)
             if binding_row is None:
-                raise ConversionError(
-                    "STRUCTURED_BINDING_MISMATCH",
-                    "Structured selector-qualified semantic_path does not match a Binding row",
-                )
+                # Input facts without target Binding entries are not physical outputs.
+                # Keep source fact identity and values unchanged in the Formal OIM pair.
+                # Required target Binding rows and their validators remain authoritative.
+                if debug_capture is not None:
+                    unprojected = debug_capture.setdefault("unprojected_facts", {})
+                    unprojected[semantic_path] = unprojected.get(semantic_path, 0) + 1
+                continue
 
         variant = _variant_for(binding_row, definition.driver.path)
         if variant and source_row["occurrence"] != variant:
@@ -3270,6 +3395,12 @@ def convert_to_flat(options):
                            "output_negative_cell_count": None, "output_detections": []})
             payload = {"status": "FAILED", "conversion_error": str(exc),
                        "output_generated": False, "negative_amount_report": report}
+            if options.debug and "tax_policy_debug" in state:
+                payload["tax_policy_debug"] = state["tax_policy_debug"]
+            if options.debug and "structured_binding_debug" in state:
+                payload["structured_binding_debug"] = state["structured_binding_debug"]
+            if options.debug and "unprojected_facts" in state:
+                payload["unprojected_facts"] = state["unprojected_facts"]
             try:
                 write_summary(options.summary_log, payload)
             except ConversionError as report_error:
@@ -3288,11 +3419,25 @@ def _convert_to_flat(options: ConversionOptions, state) -> ConversionSummary:
     )
     width = _resolved_width(definition, options.profile_width)
     structured_rows = _read_oim_pair(options.input_path, options.input_encoding, definition)
+    document_path = "$.cor_AccountingEntries.cor_DocumentInformation.cor_TaxInclusion"
+    inclusion_rows = [row for row in structured_rows if _hmd_lookup_path(row.get("semantic_path", "")) == document_path]
+    if len(inclusion_rows) > 1:
+        raise ConversionError("TAX_INCLUSION_AMBIGUOUS", "DocumentInformation contains multiple taxInclusion facts")
+    if inclusion_rows:
+        value = (inclusion_rows[0].get("value") or "").strip().lower()
+        if value not in {"true", "false", "1", "0"}:
+            raise ConversionError("TAX_INCLUSION_INVALID", "DocumentInformation taxInclusion must be Boolean")
+        tax_inclusion_mode = "tax-inclusive" if value in {"true", "1"} else "tax-exclusive"
+    else:
+        tax_inclusion_mode = "tax-exclusive"
+    # DocumentInformation taxInclusion has no EPSON physical Binding column.
+    structured_rows = [row for row in structured_rows if row not in inclusion_rows]
     state["negative_amount_report"] = _input_negative_report(options, definition, structured_rows)
     mapped_account_occurrences = 0
     ambiguous_reverse_mappings = 0
+    account_classifications: dict[tuple[str, str, str], str] = {}
     if account_mapping is not None:
-        structured_rows, mapped_account_occurrences, ambiguous_reverse_mappings = (
+        structured_rows, mapped_account_occurrences, ambiguous_reverse_mappings, account_classifications = (
             _apply_account_mapping_reverse(structured_rows, account_mapping)
         )
     account_tax_rules = (
@@ -3324,10 +3469,15 @@ def _convert_to_flat(options: ConversionOptions, state) -> ConversionSummary:
                 trace_rows,
                 definition,
                 options.tax_policy_classification,
+                tax_inclusion_mode,
+                account_classifications,
                 account_tax_rules,
+                state if options.debug else None,
             )
         )
-    headers, details = _validated_structured_rows(structured_rows, definition)
+    headers, details = _validated_structured_rows(
+        structured_rows, definition, state if options.debug else None
+    )
     by_path = {row.path: row for row in definition.rows}
     variant_rank = {variant: index for index, variant in enumerate(definition.variants)}
 
@@ -3433,7 +3583,12 @@ def _convert_to_flat(options: ConversionOptions, state) -> ConversionSummary:
         negative_amount_report=state["negative_amount_report"],
     )
     if options.summary_log is not None:
-        write_summary(options.summary_log, summary)
+        if options.debug:
+            payload = summary.as_dict()
+            payload["unprojected_facts"] = dict(sorted(state.get("unprojected_facts", {}).items()))
+            write_summary(options.summary_log, payload)
+        else:
+            write_summary(options.summary_log, summary)
     sidecar = {"normalized_sha256": hashlib.sha256(options.output_path.read_bytes()).hexdigest(),
                "summary": summary.as_dict()}
     write_summary(Path(str(options.output_path) + ".conversion-report.json"), sidecar)
@@ -3506,6 +3661,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         help="write positions of populated physical cells outside the HMD/Binding model",
     )
     forward.add_argument("--tax-trace-output", type=Path)
+    forward.add_argument("--tax-inclusion", choices=("true", "false"),
+                         help="DocumentInformation taxInclusion; omit to leave the fact absent")
 
     reverse = subparsers.add_parser("to-flat", help="convert a Formal OIM JSON + CSV pair to Flat CSV")
     add_common(reverse)
@@ -3582,6 +3739,8 @@ def _options_from_args(args: argparse.Namespace) -> ConversionOptions:
         tax_trace_input=getattr(args, "tax_trace_input", None),
         tax_reverse_mode=getattr(args, "tax_reverse_mode", "policy_regeneration"),
         tax_policy_classification=getattr(args, "tax_policy_classification", ""),
+        tax_inclusion=({"true": True, "false": False}[args.tax_inclusion]
+                       if getattr(args, "tax_inclusion", None) is not None else None),
     )
 
 

@@ -8,97 +8,188 @@
   <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/gen" schemaLocation="../gen/gl-gen-2026-12-31.xsd"/>
   <!-- reusable OIM Attribute item type -->
-  <complexType name="multicurrencyExchangeRateDateItemType">
+  <complexType name="headerExchangeRateDateItemType">
     <simpleContent>
       <restriction base="xbrli:dateTimeItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyForeignCurrencyAmountItemType">
+  <complexType name="headerForeignCurrencyAmountItemType">
     <simpleContent>
       <restriction base="xbrli:monetaryItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyForeignCurrencyItemType">
+  <complexType name="headerForeignCurrencyItemType">
     <simpleContent>
       <restriction base="xbrli:QNameItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyExchangeRateItemType">
+  <complexType name="headerExchangeRateItemType">
     <simpleContent>
       <restriction base="xbrli:pureItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyExchangeRateSourceItemType">
+  <complexType name="headerExchangeRateSourceItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyExchangeRateTypeItemType">
+  <complexType name="headerExchangeRateTypeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyTriangulationCurrencyAmountItemType">
+  <complexType name="headerMulticurrencyCommentItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="headerTriangulationCurrencyAmountItemType">
     <simpleContent>
       <restriction base="xbrli:monetaryItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyTriangulationCurrencyItemType">
+  <complexType name="headerTriangulationCurrencyItemType">
     <simpleContent>
       <restriction base="xbrli:QNameItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyTriangulationExchangeRateItemType">
+  <complexType name="headerTriangulationExchangeRateItemType">
     <simpleContent>
       <restriction base="xbrli:pureItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyTriangulationExchangeRateSourceItemType">
+  <complexType name="headerTriangulationExchangeRateSourceItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyTriangulationExchangeRateTypeItemType">
+  <complexType name="headerTriangulationExchangeRateTypeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyCrossTriangulationExchangeRateItemType">
+  <complexType name="headerCrossTriangulationExchangeRateItemType">
     <simpleContent>
       <restriction base="xbrli:pureItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyCrossTriangulationExchangeRateSourceItemType">
+  <complexType name="headerCrossTriangulationExchangeRateSourceItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyCrossTriangulationExchangeRateTypeItemType">
+  <complexType name="headerCrossTriangulationExchangeRateTypeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="multicurrencyCommentItemType">
+  <complexType name="detailExchangeRateDateItemType">
+    <simpleContent>
+      <restriction base="xbrli:dateTimeItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailForeignCurrencyAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailForeignCurrencyItemType">
+    <simpleContent>
+      <restriction base="xbrli:QNameItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailExchangeRateItemType">
+    <simpleContent>
+      <restriction base="xbrli:pureItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailExchangeRateSourceItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailExchangeRateTypeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailCommentItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailTriangulationCurrencyAmountItemType">
+    <simpleContent>
+      <restriction base="xbrli:monetaryItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailTriangulationCurrencyItemType">
+    <simpleContent>
+      <restriction base="xbrli:QNameItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailTriangulationExchangeRateItemType">
+    <simpleContent>
+      <restriction base="xbrli:pureItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailTriangulationExchangeRateSourceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailTriangulationExchangeRateTypeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailCrossTriangulationExchangeRateItemType">
+    <simpleContent>
+      <restriction base="xbrli:pureItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailCrossTriangulationExchangeRateSourceItemType">
+    <simpleContent>
+      <restriction base="xbrli:stringItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="detailCrossTriangulationExchangeRateTypeItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
   <!-- reusable OIM Attribute item element -->
-  <element name="multicurrencyExchangeRateDate" id="muc_multicurrencyExchangeRateDate" type="muc:multicurrencyExchangeRateDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyForeignCurrencyAmount" id="muc_multicurrencyForeignCurrencyAmount" type="muc:multicurrencyForeignCurrencyAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyForeignCurrency" id="muc_multicurrencyForeignCurrency" type="muc:multicurrencyForeignCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyExchangeRate" id="muc_multicurrencyExchangeRate" type="muc:multicurrencyExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyExchangeRateSource" id="muc_multicurrencyExchangeRateSource" type="muc:multicurrencyExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyExchangeRateType" id="muc_multicurrencyExchangeRateType" type="muc:multicurrencyExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyTriangulationCurrencyAmount" id="muc_multicurrencyTriangulationCurrencyAmount" type="muc:multicurrencyTriangulationCurrencyAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyTriangulationCurrency" id="muc_multicurrencyTriangulationCurrency" type="muc:multicurrencyTriangulationCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyTriangulationExchangeRate" id="muc_multicurrencyTriangulationExchangeRate" type="muc:multicurrencyTriangulationExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyTriangulationExchangeRateSource" id="muc_multicurrencyTriangulationExchangeRateSource" type="muc:multicurrencyTriangulationExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyTriangulationExchangeRateType" id="muc_multicurrencyTriangulationExchangeRateType" type="muc:multicurrencyTriangulationExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyCrossTriangulationExchangeRate" id="muc_multicurrencyCrossTriangulationExchangeRate" type="muc:multicurrencyCrossTriangulationExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyCrossTriangulationExchangeRateSource" id="muc_multicurrencyCrossTriangulationExchangeRateSource" type="muc:multicurrencyCrossTriangulationExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyCrossTriangulationExchangeRateType" id="muc_multicurrencyCrossTriangulationExchangeRateType" type="muc:multicurrencyCrossTriangulationExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="multicurrencyComment" id="muc_multicurrencyComment" type="muc:multicurrencyCommentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerExchangeRateDate" id="muc_headerExchangeRateDate" type="muc:headerExchangeRateDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerForeignCurrencyAmount" id="muc_headerForeignCurrencyAmount" type="muc:headerForeignCurrencyAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerForeignCurrency" id="muc_headerForeignCurrency" type="muc:headerForeignCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerExchangeRate" id="muc_headerExchangeRate" type="muc:headerExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerExchangeRateSource" id="muc_headerExchangeRateSource" type="muc:headerExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerExchangeRateType" id="muc_headerExchangeRateType" type="muc:headerExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerMulticurrencyComment" id="muc_headerMulticurrencyComment" type="muc:headerMulticurrencyCommentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerTriangulationCurrencyAmount" id="muc_headerTriangulationCurrencyAmount" type="muc:headerTriangulationCurrencyAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerTriangulationCurrency" id="muc_headerTriangulationCurrency" type="muc:headerTriangulationCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerTriangulationExchangeRate" id="muc_headerTriangulationExchangeRate" type="muc:headerTriangulationExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerTriangulationExchangeRateSource" id="muc_headerTriangulationExchangeRateSource" type="muc:headerTriangulationExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerTriangulationExchangeRateType" id="muc_headerTriangulationExchangeRateType" type="muc:headerTriangulationExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerCrossTriangulationExchangeRate" id="muc_headerCrossTriangulationExchangeRate" type="muc:headerCrossTriangulationExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerCrossTriangulationExchangeRateSource" id="muc_headerCrossTriangulationExchangeRateSource" type="muc:headerCrossTriangulationExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="headerCrossTriangulationExchangeRateType" id="muc_headerCrossTriangulationExchangeRateType" type="muc:headerCrossTriangulationExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailExchangeRateDate" id="muc_detailExchangeRateDate" type="muc:detailExchangeRateDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailForeignCurrencyAmount" id="muc_detailForeignCurrencyAmount" type="muc:detailForeignCurrencyAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailForeignCurrency" id="muc_detailForeignCurrency" type="muc:detailForeignCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailExchangeRate" id="muc_detailExchangeRate" type="muc:detailExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailExchangeRateSource" id="muc_detailExchangeRateSource" type="muc:detailExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailExchangeRateType" id="muc_detailExchangeRateType" type="muc:detailExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailComment" id="muc_detailComment" type="muc:detailCommentItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailTriangulationCurrencyAmount" id="muc_detailTriangulationCurrencyAmount" type="muc:detailTriangulationCurrencyAmountItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailTriangulationCurrency" id="muc_detailTriangulationCurrency" type="muc:detailTriangulationCurrencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailTriangulationExchangeRate" id="muc_detailTriangulationExchangeRate" type="muc:detailTriangulationExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailTriangulationExchangeRateSource" id="muc_detailTriangulationExchangeRateSource" type="muc:detailTriangulationExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailTriangulationExchangeRateType" id="muc_detailTriangulationExchangeRateType" type="muc:detailTriangulationExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailCrossTriangulationExchangeRate" id="muc_detailCrossTriangulationExchangeRate" type="muc:detailCrossTriangulationExchangeRateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailCrossTriangulationExchangeRateSource" id="muc_detailCrossTriangulationExchangeRateSource" type="muc:detailCrossTriangulationExchangeRateSourceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="detailCrossTriangulationExchangeRateType" id="muc_detailCrossTriangulationExchangeRateType" type="muc:detailCrossTriangulationExchangeRateTypeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <!-- reusable OIM Class primary-item anchor -->
+  <element name="p_muc_headerMulticurrency" id="p_muc_headerMulticurrency" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
   <element name="p_muc_detailMulticurrency" id="p_muc_detailMulticurrency" substitutionGroup="xbrli:item" type="xbrli:stringItemType" nillable="true" xbrli:periodType="instant"/>
 </schema>

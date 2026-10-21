@@ -21,10 +21,9 @@
   "tableTemplates": {
     "structured": {
       "dimensions": {
-        "period": "2022-03-31T24:00:00",
+        "period": "2022-04-01T00:00:00",
         "entity": "scheme:ABC-SHOTEN",
         "plt:d_cor_accountingEntries": "$d_cor_accountingEntries",
-        "plt:d_cor_detailAccountIdentifier": "$d_cor_detailAccountIdentifier",
         "plt:d_cor_detailTax": "$d_cor_detailTax",
         "plt:d_cor_entryDetail": "$d_cor_entryDetail",
         "plt:d_cor_entryHeader": "$d_cor_entryHeader",
@@ -40,7 +39,6 @@
           }
         },
         "d_cor_accountingEntries": {},
-        "d_cor_detailAccountIdentifier": {},
         "d_cor_detailTax": {},
         "d_cor_entryDetail": {},
         "d_cor_entryHeader": {},

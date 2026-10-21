@@ -7,23 +7,43 @@
   <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
   <include schemaLocation="../../muc/muc-2026-12-31.xsd"/>
   <!-- structural ComplexType supplied for the Palette module -->
+  <complexType name="headerMulticurrencyComplexType">
+    <sequence>
+      <element ref="muc:headerExchangeRateDate" minOccurs="0"/>
+      <element ref="muc:headerForeignCurrencyAmount" minOccurs="0"/>
+      <element ref="muc:headerForeignCurrency" minOccurs="0"/>
+      <element ref="muc:headerExchangeRate" minOccurs="0"/>
+      <element ref="muc:headerExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:headerExchangeRateType" minOccurs="0"/>
+      <element ref="muc:headerMulticurrencyComment" minOccurs="0"/>
+      <element ref="muc:headerTriangulationCurrencyAmount" minOccurs="0"/>
+      <element ref="muc:headerTriangulationCurrency" minOccurs="0"/>
+      <element ref="muc:headerTriangulationExchangeRate" minOccurs="0"/>
+      <element ref="muc:headerTriangulationExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:headerTriangulationExchangeRateType" minOccurs="0"/>
+      <element ref="muc:headerCrossTriangulationExchangeRate" minOccurs="0"/>
+      <element ref="muc:headerCrossTriangulationExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:headerCrossTriangulationExchangeRateType" minOccurs="0"/>
+    </sequence>
+    <attribute name="id" type="ID"/>
+  </complexType>
   <complexType name="detailMulticurrencyComplexType">
     <sequence>
-      <element ref="muc:multicurrencyExchangeRateDate" minOccurs="0"/>
-      <element ref="muc:multicurrencyForeignCurrencyAmount" minOccurs="0"/>
-      <element ref="muc:multicurrencyForeignCurrency" minOccurs="0"/>
-      <element ref="muc:multicurrencyExchangeRate" minOccurs="0"/>
-      <element ref="muc:multicurrencyExchangeRateSource" minOccurs="0"/>
-      <element ref="muc:multicurrencyExchangeRateType" minOccurs="0"/>
-      <element ref="muc:multicurrencyTriangulationCurrencyAmount" minOccurs="0"/>
-      <element ref="muc:multicurrencyTriangulationCurrency" minOccurs="0"/>
-      <element ref="muc:multicurrencyTriangulationExchangeRate" minOccurs="0"/>
-      <element ref="muc:multicurrencyTriangulationExchangeRateSource" minOccurs="0"/>
-      <element ref="muc:multicurrencyTriangulationExchangeRateType" minOccurs="0"/>
-      <element ref="muc:multicurrencyCrossTriangulationExchangeRate" minOccurs="0"/>
-      <element ref="muc:multicurrencyCrossTriangulationExchangeRateSource" minOccurs="0"/>
-      <element ref="muc:multicurrencyCrossTriangulationExchangeRateType" minOccurs="0"/>
-      <element ref="muc:multicurrencyComment" minOccurs="0"/>
+      <element ref="muc:detailExchangeRateDate" minOccurs="0"/>
+      <element ref="muc:detailForeignCurrencyAmount" minOccurs="0"/>
+      <element ref="muc:detailForeignCurrency" minOccurs="0"/>
+      <element ref="muc:detailExchangeRate" minOccurs="0"/>
+      <element ref="muc:detailExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:detailExchangeRateType" minOccurs="0"/>
+      <element ref="muc:detailComment" minOccurs="0"/>
+      <element ref="muc:detailTriangulationCurrencyAmount" minOccurs="0"/>
+      <element ref="muc:detailTriangulationCurrency" minOccurs="0"/>
+      <element ref="muc:detailTriangulationExchangeRate" minOccurs="0"/>
+      <element ref="muc:detailTriangulationExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:detailTriangulationExchangeRateType" minOccurs="0"/>
+      <element ref="muc:detailCrossTriangulationExchangeRate" minOccurs="0"/>
+      <element ref="muc:detailCrossTriangulationExchangeRateSource" minOccurs="0"/>
+      <element ref="muc:detailCrossTriangulationExchangeRateType" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>

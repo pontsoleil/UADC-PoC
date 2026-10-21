@@ -14,32 +14,32 @@
   <import namespace="http://xbrl.org/2005/xbrldt" schemaLocation="http://www.xbrl.org/2005/xbrldt-2005.xsd"/>
   <import namespace="https://www.xbrl.or.jp/taxonomy/xbrl-gl-next/gen" schemaLocation="../gen/gl-gen-2026-12-31.xsd"/>
   <!-- reusable item type -->
-  <complexType name="partyPhoneNumberItemType">
+  <complexType name="entityPartyPhoneNumberItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="partyPhoneNumberDescriptionItemType">
+  <complexType name="entityPartyPhoneNumberDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="partyFaxNumberItemType">
+  <complexType name="entityPartyFaxNumberItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="partyFaxNumberUsageItemType">
+  <complexType name="entityPartyFaxNumberUsageItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="partyEmailAddressItemType">
+  <complexType name="entityPartyEmailAddressItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="partyEmailAddressUsageItemType">
+  <complexType name="entityPartyEmailAddressUsageItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
@@ -209,32 +209,32 @@
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="accountingMethodItemType">
+  <complexType name="specifiedAccountingMethodItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="accountingMethodDescriptionItemType">
+  <complexType name="specifiedAccountingMethodDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="accountingMethodPurposeItemType">
+  <complexType name="specifiedAccountingMethodPurposeItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="accountingMethodPurposeDescriptionItemType">
+  <complexType name="specifiedAccountingMethodPurposeDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="accountingMethodStartDateItemType">
+  <complexType name="specifiedAccountingMethodStartDateItemType">
     <simpleContent>
       <restriction base="xbrli:dateTimeItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="accountingMethodEndDateItemType">
+  <complexType name="specifiedAccountingMethodEndDateItemType">
     <simpleContent>
       <restriction base="xbrli:dateTimeItemType"/>
     </simpleContent>
@@ -494,12 +494,17 @@
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="measurableCategoryItemType">
+  <complexType name="measurableClassIdItemType">
+    <simpleContent>
+      <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="measurableClassDescriptionItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="measurableIdentificationItemType">
+  <complexType name="measurableCategoryItemType">
     <simpleContent>
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
@@ -524,14 +529,14 @@
       <restriction base="xbrli:stringItemType"/>
     </simpleContent>
   </complexType>
-  <complexType name="measurableQuantityItemType">
-    <simpleContent>
-      <restriction base="xbrli:decimalItemType"/>
-    </simpleContent>
-  </complexType>
   <complexType name="measurableQualifierItemType">
     <simpleContent>
       <restriction base="xbrli:tokenItemType"/>
+    </simpleContent>
+  </complexType>
+  <complexType name="measurableQuantityItemType">
+    <simpleContent>
+      <restriction base="xbrli:decimalItemType"/>
     </simpleContent>
   </complexType>
   <complexType name="measurableUnitOfMeasureItemType">
@@ -620,9 +625,9 @@
     </simpleContent>
   </complexType>
   <!-- reusable global element declaration -->
-  <element name="partyPhone" id="bus_partyPhone" type="bus:partyPhoneComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
-  <element name="partyFax" id="bus_partyFax" type="bus:partyFaxComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
-  <element name="partyEmail" id="bus_partyEmail" type="bus:partyEmailComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="entityPartyPhone" id="bus_entityPartyPhone" type="bus:entityPartyPhoneComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="entityPartyFax" id="bus_entityPartyFax" type="bus:entityPartyFaxComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
+  <element name="entityPartyEmail" id="bus_entityPartyEmail" type="bus:entityPartyEmailComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
   <element name="organizationIdentifier" id="bus_organizationIdentifier" type="bus:organizationIdentifierComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
   <element name="partyAddress" id="bus_partyAddress" type="bus:partyAddressComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
   <element name="partyWebSite" id="bus_partyWebSite" type="bus:partyWebSiteComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
@@ -630,12 +635,12 @@
   <element name="specifiedAccountingMethodStructure" id="bus_specifiedAccountingMethodStructure" type="bus:specifiedAccountingMethodStructureComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
   <element name="assignedAccountant" id="bus_assignedAccountant" type="bus:assignedAccountantComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
   <element name="specifiedReportingCalendar" id="bus_specifiedReportingCalendar" type="bus:specifiedReportingCalendarComplexType" substitutionGroup="xbrli:tuple" nillable="false"/>
-  <element name="partyPhoneNumber" id="bus_partyPhoneNumber" type="bus:partyPhoneNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="partyPhoneNumberDescription" id="bus_partyPhoneNumberDescription" type="bus:partyPhoneNumberDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="partyFaxNumber" id="bus_partyFaxNumber" type="bus:partyFaxNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="partyFaxNumberUsage" id="bus_partyFaxNumberUsage" type="bus:partyFaxNumberUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="partyEmailAddress" id="bus_partyEmailAddress" type="bus:partyEmailAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="partyEmailAddressUsage" id="bus_partyEmailAddressUsage" type="bus:partyEmailAddressUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="entityPartyPhoneNumber" id="bus_entityPartyPhoneNumber" type="bus:entityPartyPhoneNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="entityPartyPhoneNumberDescription" id="bus_entityPartyPhoneNumberDescription" type="bus:entityPartyPhoneNumberDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="entityPartyFaxNumber" id="bus_entityPartyFaxNumber" type="bus:entityPartyFaxNumberItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="entityPartyFaxNumberUsage" id="bus_entityPartyFaxNumberUsage" type="bus:entityPartyFaxNumberUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="entityPartyEmailAddress" id="bus_entityPartyEmailAddress" type="bus:entityPartyEmailAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="entityPartyEmailAddressUsage" id="bus_entityPartyEmailAddressUsage" type="bus:entityPartyEmailAddressUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="organizationIdentifierCode" id="bus_organizationIdentifierCode" type="bus:organizationIdentifierCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="organizationIdentifierPurpose" id="bus_organizationIdentifierPurpose" type="bus:organizationIdentifierPurposeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="organizationIdentifierIssuingAgency" id="bus_organizationIdentifierIssuingAgency" type="bus:organizationIdentifierIssuingAgencyItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -672,12 +677,12 @@
   <element name="partyContactFaxNumberUsage" id="bus_partyContactFaxNumberUsage" type="bus:partyContactFaxNumberUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="partyContactEmailAddress" id="bus_partyContactEmailAddress" type="bus:partyContactEmailAddressItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="partyContactEmailAddressUsage" id="bus_partyContactEmailAddressUsage" type="bus:partyContactEmailAddressUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="accountingMethod" id="bus_accountingMethod" type="bus:accountingMethodItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="accountingMethodDescription" id="bus_accountingMethodDescription" type="bus:accountingMethodDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="accountingMethodPurpose" id="bus_accountingMethodPurpose" type="bus:accountingMethodPurposeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="accountingMethodPurposeDescription" id="bus_accountingMethodPurposeDescription" type="bus:accountingMethodPurposeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="accountingMethodStartDate" id="bus_accountingMethodStartDate" type="bus:accountingMethodStartDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="accountingMethodEndDate" id="bus_accountingMethodEndDate" type="bus:accountingMethodEndDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="specifiedAccountingMethod" id="bus_specifiedAccountingMethod" type="bus:specifiedAccountingMethodItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="specifiedAccountingMethodDescription" id="bus_specifiedAccountingMethodDescription" type="bus:specifiedAccountingMethodDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="specifiedAccountingMethodPurpose" id="bus_specifiedAccountingMethodPurpose" type="bus:specifiedAccountingMethodPurposeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="specifiedAccountingMethodPurposeDescription" id="bus_specifiedAccountingMethodPurposeDescription" type="bus:specifiedAccountingMethodPurposeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="specifiedAccountingMethodStartDate" id="bus_specifiedAccountingMethodStartDate" type="bus:specifiedAccountingMethodStartDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="specifiedAccountingMethodEndDate" id="bus_specifiedAccountingMethodEndDate" type="bus:specifiedAccountingMethodEndDateItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="accountantName" id="bus_accountantName" type="bus:accountantNameItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="accountantTypeOfEngagement" id="bus_accountantTypeOfEngagement" type="bus:accountantTypeOfEngagementItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="accountantTypeOfEngagementDescription" id="bus_accountantTypeOfEngagementDescription" type="bus:accountantTypeOfEngagementDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
@@ -741,14 +746,15 @@
   <element name="identifierContactEmailAddressUsage" id="bus_identifierContactEmailAddressUsage" type="bus:identifierContactEmailAddressUsageItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurableCode" id="bus_measurableCode" type="bus:measurableCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurableCodeDescription" id="bus_measurableCodeDescription" type="bus:measurableCodeDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="measurableClassId" id="bus_measurableClassId" type="bus:measurableClassIdItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="measurableClassDescription" id="bus_measurableClassDescription" type="bus:measurableClassDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurableCategory" id="bus_measurableCategory" type="bus:measurableCategoryItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="measurableIdentification" id="bus_measurableIdentification" type="bus:measurableIdentificationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="schemaForMeasurableIdentification" id="bus_schemaForMeasurableIdentification" type="bus:schemaForMeasurableIdentificationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="secondaryMeasurableCode" id="bus_secondaryMeasurableCode" type="bus:secondaryMeasurableCodeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="schemaForSecondaryMeasurableIdentification" id="bus_schemaForSecondaryMeasurableIdentification" type="bus:schemaForSecondaryMeasurableIdentificationItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurableDescription" id="bus_measurableDescription" type="bus:measurableDescriptionItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
-  <element name="measurableQuantity" id="bus_measurableQuantity" type="bus:measurableQuantityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurableQualifier" id="bus_measurableQualifier" type="bus:measurableQualifierItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
+  <element name="measurableQuantity" id="bus_measurableQuantity" type="bus:measurableQuantityItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurableUnitOfMeasure" id="bus_measurableUnitOfMeasure" type="bus:measurableUnitOfMeasureItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurablePerUnitCostPrice" id="bus_measurablePerUnitCostPrice" type="bus:measurablePerUnitCostPriceItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>
   <element name="measurableStartTime" id="bus_measurableStartTime" type="bus:measurableStartTimeItemType" substitutionGroup="xbrli:item" nillable="true" xbrli:periodType="instant"/>

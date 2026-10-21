@@ -7,24 +7,24 @@
   <import namespace="http://www.xbrl.org/2003/instance" schemaLocation="http://www.xbrl.org/2003/xbrl-instance-2003-12-31.xsd"/>
   <include schemaLocation="../../bus/bus-2026-12-31.xsd"/>
   <!-- structural ComplexType supplied for the Palette module -->
-  <complexType name="partyPhoneComplexType">
+  <complexType name="entityPartyPhoneComplexType">
     <sequence>
-      <element ref="bus:partyPhoneNumber"/>
-      <element ref="bus:partyPhoneNumberDescription" minOccurs="0"/>
+      <element ref="bus:entityPartyPhoneNumber"/>
+      <element ref="bus:entityPartyPhoneNumberDescription" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="partyFaxComplexType">
+  <complexType name="entityPartyFaxComplexType">
     <sequence>
-      <element ref="bus:partyFaxNumber"/>
-      <element ref="bus:partyFaxNumberUsage" minOccurs="0"/>
+      <element ref="bus:entityPartyFaxNumber"/>
+      <element ref="bus:entityPartyFaxNumberUsage" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
-  <complexType name="partyEmailComplexType">
+  <complexType name="entityPartyEmailComplexType">
     <sequence>
-      <element ref="bus:partyEmailAddress"/>
-      <element ref="bus:partyEmailAddressUsage" minOccurs="0"/>
+      <element ref="bus:entityPartyEmailAddress"/>
+      <element ref="bus:entityPartyEmailAddressUsage" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
@@ -80,12 +80,12 @@
   </complexType>
   <complexType name="specifiedAccountingMethodStructureComplexType">
     <sequence>
-      <element ref="bus:accountingMethod" minOccurs="0"/>
-      <element ref="bus:accountingMethodDescription" minOccurs="0"/>
-      <element ref="bus:accountingMethodPurpose" minOccurs="0"/>
-      <element ref="bus:accountingMethodPurposeDescription" minOccurs="0"/>
-      <element ref="bus:accountingMethodStartDate" minOccurs="0"/>
-      <element ref="bus:accountingMethodEndDate" minOccurs="0"/>
+      <element ref="bus:specifiedAccountingMethod" minOccurs="0"/>
+      <element ref="bus:specifiedAccountingMethodDescription" minOccurs="0"/>
+      <element ref="bus:specifiedAccountingMethodPurpose" minOccurs="0"/>
+      <element ref="bus:specifiedAccountingMethodPurposeDescription" minOccurs="0"/>
+      <element ref="bus:specifiedAccountingMethodStartDate" minOccurs="0"/>
+      <element ref="bus:specifiedAccountingMethodEndDate" minOccurs="0"/>
     </sequence>
     <attribute name="id" type="ID"/>
   </complexType>
@@ -203,14 +203,15 @@
     <sequence>
       <element ref="bus:measurableCode"/>
       <element ref="bus:measurableCodeDescription" minOccurs="0"/>
+      <element ref="bus:measurableClassId" minOccurs="0"/>
+      <element ref="bus:measurableClassDescription" minOccurs="0"/>
       <element ref="bus:measurableCategory" minOccurs="0"/>
-      <element ref="bus:measurableIdentification" minOccurs="0"/>
       <element ref="bus:schemaForMeasurableIdentification" minOccurs="0"/>
       <element ref="bus:secondaryMeasurableCode" minOccurs="0"/>
       <element ref="bus:schemaForSecondaryMeasurableIdentification" minOccurs="0"/>
       <element ref="bus:measurableDescription" minOccurs="0"/>
-      <element ref="bus:measurableQuantity" minOccurs="0"/>
       <element ref="bus:measurableQualifier" minOccurs="0"/>
+      <element ref="bus:measurableQuantity" minOccurs="0"/>
       <element ref="bus:measurableUnitOfMeasure" minOccurs="0"/>
       <element ref="bus:measurablePerUnitCostPrice" minOccurs="0"/>
       <element ref="bus:measurableStartTime" minOccurs="0"/>

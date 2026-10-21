@@ -2,21 +2,21 @@
 <linkbase xmlns="http://www.xbrl.org/2003/linkbase"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <labelLink xlink:type="extended" xlink:role="http://www.xbrl.org/2003/role/link">
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_partyPhone" xlink:label="loc_bus_partyPhone"/>
-    <label xlink:type="resource" xlink:label="lab_bus_partyPhone" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Party_ Phone</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyPhone" xlink:to="lab_bus_partyPhone"/>
-    <label xlink:type="resource" xlink:label="doc_bus_partyPhone" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Primary phone number of the party.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyPhone" xlink:to="doc_bus_partyPhone"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_partyFax" xlink:label="loc_bus_partyFax"/>
-    <label xlink:type="resource" xlink:label="lab_bus_partyFax" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Party_ Fax</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyFax" xlink:to="lab_bus_partyFax"/>
-    <label xlink:type="resource" xlink:label="doc_bus_partyFax" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Class for holding company fax information.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyFax" xlink:to="doc_bus_partyFax"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_partyEmail" xlink:label="loc_bus_partyEmail"/>
-    <label xlink:type="resource" xlink:label="lab_bus_partyEmail" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Party_ Email</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyEmail" xlink:to="lab_bus_partyEmail"/>
-    <label xlink:type="resource" xlink:label="doc_bus_partyEmail" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Class for holding company email information.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyEmail" xlink:to="doc_bus_partyEmail"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_entityPartyPhone" xlink:label="loc_bus_entityPartyPhone"/>
+    <label xlink:type="resource" xlink:label="lab_bus_entityPartyPhone" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Party_ Phone</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyPhone" xlink:to="lab_bus_entityPartyPhone"/>
+    <label xlink:type="resource" xlink:label="doc_bus_entityPartyPhone" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Primary phone number of the party.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyPhone" xlink:to="doc_bus_entityPartyPhone"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_entityPartyFax" xlink:label="loc_bus_entityPartyFax"/>
+    <label xlink:type="resource" xlink:label="lab_bus_entityPartyFax" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Party_ Fax</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyFax" xlink:to="lab_bus_entityPartyFax"/>
+    <label xlink:type="resource" xlink:label="doc_bus_entityPartyFax" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Class for holding company fax information.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyFax" xlink:to="doc_bus_entityPartyFax"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_entityPartyEmail" xlink:label="loc_bus_entityPartyEmail"/>
+    <label xlink:type="resource" xlink:label="lab_bus_entityPartyEmail" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Party_ Email</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyEmail" xlink:to="lab_bus_entityPartyEmail"/>
+    <label xlink:type="resource" xlink:label="doc_bus_entityPartyEmail" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Class for holding company email information.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyEmail" xlink:to="doc_bus_entityPartyEmail"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_organizationIdentifier" xlink:label="loc_bus_organizationIdentifier"/>
     <label xlink:type="resource" xlink:label="lab_bus_organizationIdentifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Organization Identifier</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_organizationIdentifier" xlink:to="lab_bus_organizationIdentifier"/>
@@ -52,36 +52,36 @@
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedReportingCalendar" xlink:to="lab_bus_specifiedReportingCalendar"/>
     <label xlink:type="resource" xlink:label="doc_bus_specifiedReportingCalendar" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">A tool to collect the periods used to summarise results from transactions.</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedReportingCalendar" xlink:to="doc_bus_specifiedReportingCalendar"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_partyPhoneNumber" xlink:label="loc_bus_partyPhoneNumber"/>
-    <label xlink:type="resource" xlink:label="lab_bus_partyPhoneNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Phone Number</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyPhoneNumber" xlink:to="lab_bus_partyPhoneNumber"/>
-    <label xlink:type="resource" xlink:label="doc_bus_partyPhoneNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Phone number referred to in Phone Number Description'\.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyPhoneNumber" xlink:to="doc_bus_partyPhoneNumber"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_partyPhoneNumberDescription" xlink:label="loc_bus_partyPhoneNumberDescription"/>
-    <label xlink:type="resource" xlink:label="lab_bus_partyPhoneNumberDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Phone Number Description</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyPhoneNumberDescription" xlink:to="lab_bus_partyPhoneNumberDescription"/>
-    <label xlink:type="resource" xlink:label="doc_bus_partyPhoneNumberDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Entity Phone Number Description such as Main, Investor relations. Enumerated as: bookkeeper, controller, direct, fax, investor-relations, main, switchboard, other.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyPhoneNumberDescription" xlink:to="doc_bus_partyPhoneNumberDescription"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_partyFaxNumber" xlink:label="loc_bus_partyFaxNumber"/>
-    <label xlink:type="resource" xlink:label="lab_bus_partyFaxNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Fax Number</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyFaxNumber" xlink:to="lab_bus_partyFaxNumber"/>
-    <label xlink:type="resource" xlink:label="doc_bus_partyFaxNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Fax Number</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyFaxNumber" xlink:to="doc_bus_partyFaxNumber"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_partyFaxNumberUsage" xlink:label="loc_bus_partyFaxNumberUsage"/>
-    <label xlink:type="resource" xlink:label="lab_bus_partyFaxNumberUsage" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Fax Number Usage</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyFaxNumberUsage" xlink:to="lab_bus_partyFaxNumberUsage"/>
-    <label xlink:type="resource" xlink:label="doc_bus_partyFaxNumberUsage" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Fax number usage (e.g. orders, head office, IR)</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyFaxNumberUsage" xlink:to="doc_bus_partyFaxNumberUsage"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_partyEmailAddress" xlink:label="loc_bus_partyEmailAddress"/>
-    <label xlink:type="resource" xlink:label="lab_bus_partyEmailAddress" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Email Address</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyEmailAddress" xlink:to="lab_bus_partyEmailAddress"/>
-    <label xlink:type="resource" xlink:label="doc_bus_partyEmailAddress" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Email Address</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyEmailAddress" xlink:to="doc_bus_partyEmailAddress"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_partyEmailAddressUsage" xlink:label="loc_bus_partyEmailAddressUsage"/>
-    <label xlink:type="resource" xlink:label="lab_bus_partyEmailAddressUsage" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Email Address Usage</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyEmailAddressUsage" xlink:to="lab_bus_partyEmailAddressUsage"/>
-    <label xlink:type="resource" xlink:label="doc_bus_partyEmailAddressUsage" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Email address usage (e.g. orders, head office, IR)</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyEmailAddressUsage" xlink:to="doc_bus_partyEmailAddressUsage"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_entityPartyPhoneNumber" xlink:label="loc_bus_entityPartyPhoneNumber"/>
+    <label xlink:type="resource" xlink:label="lab_bus_entityPartyPhoneNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Phone Number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyPhoneNumber" xlink:to="lab_bus_entityPartyPhoneNumber"/>
+    <label xlink:type="resource" xlink:label="doc_bus_entityPartyPhoneNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Phone number referred to in Phone Number Description'\.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyPhoneNumber" xlink:to="doc_bus_entityPartyPhoneNumber"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_entityPartyPhoneNumberDescription" xlink:label="loc_bus_entityPartyPhoneNumberDescription"/>
+    <label xlink:type="resource" xlink:label="lab_bus_entityPartyPhoneNumberDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Phone Number Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyPhoneNumberDescription" xlink:to="lab_bus_entityPartyPhoneNumberDescription"/>
+    <label xlink:type="resource" xlink:label="doc_bus_entityPartyPhoneNumberDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Entity Phone Number Description such as Main, Investor relations. Enumerated as: bookkeeper, controller, direct, fax, investor-relations, main, switchboard, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyPhoneNumberDescription" xlink:to="doc_bus_entityPartyPhoneNumberDescription"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_entityPartyFaxNumber" xlink:label="loc_bus_entityPartyFaxNumber"/>
+    <label xlink:type="resource" xlink:label="lab_bus_entityPartyFaxNumber" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Fax Number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyFaxNumber" xlink:to="lab_bus_entityPartyFaxNumber"/>
+    <label xlink:type="resource" xlink:label="doc_bus_entityPartyFaxNumber" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Fax Number</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyFaxNumber" xlink:to="doc_bus_entityPartyFaxNumber"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_entityPartyFaxNumberUsage" xlink:label="loc_bus_entityPartyFaxNumberUsage"/>
+    <label xlink:type="resource" xlink:label="lab_bus_entityPartyFaxNumberUsage" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Fax Number Usage</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyFaxNumberUsage" xlink:to="lab_bus_entityPartyFaxNumberUsage"/>
+    <label xlink:type="resource" xlink:label="doc_bus_entityPartyFaxNumberUsage" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Fax number usage (e.g. orders, head office, IR)</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyFaxNumberUsage" xlink:to="doc_bus_entityPartyFaxNumberUsage"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_entityPartyEmailAddress" xlink:label="loc_bus_entityPartyEmailAddress"/>
+    <label xlink:type="resource" xlink:label="lab_bus_entityPartyEmailAddress" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Email Address</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyEmailAddress" xlink:to="lab_bus_entityPartyEmailAddress"/>
+    <label xlink:type="resource" xlink:label="doc_bus_entityPartyEmailAddress" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Email Address</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyEmailAddress" xlink:to="doc_bus_entityPartyEmailAddress"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_entityPartyEmailAddressUsage" xlink:label="loc_bus_entityPartyEmailAddressUsage"/>
+    <label xlink:type="resource" xlink:label="lab_bus_entityPartyEmailAddressUsage" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Email Address Usage</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyEmailAddressUsage" xlink:to="lab_bus_entityPartyEmailAddressUsage"/>
+    <label xlink:type="resource" xlink:label="doc_bus_entityPartyEmailAddressUsage" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Email address usage (e.g. orders, head office, IR)</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_entityPartyEmailAddressUsage" xlink:to="doc_bus_entityPartyEmailAddressUsage"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_organizationIdentifierCode" xlink:label="loc_bus_organizationIdentifierCode"/>
     <label xlink:type="resource" xlink:label="lab_bus_organizationIdentifierCode" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Organization Identifier Code</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_organizationIdentifierCode" xlink:to="lab_bus_organizationIdentifierCode"/>
@@ -262,36 +262,36 @@
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyContactEmailAddressUsage" xlink:to="lab_bus_partyContactEmailAddressUsage"/>
     <label xlink:type="resource" xlink:label="doc_bus_partyContactEmailAddressUsage" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Email address usage (e.g. orders, head office, IR)</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_partyContactEmailAddressUsage" xlink:to="doc_bus_partyContactEmailAddressUsage"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_accountingMethod" xlink:label="loc_bus_accountingMethod"/>
-    <label xlink:type="resource" xlink:label="lab_bus_accountingMethod" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethod" xlink:to="lab_bus_accountingMethod"/>
-    <label xlink:type="resource" xlink:label="doc_bus_accountingMethod" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">For this entity, the method of accounting represented - from: accrual, cash, modified cash, modified accrual, encumbrance, special methods, hybrid methods, other</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethod" xlink:to="doc_bus_accountingMethod"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_accountingMethodDescription" xlink:label="loc_bus_accountingMethodDescription"/>
-    <label xlink:type="resource" xlink:label="lab_bus_accountingMethodDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method Description</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodDescription" xlink:to="lab_bus_accountingMethodDescription"/>
-    <label xlink:type="resource" xlink:label="doc_bus_accountingMethodDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the accounting method</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodDescription" xlink:to="doc_bus_accountingMethodDescription"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_accountingMethodPurpose" xlink:label="loc_bus_accountingMethodPurpose"/>
-    <label xlink:type="resource" xlink:label="lab_bus_accountingMethodPurpose" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method Purpose</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodPurpose" xlink:to="lab_bus_accountingMethodPurpose"/>
-    <label xlink:type="resource" xlink:label="doc_bus_accountingMethodPurpose" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">For this entity, the reporting purpose represented - from book, tax, management, statutory, other</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodPurpose" xlink:to="doc_bus_accountingMethodPurpose"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_accountingMethodPurposeDescription" xlink:label="loc_bus_accountingMethodPurposeDescription"/>
-    <label xlink:type="resource" xlink:label="lab_bus_accountingMethodPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method Purpose Description</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodPurposeDescription" xlink:to="lab_bus_accountingMethodPurposeDescription"/>
-    <label xlink:type="resource" xlink:label="doc_bus_accountingMethodPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the accounting method purpose</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodPurposeDescription" xlink:to="doc_bus_accountingMethodPurposeDescription"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_accountingMethodStartDate" xlink:label="loc_bus_accountingMethodStartDate"/>
-    <label xlink:type="resource" xlink:label="lab_bus_accountingMethodStartDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method Start Date</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodStartDate" xlink:to="lab_bus_accountingMethodStartDate"/>
-    <label xlink:type="resource" xlink:label="doc_bus_accountingMethodStartDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Accounting Method Start Date</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodStartDate" xlink:to="doc_bus_accountingMethodStartDate"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_accountingMethodEndDate" xlink:label="loc_bus_accountingMethodEndDate"/>
-    <label xlink:type="resource" xlink:label="lab_bus_accountingMethodEndDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method End Date</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodEndDate" xlink:to="lab_bus_accountingMethodEndDate"/>
-    <label xlink:type="resource" xlink:label="doc_bus_accountingMethodEndDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Accounting Method End Date</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountingMethodEndDate" xlink:to="doc_bus_accountingMethodEndDate"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_specifiedAccountingMethod" xlink:label="loc_bus_specifiedAccountingMethod"/>
+    <label xlink:type="resource" xlink:label="lab_bus_specifiedAccountingMethod" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethod" xlink:to="lab_bus_specifiedAccountingMethod"/>
+    <label xlink:type="resource" xlink:label="doc_bus_specifiedAccountingMethod" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">For this entity, the method of accounting represented - from: accrual, cash, modified cash, modified accrual, encumbrance, special methods, hybrid methods, other</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethod" xlink:to="doc_bus_specifiedAccountingMethod"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_specifiedAccountingMethodDescription" xlink:label="loc_bus_specifiedAccountingMethodDescription"/>
+    <label xlink:type="resource" xlink:label="lab_bus_specifiedAccountingMethodDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodDescription" xlink:to="lab_bus_specifiedAccountingMethodDescription"/>
+    <label xlink:type="resource" xlink:label="doc_bus_specifiedAccountingMethodDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the accounting method</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodDescription" xlink:to="doc_bus_specifiedAccountingMethodDescription"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_specifiedAccountingMethodPurpose" xlink:label="loc_bus_specifiedAccountingMethodPurpose"/>
+    <label xlink:type="resource" xlink:label="lab_bus_specifiedAccountingMethodPurpose" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method Purpose</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodPurpose" xlink:to="lab_bus_specifiedAccountingMethodPurpose"/>
+    <label xlink:type="resource" xlink:label="doc_bus_specifiedAccountingMethodPurpose" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">For this entity, the reporting purpose represented - from book, tax, management, statutory, other</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodPurpose" xlink:to="doc_bus_specifiedAccountingMethodPurpose"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_specifiedAccountingMethodPurposeDescription" xlink:label="loc_bus_specifiedAccountingMethodPurposeDescription"/>
+    <label xlink:type="resource" xlink:label="lab_bus_specifiedAccountingMethodPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method Purpose Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodPurposeDescription" xlink:to="lab_bus_specifiedAccountingMethodPurposeDescription"/>
+    <label xlink:type="resource" xlink:label="doc_bus_specifiedAccountingMethodPurposeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the accounting method purpose</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodPurposeDescription" xlink:to="doc_bus_specifiedAccountingMethodPurposeDescription"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_specifiedAccountingMethodStartDate" xlink:label="loc_bus_specifiedAccountingMethodStartDate"/>
+    <label xlink:type="resource" xlink:label="lab_bus_specifiedAccountingMethodStartDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method Start Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodStartDate" xlink:to="lab_bus_specifiedAccountingMethodStartDate"/>
+    <label xlink:type="resource" xlink:label="doc_bus_specifiedAccountingMethodStartDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Accounting Method Start Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodStartDate" xlink:to="doc_bus_specifiedAccountingMethodStartDate"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_specifiedAccountingMethodEndDate" xlink:label="loc_bus_specifiedAccountingMethodEndDate"/>
+    <label xlink:type="resource" xlink:label="lab_bus_specifiedAccountingMethodEndDate" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accounting Method End Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodEndDate" xlink:to="lab_bus_specifiedAccountingMethodEndDate"/>
+    <label xlink:type="resource" xlink:label="doc_bus_specifiedAccountingMethodEndDate" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Accounting Method End Date</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_specifiedAccountingMethodEndDate" xlink:to="doc_bus_specifiedAccountingMethodEndDate"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_accountantName" xlink:label="loc_bus_accountantName"/>
     <label xlink:type="resource" xlink:label="lab_bus_accountantName" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Accountant Name</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_accountantName" xlink:to="lab_bus_accountantName"/>
@@ -603,22 +603,27 @@
     <label xlink:type="resource" xlink:label="doc_bus_measurableCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Code for measurable item including BP - Business process, FA - Fixed asset/Capitalized item, IN - Inventory, KPI - Metric, NT - Intangible, SP - Supplies, SV-P - Service by employee, vendor or contractor, SV-M - Service by equipment/machinery, OT - Other</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableCode" xlink:to="doc_bus_measurableCode"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_measurableCodeDescription" xlink:label="loc_bus_measurableCodeDescription"/>
-    <label xlink:type="resource" xlink:label="lab_bus_measurableCodeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Code Description</label>
+    <label xlink:type="resource" xlink:label="lab_bus_measurableCodeDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Name</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableCodeDescription" xlink:to="lab_bus_measurableCodeDescription"/>
-    <label xlink:type="resource" xlink:label="doc_bus_measurableCodeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description of the measurable code</label>
+    <label xlink:type="resource" xlink:label="doc_bus_measurableCodeDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Name of the measurable code</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableCodeDescription" xlink:to="doc_bus_measurableCodeDescription"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_measurableClassId" xlink:label="loc_bus_measurableClassId"/>
+    <label xlink:type="resource" xlink:label="lab_bus_measurableClassId" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Class ID</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableClassId" xlink:to="lab_bus_measurableClassId"/>
+    <label xlink:type="resource" xlink:label="doc_bus_measurableClassId" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">An enumerated code to identify the inventory, fixed asset or other measurable class. Enumerated as: raw material, work-in-process, finished goods, assemblies, supplies, land, building, machinery, furniture, vehicles, other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableClassId" xlink:to="doc_bus_measurableClassId"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_measurableClassDescription" xlink:label="loc_bus_measurableClassDescription"/>
+    <label xlink:type="resource" xlink:label="lab_bus_measurableClassDescription" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Class Description</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableClassDescription" xlink:to="lab_bus_measurableClassDescription"/>
+    <label xlink:type="resource" xlink:label="doc_bus_measurableClassDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Free format description associated with gl-ehm:measurableClassID to provide specialization or clarification for the enumerated value of other.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableClassDescription" xlink:to="doc_bus_measurableClassDescription"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_measurableCategory" xlink:label="loc_bus_measurableCategory"/>
     <label xlink:type="resource" xlink:label="lab_bus_measurableCategory" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Category</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableCategory" xlink:to="lab_bus_measurableCategory"/>
     <label xlink:type="resource" xlink:label="doc_bus_measurableCategory" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Category of the measurable</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableCategory" xlink:to="doc_bus_measurableCategory"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_measurableIdentification" xlink:label="loc_bus_measurableIdentification"/>
-    <label xlink:type="resource" xlink:label="lab_bus_measurableIdentification" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Identification</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableIdentification" xlink:to="lab_bus_measurableIdentification"/>
-    <label xlink:type="resource" xlink:label="doc_bus_measurableIdentification" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Internal inventory part or SKU number or other code identifier for the measurable.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableIdentification" xlink:to="doc_bus_measurableIdentification"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_schemaForMeasurableIdentification" xlink:label="loc_bus_schemaForMeasurableIdentification"/>
-    <label xlink:type="resource" xlink:label="lab_bus_schemaForMeasurableIdentification" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Schema for Measurable Identification</label>
+    <label xlink:type="resource" xlink:label="lab_bus_schemaForMeasurableIdentification" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Schema for Measurable Code</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_schemaForMeasurableIdentification" xlink:to="lab_bus_schemaForMeasurableIdentification"/>
     <label xlink:type="resource" xlink:label="doc_bus_schemaForMeasurableIdentification" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">URI or other identifier for schema with which measurable ID can be validated</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_schemaForMeasurableIdentification" xlink:to="doc_bus_schemaForMeasurableIdentification"/>
@@ -628,7 +633,7 @@
     <label xlink:type="resource" xlink:label="doc_bus_secondaryMeasurableCode" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Second identifier (such as vendor's item number)</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_secondaryMeasurableCode" xlink:to="doc_bus_secondaryMeasurableCode"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_schemaForSecondaryMeasurableIdentification" xlink:label="loc_bus_schemaForSecondaryMeasurableIdentification"/>
-    <label xlink:type="resource" xlink:label="lab_bus_schemaForSecondaryMeasurableIdentification" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Schema for Secondary Measurable Identification</label>
+    <label xlink:type="resource" xlink:label="lab_bus_schemaForSecondaryMeasurableIdentification" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Schema for Secondary Measurable Code</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_schemaForSecondaryMeasurableIdentification" xlink:to="lab_bus_schemaForSecondaryMeasurableIdentification"/>
     <label xlink:type="resource" xlink:label="doc_bus_schemaForSecondaryMeasurableIdentification" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">URI or other identifier for schema with which measurable ID Other can be validated</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_schemaForSecondaryMeasurableIdentification" xlink:to="doc_bus_schemaForSecondaryMeasurableIdentification"/>
@@ -637,16 +642,16 @@
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableDescription" xlink:to="lab_bus_measurableDescription"/>
     <label xlink:type="resource" xlink:label="doc_bus_measurableDescription" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Text description of measurable (e.g. inventory item or other identifier)</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableDescription" xlink:to="doc_bus_measurableDescription"/>
-    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_measurableQuantity" xlink:label="loc_bus_measurableQuantity"/>
-    <label xlink:type="resource" xlink:label="lab_bus_measurableQuantity" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Quantity</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableQuantity" xlink:to="lab_bus_measurableQuantity"/>
-    <label xlink:type="resource" xlink:label="doc_bus_measurableQuantity" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Number of units in this transaction; for non-monetary calculations; can be square footage, number of people, etc.</label>
-    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableQuantity" xlink:to="doc_bus_measurableQuantity"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_measurableQualifier" xlink:label="loc_bus_measurableQualifier"/>
     <label xlink:type="resource" xlink:label="lab_bus_measurableQualifier" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Qualifier</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableQualifier" xlink:to="lab_bus_measurableQualifier"/>
     <label xlink:type="resource" xlink:label="doc_bus_measurableQualifier" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Field that can represent grading, inspection codes, ratings and other qualifiers to properly capture PKI/Balanced Scorecard information</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableQualifier" xlink:to="doc_bus_measurableQualifier"/>
+    <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_measurableQuantity" xlink:label="loc_bus_measurableQuantity"/>
+    <label xlink:type="resource" xlink:label="lab_bus_measurableQuantity" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Quantity</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableQuantity" xlink:to="lab_bus_measurableQuantity"/>
+    <label xlink:type="resource" xlink:label="doc_bus_measurableQuantity" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Number of units in this transaction; for non-monetary calculations; can be square footage, number of people, etc.</label>
+    <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableQuantity" xlink:to="doc_bus_measurableQuantity"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_measurableUnitOfMeasure" xlink:label="loc_bus_measurableUnitOfMeasure"/>
     <label xlink:type="resource" xlink:label="lab_bus_measurableUnitOfMeasure" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Measurable Unit of Measure</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_measurableUnitOfMeasure" xlink:to="lab_bus_measurableUnitOfMeasure"/>
@@ -700,7 +705,7 @@
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_depreciationMortgageJurisdiction" xlink:label="loc_bus_depreciationMortgageJurisdiction"/>
     <label xlink:type="resource" xlink:label="lab_bus_depreciationMortgageJurisdiction" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Depreciation Mortgage Jurisdiction</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_depreciationMortgageJurisdiction" xlink:to="lab_bus_depreciationMortgageJurisdiction"/>
-    <label xlink:type="resource" xlink:label="doc_bus_depreciationMortgageJurisdiction" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Jurisdiction (e.g. federal, state, local): e.g. US Federal, Province of Québec, other identifier. Enumerated as: F, federal, S, state, L, local, other.</label>
+    <label xlink:type="resource" xlink:label="doc_bus_depreciationMortgageJurisdiction" xlink:role="http://www.xbrl.org/2003/role/documentation" xml:lang="en">Jurisdiction (e.g. federal, state, local): e.g. US Federal, Province of Quebec, other identifier. Enumerated as: F, federal, S, state, L, local, other.</label>
     <labelArc xlink:type="arc" xlink:arcrole="http://www.xbrl.org/2003/arcrole/concept-label" xlink:from="loc_bus_depreciationMortgageJurisdiction" xlink:to="doc_bus_depreciationMortgageJurisdiction"/>
     <loc xlink:type="locator" xlink:href="../bus-2026-12-31.xsd#bus_depreciationMethod" xlink:label="loc_bus_depreciationMethod"/>
     <label xlink:type="resource" xlink:label="lab_bus_depreciationMethod" xlink:role="http://www.xbrl.org/2003/role/label" xml:lang="en">Depreciation Method</label>
