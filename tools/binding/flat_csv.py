@@ -125,7 +125,6 @@ UNBOUND_REPORT_FIELDS = (
     "PhysicalHeader",
     "Status",
 )
-ACCOUNT_SUBACCOUNT_SELECTOR = "[cor_Type='account-subaccount']"
 TAX_CATEGORY_SUFFIX = ".cor_DetailTax.cor_TaxCategory"
 TAX_RATE_SUFFIX = ".cor_DetailTax.cor_TaxPercentageRate"
 TAX_DETAIL_SUFFIX = ".cor_DetailTax"
@@ -836,11 +835,6 @@ def load_account_mapping(path: Path, encoding: str = "utf-8-sig") -> AccountMapp
                         "ACCOUNT_MAPPING_ROW_INVALID", "Account Mapping values must not be empty"
                     )
                 target_code = row["eTax_Account_Code"]
-                if "-" in target_code and not re.fullmatch(r".+-[1-9][0-9]*", target_code):
-                    raise ConversionError(
-                        "ACCOUNT_MAPPING_EXTENSION_INVALID",
-                        "an eTax account extension must be a positive integer suffix",
-                    )
                 source_key = (row["Account_Code"], row["Account_Name"], target_code)
                 target_key = (target_code, row["eTax_Account_Name"])
                 # An EPSON application code can be shared by multiple NTA codes.
@@ -1697,9 +1691,7 @@ def _apply_account_mapping_forward(
     definition: Definition,
 ) -> tuple[list[dict[str, str]], int, int]:
     mapped = [dict(row) for row in records]
-    additions: list[dict[str, str]] = []
     mapped_count = 0
-    extended_count = 0
     for rows in _account_record_groups(mapped):
         number = _unique_named_record(rows, "accountNumber")
         description = _unique_named_record(rows, "accountDescription")
@@ -1714,41 +1706,10 @@ def _apply_account_mapping_forward(
             raise ConversionError(
                 "ACCOUNT_MAPPING_UNMAPPED", "an account occurrence is absent from Account Mapping"
             )
-        target_code = match["eTax_Account_Code"]
-        suffix_match = re.fullmatch(r"(.+)-([1-9][0-9]*)", target_code)
-        number["value"] = suffix_match.group(1) if suffix_match else target_code
+        number["value"] = match["eTax_Account_Code"]
         description["value"] = match["eTax_Account_Name"]
         mapped_count += 1
-        if suffix_match is None:
-            continue
-        extended_count += 1
-        suffix = suffix_match.group(2)
-        semantic_base = number["semantic_path"].removesuffix(".cor_AccountNumber")
-        sub_semantic = f"{semantic_base}.cor_Subaccount{ACCOUNT_SUBACCOUNT_SELECTOR}"
-        additions.extend(
-            (
-                _hmd_structured_record(definition, sub_semantic, number, ""),
-                _hmd_structured_record(
-                    definition,
-                    f"{sub_semantic}.cor_Type",
-                    number,
-                    "account-subaccount",
-                ),
-                _hmd_structured_record(
-                    definition,
-                    f"{sub_semantic}.cor_SubaccountID",
-                    number,
-                    suffix,
-                ),
-                _hmd_structured_record(
-                    definition,
-                    f"{sub_semantic}.cor_SubaccountDescription",
-                    number,
-                    match["Account_Name"],
-                ),
-            )
-        )
-    return [*mapped, *additions], mapped_count, extended_count
+    return mapped, mapped_count, 0
 
 
 def _apply_account_mapping_reverse(
@@ -1767,21 +1728,7 @@ def _apply_account_mapping_reverse(
                 "ACCOUNT_MAPPING_REVERSE_UNRESOLVED",
                 "an account occurrence lacks its reverse mapping key facts",
             )
-        account_base = number["semantic_path"].removesuffix(".cor_AccountNumber")
-        subaccount_id_path = (
-            f"{account_base}.cor_Subaccount{ACCOUNT_SUBACCOUNT_SELECTOR}.cor_SubaccountID"
-        )
-        suffix_rows = [
-            row
-            for row in rows
-            if row.get("semantic_path", "") == subaccount_id_path
-        ]
-        if len(suffix_rows) > 1:
-            raise ConversionError(
-                "ACCOUNT_MAPPING_AMBIGUOUS", "an account occurrence contains multiple mapping suffixes"
-            )
-        suffix = suffix_rows[0].get("value", "") if suffix_rows else ""
-        target_code = f"{number['value']}-{suffix}" if suffix else number["value"]
+        target_code = number["value"]
         candidates = [row for (code, _), row in mapping.by_target.items() if code == target_code]
         if len(candidates) > 1:
             raise ConversionError("ACCOUNT_MAPPING_AMBIGUOUS", "standard account code has multiple reverse candidates")
@@ -1799,10 +1746,7 @@ def _apply_account_mapping_reverse(
         number["value"] = match["Account_Code"]
         description["value"] = match["Account_Name"]
         mapped_count += 1
-    retained = [
-        row for row in mapped if ACCOUNT_SUBACCOUNT_SELECTOR not in row.get("semantic_path", "")
-    ]
-    return retained, mapped_count, 0, classifications
+    return mapped, mapped_count, 0, classifications
 
 
 def load_standard_tax_mapping(
